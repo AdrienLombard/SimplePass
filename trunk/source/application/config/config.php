@@ -14,7 +14,7 @@
 | path to your installation.
 |
 */
-$config['base_url']	= '';
+$config['base_url']	= 'http://localhost/courchevel_src';
 
 /*
 |--------------------------------------------------------------------------
@@ -106,6 +106,8 @@ $config['enable_hooks'] = FALSE;
 | http://codeigniter.com/user_guide/general/creating_libraries.html
 |
 */
+/* cette configuration nous permet d'ajouter une fichier qui a le meme nom predifinit 
+ mais lors de le telechargement il telecharge le fichier predef plus les nos propres fichiers*/
 $config['subclass_prefix'] = 'MY_';
 
 
