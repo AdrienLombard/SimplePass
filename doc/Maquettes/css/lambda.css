@@ -5,7 +5,7 @@
 }
 
 body {
-    background: #afbcc5 url(../images/bg.jpg) top center no-repeat;
+    background: #afbcc5 url(../images/bg.jpg) top center fixed;
     color: #FFF;
 }
 
