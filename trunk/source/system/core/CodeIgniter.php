@@ -227,7 +227,8 @@
  */
 	// Load the base controller class
 	require BASEPATH.'core/Controller.php';
-        require BASEPATH.'core/Cafe.php';
+    require BASEPATH.'core/Cafe.php';
+    require BASEPATH.'core/Chocolat.php';
 
 	function &get_instance()
 	{
