@@ -1,4 +1,4 @@
-<h1>Accréditations</h1>
+<h1>Evènements</h1>
 
 <div class="wrap">
 
@@ -30,23 +30,17 @@
                 <thead>
 					<tr>
 						<th>Nom</th>
-						<th>Prénom</th>
-						<th>Société</th>
-						<th>Pays</th>
-						<th>Catégorie</th>
-						<th>Email</th>
+						<th>Début</th>
+						<th>Fin</th>
 						<th></th>
 					</tr>
                 </thead>
                 <tbody>
                     <?php for($i=0;$i<6;$i++): ?>
 					<tr>
-                        <td>Assier</td>
-                        <td>Aymeric</td>
-                        <td>TrollEtCompagnie</td>
-                        <td>Savoy</td>
-                        <td>All Access</td>
-                        <td>plop@plop.plop</td>
+                        <td>Coupe du monde de ski hiver</td>
+                        <td>12 Janvier 2012</td>
+                        <td>22 Janvier 2012</td>
 						<td><a href="<?php echo site_url('evenements/voir'); ?>">Voir<a></td>
                     </tr>
                     <?php endfor; ?>

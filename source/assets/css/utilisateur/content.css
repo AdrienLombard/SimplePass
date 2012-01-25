@@ -1,20 +1,10 @@
+/*
+ *	ASIDE
+ */
+
 aside {
     float: left;
     width: 200px;
-}
-
-#main {
-	margin-left: 200px;
-	padding-left: 20px;
-	border-left: 1px dashed #DDD;
-}
-
-#content h2 {
-	font-weight: normal;
-	font-size: 28px;
-	padding-bottom: 10px;
-	margin-bottom: 15px;
-	border-bottom: 1px solid #DDD;
 }
 
 ul {
@@ -36,4 +26,59 @@ ul li a:hover {
 .search:focus {
     box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.5);
     background: #FFF;
+}
+
+
+/*
+ *	MAIN
+ */
+
+#main {
+	margin-left: 200px;
+	padding-left: 20px;
+	border-left: 1px dashed #DDD;
+}
+
+#main h2 {
+	font-weight: normal;
+	font-size: 28px;
+	padding-bottom: 10px;
+	margin-bottom: 15px;
+	border-bottom: 1px solid #DDD;
+}
+
+table.details th, table.details td {
+    padding: 8px;
+	text-align: left;
+}
+table.details th {
+    padding-right: 30px;
+}
+
+
+table.liste {
+    width: 710px;
+}
+table.liste * {
+    text-align: center;
+}
+table.liste thead tr {
+    background: #6c8693;
+    color: #FFF;
+}
+table.liste th, table.liste td {
+    padding: 8px;
+}
+table.liste th {
+    font-weight: normal;
+}
+table.liste tr td:first-child {
+    border-left: 1px solid #CCC;
+}
+table.liste tr td:last-child {
+    border-right: 1px solid #CCC;
+}
+table.liste td {
+    border-bottom: 1px solid #CCC;
+    border-right: 1px dotted #CCC;
 }
