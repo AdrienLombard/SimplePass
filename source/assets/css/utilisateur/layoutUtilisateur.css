@@ -23,13 +23,18 @@ header {
 header .wrap-h {
     width: 1000px;
     margin: auto;
+    text-align:  right;
 }
 header .wrap-h #logo {
-    padding: 15px 0 15px 0;
     font-size: 12px;
+    float: left;
+    background: #2e6f92;
+    padding: 2px 10px 5px 10px;
+    border-radius: 0 0 100% 100%;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.4);
 }
 header .wrap-h nav {
-    float: right;
+    
 }
 header .wrap-h nav a {
     display: inline-block;

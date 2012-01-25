@@ -22,6 +22,8 @@
             
             <div class="wrap-h">
                 
+                <div id="logo"><?php echo img('logo_seul.png'); ?></div>
+                
                 <!-- menu dynamique - todo: générer en fonction de l'état -->
                 <nav>
                     <a href="#">Accréditations</a>
@@ -31,8 +33,6 @@
                     <a href="#">Utilisateurs</a>
                 </nav>
                 <!-- /menu dynamique -->
-                
-                <div id="logo">APP_NAME</div>
                 
             </div>
             
