@@ -11,7 +11,7 @@
 			</select><br>
 			<label>Type de demande</label>
 			<div class="encadrer">
-				<a href="LIndiv.html">Individuelle</a> ou par <a href="LEquipe1.html"> équipe</a>
+				<a href="<?php echo site_url('accreditationL/ajouter'); ?>">Individuelle</a> ou par <a href="LEquipe1.html"> équipe</a>
 			</div>
 		</form>
 	</div>

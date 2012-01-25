@@ -50,10 +50,12 @@
 			
 		
 		<label>Photo</label>
-		<img src="images/ombre.jpg"/><br>
+		<?php echo img('ombre.jpg'); ?><br>
 		
 		<input type="submit" name="valider" id="valider" />
 		<div class="clear"></div>
 	</form>
 
+	</div>
+	
 </div>
