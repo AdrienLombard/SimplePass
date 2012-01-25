@@ -33,7 +33,17 @@ h1 {
     background: rgba(109, 135, 148, 0.7);
     border-radius: 10px;
 }
-
+.wrap2 {
+    width: 1000px;
+    margin: auto;
+    padding: 10px 5px 10px 5px;
+    background: rgba(109, 135, 148, 0.7);
+    border-radius: 10px;
+}
+.wrap3 {
+	float: right;
+	margin-right: 35px;
+}
 .box-small {
     background: #2e6f92;
     border-top: 8px solid #1d465b;
@@ -96,4 +106,19 @@ input[type=submit]:hover {
     width: 458px;
     border-radius: 5px;
     font-size: 16px
+}
+table{
+    background: #b5bfc9;
+    color: #000;
+    border: 2px #CCC;
+    width: 900px;
+	text-align: center;
+}
+
+tr{
+	border: 1px solid #1d465b;
+}
+
+td{
+	border: 1px solid #1d465b;
 }
