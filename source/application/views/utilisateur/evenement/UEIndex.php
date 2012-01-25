@@ -4,7 +4,7 @@
 
     <div class="tabs">
         <a href="#" class="current">Liste</a>
-        <a href="#">Ajouter</a>
+        <a href="<?php echo site_url('evenements/ajout'); ?>">Ajouter</a>
     </div>
 
     <div class="box-full">
@@ -28,24 +28,26 @@
         <div id="main">
             <table class="liste" cellspacing="0">
                 <thead>
-                    <tr>
-                        <th>Nom</th>
-                        <th>Prénom</th>
-                        <th>Société</th>
-                        <th>Pays</th>
-                        <th>Catégorie</th>
-                        <th>Email</th>
-                    </tr>
+					<tr>
+						<th>Nom</th>
+						<th>Prénom</th>
+						<th>Société</th>
+						<th>Pays</th>
+						<th>Catégorie</th>
+						<th>Email</th>
+						<th></th>
+					</tr>
                 </thead>
                 <tbody>
                     <?php for($i=0;$i<6;$i++): ?>
-                    <tr>
+					<tr>
                         <td>Assier</td>
                         <td>Aymeric</td>
                         <td>TrollEtCompagnie</td>
                         <td>Savoy</td>
                         <td>All Access</td>
                         <td>plop@plop.plop</td>
+						<td><a href="<?php echo site_url('evenements/voir'); ?>">Voir<a></td>
                     </tr>
                     <?php endfor; ?>
                 </tbody>

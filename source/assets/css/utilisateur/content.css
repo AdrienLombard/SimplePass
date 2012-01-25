@@ -4,13 +4,17 @@ aside {
 }
 
 #main {
-	margin-left: 220px;
+	margin-left: 200px;
+	padding-left: 20px;
+	border-left: 1px dashed #DDD;
 }
 
 #content h2 {
 	font-weight: normal;
 	font-size: 28px;
-	margin-bottom: 25px;
+	padding-bottom: 10px;
+	margin-bottom: 15px;
+	border-bottom: 1px solid #DDD;
 }
 
 ul {

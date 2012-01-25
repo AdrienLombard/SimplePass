@@ -1,3 +1,7 @@
-table.details {
-	
+table.details th, table.liste td {
+    padding: 8px;
+	text-align: left;
+}
+table.details th {
+    padding-right: 30px;
 }

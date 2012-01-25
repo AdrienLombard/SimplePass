@@ -1,10 +1,11 @@
-<h1>Accréditations</h1>
+<h1>Evènements</h1>
 
 <div class="wrap">
 
     <div class="tabs">
-        <a href="#" class="current">Liste</a>
-        <a href="#">Ajouter</a>
+        <a href="<?php echo site_url('evenements/index'); ?>">Liste</a>
+        <a href="<?php echo site_url('evenements/ajout'); ?>">Ajouter</a>
+		<a href="#" class="current">Détails</a>
     </div>
 
     <div class="box-full">
@@ -13,8 +14,8 @@
 
             <b>Options :</b>
             <ul>
-                <li><a href="#">Modifier</a></li>
-                <li><a href="#">Supprimer</a></li>
+                <li><a href="<?php echo site_url('evenements/modification'); ?>">Modifier</a></li>
+                <li><a href="<?php echo site_url('evenements/suppression'); ?>">Supprimer</a></li>
             </ul>
 
         </aside>
