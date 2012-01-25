@@ -26,11 +26,11 @@ class AccreditationL extends Chocolat {
 	
 	public function lambda() {
 		
-		$this->layout->view('inscription/remplissageEquipe');
+		$this->layout->view('inscription/lambda');
 		
 	}
 	
-	public function ajouter() {
+	public function ajouter($event='') {
 		// Charge la librairie de validation de formulaire
 		$this->load->library('form_validation');
 		
@@ -96,28 +96,45 @@ class AccreditationL extends Chocolat {
 		
 		if ($this->form_validation->run() == FALSE) {
 			
-			$this->layout->view('inscription/inscriptionIndividuelle');
+			$data['event'] = $event;
+			
+			$this->layout->view('inscription/inscriptionIndividuelle', $data);
 		
 		}
 		else {
 			
-			/*$data['nom'] = $this->input->post('nom');
-			$data['prenom'] = $this->input->post('prenom');
-			$data['pays'] = $this->input->post('pays');
-			$data['tel'] = $this->input->post('tel');
-			$data['titre'] = $this->input->post('titre');
-			$data['role'] = $this->input->post('role');
-			$data['civilite'] = $this->input->post('civilite');
-			$data['categorie'] = $this->input->post('categorie');
-			$data['mail'] = $this->input->post('mail');*/
+			$values = Array (
+				'nom' 		=> $this->input->post('nom'),
+				'prenom' 	=> $this->input->post('prenom'),
+				'pays' 		=> $this->input->post('pays'),
+				'civilite' 	=> $this->input->post('civilite'),
+				'categorie' => $this->input->post('categorie'),
+				'mail' 		=> $this->input->post('mail')
+			);
 			
-			//TODO mettre l'insertion dans la base.
+			// On gère les champs facultatif.
+			$tel = $this->input->post('tel');
+			if(isset($tel) && !empty($tel)) {
+				$values['tel'] = $tel;
+			}
+			
+			$role = $this->input->post('role');
+			if(isset($role) && !empty($role)) {
+				$values['role'] = $role;
+			}
+			
+			$titre = $this->input->post('tel');
+			if(isset($titre) && !empty($titre)) {
+				$values['tel'] = $titre;
+			}
+			
+			//Insertion dans la base.
+			$this->modelLambda->ajouterClient($values);
 		
 		}
 		
-		
 	}
-
+	
 }
 
 /* End of file accreditationL.php */
