@@ -6,7 +6,7 @@ class Layout
 	private $var = array();
 	
 	/** le theme choisi actuellement pour le site */
-	private $current_theme = "layout_utilisateur";
+	private $current_theme = "layoutCafe";
 	
 	public function __construct()
 	{
