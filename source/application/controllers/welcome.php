@@ -17,9 +17,8 @@ class Welcome extends Cafe {
 	public function index()
 	{
             $this->layout->ajouter_css('utilisateur/login');
-            $this->layout->view('utilisateur/uLogin');
+            $this->layout->view('utilisateur/ULogin');
 	}
 }
-
 /* End of file welcome.php */
 /* Location: ./application/controllers/welcome.php */
