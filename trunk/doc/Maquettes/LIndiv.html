@@ -1,74 +1,58 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        
-        <title>Courchevel: Inscription Individuel</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link href="css/lambda.css" rel="stylesheet" type="text/css" /> 
-        
-    </head>
-    <body>
-        
-        <!-- Header fixe -->
-        <header>
-            <img src="images/s5_seg_logo.png" />
-        </header>
-        
-        <!-- Content area -->
-        <div id="content">
-            
-            <div class="wrap">
-                
-                <h1>Demande d'accréditation</h1>
-            
-                <div class="box-small">
-
-                    <span class="info">Inscription : individuelle</span><br>
-                    <span class="info">Evènement : Coupe du monde été 2012</span>
-                    
-                    <br><br>
-                    
-                    <form>
-                        <label>Civilité</label>
-                        <div class="encadrer">
-                        Homme : <INPUT type=radio name="sexe" value="M">
-                        Femme : <INPUT type=radio name="sexe" value="F">
-                        </div>
-                        <label>Nom</label>
-                        <input type="text" value="Nom"/><br>
-                        <label>Prénom</label>
-                        <input type="text" value="Prénom"/><br>
-                        <label>Pays</label>
-                        <input type="text" value="Pays"/><br>
-                        <label>Télephone</label>
-                        <input type="text" value="+33 612345678"/><br>
-                        <label>Mail</label>
-                        <input type="text" value="nom.prenom@mail.com"/><br>
-                        <label>Societe, Organime ou Publication</label>
-                        <input type="text" value="Bénevole"/><br>
-                        <label>Rôle</label>
-                        <input type="text" value="parking nord"/><br>
-                        <label>Categorie</label>
-                        <SELECT name="Categorie" class="select">
-                            <OPTION VALUE="Benevole">Bénévole</OPTION>
-                            <OPTION VALUE="Equipe">Equipe</OPTION>
-                            <OPTION VALUE="journaliste">Journaliste</OPTION>
-                            <OPTION VALUE="VIP">VIP PACC</OPTION>
-                        </SELECT><br>
-                        <label>Photo</label>
-                        <img src="images/ombre.jpg"/>
-                        
-
-                        <br>
-                        <input type="submit"/>
-                        <div class="clear"></div>
-                    </form>
-
-                </div>
-                
-            </div>
-            
-        </div>
-        
-    </body>
+	<head>
+		<title>Courchevel: Inscription Individuel</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<link href="css/lambda.css" rel="stylesheet" type="text/css" /> 
+	</head>
+	<body>
+		<!-- Header fixe -->
+		<header>
+			<img src="images/s5_seg_logo.png" />
+		</header>
+		<!-- Content area -->
+		<div id="content">
+			<div class="wrap">
+			<h1>Demande d'accréditation</h1>
+				<div class="box-small">
+					<span class="info">Inscription : individuelle</span><br>
+					<span class="info">Evènement : Coupe du monde été 2012</span>
+					<br><br>
+					<form>
+						<label>Sexe</label>
+						<div class="encadrer">
+						Homme : <input type=radio name="sexe" value="M">
+						Femme : <input type=radio name="sexe" value="F">
+						</div>
+						<label>Nom</label>
+						<input type="text" value="Nom"/><br>
+						<label>Prénom</label>
+						<input type="text" value="Prénom"/><br>
+						<label>Pays</label>
+						<input type="text" value="Pays"/><br>
+						<label>Télephone</label>
+						<input type="text" value="+33 612345678"/><br>
+						<label>Mail</label>
+						<input type="text" value="nom.prenom@mail.com"/><br>
+						<label>Société, Organime ou Publication</label>
+						<input type="text" value="Bénévole"/><br>
+						<label>Rôle</label>
+						<input type="text" value="parking nord"/><br>
+						<label>Catégorie</label>
+						<select name="Catégorie" class="select">
+							<option value="Bénévole">Bénévole</option>
+							<option value="Equipe">Equipe</option>
+							<option value="journaliste">Journaliste</option>
+							<option value="VIP">VIP PACC</option>
+						</select><br>
+						<label>Photo</label>
+						<img src="images/ombre.jpg"/>
+						<br>
+						<input type="submit"/>
+						<div class="clear"></div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</body>
 </html>
