@@ -2,7 +2,7 @@
 <html>
     <head>
         
-        <title>Lambda</title>
+        <title>Inscription Individuel</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link href="css/lambda.css" rel="stylesheet" type="text/css" /> 
         
@@ -29,17 +29,38 @@
                     <br><br>
                     
                     <form>
+                        <label>Civilité</label>
+                        <div class="encadrer">
+                        Homme : <INPUT type=radio name="sexe" value="M">
+                        Femme : <INPUT type=radio name="sexe" value="F">
+                        </div>
                         <label>Nom</label>
-                        <input type="text" value="Arnould"/><br><br>
+                        <input type="text" value="Nom"/><br>
                         <label>Prénom</label>
-                        <input type="text" value="Mickaël"/><br><br>
+                        <input type="text" value="Prénom"/><br>
                         <label>Pays</label>
-                        <input type="text" value="Tanzanie"/><br><br>
-                        <label>Sexe</label>
-                        <input type="text" value="petit"/><br><br>
-
-                        <input type="submit"/>
+                        <input type="text" value="Pays"/><br>
+                        <label>Télephone</label>
+                        <input type="text" value="+33 612345678"/><br>
+                        <label>Mail</label>
+                        <input type="text" value="nom.prenom@mail.com"/><br>
+                        <label>Societe, Organime ou Publication</label>
+                        <input type="text" value="Bénevole"/><br>
+                        <label>Rôle</label>
+                        <input type="text" value="parking nord"/><br>
+                        <label>Categorie</label>
+                        <SELECT name="Categorie" class="select">
+                            <OPTION VALUE="Benevole">Bénévole</OPTION>
+                            <OPTION VALUE="Equipe">Equipe</OPTION>
+                            <OPTION VALUE="journaliste">Journaliste</OPTION>
+                            <OPTION VALUE="VIP">VIP PACC</OPTION>
+                        </SELECT><br>
+                        <label>Photo</label>
+                        <img src="images/ombre.png"/>
                         
+
+                        <br>
+                        <input type="submit"/>
                         <div class="clear"></div>
                     </form>
 
