@@ -1,0 +1,124 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: "Trebuchet MS";
+}
+
+body {
+    background: #afbcc5 url(../images/bg.jpg) top center fixed;
+    color: #FFF;
+}
+
+header {
+    text-align: center;
+    padding: 10px;
+}
+header #menu {
+    float: right;
+}
+
+h1 {
+    display: inline-block;
+    background: #1d465b;
+    font-weight: normal;
+    padding: 5px 15px 1px 15px;
+    border-radius: 8px 8px 0 0;
+    font-size: 22px;
+}
+
+.wrap {
+    width: 500px;
+    margin: auto;
+    padding: 10px 5px 10px 5px;
+    background: rgba(109, 135, 148, 0.7);
+    border-radius: 10px;
+}
+.wrap2 {
+    width: 1000px;
+    margin: auto;
+    padding: 10px 5px 10px 5px;
+    background: rgba(109, 135, 148, 0.7);
+    border-radius: 10px;
+}
+.wrap3 {
+	float: right;
+	margin-right: 35px;
+}
+.box-small {
+    background: #2e6f92;
+    border-top: 8px solid #1d465b;
+    padding: 20px;
+    border-radius: 0 6px 8px 8px;
+    box-shadow: 0px 0px 2px rgba(0,0,0,0.5);
+}
+
+input[type=text] {
+    background: #b5bfc9;
+    border: 1px solid #1d465b;
+    padding: 4px 8px 4px 8px;
+    width: 440px;
+    border-radius: 5px;
+    font-size: 16px;
+}
+input[type=text]:focus {
+    background: #ced5db;
+    box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.5);
+}
+
+label {
+    margin-left: 10px;
+    font-size: 14px;
+    display: block;
+    margin-bottom: 3px;
+}
+input[type=submit] {
+    background: #1d465b;
+    border-radius: 5px;
+    border: 0px;
+    padding: 5px 10px 5px 10px;
+    color: #FFF;
+    float: right;
+    cursor: pointer;
+    box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.2);
+}
+input[type=submit]:hover {
+    background: #FFF;
+    color: #1d465b;
+    box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.8);
+}
+
+.clear {
+    clear: both;
+}.encadrer{
+    background: #b5bfc9;
+    color: #000;
+    border: 1px solid #1d465b;
+    padding: 4px 8px 4px 8px;
+    width: 440px;
+    border-radius: 5px;
+    font-size: 16px
+}
+.select{
+    background: #b5bfc9;
+    color: #000;
+    border: 1px solid #1d465b;
+    padding: 4px 8px 4px 8px;
+    width: 458px;
+    border-radius: 5px;
+    font-size: 16px
+}
+table{
+    background: #b5bfc9;
+    color: #000;
+    border: 2px #CCC;
+    width: 900px;
+	text-align: center;
+}
+
+tr{
+	border: 1px solid #1d465b;
+}
+
+td{
+	border: 1px solid #1d465b;
+}
