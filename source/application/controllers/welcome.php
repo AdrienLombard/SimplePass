@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Welcome extends CI_Controller {
+class Welcome extends Cafe {
 	
 	
 	/**
@@ -11,25 +11,13 @@ class Welcome extends CI_Controller {
 		parent::__construct();
 		
 		$this->load->model('user_model');
-		
-		$this->layout->ajouter_css('design');
 	}
 	
 	
 	public function index()
 	{
-		$this->layout->view('acceuil/welcome_message');
-	}
-
-	public function listingUser() {
-		
-		$resultat = $this->user_model->getUtilisateur();
-		
-		$data['users'] = $resultat;
-		
-		$this->layout->view('user_list', $data);
-		
-		
+            $this->layout->ajouter_css('utilisateur/login');
+            $this->layout->view('utilisateur/uLogin');
 	}
 }
 
