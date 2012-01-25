@@ -79,4 +79,21 @@ input[type=submit]:hover {
 
 .clear {
     clear: both;
+}.encadrer{
+    background: #b5bfc9;
+    color: #000;
+    border: 1px solid #1d465b;
+    padding: 4px 8px 4px 8px;
+    width: 440px;
+    border-radius: 5px;
+    font-size: 16px
+}
+.select{
+    background: #b5bfc9;
+    color: #000;
+    border: 1px solid #1d465b;
+    padding: 4px 8px 4px 8px;
+    width: 458px;
+    border-radius: 5px;
+    font-size: 16px
 }
