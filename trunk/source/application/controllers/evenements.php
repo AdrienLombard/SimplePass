@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Evenement extends Cafe {
+class Evenements extends Cafe {
 	
 	
     public function __construct() {
@@ -9,24 +9,28 @@ class Evenement extends Cafe {
 
 
     public function index() {
-        $this->layout->ajouter_css('utilisateur/liste');
+        // TODO
+		$this->layout->ajouter_css('utilisateur/liste');
         $this->layout->view('utilisateur/evenement/UEIndex');
     }
     
     public function voir() {
-        $this->layout->ajouter_css('utilisateur/details');
+        // TODO
+		$this->layout->ajouter_css('utilisateur/details');
 		$this->layout->view('utilisateur/evenement/UEVoir');
     }
     
     public function ajout() {
-        $this->layout->view('utilisateur/evenement/UEAjout');
+        // TODO
+		$this->layout->view('utilisateur/evenement/UEAjout');
     }
     
     public function modification() {
-        $this->layout->view('utilisateur/evenement/UEModification');
+        // TODO
+		$this->layout->view('utilisateur/evenement/UEModification');
     }
     
     public function suppression() {
-        $this->layout->view('utilisateur/evenement/UESuppression');
+        // TODO
     }
 }

@@ -1,5 +1,4 @@
 table.liste {
-    margin-left: 220px;
     width: 710px;
 }
 table.liste * {
@@ -8,10 +7,6 @@ table.liste * {
 table.liste thead tr {
     background: #6c8693;
     color: #FFF;
-}
-table.liste tbody tr:hover {
-    background: #DDD;
-    cursor: pointer;
 }
 table.liste th, table.liste td {
     padding: 8px;
