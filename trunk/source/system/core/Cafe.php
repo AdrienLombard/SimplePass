@@ -18,7 +18,7 @@ class Cafe extends CI_Controller {
 		
 		$this->layout->ajouter_js('jquery-1.7.1.min');
         
-        $this->layout->ajouter_css('utilisateur/layoutUtilisateur');
+        $this->layout->ajouter_css('utilisateur/cafe');
         
     }
     
