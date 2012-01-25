@@ -90,6 +90,18 @@ class Layout
 	
 	
 	/**
+	 * fonction pour charger le theme a utiliser.
+	 * @param String nom du theme.
+	 */
+	public function set_theme($theme) {
+		
+		if(is_string($theme) AND !empty($theme)) {
+			$current_theme = $theme;
+		}
+	}
+	
+	
+	/**
 	 * fonction pour demander l'affichage d'une flash_message sur la vue appeler ensuite.
 	 * @param char $message
 	 * @param int  $flag
