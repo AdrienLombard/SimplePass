@@ -41,6 +41,7 @@ create table accreditation
    idaccreditation      bigint not null auto_increment,
    idcategorie          bigint not null,
    idevenement          bigint not null,
+   idclient				bigint not null,
    primary key (idaccreditation)
 ) engine = InnoDB;
 
