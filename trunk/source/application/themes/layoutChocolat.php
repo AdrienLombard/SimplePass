@@ -19,7 +19,7 @@
     <body>
         <!-- page vue chocolat -->
         <header>
-            <img src="images/s5_seg_logo.png" />
+            <?php echo img('s5_seg_logo.png'); ?>
         </header>
         
         <div id="content">

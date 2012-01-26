@@ -10,9 +10,18 @@ class modelLambda extends CI_Model {
 							->get()
 							->result();
 	}
+	/*
+	public function ajouterClient($values) {
+		foreach($values as $key => $value) {
+			$this->db->set($key, $value);
+		}
+		$this->db->insert
+	}
+	 * */
+	 
 	
 	public function ajouterClient($values) {
-		return $this->db->insert_batch($values);
+		$this->db->insert($this->tableClient, $values);
 	}
 	
 }

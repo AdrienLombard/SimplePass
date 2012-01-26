@@ -64,7 +64,7 @@ $autoload['libraries'] = array('Layout', 'DateLib', 'database');
 |	$autoload['helper'] = array('url', 'file');
 */
 
-$autoload['helper'] = array('assets', 'url');
+$autoload['helper'] = array('assets', 'url', 'tool');
 
 
 /*
