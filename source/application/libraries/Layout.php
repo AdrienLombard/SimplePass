@@ -97,7 +97,6 @@ class Layout
 		
 		if(is_string($theme) AND !empty($theme)) {
 			$this->current_theme = $theme;
-			echo 'Chargement du theme : ' . $theme;
 		}
 	}
 	

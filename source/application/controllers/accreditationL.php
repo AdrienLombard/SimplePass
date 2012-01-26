@@ -12,7 +12,7 @@ class AccreditationL extends Chocolat {
 		
 		
 		// Chargement du modele.
-		
+		$this->load->model('modelLambda');
 	}
 	
 	
@@ -106,7 +106,7 @@ class AccreditationL extends Chocolat {
 			$values = Array (
 				'nom' 		=> $this->input->post('nom'),
 				'prenom' 	=> $this->input->post('prenom'),
-				'pays' 		=> $this->input->post('pays'),
+				'pays' 		=> 1,
 				'civilite' 	=> $this->input->post('civilite'),
 				'mail' 		=> $this->input->post('mail')
 			);
@@ -130,6 +130,7 @@ class AccreditationL extends Chocolat {
 			//Insertion dans la base.
 			$this->modelLambda->ajouterClient($values);
 			
+			
 			/*
 			$idClient = $this->modelLambda->lastId();
 			
@@ -142,6 +143,10 @@ class AccreditationL extends Chocolat {
 			
 			$this->modelLambda->ajouterAccred($accredValues);
 			 */
+			
+			$data['titre']		= 'Confirmation de demande';
+			$data['message']	= 'Votre demande a bien été prise en compte.<br>Merci de votre pré-enregistrement.';
+			$this->layout->view('inscription/message', $data);
 			 
 		
 		}
