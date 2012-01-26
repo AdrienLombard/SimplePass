@@ -108,7 +108,6 @@ class AccreditationL extends Chocolat {
 				'prenom' 	=> $this->input->post('prenom'),
 				'pays' 		=> $this->input->post('pays'),
 				'civilite' 	=> $this->input->post('civilite'),
-				'categorie' => $this->input->post('categorie'),
 				'mail' 		=> $this->input->post('mail')
 			);
 			
@@ -130,6 +129,20 @@ class AccreditationL extends Chocolat {
 			
 			//Insertion dans la base.
 			$this->modelLambda->ajouterClient($values);
+			
+			/*
+			$idClient = $this->modelLambda->lastId();
+			
+			$accredData = Array(
+				'icategorie'		=> $this->input->post('categorie'),
+				'idevenement'		=> $event,
+				'idclient'			=> $idClient,
+				'etataccreditation'	=> ACCREDITATION_A_VALIDE
+			);
+			
+			$this->modelLambda->ajouterAccred($accredValues);
+			 */
+			 
 		
 		}
 		

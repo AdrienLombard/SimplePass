@@ -6,7 +6,7 @@ class Layout
 	private $var = array();
 	
 	/** le theme choisi actuellement pour le site */
-	private $current_theme = "layoutCafe";
+	private $current_theme;
 	
 	public function __construct()
 	{
@@ -96,7 +96,8 @@ class Layout
 	public function set_theme($theme) {
 		
 		if(is_string($theme) AND !empty($theme)) {
-			$current_theme = $theme;
+			$this->current_theme = $theme;
+			echo 'Chargement du theme : ' . $theme;
 		}
 	}
 	
