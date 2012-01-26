@@ -17,7 +17,7 @@
         
     </head>
     <body>
-        
+        <!-- page vue chocolat -->
         <header>
             <img src="images/s5_seg_logo.png" />
         </header>
