@@ -36,6 +36,13 @@ define('FOPEN_READ_WRITE_CREATE',				'a+b');
 define('FOPEN_WRITE_CREATE_STRICT',				'xb');
 define('FOPEN_READ_WRITE_CREATE_STRICT',		'x+b');
 
+/*
+ * Mise en place des constantes pour l'état d'une accréditation.
+ */
+define('ACCREDITATION_A_VALIDE', 1);
+define('ACCREDITATION_VALIDE', 0);
+
+
 
 /* End of file constants.php */
 /* Location: ./application/config/constants.php */

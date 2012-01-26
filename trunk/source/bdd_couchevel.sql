@@ -42,6 +42,7 @@ create table accreditation
    idcategorie          bigint not null,
    idevenement          bigint not null,
    idclient				bigint not null,
+   etataccreditation	tinyint not null,
    primary key (idaccreditation)
 ) engine = InnoDB;
 
@@ -62,7 +63,7 @@ create table categorie
 create table client
 (
    idclient             bigint not null auto_increment,
-   pays                 varchar(3) not null,
+   pays                 bigint not null,
    nom                  varchar(50) not null,
    prenom               varchar(50) not null,
    civilite             varchar(10) not null,
