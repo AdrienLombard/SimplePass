@@ -18,7 +18,7 @@ class modelLambda extends CI_Model {
 		$this->db->insert
 	}
 	 * */
-	 
+	
 	
 	public function ajouterClient($values) {
 		$this->db->insert($this->tableClient, $values);
