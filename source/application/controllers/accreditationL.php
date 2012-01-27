@@ -129,7 +129,7 @@ class AccreditationL extends Chocolat {
 			
 			//Insertion dans la base.
 			$this->modelLambda->ajouterClient($values);
-			
+		
 			
 			/*
 			$idClient = $this->modelLambda->lastId();
