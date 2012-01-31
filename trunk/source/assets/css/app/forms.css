@@ -31,8 +31,8 @@ form input[type=text]:focus, input[type=password]:focus {
     background: #FFF;
 }
 
-form input[type=submit] {
-    background: #1d465b;
+form input[type=submit], .button {
+	background: #1d465b;
     border-radius: 5px;
     border: 0px;
     padding: 5px 10px 5px 10px;
@@ -42,8 +42,14 @@ form input[type=submit] {
     box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.2);
     margin-top: 20px;
 }
-form input[type=submit]:hover {
+form input[type=submit]:hover, .button:hover {
     background: #FFF;
     color: #1d465b;
     box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.8);
+}
+
+.button {
+	float: none;
+	display: inline-block;
+	margin-top: 4px;
 }

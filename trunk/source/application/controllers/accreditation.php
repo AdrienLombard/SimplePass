@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class AccreditationL extends Chocolat {
+class Accreditation extends Chocolat {
 	
 	/**
 	 * constucteur de notre classe de base.
@@ -28,7 +28,7 @@ class AccreditationL extends Chocolat {
 		
 		$this->layout->ajouter_js('lambda/script');
 		
-		$this->layout->view('inscription/lambda');
+		$this->layout->view('lambda/LAccueil');
 		
 	}
 	
@@ -100,7 +100,7 @@ class AccreditationL extends Chocolat {
 			
 			$data['event'] = $event;
 			
-			$this->layout->view('inscription/inscriptionIndividuelle', $data);
+			$this->layout->view('lambda/LIndividuelle', $data);
 		
 		}
 		else {
@@ -148,7 +148,7 @@ class AccreditationL extends Chocolat {
 			
 			$data['titre']		= 'Confirmation de demande';
 			$data['message']	= 'Votre demande a bien été prise en compte.<br>Merci de votre pré-enregistrement.';
-			$this->layout->view('inscription/message', $data);
+			$this->layout->view('lambda/LMessage', $data);
 			 
 		
 		}
