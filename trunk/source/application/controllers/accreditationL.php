@@ -26,6 +26,8 @@ class AccreditationL extends Chocolat {
 	
 	public function lambda() {
 		
+		$this->layout->ajouter_js('lambda/script');
+		
 		$this->layout->view('inscription/lambda');
 		
 	}

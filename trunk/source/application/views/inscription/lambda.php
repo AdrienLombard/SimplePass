@@ -5,13 +5,15 @@
 		<br><br>
 		<form>
 			<label>Evenement:</label>
-			<select name="Evenement" class="select">
-				<option value="SautEte2012">Saut a ski été 2012</option>
-				<option value="CourseVeloSeptembre2012">Course de Velo Septembre 2012</option>
+			<select id="evenement" name="evenement" class="select">
+				<option value="1"> Saut a ski été 2012 </option>
+				<option value="2"> Course de Velo Septembre 2012 </option>
 			</select><br>
 			<label>Type de demande</label>
 			<div class="encadrer">
-				<a href="<?php echo site_url('accreditationL/ajouter'); ?>">Individuelle</a> ou par <a href="LEquipe1.html"> équipe</a>
+				<a id="lienLambda" href="<?php echo site_url('accreditationL/ajouter/1'); ?>">Individuelle</a> 
+				ou par 
+				<a id="lienEquipe" href="LEquipe1.html"> équipe</a>
 			</div>
 		</form>
 	</div>
