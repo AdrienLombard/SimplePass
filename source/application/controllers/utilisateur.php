@@ -22,14 +22,13 @@ class utilisateur extends Cafe {
 	}
 	 
 	
-	public function connexionUtilisateur(){
+	public function connexion(){
 		$login = $this->input->post('login');
 		$mdp = $this->input->post('mdp');
 		$mdpBD = $this->modelUtilisateur->getMDP($login);
 		if(isset($mdpBD)){
 			if($mdpBD[0]->mdp == $mdp) {
-				//TODO
-				//$this->load->view('');
+				$this->layout->view('utilisateur/UWelcome');
 			}
 			else {
 				$message = 'Le mot de passe est incorrect.';

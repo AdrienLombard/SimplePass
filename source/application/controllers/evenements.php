@@ -5,7 +5,7 @@ class Evenements extends Cafe {
 	
     public function __construct() {
             parent::__construct();
-			$this->load->model('Evenement');
+			//$this->load->model('Evenement');
     }
 
 
