@@ -10,8 +10,6 @@ class Inscription extends Chocolat {
 		
 		// Chargement du css.
 		
-		// Chargement du js.
-		$this->layout->ajouter_js('lambda/script');
 		
 		// Chargement du modele.
 		$this->load->model('modelLambda');
@@ -29,6 +27,8 @@ class Inscription extends Chocolat {
 	}
 	
 	public function lambda() {
+		// Chargement du js.
+		$this->layout->ajouter_js('lambda/script');
 		
 		// On récupère la liste des évènements.
 		$data['events'] = $this->evenement->getEvenement();
@@ -38,6 +38,8 @@ class Inscription extends Chocolat {
 	}
 	
 	public function ajouter($event='') {
+		// Chargement du js.
+		$this->layout->ajouter_js('lambda/script');
 		// Charge la librairie de validation de formulaire
 		$this->load->library('form_validation');
 		
@@ -172,8 +174,13 @@ class Inscription extends Chocolat {
 	}
 	
 	public function groupe($evenement) {
-		$event['evenement'] = $this->evenement->getEvenementid($evenement);
-		$this->layout->view('lambda/LGroupe', $event);
+		// Charge la librairie de validation de formulaire
+		$this->load->library('form_validation');
+		
+		$data['evenement'] = $this->evenement->getEvenementid($evenement);
+		$data['listePays'] = $this->modelLambda->listePays();
+		$data['listeCategorie'] = $this->modelLambda->listeCategorie();
+		$this->layout->view('lambda/LGroupe', $data);
 	}
 	
 	public function exeGroupe() {
