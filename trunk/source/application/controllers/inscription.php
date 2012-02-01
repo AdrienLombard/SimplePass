@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Accreditation extends Chocolat {
+class Inscription extends Chocolat {
 	
 	/**
 	 * constucteur de notre classe de base.
@@ -96,7 +96,7 @@ class Accreditation extends Chocolat {
 		$this->form_validation->set_rules($config);
 		
 		
-		if ($this->form_validation->run() == FALSE) {
+		if ($this->form_validation->run() == false) {
 			
 			$data['event'] = $event;
 			
