@@ -60,6 +60,7 @@
 			
 		
 		<label>Photo</label>
+		
 		<?php echo img('ombre.jpg'); ?>
 		
 		<div class="clear"></div>
