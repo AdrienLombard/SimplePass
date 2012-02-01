@@ -169,7 +169,7 @@ class Evenements extends Cafe {
 			$data['message']	= 'Votre évènement à bien été modifié.';
 			$data['redirect'] 	= 'evenement/liste';
 			
-			$this->layout->view('utilisateur/evenements/uMessage', $data);
+			$this->layout->view('utilisateur/evenement/uMessage', $data);
 			
 		}
 		else {
