@@ -3,7 +3,7 @@
 <div class="wrap">
 
     <div class="tabs">
-        <a href="<?php echo site_url('evenements/index'); ?>">Liste</a>
+        <a href=" ">Liste</a>
         <a href="" class="current">Ajouter</a>
     </div>
 

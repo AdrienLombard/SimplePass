@@ -14,8 +14,9 @@
 
             <b>Options :</b>
             <ul>
-                <li><a href="<?php echo site_url('evenements/modification'); ?>">Modifier</a></li>
-                <li><a href="<?php echo site_url('evenements/suppression'); ?>">Supprimer</a></li>
+                
+				<li><a href="<?php echo site_url('evenements/modification/'.$id); ?>">Modifier</a></li>
+                <li><a href="<?php   echo site_url('evenements/supprimer/'.$id);?>">Supprimer</a></li>
             </ul>
 
         </aside>
