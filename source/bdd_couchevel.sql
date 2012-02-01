@@ -67,10 +67,10 @@ create table client
    nom                  varchar(50) not null,
    prenom               varchar(50) not null,
    civilite             varchar(10) not null,
-   organisme            varchar(100) not null,
-   role                 text not null,
-   tel                  varchar(25) not null,
-   mail                 text not null,
+   organisme            varchar(100) default null,
+   role                 text default null,
+   tel                  varchar(25) default null,
+   mail                 text default null,
    urlphoto             text not null,
    primary key (idclient)
 ) engine = InnoDB, charset = utf8;
