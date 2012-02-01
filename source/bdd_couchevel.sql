@@ -71,6 +71,8 @@ create table client
    role                 text default null,
    tel                  varchar(25) default null,
    mail                 text default null,
+   groupe				varchar(50) default null,
+   referent				bigint default null,
    urlphoto             text not null,
    primary key (idclient)
 ) engine = InnoDB, charset = utf8;
@@ -161,6 +163,9 @@ alter table categorie add constraint fk_contient foreign key (surcategorie)
 
 alter table client add constraint fk_appartient foreign key (pays)
       references pays (idpays) on delete restrict on update restrict;
+	  
+alter table client add constraint fk_referent foreign key (referent)
+	  references client (idclient);
 
 alter table donne_acces add constraint fk_donne_acces foreign key (idcategorie)
       references categorie (idcategorie) on delete restrict on update restrict;
@@ -410,7 +415,7 @@ INSERT INTO pays (idpays,nompays,indicatiftel) VALUES('ZWE','Zimbabwe','263');
 insert into zone (libellezone) values ('Espace presse');
 insert into zone (libellezone) values ('Pied de la piste');
 insert into zone (libellezone) values ('Salle de spectacle');
-insert into zone (libellezone) values ('Tribune officielle');
+insert into zone (libellezone) values ('Salle de surveillance parkings');
 
 insert into evenement (libelleevenement,datedebut,datefin) values ('Championnats du monde de saut à ski d''été 2012','1341136800','1343728800');
 insert into evenement (libelleevenement,datedebut,datefin) values ('Championnats du monde de slalom 2012','1354359600','1356001200');
@@ -418,3 +423,22 @@ insert into evenement (libelleevenement,datedebut,datefin) values ('Championnats
 insert into categorie (libellecategorie) values ('Presse');
 insert into categorie (surcategorie,libellecategorie) values (1,'Presse TV');
 insert into categorie (surcategorie,libellecategorie) values (1,'Presse écrite');
+insert into categorie (libellecategorie) values ('Bénévole');
+insert into categorie (surcategorie, libellecategorie) values (4, 'Serveur restaurant');
+insert into categorie (surcategorie, libellecategorie) values (4, 'Conducteur navette');
+insert into categorie (surcategorie, libellecategorie) values (4, 'Responsable parkings');
+insert into categorie (surcategorie, libellecategorie) values (7, 'Responsable parking stade');
+insert into categorie (surcategorie, libellecategorie) values (7, 'Responsable parking altiport');
+
+insert into donne_acces (idcategorie,idzone) values (1,1);
+insert into donne_acces (idcategorie,idzone) values (2,1);
+insert into donne_acces (idcategorie,idzone) values (3,1);
+insert into donne_acces (idcategorie,idzone) values (3,2);
+insert into donne_acces (idcategorie,idzone) values (1,3);
+insert into donne_acces (idcategorie,idzone) values (2,3);
+insert into donne_acces (idcategorie,idzone) values (3,3);
+insert into donne_acces (idcategorie,idzone) values (4,4);
+insert into donne_acces (idcategorie,idzone) values (6,4);
+insert into donne_acces (idcategorie,idzone) values (7,4);
+insert into donne_acces (idcategorie,idzone) values (8,4);
+insert into donne_acces (idcategorie,idzone) values (9,4);
