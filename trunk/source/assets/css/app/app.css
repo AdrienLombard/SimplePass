@@ -24,3 +24,7 @@ a {
 .left {
 	float: left;
 }
+
+.hidden {
+	display: none;
+}

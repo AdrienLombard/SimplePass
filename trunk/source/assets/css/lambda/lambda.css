@@ -172,6 +172,10 @@ td{
 #inscriptionGroupe .ligne .form .split input[type=text] {
 	width: 300px;
 }
+#inscriptionGroupe .ligne .form .split select {
+	width: 320px;
+	font-size: 14px;
+}
 #inscriptionGroupe .ligne .form .split a {
 	float: none;
 	margin-top: 33px;

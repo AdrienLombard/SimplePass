@@ -3,6 +3,7 @@ $(document).ready(function(){
 	// ouvrir le formulaire de la ligne pour la modifier
 	$('div.ligne h3').live('click', function(){
 		$(this).next('div.form').slideDown('fast');
+		$(this).parent().attr('etat', false);
 	})
 	
 	
@@ -46,9 +47,15 @@ $(document).ready(function(){
 			
 			// ferme le div.form
 			parent.slideUp('fast');
+			
+			// valider l'etat de la ligne
+			parent.parent().attr('etat', true);
 
 			// met à jours le h3 avec les infos des inputs
 			parent.parent().find('h3').html(nom.val() + ' ' + prenom.val() + ' - ' + categorie.val() + ' (' + role.val() + ')' + '<span class="modifier">modifier</span>');
+		} else {
+			// refuser l'etat de la ligne
+			parent.parent().attr('etat', false);
 		}
 		
 	});
@@ -63,41 +70,25 @@ $(document).ready(function(){
 	// ajout une ligne
 	var nbLigne = 1;
 	$('#ajouterLigne').click(function(){
-		
-		var pattern = '<div class="ligne" data="' + nbLigne + '" etat="false">\n\
-					<h3>Nouveau membre <span class="modifier">modifier</span></h3>\n\
-					<div class="form">\n\
-						<div class="split">\n\
-							<label for="">Nom</label>\n\
-							<input type="text" id="ligneNom" name="groupe[' + nbLigne + '][nom]" />\n\
-						</div>\n\
-						<div class="split">\n\
-							<label for="">Prénom</label>\n\
-							<input type="text" id="lignePrenom" name="groupe[' + nbLigne + '][prenom]" />\n\
-						</div>\n\
-						<div class="clear"></div>\n\
-						<div class="split">\n\
-							<label for="">Catégorie</label>\n\
-							\n\
-							<input type="text" id="ligneCategorie" name="groupe[' + nbLigne + '][categorie]" />\n\
-						</div>\n\
-						<div class="split">\n\
-							<label for="">Rôle (facultatif)</label>\n\
-							<input type="text" id="ligneRole" name="groupe[' + nbLigne + '][role]" />\n\
-						</div>\n\
-						<div class="split splitRight">\n\
-							<a href="#" class="button" id="validerLigne">Valider</a>\n\
-						</div>\n\
-						<div class="split splitRight">\n\
-							<a href="#" class="button" id="supprimerLigne">Supprimer</a>\n\
-						</div>\n\
-						<div class="clear"></div>\n\
-					</div>\n\
-				</div>';
-		
+		var pattern = $('#pattern').html().replace(/nbLigne/g, nbLigne);
 		$('#insererLigne').append(pattern);
-		
 		nbLigne++;
 	})
+	
+	// tout verifer avant de tout valider
+	$("#inscriptionGroupe").bind("submit", function(){
+		
+		var bool = true;
+		
+		$('#insererLigne .ligne').each(function(){
+			if($(this).attr('etat') == 'false')
+				bool = false;
+		})
+		
+		if(bool == false)
+			alert('Merci de valider chaque membre avant de soumettre votre demande.');
+		
+		return bool;
+	});
 	
 });
