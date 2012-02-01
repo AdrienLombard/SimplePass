@@ -197,7 +197,7 @@ class Inscription extends Chocolat {
 	}
 	
 	public function ajouterGroupe($data) {
-		
+		$data['listeCategorie'] = $this->modelLambda->listeCategorie();
 		$this->layout->ajouter_js('lambda/scriptGroupe');
 		$this->layout->view('lambda/LGroupeDetails', $data);
 	}
