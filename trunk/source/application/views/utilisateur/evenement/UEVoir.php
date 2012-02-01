@@ -28,11 +28,11 @@
 			<table class="details">
 				<tr>
 					<th>Date début</th>
-					<td><?php echo $resultat->datedebut?></td>
+					<td><?php echo display_date($resultat->datedebut)?></td>
 				</tr>
 				<tr>
 					<th>Date fin</th>
-					<td><?php echo $resultat->datefin?></td>
+					<td><?php echo display_date($resultat->datefin)?></td>
 				</tr>
 				<?php } endforeach; ?>
 			</table>
