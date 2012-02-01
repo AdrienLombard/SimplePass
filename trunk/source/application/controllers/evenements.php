@@ -5,24 +5,33 @@ class Evenements extends Cafe {
 	
     public function __construct() {
             parent::__construct();
-			//$this->load->model('Evenement');
+			$this->load->model('Evenement');
     }
 
 
     public function index() {
         // TODO
 		$this->layout->ajouter_css('utilisateur/liste');
-        $this->layout->view('utilisateur/evenement/UEIndex');
+		
+		$data['resultats']=$this->Evenement->getEvenement();		
+		
+        $this->layout->view('utilisateur/evenement/UEIndex', $data);
 		
     }
     /*@la fonction qui permet de consulter l'evenement
 	 * 
 	 */
-    public function voir() {
+    public function voir($id) {
         // TODO
 		$this->layout->ajouter_css('utilisateur/details');
-		$this->layout->view('utilisateur/evenement/UEVoir');
 		
+		// on recupère le 3 champ id
+		//$id=$this->uri->segment(3);
+	    
+		$data['resultats']=$this->Evenement->getEvenementid($id);
+		$data['id'] = $id;
+		
+		$this->layout->view('utilisateur/evenement/UEVoir', $data);
     }
     /*@ la fonction qui permet l'ajout d'un evenement
 	 * 
@@ -48,7 +57,7 @@ class Evenements extends Cafe {
 	 * 
 	 */
 	
-    public function modification() {
+    public function modification($id) {
         // TODO
 		$this->layout->view('utilisateur/evenement/UEModification');
 		$nom=$this->input->post('nom');
@@ -63,8 +72,44 @@ class Evenements extends Cafe {
 	 * 
 	 */
 	
-    public function suppression() {
+    public function supprimer($id) {
         // TODO
-		$resultat = $this->Evenement->supprimerEvenenement($id);
+	
+		$data['resultats']=$this->Evenement->getEvenementid($id);
+		
+		$this->layout->view('utilisateur/evenement/UEsupprimer');
+		
+		
+		
+    }
+	/*@afficher tous la liste des evennement
+	 * 
+	 */
+	 public function tous() {
+        // TODO
+		
+		$this->layout->view('utilisateur/evenement/UEVoir');
+		
+    }
+	/*@ la liste des evennements valide
+	 * 
+	 */
+	
+	 public function valide() {
+        // TODO
+		
+		$this->layout->view('utilisateur/evenement/UEVoir');
+		
+    }
+	
+	/*@ la liste des  evenement non valide
+	 * 
+	 */
+	
+	public function Avalide() {
+        // TODO
+		
+		$this->layout->view('utilisateur/evenement/UEVoir');
+		
     }
 }

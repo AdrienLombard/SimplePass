@@ -2,7 +2,7 @@
     <form method="post" action="<?php echo site_url('utilisateur/connexionUtilisateur'); ?>">
 		
         <h2>Authentification</h2>
-
+       
         <label>Nom d'utilisateur</label>
         <input type="text" name="login"/>
 

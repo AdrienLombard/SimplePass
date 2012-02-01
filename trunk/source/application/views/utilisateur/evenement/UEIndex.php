@@ -3,7 +3,7 @@
 <div class="wrap">
 
     <div class="tabs">
-        <a href="#" class="current">Liste</a>
+        <a href="" class="current">Liste</a>
         <a href="<?php echo site_url('evenements/ajout'); ?>">Ajouter</a>
     </div>
 
@@ -36,14 +36,20 @@
 					</tr>
                 </thead>
                 <tbody>
-                    <?php for($i=0;$i<6;$i++): ?>
+					
+                    <?php foreach ($resultats as $evenement):{  ?>
 					<tr>
-                        <td>Coupe du monde de ski hiver</td>
-                        <td>12 Janvier 2012</td>
-                        <td>22 Janvier 2012</td>
-						<td><a href="<?php echo site_url('evenements/voir'); ?>">Voir<a></td>
-                    </tr>
-                    <?php endfor; ?>
+			
+						<td><?php echo $evenement->libelleevenement?></td>
+                        
+                        <td><?php echo $evenement->datedebut?> </td> 
+						
+                        <td><?php echo $evenement->datefin?> </td>
+					    <input type="hidden" value="<?php echo $evenement->idevenement; ?>" name="id" />
+						<td><a href="<?php echo site_url('evenements/voir/'.$evenement->idevenement ); ?>">Voir<a></td>
+				   
+				  </tr>
+                    <?php } endforeach; ?>
                 </tbody>
             </table>
         </div>

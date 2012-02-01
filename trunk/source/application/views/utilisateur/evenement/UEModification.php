@@ -14,9 +14,6 @@
 
             <b>Options :</b>
             <ul>
-				<?php if(isset($modifier)):?>
-				<div calss="success"><?php echo $modifier; ?></div>
-				<?php endif; ?>
                 <li><a href="<?php echo site_url('evenements/index'); ?>">Retour</a></li>
             </ul>
 

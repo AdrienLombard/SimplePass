@@ -9,14 +9,18 @@ class Welcome extends Cafe {
 	public function __construct()
 	{
 		parent::__construct();
+		/* on charge le model user*/
+		$this->load->model('modelutilisateur');
+
 	}
-	
-	
 	public function index()
 	{
+    
             $this->layout->ajouter_css('utilisateur/login');
             $this->layout->view('utilisateur/ULogin');
+
 	}
+     
 }
 /* End of file welcome.php */
 /* Location: ./application/controllers/welcome.php */
