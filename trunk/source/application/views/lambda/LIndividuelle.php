@@ -31,7 +31,7 @@
 		<label>Pays</label>
 		<select  id="pays" name="pays" class="select">
 			<?php foreach($listePays as $pays): ?>
-			<option VALUE="<?php echo $pays->idpays; ?>" <?php echo set_select('pays', '<?php echo $pays->idpays; ?>'); ?> ><?php echo $pays->nompays; ?></option>
+			<option VALUE="<?php echo $pays->idpays; ?>" <?php echo set_select('pays', $pays->idpays); ?> ><?php echo $pays->nompays; ?></option>
 			<?php endforeach; ?>
 		</select>
 		
@@ -53,10 +53,11 @@
 		
 		<label>Categorie</label>
 		<select  id="categorie" name="categorie" class="select">
+			<?php foreach($listeCategorie as $categorie): ?>
+			<option VALUE="<?php echo $categorie->libellecategorie; ?>" <?php echo set_select('pays', $categorie->libellecategorie); ?> ><?php echo $categorie->libellecategorie; ?></option>
+			<?php endforeach; ?>
 			<option VALUE="Benevole" <?php echo set_select('categorie', 'Benevole', true); ?> >Bénévole</option>
-			<option VALUE="Equipe" <?php echo set_select('categorie', 'Equipe'); ?> >Equipe</option>
-			<option VALUE="journaliste" <?php echo set_select('categorie', 'journaliste'); ?> >Journaliste</option>
-			<option VALUE="VIP" <?php echo set_select('categorie', 'VIP'); ?> >VIP PACC</option>
+			
 		</select>
 			
 		
