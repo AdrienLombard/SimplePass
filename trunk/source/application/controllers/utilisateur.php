@@ -1,6 +1,6 @@
 <?php
 
-Class Utilisateur extends Cofe{
+Class Utilisateur extends Cafe{
     
     
    public function __construct()
