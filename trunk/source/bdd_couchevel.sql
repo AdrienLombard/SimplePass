@@ -157,6 +157,9 @@ alter table accreditation add constraint fk_depend foreign key (idcategorie)
 
 alter table accreditation add constraint fk_valable foreign key (idevenement)
       references evenement (idevenement) on delete restrict on update restrict;
+	  
+alter table accreditation add constraint fk_client foreign key (idclient)
+	  references client (idclient) on delete restrict on update restrict;
 
 alter table categorie add constraint fk_contient foreign key (surcategorie)
       references categorie (idcategorie);
@@ -427,8 +430,8 @@ insert into categorie (libellecategorie) values ('Bénévole');
 insert into categorie (surcategorie, libellecategorie) values (4, 'Serveur restaurant');
 insert into categorie (surcategorie, libellecategorie) values (4, 'Conducteur navette');
 insert into categorie (surcategorie, libellecategorie) values (4, 'Responsable parkings');
-insert into categorie (surcategorie, libellecategorie) values (7, 'Responsable parking stade');
 insert into categorie (surcategorie, libellecategorie) values (7, 'Responsable parking altiport');
+insert into categorie (surcategorie, libellecategorie) values (7, 'Responsable parking stade');
 
 insert into donne_acces (idcategorie,idzone) values (1,1);
 insert into donne_acces (idcategorie,idzone) values (2,1);
