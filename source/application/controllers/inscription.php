@@ -107,6 +107,8 @@ class Inscription extends Chocolat {
 			
 			$data['listePays'] = $this->modelLambda->listePays();
 			
+			$data['listeCategorie'] = $this->modelLambda->listeCategorie();
+			
 			$this->layout->view('lambda/LIndividuelle', $data);
 		
 		}

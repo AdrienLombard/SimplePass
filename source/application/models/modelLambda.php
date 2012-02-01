@@ -6,6 +6,8 @@ class modelLambda extends CI_Model {
 	
 	private $tablePays		= 'pays';
 	
+	private $tableCategorie = 'categorie';
+	
 	public function getClient() {
 		return $this->db->select('*')
 						->from($this->tableClient)
@@ -37,5 +39,16 @@ class modelLambda extends CI_Model {
 	public function lastId() {
 		return $this->db->insert_id();
 	}
+	
+	public function listeCategorie() {
+		return $this->db->select('*')
+						->from($this->tableCategorie)
+						->get()
+						->result();
+	}
+	
+	
+	
+	
 	
 }
