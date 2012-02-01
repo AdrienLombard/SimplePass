@@ -24,10 +24,7 @@ class Evenements extends Cafe {
     public function voir($id) {
         // TODO
 		$this->layout->ajouter_css('utilisateur/details');
-		
-		// on recupère le 3 champ id
-		//$id=$this->uri->segment(3);
-	    
+		  
 		$data['resultats']=$this->Evenement->getEvenementid($id);
 		$data['id'] = $id;
 		
@@ -39,9 +36,11 @@ class Evenements extends Cafe {
     public function ajout() {
 	
         $this->layout->view('utilisateur/evenement/UEAjout');
+		// on recupere les donnees entrees 
 		$nom=$this->input->post('nom');
 		$datedebut=$this->input->post('datedebut');
 		$datefin=$this->input->post('datefin');
+		
 		 if(isset($datedebut) && !empty($datedebut)  
 				                 && isset($datefin) && !empty($datefin)) {
 				
@@ -58,16 +57,29 @@ class Evenements extends Cafe {
 	 */
 	
     public function modification($id) {
-        // TODO
-		$this->layout->view('utilisateur/evenement/UEModification');
-		$nom=$this->input->post('nom');
-		$datedebut=$this->input->post('datedebut');
-		$datefin=$this->input->post('datefin');
 		
-		$resultat = $this->Evenement->modifierEvenement($nom,$datedebut,$datefin);
-		$data['modifier']='Evenement modifier';
-		$this->load->view('utilisateur/evenement/UEModification',$data);
+		$valid = $this->input->post('valider');
+		if($valid) {
+			// on recupere les donnees entrees 
+			$nom=$this->input->post('nom');
+			$datedebut=$this->input->post('datedebut');
+			$datefin=$this->input->post('datefin');
+
+			$resultat = $this->Evenement->modifierEvenement($nom,$datedebut,$datefin,$id);
+			
+			echo 'je rentre';
+		}
+		
+		
+		$data['resultats']=$this->Evenement->getEvenementid($id);
+		
+		//display_tab($data['resultats']);
+		
+		$this->layout->view('utilisateur/evenement/UEModification',$data);
     }
+	
+	
+	
     /*@la fonction qui permet de supprimer un evenement
 	 * 
 	 */

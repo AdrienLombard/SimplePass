@@ -22,18 +22,19 @@
         </aside>
 
         <div id="main">
-            
-			<h2>Coupe du monde de ski hiver</h2>
+            <?php foreach ($resultats as $resultat):{?>
+			<h2><?php echo $resultat->libelleevenement?></h2>
 			
 			<table class="details">
 				<tr>
 					<th>Date début</th>
-					<td>12 Janvier 2012</td>
+					<td><?php echo $resultat->datedebut?></td>
 				</tr>
 				<tr>
 					<th>Date fin</th>
-					<td>22 Janvier 2012</td>
+					<td><?php echo $resultat->datefin?></td>
 				</tr>
+				<?php } endforeach; ?>
 			</table>
 			
         </div>

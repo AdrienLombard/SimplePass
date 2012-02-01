@@ -1,7 +1,7 @@
 <?php
  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Evenement extends CI_Model{
+class evenement extends CI_Model{
 	  
 	private $tabEvenement= 'evenement';
 	
@@ -65,7 +65,7 @@ class Evenement extends CI_Model{
 	/*@ Modifier un evenement
 	 * @return
 	 */
-	public function modifierEvenement($libelle,$datedebut,$datefin){
+	public function modifierEvenement($libelle,$datedebut,$datefin,$id){
 		
 		 
 		 $data = array(
@@ -73,9 +73,9 @@ class Evenement extends CI_Model{
                               'datedebut' => $datedebut,
 			                  'datefin' => $datefin
                       );
-
-                   
-                    $this->db->update('evenement', $data); 
+                    $this->db->where('idevenement', $id);
+                    $this->db->update('evenement', $data);
+			                  
 	}
 	
 }
