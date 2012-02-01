@@ -143,6 +143,7 @@ class Layout
 	{
 		$this->var['redirect']['url'] = $url;
 		$this->var['redirect']['tempo'] = $tempo;
+		echo 'ajout redirect';
 	}
 	
 	

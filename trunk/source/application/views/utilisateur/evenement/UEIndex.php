@@ -3,8 +3,8 @@
 <div class="wrap">
 
     <div class="tabs">
-        <a href="<?php echo site_url('evenements/index'); ?>" class="current">Liste</a>
-        <a href="<?php echo site_url('evenements/ajout'); ?>">Ajouter</a>
+        <a href="<?php echo site_url('evenements/liste'); ?>" class="current">Liste</a>
+        <a href="<?php echo site_url('evenements/ajouter'); ?>">Ajouter</a>
     </div>
 
     <div class="box-full">
@@ -26,7 +26,7 @@
         </aside>
 
         <div id="main">
-            <table class="liste" cellspacing="0">
+            <table class="liste">
                 <thead>
 					<tr>
 						<th>Nom</th>
@@ -45,8 +45,8 @@
                         <td><?php echo display_date($evenement->datedebut)?> </td> 
 						
                         <td><?php echo display_date($evenement->datefin)?> </td>
-					    <input type="hidden" value="<?php echo $evenement->idevenement; ?>" name="id" />
-						<td><a href="<?php echo site_url('evenements/voir/'.$evenement->idevenement ); ?>">Voir<a></td>
+					    <!--  <input type="hidden" value="<?php echo $evenement->idevenement; ?>" name="id" /> -->
+						<td><a href="<?php echo site_url('evenements/voir/'.$evenement->idevenement ); ?>">Voir</a></td>
 				   
 				  </tr>
                     <?php } endforeach; ?>

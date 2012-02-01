@@ -15,17 +15,17 @@
             <ul>
 				
 				<?php if(isset($ajoute)):?>
-				<div calss="ajoute"><?php echo $ajoute; ?></div>
+				<li><span class="ajoute"><?php echo $ajoute; ?></span></li>
 				<?php endif; ?>
 				
-                <li><a href="<?php echo site_url('evenements/index'); ?>">Retour</a></li>
+                <li><a href="<?php echo site_url('evenements/liste'); ?>">Retour</a></li>
             </ul>
 
         </aside>
 
         <div id="main">
 			
-			<form action="<?php echo site_url('evenements/ajout'); ?>" method="post">
+			<form action="<?php echo site_url('evenements/exeAjouter'); ?>" method="post">
 				
 				<h2>Nouvel évènement</h2>
 				
@@ -33,12 +33,13 @@
 				<input type="text" name="nom" />
 				
 				<label>Date début</label>
-				<input type="text" name="datedebut"/>
+<!-- 				<input type="text" name="datedebut"/> -->
+				<input type="text" id="datepicker-debut" name="datedebut" READONLY="READONLY" />
 				
 				<label>Date fin</label>
-				<input type="text" name="datefin"/>
+				<input type="text" id="datepicker-fin" name="datedebut" READONLY="READONLY" />
 				
-				<input type="submit"/>
+				<input type="submit" name="valider" />
 				
 			</form>
 			 

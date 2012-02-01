@@ -3,8 +3,8 @@
 <div class="wrap">
 
     <div class="tabs">
-        <a href="<?php echo site_url('evenements/index'); ?>">Liste</a>
-        <a href="<?php echo site_url('evenements/ajout'); ?>">Ajouter</a>
+        <a href="<?php echo site_url('evenements/voir'); ?>">Liste</a>
+        <a href="<?php echo site_url('evenements/ajouter'); ?>">Ajouter</a>
 		<a href="#" class="current">Modifier</a>
     </div>
 
@@ -14,28 +14,26 @@
 
             <b>Options :</b>
             <ul>
-                <li><a href="<?php echo site_url('evenements/index'); ?>">Retour</a></li>
+                <li><a href="<?php echo site_url('evenements/voir/'.$id); ?>">Retour</a></li>
             </ul>
 
         </aside>
 
         <div id="main">
 			
-			<form action="" method="post">
-				 <?php foreach ($resultats as $resultat):?>
-				<h2><?php echo $resultat->libelleevenement?></h2>
+			<form action="<?php echo site_url('evenements/exeModifier/'.$id); ?>" method="post">
+				<h2><?php echo $nom?></h2>
 				
 				<label>Nom</label>
-				<input type="text" value="<?php echo $resultat->libelleevenement?>" name="nom"/>
+				<input type="text" value="<?php echo $nom; ?>" name="nom"/>
 				
 				<label>Date début</label>
-				<input type="text" value="<?php echo display_date($resultat->datedebut)?>" name="datedebut"/>
+				<input type="text" id="datepicker-debut" name="datedebut" READONLY="READONLY" />
 				
 				<label>Date fin</label>
-				<input type="text" value="<?php echo display_date($resultat->datefin)?>" name="datefin"/>
+				<input type="text" id="datepicker-fin" name="datedebut" READONLY="READONLY" />
 				
 				<input type="submit" name="valider" />
-				<?php  endforeach; ?>
 			</form>
 			
         </div>

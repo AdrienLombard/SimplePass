@@ -3,125 +3,207 @@
 class Evenements extends Cafe {
 	
 	
-    public function __construct() {
-            parent::__construct();
-			$this->load->model('Evenement');
-    }
+	public function __construct() {
+		parent::__construct();
+		$this->load->model('Evenement');
+		
+		$this->load->library('form_validation');
+		
+		$this->layout->ajouter_js('utilisateur/scriptDate');
+	}
 
 
-    public function index() {
-        // TODO
+	public function index() {
+		
+		$this->liste();
+		
+	}
+	
+	/**
+	 * Méthode Liting du CRUD. 
+	 */
+	public function liste() {
+		// Chargement du css.
 		$this->layout->ajouter_css('utilisateur/liste');
 		
-		$data['resultats']=$this->Evenement->getEvenement();		
+		// Récupération des données dans la base.
+		$data['resultats']=$this->Evenement->getEvenement();
 		
-        $this->layout->view('utilisateur/evenement/UEIndex', $data);
-		
-    }
-    /*@la fonction qui permet de consulter l'evenement
-	 * 
+		// Appelle de la vue.
+		$this->layout->view('utilisateur/evenement/UEIndex', $data);
+	}
+	
+	
+	/**
+	 * Méthode Read du CRUD.
+	 * @param  $id : Id de la données à afficher.
 	 */
-    public function voir($id) {
-        // TODO
+	public function voir($id) {
+		// Chargement du css.
 		$this->layout->ajouter_css('utilisateur/details');
-		  
+		
+		// Récupération des données sur la données corréspondant a l'id.
 		$data['resultats']=$this->Evenement->getEvenementid($id);
 		$data['id'] = $id;
 		
+		// Appelle de la vue.
 		$this->layout->view('utilisateur/evenement/UEVoir', $data);
-    }
-    /*@ la fonction qui permet l'ajout d'un evenement
-	 * 
-	 */
-    public function ajout() {
+	}
 	
-        $this->layout->view('utilisateur/evenement/UEAjout');
-		// on recupere les donnees entrees 
-		$nom=$this->input->post('nom');
-		$datedebut=$this->input->post('datedebut');
-		$datefin=$this->input->post('datefin');
-		
-		 if(isset($datedebut) && !empty($datedebut)  
-				                 && isset($datefin) && !empty($datefin)) {
-				
-				$result=$this->Evenement->ajouterEvenement($nom,$datedebut,$datefin);
-				
-		        $data['ajoute']='Evenement ajoute';
-		
-			}
-		
-		
-    }
-	/*@la fonction qui permet de modifier un evenement
-	 * 
+	/**
+	 * Méthode Create du CRUD.
 	 */
-	
-    public function modification($id) {
+	public function ajouter() {
 		
-		$valid = $this->input->post('valider');
-		if($valid) {
-			// on recupere les donnees entrees 
-			$nom=$this->input->post('nom');
-			$datedebut=$this->input->post('datedebut');
-			$datefin=$this->input->post('datefin');
+		// Traitement
+		
+		// Appelle de la vue.
+		$this->layout->view('utilisateur/evenement/UEAjout');
+		
+	}
+	
+	/**
+	 * Méthode de traitement pour l'ajout.
+	 */
+	public function exeAjouter() {
+		$config = array(
+		array(
+					'field'   => 'nom',
+					'label'   => 'Nom', 
+					'rules'   => 'required'
+		),
+		array(
+					'field'   => 'datedebut',
+					'label'   => 'Date de début', 
+					'rules'   => ''
+		),
+		array(
+					'field'   => 'datefin',
+					'label'   => 'Date de fin', 
+					'rules'   => ''
+		)
+		);
+		$this->form_validation->set_rules($config);
+		
+		
+		$nom 		= $this->input->post('nom');
+		$datedebut 	= $this->input->post('datedebut');
+		$datefin 	= $this->input->post('datefin');
+		
+		if ($this->form_validation->run() == true) {
+			//$result = $this->Evenement->ajouterEvenement($nom, $datedebut, $datefin);
+			
+// 			$newId = $this->Evenement->lastId();
+			
+			$data['titre']		= 'Ajout';
+			$data['message']	= 'Votre évènement à bien été ajouté.';
+			$data['redirect'] 	= 'evenements/liste';
+			
+			$this->layout->view('utilisateur/evenement/uMessage', $data);
+		}
+		else {
+			$this->ajouter();
+		}
+	}
 
-			$resultat = $this->Evenement->modifierEvenement($nom,$datedebut,$datefin,$id);
-			
-			
+	
+	/**
+	 * Méthode Update du CRUD.
+	 * @param $id : Id de la données à modifiée.
+	 */
+	public function modifier($id, $re=false) {
+		
+		// Traitement
+		$data['id'] = $id;
+		
+		if($re) {
+			$data['nom'] 		= $re['nom'];
+			$data['datedebut'] 	= date_to_timestamp($re['datedebut']);
+			$data['datefin'] 	= date_to_timestamp($re['datefin']);
+		}
+		else {
+			$reponse = $this->Evenement->getEvenementid($id);
+			$data['nom'] 		= $reponse[0]->libelleevenement;
+			$data['datedebut'] 	= $reponse[0]->datedebut;
+			$data['datefin'] 	= $reponse[0]->datefin;
 		}
 		
-		
-		$data['resultats']=$this->Evenement->getEvenementid($id);
-		
-		//display_tab($data['resultats']);
-		
+		// Appelle de la vue.
 		$this->layout->view('utilisateur/evenement/UEModification',$data);
-    }
+	}
 	
-	
-	
-    /*@la fonction qui permet de supprimer un evenement
-	 * 
+	/**
+	 * Méthode traitement de l'Update du CRUD.
 	 */
+	public function exeModifier($id) {
+		$data['id'] = $id;
+		
+		$config = array(
+		array(
+			'field'   => 'nom',
+			'label'   => 'Nom', 
+			'rules'   => 'required'
+		),
+		array(
+			'field'   => 'datedebut',
+			'label'   => 'Date de début', 
+			'rules'   => ''
+		),
+		array(
+			'field'   => 'datefin',
+			'label'   => 'Date de fin', 
+			'rules'   => ''
+		)
+		);
+		$this->form_validation->set_rules($config);
+		
+		$nom 		= $this->input->post('nom');
+		$datedebut 	= $this->input->post('datedebut');
+		$datefin 	= $this->input->post('datefin');
+		
+		if ($this->form_validation->run() == true) {
+			
+			$resultat = $this->Evenement->modifierEvenement($nom, $datedebut, $datefin, $id);
+			
+			$data['titre']		= 'Modification';
+			$data['message']	= 'Votre évènement à bien été modifié.';
+			$data['redirect'] 	= 'evenement/liste';
+			
+			$this->layout->view('utilisateur/evenements/uMessage', $data);
+			
+		}
+		else {
+			$donnees['nom'] 		= $nom;
+			$donnees['datedebut'] 	= $datedebut;
+			$donnees['datefin'] 	= $datefin;
+			$this->modifier($id, $donnees);
+		}
+	}
 	
-    public function supprimer($id) {
-        // TODO
 	
+	/**
+	 * Methode Delete du CRUD.
+	 * @param $id : Id de la données a supprimer.
+	 */
+	public function supprimer($id) {
+		
 		$data['resultats']=$this->Evenement->getEvenementid($id);
 		
 		$this->layout->view('utilisateur/evenement/UEsupprimer');
 		
 		
-		
-    }
-	/*@afficher tous la liste des evennement
-	 * 
-	 */
-	 public function tous() {
-        // TODO
-		
-		$this->layout->view('utilisateur/evenement/UEVoir');
-		
-    }
-	/*@ la liste des evennements valide
-	 * 
-	 */
+	}
+	
 	
 	 public function valide() {
-        // TODO
-		
+		// TODO
 		$this->layout->view('utilisateur/evenement/UEVoir');
 		
-    }
-	
-	/*@ la liste des  evenement non valide
-	 * 
-	 */
+	}
 	
 	public function Avalide() {
-        // TODO
-		
+		// TODO
 		$this->layout->view('utilisateur/evenement/UEVoir');
 		
-    }
+	}
 }
