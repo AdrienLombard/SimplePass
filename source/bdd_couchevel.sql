@@ -182,6 +182,8 @@ alter table possede add constraint fk_possede2 foreign key (idclient)
 
 insert into utilisateur (login,mdp) values ('root', 'root');
 
+alter table pays modify indicatiftel varchar(10);
+
 INSERT INTO pays (idpays,nompays,indicatiftel) VALUES('AFG','Afghanistan','93');
 INSERT INTO pays (idpays,nompays,indicatiftel) VALUES('ZAF','Afrique du Sud','27');
 INSERT INTO pays (idpays,nompays,indicatiftel) VALUES('ALB','Albanie','355');
