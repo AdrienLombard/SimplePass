@@ -10,9 +10,12 @@ class Inscription extends Chocolat {
 		
 		// Chargement du css.
 		
+		// Chargement du js.
+		$this->layout->ajouter_js('lambda/script');
 		
 		// Chargement du modele.
 		$this->load->model('modelLambda');
+		$this->load->model('evenement');
 	}
 	
 	
@@ -26,10 +29,11 @@ class Inscription extends Chocolat {
 	
 	public function lambda() {
 		
-		$this->layout->ajouter_js('lambda/script');
+		// On récupère la liste des évènements.
+		$data['events'] = $this->evenement->getEvenement();
 		
-		$this->layout->view('lambda/LAccueil');
-		
+		// On charge la vue pour cette même page.
+		$this->layout->view('lambda/LAccueil', $data);
 	}
 	
 	public function ajouter($event='') {
@@ -59,7 +63,7 @@ class Inscription extends Chocolat {
 			array(
 				'field'   => 'pays',
 				'label'   => 'Pays', 
-				'rules'   => 'required'
+				'rules'   => ''
 			),
 			array(
 				'field'   => 'tel',
@@ -98,7 +102,9 @@ class Inscription extends Chocolat {
 		
 		if ($this->form_validation->run() == false) {
 			
-			$data['event'] = $event;
+			$data['event'] = $this->evenement->getEvenementid($event);
+			
+			$data['listePays'] = $this->modelLambda->listePays();
 			
 			$this->layout->view('lambda/LIndividuelle', $data);
 		
@@ -108,7 +114,7 @@ class Inscription extends Chocolat {
 			$values = Array (
 				'nom' 		=> $this->input->post('nom'),
 				'prenom' 	=> $this->input->post('prenom'),
-				'pays' 		=> 1,
+				'pays' 		=> $this->input->post('pays'),
 				'civilite' 	=> $this->input->post('civilite'),
 				'mail' 		=> $this->input->post('mail')
 			);
@@ -119,10 +125,14 @@ class Inscription extends Chocolat {
 				$values['tel'] = $tel;
 			}
 			
-			$role = $this->input->post('role');
-			if(isset($role) && !empty($role)) {
-				$values['role'] = $role;
+			$role = $this->input->post('choixRole');
+			if($role == 'Oui') {
+				$role = $this->input->post('role');
+				if(isset($role) && !empty($role)) {
+					$values['role'] = $role;
+				}
 			}
+			
 			
 			$titre = $this->input->post('tel');
 			if(isset($titre) && !empty($titre)) {
@@ -148,6 +158,9 @@ class Inscription extends Chocolat {
 			
 			$data['titre']		= 'Confirmation de demande';
 			$data['message']	= 'Votre demande a bien été prise en compte.<br>Merci de votre pré-enregistrement.';
+			
+			$this->layout->add_redirect('inscription/lambda', 3);
+			
 			$this->layout->view('lambda/LMessage', $data);
 			 
 		

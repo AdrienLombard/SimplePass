@@ -10,8 +10,9 @@
 		
 		<label>Evenement:</label>
 		<select id="evenement" name="evenement" class="select">
-			<option value="1"> Saut a ski été 2012 </option>
-			<option value="2"> Course de Velo Septembre 2012 </option>
+			<?php foreach($events as $event): ?>
+				<option value="<?php echo $event->idevenement; ?>"> <?php echo $event->libelleevenement; ?> </option>
+			<?php endforeach; ?>
 		</select><br>
 
 		<br>

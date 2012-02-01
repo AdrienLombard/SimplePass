@@ -8,7 +8,7 @@
 	<div class="box-small">
 	
 	<span class="info">Inscription : individuelle</span><br>
-	<span class="info">Evènement : Coupe du monde été 2012</span>
+	<span class="info">Evènement : <?php echo $event[0]->libelleevenement; ?></span>
 	
 	<br><br>
 	
@@ -29,7 +29,11 @@
 		<input type="text" value="<?php echo set_value('prenom'); ?>" id="prenom" name="prenom" />
 		
 		<label>Pays</label>
-		<input type="text" value="<?php echo set_value('pays'); ?>" id="pays" name="pays" />
+		<select  id="pays" name="pays" class="select">
+			<?php foreach($listePays as $pays): ?>
+			<option VALUE="<?php echo $pays->idpays; ?>" <?php echo set_select('pays', '<?php echo $pays->idpays; ?>'); ?> ><?php echo $pays->nompays; ?></option>
+			<?php endforeach; ?>
+		</select>
 		
 		<label>Télephone</label>
 		<input type="text" value="<?php echo set_value('tel'); ?>" id="tel" name="tel" />
@@ -40,7 +44,11 @@
 		<label>Societe, Organime ou Publication</label>
 		<input type="text" value="<?php echo set_value('titre'); ?>" id="titre" name="titre" />
 		
-		<label>Rôle</label>
+		<label>Voulez-vous spécifier un rôle ?</label>
+		<div class="encadrer" >
+		<input type=radio class="choixRole" name="choixRole" value="Non" <?php echo set_radio('choixRole', 'Non', TRUE); ?> >Non
+		<input type=radio class="choixRole" name="choixRole" value="Oui" <?php echo set_radio('choixRole', 'Oui'); ?> >Oui
+		</div>
 		<input type="text" value="<?php echo set_value('role'); ?>" id="role" name="role" />
 		
 		<label>Categorie</label>
