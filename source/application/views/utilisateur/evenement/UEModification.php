@@ -22,20 +22,20 @@
         <div id="main">
 			
 			<form action="" method="post">
-				
-				<h2>Coupe du monde de ski hiver</h2>
+				 <?php foreach ($resultats as $resultat):?>
+				<h2><?php echo $resultat->libelleevenement?></h2>
 				
 				<label>Nom</label>
-				<input type="text" value="Coupe du monde de ski hiver" name="nom"/>
+				<input type="text" value="<?php echo $resultat->libelleevenement?>" name="nom"/>
 				
 				<label>Date début</label>
-				<input type="text" value="12 Janvier 2012" datedebu="datedebut"/>
+				<input type="text" value="<?php echo $resultat->datedebut?>" name="datedebut"/>
 				
 				<label>Date fin</label>
-				<input type="text" value="22 Janvier 2012" datefin="datefin"/>
+				<input type="text" value="<?php echo $resultat->datefin?>" name="datefin"/>
 				
-				<input type="submit"/>
-				
+				<input type="submit" name="valider" />
+				<?php  endforeach; ?>
 			</form>
 			
         </div>

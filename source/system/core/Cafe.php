@@ -6,6 +6,8 @@ class Cafe extends CI_Controller {
         
         parent::__construct();
 		
+		$this->output->enable_profiler(true);
+		
 		$this->layout->set_theme('layoutCafe');
         
         $this->layout->set_titre('Courchevel');
