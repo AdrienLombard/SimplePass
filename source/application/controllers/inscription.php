@@ -168,6 +168,19 @@ class Inscription extends Chocolat {
 		
 	}
 	
+	public function groupe() {
+		$this->layout->view('lambda/LGroupe');
+	}
+	
+	public function ajouterGroupe() {
+		$this->layout->ajouter_js('lambda/scriptGroupe');
+		$this->layout->view('lambda/LGroupeDetails');
+	}
+	
+	public function exeAjouterGroupe() {
+		// TODO
+	}
+	
 }
 
 /* End of file accreditationL.php */
