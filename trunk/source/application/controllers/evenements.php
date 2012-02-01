@@ -67,7 +67,7 @@ class Evenements extends Cafe {
 
 			$resultat = $this->Evenement->modifierEvenement($nom,$datedebut,$datefin,$id);
 			
-			echo 'je rentre';
+			
 		}
 		
 		

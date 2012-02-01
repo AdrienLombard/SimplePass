@@ -29,10 +29,10 @@
 				<input type="text" value="<?php echo $resultat->libelleevenement?>" name="nom"/>
 				
 				<label>Date début</label>
-				<input type="text" value="<?php echo $resultat->datedebut?>" name="datedebut"/>
+				<input type="text" value="<?php echo display_date($resultat->datedebut)?>" name="datedebut"/>
 				
 				<label>Date fin</label>
-				<input type="text" value="<?php echo $resultat->datefin?>" name="datefin"/>
+				<input type="text" value="<?php echo display_date($resultat->datefin)?>" name="datefin"/>
 				
 				<input type="submit" name="valider" />
 				<?php  endforeach; ?>
