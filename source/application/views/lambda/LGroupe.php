@@ -38,8 +38,7 @@
 			<select  id="categorie" name="categorie" class="select">
 				<?php foreach($listeCategorie as $categorie): ?>
 				<option VALUE="<?php echo $categorie->libellecategorie; ?>" <?php echo set_select('pays', $categorie->libellecategorie); ?> ><?php echo $categorie->libellecategorie; ?></option>
-				<?php endforeach; ?>
-				<option VALUE="Benevole" <?php echo set_select('categorie', 'Benevole', true); ?> >Bénévole</option>			
+				<?php endforeach; ?>			
 			</select>
 			
 			<label>Rôle</label>
