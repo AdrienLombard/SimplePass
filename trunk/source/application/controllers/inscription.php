@@ -8,6 +8,9 @@ class Inscription extends Chocolat {
 	public function __construct() {
 		parent::__construct();
 		
+		// Charge la librairie de validation de formulaire
+		$this->load->library('form_validation');
+		
 		// Chargement du css.
 		
 		
@@ -40,8 +43,6 @@ class Inscription extends Chocolat {
 	public function ajouter($event='') {
 		// Chargement du js.
 		$this->layout->ajouter_js('lambda/script');
-		// Charge la librairie de validation de formulaire
-		$this->load->library('form_validation');
 		
 		// variable pour transmettre des données à la vue.
 		$data = Array();
@@ -174,8 +175,6 @@ class Inscription extends Chocolat {
 	}
 	
 	public function groupe($evenement) {
-		// Charge la librairie de validation de formulaire
-		$this->load->library('form_validation');
 		
 		$data['evenement'] = $this->evenement->getEvenementid($evenement);
 		$data['listePays'] = $this->modelLambda->listePays();
