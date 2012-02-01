@@ -44,7 +44,7 @@ create table accreditation
    idclient				bigint not null,
    etataccreditation	tinyint not null,
    primary key (idaccreditation)
-) engine = InnoDB;
+) engine = InnoDB, charset = utf8;
 
 /*==============================================================*/
 /* Table : categorie                                            */
@@ -55,7 +55,7 @@ create table categorie
    surcategorie         bigint,
    libellecategorie     text not null,
    primary key (idcategorie)
-) engine = InnoDB;
+) engine = InnoDB, charset = utf8;
 
 /*==============================================================*/
 /* Table : client                                               */
@@ -63,7 +63,7 @@ create table categorie
 create table client
 (
    idclient             bigint not null auto_increment,
-   pays                 bigint not null,
+   pays                 varchar(3) not null,
    nom                  varchar(50) not null,
    prenom               varchar(50) not null,
    civilite             varchar(10) not null,
@@ -73,7 +73,7 @@ create table client
    mail                 text not null,
    urlphoto             text not null,
    primary key (idclient)
-) engine = InnoDB;
+) engine = InnoDB, charset = utf8;
 
 /*==============================================================*/
 /* Table : donne_acces                                          */
@@ -83,7 +83,7 @@ create table donne_acces
    idcategorie          bigint not null,
    idzone               bigint not null,
    primary key (idcategorie, idzone)
-) engine = InnoDB;
+) engine = InnoDB, charset = utf8;
 
 /*==============================================================*/
 /* Table : evenement                                            */
@@ -96,7 +96,7 @@ create table evenement
    datedebut            bigint not null,
    datefin              bigint not null,
    primary key (idevenement)
-) engine = InnoDB;
+) engine = InnoDB, charset = utf8;
 
 /*==============================================================*/
 /* Table : pays                                                 */
@@ -107,7 +107,7 @@ create table pays
    nompays              text not null,
    indicatiftel         varchar(10) not null,
    primary key (idpays)
-) engine = InnoDB;
+) engine = InnoDB, charset = utf8;
 
 /*==============================================================*/
 /* Table : permet                                               */
@@ -117,7 +117,7 @@ create table permet
    idaccreditation      bigint not null,
    idzone               bigint not null,
    primary key (idaccreditation, idzone)
-) engine = InnoDB;
+) engine = InnoDB, charset = utf8;
 
 /*==============================================================*/
 /* Table : possede                                              */
@@ -127,7 +127,7 @@ create table possede
    idaccreditation      bigint not null,
    idclient             bigint not null,
    primary key (idaccreditation, idclient)
-) engine = InnoDB;
+) engine = InnoDB, charset = utf8;
 
 /*==============================================================*/
 /* Table : utilisateur                                          */
@@ -138,7 +138,7 @@ create table utilisateur
    login                varchar(50) not null,
    mdp                  varchar(50) not null,
    primary key (idutilisateur)
-) engine = InnoDB;
+) engine = InnoDB, charset = utf8;
 
 /*==============================================================*/
 /* Table : zone                                                 */
@@ -148,7 +148,7 @@ create table zone
    idzone               bigint not null auto_increment,
    libellezone          text not null,
    primary key (idzone)
-) engine = InnoDB;
+) engine = InnoDB, charset = utf8;
 
 alter table accreditation add constraint fk_depend foreign key (idcategorie)
       references categorie (idcategorie) on delete restrict on update restrict;
@@ -181,8 +181,6 @@ alter table possede add constraint fk_possede2 foreign key (idclient)
       references client (idclient) on delete restrict on update restrict;
 
 insert into utilisateur (login,mdp) values ('root', 'root');
-
-alter table pays modify indicatiftel varchar(10);
 
 INSERT INTO pays (idpays,nompays,indicatiftel) VALUES('AFG','Afghanistan','93');
 INSERT INTO pays (idpays,nompays,indicatiftel) VALUES('ZAF','Afrique du Sud','27');
@@ -241,7 +239,7 @@ INSERT INTO pays (idpays,nompays,indicatiftel) VALUES('CUW','Curaçao','599-9');
 INSERT INTO pays (idpays,nompays,indicatiftel) VALUES('DNK','Danemark','45');
 INSERT INTO pays (idpays,nompays,indicatiftel) VALUES('DJI','Djibouti','253');
 INSERT INTO pays (idpays,nompays,indicatiftel) VALUES('DMA','Dominique','1767');
-INSERT INTO pays (idpays,nompays,indicatiftel) VALUES('EGY','gypte','20');
+INSERT INTO pays (idpays,nompays,indicatiftel) VALUES('EGY','Egypte','20');
 INSERT INTO pays (idpays,nompays,indicatiftel) VALUES('SLV','El Salvador','503');
 INSERT INTO pays (idpays,nompays,indicatiftel) VALUES('ARE','Emirats arabes unis','971');
 INSERT INTO pays (idpays,nompays,indicatiftel) VALUES('ECU','Equateur','593');
