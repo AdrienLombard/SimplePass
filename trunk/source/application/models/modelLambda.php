@@ -34,4 +34,8 @@ class modelLambda extends CI_Model {
 						->result();
 	}
 	
+	public function lastId() {
+		return $this->db->insert_id();
+	}
+	
 }

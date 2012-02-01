@@ -15,6 +15,7 @@ class Inscription extends Chocolat {
 		
 		// Chargement du modele.
 		$this->load->model('modelLambda');
+		$this->load->model('modelAccreditation');
 		$this->load->model('evenement');
 	}
 	
@@ -168,17 +169,70 @@ class Inscription extends Chocolat {
 		
 	}
 	
-	public function groupe() {
-		$this->layout->view('lambda/LGroupe');
+	public function groupe($evenement) {
+		$event['evenement'] = $this->evenement->getEvenementid($evenement);
+		$this->layout->view('lambda/LGroupe', $event);
 	}
 	
-	public function ajouterGroupe() {
+	public function exeGroupe() {
+		$data['groupe'] = $this->input->post('groupe');
+		$data['pays'] = $this->input->post('pays');	
+		$data['nom'] = $this->input->post('nom');
+		$data['prenom'] = $this->input->post('prenom');
+		$data['categorie'] = $this->input->post('categorie');
+		$data['role'] = $this->input->post('role');
+		$data['tel'] = $this->input->post('tel');
+		$data['mail'] = $this->input->post('mail');
+		$data['evenement'] = $this->input->post('evenement');
+		
+		$this->ajouterGroupe($data);
+	}
+	
+	public function ajouterGroupe($data) {
 		$this->layout->ajouter_js('lambda/scriptGroupe');
-		$this->layout->view('lambda/LGroupeDetails');
+		$this->layout->view('lambda/LGroupeDetails', $data);
 	}
 	
 	public function exeAjouterGroupe() {
-		// TODO
+		
+		// ajout du référent
+		$ref = $data = $this->input->post('ref');
+		unset($ref['categorie']);
+		$this->modelLambda->ajouterClient($ref);
+		$id = $this->modelLambda->lastId();
+		
+		// création de l'accreditation pour le referent
+		$accred = null;
+		$accred['idcategorie'] = $data['categorie'];
+		$accred['idevenement'] = $this->input->post('evenement');
+		$accred['idclient'] = $id;
+		$accred['etataccreditation'] = 1;
+		$this->modelAccreditation->ajouter($accred);
+		
+		// ajout des membres
+		foreach($this->input->post('groupe') as $ligne) {
+			// création du client
+			$membre = null;
+			$membre['nom'] = $ligne['nom'];
+			$membre['prenom'] = $ligne['prenom'];
+			$membre['role'] = $ligne['role'];
+			$membre['pays'] = $data['pays'];
+			$membre['groupe'] = $data['groupe'];
+			$membre['referent'] = $id;
+			$this->modelLambda->ajouterClient($membre);
+
+			// création de l'accreditation
+			$accred = null;
+			$accred['idcategorie'] = $ligne['categorie'];
+			$accred['idevenement'] = $this->input->post('evenement');
+			$accred['idclient'] = $this->modelLambda->lastId();
+			$accred['etataccreditation'] = 1;
+			$this->modelAccreditation->ajouter($accred);
+		}
+		
+		$msg['titre']	= 'Confirmation de demande';
+		$msg['message']	= 'Vos demandes ont bien été prises en compte.<br>Merci de votre pré-enregistrement.';
+		$this->layout->view('lambda/LMessage', $msg);
 	}
 	
 }
