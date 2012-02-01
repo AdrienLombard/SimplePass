@@ -20,7 +20,7 @@ class Evenements extends Cafe {
 	}
 	
 	/**
-	 * Méthode Liting du CRUD. 
+	 * Méthode Listing du CRUD. 
 	 */
 	public function liste() {
 		// Chargement du css.
@@ -206,4 +206,5 @@ class Evenements extends Cafe {
 		$this->layout->view('utilisateur/evenement/UEVoir');
 		
 	}
+
 }

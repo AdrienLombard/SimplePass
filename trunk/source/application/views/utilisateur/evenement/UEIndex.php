@@ -45,7 +45,7 @@
                         <td><?php echo display_date($evenement->datedebut)?> </td> 
 						
                         <td><?php echo display_date($evenement->datefin)?> </td>
-					    <!--  <input type="hidden" value="<?php echo $evenement->idevenement; ?>" name="id" /> -->
+					    <?php echo $evenement->idevenement; ?>
 						<td><a href="<?php echo site_url('evenements/voir/'.$evenement->idevenement ); ?>">Voir</a></td>
 				   
 				  </tr>
