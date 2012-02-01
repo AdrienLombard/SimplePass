@@ -122,3 +122,61 @@ tr{
 td{
 	border: 1px solid #1d465b;
 }
+
+
+
+/* GROUPE */
+
+#inscriptionGroupe {
+	
+}
+
+#inscriptionGroupe .ligne {
+	margin-bottom: 1px;
+}
+
+#inscriptionGroupe .ligne h3 {
+	font-weight: normal;
+	background: #1d465b;
+	font-size: 18px;
+	padding: 6px 10px 6px 10px;
+	border-radius:6px;
+	cursor: pointer;
+}
+
+#inscriptionGroupe .ligne h3 .modifier {
+	color: #1d465b;
+	float: right;
+	font-size: 16px;
+	font-style: italic;
+}
+#inscriptionGroupe .ligne h3:hover .modifier {
+	color: #FFF;
+}
+
+#inscriptionGroupe .ligne .form {
+	background: rgba(109, 135, 148, 0.7);
+	padding: 0 18px 18px 18px;
+	border-radius: 6px;
+}
+
+#inscriptionGroupe .ligne .form .split {
+	float: left;
+	margin-right: 15px;
+}
+#inscriptionGroupe .ligne .form .splitRight {
+	float: right;
+	margin-right: 0;
+	margin-left: 15px;
+}
+#inscriptionGroupe .ligne .form .split input[type=text] {
+	width: 300px;
+}
+#inscriptionGroupe .ligne .form .split a {
+	float: none;
+	margin-top: 33px;
+}
+
+#inscriptionGroupe #ajoutMembre {
+	margin-top: 20px;
+}
