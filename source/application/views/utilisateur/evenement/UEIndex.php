@@ -26,7 +26,7 @@
         </aside>
 
         <div id="main">
-            <table class="liste">
+        	<table class="liste">
                 <thead>
 					<tr>
 						<th>Nom</th>
@@ -37,7 +37,7 @@
                 </thead>
                 <tbody>
 					
-                    <?php foreach ($resultats as $evenement):{  ?>
+                    <?php foreach ($resultats as $evenement): ?>
 					<tr>
 			
 						<td><?php echo $evenement->libelleevenement?></td>
@@ -45,11 +45,11 @@
                         <td><?php echo display_date($evenement->datedebut)?> </td> 
 						
                         <td><?php echo display_date($evenement->datefin)?> </td>
-					    <?php echo $evenement->idevenement; ?>
+					    
 						<td><a href="<?php echo site_url('evenements/voir/'.$evenement->idevenement ); ?>">Voir</a></td>
 				   
 				  </tr>
-                    <?php } endforeach; ?>
+                    <?php endforeach; ?>
                 </tbody>
             </table>
         </div>
