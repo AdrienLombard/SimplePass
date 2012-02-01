@@ -78,6 +78,7 @@ $(document).ready(function(){
 						<div class="clear"></div>\n\
 						<div class="split">\n\
 							<label for="">Catégorie</label>\n\
+							\n\
 							<input type="text" id="ligneCategorie" name="groupe[' + nbLigne + '][categorie]" />\n\
 						</div>\n\
 						<div class="split">\n\
