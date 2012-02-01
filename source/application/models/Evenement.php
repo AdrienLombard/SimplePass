@@ -5,11 +5,11 @@ class evenement extends CI_Model{
 	  
 	private $tabEvenement= 'evenement';
 	
-	/*@Fonction pour recuperer un evenement
-	 * @ return un Evenement pour un id d'evenement
+	/**
+	 * Fonction pour recuperer un evenement
+	 * @return un Evenement pour un id d'evenement
 	 */
 	public function getEvenementid($id){
-			
 		return $this->db->select('*')
 							->from($this->tabEvenement)
 				            ->where('idevenement',$id)
@@ -19,15 +19,15 @@ class evenement extends CI_Model{
 	}
 	
 	public function getEvenement(){
-			
 		return $this->db->select('*')
 							->from($this->tabEvenement)
 							->get()
 							->result();
 			
 	}
-	/*@Fonction pour recuperer l'id d'un evenement
-	 *@return l'id Evenement 
+	/**
+	 * Fonction pour recuperer l'id d'un evenement
+	 * @return l'id Evenement 
 	 */
 	public function getIdEvenement($libelle){
 		   return $this->db->select('libelleevenement')
@@ -38,18 +38,22 @@ class evenement extends CI_Model{
 		
 	} 
 	
-	/*@ Supprimer l'evenement
+	/**
+	 * Supprimer l'evenement
 	 * 
 	 */
 	public function supprimerEvenement($id){
 		
-	$this->db->delete('evenement', $id);
+		$this->db->delete('evenement', $id);
 			
 	}
 	
-	/*@
-	 * Ajouter un evenement
-	 * @return
+	/**
+	 * 
+	 * Enter description here ...
+	 * @param unknown_type $libelle
+	 * @param unknown_type $datedebut
+	 * @param unknown_type $datefin
 	 */
 	public function ajouterEvenement($libelle,$datedebut,$datefin){
 		    
@@ -62,20 +66,31 @@ class evenement extends CI_Model{
                        $this->db->insert('evenement', $data); 
 		
 	}
-	/*@ Modifier un evenement
-	 * @return
+	
+	/**
+	 * 
+	 * Enter description here ...
+	 * @param unknown_type $libelle
+	 * @param unknown_type $datedebut
+	 * @param unknown_type $datefin
+	 * @param unknown_type $id
 	 */
 	public function modifierEvenement($libelle,$datedebut,$datefin,$id){
 		
 		 
 		 $data = array(
-                              'libelleevenement' => $libelle,
-                              'datedebut' => $datedebut,
-			                  'datefin' => $datefin
-                      );
-                    $this->db->where('idevenement', $id);
-                    $this->db->update('evenement', $data);
+		 	'libelleevenement' => $libelle,
+		 	'datedebut' => $datedebut,
+		 	'datefin' => $datefin
+		 );
+		
+		 $this->db->where('idevenement', $id);
+		 $this->db->update('evenement', $data);
 			                  
+	}
+	
+	public function lastId() {
+		$this->db->insert_id();
 	}
 	
 }
