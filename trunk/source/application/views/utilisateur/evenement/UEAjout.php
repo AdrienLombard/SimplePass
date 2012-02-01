@@ -3,8 +3,8 @@
 <div class="wrap">
 
     <div class="tabs">
-        <a href=" ">Liste</a>
-        <a href="" class="current">Ajouter</a>
+        <a href="<?php echo site_url('evenements/liste'); ?>">Liste</a>
+        <a href="<?php echo site_url('evenements/ajouter'); ?>" class="current">Ajouter</a>
     </div>
 
     <div class="box-full">
