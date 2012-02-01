@@ -52,7 +52,7 @@ create table accreditation
 create table categorie
 (
    idcategorie          bigint not null auto_increment,
-   surcategorie         bigint,
+   surcategorie         bigint default null,
    libellecategorie     text not null,
    primary key (idcategorie)
 ) engine = InnoDB, charset = utf8;
@@ -406,3 +406,15 @@ INSERT INTO pays (idpays,nompays,indicatiftel) VALUES('WLF','Wallis-et-Futuna','
 INSERT INTO pays (idpays,nompays,indicatiftel) VALUES('YEM','Yémen','967');
 INSERT INTO pays (idpays,nompays,indicatiftel) VALUES('ZMB','Zambie','260');
 INSERT INTO pays (idpays,nompays,indicatiftel) VALUES('ZWE','Zimbabwe','263');
+
+insert into zone (libellezone) values ('Espace presse');
+insert into zone (libellezone) values ('Pied de la piste');
+insert into zone (libellezone) values ('Salle de spectacle');
+insert into zone (libellezone) values ('Tribune officielle');
+
+insert into evenement (libelleevenement,datedebut,datefin) values ('Championnats du monde de saut à ski d''été 2012','1341136800','1343728800');
+insert into evenement (libelleevenement,datedebut,datefin) values ('Championnats du monde de slalom 2012','1354359600','1356001200');
+
+insert into categorie (libellecategorie) values ('Presse');
+insert into categorie (surcategorie,libellecategorie) values (1,'Presse TV');
+insert into categorie (surcategorie,libellecategorie) values (1,'Presse écrite');
