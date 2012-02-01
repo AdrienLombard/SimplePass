@@ -5,24 +5,42 @@
 	
 	<div class="box-small">
 		
-		<span class="info">Inscription : Groupe</span><br>
-		<span class="info">Evènement : Coupe du monde été 2012</span>
+		<span class="info">Evènement : <?php echo $evenement[0]->libelleevenement; ?></span>
 		
 		<br><br>
 		
-		<form method="post" action="<?php echo site_url('inscription/ajouterGroupe'); ?>">
+		<form method="post" action="<?php echo site_url('inscription/exeGroupe'); ?>">
 			
-			<label>Nom d'équipe</label>
-			<input type="text" value="Equipe"/>
+			<input type="hidden" name="evenement" value="<?php echo $evenement[0]->idevenement; ?>" />
+			
+			<h2>Groupe</h2>
+			
+			<label>Nom</label>
+			<input type="text" value="Nom du groupe" name="groupe" />
 			
 			<label>Pays</label>
-			<input type="text" value="Pays"/>
+			<input type="text" value="Pays" name="pays" />
+			
+			<br><br>
+			<h2>Responsable</h2>
+			
+			<label>Nom</label>
+			<input type="text" value="+33 612345678" name="nom" />
+			
+			<label>Prénom</label>
+			<input type="text" value="+33 612345678" name="prenom" />
+			
+			<label>Catégorie</label>
+			<input type="text" value="+33 612345678" name="categorie" />
+			
+			<label>Rôle</label>
+			<input type="text" value="+33 612345678" name="role" />
 
-			<label>Télephone du responsable</label>
-			<input type="text" value="+33 612345678"/>
+			<label>Télephone</label>
+			<input type="text" value="+33 612345678" name="tel" />
 
-			<label>Mail du responsable</label>
-			<input type="text" value="nom.prenom@mail.com"/>
+			<label>Mail</label>
+			<input type="text" value="nom.prenom@mail.com" name="mail" />
 			
 			<br>
 			

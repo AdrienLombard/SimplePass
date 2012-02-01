@@ -90,7 +90,7 @@ class evenement extends CI_Model{
 	}
 	
 	public function lastId() {
-		$this->db->insert_id();
+		return $this->db->insert_id();
 	}
 	
 }
