@@ -6,7 +6,7 @@
 }
 
 body {
-	min-height: 800px;
+	height: 800px;
 }
 
 a {
@@ -16,4 +16,8 @@ a {
 
 .clear {
     clear: both;
+}
+
+.center {
+	text-align: center;
 }
