@@ -2,13 +2,15 @@
 
 class modelLambda extends CI_Model {
 	
-	private $tableClient = 'client';
+	private $tableClient 	= 'client';
+	
+	private $tablePays		= 'pays';
 	
 	public function getClient() {
-			return $this->db->select('*')
-							->from($this->tableClient)
-							->get()
-							->result();
+		return $this->db->select('*')
+						->from($this->tableClient)
+						->get()
+						->result();
 	}
 	/*
 	public function ajouterClient($values) {
@@ -22,6 +24,14 @@ class modelLambda extends CI_Model {
 	
 	public function ajouterClient($values) {
 		$this->db->insert($this->tableClient, $values);
+	}
+	
+	
+	public function listePays() {
+		return $this->db->select('*')
+						->from($this->tablePays)
+						->get()
+						->result();
 	}
 	
 }
