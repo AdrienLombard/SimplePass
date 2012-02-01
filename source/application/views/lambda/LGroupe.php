@@ -19,25 +19,34 @@
 			<input type="text" value="Nom du groupe" name="groupe" />
 			
 			<label>Pays</label>
-			<input type="text" value="Pays" name="pays" />
+			<select  id="pays" name="pays" class="select">
+				<?php foreach($listePays as $pays): ?>
+				<option VALUE="<?php echo $pays->idpays; ?>" <?php echo set_select('pays', $pays->idpays); ?> ><?php echo $pays->nompays; ?></option>
+				<?php endforeach; ?>
+			</select>
 			
 			<br><br>
 			<h2>Responsable</h2>
 			
 			<label>Nom</label>
-			<input type="text" value="+33 612345678" name="nom" />
+			<input type="text" value="nom" name="nom" />
 			
 			<label>Prénom</label>
-			<input type="text" value="+33 612345678" name="prenom" />
+			<input type="text" value="prenom" name="prenom" />
 			
 			<label>Catégorie</label>
-			<input type="text" value="+33 612345678" name="categorie" />
+			<select  id="categorie" name="categorie" class="select">
+				<?php foreach($listeCategorie as $categorie): ?>
+				<option VALUE="<?php echo $categorie->libellecategorie; ?>" <?php echo set_select('pays', $categorie->libellecategorie); ?> ><?php echo $categorie->libellecategorie; ?></option>
+				<?php endforeach; ?>
+				<option VALUE="Benevole" <?php echo set_select('categorie', 'Benevole', true); ?> >Bénévole</option>			
+			</select>
 			
 			<label>Rôle</label>
-			<input type="text" value="+33 612345678" name="role" />
+			<input type="text" value="role" name="role" />
 
 			<label>Télephone</label>
-			<input type="text" value="+33 612345678" name="tel" />
+			<input type="text" value="0123456789" name="tel" />
 
 			<label>Mail</label>
 			<input type="text" value="nom.prenom@mail.com" name="mail" />
