@@ -98,11 +98,11 @@ class Evenements extends Cafe {
 			
            //$newId = $this->Evenement->lastId();
 			
-				
+			
 			$data['titre']		= 'Ajout';
 			$data['message']	= 'Votre évènement à bien été ajouté.';
 			$data['redirect'] 	= 'evenements/liste';
-			
+			$this->Evenement->ajouterEvenement( $nom,$datedebut,$datefin);
 			$this->layout->view('utilisateur/evenement/uMessage', $data);	 
 		}
 		else {
@@ -165,15 +165,15 @@ class Evenements extends Cafe {
 		$nom 		= $this->input->post('nom');
 		$datedebut 	= $this->input->post('datedebut');
 		$datefin 	= $this->input->post('datefin');
-		
-		if ($this->form_validation->run() == true) {
+		$datedebutTstmp= date_to_timestamp($datedebut);
+		$datefinTstmp  = date_to_timestamp($datefin);
+		if ($this->form_validation->run() == true && $datedebutTstmp < $datefinTstmp ) {
 			
 			$resultat = $this->Evenement->modifierEvenement($nom, $datedebut, $datefin, $id);
 			
 			$data['titre']		= 'Modification';
 			$data['message']	= 'Votre évènement à bien été modifié.';
 			$data['redirect'] 	= 'evenement/liste';
-			
 			$this->layout->view('utilisateur/evenement/uMessage', $data);
 			
 		}
@@ -192,8 +192,8 @@ class Evenements extends Cafe {
 	 */
 	public function supprimer($id) {
 		
-		$data['resultats']=$this->Evenement->getEvenementid($id);
-		
+		$idsp=$this->Evenement->getEvenementid($id);
+		$this->Evenement->supprimerEvenement($idsp);
 		$this->layout->view('utilisateur/evenement/UEsupprimer');
 		
 		

@@ -60,7 +60,7 @@
 			
 		
 		<label>Photo</label>
-		
+		<input type="file" name="fichier" size="3">
 		<?php echo img('ombre.jpg'); ?>
 		
 		<div class="clear"></div>

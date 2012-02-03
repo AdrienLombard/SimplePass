@@ -13,7 +13,7 @@
 
             <b>Filtres :</b>
             <ul>
-                <li><a href="#">Tous</a></li>
+                <li><a href="<?php echo site_url('evenements/liste'); ?>">Tous</a></li>
                 <li><a href="#">A valider</a></li>
                 <li><a href="#">Validé</a></li>
             </ul>

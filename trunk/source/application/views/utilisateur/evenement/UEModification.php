@@ -31,7 +31,7 @@
 				<input type="text" id="datepicker-debut" name="datedebut" READONLY="READONLY" />
 				
 				<label>Date fin</label>
-				<input type="text" id="datepicker-fin" name="datedebut" READONLY="READONLY" />
+				<input type="text" id="datepicker-fin" name="datefin" READONLY="READONLY" />
 				
 				<input type="submit" name="valider" />
 			</form>
