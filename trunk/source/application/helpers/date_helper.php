@@ -119,10 +119,22 @@ if ( !function_exists('create_date'))
  */
 if ( !function_exists('date_to_timestamp'))
 {
-	function date_to_timestamp ($date)
+	function date_to_timestamp2 ($date)
 	{
 		$tab_date = explode('/', $date); 
 		return mktime(0, 0, 0, $tab_date[1], $tab_date[0], $tab_date[2]);
+	}
+}
+
+/**
+* transforme une date + mois + année en timestamp
+*/
+if ( !function_exists('date_to_timestamp'))
+{
+	function date_to_timestamp ($date)
+	{
+		$tab_date = explode('-', $date);
+		return mktime(0, 0, 0, $tab_date[1], $tab_date[2], $tab_date[0]);
 	}
 }
 

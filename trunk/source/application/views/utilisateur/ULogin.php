@@ -1,5 +1,5 @@
 <div id="login">
-    <form method="post" action="<?php echo site_url('utilisateur/connexionUtilisateur'); ?>">
+    <form method="post" action="<?php echo site_url('utilisateur/connexion'); ?>">
 		
         <h2>Authentification</h2>
        

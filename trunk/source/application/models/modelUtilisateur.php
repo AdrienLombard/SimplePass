@@ -19,7 +19,7 @@ class modelUtilisateur extends CI_Model {
 	 */
 	
 	public function getMDP($login){
-			return $this->db->select('mdp')
+			return $this->db->select('nom, prenom, mdp')
 							->from($this->tableUser)
 							->where('login', $login)
 							->get()
