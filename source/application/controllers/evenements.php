@@ -90,18 +90,23 @@ class Evenements extends Cafe {
 		$datedebut 	= $this->input->post('datedebut');
 		$datefin 	= $this->input->post('datefin');
 		
-		if ($this->form_validation->run() == true) {
+		 $datedebutTstmp= date_to_timestamp($datedebut);
+		 $datefinTstmp  = date_to_timestamp($datefin);
+		
+		if ($this->form_validation->run() == true && $datedebutTstmp < $datefinTstmp) {
 			//$result = $this->Evenement->ajouterEvenement($nom, $datedebut, $datefin);
 			
-// 			$newId = $this->Evenement->lastId();
+           //$newId = $this->Evenement->lastId();
 			
+				
 			$data['titre']		= 'Ajout';
 			$data['message']	= 'Votre évènement à bien été ajouté.';
 			$data['redirect'] 	= 'evenements/liste';
 			
-			$this->layout->view('utilisateur/evenement/uMessage', $data);
+			$this->layout->view('utilisateur/evenement/uMessage', $data);	 
 		}
 		else {
+			
 			$this->ajouter();
 		}
 	}
