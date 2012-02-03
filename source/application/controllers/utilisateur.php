@@ -16,29 +16,31 @@ class utilisateur extends Cafe {
 	public function index($message='')
 	{
 		$data['message'] = $message;
-		echo $data['message'];
 		$this->layout->ajouter_css('utilisateur/login');
 		$this->layout->view('utilisateur/ULogin', $data);
 	}
 	 
 	
 	public function connexion(){
-		$login = $this->input->post('login');
-		$mdp = $this->input->post('mdp');
-		$mdpBD = $this->modelUtilisateur->getMDP($login);
-		if(isset($mdpBD)){
-			if($mdpBD[0]->mdp == $mdp) {
-				$this->layout->view('utilisateur/UWelcome');
+		// On récupère les données entrée par l'utilisateur.
+		$login 	= $this->input->post('login');
+		$mdp 	= $this->input->post('mdp');
+		
+		// On regarde dans la base si l'utilisateur existe.
+		$donnesUtilisateur = $this->modelUtilisateur->getMDP($login);
+		
+		if(isset($donnesUtilisateur)){
+			if($donnesUtilisateur[0]->mdp == $mdp) {
+				$data['nom'] = $donnesUtilisateur[0]->nom . " " . $donnesUtilisateur[0]->prenom;
+				$this->layout->view('utilisateur/UWelcome', $data);
 			}
 			else {
 				$message = 'Le mot de passe est incorrect.';
-				echo 'BB'.$message;
 				$this->index($message);
 			}
 		}
 		else {
-			$message = 'Le login est incorrect.';
-			echo 'BB'.$message;
+			$message = "L'utilisateur " . $login . " n'existe pas.";
 			$this->index($message);
 		}
 		

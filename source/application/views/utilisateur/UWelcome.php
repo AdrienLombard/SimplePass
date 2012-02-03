@@ -6,7 +6,7 @@
 
         <div id="main">
             
-			Plop ?
+			Bienvenue <?php echo $nom; ?>.
 			
         </div>
 
