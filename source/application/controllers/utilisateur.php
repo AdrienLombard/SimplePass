@@ -18,9 +18,9 @@ class utilisateur extends Cafe {
 		if($this->session->userdata('login')) {
 			$data['titre']		= 'Information';
 			$data['message']	= 'Vous êtes déjà connecté.';
-			$data['redirect'] 	= 'evenements/liste';
+			$data['redirect'] 	= 'utilisateur/index';
 				
-			$this->layout->view('utilisateur/evenement/uMessage', $data);
+			$this->layout->view('utilisateur/uMessage', $data);
 		}
 		else {
 			$data['message'] = $message;
