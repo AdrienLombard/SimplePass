@@ -2,17 +2,21 @@
 
 class modelAccreditation extends CI_Model {
 	
-	private $table 	= 'courchevel_accreditation';
+	private $tableAccreditation 	= 'courchevel_accreditation';
+	private $tableCategorie			= 'courchevel_categorie';
+	private $tableEvenement			= 'courchevel_evenement';
+	private $tableClient			= 'courchevel_client';
 	
 	public function getAccreditation() {
 		return $this->db->select('*')
-						->from($this->table)
+						->from($this->tableAccreditation . ' a')
+						->join($this->tableCategorie . ' c', 'a.idcategorie = c.idcategorie')
 						->get()
 						->result();
 	}
 	
 	public function ajouter($values) {
-		$this->db->insert($this->table, $values);
+		$this->db->insert($this->tableAccreditation, $values);
 	}
 	
 	public function lastId() {

@@ -3,37 +3,24 @@
 <div class="wrap">
 
     <div class="tabs">
-        <a href="<?php echo site_url('evenements/liste'); ?>" class="current">Liste</a>
-        <a href="<?php echo site_url('evenements/ajouter'); ?>">Ajouter</a>
+        <a href="<?php echo site_url('evenement/liste'); ?>" class="current">Liste</a>
+        <a href="<?php echo site_url('evenement/ajouter'); ?>">Ajouter</a>
     </div>
 
     <div class="box-full">
 
-        <aside>
-
-            <b>Filtres :</b>
-            <ul>
-                <li><a href="<?php echo site_url('evenements/liste'); ?>">Tous</a></li>
-                <li><a href="#">A valider</a></li>
-                <li><a href="#">Validé</a></li>
-            </ul>
-
-            <br><br>
-
-            <b>Rechercher :</b><br>
-            <input type="text" class="search">
-
-        </aside>
-
-        <div id="main">
-        	<table class="liste">
+        <div id="main" class="nomargin">
+        	
+			<table class="liste">
                 <thead>
+					
 					<tr>
 						<th>Nom</th>
 						<th>Début</th>
 						<th>Fin</th>
 						<th></th>
 					</tr>
+					
                 </thead>
                 <tbody>
 					
@@ -46,7 +33,7 @@
 						
                         <td><?php echo display_date($evenement->datefin)?> </td>
 
-						<td><a href="<?php echo site_url('evenements/voir/'.$evenement->idevenement ); ?>">Voir</a></td>
+						<td><a href="<?php echo site_url('evenement/voir/'.$evenement->idevenement ); ?>">Voir</a></td>
 				   
 				  </tr>
                     <?php endforeach; ?>

@@ -25,7 +25,7 @@
                 
                 <!-- menu dynamique - todo: générer en fonction de l'état -->
                 <nav>
-                    <a href="#">Accréditations</a>
+                    <a href="<?php echo site_url('accreditation/index'); ?>">Accréditations</a>
                     <a href="<?php echo site_url('evenements/index'); ?>">Evènements</a>
                     <a href="#">Catégories</a>
                     <a href="#">Zones</a>

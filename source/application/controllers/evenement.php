@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Evenements extends Cafe {
+class Evenement extends Cafe {
 	
 	
 	public function __construct() {
@@ -68,19 +68,19 @@ class Evenements extends Cafe {
 	public function exeAjouter() {
 		$config = array(
 		array(
-			'field'   => 'nom',
-			'label'   => 'Nom', 
-			'rules'   => 'required'
+					'field'   => 'nom',
+					'label'   => 'Nom', 
+					'rules'   => 'required'
 		),
 		array(
-			'field'   => 'datedebut',
-			'label'   => 'Date de début', 
-			'rules'   => ''
+					'field'   => 'datedebut',
+					'label'   => 'Date de début', 
+					'rules'   => ''
 		),
 		array(
-			'field'   => 'datefin',
-			'label'   => 'Date de fin', 
-			'rules'   => ''
+					'field'   => 'datefin',
+					'label'   => 'Date de fin', 
+					'rules'   => ''
 		)
 		);
 		$this->form_validation->set_rules($config);

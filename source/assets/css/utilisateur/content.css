@@ -38,6 +38,11 @@ ul li a:hover {
 	padding-left: 20px;
 	border-left: 1px dashed #DDD;
 }
+#main.nomargin {
+	margin-left: 0;
+	padding-left: 0;
+	border: 0;
+}
 
 #main h2 {
 	font-weight: normal;
@@ -57,7 +62,7 @@ table.details th {
 
 
 table.liste {
-    width: 710px;
+    width: 940px;
 }
 table.liste * {
     text-align: center;

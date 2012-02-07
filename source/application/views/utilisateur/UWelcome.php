@@ -4,7 +4,7 @@
 
     <div class="box-full">
 
-        <div id="main">
+        <div id="main" class="nomargin">
             
 			Bienvenue <?php echo $nom; ?>.
 			

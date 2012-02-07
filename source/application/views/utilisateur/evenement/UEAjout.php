@@ -3,8 +3,8 @@
 <div class="wrap">
 
     <div class="tabs">
-        <a href="<?php echo site_url('evenements/liste'); ?>">Liste</a>
-        <a href="<?php echo site_url('evenements/ajouter'); ?>" class="current">Ajouter</a>
+        <a href="<?php echo site_url('evenement/liste'); ?>">Liste</a>
+        <a href="<?php echo site_url('evenement/ajouter'); ?>" class="current">Ajouter</a>
     </div>
 
     <div class="box-full">
@@ -18,14 +18,14 @@
 				<li><span class="ajoute"><?php echo $ajoute; ?></span></li>
 				<?php endif; ?>
 				
-                <li><a href="<?php echo site_url('evenements/liste'); ?>">Retour</a></li>
+                <li><a href="<?php echo site_url('evenement/liste'); ?>">Retour</a></li>
             </ul>
 
         </aside>
 
         <div id="main">
 			
-			<form action="<?php echo site_url('evenements/exeAjouter'); ?>" method="post">
+			<form action="<?php echo site_url('evenement/exeAjouter'); ?>" method="post">
 				
 				<h2>Nouvel évènement</h2>
 				
