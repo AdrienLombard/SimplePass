@@ -21,15 +21,15 @@
             
             <div class="wrap-h">
                 
-                <div id="logo"><span>SIMPLE</span><b>PASS</b></div>
+                <div id="logo">
+					<span>SIMPLE</span><b>PASS</b>
+					<span class="subtitle">accreditation</span>
+				</div>
                 
                 <!-- menu dynamique - todo: générer en fonction de l'état -->
                 <nav>
                     <a href="<?php echo site_url('accreditation/index'); ?>">Accréditations</a>
-                    <a href="<?php echo site_url('evenements/index'); ?>">Evènements</a>
-                    <a href="#">Catégories</a>
-                    <a href="#">Zones</a>
-                    <a href="#">Utilisateurs</a>
+                    <a href="<?php echo site_url('evenement/index'); ?>">Evènements</a>
                 </nav>
                 <!-- /menu dynamique -->
                 
