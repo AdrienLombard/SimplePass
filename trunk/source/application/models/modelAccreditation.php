@@ -2,7 +2,7 @@
 
 class modelAccreditation extends CI_Model {
 	
-	private $table 	= 'accreditation';
+	private $table 	= 'courchevel_accreditation';
 	
 	public function getAccreditation() {
 		return $this->db->select('*')

@@ -37,7 +37,7 @@
 			<label>Catégorie</label>
 			<select  id="categorie" name="categorie" class="select">
 				<?php foreach($listeCategorie as $categorie): ?>
-				<option VALUE="<?php echo $categorie->libellecategorie; ?>" <?php echo set_select('pays', $categorie->libellecategorie); ?> ><?php echo $categorie->libellecategorie; ?></option>
+				<option VALUE="<?php echo $categorie->idcategorie; ?>" <?php echo set_select('pays', $categorie->libellecategorie); ?> ><?php echo $categorie->libellecategorie; ?></option>
 				<?php endforeach; ?>			
 			</select>
 			
