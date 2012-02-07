@@ -1,7 +1,7 @@
 <?php
  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class evenement extends CI_Model{
+class modelEvenement extends CI_Model{
 	  
 	private $tabEvenement= 'courchevel_evenement';
 	
@@ -44,8 +44,10 @@ class evenement extends CI_Model{
 	 */
 	public function supprimerEvenement($id){
 		
-		$this->db->delete('evenement', $id);
-			
+		//$this->db->delete('evenement', $id);
+		$this->db->where('idevenement', $id);
+        $this->db->delete($this->tabEvenement);
+	
 	}
 	
 	/**
