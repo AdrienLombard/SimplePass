@@ -28,10 +28,10 @@
 				<input type="text" value="<?php echo $nom; ?>" name="nom"/>
 				
 				<label>Date début</label>
-				<input type="text" id="datepicker-debut" name="datedebut" READONLY="READONLY" />
+				<input type="text" value="<?php echo display_date ($datedebut) ;?>" id="datepicker-debut" name="datedebut" READONLY="READONLY" />
 				
 				<label>Date fin</label>
-				<input type="text" id="datepicker-fin" name="datefin" READONLY="READONLY" />
+				<input type="text" value="<?php echo display_date ($datefin) ;?>" id="datepicker-fin" name="datefin" READONLY="READONLY" />
 				
 				<input type="submit" name="valider" />
 			</form>
