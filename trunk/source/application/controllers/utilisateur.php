@@ -23,7 +23,6 @@ class utilisateur extends Cafe {
 			$this->layout->view('utilisateur/evenement/uMessage', $data);
 		}
 		else {
-			echo 'banzai';
 			$data['message'] = $message;
 			$this->layout->ajouter_css('utilisateur/login');
 			$this->layout->view('utilisateur/ULogin', $data);
