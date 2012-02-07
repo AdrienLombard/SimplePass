@@ -105,8 +105,9 @@ class Inscription extends Chocolat {
 		
 		
 		if ($this->form_validation->run() == false) {
+			$data['event_id'] = $event;
 			
-			$data['event'] = $this->modelEvenement->getEvenementid($event);
+			$data['event_info'] = $this->modelEvenement->getEvenementid($event);
 			
 			$data['listePays'] = $this->modelLambda->listePays();
 			
@@ -139,28 +140,25 @@ class Inscription extends Chocolat {
 				}
 			}
 			
-			
-			$titre = $this->input->post('tel');
-			if(isset($titre) && !empty($titre)) {
-				$values['tel'] = $titre;
+			$organisme = $this->input->post('titre');
+			if(isset($organisme) && !empty($organisme)) {
+				$values['organisme'] = $organisme;
 			}
 			
 			//Insertion dans la base.
 			$this->modelLambda->ajouterClient($values);
-		
 			
-			/*
 			$idClient = $this->modelLambda->lastId();
 			
 			$accredData = Array(
-				'icategorie'		=> $this->input->post('categorie'),
+				'idcategorie'		=> $this->input->post('categorie'),
 				'idevenement'		=> $event,
 				'idclient'			=> $idClient,
 				'etataccreditation'	=> ACCREDITATION_A_VALIDE
 			);
 			
-			$this->modelLambda->ajouterAccred($accredValues);
-			 */
+			$this->modelAccreditation->ajouter($accredData);
+			
 			
 			$data['titre']		= 'Confirmation de demande';
 			$data['message']	= 'Votre demande a bien été prise en compte.<br>Merci de votre pré-enregistrement.';

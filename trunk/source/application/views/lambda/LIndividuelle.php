@@ -8,13 +8,13 @@
 	<div class="box-small">
 	
 	<span class="info">Inscription : individuelle</span><br>
-	<span class="info">Evènement : <?php echo $event[0]->libelleevenement; ?></span>
+	<span class="info">Evènement : <?php echo $event_info[0]->libelleevenement; ?></span>
 	
 	<br><br>
 	
-	<form action="<?php echo site_url('inscription/ajouter'); ?>" method="POST" >
+	<form action="<?php echo site_url('inscription/ajouter/' . $event_id); ?>" method="POST" >
 		
-		<input type="hidden" id="evenement" name="evenement" value="<?php echo $event; ?>" />
+		<input type="hidden" id="evenement" name="evenement" value="<?php echo $event_id; ?>" />
 		
 		<label>Civilité</label>
 		<div class="encadrer" >
@@ -54,7 +54,7 @@
 		<label>Categorie</label>
 		<select  id="categorie" name="categorie" class="select">
 			<?php foreach($listeCategorie as $categorie): ?>
-			<option VALUE="<?php echo $categorie->libellecategorie; ?>" <?php echo set_select('pays', $categorie->libellecategorie); ?> ><?php echo $categorie->libellecategorie; ?></option>
+			<option VALUE="<?php echo $categorie->idcategorie; ?>" <?php echo set_select('pays', $categorie->libellecategorie); ?> ><?php echo $categorie->libellecategorie; ?></option>
 			<?php endforeach; ?>
 		</select>
 			
