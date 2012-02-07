@@ -14,12 +14,22 @@ header .wrap-h {
     text-align:  right;
 }
 header .wrap-h #logo {
-    font-size: 12px;
+    /*
+	font-size: 12px;
     float: left;
     background: #2e6f92;
     padding: 2px 10px 5px 10px;
     border-radius: 0 0 100% 100%;
     box-shadow: 0 0 2px rgba(0, 0, 0, 0.4);
+	*/
+    float: left;
+    background: #2e6f92;
+    padding: 15px 30px 15px 30px;
+    border-radius: 0 0 10px 10px;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.4);
+}
+header .wrap-h #logo * {
+	font-size: 18px;
 }
 header .wrap-h nav {
     
@@ -36,6 +46,6 @@ header .wrap-h nav a:hover {
 
 #content {
     width: 1000px;
-    padding: 50px 0 80px 0;
+    padding: 40px 0 80px 0;
     margin: auto;
 }
