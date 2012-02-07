@@ -6,7 +6,7 @@ class modelUtilisateur extends CI_Model {
 	private $tableUser = 'courchevel_utilisateur';
 	
 	public function getUtilisateur() {
-			return $this->db->select('*')
+			return $user = $this->db->select('*')
 							->from($this->tableUser)
 							->get()
 							->result();

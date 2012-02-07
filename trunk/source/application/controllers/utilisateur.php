@@ -38,8 +38,8 @@ class utilisateur extends Cafe {
 		if($login && $mdp) {
 			// On regarde dans la base si l'utilisateur existe.
 			$donnesUtilisateur = $this->modelUtilisateur->getMDP($login);
-			
-			if(isset($donnesUtilisateur)){
+
+			if(!empty($donnesUtilisateur)){
 				if($donnesUtilisateur[0]->mdp == $mdp) {
 					$this->session->set_userdata('login', $donnesUtilisateur[0]->login);
 					
