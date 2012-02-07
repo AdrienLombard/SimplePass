@@ -3,8 +3,8 @@
 <div class="wrap">
 
     <div class="tabs">
-        <a href="<?php echo site_url('evenements/liste'); ?>">Liste</a>
-        <a href="<?php echo site_url('evenements/ajouter'); ?>">Ajouter</a>
+        <a href="<?php echo site_url('evenement/liste'); ?>">Liste</a>
+        <a href="<?php echo site_url('evenement/ajouter'); ?>">Ajouter</a>
 		<a href="#" class="current">Détails</a>
     </div>
 
@@ -15,8 +15,8 @@
             <b>Options :</b>
             <ul>
                 
-				<li><a href="<?php echo site_url('evenements/modifier/'.$id); ?>">Modifier</a></li>
-                <li><a href="<?php   echo site_url('evenements/supprimer/'.$id);?>">Supprimer</a></li>
+				<li><a href="<?php echo site_url('evenement/modifier/'.$id); ?>">Modifier</a></li>
+                <li><a href="<?php   echo site_url('evenement/supprimer/'.$id);?>">Supprimer</a></li>
             </ul>
 
         </aside>

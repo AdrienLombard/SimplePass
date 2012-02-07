@@ -3,8 +3,8 @@
 <div class="wrap">
 
     <div class="tabs">
-        <a href="<?php echo site_url('evenements/voir'); ?>">Liste</a>
-        <a href="<?php echo site_url('evenements/ajouter'); ?>">Ajouter</a>
+        <a href="<?php echo site_url('evenement/voir'); ?>">Liste</a>
+        <a href="<?php echo site_url('evenement/ajouter'); ?>">Ajouter</a>
 		<a href="#" class="current">Modifier</a>
     </div>
 
@@ -14,14 +14,14 @@
 
             <b>Options :</b>
             <ul>
-                <li><a href="<?php echo site_url('evenements/voir/'.$id); ?>">Retour</a></li>
+                <li><a href="<?php echo site_url('evenement/voir/'.$id); ?>">Retour</a></li>
             </ul>
 
         </aside>
 
         <div id="main">
 			
-			<form action="<?php echo site_url('evenements/exeModifier/'.$id); ?>" method="post">
+			<form action="<?php echo site_url('evenement/exeModifier/'.$id); ?>" method="post">
 				<h2><?php echo $nom?></h2>
 				
 				<label>Nom</label>
