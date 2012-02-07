@@ -191,9 +191,8 @@ class Evenements extends Cafe {
 	 * @param $id : Id de la données a supprimer.
 	 */
 	public function supprimer($id) {
-		
-		$idsp=$this->modelEvenement->getEvenementid($id);
-		$this->modelEvenement->supprimerEvenement($idsp);
+	   
+		$this->modelEvenement->supprimerEvenement($id);
 		$this->layout->view('utilisateur/evenement/UEsupprimer');
 		
 		
