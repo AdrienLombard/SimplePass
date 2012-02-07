@@ -3,7 +3,7 @@
 
 class modelUtilisateur extends CI_Model {
 	
-	private $tableUser = 'utilisateur';
+	private $tableUser = 'courchevel_utilisateur';
 	
 	public function getUtilisateur() {
 			return $this->db->select('*')
@@ -17,9 +17,8 @@ class modelUtilisateur extends CI_Model {
 	 * retourne le mot de passe associé au login passé en paramètre
 	 * @return mdp
 	 */
-	
 	public function getMDP($login){
-			return $this->db->select('nom, prenom, mdp')
+			return $this->db->select('login, mdp')
 							->from($this->tableUser)
 							->where('login', $login)
 							->get()

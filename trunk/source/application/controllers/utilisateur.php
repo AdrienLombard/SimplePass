@@ -15,9 +15,19 @@ class utilisateur extends Cafe {
 	
 	public function index($message='')
 	{
-		$data['message'] = $message;
-		$this->layout->ajouter_css('utilisateur/login');
-		$this->layout->view('utilisateur/ULogin', $data);
+		if($this->session->userdata('login')) {
+			$data['titre']		= 'Information';
+			$data['message']	= 'Vous êtes déjà connecté.';
+			$data['redirect'] 	= 'evenements/liste';
+				
+			$this->layout->view('utilisateur/evenement/uMessage', $data);
+		}
+		else {
+			echo 'banzai';
+			$data['message'] = $message;
+			$this->layout->ajouter_css('utilisateur/login');
+			$this->layout->view('utilisateur/ULogin', $data);
+		}
 	}
 	 
 	
@@ -26,23 +36,41 @@ class utilisateur extends Cafe {
 		$login 	= $this->input->post('login');
 		$mdp 	= $this->input->post('mdp');
 		
-		// On regarde dans la base si l'utilisateur existe.
-		$donnesUtilisateur = $this->modelUtilisateur->getMDP($login);
-		
-		if(isset($donnesUtilisateur)){
-			if($donnesUtilisateur[0]->mdp == $mdp) {
-				$data['nom'] = $donnesUtilisateur[0]->nom . " " . $donnesUtilisateur[0]->prenom;
-				$this->layout->view('utilisateur/UWelcome', $data);
+		if($login && $mdp) {
+			// On regarde dans la base si l'utilisateur existe.
+			$donnesUtilisateur = $this->modelUtilisateur->getMDP($login);
+			
+			if(isset($donnesUtilisateur)){
+				if($donnesUtilisateur[0]->mdp == $mdp) {
+					$this->session->set_userdata('login', $donnesUtilisateur[0]->login);
+					
+					
+					$data['nom'] = $donnesUtilisateur[0]->login;
+					$this->layout->view('utilisateur/UWelcome', $data);
+				}
+				else {
+					$message = 'Le mot de passe est incorrect.';
+					$this->index($message);
+				}
 			}
 			else {
-				$message = 'Le mot de passe est incorrect.';
+				$message = "L'utilisateur " . $login . " n'existe pas.";
 				$this->index($message);
 			}
 		}
 		else {
-			$message = "L'utilisateur " . $login . " n'existe pas.";
+			$message = "Veuillez remplir tous les champs.";
 			$this->index($message);
 		}
+
+	}
+	
+	
+	public function deconnexion() {
+		if($this->session->userdata('login')) {
+			$this->session->unset_userdata('login');
+		}
+		
 		
 	}
 }

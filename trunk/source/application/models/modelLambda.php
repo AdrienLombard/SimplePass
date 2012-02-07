@@ -2,11 +2,11 @@
 
 class modelLambda extends CI_Model {
 	
-	private $tableClient 	= 'client';
+	private $tableClient 	= 'courchevel_client';
 	
-	private $tablePays		= 'pays';
+	private $tablePays		= 'courchevel_pays';
 	
-	private $tableCategorie = 'categorie';
+	private $tableCategorie = 'courchevel_categorie';
 	
 	public function getClient() {
 		return $this->db->select('*')
