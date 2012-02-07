@@ -32,6 +32,7 @@ class modelLambda extends CI_Model {
 	public function listePays() {
 		return $this->db->select('*')
 						->from($this->tablePays)
+						->order_by('nompays')
 						->get()
 						->result();
 	}

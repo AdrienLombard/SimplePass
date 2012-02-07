@@ -5,13 +5,13 @@
 	
 	<div class="box-small">
 		
-		<span class="info">Evènement : <?php echo $evenement[0]->libelleevenement; ?></span>
+		<span class="info">Evènement : <?php echo $infoEvenement[0]->libelleevenement; ?></span>
 		
 		<br><br>
 		
-		<form method="post" action="<?php echo site_url('inscription/exeGroupe'); ?>">
+		<form method="post" action="<?php echo site_url('inscription/exeGroupe/' . $idEvenement); ?>">
 			
-			<input type="hidden" name="evenement" value="<?php echo $evenement[0]->idevenement; ?>" />
+			<input type="hidden" name="evenement" value="<?php echo $infoEvenement[0]->idevenement; ?>" />
 			
 			<h2>Groupe</h2>
 			

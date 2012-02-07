@@ -174,24 +174,125 @@ class Inscription extends Chocolat {
 	
 	public function groupe($evenement) {
 		
-		$data['evenement'] = $this->modelEvenement->getEvenementid($evenement);
-		$data['listePays'] = $this->modelLambda->listePays();
+		$data['idEvenement']		= $evenement;
+		$data['infoEvenement'] 	= $this->modelEvenement->getEvenementid($evenement);
+		$data['listePays'] 		= $this->modelLambda->listePays();
 		$data['listeCategorie'] = $this->modelLambda->listeCategorie();
+		
 		$this->layout->view('lambda/LGroupe', $data);
+		
+		
 	}
 	
 	public function exeGroupe() {
-		$data['groupe'] = $this->input->post('groupe');
-		$data['pays'] = $this->input->post('pays');	
-		$data['nom'] = $this->input->post('nom');
-		$data['prenom'] = $this->input->post('prenom');
-		$data['categorie'] = $this->input->post('categorie');
-		$data['role'] = $this->input->post('role');
-		$data['tel'] = $this->input->post('tel');
-		$data['mail'] = $this->input->post('mail');
-		$data['evenement'] = $this->input->post('evenement');
+		$idEvenement = $this->input->post('evenement');
 		
-		$this->ajouterGroupe($data);
+		// On regle les paramètres du formulaire.
+		$this->form_validation->set_message('roequired', 'Le champ %s est obligatoire.');
+		$this->form_validation->set_message('valid_email', 'Veuillez rentrer un mail valide.');
+		$this->form_validation->set_error_delimiters('<p class="error_message" >', '<p>');
+		
+		// On définie les règles de validation du formulaire.
+		$config = array(
+			array(
+				'field'   => 'groupe',
+				'label'   => 'Nom du groupe', 
+				'rules'   => 'required'
+			),
+			array(
+				'field'   => 'nom',
+				'label'   => 'Nom', 
+				'rules'   => 'required'
+			),
+			array(
+				'field'   => 'prenom',
+				'label'   => 'Prénom', 
+				'rules'   => 'required'
+			),
+			array(
+				'field'   => 'role',
+				'label'   => 'Rôle', 
+				'rules'   => 'required'
+			),
+			array(
+				'field'   => 'tel',
+				'label'   => 'Téléphone', 
+				'rules'   => 'required'
+			),
+			array(
+				'field'   => 'mail',
+				'label'   => 'Mail', 
+				'rules'   => 'required|valid_email'
+			)
+		);
+		
+		$this->form_validation->set_rules($config);
+		
+		if ($this->form_validation->run() == false) {
+			$data['idEvenement'] = $idEvenement;
+			
+			$data['infoEvenement'] = $this->modelEvenement->getEvenementid($idEvenement);
+			
+			$data['listePays'] = $this->modelLambda->listePays();
+			
+			$data['listeCategorie'] = $this->modelLambda->listeCategorie();
+			
+			$this->layout->view('lambda/LGroupe', $data);
+		
+		}
+		else {
+			
+			/*
+			$values = Array (
+				'groupe'	=> $this->input->post('groupe'),
+				'pays' 		=> $this->input->post('pays'),
+				'nom' 		=> $this->input->post('nom'),
+				'prenom' 	=> $this->input->post('prenom'),
+				'role'		=> $this->input->post('role'),
+				'mail' 		=> $this->input->post('mail'),
+				'tel'		=> $this->input->post('tel')
+			);
+			
+			//Insertion dans la base.
+			$this->modelLambda->ajouterClient($values);
+			
+			$idClient = $this->modelLambda->lastId();
+			
+			$accredData = Array(
+				'idcategorie'		=> $this->input->post('categorie'),
+				'idevenement'		=> $evenement,
+				'idclient'			=> $idClient,
+				'etataccreditation'	=> ACCREDITATION_A_VALIDE
+			);
+			
+			$this->modelAccreditation->ajouter($accredData);
+			
+			
+			$data['titre']		= 'Confirmation de demande';
+			$data['message']	= 'Votre demande a bien été prise en compte.<br>Merci de votre pré-enregistrement.';
+			
+			$this->layout->add_redirect('inscription/lambda', 3);
+			
+			$this->layout->view('lambda/LMessage', $data);
+			 
+			*/
+			 
+			$data['groupe'] 	= $this->input->post('groupe');
+			$data['pays'] 		= $this->input->post('pays');	
+			$data['nom'] 		= $this->input->post('nom');
+			$data['prenom'] 	= $this->input->post('prenom');
+			$data['categorie'] 	= $this->input->post('categorie');
+			$data['role'] 		= $this->input->post('role');
+			$data['tel'] 		= $this->input->post('tel');
+			$data['mail'] 		= $this->input->post('mail');
+			$data['evenement'] 	= $this->input->post('evenement');
+			
+			
+			
+			$this->ajouterGroupe($data);
+		
+		}
+		
 	}
 	
 	public function ajouterGroupe($data) {
