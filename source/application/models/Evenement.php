@@ -3,7 +3,7 @@
 
 class evenement extends CI_Model{
 	  
-	private $tabEvenement= 'evenement';
+	private $tabEvenement= 'courchevel_evenement';
 	
 	/**
 	 * Fonction pour recuperer un evenement
