@@ -8,6 +8,10 @@
             
 			Bienvenue <?php echo $nom; ?>.
 			
+			<br /><br />
+			
+			Ici sera affiché un récapitulatif de vos données.
+			
         </div>
 
         <div class="clear"></div>

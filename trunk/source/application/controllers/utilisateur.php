@@ -13,14 +13,11 @@ class utilisateur extends Cafe {
 	}
 	
 	
-	public function index($message='')
+	public function index()
 	{
 		if($this->session->userdata('login')) {
-			$data['titre']		= 'Information';
-			$data['message']	= 'Vous êtes déjà connecté.';
-			$data['redirect'] 	= 'utilisateur/index';
-				
-			$this->layout->view('utilisateur/uMessage', $data);
+			$data['nom'] = $this->session->userdata('login');
+			$this->layout->view('utilisateur/UWelcome', $data);
 		}
 		else {
 			$data['message'] = $message;

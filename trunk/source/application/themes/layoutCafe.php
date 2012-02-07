@@ -21,7 +21,7 @@
             
             <div class="wrap-h">
                 
-                <div id="logo"><?php echo img('logo_seul.png'); ?></div>
+                <div id="logo"><span>SIMPLE</span><b>PASS</b></div>
                 
                 <!-- menu dynamique - todo: générer en fonction de l'état -->
                 <nav>
