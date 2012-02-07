@@ -1,6 +1,10 @@
-<h1>Bienvenue</h1>
+<h1>Accueil</h1>
 
 <div class="wrap">
+	
+	<div class="tabs">
+        <a href="#" class="current">Bienvenue</a>
+    </div>
 
     <div class="box-full">
 

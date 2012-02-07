@@ -10,7 +10,8 @@ class modelAccreditation extends CI_Model {
 	public function getAccreditation() {
 		return $this->db->select('*')
 						->from($this->tableAccreditation . ' a')
-						->join($this->tableCategorie . ' c', 'a.idcategorie = c.idcategorie')
+						->join($this->tableClient . ' cl', 'a.idclient = cl.idclient')
+						->join($this->tableCategorie . ' ca', 'a.idcategorie = ca.idcategorie')
 						->get()
 						->result();
 	}

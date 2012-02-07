@@ -1,8 +1,9 @@
 h1 {
     color: #1d465b;
     font-weight: normal;
-    font-size: 52px;
+    font-size: 42px;
     text-align: right;
+	margin-bottom: -25px;
 }
 
 
@@ -21,6 +22,7 @@ h1 {
 }
 .tabs a.current:hover {
     background: #1d465b;
+	cursor: default;
 }
 
 
@@ -29,5 +31,5 @@ h1 {
     padding: 25px 30px 25px 30px;
     border-radius: 0 6px 10px 10px;
     border-top: 8px solid #1d465b;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
 }

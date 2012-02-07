@@ -1,12 +1,13 @@
 body {
     background: #afbcc5;
+	background: #EAEAEA;
 }
 
 
 header {
     background: #1d465b;
     color: #FFF;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.8);
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.8);
 }
 header .wrap-h {
     width: 1000px;
@@ -24,15 +25,19 @@ header .wrap-h #logo {
 	*/
     float: left;
     background: #2e6f92;
-    padding: 15px 30px 15px 30px;
+    padding: 12px 30px 15px 30px;
     border-radius: 0 0 10px 10px;
-    box-shadow: 0 0 2px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.6);
+	text-align: center;
 }
 header .wrap-h #logo * {
 	font-size: 18px;
+	font-family: Arial;
 }
-header .wrap-h nav {
-    
+header .wrap-h #logo .subtitle {
+	display: block;
+	font-size: 10px;
+	letter-spacing: 3px;
 }
 header .wrap-h nav a {
     display: inline-block;
@@ -46,6 +51,6 @@ header .wrap-h nav a:hover {
 
 #content {
     width: 1000px;
-    padding: 40px 0 80px 0;
+    padding: 35px 0 80px 0;
     margin: auto;
 }
