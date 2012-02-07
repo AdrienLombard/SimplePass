@@ -101,9 +101,9 @@ class Evenement extends Cafe {
 			
 			$data['titre']		= 'Ajout';
 			$data['message']	= 'Votre évènement à bien été ajouté.';
-			$data['redirect'] 	= 'evenements/liste';
+			$data['redirect'] 	= 'evenement/liste';
 			$this->modelEvenement->ajouterEvenement( $nom,$datedebut,$datefin);
-			$this->layout->view('utilisateur/evenement/uMessage', $data);	 
+			$this->layout->view('utilisateur/UMessage', $data);	 
 		}
 		else {
 			
@@ -174,7 +174,7 @@ class Evenement extends Cafe {
 			$data['titre']		= 'Modification';
 			$data['message']	= 'Votre évènement à bien été modifié.';
 			$data['redirect'] 	= 'evenement/liste';
-			$this->layout->view('utilisateur/evenement/uMessage', $data);
+			$this->layout->view('utilisateur/UMessage', $data);
 			
 		}
 		else {
@@ -193,9 +193,12 @@ class Evenement extends Cafe {
 	public function supprimer($id) {
 	   
 		$this->modelEvenement->supprimerEvenement($id);
-		$this->layout->view('utilisateur/evenement/UEsupprimer');
 		
-		
+		$data['titre']		= 'Suppression';
+		$data['message']	= 'Votre évènement a bien été supprimé.';
+		$data['redirect'] 	= 'evenement/liste';
+		$this->layout->view('utilisateur/UMessage', $data);
+
 	}
 	
 	
