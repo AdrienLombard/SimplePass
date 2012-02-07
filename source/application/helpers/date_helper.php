@@ -21,7 +21,7 @@ if ( !function_exists('display_date'))
 {
 	function display_date ($t)
 	{
-		return date('d/m/Y', $t);
+		return date('Y/m/d', $t);
 	}
 }
 
