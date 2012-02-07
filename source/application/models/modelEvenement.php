@@ -65,7 +65,7 @@ class modelEvenement extends CI_Model{
                             'datefin' =>$datefin
                        );
 
-                       $this->db->insert('evenement', $data); 
+                       $this->db->insert($this->tabEvenement, $data); 
 		
 	}
 	

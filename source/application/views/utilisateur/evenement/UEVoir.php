@@ -16,7 +16,7 @@
             <ul>
                 
 				<li><a href="<?php echo site_url('evenement/modifier/'.$id); ?>">Modifier</a></li>
-                <li><a href="<?php   echo site_url('evenement/supprimer/'.$id);?>">Supprimer</a></li>
+                <li><a href="<?php echo site_url('evenement/supprimer/'.$id);?>" confirm="Êtes-vous sûr de vouloir supprimer cet évènement ?">Supprimer</a></li>
             </ul>
 
         </aside>
