@@ -1,20 +1,20 @@
-<?php
+<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Cafe extends CI_Controller {
     
-    private $autorisations;
-	private $login = false;
+    private $auth = array();
 	
 	public function __construct() {
         
         parent::__construct();
 		
+		// debug
 		//$this->output->enable_profiler(true);
 		
+		// theme du layout
 		$this->layout->set_theme('layoutCafe');
 		
-		$this->login = ($this->session->userdata('login'))? true : false;
-		$this->layout->set_login($this->login);
+		$this->layout->set_login($this->session->userdata('login'));
         
         $this->layout->set_titre('Courchevel');
 		
@@ -36,18 +36,24 @@ class Cafe extends CI_Controller {
     }
 	
 	public function securise($array) {
-		$this->autorisations = $array;
+		$this->auth = $array;
 	}
+	
 	/*
-	public function __call($method, $args) {
-		echo $method;
-		
-		if( (in_array($method, $this->autorisations) && $this->login) || !in_array($method, $this->autorisations)) {
-			$this->$method($args);
+	 * Remapage de l'URL, permet de vérifier la sécurité en amont
+	 * @param $method : nom de la méthode demandée
+	 * @param @args 
+	 */
+	public function _remap($method, $args = null) {
+		// on lance la méthode si : méthode sécurisé & user loggé ou méthode non sécurisé
+		if((in_array($method, $this->auth) && $this->session->userdata('login')) || !in_array($method, $this->auth))
+			call_user_func_array(array($this, $method), $args);
+		else {
+			$this->load->helper('url');
+			redirect($this->router->routes['default_controller']);
 		}
-		else echo 'plop ! pas le droit hahahaha !';
 	}
-    */
+    
 }
 
 ?>

@@ -116,7 +116,7 @@ class Layout
 	 * @param char $message
 	 * @param int  $flag
 	 */
-	function flash_message ($message, $flag=2)
+	public function flash_message ($message, $flag=2)
 	{
 		$rep = '<div id="flash_message" ';
 		switch ($flag)
@@ -149,19 +149,11 @@ class Layout
 	 * @param int $url	 url de redirection
 	 * @param int $tempo temps en seconde avant la redirection automatique
 	 */
-	function add_redirect ($url, $tempo=1)
+	public function add_redirect ($url, $tempo=1)
 	{
 		$this->var['redirect']['url'] = $url;
 		$this->var['redirect']['tempo'] = $tempo;
-	}
-	
-	
-	
-	
-	
-	
-	
-	
+	}	
 	
 	
 }
