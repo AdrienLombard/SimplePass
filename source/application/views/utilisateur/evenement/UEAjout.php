@@ -30,14 +30,14 @@
 				<h2>Nouvel évènement</h2>
 				
 				<label>Nom</label>
-				<input type="text" name="nom" />
+				<input type="text" name="nom" value="<?php if($info) echo $info->nom; ?>" />
 				
 				<label>Date début</label>
 <!-- 				<input type="text" name="datedebut"/> -->
-				<input type="text" id="datepicker-debut" name="datedebut" READONLY="READONLY" />
+				<input type="text" id="datepicker-debut" name="datedebut" value="<?php if($info) echo $info->dateDebut; ?>" READONLY="READONLY" />
 				
 				<label>Date fin</label>
-				<input type="text" id="datepicker-fin" name="datefin" READONLY="READONLY" />
+				<input type="text" id="datepicker-fin" name="datefin" value="<?php if($info) echo $info->dateFin; ?>" READONLY="READONLY" />
 				
 				<input type="submit" name="valider" />
 				

@@ -8,7 +8,7 @@ if ( !function_exists('display_date_time'))
 {
 	function display_date_time($t)
 	{
-		return date('d/m/Y H:i:s', $t);
+		return date('Y-m-d H:i:s', $t);
 	}
 }
 
@@ -21,7 +21,7 @@ if ( !function_exists('display_date'))
 {
 	function display_date ($t)
 	{
-		return date('Y/m/d', $t);
+		return date('Y-m-d', $t);
 	}
 }
 
@@ -113,18 +113,6 @@ if ( !function_exists('create_date'))
 	}
 }
 
-
-/**
- * transforme une date + mois + année en timestamp
- */
-if ( !function_exists('date_to_timestamp'))
-{
-	function date_to_timestamp2 ($date)
-	{
-		$tab_date = explode('/', $date); 
-		return mktime(0, 0, 0, $tab_date[1], $tab_date[0], $tab_date[2]);
-	}
-}
 
 /**
 * transforme une date + mois + année en timestamp
