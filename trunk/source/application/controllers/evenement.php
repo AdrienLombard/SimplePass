@@ -172,7 +172,7 @@ class Evenement extends Cafe {
 		$datefinTstmp  = date_to_timestamp($datefin);
 		if ($this->form_validation->run() == true && $datedebutTstmp < $datefinTstmp ) {
 			
-			$resultat = $this->modelEvenement->modifierEvenement($nom, $datedebut, $datefin, $id);
+			$resultat = $this->modelEvenement->modifierEvenement($nom, $datedebutTstmp, $datefinTstmp, $id);
 			
 			$data['titre']		= 'Modification';
 			$data['message']	= 'Votre évènement à bien été modifié.';
