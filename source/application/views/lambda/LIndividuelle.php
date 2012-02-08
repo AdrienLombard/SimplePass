@@ -41,7 +41,7 @@
 		<label>Mail</label>
 		<input type="text" value="<?php echo set_value('mail'); ?>" id="mail" name="mail" />
 		
-		<label>Societe, Organime ou Publication</label>
+		<label>Societe, Organisme ou Publication</label>
 		<input type="text" value="<?php echo set_value('titre'); ?>" id="titre" name="titre" />
 		
 		<label>Voulez-vous spécifier un rôle ?</label>
@@ -60,8 +60,9 @@
 			
 		
 		<label>Photo</label>
-		<input type="file" name="fichier" size="3">
 		<?php echo img('ombre.jpg'); ?>
+		<br>
+		<input type="file" name="fichier">
 		
 		<div class="clear"></div>
 		

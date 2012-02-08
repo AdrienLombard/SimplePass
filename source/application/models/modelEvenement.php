@@ -87,7 +87,7 @@ class modelEvenement extends CI_Model{
 		 );
 		
 		 $this->db->where('idevenement', $id);
-		 $this->db->update('evenement', $data);
+		 $this->db->update($this->tabEvenement, $data);
 			                  
 	}
 	
