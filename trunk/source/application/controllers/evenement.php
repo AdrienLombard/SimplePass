@@ -7,10 +7,10 @@ class Evenement extends Cafe {
 		parent::__construct();
 		
 		$this->load->model('modelEvenement');
-		
 		$this->load->library('form_validation');
-		
 		$this->layout->ajouter_js('utilisateur/scriptDate');
+		
+		$this->securise(array('voir'));
 	}
 
 

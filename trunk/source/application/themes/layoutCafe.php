@@ -28,8 +28,12 @@
                 
                 <!-- menu dynamique - todo: générer en fonction de l'état -->
                 <nav>
-                    <a href="<?php echo site_url('accreditation/index'); ?>">Accréditations</a>
+					<a href="<?php echo site_url('utilisateur/index'); ?>">Accueil</a>
+					<?php if($CI_login): ?>
+					<a href="<?php echo site_url('accreditation/index'); ?>">Accréditations</a>
                     <a href="<?php echo site_url('evenement/index'); ?>">Evènements</a>
+					<?php endif; ?>
+					<a href="<?php echo site_url('utilisateur/deconnexion'); ?>">Déconnexion</a>
                 </nav>
                 <!-- /menu dynamique -->
                 
@@ -38,8 +42,8 @@
         </header>
         
         <div id="content">
-            
-            <!-- output -->
+			
+			<!-- output -->
             <?php echo $output; ?>
             <!-- /output -->
             

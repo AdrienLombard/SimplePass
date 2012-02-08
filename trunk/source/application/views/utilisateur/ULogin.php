@@ -8,12 +8,16 @@
 
         <label>Mot de passe</label>
         <input type="password" name="mdp"/>
-
-        <input type="submit" name="valider"/>
 		
-		<span class="erreur" ><?php if(isset($message)) echo $message; ?></span>
+		<?php if(isset($message) && $message != ''): ?>
+		<div class="loginErreur" ><?php echo $message; ?></div>
+		<?php endif; ?>
 		
         <div class="clear"></div>
+		
+		<input type="submit" name="valider"/>
+		
+		<div class="clear"></div>
 
     </form>
 </div>
