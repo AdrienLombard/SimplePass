@@ -5,6 +5,7 @@ class Evenement extends Cafe {
 	
 	public function __construct() {
 		parent::__construct();
+		
 		$this->load->model('modelEvenement');
 		
 		$this->load->library('form_validation');
