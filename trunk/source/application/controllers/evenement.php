@@ -54,12 +54,13 @@ class Evenement extends Cafe {
 	/**
 	 * Méthode Create du CRUD.
 	 */
-	public function ajouter() {
+	public function ajouter($values='') {
 		
-		// Traitement
+		// Traitement.
+		$data['info'] = $values;
 		
 		// Appel de la vue.
-		$this->layout->view('utilisateur/evenement/UEAjout');
+		$this->layout->view('utilisateur/evenement/UEAjout', $data);
 		
 	}
 	
@@ -91,20 +92,25 @@ class Evenement extends Cafe {
 		$datedebut 	= $this->input->post('datedebut');
 		$datefin 	= $this->input->post('datefin');
 		
-		$datedebutTstmp	= date_to_timestamp($datedebut);
-		$datefinTstmp  	= date_to_timestamp($datefin);
+		 $datedebutTstmp= date_to_timestamp($datedebut);
+		 $datefinTstmp  = date_to_timestamp($datefin);
 		
 		if ($this->form_validation->run() == true && $datedebutTstmp < $datefinTstmp) {
 			
 			$data['titre']		= 'Ajout';
 			$data['message']	= 'Votre évènement à bien été ajouté.';
 			$data['redirect'] 	= 'evenement/liste';
-			$this->modelEvenement->ajouterEvenement( $nom,$datedebut,$datefin);
+			$this->modelEvenement->ajouterEvenement( $nom,$datedebutTstmp,$datefinTstmp);
 			$this->layout->view('utilisateur/UMessage', $data);	 
 		}
 		else {
 			
-			$this->ajouter();
+			$values->nom		= $nom;
+			$values->dateDebut	= $datedebut;
+			$values->dateFin	= $datefin;
+			
+			
+			$this->ajouter($values);
 		}
 	}
 
