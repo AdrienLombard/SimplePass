@@ -13,7 +13,7 @@ class utilisateur extends Cafe {
 	}
 	
 	
-	public function index()
+	public function index($message = '')
 	{
 		if($this->session->userdata('login')) {
 			$data['nom'] = $this->session->userdata('login');
