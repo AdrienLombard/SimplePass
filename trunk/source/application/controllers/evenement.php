@@ -58,7 +58,7 @@ class Evenement extends Cafe {
 		
 		// Traitement
 		
-		// Appelle de la vue.
+		// Appel de la vue.
 		$this->layout->view('utilisateur/evenement/UEAjout');
 		
 	}
@@ -91,14 +91,10 @@ class Evenement extends Cafe {
 		$datedebut 	= $this->input->post('datedebut');
 		$datefin 	= $this->input->post('datefin');
 		
-		 $datedebutTstmp= date_to_timestamp($datedebut);
-		 $datefinTstmp  = date_to_timestamp($datefin);
+		$datedebutTstmp	= date_to_timestamp($datedebut);
+		$datefinTstmp  	= date_to_timestamp($datefin);
 		
 		if ($this->form_validation->run() == true && $datedebutTstmp < $datefinTstmp) {
-			//$result = $this->Evenement->ajouterEvenement($nom, $datedebut, $datefin);
-			
-           //$newId = $this->Evenement->lastId();
-			
 			
 			$data['titre']		= 'Ajout';
 			$data['message']	= 'Votre évènement à bien été ajouté.';
