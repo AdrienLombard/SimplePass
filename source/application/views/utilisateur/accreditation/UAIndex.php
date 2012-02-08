@@ -1,4 +1,4 @@
-<h1>Accréditation</h1>
+<h1>Accréditations</h1>
 
 <div class="wrap">
 
@@ -16,7 +16,7 @@
 					<tr>
 						<th>Nom</th>
 						<th>Prénom</th>
-						<th>pays</th>
+						<th>Pays</th>
 						<th>Catégorie</th>
 					</tr>
 					
