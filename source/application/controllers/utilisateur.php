@@ -8,7 +8,6 @@ class utilisateur extends Cafe {
 	public function __construct()
 	{
 		parent::__construct();
-		
 		$this->load->model('modelUtilisateur');
 	}
 	
@@ -67,7 +66,10 @@ class utilisateur extends Cafe {
 			$this->session->unset_userdata('login');
 		}
 		
-		
+		$data['titre']		= 'Déconnexion';
+		$data['message']	= 'Vous avez bien été déconnecté.';
+		$data['redirect'] 	= 'utilisateur/index';
+		$this->layout->view('utilisateur/UMessage', $data);
 	}
 }
 

@@ -26,6 +26,8 @@ class Layout
 		
 		$this->var['redirect'] = Array();
 		
+		$this->var['CI_login'] = false;
+		
 		define('MSG_OK', 0);	// vert
 		define('MSG_ERR', 1);	// rouge
 		define('MSG_INFO', 2);	// jaune
@@ -100,6 +102,14 @@ class Layout
 		}
 	}
 	
+	/**
+	 * fonction pour savoir si l'utilisateur est connecté
+	 * @param Boolean etat du login
+	 */
+	public function set_login($bool) {
+		$this->var['CI_login'] = $bool;
+	}
+	
 	
 	/**
 	 * fonction pour demander l'affichage d'une flash_message sur la vue appeler ensuite.
@@ -143,7 +153,6 @@ class Layout
 	{
 		$this->var['redirect']['url'] = $url;
 		$this->var['redirect']['tempo'] = $tempo;
-		echo 'ajout redirect';
 	}
 	
 	
