@@ -172,12 +172,15 @@ class Inscription extends Chocolat {
 		
 	}
 	
-	public function groupe($evenement) {
+	public function groupe($evenement, $info=false) {
 		
-		$data['idEvenement']		= $evenement;
+		
+		
+		$data['idEvenement']	= $evenement;
 		$data['infoEvenement'] 	= $this->modelEvenement->getEvenementid($evenement);
 		$data['listePays'] 		= $this->modelLambda->listePays();
 		$data['listeCategorie'] = $this->modelLambda->listeCategorie();
+		$data['values'] = $info;
 		
 		$this->layout->view('lambda/LGroupe', $data);
 		
@@ -229,16 +232,18 @@ class Inscription extends Chocolat {
 		$this->form_validation->set_rules($config);
 		
 		if ($this->form_validation->run() == false) {
-			$data['idEvenement'] = $idEvenement;
 			
-			$data['infoEvenement'] = $this->modelEvenement->getEvenementid($idEvenement);
+			$values->groupe 	= $this->input->post('groupe');
+			$values->pays 		= $this->input->post('pays');
+			$values->nom 		= $this->input->post('nom');
+			$values->prenom 	= $this->input->post('prenom');
+			$values->role 		= $this->input->post('role');
+			$values->mail 		= $this->input->post('mail');
+			$values->tel 		= $this->input->post('tel');
+			$values->categorie 	= $this->input->post('categorie');
 			
-			$data['listePays'] = $this->modelLambda->listePays();
+			$this->groupe($idEvenement, $values);
 			
-			$data['listeCategorie'] = $this->modelLambda->listeCategorie();
-			
-			$this->layout->view('lambda/LGroupe', $data);
-		
 		}
 		else {
 			
@@ -250,7 +255,7 @@ class Inscription extends Chocolat {
 				'prenom' 	=> $this->input->post('prenom'),
 				'role'		=> $this->input->post('role'),
 				'mail' 		=> $this->input->post('mail'),
-				'tel'		=> $this->input->post('tel')
+				'tel'		=> $this->input->post('tel'),
 			);
 			
 			//Insertion dans la base.
@@ -345,5 +350,5 @@ class Inscription extends Chocolat {
 	
 }
 
-/* End of file accreditationL.php */
-/* Location: ./application/controllers/accreditationL.php */
+/* End of file inscription.php */
+/* Location: ./application/controllers/inscription.php */
