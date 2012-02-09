@@ -432,6 +432,7 @@ insert into courchevel_categorie (surcategorie, libellecategorie) values (4, 'Co
 insert into courchevel_categorie (surcategorie, libellecategorie) values (4, 'Responsable parkings');
 insert into courchevel_categorie (surcategorie, libellecategorie) values (7, 'Responsable parking altiport');
 insert into courchevel_categorie (surcategorie, libellecategorie) values (7, 'Responsable parking stade');
+insert into courchevel_categorie (libellecategorie) values ('Sportif');
 
 insert into courchevel_donne_acces (idcategorie,idzone) values (1,1);
 insert into courchevel_donne_acces (idcategorie,idzone) values (2,1);
