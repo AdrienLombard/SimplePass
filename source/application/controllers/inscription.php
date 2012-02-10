@@ -40,6 +40,7 @@ class Inscription extends Chocolat {
 		$this->layout->view('lambda/LAccueil', $data);
 	}
 	
+	
 	public function ajouter($event='') {
 		// Chargement du js.
 		$this->layout->ajouter_js('lambda/script');
@@ -119,7 +120,7 @@ class Inscription extends Chocolat {
 		else {
 			
 			$values = Array (
-				'nom' 		=> $this->input->post('nom'),
+				'nom' 		=> strtoupper($this->input->post('nom')),
 				'prenom' 	=> $this->input->post('prenom'),
 				'pays' 		=> $this->input->post('pays'),
 				'civilite' 	=> $this->input->post('civilite'),
@@ -173,8 +174,6 @@ class Inscription extends Chocolat {
 	}
 	
 	public function groupe($evenement, $info=false) {
-		
-		
 		
 		$data['idEvenement']	= $evenement;
 		$data['infoEvenement'] 	= $this->modelevenement->getEvenementid($evenement);
@@ -235,7 +234,7 @@ class Inscription extends Chocolat {
 			
 			$values->groupe 	= $this->input->post('groupe');
 			$values->pays 		= $this->input->post('pays');
-			$values->nom 		= $this->input->post('nom');
+			$values->nom 		= strtoupper($this->input->post('nom'));
 			$values->prenom 	= $this->input->post('prenom');
 			$values->role 		= $this->input->post('role');
 			$values->mail 		= $this->input->post('mail');
@@ -247,41 +246,6 @@ class Inscription extends Chocolat {
 		}
 		else {
 			
-			/*
-			$values = Array (
-				'groupe'	=> $this->input->post('groupe'),
-				'pays' 		=> $this->input->post('pays'),
-				'nom' 		=> $this->input->post('nom'),
-				'prenom' 	=> $this->input->post('prenom'),
-				'role'		=> $this->input->post('role'),
-				'mail' 		=> $this->input->post('mail'),
-				'tel'		=> $this->input->post('tel'),
-			);
-			
-			//Insertion dans la base.
-			$this->modellambda->ajouterClient($values);
-			
-			$idClient = $this->modellambda->lastId();
-			
-			$accredData = Array(
-				'idcategorie'		=> $this->input->post('categorie'),
-				'idevenement'		=> $evenement,
-				'idclient'			=> $idClient,
-				'etataccreditation'	=> ACCREDITATION_A_VALIDE
-			);
-			
-			$this->modelaccreditation->ajouter($accredData);
-			
-			
-			$data['titre']		= 'Confirmation de demande';
-			$data['message']	= 'Votre demande a bien été prise en compte.<br>Merci de votre pré-enregistrement.';
-			
-			$this->layout->add_redirect('inscription/lambda', 3);
-			
-			$this->layout->view('lambda/LMessage', $data);
-			 
-			*/
-			 
 			$data['groupe'] 	= $this->input->post('groupe');
 			$data['pays'] 		= $this->input->post('pays');	
 			$data['nom'] 		= $this->input->post('nom');
@@ -292,19 +256,18 @@ class Inscription extends Chocolat {
 			$data['mail'] 		= $this->input->post('mail');
 			$data['evenement'] 	= $this->input->post('evenement');
 			
-			
-			
 			$this->ajouterGroupe($data);
-		
 		}
 		
 	}
+	
 	
 	public function ajouterGroupe($data) {
 		$data['listeCategorie'] = $this->modellambda->listeCategorie();
 		$this->layout->ajouter_js('lambda/scriptGroupe');
 		$this->layout->view('lambda/LGroupeDetails', $data);
 	}
+	
 	
 	public function exeAjouterGroupe() {
 		
