@@ -8,7 +8,7 @@ class utilisateur extends Cafe {
 	public function __construct()
 	{
 		parent::__construct();
-		$this->load->model('modelUtilisateur');
+		$this->load->model('modelutilisateur');
 	}
 	
 	
@@ -33,7 +33,7 @@ class utilisateur extends Cafe {
 		
 		if($login && $mdp) {
 			// On regarde dans la base si l'utilisateur existe.
-			$donnesUtilisateur = $this->modelUtilisateur->getMDP($login);
+			$donnesUtilisateur = $this->modelutilisateur->getMDP($login);
 
 			if(!empty($donnesUtilisateur)){
 				if($donnesUtilisateur[0]->mdp == $mdp) {

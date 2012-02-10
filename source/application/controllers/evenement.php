@@ -6,7 +6,7 @@ class Evenement extends Cafe {
 	public function __construct() {
 		parent::__construct();
 		
-		$this->load->model('modelEvenement');
+		$this->load->model('modelevenement');
 		$this->load->library('form_validation');
 		$this->layout->ajouter_js('utilisateur/scriptDate');
 		
@@ -28,7 +28,7 @@ class Evenement extends Cafe {
 		$this->layout->ajouter_css('utilisateur/liste');
 		
 		// Récupération des données dans la base.
-		$data['resultats']=$this->modelEvenement->getEvenement();
+		$data['resultats']=$this->modelevenement->getEvenement();
 		
 		// Appelle de la vue.
 		$this->layout->view('utilisateur/evenement/UEIndex', $data);
@@ -44,7 +44,7 @@ class Evenement extends Cafe {
 		$this->layout->ajouter_css('utilisateur/details');
 		
 		// Récupération des données sur la données corréspondant a l'id.
-		$data['resultats']=$this->modelEvenement->getEvenementid($id);
+		$data['resultats']=$this->modelevenement->getEvenementid($id);
 		$data['id'] = $id;
 		
 		// Appelle de la vue.
@@ -100,7 +100,7 @@ class Evenement extends Cafe {
 			$data['titre']		= 'Ajout';
 			$data['message']	= 'Votre évènement à bien été ajouté.';
 			$data['redirect'] 	= 'evenement/liste';
-			$this->modelEvenement->ajouterEvenement( $nom,$datedebutTstmp,$datefinTstmp);
+			$this->modelevenement->ajouterEvenement( $nom,$datedebutTstmp,$datefinTstmp);
 			$this->layout->view('utilisateur/UMessage', $data);	 
 		}
 		else {
@@ -130,7 +130,7 @@ class Evenement extends Cafe {
 			$data['datefin'] 	= date_to_timestamp($re['datefin']);
 		}
 		else {
-			$reponse = $this->modelEvenement->getEvenementid($id);
+			$reponse = $this->modelevenement->getEvenementid($id);
 			$data['nom'] 		= $reponse[0]->libelleevenement;
 			$data['datedebut'] 	= $reponse[0]->datedebut;
 			$data['datefin'] 	= $reponse[0]->datefin;
@@ -172,7 +172,7 @@ class Evenement extends Cafe {
 		$datefinTstmp  = date_to_timestamp($datefin);
 		if ($this->form_validation->run() == true && $datedebutTstmp < $datefinTstmp ) {
 			
-			$resultat = $this->modelEvenement->modifierEvenement($nom, $datedebutTstmp, $datefinTstmp, $id);
+			$resultat = $this->modelevenement->modifierEvenement($nom, $datedebutTstmp, $datefinTstmp, $id);
 			
 			$data['titre']		= 'Modification';
 			$data['message']	= 'Votre évènement à bien été modifié.';
@@ -195,7 +195,7 @@ class Evenement extends Cafe {
 	 */
 	public function supprimer($id) {
 	   
-		$this->modelEvenement->supprimerEvenement($id);
+		$this->modelevenement->supprimerEvenement($id);
 		
 		$data['titre']		= 'Suppression';
 		$data['message']	= 'Votre évènement a bien été supprimé.';

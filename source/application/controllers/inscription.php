@@ -15,9 +15,9 @@ class Inscription extends Chocolat {
 		
 		
 		// Chargement du modele.
-		$this->load->model('modelLambda');
-		$this->load->model('modelAccreditation');
-		$this->load->model('modelEvenement');
+		$this->load->model('modellambda');
+		$this->load->model('modelaccreditation');
+		$this->load->model('modelevenement');
 	}
 	
 	
@@ -34,7 +34,7 @@ class Inscription extends Chocolat {
 		$this->layout->ajouter_js('lambda/script');
 		
 		// On récupère la liste des évènements.
-		$data['events'] = $this->modelEvenement->getEvenement();
+		$data['events'] = $this->modelevenement->getEvenement();
 		
 		// On charge la vue pour cette même page.
 		$this->layout->view('lambda/LAccueil', $data);
@@ -107,11 +107,11 @@ class Inscription extends Chocolat {
 		if ($this->form_validation->run() == false) {
 			$data['event_id'] = $event;
 			
-			$data['event_info'] = $this->modelEvenement->getEvenementid($event);
+			$data['event_info'] = $this->modelevenement->getEvenementid($event);
 			
-			$data['listePays'] = $this->modelLambda->listePays();
+			$data['listePays'] = $this->modellambda->listePays();
 			
-			$data['listeCategorie'] = $this->modelLambda->listeCategorie();
+			$data['listeCategorie'] = $this->modellambda->listeCategorie();
 			
 			$this->layout->view('lambda/LIndividuelle', $data);
 		
@@ -146,9 +146,9 @@ class Inscription extends Chocolat {
 			}
 			
 			//Insertion dans la base.
-			$this->modelLambda->ajouterClient($values);
+			$this->modellambda->ajouterClient($values);
 			
-			$idClient = $this->modelLambda->lastId();
+			$idClient = $this->modellambda->lastId();
 			
 			$accredData = Array(
 				'idcategorie'		=> $this->input->post('categorie'),
@@ -157,7 +157,7 @@ class Inscription extends Chocolat {
 				'etataccreditation'	=> ACCREDITATION_A_VALIDE
 			);
 			
-			$this->modelAccreditation->ajouter($accredData);
+			$this->modelaccreditation->ajouter($accredData);
 			
 			
 			$data['titre']		= 'Confirmation de demande';
@@ -177,9 +177,9 @@ class Inscription extends Chocolat {
 		
 		
 		$data['idEvenement']	= $evenement;
-		$data['infoEvenement'] 	= $this->modelEvenement->getEvenementid($evenement);
-		$data['listePays'] 		= $this->modelLambda->listePays();
-		$data['listeCategorie'] = $this->modelLambda->listeCategorie();
+		$data['infoEvenement'] 	= $this->modelevenement->getEvenementid($evenement);
+		$data['listePays'] 		= $this->modellambda->listePays();
+		$data['listeCategorie'] = $this->modellambda->listeCategorie();
 		$data['values'] = $info;
 		
 		$this->layout->view('lambda/LGroupe', $data);
@@ -259,9 +259,9 @@ class Inscription extends Chocolat {
 			);
 			
 			//Insertion dans la base.
-			$this->modelLambda->ajouterClient($values);
+			$this->modellambda->ajouterClient($values);
 			
-			$idClient = $this->modelLambda->lastId();
+			$idClient = $this->modellambda->lastId();
 			
 			$accredData = Array(
 				'idcategorie'		=> $this->input->post('categorie'),
@@ -270,7 +270,7 @@ class Inscription extends Chocolat {
 				'etataccreditation'	=> ACCREDITATION_A_VALIDE
 			);
 			
-			$this->modelAccreditation->ajouter($accredData);
+			$this->modelaccreditation->ajouter($accredData);
 			
 			
 			$data['titre']		= 'Confirmation de demande';
@@ -301,7 +301,7 @@ class Inscription extends Chocolat {
 	}
 	
 	public function ajouterGroupe($data) {
-		$data['listeCategorie'] = $this->modelLambda->listeCategorie();
+		$data['listeCategorie'] = $this->modellambda->listeCategorie();
 		$this->layout->ajouter_js('lambda/scriptGroupe');
 		$this->layout->view('lambda/LGroupeDetails', $data);
 	}
@@ -311,8 +311,8 @@ class Inscription extends Chocolat {
 		// ajout du référent
 		$ref = $data = $this->input->post('ref');
 		unset($ref['categorie']);
-		$this->modelLambda->ajouterClient($ref);
-		$id = $this->modelLambda->lastId();
+		$this->modellambda->ajouterClient($ref);
+		$id = $this->modellambda->lastId();
 		
 		// création de l'accreditation pour le referent
 		$accred = null;
@@ -320,7 +320,7 @@ class Inscription extends Chocolat {
 		$accred['idevenement'] = $this->input->post('evenement');
 		$accred['idclient'] = $id;
 		$accred['etataccreditation'] = 1;
-		$this->modelAccreditation->ajouter($accred);
+		$this->modelaccreditation->ajouter($accred);
 		
 		// ajout des membres
 		foreach($this->input->post('groupe') as $ligne) {
@@ -332,15 +332,15 @@ class Inscription extends Chocolat {
 			$membre['pays'] = $data['pays'];
 			$membre['groupe'] = $data['groupe'];
 			$membre['referent'] = $id;
-			$this->modelLambda->ajouterClient($membre);
+			$this->modellambda->ajouterClient($membre);
 
 			// création de l'accreditation
 			$accred = null;
 			$accred['idcategorie'] = $ligne['categorie'];
 			$accred['idevenement'] = $this->input->post('evenement');
-			$accred['idclient'] = $this->modelLambda->lastId();
+			$accred['idclient'] = $this->modellambda->lastId();
 			$accred['etataccreditation'] = 1;
-			$this->modelAccreditation->ajouter($accred);
+			$this->modelaccreditation->ajouter($accred);
 		}
 		
 		$msg['titre']	= 'Confirmation de demande';

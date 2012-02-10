@@ -1,5 +1,5 @@
 
-<?php echo validation_errors(); ?>
+<?php //echo validation_errors(); ?>
 
 <div class="wrap">
 	
