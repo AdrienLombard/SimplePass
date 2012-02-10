@@ -16,19 +16,19 @@
 		
 		<input type="hidden" id="evenement" name="evenement" value="<?php echo $event_id; ?>" />
 		
-		<label>Civilité</label>
+		<label>Civilité*</label>
 		<div class="encadrer" >
 			Homme : <input type=radio id="civilite" name="civilite" value="M" <?php echo set_radio('civilite', 'M', TRUE); ?> >
 			Femme : <input type=radio id="civilite" name="civilite" value="F" <?php echo set_radio('civilite', 'F'); ?> >
 		</div>
 		
-		<label>Nom</label>
+		<label>Nom*</label>
 		<input type="text" value="<?php echo set_value('nom'); ?>" id="nom" name="nom" />
 		
-		<label>Prénom</label>
+		<label>Prénom*</label>
 		<input type="text" value="<?php echo set_value('prenom'); ?>" id="prenom" name="prenom" />
 		
-		<label>Pays</label>
+		<label>Pays*</label>
 		<select  id="pays" name="pays" class="select">
 			<?php foreach($listePays as $pays): ?>
 			<option VALUE="<?php echo $pays->idpays; ?>" <?php echo set_select('pays', $pays->idpays); ?> ><?php echo $pays->nompays; ?></option>
@@ -38,7 +38,7 @@
 		<label>Télephone</label>
 		<input type="text" value="<?php echo set_value('tel'); ?>" id="tel" name="tel" />
 		
-		<label>Mail</label>
+		<label>Mail*</label>
 		<input type="text" value="<?php echo set_value('mail'); ?>" id="mail" name="mail" />
 		
 		<label>Societe, Organisme ou Publication</label>
