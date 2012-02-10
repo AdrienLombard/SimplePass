@@ -13,7 +13,11 @@
             <script type="text/javascript" src="<?php echo $url; ?>"></script> 
         <?php endforeach; ?>
 
-        <?php if(isset($redirect[1])) header('Refresh: '.$redirect[1].';Url='.site_url($redirect[0])); ?>
+        <?php 
+		if(!empty($redirect['url'])) {
+			echo '<meta http-equiv="refresh" content="' . $redirect['tempo'] . '; URL=' . site_url($redirect['url']) . '">';
+		}
+		?>
         
     </head>
     <body>

@@ -39,8 +39,10 @@ class utilisateur extends Cafe {
 				if($donnesUtilisateur[0]->mdp == $mdp) {
 					$this->session->set_userdata('login', $donnesUtilisateur[0]->login);
 					
-					
 					$data['nom'] = $donnesUtilisateur[0]->login;
+					
+					$this->layout->add_redirect('utilisateur', 0.1);
+					
 					$this->layout->view('utilisateur/UWelcome', $data);
 				}
 				else {
@@ -65,6 +67,7 @@ class utilisateur extends Cafe {
 		if($this->session->userdata('login')) {
 			$this->session->unset_userdata('login');
 		}
+		$this->layout->add_redirect('utilisateur', 0.1);
 		
 		$data['titre']		= 'Déconnexion';
 		$data['message']	= 'Vous avez bien été déconnecté.';
