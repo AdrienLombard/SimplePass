@@ -7,14 +7,14 @@ class Accreditation extends Cafe {
 		
 		parent::__construct();
 		
-		$this->load->model('modelAccreditation');
+		$this->load->model('modelaccreditation');
 		
 	}
 
 
 	public function index() {
 		
-		$data['accreditations'] = $this->modelAccreditation->getAccreditation();
+		$data['accreditations'] = $this->modelaccreditation->getAccreditation();
 		$this->layout->view('utilisateur/accreditation/UAIndex', $data);
 		
 	}
