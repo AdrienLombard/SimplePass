@@ -4,7 +4,7 @@
 	
 	<div class="box-small">
 		
-		<span class="info">Bienvenu sur le site de demande d'accréditation</span>
+		<span class="info">Bienvenue sur le site de demande d'accréditation</span>
 		
 		<br><br>
 		
