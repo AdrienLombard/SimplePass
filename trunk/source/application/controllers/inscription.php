@@ -29,6 +29,10 @@ class Inscription extends Chocolat {
 		
 	}
 	
+	
+	/**
+	 * Méthode pour le choix d'une inscription individuelle ou par équipe et de l'évènement.
+	 */
 	public function lambda() {
 		// Chargement du js.
 		$this->layout->ajouter_js('lambda/script');
@@ -40,7 +44,10 @@ class Inscription extends Chocolat {
 		$this->layout->view('lambda/LAccueil', $data);
 	}
 	
-	
+	/**
+	 * Méthode pour afficher le formulaire pour l'ajout individuelle.
+	 * Comprend également le traitement complet.
+	 */
 	public function ajouter($event='') {
 		// Chargement du js.
 		$this->layout->ajouter_js('lambda/script');
@@ -173,6 +180,10 @@ class Inscription extends Chocolat {
 		
 	}
 	
+	
+	/**
+	 * Méthode pour le formulaire pour la saisie du responsable d'une équipe.
+	 */
 	public function groupe($evenement, $info=false) {
 		
 		$data['idEvenement']	= $evenement;
@@ -186,6 +197,10 @@ class Inscription extends Chocolat {
 		
 	}
 	
+	
+	/**
+	 * Méthode de traitement pour la saisie du responsable.
+	 */
 	public function exeGroupe() {
 		$idEvenement = $this->input->post('evenement');
 		
@@ -262,6 +277,9 @@ class Inscription extends Chocolat {
 	}
 	
 	
+	/**
+	 * Méthode pour l'ajout de tous les membres d"une équipe.
+	 */
 	public function ajouterGroupe($data) {
 		$data['listeCategorie'] = $this->modellambda->listeCategorie();
 		$this->layout->ajouter_js('lambda/scriptGroupe');
@@ -269,6 +287,9 @@ class Inscription extends Chocolat {
 	}
 	
 	
+	/**
+	 * Méthode pour le traitement de l'ajout des membres d'une équipe.
+	 */
 	public function exeAjouterGroupe() {
 		
 		// ajout du référent
