@@ -1,6 +1,45 @@
 
 <?php //echo validation_errors(); ?>
 
+<script type="text/javascript">
+	
+	$(document).ready(function(){
+		
+		var tabCat = new Array();
+		
+		<?php $i = 0; ?>
+		<?php foreach($listeCategorie as $cat): ?>
+			tabCat[<?php echo $i; ?>] = [<?php echo $cat->idcategorie ?>, <?php echo $cat->surcategorie ?>, "<?php echo $cat->libellecategorie ?>"];
+			<?php $i++; ?>
+		<?php endforeach; ?>
+
+		$("select.dyn-selector").live("change",function(){
+			
+			var id = $(this).find("option:selected").val();
+			var count = 0;
+			
+			var newSelect = "<select name='categorie[]' class='select dyn-selector'>";
+			newSelect += "<option value='-1'>Je ne sais pas encore</option>";
+			for(var i=0; i<tabCat.length; i++) {
+				if(tabCat[i][1] == id) {
+					newSelect += "<option value='" + tabCat[i][0] + "'>" + tabCat[i][2] + "</option>";
+					count++;
+				}
+			}
+			newSelect += "</select>";
+			
+			$(this).next().remove();
+			
+			if(count != 0)
+				$(newSelect).insertAfter(this);
+			
+		});
+
+	});
+	
+</script>
+
+
 <div class="wrap">
 	
 	<h1>Demande d'accréditation</h1>
@@ -51,13 +90,17 @@
 		</div>
 		<input type="text" value="<?php echo set_value('role'); ?>" id="role" name="role" />
 		
+		<div>
 		<label>Categorie</label>
-		<select  id="categorie" name="categorie" class="select">
-			<?php foreach($listeCategorie as $categorie): ?>
+		<select  id="categorie" name="categorie[]" class="select dyn-selector">
+			<option value="-1">Je ne sais pas encore</option>
+			<?php foreach($listeSurCategorie as $categorie): ?>
 			<option VALUE="<?php echo $categorie->idcategorie; ?>" <?php echo set_select('pays', $categorie->libellecategorie); ?> ><?php echo $categorie->libellecategorie; ?></option>
 			<?php endforeach; ?>
 		</select>
-			
+		</div>
+		
+		<div class="sous-categories"></div>			
 		
 		<label>Photo</label>
 		<?php echo img('ombre.jpg'); ?>
