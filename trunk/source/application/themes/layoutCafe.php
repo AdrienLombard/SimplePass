@@ -34,10 +34,11 @@
                 <nav>
 					<a href="<?php echo site_url('utilisateur/index'); ?>">Accueil</a>
 					<?php if($CI_login): ?>
-					<a href="<?php echo site_url('accreditation/index'); ?>">Accréditations</a>
                     <a href="<?php echo site_url('evenement/index'); ?>">Evènements</a>
-					<?php endif; ?>
+					<a href="<?php echo site_url('accreditation/index'); ?>">Accréditations</a>
+					<a href="<?php echo site_url('zone/index'); ?>">Zones</a>
 					<a href="<?php echo site_url('utilisateur/deconnexion'); ?>">Déconnexion</a>
+					<?php endif; ?>
                 </nav>
                 <!-- /menu dynamique -->
                 

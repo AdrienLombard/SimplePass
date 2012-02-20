@@ -48,6 +48,14 @@ class modelLambda extends CI_Model {
 						->result();
 	}
 	
+	public function listeSurCategorie() {
+		return $this->db->select('*')
+						->from($this->tableCategorie)
+						->where('surcategorie', NULL)
+						->get()
+						->result();
+	}
+	
 	
 	
 	

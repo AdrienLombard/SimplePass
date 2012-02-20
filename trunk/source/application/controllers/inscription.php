@@ -113,11 +113,14 @@ class Inscription extends Chocolat {
 		
 		
 		if ($this->form_validation->run() == false) {
+			
 			$data['event_id'] = $event;
 			
 			$data['event_info'] = $this->modelevenement->getEvenementid($event);
 			
 			$data['listePays'] = $this->modellambda->listePays();
+			
+			$data['listeSurCategorie'] = $this->modellambda->listeSurCategorie();
 			
 			$data['listeCategorie'] = $this->modellambda->listeCategorie();
 			
@@ -153,13 +156,20 @@ class Inscription extends Chocolat {
 				$values['organisme'] = $organisme;
 			}
 			
+			$categories = $this->input->post('categorie');
+			$categorie = null;
+			foreach($categories as $cat) {
+				if($cat != "-1")
+					$categorie = $cat;
+			}
+			
 			//Insertion dans la base.
 			$this->modellambda->ajouterClient($values);
 			
 			$idClient = $this->modellambda->lastId();
 			
 			$accredData = Array(
-				'idcategorie'		=> $this->input->post('categorie'),
+				'idcategorie'		=> $categorie,
 				'idevenement'		=> $event,
 				'idclient'			=> $idClient,
 				'etataccreditation'	=> ACCREDITATION_A_VALIDE
