@@ -76,19 +76,20 @@ class Zone extends Cafe {
 				'label'   => 'Nom', 
 				'rules'   => 'required'
 			),
-			// array (
-				// 'field'   => 'description',
-				// 'label'   => 'Description', 
-				// 'rules'   => ''
-			// )
+			array (
+				'field'   => 'code',
+				'label'   => 'Code de zone', 
+				'rules'   => 'required'
+			)
 		);
 		$this->form_validation->set_rules($config);
 		
+		$code	 = $this->input->post('code');
 		$libelle = $this->input->post('libelle');
 		
 		if ($this->form_validation->run() == true) {
 			// Ajout dans la base.
-			$this->modelzone->ajouterZone( $libelle );
+			$this->modelzone->ajouterZone( $libelle, $code );
 			
 			// Appel de la vue.
 			$data['titre']		= 'Ajout';
@@ -99,6 +100,7 @@ class Zone extends Cafe {
 		else {
 			
 			$values->libelle = $libelle;
+			$values->code	 = $code;
 			
 			$this->ajouter($values);
 		}
@@ -115,10 +117,12 @@ class Zone extends Cafe {
 		$data['id'] = $id;
 		
 		if($re) {
+			$data['code']	 = $re['code'];
 			$data['libelle'] = $re['libelle'];
 		}
 		else {
 			$reponse = $this->modelzone->getZoneById( $id );
+			$data['code'] 	 = $reponse[0]->codezone;
 			$data['libelle'] = $reponse[0]->libellezone;
 		}
 		
@@ -137,15 +141,21 @@ class Zone extends Cafe {
 				'field'   => 'libelle',
 				'label'   => 'Nom', 
 				'rules'   => 'required'
+			),
+			array (
+				'field'   => 'code',
+				'label'   => 'Code de zone', 
+				'rules'   => 'required'
 			)
 		);
 		$this->form_validation->set_rules($config);
 		
+		$code	 = $this->input->post('code');
 		$libelle = $this->input->post('libelle');
 		
 		if ($this->form_validation->run() == true) {
 			
-			$resultat = $this->modelzone->modifierZone( $id, $libelle );
+			$resultat = $this->modelzone->modifierZone( $id, $libelle, $code );
 			
 			$data['titre']		= 'Modification';
 			$data['message']	= 'Votre zone à bien été modifiée.';
@@ -154,9 +164,9 @@ class Zone extends Cafe {
 			
 		}
 		else {
-			$donnees['nom'] 		= $nom;
-			$donnees['datedebut'] 	= $datedebut;
-			$donnees['datefin'] 	= $datefin;
+			$donnees['code'] 		= $code;
+			$donnees['libelle'] 	= $libelle;
+			
 			$this->modifier($id, $donnees);
 		}
 	}

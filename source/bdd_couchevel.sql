@@ -148,6 +148,7 @@ create table courchevel_utilisateur
 create table courchevel_zone
 (
    idzone               bigint not null auto_increment,
+   codezone				varchar(5) not null,
    libellezone          text not null,
    primary key (idzone)
 ) engine = InnoDB, charset = utf8;

@@ -15,6 +15,7 @@
                 <thead>
 					
 					<tr>
+						<th>Code</th>
 						<th>Nom</th>
 						<th> </th>
 					</tr>
@@ -24,7 +25,9 @@
 					
                     <?php foreach ($resultats as $zone): ?>
 					<tr>
-						<td><?php echo $zone->libellezone?></td>
+						<td><?php echo $zone->codezone; ?></td>
+					
+						<td><?php echo $zone->libellezone; ?></td>
 						
 						<td><a href="<?php echo site_url('zone/voir/'.$zone->idzone ); ?>">Voir</a></td>
 				  </tr>
