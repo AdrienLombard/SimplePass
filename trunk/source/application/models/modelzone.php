@@ -26,13 +26,13 @@ class modelzone extends CI_Model{
 		
 	}
 	
-	public function ajouterZone( $libelle ) {
-		return $this->db->insert($this->tabZone, array('libellezone' => $libelle) );
+	public function ajouterZone( $libelle, $code ) {
+		return $this->db->insert($this->tabZone, array('libellezone' => $libelle, 'codezone' => $code) );
 	}
 	
 	
 	public function modifierZone( $idZone, $libelle ) {
-		return $this->db->update($this->tabZone, array( 'libellezone' => $libelle), 'idzone = '.$idZone);
+		return $this->db->update($this->tabZone, array( 'libellezone' => $libelle, 'codezone' => $code), 'idzone = '.$idZone);
 	}
 	
 	
