@@ -3,7 +3,7 @@
 
 class modelEvenement extends MY_Model {
 	
-	public function getEvenement(){
+	public function getEvenements(){
 		
 		return $this->db->get(DB_EVENEMENT)->result();
 	
@@ -27,11 +27,11 @@ class modelEvenement extends MY_Model {
 	 * @return l'id Evenement 
 	 */
 	public function getIdEvenement($libelle){
-		return $this->db->select('libelleevenement')
-						->form($this->tabEvenement)
-						->where('libelleevenement',$libelle)
-						->get()
-						->result();
+		   return $this->db->select('libelleevenement')
+				           ->form(DB_EVENEMENT)
+						   ->where('libelleevenement',$libelle)
+						   ->get()
+				           ->result();
 		
 	} 
 	
@@ -45,12 +45,13 @@ class modelEvenement extends MY_Model {
 	public function ajouter($libelle,$datedebut,$datefin){
 		
 		$data = array(
-			'libelleevenement' => $libelle ,
-			'datedebut' => $datedebut,
-			'datefin' =>$datefin
-		);
+		 	'libelleevenement' => $libelle,
+		 	'datedebut' => $datedebut,
+		 	'datefin' => $datefin
+		 );
 		
-		$this->db->insert($this->tabEvenement, $data); 
+		$this->db->insert(DB_EVENEMENT, $data);
+	
 	}
 	
 	/**
@@ -64,13 +65,13 @@ class modelEvenement extends MY_Model {
 	public function modifier($libelle, $datedebut, $datefin, $id){
 
 		$data = array(
-			'libelleevenement' => $libelle,
-			'datedebut' => $datedebut,
-			'datefin' => $datefin
-		);
-
-		$this->db->where('idevenement', $id);
-		$this->db->update($this->tabEvenement, $data);
+		 	'libelleevenement' => $libelle,
+		 	'datedebut' => $datedebut,
+		 	'datefin' => $datefin
+		 );
+		
+		 $this->db->where('idevenement', $id);
+		 $this->db->update(DB_EVENEMENT, $data);
 		
 	}
 	
@@ -81,9 +82,10 @@ class modelEvenement extends MY_Model {
 	 */
 	public function supprimer($id){
 		
+		 //$this->db->delete('evenement', $id);
 		$this->db->where('idevenement', $id);
-        $this->db->delete($this->tabEvenement);
-	
+        $this->db->delete(DB_EVENEMENT);
+			                  
 	}
 	
 }
