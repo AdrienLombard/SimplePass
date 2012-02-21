@@ -2,6 +2,10 @@
 
 class MY_Model extends CI_Model {
 	
+	public function __construct() {
+        parent::__construct();
+    }
+	
 	public function lastId() {
 		return $this->db->insert_id();
 	}

@@ -20,6 +20,14 @@ class modelClient extends MY_Model {
 		return $result[0];
 	}
 	
+	public function getClientsAvecAccred() {
+		return $this->db->select('*')
+							->from(DB_CLIENT . ' c')
+							->join(DB_ACCREDITATION . ' a', 'a.idclient = c.idclient')
+							->get()
+							->result();
+	}
+	
 	
 	/*
 	 * CREATE
