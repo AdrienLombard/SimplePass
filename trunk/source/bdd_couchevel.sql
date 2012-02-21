@@ -43,6 +43,7 @@ create table courchevel_accreditation
    idevenement          bigint not null,
    idclient				bigint not null,
    etataccreditation	tinyint not null,
+   dateaccreditation	bigint not null,
    primary key (idaccreditation)
 ) engine = InnoDB, charset = utf8;
 
