@@ -433,10 +433,10 @@ INSERT INTO courchevel_pays (idpays,nompays,indicatiftel) VALUES('YEM','Yémen',
 INSERT INTO courchevel_pays (idpays,nompays,indicatiftel) VALUES('ZMB','Zambie','260');
 INSERT INTO courchevel_pays (idpays,nompays,indicatiftel) VALUES('ZWE','Zimbabwe','263');
 
-insert into courchevel_zone (libellezone) values ('Espace presse');
-insert into courchevel_zone (libellezone) values ('Pied de la piste');
-insert into courchevel_zone (libellezone) values ('Salle de spectacle');
-insert into courchevel_zone (libellezone) values ('Salle de surveillance parkings');
+insert into courchevel_zone (codezone,libellezone) values ('1','Espace presse');
+insert into courchevel_zone (codezone,libellezone) values ('2','Pied de la piste');
+insert into courchevel_zone (codezone,libellezone) values ('3','Salle de spectacle');
+insert into courchevel_zone (codezone,libellezone) values ('4','Salle de surveillance parkings');
 
 insert into courchevel_evenement (libelleevenement,datedebut,datefin) values ('Championnats du monde de saut à ski d''été 2012','1341136800','1343728800');
 insert into courchevel_evenement (libelleevenement,datedebut,datefin) values ('Championnats du monde de slalom 2012','1354359600','1356001200');
