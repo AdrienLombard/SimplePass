@@ -78,6 +78,16 @@ create table courchevel_client
 ) engine = InnoDB, charset = utf8;
 
 /*==============================================================*/
+/* Table : categories_evenements                                          */
+/*==============================================================*/
+create table courchevel_categories_evenements
+(
+   idevenement          bigint not null,
+   idcategorie			bigint not null,
+   primary key (idevenement, idcategorie)
+) engine = InnoDB, charset = utf8;
+
+/*==============================================================*/
 /* Table : donne_acces                                          */
 /*==============================================================*/
 create table courchevel_donne_acces
@@ -97,6 +107,7 @@ create table courchevel_evenement
    descriptionevenement text,
    datedebut            bigint not null,
    datefin              bigint not null,
+   listezones			text not null,
    primary key (idevenement)
 ) engine = InnoDB, charset = utf8;
 
@@ -170,6 +181,12 @@ alter table courchevel_client add constraint fk_appartient foreign key (pays)
 	  
 alter table courchevel_client add constraint fk_referent foreign key (referent)
 	  references courchevel_client (idclient);
+	  
+alter table courchevel_categories_evenements add constraint fk_categories_evenements1 foreign key (idevenement)
+	  references courchevel_evenement (idevenement);
+
+alter table courchevel_categories_evenements add constraint fk_categories_evenements2 foreign key (idcategorie)
+	  references courchevel_categorie (idcategorie);	  
 
 alter table courchevel_donne_acces add constraint fk_donne_acces foreign key (idcategorie)
       references courchevel_categorie (idcategorie) on delete restrict on update restrict;
@@ -447,3 +464,14 @@ insert into courchevel_donne_acces (idcategorie,idzone) values (6,4);
 insert into courchevel_donne_acces (idcategorie,idzone) values (7,4);
 insert into courchevel_donne_acces (idcategorie,idzone) values (8,4);
 insert into courchevel_donne_acces (idcategorie,idzone) values (9,4);
+
+insert into courchevel_categories_evenements (idcategorie,idevenement) values (1,1);
+insert into courchevel_categories_evenements (idcategorie,idevenement) values (2,1);
+insert into courchevel_categories_evenements (idcategorie,idevenement) values (3,1);
+insert into courchevel_categories_evenements (idcategorie,idevenement) values (4,1);
+insert into courchevel_categories_evenements (idcategorie,idevenement) values (5,1);
+insert into courchevel_categories_evenements (idcategorie,idevenement) values (6,1);
+insert into courchevel_categories_evenements (idcategorie,idevenement) values (7,1);
+insert into courchevel_categories_evenements (idcategorie,idevenement) values (8,1);
+insert into courchevel_categories_evenements (idcategorie,idevenement) values (9,1);
+insert into courchevel_categories_evenements (idcategorie,idevenement) values (10,1);
