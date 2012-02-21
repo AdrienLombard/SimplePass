@@ -46,7 +46,7 @@ class Zone extends Cafe {
 		$this->layout->ajouter_css('utilisateur/details');
 		
 		// Récupération des données sur la données corréspondant a l'id.
-		$data['resultats']=$this->modelzone->getZoneById( $id );;
+		$data['resultats']=$this->modelzone->getZoneParId( $id );;
 		$data['id'] = $id;
 		
 		// Appelle de la vue.
@@ -121,7 +121,7 @@ class Zone extends Cafe {
 			$data['libelle'] = $re['libelle'];
 		}
 		else {
-			$reponse = $this->modelzone->getZoneById( $id );
+			$reponse = $this->modelzone->getZoneParId( $id );
 			$data['code'] 	 = $reponse[0]->codezone;
 			$data['libelle'] = $reponse[0]->libellezone;
 		}
