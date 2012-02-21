@@ -1,6 +1,6 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class modelLambda extends CI_Model {
+class modelLambda extends MY_Model {
 	
 	private $tableClient 	= 'courchevel_client';
 	

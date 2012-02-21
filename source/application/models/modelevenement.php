@@ -1,30 +1,26 @@
 <?php
  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class modelEvenement extends CI_Model{
-	  
-	private $tabEvenement= 'courchevel_evenement';
+class modelEvenement extends MY_Model {
+	
+	public function getEvenement(){
+		return $this->db->get(DB_EVENEMENT)->result();
+			
+	}
 	
 	/**
 	 * Fonction pour recuperer un evenement
 	 * @return un Evenement pour un id d'evenement
 	 */
-	public function getEvenementid($id){
+	public function getEvenementParId($id){
 		return $this->db->select('*')
-							->from($this->tabEvenement)
+							->from(DB_EVENEMENT)
 				            ->where('idevenement',$id)
 							->get()
 							->result();
 			
 	}
 	
-	public function getEvenement(){
-		return $this->db->select('*')
-							->from($this->tabEvenement)
-							->get()
-							->result();
-			
-	}
 	/**
 	 * Fonction pour recuperer l'id d'un evenement
 	 * @return l'id Evenement 
@@ -42,7 +38,7 @@ class modelEvenement extends CI_Model{
 	 * Supprimer l'evenement
 	 * 
 	 */
-	public function supprimerEvenement($id){
+	public function supprimer($id){
 		
 		//$this->db->delete('evenement', $id);
 		$this->db->where('idevenement', $id);
@@ -57,7 +53,7 @@ class modelEvenement extends CI_Model{
 	 * @param unknown_type $datedebut
 	 * @param unknown_type $datefin
 	 */
-	public function ajouterEvenement($libelle,$datedebut,$datefin){
+	public function ajouter($libelle,$datedebut,$datefin){
 		    
 		$data = array(
                            'libelleevenement' => $libelle ,
@@ -77,7 +73,7 @@ class modelEvenement extends CI_Model{
 	 * @param unknown_type $datefin
 	 * @param unknown_type $id
 	 */
-	public function modifierEvenement($libelle,$datedebut,$datefin,$id){
+	public function modifier($libelle,$datedebut,$datefin,$id){
 		
 		 
 		 $data = array(
@@ -89,10 +85,6 @@ class modelEvenement extends CI_Model{
 		 $this->db->where('idevenement', $id);
 		 $this->db->update($this->tabEvenement, $data);
 			                  
-	}
-	
-	public function lastId() {
-		return $this->db->insert_id();
 	}
 	
 }

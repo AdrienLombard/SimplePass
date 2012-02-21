@@ -1,27 +1,79 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class modelAccreditation extends CI_Model {
+class modelAccreditation extends MY_Model {
 	
-	private $tableAccreditation 	= 'courchevel_accreditation';
-	private $tableCategorie			= 'courchevel_categorie';
-	private $tableEvenement			= 'courchevel_evenement';
-	private $tableClient			= 'courchevel_client';
 	
-	public function getAccreditation() {
+	/*
+	 * READ
+	 */
+
+	public function getAccreditations() {
 		return $this->db->select('*')
-						->from($this->tableAccreditation . ' a')
-						->join($this->tableClient . ' cl', 'a.idclient = cl.idclient')
-						->join($this->tableCategorie . ' ca', 'a.idcategorie = ca.idcategorie')
+						->from(DB_ACCREDITATION . ' a')
+						->join(DB_CLIENT . ' cl', 'a.idclient = cl.idclient')
+						->join(DB_CATEGORIE . ' ca', 'a.idcategorie = ca.idcategorie')
+						->get()
+						->result();
+	}
+
+	
+	public function getAccreditationParId($id) {
+		$result = $this->db->select('*')
+							->from(DB_ACCREDITATION . ' a')
+							->join(DB_CLIENT . ' cl', 'a.idclient = cl.idclient')
+							->join(DB_CATEGORIE . ' ca', 'a.idcategorie = ca.idcategorie')
+							->where('a.idaccreditation', $id)
+							->get()
+							->result();
+		return $result[0];
+	}
+	
+	public function getAccreditationsParEvenement($idEvenement) {
+		return $this->db->select('*')
+						->from(DB_ACCREDITATION . ' a')
+						->join(DB_CLIENT . ' cl', 'a.idclient = cl.idclient')
+						->join(DB_CATEGORIE . ' ca', 'a.idcategorie = ca.idcategorie')
+						->where('a.idevenement', $idEvenement)
 						->get()
 						->result();
 	}
 	
-	public function ajouter($values) {
-		$this->db->insert($this->tableAccreditation, $values);
+	public function getAccreditationsParClient($idClient) {
+		return $this->db->select('*')
+						->from(DB_ACCREDITATION . ' a')
+						->join(DB_CLIENT . ' cl', 'a.idclient = cl.idclient')
+						->join(DB_CATEGORIE . ' ca', 'a.idcategorie = ca.idcategorie')
+						->where('a.idclient', $idClient)
+						->get()
+						->result();
 	}
 	
-	public function lastId() {
-		return $this->db->insert_id();
+	
+	/*
+	 * CREATE
+	 */
+	
+	public function ajouter($values) {
+		$this->db->insert(DB_ACCREDITATION, $values);
+		return $this->lastId();
+	}
+	
+	
+	/*
+	 * UPDATE
+	 */
+	
+	public function modifier($id, $values) {
+		$this->db->update(DB_ACCREDITATION, $values, array('idaccreditation = ' . $id));
+	}
+	
+	
+	/*
+	 * DELETE
+	 */
+	
+	public function supprimer($id) {
+		$this->db->delete(DB_ACCREDITATION, array('idaccreditation = ' . $id));
 	}
 	
 }
