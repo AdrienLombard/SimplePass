@@ -3,7 +3,10 @@
 <div class="wrap">
 
     <div class="tabs">
-        <a href="<?php echo site_url('accreditation/index'); ?>" class="current">Liste des demandes</a>
+        <a href="<?php echo site_url('accreditation/index'); ?>">Recherche</a>
+		<a href="<?php echo site_url('accreditation/index'); ?>" class="current">Liste</a>
+		<a href="<?php echo site_url('accreditation/index'); ?>">Ajout</a>
+		<a href="<?php echo site_url('accreditation/index'); ?>">Demandes</a>
     </div>
 
     <div class="box-full">
@@ -14,8 +17,7 @@
                 <thead>
 					
 					<tr>
-						<th>Nom</th>
-						<th>Prénom</th>
+						<th>Personne</th>
 						<th>Pays</th>
 						<th>Catégorie</th>
 					</tr>
@@ -25,8 +27,7 @@
 					
                     <?php foreach ($accreditations as $accreditation): ?>
 					<tr>
-						<td><?php echo $accreditation->nom ?></td>
-                        <td><?php echo $accreditation->prenom ?></td> 
+						<td><?php echo $accreditation->nom . ' ' . $accreditation->prenom ?></td>
 						<td><?php echo $accreditation->pays ?></td>
                         <td><?php echo $accreditation->libellecategorie ?> </td>
 					</tr>

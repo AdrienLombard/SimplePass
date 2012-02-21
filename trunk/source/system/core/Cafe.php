@@ -43,6 +43,7 @@ class Cafe extends CI_Controller {
 	 * Remapage de l'URL, permet de vérifier la sécurité en amont
 	 * @param $method : nom de la méthode demandée
 	 * @param @args 
+	 * @auteur : Aymeric hahahahahaha !
 	 */
 	public function _remap($method, $args = null) {
 		// on lance la méthode si : méthode sécurisé & user loggé ou méthode non sécurisé

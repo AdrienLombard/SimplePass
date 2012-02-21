@@ -36,12 +36,27 @@ define('FOPEN_READ_WRITE_CREATE',				'a+b');
 define('FOPEN_WRITE_CREATE_STRICT',				'xb');
 define('FOPEN_READ_WRITE_CREATE_STRICT',		'x+b');
 
+
 /*
- * Mise en place des constantes pour l'état d'une accréditation.
+ * Mise en place des constantes pour l'Ã©tat d'une accrÃ©ditation.
  */
 define('ACCREDITATION_A_VALIDE', 1);
 define('ACCREDITATION_VALIDE', 0);
 
+
+/*
+ * Nom des tables de la bdd
+ */
+define('DB_ACCREDITATION',	'courchevel_accreditation');
+define('DB_CATEGORIE',		'courchevel_categorie');
+define('DB_CLIENT',			'courchevel_client');
+define('DB_DONNE_ACCES',	'courchevel_donne_acces');
+define('DB_EVENEMENT',		'courchevel_evenement');
+define('DB_PAYS',			'courchevel_pays');
+define('DB_PERMET',			'courchevel_permet');
+define('DB_POSSEDE',		'courchevel_possede');
+define('DB_UTILISATEUR',	'courchevel_utilisateur');
+define('DB_ZONE',			'courchevel_zone');
 
 
 /* End of file constants.php */
