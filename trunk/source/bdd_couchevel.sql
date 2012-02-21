@@ -39,7 +39,7 @@ drop table if exists courchevel_zone;
 create table courchevel_accreditation
 (
    idaccreditation      bigint not null auto_increment,
-   idcategorie          bigint not null,
+   idcategorie          bigint,
    idevenement          bigint not null,
    idclient				bigint not null,
    etataccreditation	tinyint not null,
