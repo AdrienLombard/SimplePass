@@ -2,7 +2,7 @@
  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class modelZone extends MY_Model {
-	  
+	
 	public function getZones() {
 		return $this->db->select('*')
 						->from(DB_ZONE)
@@ -10,11 +10,12 @@ class modelZone extends MY_Model {
 						->result();
 			
 	}
+	
 	/**
 	 * Fonction pour recuperer l'id d'un evenement
 	 * @return l'id Evenement 
 	 */
-	public function getZoneById( $idZone ) {
+	public function getZoneParId( $idZone ) {
 	   return $this->db->select('*')
 					   ->from(DB_ZONE)
 					   ->where('idzone', $idZone)
