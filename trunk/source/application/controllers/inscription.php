@@ -38,7 +38,7 @@ class Inscription extends Chocolat {
 		$this->layout->ajouter_js('lambda/script');
 		
 		// On récupère la liste des évènements.
-		$data['events'] = $this->modelevenement->getEvenement();
+		$data['events'] = $this->modelevenement->getEvenements();
 		
 		// On charge la vue pour cette même page.
 		$this->layout->view('lambda/LAccueil', $data);
@@ -116,7 +116,7 @@ class Inscription extends Chocolat {
 			
 			$data['event_id'] = $event;
 			
-			$data['event_info'] = $this->modelevenement->getEvenementid($event);
+			$data['event_info'] = $this->modelevenement->getEvenementParId($event);
 			
 			$data['listePays'] = $this->modellambda->listePays();
 			

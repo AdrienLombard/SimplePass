@@ -9,7 +9,7 @@ class Cafe extends CI_Controller {
         parent::__construct();
 		
 		// debug
-		//$this->output->enable_profiler(true);
+		$this->output->enable_profiler(true);
 		
 		// theme du layout
 		$this->layout->set_theme('layoutCafe');

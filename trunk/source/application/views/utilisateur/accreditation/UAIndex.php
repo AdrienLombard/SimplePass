@@ -4,7 +4,6 @@
 
     <div class="tabs">
 		<a href="<?php echo site_url('accreditation/index'); ?>" class="current">Liste</a>
-		<a href="<?php echo site_url('accreditation/index'); ?>">Demandes</a>
 		<a href="<?php echo site_url('accreditation/ajout'); ?>">Ajouter</a>
     </div>
 
@@ -15,11 +14,12 @@
             <b>Recherche :</b>
 			<input type="text" class="search" />
 			
-			<b>Evènement :</b><br />
-            <select class="select">
-				<option>Tous</option>
-				<option>Champignon de mario</option>
-			</select>
+			<b>Filtre :</b>
+            <ul>
+				<li>Tous</li>
+				<li>Validée</li>
+				<li>Demandes</li>
+			</ul>
 
         </aside>
 		
@@ -31,18 +31,23 @@
 					<tr>
 						<th>Personne</th>
 						<th>Pays</th>
-						<th colspan="2">Dernière accréditation</th>
+						<th>Date</th>
+						<th>Catégorie</th>
+						<th>Etat</th>
+						<th></th>
 					</tr>
 					
                 </thead>
                 <tbody>
 					
-                    <?php foreach ($clients as $client): ?>
+                    <?php foreach ($accreds as $accred): ?>
 					<tr>
-						<td><?php echo $client->nom . ' ' . $client->prenom ?></td>
-						<td><?php echo $client->pays ?></td>
-                        <td>Date</td>
-						<td><?php echo ($client->etataccreditation == 1)? 'Demande' : $client->libellecategorie ?> </td>
+						<td><?php echo $accred->nom . ' ' . $accred->prenom ?></td>
+						<td><?php echo $accred->pays ?></td>
+                        <td></td>
+						<td><?php echo $accred->libellecategorie; ?></td>
+						<td><?php echo ($accred->etataccreditation == 1)? 'Demande' : 'Validée' ?> </td>
+						<td><a href="<?php echo site_url('accreditation/voir'); ?>">Voir</a></td>
 					</tr>
                     <?php endforeach; ?>
 					

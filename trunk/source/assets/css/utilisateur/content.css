@@ -98,8 +98,14 @@ table.liste tr th {
     font-weight: normal;
 	margin: 0;
 }
+table.liste tr th:first-child {
+    text-align: left;
+	padding-left: 15px;
+}
 table.liste tr td:first-child {
     border-left: 1px solid #CCC;
+	text-align: left;
+	padding-left: 15px;
 }
 table.liste tr td:last-child {
     border-right: 1px solid #CCC;
