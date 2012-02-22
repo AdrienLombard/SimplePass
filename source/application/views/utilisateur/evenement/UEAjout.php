@@ -38,7 +38,21 @@
 				
 				<label>Date fin</label>
 				<input type="text" id="datepicker-fin" name="datefin" value="<?php if($info) echo $info->dateFin; ?>" READONLY="READONLY" />
-				
+
+				</br>
+				<label>Voulez-vous télécharger une ancienne évenement ? </label>
+				</br>
+
+				<div class="encadrer" >
+					<input type=radio class="choix" name="choix" value="Non"  checked="checked" >Non
+					<input type=radio class="choix" name="choix" value="Oui"  >Oui
+				</div>
+				</br>
+				<select name="evenements">
+					<?php foreach ($resultats as $evenement): { ?>
+							<option value="<?php echo $evenement->idevenement ?> "><?php echo $evenement->libelleevenement ?></option>
+					<?php } endforeach; ?>
+				</select>
 				<input type="submit" name="valider" />
 				
 			</form>
