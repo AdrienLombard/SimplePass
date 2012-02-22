@@ -34,7 +34,6 @@ class Evenement extends Cafe {
 		$this->layout->view('utilisateur/evenement/UEIndex', $data);
 	}
 	
-	
 	/**
 	 * Méthode Read du CRUD.
 	 * @param  $id : Id de la données à afficher.
@@ -57,6 +56,7 @@ class Evenement extends Cafe {
 	public function ajouter($values='') {
 		
 		// Traitement.
+		$data['resultats']=$this->modelevenement->getEvenement();
 		$data['info'] = $values;
 		
 		// Appel de la vue.
