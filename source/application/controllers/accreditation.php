@@ -10,6 +10,7 @@ class Accreditation extends Cafe {
 		$this->load->model('modelaccreditation');
 		
 		$this->layout->ajouter_css('utilisateur/accreditation');
+		$this->layout->ajouter_js('utilisateur/CRUDAccred');
 		
 	}
 
