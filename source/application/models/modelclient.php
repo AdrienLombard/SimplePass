@@ -24,6 +24,7 @@ class modelClient extends MY_Model {
 		return $this->db->select('*')
 							->from(DB_CLIENT . ' c')
 							->join(DB_ACCREDITATION . ' a', 'a.idclient = c.idclient')
+							->join(DB_CATEGORIE . ' ca', 'a.idcategorie = ca.idcategorie')
 							->get()
 							->result();
 	}

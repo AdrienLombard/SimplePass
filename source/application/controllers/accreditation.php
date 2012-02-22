@@ -9,13 +9,14 @@ class Accreditation extends Cafe {
 		
 		$this->load->model('modelaccreditation');
 		
+		$this->layout->ajouter_css('utilisateur/accreditation');
+		
 	}
 
 
 	public function index() {
 		
-		$this->load->model('modelclient');
-		$data['clients'] = $this->modelclient->getClientsAvecAccred();
+		$data['accreds'] = $this->modelaccreditation->getAccreditationsParEvenement(1);
 		$this->layout->view('utilisateur/accreditation/UAIndex', $data);
 		
 	}
@@ -27,9 +28,31 @@ class Accreditation extends Cafe {
 		
 	}
 	
-	public function ajout() {
+	public function voir() {
+		
+		$this->layout->view('utilisateur/accreditation/UAVoir');
+		
+	}
+	
+	public function ajouter() {
 		
 		$this->layout->view('utilisateur/accreditation/UAAjout');
+		
+	}
+	
+	public function ajouterClient() {
+		
+	}
+	
+	public function exeAjouterClient() {
+		
+	}
+	
+	public function ajouterAccreditation() {
+		
+	}
+	
+	public function exeAjouterAccreditation() {
 		
 	}
 

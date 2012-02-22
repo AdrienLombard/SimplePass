@@ -31,8 +31,8 @@ class modelAccreditation extends MY_Model {
 	public function getAccreditationsParEvenement($idEvenement) {
 		return $this->db->select('*')
 						->from(DB_ACCREDITATION . ' a')
-						->join(DB_CLIENT . ' cl', 'a.idclient = cl.idclient')
-						->join(DB_CATEGORIE . ' ca', 'a.idcategorie = ca.idcategorie')
+						->join(DB_CLIENT . ' cl', 'a.idclient = cl.idclient', 'left')
+						->join(DB_CATEGORIE . ' ca', 'a.idcategorie = ca.idcategorie', 'left')
 						->where('a.idevenement', $idEvenement)
 						->get()
 						->result();
