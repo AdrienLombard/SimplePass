@@ -44,6 +44,7 @@ create table courchevel_accreditation
    idcategorie          bigint,
    idevenement          bigint not null,
    idclient				bigint not null,
+   fonction             text default null,
    etataccreditation	tinyint not null,
    dateaccreditation	bigint not null,
    primary key (idaccreditation)
@@ -71,7 +72,6 @@ create table courchevel_client
    prenom               varchar(50) not null,
    civilite             varchar(10) not null,
    organisme            varchar(100) default null,
-   role                 text default null,
    tel                  varchar(25) default null,
    mail                 text default null,
    groupe				varchar(50) default null,
@@ -81,7 +81,7 @@ create table courchevel_client
 ) engine = InnoDB, charset = utf8;
 
 /*==============================================================*/
-/* Table : categories_evenements                                          */
+/* Table : categories_evenements                                */
 /*==============================================================*/
 create table courchevel_categories_evenements
 (
