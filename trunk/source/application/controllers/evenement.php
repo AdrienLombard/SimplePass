@@ -6,7 +6,12 @@ class Evenement extends Cafe {
 	public function __construct() {
 		parent::__construct();
 		
+		// Chargement des modeles.
 		$this->load->model('modelevenement');
+		$this->load->model('modelzone');
+		$this->load->model('modelcategorie');
+		
+		
 		$this->load->library('form_validation');
 		$this->layout->ajouter_js('utilisateur/scriptDate');
 		
@@ -64,6 +69,7 @@ class Evenement extends Cafe {
 		
 	}
 	
+	
 	/**
 	 * Méthode de traitement pour l'ajout.
 	 */
@@ -97,11 +103,13 @@ class Evenement extends Cafe {
 		
 		if ($this->form_validation->run() == true && $datedebutTstmp < $datefinTstmp) {
 			
-			$data['titre']		= 'Ajout';
-			$data['message']	= 'Votre évènement à bien été ajouté.';
-			$data['redirect'] 	= 'evenement/liste';
-			$this->modelevenement->ajouter( $nom,$datedebutTstmp,$datefinTstmp);
-			$this->layout->view('utilisateur/UMessage', $data);	 
+			$idEvenement = $this->input->post('choix');
+			
+			// $this->modelevenement->ajouter( $nom, $datedebutTstmp, $datefinTstmp);
+			
+			$id = $this->modelevenement->lastId();
+			
+			$this->donnes( $id, $idEvenement );
 		}
 		else {
 			
@@ -113,7 +121,45 @@ class Evenement extends Cafe {
 			$this->ajouter($values);
 		}
 	}
+	
 
+	/**
+	 * Fonction pour mettre les zones et les catégories liées à notre évènement.
+	 */
+	public function donnes( $id, $idEvenement=0 ) {
+		
+		$data['listeZones'] = $this->modelzone->getZoneParEvenement( $idEvenement );
+		
+		if($idEvenement != 0) {
+			// On traite la récupération des catégorie de l'évènement modèle.
+			$categories = $this->modelcategorie->getCategorieDansEvenement( $idEvenement );
+			$data['listeCategorie']		= $categories;
+			
+			// on construit un tableau avec les id des catégorie pour récupérer tous les couples zone/catégorie.
+			$idCategorie = Array();
+			foreach($categories as $cate) {
+				$idcategorie[] = $cate->idcategorie;
+			}
+			$categoriesZones = $this->modelzone->getZoneParIdMultiple ( $idcategorie );
+			
+			// On construit le tableau qui va organisé les zones et les catégories.
+			$listeCatgorieZone = Array();
+			foreach($categoriesZones as $categorie) {
+				$listeCatgorieZone[$categorie->idcategorie][$categorie->idzone] = 1;
+			}
+			
+			$data['listeCatgorieZone'] 	= $listeCatgorieZone;
+			
+			// On traite la récupération des infos sur les zones.
+			
+			
+			
+		}
+		
+		$this->layout->view('utilisateur/evenement/UEAjout2', $data);
+		
+	}
+	
 	
 	/**
 	 * Méthode Update du CRUD.

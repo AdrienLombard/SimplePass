@@ -3,7 +3,7 @@
 
 class modelEvenement extends MY_Model {
 	
-	public function getEvenements(){
+	public function getEvenement(){
 		
 		return $this->db->get(DB_EVENEMENT)->result();
 	
