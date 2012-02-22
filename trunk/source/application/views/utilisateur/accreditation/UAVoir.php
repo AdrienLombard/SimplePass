@@ -40,18 +40,24 @@
 					
 				</div>
 				
-				<div class="infos">
+				<form class="infos">
 					
-					<div class="nom">M. ASSIER Aymeric</div>
-					<div class="pays">FRA</div>
+					<input type="text" class="nom" init="M. ASSIER Aymeric" value="M. ASSIER Aymeric">
+					<select class="pays" init="FRA" style="background: url(<?php echo img_url('drapeaux/fra.gif'); ?>) no-repeat left; padding-left: 15px">
+						<option value="FRA" style="background: url(<?php echo img_url('drapeaux/fra.gif'); ?>) no-repeat left;" selected>FRA</option>
+						<option value="DEU" style="background: url(<?php echo img_url('drapeaux/deu.gif'); ?>) no-repeat left;">DEU</option>
+						<option value="ITA" style="background: url(<?php echo img_url('drapeaux/ita.gif'); ?>) no-repeat left;">ITA</option>
+					</select>
 					
-					<div class="organisme">Entreprise beta</div>
-					<div class="role">CEO</div>
+					<input type="text" class="organisme" init="Entreprise beta" value="Entreprise beta">
+					<input type="text" class="role" init="CEO" value="CEO">
 					
-					<div class="tel">+33 (0)6 87 07 27 25</div>
-					<div class="email">aymeric.assier@gmail.com</div>
+					<input type="text" class="tel" init="+33 (0)6 87 07 27 25" value="+33 (0)6 87 07 27 25">
+					<input type="text" class="email" init="aymeric.assier@gmail.com" value="aymeric.assier@gmail.com">
 					
-				</div>
+					<input type="submit" class="valideInfos" value="Enregistrer les modifications" />
+					
+				</form>
 				
 				<div class="clear"></div>
 				
@@ -59,13 +65,13 @@
 			
 			<div class="listeAccred">
 				
-				<h3>Historique</h3>
+				<h3>En cours</h3>
 				
 				<form class="accredForm">
 					
 				</form>
 				
-				<div class="ligneAccred">
+				<div class="ligneAccred close">
 					<span class="date">2012-02-16</span>
 					<span class="categorie">Press TV</span>
 					<span class="evenement">Coupe du monde de saut à ski</span>
@@ -135,11 +141,15 @@
 					
 				</div>
 				
+				
+				<h3>Historique</h3>
+				
 				<div class="ligneAccred close">
 					<span class="date">2011-05-21</span>
 					<span class="categorie">Press TV</span>
 					<span class="evenement">Coupe du monde de saut à ski</span>
 					<span class="etat">Validée</span>
+					<div class="detailZones">Zones : 1, 2, 3, 4, 8, 10, 11</div>
 				</div>
 				
 			</div>
