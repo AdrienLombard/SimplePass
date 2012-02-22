@@ -20,13 +20,23 @@ class modelCategorie extends CI_Model {
 						->get()
 						->result();
 	}
+	
 	public function getCategorieMereid($id) {
-		
 		return $this->db->select('*')
 						->from($this->tableCategorie)
 						->where('idcategorie',$id)
 						->get()
 						->result();
+	}
+	
+	public function getCategorieDansEvenement( $idEvenement ) {
+		return $this->db->select('*')
+						->from(DB_CATEGORIE . ' c')
+						->join(DB_CATEGORIE_EVENEMENT . ' ca', 'ca.idcategorie = c.idcategorie')
+						->where('idevenement',$idEvenement)
+						->get()
+						->result();
+		
 	}
 	
 	

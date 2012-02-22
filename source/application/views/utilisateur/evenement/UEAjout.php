@@ -53,7 +53,7 @@
 							<option value="<?php echo $evenement->idevenement ?> "><?php echo $evenement->libelleevenement ?></option>
 					<?php } endforeach; ?>
 				</select>
-				<input type="submit" name="valider" />
+				<input type="submit" name="suivant" value="Suivant" />
 				
 			</form>
 			 
