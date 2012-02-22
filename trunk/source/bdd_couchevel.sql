@@ -33,6 +33,8 @@ drop table if exists courchevel_utilisateur;
 
 drop table if exists courchevel_zone;
 
+drop table if exists courchevel_zones_evenement;
+
 /*==============================================================*/
 /* Table : accreditation                                        */
 /*==============================================================*/
@@ -160,8 +162,18 @@ create table courchevel_utilisateur
 create table courchevel_zone
 (
    idzone               bigint not null auto_increment,
-   codezone				varchar(5) not null,
    libellezone          text not null,
+   primary key (idzone)
+) engine = InnoDB, charset = utf8;
+
+/*==============================================================*/
+/* Table : zones_evenement                                      */
+/*==============================================================*/
+create table courchevel_zones_evenement
+(
+   idzone               bigint not null,
+   idevenement			bigint not null,
+   codezone				varchar(5) not null,
    primary key (idzone)
 ) engine = InnoDB, charset = utf8;
 
@@ -392,13 +404,18 @@ INSERT INTO courchevel_pays (idpays,nompays,indicatiftel) VALUES('YEM','Yémen',
 INSERT INTO courchevel_pays (idpays,nompays,indicatiftel) VALUES('ZMB','Zambie','260');
 INSERT INTO courchevel_pays (idpays,nompays,indicatiftel) VALUES('ZWE','Zimbabwe','263');
 
-insert into courchevel_zone (codezone,libellezone) values ('1','Espace presse');
-insert into courchevel_zone (codezone,libellezone) values ('2','Pied de la piste');
-insert into courchevel_zone (codezone,libellezone) values ('3','Salle de spectacle');
-insert into courchevel_zone (codezone,libellezone) values ('4','Salle de surveillance parkings');
+insert into courchevel_zone (libellezone) values ('Espace presse');
+insert into courchevel_zone (libellezone) values ('Pied de la piste');
+insert into courchevel_zone (libellezone) values ('Salle de spectacle');
+insert into courchevel_zone (libellezone) values ('Salle de surveillance parkings');
 
 insert into courchevel_evenement (libelleevenement,datedebut,datefin) values ('Championnats du monde de saut à ski d''été 2012','1341136800','1343728800');
 insert into courchevel_evenement (libelleevenement,datedebut,datefin) values ('Championnats du monde de slalom 2012','1354359600','1356001200');
+
+insert into courchevel_zones_evenement values (1,1,'1');
+insert into courchevel_zones_evenement values (2,1,'2');
+insert into courchevel_zones_evenement values (3,1,'3');
+insert into courchevel_zones_evenement values (4,1,'4');
 
 insert into courchevel_categorie (libellecategorie) values ('Presse');
 insert into courchevel_categorie (surcategorie,libellecategorie) values (1,'Presse TV');
