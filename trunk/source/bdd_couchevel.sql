@@ -165,48 +165,6 @@ create table courchevel_zone
    primary key (idzone)
 ) engine = InnoDB, charset = utf8;
 
-alter table courchevel_accreditation add constraint fk_depend foreign key (idcategorie)
-      references courchevel_categorie (idcategorie) on delete restrict on update restrict;
-
-alter table courchevel_accreditation add constraint fk_valable foreign key (idevenement)
-      references courchevel_evenement (idevenement) on delete restrict on update restrict;
-	  
-alter table courchevel_accreditation add constraint fk_client foreign key (idclient)
-	  references courchevel_client (idclient) on delete restrict on update restrict;
-
-alter table courchevel_categorie add constraint fk_contient foreign key (surcategorie)
-      references courchevel_categorie (idcategorie);
-
-alter table courchevel_client add constraint fk_appartient foreign key (pays)
-      references courchevel_pays (idpays) on delete restrict on update restrict;
-	  
-alter table courchevel_client add constraint fk_referent foreign key (referent)
-	  references courchevel_client (idclient);
-	  
-alter table courchevel_categories_evenements add constraint fk_categories_evenements1 foreign key (idevenement)
-	  references courchevel_evenement (idevenement);
-
-alter table courchevel_categories_evenements add constraint fk_categories_evenements2 foreign key (idcategorie)
-	  references courchevel_categorie (idcategorie);	  
-
-alter table courchevel_donne_acces add constraint fk_donne_acces foreign key (idcategorie)
-      references courchevel_categorie (idcategorie) on delete restrict on update restrict;
-
-alter table courchevel_donne_acces add constraint fk_donne_acces2 foreign key (idzone)
-      references courchevel_zone (idzone) on delete restrict on update restrict;
-
-alter table courchevel_permet add constraint fk_permet foreign key (idaccreditation)
-      references courchevel_accreditation (idaccreditation) on delete restrict on update restrict;
-
-alter table courchevel_permet add constraint fk_permet2 foreign key (idzone)
-      references courchevel_zone (idzone) on delete restrict on update restrict;
-
-alter table courchevel_possede add constraint fk_possede foreign key (idaccreditation)
-      references courchevel_accreditation (idaccreditation) on delete restrict on update restrict;
-
-alter table courchevel_possede add constraint fk_possede2 foreign key (idclient)
-      references courchevel_client (idclient) on delete restrict on update restrict;
-
 insert into courchevel_utilisateur (login,mdp) values ('root', 'root');
 
 INSERT INTO courchevel_pays (idpays,nompays,indicatiftel) VALUES('AFG','Afghanistan','93');
