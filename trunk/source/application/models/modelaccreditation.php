@@ -43,7 +43,19 @@ class modelAccreditation extends MY_Model {
 						->from(DB_ACCREDITATION . ' a')
 						->join(DB_CLIENT . ' cl', 'a.idclient = cl.idclient')
 						->join(DB_CATEGORIE . ' ca', 'a.idcategorie = ca.idcategorie')
+						->join(DB_EVENEMENT . ' e', 'e.idevenement = a.idevenement')
 						->where('a.idclient', $idClient)
+						->get()
+						->result();
+	}
+	
+	public function getAccreditationsEnAttente( $idEvenement ) {
+		return $this->db->select('*')
+						->from(DB_ACCREDITATION . ' a')
+						->join(DB_CLIENT . ' cl', 'a.idclient = cl.idclient', 'left')
+						->join(DB_CATEGORIE . ' ca', 'a.idcategorie = ca.idcategorie', 'left')
+						->where('a.idevenement', $idEvenement)
+						->where('a.etataccreditation', ACCREDITATION_A_VALIDE)
 						->get()
 						->result();
 	}

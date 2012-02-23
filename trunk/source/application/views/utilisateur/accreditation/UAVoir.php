@@ -148,13 +148,19 @@
 				
 				<h3>Historique</h3>
 				
-				<div class="ligneAccred close">
-					<span class="date">2011-05-21</span>
-					<span class="categorie">Press TV</span>
-					<span class="evenement">Coupe du monde de saut à ski</span>
-					<span class="etat">Validée</span>
-					<div class="detailZones">Zones : 1, 2, 3, 4, 8, 10, 11</div>
-				</div>
+				<?php foreach($accredValide as $accred): ?>
+					<div class="ligneAccred close">
+						<span class="date"><?php echo $accred->dateaccreditation; ?></span>
+						<span class="categorie"><?php echo $accred->libellecategorie; ?></span>
+						<span class="evenement"><?php echo $accred->libelleevenement; ?></span>
+						<div class="detailZones">
+							Zones : 
+							<?php foreach($listeZonesAccred[$accred->idaccreditation] as $zone => $value): ?>
+								<?php echo $zone . ','; ?>
+							<?php endforeach; ?>
+						</div>
+					</div>
+				<?php endforeach; ?>
 				
 			</div>
 			

@@ -24,10 +24,10 @@ class modelZone extends MY_Model {
 		
 	}
 	
-	public function getZoneParIdMultiple ( $idZone ) {
+	public function getZoneParIdMultiple ( $idCategorie ) {
 		$where = '';
 		$k = true;
-		foreach($idZone as $id) {
+		foreach($idCategorie as $id) {
 			if($k) {
 				$where .= 'idcategorie = ' . $id;
 				$k = false;
@@ -45,6 +45,27 @@ class modelZone extends MY_Model {
 
 	}
 	
+	public function getZoneParAccreditationMultiple ( $idAccred ) {
+		$where = '';
+		$k = true;
+		foreach($idAccred as $id) {
+			if($k) {
+				$where .= 'idaccreditation = ' . $id;
+				$k = false;
+			}
+			else {
+				$where .= ' OR idaccreditation = ' . $id;
+			}
+		}
+		
+		return $this->db->select('*')
+						->from(DB_PERMET)
+						->where($where)
+						->get()
+						->result();
+
+	}
+	
 	
 	public function getZoneParEvenement( $idEvenement ) {
 		return $this->db->select('*')
@@ -54,6 +75,7 @@ class modelZone extends MY_Model {
 					   ->get()
 					   ->result();
 	}
+	
 	
 	public function ajouter($libelle ) {
 		return $this->db->insert(DB_ZONE, array('libellezone' => $libelle) );
