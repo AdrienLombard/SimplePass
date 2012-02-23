@@ -38,7 +38,7 @@ class Evenement extends Cafe {
 		$this->layout->ajouter_css('utilisateur/liste');
 		
 		// RÃƒÂ©cupÃƒÂ©ration des donnÃƒÂ©es dans la base.
-		$data['resultats']=$this->modelevenement->getEvenement();
+		$data['resultats']=$this->modelevenement->getEvenements();
 		
 		// Appelle de la vue.
 		$this->layout->view('utilisateur/evenement/UEIndex', $data);
@@ -66,7 +66,7 @@ class Evenement extends Cafe {
 	public function ajouter($values='') {
 		
 		// Traitement.
-		$data['resultats']=$this->modelevenement->getEvenement();
+		$data['resultats']=$this->modelevenement->getEvenements();
 		$data['info'] = $values;
 		
 		// Appel de la vue.
