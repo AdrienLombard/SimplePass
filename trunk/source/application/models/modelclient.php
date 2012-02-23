@@ -14,7 +14,7 @@ class modelClient extends MY_Model {
 	public function getClientParId($id) {
 		$result = $this->db->select('*')
 							->from(DB_CLIENT . ' c')
-							->where('c idclient', $id)
+							->where('c.idclient', $id)
 							->get()
 							->result();
 		return $result[0];

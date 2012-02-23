@@ -29,9 +29,13 @@ class Accreditation extends Cafe {
 		
 	}
 	
-	public function voir() {
+	public function voir($idClient) {
 		
-		$this->layout->view('utilisateur/accreditation/UAVoir');
+		$this->load->model('modelclient');
+		
+		$data['client'] = $this->modelclient->getClientParId($idClient);
+		
+		$this->layout->view('utilisateur/accreditation/UAVoir', $data);
 		
 	}
 	

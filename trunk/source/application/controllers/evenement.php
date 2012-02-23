@@ -14,6 +14,9 @@ class Evenement extends Cafe {
 		
 		$this->load->library('form_validation');
 		$this->layout->ajouter_js('utilisateur/scriptDate');
+		$this->layout->ajouter_js('utilisateur/CRUDEvenement');
+		
+		$this->layout->ajouter_css('utilisateur/evenement');
 		
 		$this->securise(array('voir'));
 	}
@@ -26,13 +29,13 @@ class Evenement extends Cafe {
 	}
 	
 	/**
-	 * Méthode Listing du CRUD. 
+	 * MÃ©thode Listing du CRUD. 
 	 */
 	public function liste() {
 		// Chargement du css.
 		$this->layout->ajouter_css('utilisateur/liste');
 		
-		// Récupération des données dans la base.
+		// RÃ©cupÃ©ration des donnÃ©es dans la base.
 		$data['resultats']=$this->modelevenement->getEvenement();
 		
 		// Appelle de la vue.
@@ -40,14 +43,14 @@ class Evenement extends Cafe {
 	}
 	
 	/**
-	 * Méthode Read du CRUD.
-	 * @param  $id : Id de la données à afficher.
+	 * MÃ©thode Read du CRUD.
+	 * @param  $id : Id de la donnÃ©es Ã  afficher.
 	 */
 	public function voir($id) {
 		// Chargement du css.
 		$this->layout->ajouter_css('utilisateur/details');
 		
-		// Récupération des données sur la données corréspondant a l'id.
+		// RÃ©cupÃ©ration des donnÃ©es sur la donnÃ©es corrÃ©spondant a l'id.
 		$data['resultats']=$this->modelevenement->getEvenementParId($id);
 		$data['id'] = $id;
 		
@@ -56,7 +59,7 @@ class Evenement extends Cafe {
 	}
 	
 	/**
-	 * Méthode Create du CRUD.
+	 * MÃ©thode Create du CRUD.
 	 */
 	public function ajouter($values='') {
 		
@@ -71,7 +74,7 @@ class Evenement extends Cafe {
 	
 	
 	/**
-	 * Méthode de traitement pour l'ajout.
+	 * MÃ©thode de traitement pour l'ajout.
 	 */
 	public function exeAjouter() {
 		$config = array(
@@ -82,7 +85,7 @@ class Evenement extends Cafe {
 		),
 		array(
 					'field'   => 'datedebut',
-					'label'   => 'Date de début', 
+					'label'   => 'Date de dÃ©but', 
 					'rules'   => ''
 		),
 		array(
@@ -124,25 +127,26 @@ class Evenement extends Cafe {
 	
 
 	/**
-	 * Fonction pour mettre les zones et les catégories liées à notre évènement.
+	 * Fonction pour mettre les zones et les catÃ©gories liÃ©es Ã  notre Ã©vÃ¨nement.
 	 */
 	public function donnes( $id, $idEvenement=0 ) {
 		
 		$data['listeZones'] = $this->modelzone->getZoneParEvenement( $idEvenement );
 		
 		if($idEvenement != 0) {
-			// On traite la récupération des catégorie de l'évènement modèle.
-			$categories = $this->modelcategorie->getCategorieDansEvenement( $idEvenement );
+			// On traite la rÃ©cupÃ©ration des catÃ©gorie de l'Ã©vÃ¨nement modÃ¨le.
+			$categories = $this->modelcategorie->getCategorieDansEvenement($idEvenement);
+			
 			$data['listeCategorie']		= $categories;
 			
-			// on construit un tableau avec les id des catégorie pour récupérer tous les couples zone/catégorie.
+			// on construit un tableau avec les id des catÃ©gorie pour rÃ©cupÃ©rer tous les couples zone/catÃ©gorie.
 			$idCategorie = Array();
 			foreach($categories as $cate) {
 				$idcategorie[] = $cate->idcategorie;
 			}
 			$categoriesZones = $this->modelzone->getZoneParIdMultiple ( $idcategorie );
 			
-			// On construit le tableau qui va organisé les zones et les catégories.
+			// On construit le tableau qui va organisÃ© les zones et les catÃ©gories.
 			$listeCatgorieZone = Array();
 			foreach($categoriesZones as $categorie) {
 				$listeCatgorieZone[$categorie->idcategorie][$categorie->idzone] = 1;
@@ -150,7 +154,7 @@ class Evenement extends Cafe {
 			
 			$data['listeCatgorieZone'] 	= $listeCatgorieZone;
 			
-			// On traite la récupération des infos sur les zones.
+			// On traite la rÃ©cupÃ©ration des infos sur les zones.
 			
 			
 			
@@ -162,8 +166,8 @@ class Evenement extends Cafe {
 	
 	
 	/**
-	 * Méthode Update du CRUD.
-	 * @param $id : Id de la données à modifiée.
+	 * MÃ©thode Update du CRUD.
+	 * @param $id : Id de la donnÃ©es Ã  modifiÃ©e.
 	 */
 	public function modifier($id, $re=false) {
 		
@@ -187,7 +191,7 @@ class Evenement extends Cafe {
 	}
 	
 	/**
-	 * Méthode traitement de l'Update du CRUD.
+	 * MÃ©thode traitement de l'Update du CRUD.
 	 */
 	public function exeModifier($id) {
 		$data['id'] = $id;
@@ -200,7 +204,7 @@ class Evenement extends Cafe {
 		),
 		array(
 			'field'   => 'datedebut',
-			'label'   => 'Date de début', 
+			'label'   => 'Date de dÃ©but', 
 			'rules'   => ''
 		),
 		array(
@@ -221,7 +225,7 @@ class Evenement extends Cafe {
 			$resultat = $this->modelevenement->modifier($nom, $datedebutTstmp, $datefinTstmp, $id);
 			
 			$data['titre']		= 'Modification';
-			$data['message']	= 'Votre évènement à bien été modifié.';
+			$data['message']	= 'Votre Ã©vÃ¨nement Ã  bien Ã©tÃ© modifiÃ©.';
 			$data['redirect'] 	= 'evenement/liste';
 			$this->layout->view('utilisateur/UMessage', $data);
 			
@@ -237,14 +241,14 @@ class Evenement extends Cafe {
 	
 	/**
 	 * Methode Delete du CRUD.
-	 * @param $id : Id de la données a supprimer.
+	 * @param $id : Id de la donnÃ©es a supprimer.
 	 */
 	public function supprimer($id) {
 	   
 		$this->modelevenement->supprimer($id);
 		
 		$data['titre']		= 'Suppression';
-		$data['message']	= 'Votre évènement a bien été supprimé.';
+		$data['message']	= 'Votre Ã©vÃ¨nement a bien Ã©tÃ© supprimÃ©.';
 		$data['redirect'] 	= 'evenement/liste';
 		$this->layout->view('utilisateur/UMessage', $data);
 
