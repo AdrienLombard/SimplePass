@@ -42,18 +42,22 @@
 				
 				<form class="infos">
 					
-					<input type="text" class="nom" init="M. ASSIER Aymeric" value="M. ASSIER Aymeric">
-					<select class="pays" init="FRA" style="background: url(<?php echo img_url('drapeaux/fra.gif'); ?>) no-repeat left; padding-left: 15px">
-						<option value="FRA" style="background: url(<?php echo img_url('drapeaux/fra.gif'); ?>) no-repeat left;" selected>FRA</option>
-						<option value="DEU" style="background: url(<?php echo img_url('drapeaux/deu.gif'); ?>) no-repeat left;">DEU</option>
-						<option value="ITA" style="background: url(<?php echo img_url('drapeaux/ita.gif'); ?>) no-repeat left;">ITA</option>
+					<input type="text" class="nom" init="<?php echo $client->nom.' '.$client->prenom; ?>" value="<?php echo $client->nom.' '.$client->prenom; ?>">
+					<select class="pays" init="FRA"
+							style="background: url(<?php echo img_url('drapeaux/fra.gif'); ?>) no-repeat left; padding-left: 15px">
+						<option value="FRA"
+								style="background: url(<?php echo img_url('drapeaux/fra.gif'); ?>) no-repeat left;" selected>FRA</option>
+						<option value="DEU"
+								style="background: url(<?php echo img_url('drapeaux/deu.gif'); ?>) no-repeat left;">DEU</option>
+						<option value="ITA"
+								style="background: url(<?php echo img_url('drapeaux/ita.gif'); ?>) no-repeat left;">ITA</option>
 					</select>
 					
-					<input type="text" class="organisme" init="Entreprise beta" value="Entreprise beta">
-					<input type="text" class="role" init="CEO" value="CEO">
+					<input type="text" class="organisme" init="<?php echo $client->organisme; ?>" value="<?php echo $client->organisme; ?>">
+					<input type="text" class="role" init="<?php echo $client->role; ?>" value="<?php echo $client->role; ?>">
 					
-					<input type="text" class="tel" init="+33 (0)6 87 07 27 25" value="+33 (0)6 87 07 27 25">
-					<input type="text" class="email" init="aymeric.assier@gmail.com" value="aymeric.assier@gmail.com">
+					<input type="text" class="tel" init="<?php echo $client->tel; ?>" value="<?php echo $client->tel; ?>">
+					<input type="text" class="email" init="<?php echo $client->mail; ?>" value="<?php echo $client->mail; ?>">
 					
 					<input type="submit" class="valideInfos" value="Enregistrer les modifications" />
 					

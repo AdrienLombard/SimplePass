@@ -47,7 +47,7 @@
                         <td></td>
 						<td><?php echo $accred->libellecategorie; ?></td>
 						<td><?php echo ($accred->etataccreditation == 1)? 'Demande' : 'Validée' ?> </td>
-						<td><a href="<?php echo site_url('accreditation/voir'); ?>">Voir</a></td>
+						<td><a href="<?php echo site_url('accreditation/voir/' . $accred->idaccreditation); ?>">Voir</a></td>
 					</tr>
                     <?php endforeach; ?>
 					
