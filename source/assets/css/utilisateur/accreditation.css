@@ -47,7 +47,9 @@
 	margin-top: 8px;
 }
 .accred .client .infos select.pays {
-	width: 100px;
+	width: auto;
+	margin-left: 7px;
+	font-size: 14px;
 }
 .accred .client .infos select.pays option {
 	padding-left: 20px;

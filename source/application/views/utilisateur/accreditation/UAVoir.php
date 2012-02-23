@@ -43,14 +43,14 @@
 				<form class="infos">
 					
 					<input type="text" class="nom" init="<?php echo $client->nom.' '.$client->prenom; ?>" value="<?php echo $client->nom.' '.$client->prenom; ?>">
-					<select class="pays" init="FRA"
-							style="background: url(<?php echo img_url('drapeaux/fra.gif'); ?>) no-repeat left; padding-left: 15px">
-						<option value="FRA"
-								style="background: url(<?php echo img_url('drapeaux/fra.gif'); ?>) no-repeat left;" selected>FRA</option>
-						<option value="DEU"
-								style="background: url(<?php echo img_url('drapeaux/deu.gif'); ?>) no-repeat left;">DEU</option>
-						<option value="ITA"
-								style="background: url(<?php echo img_url('drapeaux/ita.gif'); ?>) no-repeat left;">ITA</option>
+					
+					<select class="pays" init="<?php echo $client->pays; ?>"
+							style="background: url(<?php echo img_url('drapeaux/'.strtolower($client->pays).'.gif'); ?>) no-repeat left; padding-left: 15px">
+						
+					<?php foreach($pays as $p): ?>
+						<option value="<?php echo $p->idpays; ?>" style="background: url(<?php echo img_url('drapeaux/'.strtolower($p->idpays).'.gif'); ?>) no-repeat left;" <?php echo ($p->idpays == $client->pays)? 'selected' : '' ?>><?php echo $p->nompays; ?></option>
+					<?php endforeach; ?>
+					
 					</select>
 					
 					<input type="text" class="organisme" init="<?php echo $client->organisme; ?>" value="<?php echo $client->organisme; ?>">
