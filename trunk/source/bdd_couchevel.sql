@@ -269,11 +269,11 @@ INSERT INTO courchevel_pays (idpays,nompays,indicatiftel) VALUES('HKG','Hong Kon
 INSERT INTO courchevel_pays (idpays,nompays,indicatiftel) VALUES('HUN','Hongrie','36');
 INSERT INTO courchevel_pays (idpays,nompays,indicatiftel) VALUES('MUS','Ile Maurice','230');
 INSERT INTO courchevel_pays (idpays,nompays,indicatiftel) VALUES('FJI','Iles Fidji','679');
-INSERT INTO courchevel_pays (idpays,nompays,indicatiftel) VALUES('MNP','les Mariannes du Nord','1670');
-INSERT INTO courchevel_pays (idpays,nompays,indicatiftel) VALUES('MHL','les Marshall','692');
-INSERT INTO courchevel_pays (idpays,nompays,indicatiftel) VALUES('SLB','les Salomon','677');
-INSERT INTO courchevel_pays (idpays,nompays,indicatiftel) VALUES('VGB','les Vierges britanniques','1284');
-INSERT INTO courchevel_pays (idpays,nompays,indicatiftel) VALUES('VIR','les Vierges des États-Unis','1340');
+INSERT INTO courchevel_pays (idpays,nompays,indicatiftel) VALUES('MNP','Iles Mariannes du Nord','1670');
+INSERT INTO courchevel_pays (idpays,nompays,indicatiftel) VALUES('MHL','Iles Marshall','692');
+INSERT INTO courchevel_pays (idpays,nompays,indicatiftel) VALUES('SLB','Iles Salomon','677');
+INSERT INTO courchevel_pays (idpays,nompays,indicatiftel) VALUES('VGB','Iles Vierges britanniques','1284');
+INSERT INTO courchevel_pays (idpays,nompays,indicatiftel) VALUES('VIR','Iles Vierges des États-Unis','1340');
 INSERT INTO courchevel_pays (idpays,nompays,indicatiftel) VALUES('IND','Inde','91');
 INSERT INTO courchevel_pays (idpays,nompays,indicatiftel) VALUES('IDN','Indonésie','62');
 INSERT INTO courchevel_pays (idpays,nompays,indicatiftel) VALUES('IRQ','Irak','964');

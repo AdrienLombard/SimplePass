@@ -43,18 +43,18 @@
 						<?php foreach ($listeCategorie as $categorie): ?>
 						<tr class="ligneChoixZoneCat">
 
-							<td>
-								<?php echo $categorie->libellecategorie?>
+							<td style="padding-left: <?php echo ($categorie['depth'] * 20) + 10; ?>px">
+								<?php echo $categorie['db']->libellecategorie?>
 							</td>
 
 							<?php foreach($listeZones as $zone): ?>
 								
-								<?php if(isset($listeCatgorieZone[$categorie->idcategorie][$zone->idzone])): ?>
+								<?php if(isset($listeCatgorieZone[$categorie['db']->idcategorie][$zone->idzone])): ?>
 									
 									<td>
 										<input type="checkbox"
-											   name="<?php echo $categorie->idcategorie . '_' . $zone->idzone; ?>"
-											   cat="<?php echo $categorie->idcategorie; ?>"
+											   name="<?php echo $categorie['db']->idcategorie . '_' . $zone->idzone; ?>"
+											   cat="<?php echo $categorie['db']->idcategorie; ?>"
 											   zone="<?php echo $zone->idzone; ?>"
 											   checked="checked"/>
 									</td>
@@ -63,8 +63,8 @@
 								
 									<td>
 										<input type="checkbox"
-											   name="<?php echo $categorie->idcategorie . '_' . $zone->idzone; ?>"
-											   cat="<?php echo $categorie->idcategorie; ?>"
+											   name="<?php echo $categorie['db']->idcategorie . '_' . $zone->idzone; ?>"
+											   cat="<?php echo $categorie['db']->idcategorie; ?>"
 											   zone="<?php echo $zone->idzone; ?>" />
 									</td>
 								
