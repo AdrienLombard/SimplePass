@@ -75,11 +75,14 @@
 					
 				</form>
 				
+				<?php if(count($accredAttente)==0) echo '<br/>Aucune demande en cours.' ?>
+				
+				<?php foreach($accredAttente as $demande): ?>
+				
 				<div class="ligneAccred close">
-					<span class="date">2012-02-16</span>
-					<span class="categorie">Press TV</span>
-					<span class="evenement">Coupe du monde de saut à ski</span>
-					<span class="etat">Demande</span>
+					<span class="date"><?php echo $demande->dateaccreditation; ?></span>
+					<span class="categorie"><?php echo $demande->libellecategorie; ?></span>
+					<span class="evenement"><?php echo $demande->libelleevenement; ?></span>
 					
 					<form class="editAccred">
 						
@@ -144,6 +147,8 @@
 					</form>
 					
 				</div>
+				
+				<?php endforeach; ?>
 				
 				
 				<h3>Historique</h3>

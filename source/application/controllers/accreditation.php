@@ -44,17 +44,18 @@ class Accreditation extends Cafe {
 		
 		$this->load->model('modelclient');
 		$this->load->model('modelpays');
+		$this->load->model('modelaccreditation');
 		
 		$data = Array();
 		
 		// On récupère les informations sur le client.
 		$data['client'] = $this->modelclient->getClientParId($idClient);
 		$data['pays'] = $this->modelpays->getpays();
+		$data['accredAttente'] = array();
+		//$data['demandes'] = $this->modelaccreditation->getDemandesParClient($idClient);
 		
 		// On récpère les accréditations de ce client.
 		$accreditation = $this->modelaccreditation->getAccreditationsParClient( $idClient );
-		$data['accredAttente'] = array();
-		$data['accredValide'] = array();
 		foreach ($accreditation as $accred) {
 			if($accred->etataccreditation == ACCREDITATION_A_VALIDE) {
 				$data['accredAttente'][] = $accred;
