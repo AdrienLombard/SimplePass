@@ -6,18 +6,20 @@ class Evenement extends Cafe {
 	public function __construct() {
 		parent::__construct();
 		
+		// Chargemnent des module de codeigniter.
+		$this->load->library('form_validation');
+		
 		// Chargement des modeles.
 		$this->load->model('modelevenement');
 		$this->load->model('modelzone');
 		$this->load->model('modelcategorie');
 		
-		
-		$this->load->library('form_validation');
+		// Chargement des fichier javascript.
 		$this->layout->ajouter_js('utilisateur/scriptDate');
 		$this->layout->ajouter_js('utilisateur/CRUDEvenement');
 		
+		// Mise en place des vérification sur l'authentification.
 		$this->layout->ajouter_css('utilisateur/evenement');
-		
 		$this->securise(array('voir'));
 	}
 
@@ -135,7 +137,7 @@ class Evenement extends Cafe {
 		
 		if($idEvenement != 0) {
 			// On traite la rÃ©cupÃ©ration des catÃ©gorie de l'Ã©vÃ¨nement modÃ¨le.
-			$categories = $this->modelcategorie->getCategorieDansEvenement($idEvenement);
+			$categories = $this->modelcategorie->getCategorieDansEvenement( $idEvenement );
 			
 			$data['listeCategorie']		= $categories;
 			

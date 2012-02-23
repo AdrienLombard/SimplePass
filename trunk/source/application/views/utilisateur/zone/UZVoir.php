@@ -24,7 +24,7 @@
 
         <div id="main">
             <?php foreach ($resultats as $resultat): ?>
-				<h2><?php echo $resultat->libellezone; ?> - <?php echo $resultat->codezone; ?></h2>
+				<h2><?php echo $resultat->libellezone; ?></h2>
 			<?php endforeach; ?>
 			
 			<?php

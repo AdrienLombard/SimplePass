@@ -75,21 +75,15 @@ class Zone extends Cafe {
 				'field'   => 'libelle',
 				'label'   => 'Nom', 
 				'rules'   => 'required'
-			),
-			array (
-				'field'   => 'code',
-				'label'   => 'Code de zone', 
-				'rules'   => 'required'
 			)
 		);
 		$this->form_validation->set_rules($config);
 		
-		$code	 = $this->input->post('code');
 		$libelle = $this->input->post('libelle');
 		
 		if ($this->form_validation->run() == true) {
 			// Ajout dans la base.
-			$this->modelzone->ajouterZone( $libelle, $code );
+			$this->modelzone->ajouter( $libelle );
 			
 			// Appel de la vue.
 			$data['titre']		= 'Ajout';
@@ -100,7 +94,6 @@ class Zone extends Cafe {
 		else {
 			
 			$values->libelle = $libelle;
-			$values->code	 = $code;
 			
 			$this->ajouter($values);
 		}
@@ -117,12 +110,10 @@ class Zone extends Cafe {
 		$data['id'] = $id;
 		
 		if($re) {
-			$data['code']	 = $re['code'];
 			$data['libelle'] = $re['libelle'];
 		}
 		else {
 			$reponse = $this->modelzone->getZoneParId( $id );
-			$data['code'] 	 = $reponse[0]->codezone;
 			$data['libelle'] = $reponse[0]->libellezone;
 		}
 		
@@ -141,21 +132,15 @@ class Zone extends Cafe {
 				'field'   => 'libelle',
 				'label'   => 'Nom', 
 				'rules'   => 'required'
-			),
-			array (
-				'field'   => 'code',
-				'label'   => 'Code de zone', 
-				'rules'   => 'required'
 			)
 		);
 		$this->form_validation->set_rules($config);
 		
-		$code	 = $this->input->post('code');
 		$libelle = $this->input->post('libelle');
 		
 		if ($this->form_validation->run() == true) {
 			
-			$resultat = $this->modelzone->modifierZone( $id, $libelle, $code );
+			$resultat = $this->modelzone->modifier( $id, $libelle );
 			
 			$data['titre']		= 'Modification';
 			$data['message']	= 'Votre zone à bien été modifiée.';
@@ -164,7 +149,6 @@ class Zone extends Cafe {
 			
 		}
 		else {
-			$donnees['code'] 		= $code;
 			$donnees['libelle'] 	= $libelle;
 			
 			$this->modifier($id, $donnees);
@@ -178,7 +162,7 @@ class Zone extends Cafe {
 	 */
 	public function supprimer($id) {
 	   
-		$this->modelzone->supprimerZone( $id );
+		$this->modelzone->supprimer( $id );
 		
 		$data['titre']		= 'Suppression';
 		$data['message']	= 'Votre zone a bien été supprimée.';

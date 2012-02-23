@@ -24,9 +24,6 @@
 				
 				<h2>Nouvelle zone</h2>
 				
-				<label>Code</label>
-				<input type="text" name="code" value="<?php if($info) echo $info->code; ?>" />
-				
 				<label>Nom</label>
 				<input type="text" name="libelle" value="<?php if($info) echo $info->libelle; ?>" />
 				

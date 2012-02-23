@@ -24,9 +24,6 @@
 			<form action="<?php echo site_url('zone/exeModifier/'.$id); ?>" method="post">
 				<h2><?php echo $libelle; ?></h2>
 				
-				<label>Code</label>
-				<input type="text" name="code" value="<?php echo $code; ?>" />
-				
 				<label>Nom</label>
 				<input type="text" value="<?php echo $libelle; ?>" name="libelle"/>
 				

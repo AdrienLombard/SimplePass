@@ -55,13 +55,13 @@ class modelZone extends MY_Model {
 					   ->result();
 	}
 	
-	public function ajouter($libelle, $code) {
-		return $this->db->insert(DB_ZONE, array('libellezone' => $libelle, 'codezone' => $code) );
+	public function ajouter($libelle ) {
+		return $this->db->insert(DB_ZONE, array('libellezone' => $libelle) );
 	}
 	
 	
-	public function modifier( $idZone, $libelle) {
-		return $this->db->update(DB_ZONE, array( 'libellezone' => $libelle, 'codezone' => $code), 'idzone = '.$idZone);
+	public function modifier( $idZone, $libelle ) {
+		return $this->db->update(DB_ZONE, array( 'libellezone' => $libelle), 'idzone = '.$idZone);
 	}
 	
 	
