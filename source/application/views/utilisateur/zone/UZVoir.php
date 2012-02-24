@@ -1,4 +1,4 @@
-<h1>Evènements</h1>
+<h1>Zones</h1>
 
 <div class="wrap">
 
@@ -11,14 +11,10 @@
     <div class="box-full">
 		
 		<aside>
-
-            <b>Options :</b>
-            <ul>
-                
-				<li><a href="<?php echo site_url('zone/modifier/'.$id); ?>">Modifier</a></li>
-                <li><a href="<?php echo site_url('zone/supprimer/'.$id);?>" confirm="Êtes-vous sûr de vouloir supprimer cet zone ?">Supprimer</a></li>
-				<li><a href="<?php echo site_url('zone'); ?>">Retour</a></li>
-            </ul>
+ 
+			<a href="<?php echo site_url('zone/modifier/'.$id); ?>">Modifier</a>
+            <a href="<?php echo site_url('zone/supprimer/'.$id);?>" confirm="Êtes-vous sûr de vouloir supprimer cet zone ?">Supprimer</a>
+			<a href="<?php echo site_url('zone'); ?>">Retour</a>
 
         </aside>
 
