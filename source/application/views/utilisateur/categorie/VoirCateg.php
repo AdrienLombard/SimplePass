@@ -16,8 +16,8 @@
             <ul>
                 
 				<li><a href="<?php echo site_url('categorie/modifier/'.$id); ?>">Modifier</a></li>
-                <li><a href="<?php echo site_url('categorie/supprimer/'.$id);?>" confirm="Êtes-vous sûr de vouloir supprimer cette catégorie ?">Supprimer</a></li>
-				<li><a href="<?php echo site_url('categorie/index/'.$id); ?>">Retour</a></li>
+                <li><a href="<?php echo site_url('categorie/supprimer/'.$id);?>" confirm="Êtes-vous sûr de vouloir supprimer cette catégorie et ses sous-catégories ?">Supprimer</a></li>
+				<li><a href="<?php echo site_url('categorie/liste/'.$id); ?>">Retour</a></li>
             </ul>
 
         </aside>

@@ -8,7 +8,7 @@ class modelCategorie extends CI_Model {
 	
 	public function getCategorieMere() {
 		return $this->db->select('*')
-						->from($this->tableCategorie)
+						->from(DB_CATEGORIE )
 						->where('surcategorie',null)
 						->get()
 						->result();
@@ -16,15 +16,23 @@ class modelCategorie extends CI_Model {
 	
 	public function getCategorie() {
 		return $this->db->select('*')
-						->from($this->tableCategorie)
+						->from(DB_CATEGORIE )
 						->get()
 						->result();
 	}
 	
 	public function getCategorieMereid($id) {
 		return $this->db->select('*')
-						->from($this->tableCategorie)
+						->from(DB_CATEGORIE )
 						->where('idcategorie',$id)
+						->get()
+						->result();
+	}
+	
+	public function getSousCategorieid($id) {
+		return $this->db->select('idcategorie')
+						->from(DB_CATEGORIE )
+						->where('surcategorie',$id)
 						->get()
 						->result();
 	}
