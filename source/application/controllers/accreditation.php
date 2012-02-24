@@ -19,7 +19,7 @@ class Accreditation extends Cafe {
 
 	public function index() {
 		
-		$data['accreds'] = $this->modelaccreditation->getAccreditationsParEvenement(1);
+		$data['accreds'] = $this->modelaccreditation->getAccreditationsValidees(1);
 		$this->layout->view('utilisateur/accreditation/UAIndex', $data);
 		
 	}
@@ -27,11 +27,10 @@ class Accreditation extends Cafe {
 	/**
 	 * Fonction pour afficher la liste des demandes en cours.
 	 */
-	public function demandes( $idEvenement ) {
+	public function demandes() {
 		
-		$data['accreditations'] = $this->modelaccreditation->getAccreditationsEnAttente( $idEvenement );
-		
-		$this->layout->view('utilisateur/accreditation/UAIndex', $data);
+		$data['accreds'] = $this->modelaccreditation->getAccreditationsEnAttente(1);
+		$this->layout->view('utilisateur/accreditation/UADemandes', $data);
 		
 	}
 	
@@ -45,12 +44,19 @@ class Accreditation extends Cafe {
 		$this->load->model('modelclient');
 		$this->load->model('modelpays');
 		$this->load->model('modelaccreditation');
+		$this->load->model('modelevenement');
+		$this->load->model('modelcategorie');
+		$this->load->model('modelzone');
 		
 		$data = Array();
 		
 		// On récupère les informations sur le client.
 		$data['client'] = $this->modelclient->getClientParId($idClient);
 		$data['pays'] = $this->modelpays->getpays();
+		$data['evenements'] = $this->modelevenement->getEvenements();
+		$data['categories'] = $this->modelcategorie->getCategories();
+		$data['zones'] = $this->modelzone->getZones();
+		
 		$data['accredAttente'] = array();
 		$data['accredValide'] = array();
 		//$data['demandes'] = $this->modelaccreditation->getDemandesParClient($idClient);

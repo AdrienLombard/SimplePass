@@ -13,7 +13,7 @@
         <aside>
            
             <a href="#">Modifier la personne</a>
-			<a href="#">Ajouter une accred</a>
+			<a href="#">Nouvelle accréditation</a>
 
         </aside>
 		
@@ -79,15 +79,19 @@
 					<form class="editAccred">
 						
 						<div>
-							<select>
-								<option>Choisir un évènement </option>
+							<select name="evenement">
+								<?php foreach($evenements as $evenement): ?>
+								<option value="<?php echo $evenement->idevenement; ?>"><?php echo $evenement->libelleevenement; ?></option>
+								<?php endforeach; ?>
 							</select>
 						</div>
 						
 						<div>
 							<input type="text" />
 							<select>
-								<option>Choisir une catégorie </option>
+								<?php foreach($categories as $categorie): ?>
+								<option value="<?php echo $categorie->idcategorie; ?>"><?php echo $categorie->libellecategorie; ?></option>
+								<?php endforeach; ?>
 							</select>
 						</div>
 						
