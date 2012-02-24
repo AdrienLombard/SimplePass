@@ -404,6 +404,12 @@ INSERT INTO courchevel_pays (idpays,nompays,indicatiftel) VALUES('YEM','Yémen',
 INSERT INTO courchevel_pays (idpays,nompays,indicatiftel) VALUES('ZMB','Zambie','260');
 INSERT INTO courchevel_pays (idpays,nompays,indicatiftel) VALUES('ZWE','Zimbabwe','263');
 
+insert into courchevel_client (pays,nom,prenom,civilite,organisme,tel,mail) values ('CHE','ASSIER','Aymeric','M','World Company','0123456789','aymeric.assier@gmail.com');
+insert into courchevel_client (pays,nom,prenom,civilite,organisme,tel,mail) values ('FRA','LOMBARD','Adrien','M','World Company','0234567891','adrien.lombard@gmail.com');
+insert into courchevel_client (pays,nom,prenom,civilite,tel,mail) values ('BEL','ARNOULD','Mickaël','M','0345678912','mickael.arnould@gmail.com');
+insert into courchevel_client (pays,nom,prenom,civilite,tel,mail) values ('FRA','FRANCHON','Sebastien','M','0456789123','seb.franchon@gmail.com');
+insert into courchevel_client (pays,nom,prenom,civilite,tel,mail) values ('TUN','CHRIGUI','Hajer','Mlle','0567891234','hajer.chrigui@gmail.com');
+
 insert into courchevel_zone (libellezone) values ('Espace presse');
 insert into courchevel_zone (libellezone) values ('Pied de la piste');
 insert into courchevel_zone (libellezone) values ('Salle de spectacle');
