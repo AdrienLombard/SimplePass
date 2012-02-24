@@ -11,10 +11,7 @@
 		
 		<aside>
            
-            <b>Options :</b>
-            <ul>
-                <li><a href="<?php echo site_url('zone/liste'); ?>">Retour</a></li>
-            </ul>
+            <a href="<?php echo site_url('zone/liste'); ?>">Retour</a>
 
         </aside>
 

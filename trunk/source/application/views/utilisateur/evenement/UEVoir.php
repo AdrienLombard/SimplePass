@@ -11,14 +11,10 @@
     <div class="box-full">
 		
 		<aside>
-
-            <b>Options :</b>
-            <ul>
                 
-				<li><a href="<?php echo site_url('evenement/modifier/'.$id); ?>">Modifier</a></li>
-                <li><a href="<?php echo site_url('evenement/supprimer/'.$id);?>" confirm="Êtes-vous sûr de vouloir supprimer cet évènement ?">Supprimer</a></li>
-				<li><a href="<?php echo site_url('evenement/voir/'.$id); ?>">Retour</a></li>
-            </ul>
+			<a href="<?php echo site_url('evenement/modifier/'.$id); ?>">Modifier</a>
+			<a href="<?php echo site_url('evenement/supprimer/'.$id);?>" confirm="Êtes-vous sûr de vouloir supprimer cet évènement ?">Supprimer</a>
+			<a href="<?php echo site_url('evenement/voir/'.$id); ?>">Retour</a>
 
         </aside>
 
