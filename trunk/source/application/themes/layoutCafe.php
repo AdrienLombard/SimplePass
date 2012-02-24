@@ -36,6 +36,7 @@
 					<?php if($CI_login): ?>
                     <a href="<?php echo site_url('evenement/index'); ?>">Evènements</a>
 					<a href="<?php echo site_url('accreditation/index'); ?>">Accréditations</a>
+					<a href="<?php echo site_url('categorie/liste'); ?>">Catégories</a>
 					<a href="<?php echo site_url('zone/index'); ?>">Zones</a>
 					<a href="<?php echo site_url('utilisateur/deconnexion'); ?>">Déconnexion</a>
 					<?php endif; ?>

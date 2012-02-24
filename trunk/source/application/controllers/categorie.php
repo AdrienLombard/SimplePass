@@ -14,12 +14,12 @@ class Categorie extends Cafe {
 	}
 
 
-	public function index() {
+	/*public function index() {
 		
 		$data['categories'] = $this->modelCategorie->getCategorieMere();
 		$this->layout->view('utilisateur/categorie/UCIndex', $data);
 		
-	}
+	}*/
 
 	
 	public function liste() {
@@ -62,8 +62,8 @@ class Categorie extends Cafe {
 		
 		if ($this->form_validation->run() == true ) {
 	    	$data['titre']		= 'Ajout';
-			$data['message']	= 'Votre évènement à bien été ajouté.';
-			$data['redirect'] 	= 'evenement/liste';
+			$data['message']	= 'Votre catégorie a bien été ajoutée.';
+			$data['redirect'] 	= 'categorie/liste';
 			$idcategorie=$_POST['categories'];
 			
 			if( $idcategorie!=-1)
@@ -83,7 +83,7 @@ class Categorie extends Cafe {
 	
 	public function supprimer($id) {
 		
-		$categories =$this->modelCategorie->getCategorieMereid($id);
+		/*$categories =$this->modelCategorie->getCategorieMereid($id);
 	
 		foreach ($categories as $categorie)
 		{
@@ -97,10 +97,24 @@ class Categorie extends Cafe {
 
 	     else 
 			$this->modelCategorie->supprimerCategorie($id);
+		 
+		}*/
+		
+		$categories =$this->modelCategorie->getSousCategorieid($id);
+		
+		if(isset($categories) && !empty($categories)) {
+		
+			foreach ($categories as $categorie)
+			{
+				$this->modelCategorie->supprimerCategorie($categorie->idcategorie);
+			}
 		}
+		
+		$this->modelCategorie->supprimerCategorie($id);
+		
 		$data['titre']		= 'Suppression';
-		$data['message']	= 'Votre évènement a bien été supprimé.';
-		$data['redirect'] 	= 'evenement/liste';
+		$data['message']	= 'Votre catégorie a bien été supprimée.';
+		$data['redirect'] 	= 'categorie/liste';
 		$this->layout->view('utilisateur/UMessage', $data);
 		
 	}
