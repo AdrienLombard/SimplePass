@@ -4,7 +4,8 @@
 
     <div class="tabs">
 		<a href="<?php echo site_url('accreditation/index'); ?>" class="current">Liste</a>
-		<a href="<?php echo site_url('accreditation/ajout'); ?>">Ajouter</a>
+		<a href="#">Demandes</a>
+		<a href="<?php echo site_url('accreditation/ajouter'); ?>">Ajouter</a>
     </div>
 
     <div class="box-full">
@@ -13,13 +14,6 @@
            
             <b>Recherche :</b>
 			<input type="text" class="search" />
-			
-			<b>Filtre :</b>
-            <ul>
-				<li>Tous</li>
-				<li>Validée</li>
-				<li>Demandes</li>
-			</ul>
 
         </aside>
 		
@@ -47,7 +41,7 @@
                         <td></td>
 						<td><?php echo $accred->libellecategorie; ?></td>
 						<td><?php echo ($accred->etataccreditation == 1)? 'Demande' : 'Validée' ?> </td>
-						<td><a href="<?php echo site_url('accreditation/voir/' . $accred->idaccreditation); ?>">Voir</a></td>
+						<td><a href="<?php echo site_url('accreditation/voir/' . $accred->idclient); ?>">Voir</a></td>
 					</tr>
                     <?php endforeach; ?>
 					

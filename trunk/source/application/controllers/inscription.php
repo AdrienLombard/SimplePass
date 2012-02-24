@@ -172,7 +172,8 @@ class Inscription extends Chocolat {
 				'idcategorie'		=> $categorie,
 				'idevenement'		=> $event,
 				'idclient'			=> $idClient,
-				'etataccreditation'	=> ACCREDITATION_A_VALIDE
+				'etataccreditation'	=> ACCREDITATION_A_VALIDE,
+				'dateaccreditation' => time()
 			);
 			
 			$this->modelaccreditation->ajouter($accredData);
