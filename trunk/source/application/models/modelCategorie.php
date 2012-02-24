@@ -2,10 +2,6 @@
 
 class modelCategorie extends CI_Model {
 	
-	private $tableCategorie 	= 'courchevel_categorie';
-	
-	
-	
 	public function getCategorieMere() {
 		return $this->db->select('*')
 						->from(DB_CATEGORIE )
@@ -14,7 +10,7 @@ class modelCategorie extends CI_Model {
 						->result();
 	}
 	
-	public function getCategorie() {
+	public function getCategories() {
 		return $this->db->select('*')
 						->from(DB_CATEGORIE )
 						->get()

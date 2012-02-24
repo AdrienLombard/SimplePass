@@ -5,8 +5,8 @@ $(document).ready(function(){
 	
 	$("div.ligneAccred").live('click', function(){
 		$(this).toggleClass('close');
-		$(this).find("form.editAccred").slideToggle('fast');
-		$(this).find("div.detailZones").slideToggle('fast');
+		$(this).find("form.editAccred").slideDown('fast');
+		$(this).find("div.detailZones").slideDown('fast');
 	});
 	
 	$(".valideInfos").hide();

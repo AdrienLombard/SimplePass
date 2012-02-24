@@ -3,8 +3,8 @@
 <div class="wrap">
 
     <div class="tabs">
-		<a href="<?php echo site_url('accreditation/index'); ?>" class="current">Liste</a>
-		<a href="<?php echo site_url('accreditation/demandes'); ?>">Demandes</a>
+		<a href="<?php echo site_url('accreditation/index'); ?>">Liste</a>
+		<a href="<?php echo site_url('accreditation/demandes'); ?>" class="current">Demandes</a>
 		<a href="<?php echo site_url('accreditation/ajouter'); ?>">Ajouter</a>
     </div>
 
@@ -27,7 +27,7 @@
 						<th>Pays</th>
 						<th>Date</th>
 						<th>Catégorie</th>
-						<th></th>
+						<th>Etat</th>
 					</tr>
 					
                 </thead>
