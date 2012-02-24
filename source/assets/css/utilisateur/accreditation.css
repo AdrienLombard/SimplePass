@@ -8,7 +8,7 @@
 .accred .client .photo .simulPhoto {
 	background: #666;
 	height: 180px;
-	width: 160px;
+	width: 161px;
 	margin-right: 20px;
 }
 
@@ -20,7 +20,7 @@
     padding: 8px 0 8px 0;
     background: #6c8693;
     color: #FFF;
-	width: 77px;
+	width: 78px;
 	text-align: center;
 	font-size: 10px;
 }
@@ -40,8 +40,11 @@
 .accred .client .infos input[type=text]:focus, .accred .client .infos select:focus {
 	border: 1px solid #CCC;
 }
-.accred .client .infos input.nom {
+.accred .client .infos input.nom, .accred .client .infos input.prenom {
 	font-size: 26px;
+}
+.accred .client .infos input.prenom {
+	margin-bottom: 8px;
 }
 .accred .client .infos input.organisme {
 	margin-top: 8px;
@@ -151,4 +154,49 @@
 	font-size: 16px;
 	margin-top: 10px;
 	padding-top: 10px;
+}
+
+
+
+
+
+/*
+ * RECHERCHE CLIENT POUR AJOUT
+ */
+
+form.rechercheClient {
+	width: 500px;
+	margin: auto;
+}
+
+form.rechercheClient div.flowSearch label {
+	font-size: 22px;
+	color: #999;
+	font-style: italic;
+}
+form.rechercheClient div.flowSearch input {
+	width: 500px;
+	border-radius: 0;
+	border: 2px solid #666;
+	padding: 8px 20px 10px 20px;
+	font-size: 28px;
+}
+form.rechercheClient div.flowSearch input:focus {
+	box-shadow: 2px 2px 2px rgba(0,0,0,0.2) inset;
+}
+
+form.rechercheClient div.listeTempsReel div.itemFlowSearch {
+	width: 512px;
+	padding: 10px 15px 10px 15px;
+	border: 1px solid #CCC;
+	border-top: 0;
+	background: #F3F3F3;
+	display: none;
+}
+form.rechercheClient div.listeTempsReel div.itemFlowSearch:hover {
+	background: #DDD;
+	cursor: pointer;
+}
+form.rechercheClient div.listeTempsReel div.itemFlowSearch span.pays {
+	float: right;
 }

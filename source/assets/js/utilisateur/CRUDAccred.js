@@ -17,7 +17,23 @@ $(document).ready(function(){
 	});
 
 	$("select.pays").change(function(){
-		$(this).attr('style', 'background: url(http://localhost/courchevel_src/assets/images/drapeaux/' + $(this).val().toLowerCase() + '.gif) no-repeat left; padding-left: 15px;')
+		$(this).attr('style', 'background: url(http://localhost/courchevel_src/assets/images/drapeaux/' + $(this).val().toLowerCase() + '.gif) no-repeat left; padding-left: 15px;');
+		$("form.infos input[type=submit]").show();
 	});
+	
+	
+	
+	/*
+	 * Recherche de personne dans 'ajouter'
+	 */
+	$('.flowSearch input').keyup(function(){
+		
+		var val = $(this).val().toLowerCase();
+		$('.itemFlowSearch').hide();
+		if(val.length >= 2) 
+			$('.itemFlowSearch[username*='+val+']').show();
+
+	});
+	
 	
 });

@@ -12,16 +12,8 @@
 
         <aside>
            
-            <b>Options :</b>
-			<ul>
-				<li>Modifier</li>
-				<li>Retour</li>
-			</ul>
-			
-			<b>Actions :</b>
-			<ul>
-				<li>Ajouter</li>
-			</ul>
+            <a href="#">Modifier la personne</a>
+			<a href="#">Ajouter une accred</a>
 
         </aside>
 		
@@ -34,17 +26,20 @@
 					<div class="simulPhoto"></div>
 					
 					<div class="optionPhoto">
-						<a href="#">UPLOAD</a>
-						<a href="#">PRENDRE</a>
+						<a href="#">FICHIER</a>
+						<a href="#">WEBCAM</a>
 					</div>
 					
 				</div>
 				
-				<form class="infos">
+				<form class="infos" method="post" action="<?php echo site_url('accreditation/exeModifierClient'); ?>">
 					
-					<input type="text" class="nom" init="<?php echo $client->nom.' '.$client->prenom; ?>" value="<?php echo $client->nom.' '.$client->prenom; ?>">
+					<input type="hidden" name="id" value="<?php echo $client->idclient; ?>" />
 					
-					<select class="pays" init="<?php echo $client->pays; ?>"
+					<input type="text" name="nom" class="nom" init="<?php echo $client->nom; ?>" value="<?php echo $client->nom; ?>">
+					<input type="text" name="prenom" class="prenom" init="<?php echo $client->prenom; ?>" value="<?php echo $client->prenom; ?>">
+
+					<select class="pays" name="pays" init="<?php echo $client->pays; ?>"
 							style="background: url(<?php echo img_url('drapeaux/'.strtolower($client->pays).'.gif'); ?>) no-repeat left; padding-left: 15px">
 						
 					<?php foreach($pays as $p): ?>
@@ -53,11 +48,8 @@
 					
 					</select>
 					
-					<input type="text" class="organisme" init="<?php echo $client->organisme; ?>" value="<?php echo $client->organisme; ?>">
-					<input type="text" class="role" init="<?php echo $client->role; ?>" value="<?php echo $client->role; ?>">
-					
-					<input type="text" class="tel" init="<?php echo $client->tel; ?>" value="<?php echo $client->tel; ?>">
-					<input type="text" class="email" init="<?php echo $client->mail; ?>" value="<?php echo $client->mail; ?>">
+					<input type="text" name="tel" class="tel" init="<?php echo $client->tel; ?>" value="<?php echo $client->tel; ?>">
+					<input type="text" name="mail" class="email" init="<?php echo $client->mail; ?>" value="<?php echo $client->mail; ?>">
 					
 					<input type="submit" class="valideInfos" value="Enregistrer les modifications" />
 					
@@ -80,7 +72,7 @@
 				<?php foreach($accredAttente as $demande): ?>
 				
 				<div class="ligneAccred close">
-					<span class="date"><?php echo $demande->dateaccreditation; ?></span>
+					<span class="date"><?php echo display_date($demande->dateaccreditation); ?></span>
 					<span class="categorie"><?php echo $demande->libellecategorie; ?></span>
 					<span class="evenement"><?php echo $demande->libelleevenement; ?></span>
 					
@@ -152,6 +144,8 @@
 				
 				
 				<h3>Historique</h3>
+				
+				<?php if(count($accredValide)==0) echo '<br/>Aucune accréditation.' ?>
 				
 				<?php foreach($accredValide as $accred): ?>
 					<div class="ligneAccred close">

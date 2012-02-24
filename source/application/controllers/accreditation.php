@@ -52,10 +52,12 @@ class Accreditation extends Cafe {
 		$data['client'] = $this->modelclient->getClientParId($idClient);
 		$data['pays'] = $this->modelpays->getpays();
 		$data['accredAttente'] = array();
+		$data['accredValide'] = array();
 		//$data['demandes'] = $this->modelaccreditation->getDemandesParClient($idClient);
 		
 		// On récpère les accréditations de ce client.
 		$accreditation = $this->modelaccreditation->getAccreditationsParClient( $idClient );
+		$idCategories = array();
 		foreach ($accreditation as $accred) {
 			if($accred->etataccreditation == ACCREDITATION_A_VALIDE) {
 				$data['accredAttente'][] = $accred;
@@ -67,26 +69,31 @@ class Accreditation extends Cafe {
 			$idCategories[] = $accred->idcategorie;
 		}
 		
-		// On récupère et on traite la liste des zones utilisé par les accréditation de ce client.
-		$zonesCate = $this->modelzone->getZoneParIdMultiple( $idCategories );
-		$cateZones = Array();
-		foreach($zonesCate as $zones) {
-			$cateZones[$zones->idcategorie][$zones->idzone] = true;
-			
-		}
-		foreach($accreditation as $accred) {
-			$listeZonesAccred[$accred->idaccreditation] = $cateZones[$accred->idcategorie];
-		}
+		$listeZonesAccred = array();
+		if(count($idCategories)) {
+
+			// On récupère et on traite la liste des zones utilisé par les accréditation de ce client.
+			$zonesCate = $this->modelzone->getZoneParIdMultiple( $idCategories );
+			$cateZones = Array();
+			foreach($zonesCate as $zones) {
+				$cateZones[$zones->idcategorie][$zones->idzone] = true;
+
+			}
+			foreach($accreditation as $accred) {
+				$listeZonesAccred[$accred->idaccreditation] = $cateZones[$accred->idcategorie];
+			}
+
+			// on prend les zone + accred.
+			$accredZones = $this->modelzone->getZoneParAccreditationMultiple( $idAccred );
+
+			// on merge dans le meme tableau, avec [idaccred][idzone] = true; de la meme facon.
+			foreach ($accredZones as $key => $zones) {
+				$listeZonesAccred[$zones->idacreditation][$zones->idzone] = true;
+			}
+
+			$data['listeZonesAccred'] = $listeZonesAccred;
 		
-		// on prend les zone + accred.
-		$accredZones = $this->modelzone->getZoneParAccreditationMultiple( $idAccred );
-		
-		// on merge dans le meme tableau, avec [idaccred][idzone] = true; de la meme facon.
-		foreach ($accredZones as $key => $zones) {
-			$listeZonesAccred[$zones->idacreditation][$zones->idzone] = true;
 		}
-		
-		$data['listeZonesAccred'] = $listeZonesAccred;
 		
 		$this->layout->view('utilisateur/accreditation/UAVoir', $data);
 		
@@ -94,7 +101,10 @@ class Accreditation extends Cafe {
 	
 	public function ajouter() {
 		
-		$this->layout->view('utilisateur/accreditation/UAAjout');
+		$this->load->model('modelclient');
+		$data['clients'] = $this->modelclient->getClients();
+		
+		$this->layout->view('utilisateur/accreditation/UAAjout', $data);
 		
 	}
 	
@@ -111,6 +121,23 @@ class Accreditation extends Cafe {
 	}
 	
 	public function exeAjouterAccreditation() {
+		
+	}
+	
+	public function exeModifierClient() {
+		
+		$id				= $this->input->post('id');
+		$data['nom']	= $this->input->post('nom');
+		$data['prenom'] = $this->input->post('prenom');
+		$data['pays']	= $this->input->post('pays');
+		$data['tel']	= $this->input->post('tel');
+		$data['mail']	= $this->input->post('mail');
+		
+		$this->load->model('modelclient');
+		$this->modelclient->modifier($id, $data);
+		
+		$this->load->helper('url');
+		redirect('accreditation/voir/' . $id);
 		
 	}
 

@@ -45,7 +45,8 @@ class modelClient extends MY_Model {
 	 */
 	
 	public function modifier($id, $values) {
-		$this->db->update(DB_CLIENT, $values, array('idclient = ' . $id));
+		$this->db->where('idclient', $id);
+		$this->db->update(DB_CLIENT, $values);
 	}
 	
 	

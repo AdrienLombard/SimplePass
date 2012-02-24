@@ -47,6 +47,24 @@ aside ul li {
 	margin-left: 10px;
 }
 
+aside a {
+	display: block;
+	text-align: center;
+	width: 155px;
+	padding: 8px 12px 8px 12px;
+	border: 1px solid #CCC;
+	color: #666;
+	background: #F3F3F3;
+	border-radius: 5px;
+	margin-bottom: 10px;
+	font-size: 12px;
+}
+aside a:hover {
+	border: 1px solid #999;
+	color: #FFF;
+	background: #999;
+}
+
 
 /*
  *	MAIN

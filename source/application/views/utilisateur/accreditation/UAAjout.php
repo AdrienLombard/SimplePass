@@ -11,8 +11,30 @@
     <div class="box-full">
 
         <div id="main" class="nomargin">
-        	
 			
+			<form class="rechercheClient">
+        	
+				<div class="flowSearch">
+					<label>Nom de la personne :</label>
+					<input type="text" />
+				</div>
+				
+				<div class="listeTempsReel">
+					
+					<?php foreach($clients as $client): ?>
+					<a href="<?php echo site_url('accreditation/voir/'.$client->idclient); ?>">
+						<div username="<?php echo strtolower($client->nom. ' ' .$client->prenom); ?>" class="itemFlowSearch">
+							<span class="username"><?php echo $client->nom. ' ' .$client->prenom; ?></span>
+							<span class="pays"><?php echo $client->pays; ?></span>
+						</div>
+					</a>
+					<?php endforeach; ?>
+					
+				</div>
+				
+				<input type="submit" value="Personne ne correspond ? Créer une nouvelle personne" />
+				
+			</form>
 			
         </div>
 
