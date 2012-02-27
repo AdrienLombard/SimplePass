@@ -24,6 +24,7 @@
 					
 					<tr>
 						<th>Personne</th>
+						<th>Groupe</th>
 						<th>Pays</th>
 						<th>Date</th>
 						<th>Catégorie</th>
@@ -35,13 +36,19 @@
 					
                     <?php foreach ($accreds as $accred): ?>
 					<tr>
+					
 						<td><?php echo $accred->nom . ' ' . $accred->prenom ?></td>
+						<td><?php echo $accred->groupe ?></td>
 						<td><?php echo $accred->pays ?></td>
                         <td><?php echo display_date($accred->dateaccreditation); ?></td>
 						<td><?php echo $accred->libellecategorie; ?></td>
-						<td><a href="<?php echo site_url('accreditation/voir/' . $accred->idclient); ?>">Voir</a></td>
+						<td><a href="<?php  if($accred->groupe==null) echo site_url('accreditation/voir/' . $accred->idclient); 
+						else echo site_url('accreditation/voirEquipe/' . $accred->idclient);?>">Voir</a></td>
 					</tr>
-                    <?php endforeach; ?>
+               
+					 <?php endforeach; ?>
+					
+					
 					
                 </tbody>
             </table>
