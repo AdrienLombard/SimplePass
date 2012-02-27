@@ -4,7 +4,7 @@
 
     <div class="tabs">
 		<a href="<?php echo site_url('accreditation/index'); ?>">Liste</a>
-		<a href="<?php echo site_url('accreditation/ajout'); ?>">Ajouter</a>
+		<a href="<?php echo site_url('accreditation/ajouter'); ?>">Ajouter</a>
 		<a href="#" class="current">Voir</a>
     </div>
 
@@ -157,10 +157,13 @@
 						<span class="categorie"><?php echo $accred->libellecategorie; ?></span>
 						<span class="evenement"><?php echo $accred->libelleevenement; ?></span>
 						<div class="detailZones">
-							Zones : 
-							<?php foreach($listeZonesAccred[$accred->idaccreditation] as $zone => $value): ?>
-								<?php echo $zone . ','; ?>
-							<?php endforeach; ?>
+							Zones :
+							<?php if(isset($listeZonesAccred[$accred->idaccreditation])): ?>
+								<?php echo implode(', ', $listeZonesAccred[$accred->idaccreditation]); ?>
+							<?php else: ?>
+								Aucune...
+							<?php endif; ?>
+							
 						</div>
 					</div>
 				<?php endforeach; ?>

@@ -43,11 +43,9 @@ class modelCategorie extends CI_Model {
 		
 	}
 	
-	public function getCategorieDansEvenementToutBien($idEvenement) {
+	public function getCategorieDansEvenementToutBien() {
 		$result =  $this->db->select('*')
 						->from(DB_CATEGORIE . ' c')
-						->join(DB_CATEGORIE_EVENEMENT . ' ca', 'ca.idcategorie = c.idcategorie')
-						->where('idevenement',$idEvenement)
 						->order_by('c.surcategorie')
 						->get()
 						->result();

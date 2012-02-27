@@ -11,6 +11,8 @@
 
 		<div id="main" class="nomargin">			
 			
+			<form action="<?php echo site_url('evenement/exeDonnees/' . $id); ?>" method="post">
+			
 			<table class="listeCategorieEvent">
 				<thead>
 					<th></th>
@@ -34,18 +36,27 @@
 						<td class="titreCodeDeLaZone">code de la zone :</td>
 						<?php foreach($listeZones as $zone): ?>
 							<td>
-								<input type="text" maxlength="3" name="<?php echo 'code_' . $zone->idzone; ?>" zone="<?php echo $zone->idzone; ?>" class="codeZone" />
+								<input type="text" 
+									   maxlength="3" 
+									   name="<?php echo 'code_' . $zone->idzone; ?>" 
+									   zone="<?php echo $zone->idzone; ?>" 
+									   class="codeZone" 
+									   <?php if($modeleEvenement) echo 'value="' . $zone->codezone . '"'; ?> />
 							</td>
 						<?php endforeach; ?>
 					</tr>
+					
 					
 					<?php if(isset($listeCategorie)): ?>
 						<?php foreach ($listeCategorie as $categorie): ?>
 						<tr class="ligneChoixZoneCat">
 
 							<td style="padding-left: <?php echo ($categorie['depth'] * 20) + 10; ?>px">
-								<?php echo $categorie['db']->libellecategorie?>
-							</td>
+								<?php echo $categorie['db']->libellecategorie; ?>
+								<input type="hidden" 
+									   value="<?php echo $categorie['db']->idcategorie; ?>" 
+									   name="name[]" />
+ 							</td>
 
 							<?php foreach($listeZones as $zone): ?>
 								
@@ -79,11 +90,9 @@
 				</tbody>
 			</table>
 			
+			<input type="submit" name="valider" value="Sauvegarder" />
 			
-			
-			
-			
-			
+			</form>
 			
 			
 			

@@ -14,7 +14,7 @@
            
             <b>Recherche :</b>
 			<input type="text" class="search" />
-
+			
         </aside>
 		
 		<div id="main">

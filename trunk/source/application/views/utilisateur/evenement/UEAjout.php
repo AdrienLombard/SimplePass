@@ -36,13 +36,15 @@
 				</br>
 
 				<div class="encadrer" >
-					<input type=radio class="choix" name="choix" value="Non"  checked="checked" >Non
-					<input type=radio class="choix" name="choix" value="Oui"  >Oui
+					<input type=radio class="choix" name="choix" value="non"  checked="checked" >Non
+					<input type=radio class="choix" name="choix" value="oui"  >Oui
 				</div>
 				</br>
 				<select name="evenements">
 					<?php foreach ($resultats as $evenement): { ?>
-							<option value="<?php echo $evenement->idevenement ?> "><?php echo $evenement->libelleevenement ?></option>
+							<option 
+								value="<?php echo $evenement->idevenement; ?>"><?php echo $evenement->libelleevenement; ?>
+							</option>
 					<?php } endforeach; ?>
 				</select>
 				<input type="submit" name="suivant" value="Suivant" />

@@ -72,32 +72,18 @@ class Accreditation extends Cafe {
 				$data['accredValide'][] = $accred;
 			}
 			$idAccred[] = $accred->idaccreditation;
-			$idCategories[] = $accred->idcategorie;
 		}
 		
 		$listeZonesAccred = array();
 		if(count($idCategories)) {
 
-			// On récupère et on traite la liste des zones utilisé par les accréditation de ce client.
-			$zonesCate = $this->modelzone->getZoneParIdMultiple( $idCategories );
-			$cateZones = Array();
-			foreach($zonesCate as $zones) {
-				$cateZones[$zones->idcategorie][$zones->idzone] = true;
-
-			}
-			foreach($accreditation as $accred) {
-				$listeZonesAccred[$accred->idaccreditation] = $cateZones[$accred->idcategorie];
-			}
-
-			// on prend les zone + accred.
-			$accredZones = $this->modelzone->getZoneParAccreditationMultiple( $idAccred );
-
-			// on merge dans le meme tableau, avec [idaccred][idzone] = true; de la meme facon.
-			foreach ($accredZones as $key => $zones) {
-				$listeZonesAccred[$zones->idacreditation][$zones->idzone] = true;
-			}
-
-			$data['listeZonesAccred'] = $listeZonesAccred;
+		// On récupère et on traite la liste des zones utilisé par les accréditation de ce client.
+		$zonesAccreds = $this->modelzone->getZoneParAccreditationMultiple( $idAccred );
+		foreach ($zonesAccreds as $zones) {
+			$listeZonesAccred[$zones->idaccreditation][] = $zones->idzone;
+		}
+		
+		$data['listeZonesAccred'] = $listeZonesAccred;
 		
 		}
 		
@@ -129,7 +115,7 @@ class Accreditation extends Cafe {
 	public function exeAjouterAccreditation() {
 		
 	}
-	
+
 	public function exeModifierClient() {
 		
 		$id				= $this->input->post('id');
