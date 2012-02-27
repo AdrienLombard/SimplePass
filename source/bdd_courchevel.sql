@@ -108,6 +108,7 @@ create table courchevel_parametres_evenements
    idzone               bigint not null,
    idevenement          bigint not null,
    idcategorie          bigint not null,
+   codezone				int    not null,
    primary key (idzone, idevenement, idcategorie)
 ) engine = InnoDB, charset = utf8;
 
