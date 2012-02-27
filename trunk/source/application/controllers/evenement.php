@@ -63,23 +63,24 @@ class Evenement extends Cafe {
 		
 		$categories = $this->modelcategorie->getCategorieDansEvenementToutBien($id);
 		$data['listeCategorie'] = $categories;
+		
+		$data['listeCatgorieZone'] = Array();
+		if($categories) {
+			// on construit un tableau avec les id des catégorie pour récupérer tous les couples zone/catégorie.
+			$idCategorie = Array();
+			foreach($categories as $cate) {
+				$idcategorie[] = $cate['db']->idcategorie;
+			}
+			$categoriesZones = $this->modelzone->getZoneParIdMultipleParEvenement ( $idcategorie, $id );
 
-		// on construit un tableau avec les id des catégorie pour récupérer tous les couples zone/catégorie.
-		$idCategorie = Array();
-		foreach($categories as $cate) {
-			$idcategorie[] = $cate['db']->idcategorie;
-		}
-		$categoriesZones = $this->modelzone->getZoneParIdMultipleParEvenement ( $idcategorie, $id );
-		
-		// On construit le tableau qui va organiser les zones et les catégories.
-		$listeCatgorieZone = Array();
-		foreach($categoriesZones as $categorie) {
-			$listeCatgorieZone[$categorie->idcategorie][$categorie->idzone] = 1;
-		}
+			// On construit le tableau qui va organiser les zones et les catégories.
+			$listeCatgorieZone = Array();
+			foreach($categoriesZones as $categorie) {
+				$listeCatgorieZone[$categorie->idcategorie][$categorie->idzone] = 1;
+			}
 
-		$data['listeCatgorieZone'] 	= $listeCatgorieZone;
-		
-		
+			$data['listeCatgorieZone'] 	= $listeCatgorieZone;
+		}
 		
 		// Appelle de la vue.
 		$this->layout->view('utilisateur/evenement/UEVoir', $data);
@@ -215,6 +216,7 @@ class Evenement extends Cafe {
 		// recup liste des categorie.
 		$categories = $this->input->post('name');
 		
+		$newentry = false;
 		$newDonneesEvenement = Array();
 		foreach( $categories as $categorie) {
 			foreach($zones as $zone) {
@@ -226,12 +228,16 @@ class Evenement extends Cafe {
 						'codezone'		=> $this->input->post('code_' . $zone->idzone)
 					);
 					$newDonneesEvenement[] = $entry;
+					$newentry = true;
 				}
 			}
 		}
 				
 		// ajout dans la base des données.
-		$this->modelevenement->ajouterDonnees( $newDonneesEvenement );
+		if( $newentry ) {
+			$this->modelevenement->ajouterDonnees( $newDonneesEvenement );
+		}
+		
 		
 		// on affiche le message de reussite de l'ajout de l'evenement.
 		//display_tab($newDonneesEvenement);

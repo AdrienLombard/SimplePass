@@ -36,8 +36,20 @@
 				</br>
 
 				<div class="encadrer" >
-					<input type=radio class="choix" name="choix" value="non"  checked="checked" >Non
-					<input type=radio class="choix" name="choix" value="oui"  >Oui
+					<input type=radio 
+						   class="choix" 
+						   name="choix" 
+						   value="non"  
+						   checked="checked" 
+						   <?php if(!$resultats) echo 'disabled="true"'; ?> >Non
+					
+					<input type=radio 
+						   class="choix" 
+						   name="choix" 
+						   value="oui" 
+						   <?php if(!$resultats) echo 'disabled="true"'; ?> >Oui
+					
+					<?php if(!$resultats) echo ' - Aucun évènement pour servir de modèle.'; ?>
 				</div>
 				</br>
 				<select name="evenements">
