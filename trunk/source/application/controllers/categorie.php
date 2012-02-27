@@ -34,9 +34,11 @@ class Categorie extends Cafe {
 	public function voir($id) {
 		
 		$this->layout->ajouter_css('utilisateur/details');
-		$data['nom']=$this->modelCategorie->getCategorieMereid($id);
-		$data['resultats']=$this->modelCategorie->getSousCategorie($id);
-		$data['id'] = $id;
+		
+		$data['nom']		= $this->modelCategorie->getCategorieMereid($id);
+		$data['resultats']	= $this->modelCategorie->getSousCategorie($id);
+		$data['id']			= $id;
+		
 		$this->layout->view('utilisateur/categorie/VoirCateg', $data);
 	}
 	
