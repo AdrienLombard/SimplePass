@@ -88,12 +88,12 @@ class modelCategorie extends CI_Model {
 	
 	public function ajouter($nom,$id) {
 		$values=array('libellecategorie'=>$nom,'surcategorie'=>$id);
-		$this->db->insert($this->tableCategorie, $values);
+		$this->db->insert(DB_CATEGORIE, $values);
 	}
 	
 	public function getSousCategorie($id) {
 		return $this->db->select('*')
-						->from($this->tableCategorie)
+						->from(DB_CATEGORIE)
 						->where('surcategorie',$id)
 						->get()
 						->result();
@@ -106,17 +106,17 @@ class modelCategorie extends CI_Model {
 		
 		$this->db->where('idcategorie', $id);
 		
-        $this->db->delete($this->tableCategorie);
+        $this->db->delete(DB_CATEGORIE);
 	}
 	
 	public function supprimersousCategorie($id) {
 		
 		$this->db->where('surcategorie', $id);
-        $this->db->delete($this->tableCategorie);
+        $this->db->delete(DB_CATEGORIE);
 	}
 	
 	public function modifier($id,$nom) {
-		return $this->db->update($this->tableCategorie, array( 'libellecategorie' => $nom), 'idcategorie = '.$id);
+		return $this->db->update(DB_CATEGORIE, array( 'libellecategorie' => $nom), 'idcategorie = '.$id);
 	}
 	
 	
