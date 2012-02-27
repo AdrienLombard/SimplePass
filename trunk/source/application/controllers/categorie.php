@@ -43,7 +43,7 @@ class Categorie extends Cafe {
 	public function ajouter($values='') {
 		
 		$data['info'] = $values;
-		$data['categories']=$this->modelCategorie->getCategorie();
+		$data['categories']=$this->modelCategorie->getCategories();
 		$this->layout->view('utilisateur/categorie/AjoutCateg', $data);
 		
 	}
