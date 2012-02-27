@@ -23,19 +23,26 @@
         </aside>
 
         <div id="main">
-			<?php foreach ($nom as $nom1):{?>
-			<h2><?php echo $nom1->libellecategorie ?></h2>
-			<?php } endforeach; ?>
-            <?php foreach ($resultats as $categorie):{?>
+			
+			<h2><?php echo $nom[0]->libellecategorie ?></h2>
 			
 			<table class="details">
-				<tr>
-					<th>Sous catégorie </th>
-					<td><?php echo $categorie->libellecategorie?></td>
-					<td><a href="<?php echo site_url('categorie/voir/'.$categorie->idcategorie ); ?>">Voir</a></td>
-				</tr>
+				<?php if($resultats): ?>
+					<?php foreach ($resultats as $categorie): ?>
 				
-				<?php } endforeach; ?>
+						<tr>
+							<th><strong> Sous-Catégorie </strong></th>
+							<td><?php echo $categorie->libellecategorie?></td>
+							<td><a href="<?php echo site_url('categorie/voir/'.$categorie->idcategorie ); ?>">Voir</a></td>
+						</tr>
+
+					<?php endforeach; ?>
+				<?php else: ?>
+						<tr>
+							<td>Cette catégorie ne contient aucune sous-catégorie.</td>
+						</tr>
+				<?php endif; ?>
+				
 			</table>
 			
         </div>
