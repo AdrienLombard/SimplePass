@@ -49,17 +49,14 @@ define('ACCREDITATION_VALIDE', 0);
  */
 define('DB_ACCREDITATION',			'courchevel_accreditation');
 define('DB_CATEGORIE',				'courchevel_categorie');
-define('DB_CATEGORIE_EVENEMENT',	'courchevel_categories_evenements');
-define('DB_CATEGORIE_ZONE', 		'courchevel_donne_acces');
-define('DB_ZONES_EVENEMENT',		'courchevel_zones_evenement');
 define('DB_CLIENT',					'courchevel_client');
-define('DB_DONNE_ACCES',			'courchevel_donne_acces');
 define('DB_EVENEMENT',				'courchevel_evenement');
 define('DB_PAYS',					'courchevel_pays');
-define('DB_PERMET',					'courchevel_permet');
 define('DB_POSSEDE',				'courchevel_possede');
 define('DB_UTILISATEUR',			'courchevel_utilisateur');
 define('DB_ZONE',					'courchevel_zone');
+
+define('DB_PARAMETRE_EVENEMENT',	'courchevel_parametres_evenements');
 
 
 /* End of file constants.php */

@@ -24,7 +24,30 @@ class modelZone extends MY_Model {
 		
 	}
 	
-	public function getZoneParIdMultiple ( $idCategorie ) {
+	public function getZoneParIdMultipleParEvenement( $idCategorie, $idEvenement ) {
+		$where = '';
+		$k = true;
+		foreach($idCategorie as $id) {
+			if($k) {
+				$where .= '( idcategorie = ' . $id;
+				$k = false;
+			}
+			else {
+				$where .= ' OR idcategorie = ' . $id;
+			}
+		}
+		$where .= ' )';
+		
+		return $this->db->select('*')
+						->from(DB_PARAMETRE_EVENEMENT)
+						->where($where)
+						->where('idevenement', $idEvenement)
+						->get()
+						->result();
+
+	}
+	
+	public function getZoneParIdMultiple( $idCategorie ) {
 		$where = '';
 		$k = true;
 		foreach($idCategorie as $id) {
@@ -38,7 +61,7 @@ class modelZone extends MY_Model {
 		}
 		
 		return $this->db->select('*')
-						->from(DB_CATEGORIE_ZONE)
+						->from(DB_PARAMETRE_EVENEMENT)
 						->where($where)
 						->get()
 						->result();
@@ -68,16 +91,16 @@ class modelZone extends MY_Model {
 	
 	
 	public function getZoneParEvenement( $idEvenement ) {
-		return $this->db->select('*')
-					   ->from(DB_ZONE . ' z')
-					   ->join(DB_ZONES_EVENEMENT . ' ze', 'z.idzone = ze.idzone', 'left')
-					   ->where('idevenement', $idEvenement)
-					   ->get()
-					   ->result();
+		return $this->db->select('ze.idzone, ze.codezone, z.libellezone')
+						->distinct()
+					    ->from(DB_ZONE . ' z')
+					    ->join(DB_PARAMETRE_EVENEMENT . ' ze', 'z.idzone = ze.idzone AND ze.idevenement = ' . $idEvenement, 'left')
+					    ->get()
+					    ->result();
 	}
 	
 	
-	public function ajouter($libelle ) {
+	public function ajouter( $libelle ) {
 		return $this->db->insert(DB_ZONE, array('libellezone' => $libelle) );
 	}
 	

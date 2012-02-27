@@ -21,6 +21,7 @@ class modelEvenement extends MY_Model {
 						->result();
 			
 	}
+
 	
 	/**
 	 * Fonction pour recuperer l'id d'un evenement
@@ -33,7 +34,19 @@ class modelEvenement extends MY_Model {
 						   ->get()
 				           ->result();
 		
-	} 
+	}
+	
+	
+	public function getCategoriesZonesPourEvenement( $idEvenment ) {
+		return $this->db->select('*')
+						->from(DB_CATEGORIE_EVENEMENT . ' ce')
+						->join(DB_CATEGORIE . ' c', 'c.idcategorie = ce.idcategorie')
+						->join(DB_CATEGORIE_ZONE . ' cz', 'cz.idcategorie = c.idcategorie')
+						->where('ce.idevenement', $idEvenment)
+						->get()
+						->result();
+	}
+	
 	
 	/**
 	 * 
@@ -52,6 +65,15 @@ class modelEvenement extends MY_Model {
 		
 		$this->db->insert(DB_EVENEMENT, $data);
 	
+	}
+	
+	
+	/**
+	 * Fonction pour ajouter les paramètre d'un évènment : trio evenement / zone / categorie.
+	 * @param Array $parametre : le tableau associatif des ligne a insérer.
+	 */
+	public function ajouterDonnees( $parametre ) {
+		return $this->db->insert_batch(DB_PARAMETRE_EVENEMENT, $parametre );
 	}
 	
 	/**
