@@ -275,20 +275,23 @@ class Evenement extends Cafe {
 			$data['datedebut'] 	= $reponse[0]->datedebut;
 			$data['datefin'] 	= $reponse[0]->datefin;
 			
-			// Construction du tableau de couple categorie / zone pour remplir les case a cocher.
-			$data['listeCatgorieZone'] = Array();
-			$idCategorie = Array();
-			foreach($categories as $cate) {
-				$idcategorie[] = $cate['db']->idcategorie;
-			}
-			$categoriesZones = $this->modelzone->getZoneParIdMultipleParEvenement ( $idcategorie, $id );
+			$data['listeCategorieZone'] = Array();
+			if($categories) {
+				// Construction du tableau de couple categorie / zone pour remplir les case a cocher.
+				$data['listeCatgorieZone'] = Array();
+				$idCategorie = Array();
+				foreach($categories as $cate) {
+					$idcategorie[] = $cate['db']->idcategorie;
+				}
+				$categoriesZones = $this->modelzone->getZoneParIdMultipleParEvenement ( $idcategorie, $id );
 
-			// On construit le tableau qui va organiser les zones et les catégories.
-			$listeCatgorieZone = Array();
-			foreach($categoriesZones as $categorie) {
-				$listeCatgorieZone[$categorie->idcategorie][$categorie->idzone] = 1;
+				// On construit le tableau qui va organiser les zones et les catégories.
+				$listeCatgorieZone = Array();
+				foreach($categoriesZones as $categorie) {
+					$listeCatgorieZone[$categorie->idcategorie][$categorie->idzone] = 1;
+				}
+				$data['listeCategorieZone'] = $listeCatgorieZone;
 			}
-			$data['listeCategorieZone'] 	= $listeCatgorieZone;
 		}
 		
 		// Appelle de la vue.
