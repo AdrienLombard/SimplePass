@@ -33,6 +33,14 @@ class modelCategorie extends CI_Model {
 						->result();
 	}
 	
+	public function getSousCategorie( $id ) {
+		return $this->db->select('*')
+						->from(DB_CATEGORIE)
+						->where('surcategorie',$id)
+						->get()
+						->result();
+	}
+	
 	public function getCategorieDansEvenement( $idEvenement ) {
 		return $this->db->select('*')
 						->from(DB_CATEGORIE . ' c')
@@ -91,16 +99,6 @@ class modelCategorie extends CI_Model {
 		$this->db->insert(DB_CATEGORIE, $values);
 	}
 	
-	public function getSousCategorie($id) {
-		return $this->db->select('*')
-						->from(DB_CATEGORIE)
-						->where('surcategorie',$id)
-						->get()
-						->result();
-	}
-	public function lastId() {
-		return $this->db->insert_id();
-	}
 	
 	public function supprimerCategorie($id) {
 		
