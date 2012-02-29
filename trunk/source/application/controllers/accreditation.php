@@ -132,5 +132,15 @@ class Accreditation extends Cafe {
 		redirect('accreditation/voir/' . $id);
 		
 	}
+	
+	public function valider ($idAccreditation ) {
+		
+		$this->modelaccreditation->valideraccreditation( $idAccreditation );
+				
+		$data['titre']		= 'Validation';
+		$data['message']	= 'L\'accréditation a été validée avec succes.';
+		$this->layout->view('utilisateur/UMessage', $data);	 
+		
+	}
 
 }

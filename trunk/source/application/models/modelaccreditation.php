@@ -96,6 +96,7 @@ class modelAccreditation extends MY_Model {
 	}
 	
 	
+	
 	/*
 	 * CREATE
 	 */
@@ -112,6 +113,12 @@ class modelAccreditation extends MY_Model {
 	
 	public function modifier($id, $values) {
 		$this->db->update(DB_ACCREDITATION, $values, array('idaccreditation = ' . $id));
+	}
+	
+	public function valideraccreditation( $id ) {
+		$this->db->set('etataccreditation', ACCREDITATION_VALIDE)
+				 ->where('idaccreditation', $id) 
+				 ->update();
 	}
 	
 	

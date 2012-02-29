@@ -88,7 +88,6 @@ class Zone extends Cafe {
 			// Appel de la vue.
 			$data['titre']		= 'Ajout';
 			$data['message']	= 'Votre zone à bien été ajoutée.';
-			$data['redirect'] 	= 'zone';
 			$this->layout->view('utilisateur/UMessage', $data);	 
 		}
 		else {
