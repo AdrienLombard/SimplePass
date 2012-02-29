@@ -114,7 +114,7 @@ class Zone extends Cafe {
 		}
 		else {
 			$reponse = $this->modelzone->getZoneParId( $id );
-			$data['libelle'] = $reponse[0]->libellezone;
+			$data['libelle'] = ($reponse) ? $reponse[0]->libellezone : null;
 		}
 		
 		// Appelle de la vue.
