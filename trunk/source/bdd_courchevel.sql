@@ -105,10 +105,10 @@ create table courchevel_evenement
 /*==============================================================*/
 create table courchevel_parametres_evenements
 (
-   idzone               bigint not null,
    idevenement          bigint not null,
    idcategorie          bigint not null,
-   codezone				int    not null,
+   idzone               bigint not null,
+   codezone				int,
    primary key (idzone, idevenement, idcategorie)
 ) engine = InnoDB, charset = utf8;
 
@@ -146,6 +146,103 @@ create table courchevel_zone
 ) engine = InnoDB, charset = utf8;
 
 insert into courchevel_utilisateur (login,mdp) values ('root', 'root');
+
+insert into courchevel_client (pays,nom,prenom,civilite,organisme,tel,mail) values ('CHE','ASSIER','Aymeric','M','World Company','0123456789','aymeric.assier@gmail.com');
+insert into courchevel_client (pays,nom,prenom,civilite,organisme,tel,mail) values ('FRA','LOMBARD','Adrien','M','World Company','0234567891','adrien.lombard@gmail.com');
+insert into courchevel_client (pays,nom,prenom,civilite,tel,mail) values ('BEL','ARNOULD','Mickaël','M','0345678912','mickael.arnould@gmail.com');
+insert into courchevel_client (pays,nom,prenom,civilite,tel,mail) values ('FRA','FRANCHON','Sebastien','M','0456789123','seb.franchon@gmail.com');
+insert into courchevel_client (pays,nom,prenom,civilite,tel,mail) values ('TUN','CHRIGUI','Hajer','Mlle','0567891234','hajer.chrigui@gmail.com');
+
+insert into courchevel_zone (libellezone) values ('Data / Timing');
+insert into courchevel_zone (libellezone) values ('Team Areas');
+insert into courchevel_zone (libellezone) values ('Coach Areas');
+insert into courchevel_zone (libellezone) values ('Sports Areas');
+insert into courchevel_zone (libellezone) values ('Start & Warm Up');
+insert into courchevel_zone (libellezone) values ('Officials Areas');
+insert into courchevel_zone (libellezone) values ('TV / Radio Areas');
+insert into courchevel_zone (libellezone) values ('TV / Radio Commentators');
+insert into courchevel_zone (libellezone) values ('IBC / TV Compound');
+insert into courchevel_zone (libellezone) values ('Media Areas');
+insert into courchevel_zone (libellezone) values ('Photographer Areas');
+insert into courchevel_zone (libellezone) values ('Special Media Areas');
+insert into courchevel_zone (libellezone) values ('Press Centre');
+insert into courchevel_zone (libellezone) values ('VIP');
+insert into courchevel_zone (libellezone) values ('O.C. Areas');
+
+insert into courchevel_evenement (libelleevenement,datedebut,datefin) values ('Coupe du monde feminine de ski alpin hiver 2011','1324076400','1324162800');
+insert into courchevel_evenement (libelleevenement,datedebut,datefin) values ('Coupe du monde d été de saut a ski 2011','1313013600','1313100000');
+insert into courchevel_evenement (libelleevenement,datedebut,datefin) values ('Coupe du monde feminine de ski alpin hiver 2012','1355612400','1355698800');
+
+insert into courchevel_categorie (libellecategorie) values ('Presse');
+insert into courchevel_categorie (surcategorie,libellecategorie) values (1,'Presse oral');
+insert into courchevel_categorie (surcategorie,libellecategorie) values (1,'Presse écrite');
+insert into courchevel_categorie (surcategorie,libellecategorie) values (2,'Presse TV');
+insert into courchevel_categorie (surcategorie,libellecategorie) values (2,'Presse radio');
+insert into courchevel_categorie (libellecategorie) values ('Bénévole');
+insert into courchevel_categorie (surcategorie, libellecategorie) values (6, 'Serveur restaurant');
+insert into courchevel_categorie (surcategorie, libellecategorie) values (6, 'Conducteur navette');
+insert into courchevel_categorie (surcategorie, libellecategorie) values (6, 'Responsable parkings');
+insert into courchevel_categorie (surcategorie, libellecategorie) values (9, 'Responsable parking altiport');
+insert into courchevel_categorie (surcategorie, libellecategorie) values (9, 'Responsable parking stade');
+insert into courchevel_categorie (libellecategorie) values ('Sportif');
+insert into courchevel_categorie (libellecategorie) values ('VIP');
+
+insert into courchevel_parametres_evenements (idevenement, idcategorie, idzone) values (1, 4, 7);
+insert into courchevel_parametres_evenements (idevenement, idcategorie, idzone) values (1, 4, 8);
+insert into courchevel_parametres_evenements (idevenement, idcategorie, idzone) values (1, 4, 9);
+insert into courchevel_parametres_evenements (idevenement, idcategorie, idzone) values (1, 4, 10);
+insert into courchevel_parametres_evenements (idevenement, idcategorie, idzone) values (1, 7, 14);
+insert into courchevel_parametres_evenements (idevenement, idcategorie, idzone) values (1, 7, 15);
+insert into courchevel_parametres_evenements (idevenement, idcategorie, idzone) values (1, 12, 2);
+insert into courchevel_parametres_evenements (idevenement, idcategorie, idzone) values (1, 12, 3);
+insert into courchevel_parametres_evenements (idevenement, idcategorie, idzone) values (1, 12, 4);
+insert into courchevel_parametres_evenements (idevenement, idcategorie, idzone) values (1, 12, 5);
+insert into courchevel_parametres_evenements (idevenement, idcategorie, idzone) values (1, 13, 14);
+insert into courchevel_parametres_evenements (idevenement, idcategorie, idzone) values (2, 1, 7);
+insert into courchevel_parametres_evenements (idevenement, idcategorie, idzone) values (2, 1, 8);
+insert into courchevel_parametres_evenements (idevenement, idcategorie, idzone) values (2, 1, 9);
+insert into courchevel_parametres_evenements (idevenement, idcategorie, idzone) values (2, 1, 10);
+insert into courchevel_parametres_evenements (idevenement, idcategorie, idzone) values (2, 1, 11);
+insert into courchevel_parametres_evenements (idevenement, idcategorie, idzone) values (2, 1, 12);
+insert into courchevel_parametres_evenements (idevenement, idcategorie, idzone) values (2, 6, 6);
+insert into courchevel_parametres_evenements (idevenement, idcategorie, idzone) values (2, 6, 14);
+insert into courchevel_parametres_evenements (idevenement, idcategorie, idzone) values (2, 13, 14);
+insert into courchevel_parametres_evenements (idevenement, idcategorie, idzone) values (3, 4, 7);
+insert into courchevel_parametres_evenements (idevenement, idcategorie, idzone) values (3, 4, 8);
+insert into courchevel_parametres_evenements (idevenement, idcategorie, idzone) values (3, 4, 9);
+insert into courchevel_parametres_evenements (idevenement, idcategorie, idzone) values (3, 4, 10);
+insert into courchevel_parametres_evenements (idevenement, idcategorie, idzone) values (3, 4, 12);
+insert into courchevel_parametres_evenements (idevenement, idcategorie, idzone) values (3, 7, 14);
+insert into courchevel_parametres_evenements (idevenement, idcategorie, idzone) values (3, 12, 2);
+insert into courchevel_parametres_evenements (idevenement, idcategorie, idzone) values (3, 12, 3);
+insert into courchevel_parametres_evenements (idevenement, idcategorie, idzone) values (3, 12, 4);
+insert into courchevel_parametres_evenements (idevenement, idcategorie, idzone) values (3, 12, 5);
+insert into courchevel_parametres_evenements (idevenement, idcategorie, idzone) values (3, 13, 14);
+
+insert into courchevel_accreditation (idclient, idcategorie, idevenement, etataccreditation, dateaccreditation) values (1, 13, 1, '0', '1324076400');
+insert into courchevel_accreditation (idclient, idcategorie, idevenement, etataccreditation, dateaccreditation) values (1, 13, 2, '0', '1330038000');
+insert into courchevel_accreditation (idclient, idcategorie, idevenement, etataccreditation, dateaccreditation) values (1, 13, 3, '1', '1330297200');
+insert into courchevel_accreditation (idclient, idcategorie, idevenement, etataccreditation, dateaccreditation) values (3, 12, 1, '0', '1324076400');
+insert into courchevel_accreditation (idclient, idcategorie, idevenement, etataccreditation, dateaccreditation) values (3, 12, 3, '0', '1330038000');
+insert into courchevel_accreditation (idclient, idcategorie, idevenement, etataccreditation, dateaccreditation) values (2, 4, 3, '1', '1330038000');
+
+insert into courchevel_accreditation_zones (idaccreditation, idzone) values (1, 14);
+insert into courchevel_accreditation_zones (idaccreditation, idzone) values (2, 14);
+insert into courchevel_accreditation_zones (idaccreditation, idzone) values (3, 14);
+insert into courchevel_accreditation_zones (idaccreditation, idzone) values (4, 2);
+insert into courchevel_accreditation_zones (idaccreditation, idzone) values (4, 3);
+insert into courchevel_accreditation_zones (idaccreditation, idzone) values (4, 4);
+insert into courchevel_accreditation_zones (idaccreditation, idzone) values (4, 5);
+insert into courchevel_accreditation_zones (idaccreditation, idzone) values (5, 1);
+insert into courchevel_accreditation_zones (idaccreditation, idzone) values (5, 2);
+insert into courchevel_accreditation_zones (idaccreditation, idzone) values (5, 3);
+insert into courchevel_accreditation_zones (idaccreditation, idzone) values (5, 4);
+insert into courchevel_accreditation_zones (idaccreditation, idzone) values (5, 5);
+insert into courchevel_accreditation_zones (idaccreditation, idzone) values (6, 7);
+insert into courchevel_accreditation_zones (idaccreditation, idzone) values (5, 8);
+insert into courchevel_accreditation_zones (idaccreditation, idzone) values (5, 9);
+insert into courchevel_accreditation_zones (idaccreditation, idzone) values (5, 10);
+insert into courchevel_accreditation_zones (idaccreditation, idzone) values (5, 12);
 
 INSERT INTO courchevel_pays (idpays,nompays,indicatiftel) VALUES('AFG','Afghanistan','93');
 INSERT INTO courchevel_pays (idpays,nompays,indicatiftel) VALUES('ZAF','Afrique du Sud','27');
