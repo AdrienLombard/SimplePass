@@ -85,23 +85,6 @@ class Categorie extends Cafe {
 	
 	public function supprimer($id) {
 		
-		/*$categories =$this->modelCategorie->getCategorieMereid($id);
-	
-		foreach ($categories as $categorie)
-		{
-			
-			echo $categorie->surcategorie;
-                if($categorie->surcategorie==null)
-				{
-					$this->modelCategorie->supprimerCategorie($id);
-                    $this->modelCategorie->supprimersousCategorie($categorie->idcategorie);
-				}
-
-	     else 
-			$this->modelCategorie->supprimerCategorie($id);
-		 
-		}*/
-		
 		$categories =$this->modelCategorie->getSousCategorieid($id);
 		
 		if(isset($categories) && !empty($categories)) {
@@ -127,13 +110,13 @@ class Categorie extends Cafe {
 		$data['id'] = $id;
 		if($re)
 		{
-			$data['nom'] 		= $re['nom'];
+			$data['nom'] = $re['nom'];
 	   	
 		}
 		else {
 			
 			$reponse = $this->modelCategorie->getCategorieMereid($id);
-			$data['nom']= $reponse[0]->libellecategorie;
+			$data['nom'] = ($reponse) ? $reponse[0]->libellecategorie : null;
 			
 		}
 		$this->layout->view('utilisateur/categorie/UCModifier',$data);
