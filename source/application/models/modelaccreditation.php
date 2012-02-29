@@ -83,6 +83,18 @@ class modelAccreditation extends MY_Model {
 						->result();
 	}
 	
+	public function verificationAccred( $event, $nom, $prenom, $pays ) {
+		return $this->db->select('*')
+						->from(DB_ACCREDITATION . ' a')
+						->join(DB_CLIENT . ' c', 'c.idclient = a.idclient')
+						->where('idevenement', $event)
+						->where('nom', $nom)
+						->where('prenom', $prenom)
+						->where('pays', $pays)
+						->get()
+						->result();
+	}
+	
 	
 	/*
 	 * CREATE
