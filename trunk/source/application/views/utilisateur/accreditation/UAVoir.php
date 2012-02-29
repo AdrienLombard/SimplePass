@@ -40,10 +40,10 @@
 					<input type="text" name="prenom" class="prenom" init="<?php echo $client->prenom; ?>" value="<?php echo $client->prenom; ?>">
 
 					<select class="pays" name="pays" init="<?php echo $client->pays; ?>"
-							style="background: url(<?php echo img_url('drapeaux/'.strtolower($client->pays).'.gif'); ?>) no-repeat left; padding-left: 15px">
+							style="background: url(<?php echo img_url('drapeaux/'.strtolower($client->pays).'.gif'); ?>)no-repeat left; padding-left: 15px">
 						
 					<?php foreach($pays as $p): ?>
-						<option value="<?php echo $p->idpays; ?>" style="background: url(<?php echo img_url('drapeaux/'.strtolower($p->idpays).'.gif'); ?>) no-repeat left;" <?php echo ($p->idpays == $client->pays)? 'selected' : '' ?>><?php echo $p->nompays; ?></option>
+						<option value="<?php echo $p->idpays; ?>" style="background: url(<?php echo img_url('drapeaux/'.strtolower($p->idpays).'.gif'); ?>)no-repeat left;" <?php echo ($p->idpays == $client->pays)? 'selected' : '' ?>><?php echo $p->nompays; ?></option>
 					<?php endforeach; ?>
 					
 					</select>

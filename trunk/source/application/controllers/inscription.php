@@ -198,14 +198,13 @@ class Inscription extends Chocolat {
 	public function groupe($evenement, $info=false) {
 		
 		$data['idEvenement']	= $evenement;
-		$data['infoEvenement'] 	= $this->modelevenement->getEvenementid($evenement);
+		$data['infoEvenement'] 	= $this->modelevenement->getEvenementParId($evenement);
 		$data['listePays'] 		= $this->modellambda->listePays();
 		$data['listeCategorie'] = $this->modellambda->listeCategorie();
 		$data['values'] = $info;
 		
 		$this->layout->view('lambda/LGroupe', $data);
-		
-		
+			
 	}
 	
 	

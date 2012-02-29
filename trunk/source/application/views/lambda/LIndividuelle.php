@@ -46,11 +46,11 @@
 	
 	<div class="box-small">
 	
-	<span class="info">Inscription : individuelle</span><br>
-	<span class="info">Evènement : <?php echo $event_info[0]->libelleevenement; ?></span>
+	<span class="info"><h4>Inscription :</h4> individuelle</span><br>
+	<span class="info"><h4>Evènement :</h4> <?php echo $event_info[0]->libelleevenement; ?></span><br>
 	
 	<br><br>
-	
+	<span class="info">* champs obligatoire</span><br>
 	<form action="<?php echo site_url('inscription/ajouter/' . $event_id); ?>" method="POST" >
 		
 		<input type="hidden" id="evenement" name="evenement" value="<?php echo $event_id; ?>" />
@@ -70,7 +70,7 @@
 		<label>Pays*</label>
 		<select  id="pays" name="pays" class="select">
 			<?php foreach($listePays as $pays): ?>
-			<option VALUE="<?php echo $pays->idpays; ?>" <?php echo set_select('pays', $pays->idpays); ?> ><?php echo $pays->nompays; ?></option>
+				<option VALUE="<?php echo $pays->idpays; ?>" <?php echo set_select('pays', $pays->idpays); ?> ><?php echo $pays->nompays; ?></option>
 			<?php endforeach; ?>
 		</select>
 		
