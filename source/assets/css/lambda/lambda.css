@@ -94,7 +94,9 @@ input[type=submit]:hover {
 
 .clear {
     clear: both;
-}.encadrer{
+}
+
+.encadrer{
     background: #b5bfc9;
     color: #000;
     border: 1px solid #1d465b;
@@ -160,6 +162,17 @@ td{
 	float: left;
 	margin-right: 15px;
 }
+
+#inscriptionGroupe .ligne .form .split .encadrer{
+    background: #b5bfc9;
+    color: #000;
+    border: 1px solid #1d465b;
+    padding: 4px 8px 4px 8px;
+    width: 300px;
+    border-radius: 5px;
+    font-size: 16px
+}
+
 #inscriptionGroupe .ligne .form .splitRight {
 	float: right;
 	margin-right: 0;
@@ -169,6 +182,7 @@ td{
 	width: 300px;
 }
 #inscriptionGroupe .ligne .form .split select {
+	display: block;
 	width: 320px;
 	font-size: 14px;
 }
