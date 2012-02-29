@@ -42,9 +42,10 @@ class modelCategorie extends CI_Model {
 	}
 	
 	public function getCategorieDansEvenement( $idEvenement ) {
-		return $this->db->select('*')
+		return $this->db->select('c.idcategorie, c.libellecategorie')
+						->distinct()
 						->from(DB_CATEGORIE . ' c')
-						->join(DB_CATEGORIE_EVENEMENT . ' ca', 'ca.idcategorie = c.idcategorie')
+						->join(DB_PARAMETRE_EVENEMENT . ' pe', 'pe.idcategorie = c.idcategorie', 'left')
 						->where('idevenement',$idEvenement)
 						->get()
 						->result();

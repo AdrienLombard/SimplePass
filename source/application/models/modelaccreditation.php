@@ -28,6 +28,30 @@ class modelAccreditation extends MY_Model {
 		return $result[0];
 	}
 	
+	public function getAccreditationsReferentParEvenement($idclient, $idEvenement) {
+		return $this->db->select('*')
+						->from(DB_ACCREDITATION . ' a')
+						->join(DB_CLIENT . ' cl', 'a.idclient = cl.idclient')
+						->join(DB_CATEGORIE . ' ca', 'a.idcategorie = ca.idcategorie')
+						->join(DB_EVENEMENT . ' e', 'e.idevenement = a.idevenement')
+						->where('cl.idclient', $idclient)
+				        ->where('e.idevenement', $idEvenement)
+						->get()
+						->result();
+	}
+	
+	public function getAccreditationsGroupeParEvenement($idclient, $idEvenement) {
+		return $this->db->select('*')
+						->from(DB_ACCREDITATION . ' a')
+						->join(DB_CLIENT . ' cl', 'a.idclient = cl.idclient')
+						->join(DB_CATEGORIE . ' ca', 'a.idcategorie = ca.idcategorie')
+						->join(DB_EVENEMENT . ' e', 'e.idevenement = a.idevenement')
+						->where('cl.referent', $idclient)
+				        ->where('e.idevenement', $idEvenement)
+						->get()
+						->result();
+	}
+	
 	public function getAccreditationsParEvenement($idEvenement) {
 		return $this->db->select('*')
 						->from(DB_ACCREDITATION . ' a')
@@ -78,6 +102,7 @@ class modelAccreditation extends MY_Model {
 						->join(DB_CLIENT . ' cl', 'a.idclient = cl.idclient', 'left')
 						->join(DB_CATEGORIE . ' ca', 'a.idcategorie = ca.idcategorie', 'left')
 						->where('a.idevenement', $idEvenement)
+				        ->where('cl.referent', Null)
 						->where('a.etataccreditation', ACCREDITATION_A_VALIDE)
 						->get()
 						->result();

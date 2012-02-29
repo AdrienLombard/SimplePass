@@ -1,7 +1,15 @@
 .accred {
 	
 }
+.accred .client .groupe {
+	float: left;
+	background: #666;
+	height: 180px;
+	width: 161px;
+	margin-right: 20px;
+	text-align: center;
 
+}
 .accred .client .photo {
 	float: left;
 }

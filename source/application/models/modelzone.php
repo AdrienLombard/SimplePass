@@ -68,7 +68,7 @@ class modelZone extends MY_Model {
 
 	}
 	
-	public function getZoneParAccreditationMultiple ( $idAccred ) {
+	/*public function getZoneParAccreditationMultiple ( $idAccred ) {
 		$where = '';
 		$k = true;
 		foreach($idAccred as $id) {
@@ -88,7 +88,7 @@ class modelZone extends MY_Model {
 						->result();
 
 	}
-	
+	*/
 	
 	public function getZoneParEvenement( $idEvenement ) {
 		return $this->db->select('ze.idzone, ze.codezone, z.libellezone')
