@@ -23,20 +23,6 @@ class modelEvenement extends MY_Model {
 	}
 
 	
-	/**
-	 * Fonction pour recuperer l'id d'un evenement
-	 * @return l'id Evenement 
-	 */
-	public function getIdEvenement($libelle){
-		   return $this->db->select('libelleevenement')
-				           ->form(DB_EVENEMENT)
-						   ->where('libelleevenement',$libelle)
-						   ->get()
-				           ->result();
-		
-	}
-	
-	
 	public function getCategoriesZonesPourEvenement( $idEvenment ) {
 		return $this->db->select('*')
 						->from(DB_CATEGORIE_EVENEMENT . ' ce')
@@ -48,23 +34,27 @@ class modelEvenement extends MY_Model {
 	}
 	
 	
-	/**
-	 * 
-	 * Enter description here ...
-	 * @param unknown_type $libelle
-	 * @param unknown_type $datedebut
-	 * @param unknown_type $datefin
-	 */
+	public function getEvenementEnCours() {
+		$current_date = time();
+		
+		 return $this->db->select('*')
+				          ->from(DB_EVENEMENT)
+						  ->where('datefin >', $current_date)
+						  ->get()
+				          ->result();
+		
+	}
+	
+	
 	public function ajouter($libelle,$datedebut,$datefin){
 		
 		$data = array(
-		 	'libelleevenement' => $libelle,
-		 	'datedebut' => $datedebut,
-		 	'datefin' => $datefin
+		 	'libelleevenement'	=> $libelle,
+		 	'datedebut'			=> $datedebut,
+		 	'datefin'			=> $datefin
 		 );
 		
 		$this->db->insert(DB_EVENEMENT, $data);
-	
 	}
 	
 	
