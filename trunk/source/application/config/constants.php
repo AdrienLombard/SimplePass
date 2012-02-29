@@ -48,15 +48,14 @@ define('ACCREDITATION_VALIDE', 0);
  * Nom des tables de la bdd.
  */
 define('DB_ACCREDITATION',			'courchevel_accreditation');
+define('DB_ACCREDITATION_ZONES',	'courchevel_accreditation_zones');
 define('DB_CATEGORIE',				'courchevel_categorie');
 define('DB_CLIENT',					'courchevel_client');
 define('DB_EVENEMENT',				'courchevel_evenement');
+define('DB_PARAMETRES_EVENEMENTS',	'courchevel_parametres_evenements');
 define('DB_PAYS',					'courchevel_pays');
-define('DB_POSSEDE',				'courchevel_possede');
 define('DB_UTILISATEUR',			'courchevel_utilisateur');
 define('DB_ZONE',					'courchevel_zone');
-
-define('DB_PARAMETRE_EVENEMENT',	'courchevel_parametres_evenements');
 
 
 /* End of file constants.php */

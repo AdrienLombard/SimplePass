@@ -12,7 +12,7 @@
 
         <aside>
            
-            <a href="#">Modifier la personne</a>
+            <a href="#" class="editClient">Modifier la personne</a>
 			<a href="#">Nouvelle accréditation</a>
 
         </aside>
@@ -36,20 +36,34 @@
 					
 					<input type="hidden" name="id" value="<?php echo $client->idclient; ?>" />
 					
-					<input type="text" name="nom" class="nom" init="<?php echo $client->nom; ?>" value="<?php echo $client->nom; ?>">
-					<input type="text" name="prenom" class="prenom" init="<?php echo $client->prenom; ?>" value="<?php echo $client->prenom; ?>">
+					<div>
+						<input type="text" name="nom" class="nom" init="<?php echo $client->nom; ?>" value="<?php echo $client->nom; ?>" readonly>
+					</div>
+					
+					<div>
+						<input type="text" name="prenom" class="prenom" init="<?php echo $client->prenom; ?>" value="<?php echo $client->prenom; ?>" readonly>
+					</div>
 
-					<select class="pays" name="pays" init="<?php echo $client->pays; ?>"
-							style="background: url(<?php echo img_url('drapeaux/'.strtolower($client->pays).'.gif'); ?>)no-repeat left; padding-left: 15px">
-						
-					<?php foreach($pays as $p): ?>
-						<option value="<?php echo $p->idpays; ?>" style="background: url(<?php echo img_url('drapeaux/'.strtolower($p->idpays).'.gif'); ?>)no-repeat left;" <?php echo ($p->idpays == $client->pays)? 'selected' : '' ?>><?php echo $p->nompays; ?></option>
-					<?php endforeach; ?>
+					<div>
+						<label>Pays : </label>
+						<select class="pays" name="pays" init="<?php echo $client->pays; ?>" style="padding-left: 0px;" disabled="disabled">
+
+						<?php foreach($pays as $p): ?>
+							<option value="<?php echo $p->idpays; ?>" style="background: url(<?php echo img_url('drapeaux/'.strtolower($p->idpays).'.gif'); ?>) no-repeat left;" <?php echo ($p->idpays == $client->pays)? 'selected' : '' ?>><?php echo $p->nompays; ?></option>
+						<?php endforeach; ?>
+
+						</select>
+					</div>
 					
-					</select>
+					<div>
+						<label>Tel : </label>
+						<input type="text" name="tel" class="tel" init="<?php echo $client->tel; ?>" value="<?php echo $client->tel; ?>" readonly>
+					</div>
 					
-					<input type="text" name="tel" class="tel" init="<?php echo $client->tel; ?>" value="<?php echo $client->tel; ?>">
-					<input type="text" name="mail" class="email" init="<?php echo $client->mail; ?>" value="<?php echo $client->mail; ?>">
+					<div>
+						<label>Mail : </label>
+						<input type="text" name="mail" class="email" init="<?php echo $client->mail; ?>" value="<?php echo $client->mail; ?>" readonly>
+					</div>
 					
 					<input type="submit" class="valideInfos" value="Enregistrer les modifications" />
 					
@@ -72,66 +86,50 @@
 				<?php foreach($accredAttente as $demande): ?>
 				
 				<div class="ligneAccred close">
-					<span class="date"><?php echo display_date($demande->dateaccreditation); ?></span>
-					<span class="categorie"><?php echo $demande->libellecategorie; ?></span>
-					<span class="evenement"><?php echo $demande->libelleevenement; ?></span>
+					
+					<div class="fixe">
+						<span class="date"><?php echo display_date($demande['accred']->dateaccreditation); ?></span>
+						<span class="categorie"><?php echo $demande['accred']->libellecategorie; ?></span>
+						<span class="evenement"><?php echo $demande['accred']->libelleevenement; ?></span>
+					</div>
 					
 					<form class="editAccred">
 						
 						<div>
 							<select name="evenement">
 								<?php foreach($evenements as $evenement): ?>
-								<option value="<?php echo $evenement->idevenement; ?>"><?php echo $evenement->libelleevenement; ?></option>
+								<option value="<?php echo $evenement->idevenement; ?>" <?php echo ($demande['accred']->idevenement == $evenement->idevenement)? 'selected' : ''; ?>><?php echo $evenement->libelleevenement; ?></option>
 								<?php endforeach; ?>
 							</select>
 						</div>
 						
 						<div>
-							<input type="text" />
-							<select>
+							
+							<input type="text" value="t'es qui toi ?"/>
+							
+							<select name="categorie">
 								<?php foreach($categories as $categorie): ?>
-								<option value="<?php echo $categorie->idcategorie; ?>"><?php echo $categorie->libellecategorie; ?></option>
+								<option value="<?php echo $categorie['db']->idcategorie; ?>" <?php echo ($demande['accred']->idcategorie == $categorie['db']->idcategorie)? 'selected' : ''; ?>>
+									<?php repeat('- ', $categorie['depth']); ?><?php echo $categorie['db']->libellecategorie; ?>
+								</option>
 								<?php endforeach; ?>
 							</select>
+							
 						</div>
 						
 						<table class="choixZones">
 							<thead>
 								<tr>
-									<td>01</td>
-									<td>02</td>
-									<td>03</td>
-									<td>04</td>
-									<td>05</td>
-									<td>06</td>
-									<td>07</td>
-									<td>08</td>
-									<td>09</td>
-									<td>10</td>
-									<td>11</td>
-									<td>12</td>
-									<td>13</td>
-									<td>14</td>
-									<td>15</td>
+									<?php foreach($demande['allZones'] as $zone): ?>
+									<td><?php echo $zone->codezone; ?></td>
+									<?php endforeach; ?>
 								</tr>
 							</thead>
 							<tbody>
 								<tr>
-									<td><input type="checkbox" /></td>
-									<td><input type="checkbox" /></td>
-									<td><input type="checkbox" /></td>
-									<td><input type="checkbox" /></td>
-									<td><input type="checkbox" /></td>
-									<td><input type="checkbox" /></td>
-									<td><input type="checkbox" /></td>
-									<td><input type="checkbox" /></td>
-									<td><input type="checkbox" /></td>
-									<td><input type="checkbox" /></td>
-									<td><input type="checkbox" /></td>
-									<td><input type="checkbox" /></td>
-									<td><input type="checkbox" /></td>
-									<td><input type="checkbox" /></td>
-									<td><input type="checkbox" /></td>
+									<?php foreach($demande['allZones'] as $zone): ?>
+									<td><input type="checkbox" name="zone[<?php echo $zone->idzone; ?>]" <?php echo (zoneIsIn($zone, $demande['zones']))? 'checked': '' ; ?> /></td>
+									<?php endforeach; ?>
 								</tr>
 							</tbody>
 						</table>
@@ -153,16 +151,19 @@
 				
 				<?php foreach($accredValide as $accred): ?>
 					<div class="ligneAccred close">
-						<span class="date"><?php echo $accred->dateaccreditation; ?></span>
-						<span class="categorie"><?php echo $accred->libellecategorie; ?></span>
-						<span class="evenement"><?php echo $accred->libelleevenement; ?></span>
+						
+						<div class="fixe">
+							<span class="date"><?php echo display_date($accred['accred']->dateaccreditation); ?></span>
+							<span class="categorie"><?php echo $accred['accred']->libellecategorie; ?></span>
+							<span class="evenement"><?php echo $accred['accred']->libelleevenement; ?></span>
+						</div>
+						
 						<div class="detailZones">
 							Zones :
-							<?php if(isset($listeZonesAccred[$accred->idaccreditation])): ?>
-								<?php echo implode(', ', $listeZonesAccred[$accred->idaccreditation]); ?>
-							<?php else: ?>
-								Aucune...
-							<?php endif; ?>
+							
+							<?php foreach($accred['zones'] as $z): ?>
+								<?php echo $z->idzone; ?> 
+							<?php endforeach; ?>
 							
 						</div>
 					</div>

@@ -85,6 +85,18 @@ class modelAccreditation extends MY_Model {
 						->result();
 	}
 	
+	public function getAccreditationsValideesParClient($idClient) {
+		return $this->db->select('*')
+						->from(DB_ACCREDITATION . ' a')
+						->join(DB_CLIENT . ' cl', 'a.idclient = cl.idclient')
+						->join(DB_CATEGORIE . ' ca', 'a.idcategorie = ca.idcategorie')
+						->join(DB_EVENEMENT . ' e', 'e.idevenement = a.idevenement')
+						->where('a.idclient', $idClient)
+						->where('etataccreditation', ACCREDITATION_VALIDE)
+						->get()
+						->result();
+	}
+	
 	public function getAccreditationsValidees( $idEvenement ) {
 		return $this->db->select('*')
 						->from(DB_ACCREDITATION . ' a')

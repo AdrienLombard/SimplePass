@@ -9,3 +9,23 @@ if ( ! function_exists('display_tab'))
 		echo '</pre>';
 	}
 }
+
+if ( ! function_exists('repeat'))
+{
+	function repeat($str, $occur)
+	{
+		for($i=0;$i<$occur;$i++)
+			echo $str;
+	}
+}
+
+if ( ! function_exists('zoneIsIn'))
+{
+	function zoneIsIn($zone, $zones)
+	{
+		foreach($zones as $z)
+			if($z->idzone == $zone->idzone)
+				return true;
+		return false;
+	}
+}

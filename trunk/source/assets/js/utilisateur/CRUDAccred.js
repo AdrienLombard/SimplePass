@@ -3,26 +3,12 @@ $(document).ready(function(){
 	$("form.editAccred").hide();
 	$("div.detailZones").hide();
 	
-	$("div.ligneAccred").live('click', function(){
-		$(this).toggleClass('close');
-		$(this).find("form.editAccred").slideDown('fast');
-		$(this).find("div.detailZones").slideDown('fast');
+	$(".ligneAccred .fixe").live('click', function(){
+		$(this).parent().toggleClass('close');
+		$(this).next().slideToggle('fast');
 	});
 	
-	$(".valideInfos").hide();
-	
-	$("form.infos input[type=text]").blur(function(){
-		if($(this).val() != $(this).attr('init'))
-			$("form.infos input[type=submit]").show();
-	});
-
-	$("select.pays").change(function(){
-		$(this).attr('style', 'background: url(http://localhost/courchevel_src/assets/images/drapeaux/' + $(this).val().toLowerCase() + '.gif) no-repeat left; padding-left: 15px;');
-		$("form.infos input[type=submit]").show();
-	});
-	
-	
-	
+		
 	/*
 	 * Recherche de personne dans 'ajouter'
 	 */
@@ -35,5 +21,20 @@ $(document).ready(function(){
 
 	});
 	
+	
+	/*
+	 * Modifier le formulaire du client en place
+	 */
+	
+	$("form.infos input[type=submit]").hide();
+	
+	$('a.editClient').live('click', function(){
+		$('form.infos input, form.infos select').removeAttr('readonly').removeAttr('disabled');
+		$("form.infos input[type=submit]").show();
+	});
+
+	$("select.pays").change(function(){
+		$(this).attr('style', 'background: url(http://localhost/courchevel_src/assets/images/drapeaux/' + $(this).val().toLowerCase() + '.gif) no-repeat left;');
+	});
 	
 });

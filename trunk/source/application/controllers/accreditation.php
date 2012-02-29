@@ -53,37 +53,27 @@ class Accreditation extends Cafe {
 		$data['client'] = $this->modelclient->getClientParId($idClient);
 		$data['pays'] = $this->modelpays->getpays();
 		$data['evenements'] = $this->modelevenement->getEvenements();
-		$data['categories'] = $this->modelcategorie->getCategories();
+		$data['categories'] = $this->modelcategorie->getCategorieDansEvenementToutBien();
 		$data['zones'] = $this->modelzone->getZones();
 		
 		$data['accredAttente'] = array();
 		$data['accredValide'] = array();
-		//$data['demandes'] = $this->modelaccreditation->getDemandesParClient($idClient);
 		
-		// On récpère les accréditations de ce client.
-		$accreditation = $this->modelaccreditation->getAccreditationsParClient( $idClient );
-		$idCategories = array();
-		foreach ($accreditation as $accred) {
-			if($accred->etataccreditation == ACCREDITATION_A_VALIDE) {
-				$data['accredAttente'][] = $accred;
-			}
-			else {
-				$data['accredValide'][] = $accred;
-			}
-			$idAccred[] = $accred->idaccreditation;
+		$demandes = $this->modelaccreditation->getDemandesParClient($idClient);
+		$validees = $this->modelaccreditation->getAccreditationsValideesParClient($idClient);
+		
+		foreach($demandes as $demande) {
+			$sortie['accred'] = $demande;
+			$sortie['allZones'] = $this->modelzone->getZoneParEvenement($demande->idevenement);
+			$sortie['zones'] = $this->modelzone->getZoneParAccreditation($demande->idaccreditation);
+			$data['accredAttente'][] = $sortie;
 		}
 		
-		$listeZonesAccred = array();
-		if(count($idCategories)) {
-
-		// On récupère et on traite la liste des zones utilisé par les accréditation de ce client.
-		$zonesAccreds = $this->modelzone->getZoneParAccreditationMultiple( $idAccred );
-		foreach ($zonesAccreds as $zones) {
-			$listeZonesAccred[$zones->idaccreditation][] = $zones->idzone;
-		}
-		
-		$data['listeZonesAccred'] = $listeZonesAccred;
-		
+		foreach($validees as $validee) {
+			$sortie['accred'] = $demande;
+			$sortie['allZones'] = $this->modelzone->getZoneParEvenement($validee->idevenement);
+			$sortie['zones'] = $this->modelzone->getZoneParAccreditation($validee->idaccreditation);
+			$data['accredValide'][] = $sortie;
 		}
 		
 		$this->layout->view('utilisateur/accreditation/UAVoir', $data);
