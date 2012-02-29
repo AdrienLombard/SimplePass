@@ -26,6 +26,11 @@ h1 {
     font-size: 22px;
 }
 
+h4 {
+	display: inline-block;
+	font-size: 20px; 
+}
+
 .wrap {
     width: 500px;
     margin: auto;
