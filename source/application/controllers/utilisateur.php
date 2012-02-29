@@ -9,6 +9,8 @@ class utilisateur extends Cafe {
 	{
 		parent::__construct();
 		$this->load->model('modelutilisateur');
+		
+		$this->lang->load('test');
 	}
 	
 	
@@ -23,6 +25,8 @@ class utilisateur extends Cafe {
 			$this->layout->ajouter_css('utilisateur/login');
 			$this->layout->view('utilisateur/ULogin', $data);
 		}
+		
+		echo $this->lang->line('key');
 	}
 	 
 	
