@@ -54,33 +54,41 @@ class Evenement extends Cafe {
 		
 		// Récupération des données sur la données corréspondant a l'id.
 		$data['resultats']=$this->modelevenement->getEvenementParId( $id );
-		$data['id'] = $id;
 		
-		// Récupération de la liste des zones.
-		$data['listeZones'] = $this->modelzone->getZoneParEvenement( $id );
+		if($data['resultats']) {
+			$data['id'] = $id;
 		
-		
-		
-		$categories = $this->modelcategorie->getCategorieDansEvenementToutBien($id);
-		$data['listeCategorie'] = $categories;
-		
-		$data['listeCatgorieZone'] = Array();
-		if($categories) {
-			// on construit un tableau avec les id des catégorie pour récupérer tous les couples zone/catégorie.
-			$idCategorie = Array();
-			foreach($categories as $cate) {
-				$idcategorie[] = $cate['db']->idcategorie;
-			}
-			$categoriesZones = $this->modelzone->getZoneParIdMultipleParEvenement ( $idcategorie, $id );
+			// Récupération de la liste des zones.
+			$data['listeZones'] = $this->modelzone->getZoneParEvenement( $id );
 
-			// On construit le tableau qui va organiser les zones et les catégories.
-			$listeCatgorieZone = Array();
-			foreach($categoriesZones as $categorie) {
-				$listeCatgorieZone[$categorie->idcategorie][$categorie->idzone] = 1;
-			}
 
-			$data['listeCatgorieZone'] 	= $listeCatgorieZone;
+
+			$categories = $this->modelcategorie->getCategorieDansEvenementToutBien($id);
+			$data['listeCategorie'] = $categories;
+
+			$data['listeCatgorieZone'] = Array();
+			if($categories) {
+				// on construit un tableau avec les id des catégorie pour récupérer tous les couples zone/catégorie.
+				$idCategorie = Array();
+				foreach($categories as $cate) {
+					$idcategorie[] = $cate['db']->idcategorie;
+				}
+				$categoriesZones = $this->modelzone->getZoneParIdMultipleParEvenement ( $idcategorie, $id );
+
+				// On construit le tableau qui va organiser les zones et les catégories.
+				$listeCatgorieZone = Array();
+				foreach($categoriesZones as $categorie) {
+					$listeCatgorieZone[$categorie->idcategorie][$categorie->idzone] = 1;
+				}
+
+				$data['listeCatgorieZone'] 	= $listeCatgorieZone;
+			}
 		}
+		else {
+			
+			
+		}
+		
 		
 		// Appelle de la vue.
 		$this->layout->view('utilisateur/evenement/UEVoir', $data);
@@ -271,27 +279,30 @@ class Evenement extends Cafe {
 		}
 		else {
 			$reponse = $this->modelevenement->getEvenementParId($id);
-			$data['nom'] 		= $reponse[0]->libelleevenement;
-			$data['datedebut'] 	= $reponse[0]->datedebut;
-			$data['datefin'] 	= $reponse[0]->datefin;
-			
-			$data['listeCategorieZone'] = Array();
-			if($categories) {
-				// Construction du tableau de couple categorie / zone pour remplir les case a cocher.
-				$data['listeCatgorieZone'] = Array();
-				$idCategorie = Array();
-				foreach($categories as $cate) {
-					$idcategorie[] = $cate['db']->idcategorie;
-				}
-				$categoriesZones = $this->modelzone->getZoneParIdMultipleParEvenement ( $idcategorie, $id );
+			if($reponse) {
+				$data['nom'] 		= $reponse[0]->libelleevenement;
+				$data['datedebut'] 	= $reponse[0]->datedebut;
+				$data['datefin'] 	= $reponse[0]->datefin;
 
-				// On construit le tableau qui va organiser les zones et les catégories.
-				$listeCatgorieZone = Array();
-				foreach($categoriesZones as $categorie) {
-					$listeCatgorieZone[$categorie->idcategorie][$categorie->idzone] = 1;
+				$data['listeCategorieZone'] = Array();
+				if($categories) {
+					// Construction du tableau de couple categorie / zone pour remplir les case a cocher.
+					$data['listeCatgorieZone'] = Array();
+					$idCategorie = Array();
+					foreach($categories as $cate) {
+						$idcategorie[] = $cate['db']->idcategorie;
+					}
+					$categoriesZones = $this->modelzone->getZoneParIdMultipleParEvenement ( $idcategorie, $id );
+
+					// On construit le tableau qui va organiser les zones et les catégories.
+					$listeCatgorieZone = Array();
+					foreach($categoriesZones as $categorie) {
+						$listeCatgorieZone[$categorie->idcategorie][$categorie->idzone] = 1;
+					}
+					$data['listeCategorieZone'] = $listeCatgorieZone;
 				}
-				$data['listeCategorieZone'] = $listeCatgorieZone;
 			}
+			
 		}
 		
 		// Appelle de la vue.
