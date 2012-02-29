@@ -208,11 +208,14 @@ class Inscription extends Chocolat {
 	 * Méthode pour le formulaire pour la saisie du responsable d'une équipe.
 	 */
 	public function groupe($evenement, $info=false) {
+		// Chargement du js.
+		$this->layout->ajouter_js('lambda/script');
 		
 		$data['idEvenement']	= $evenement;
 		$data['infoEvenement'] 	= $this->modelevenement->getEvenementParId($evenement);
 		$data['listePays'] 		= $this->modellambda->listePays();
 		$data['listeCategorie'] = $this->modelcategorie->getCategories();
+		$data['listeSurCategorie'] = $this->modelcategorie->getCategoriesMere();
 		$data['values'] = $info;
 		
 		$this->layout->view('lambda/LGroupe', $data);
@@ -224,6 +227,7 @@ class Inscription extends Chocolat {
 	 * Méthode de traitement pour la saisie du responsable.
 	 */
 	public function exeGroupe() {
+				
 		$idEvenement = $this->input->post('evenement');
 		
 		// On regle les paramètres du formulaire.
@@ -292,6 +296,8 @@ class Inscription extends Chocolat {
 			$data['tel'] 		= $this->input->post('tel');
 			$data['mail'] 		= $this->input->post('mail');
 			$data['evenement'] 	= $this->input->post('evenement');
+			$data['listeSurCategorie'] = $this->modellambda->listeSurCategorie();
+			$data['listeCategorie'] = $this->modellambda->listeCategorie();
 			
 			$this->ajouterGroupe($data);
 		}
@@ -312,8 +318,7 @@ class Inscription extends Chocolat {
 	/**
 	 * Méthode pour le traitement de l'ajout des membres d'une équipe.
 	 */
-	public function exeAjouterGroupe() {
-		
+	public function exeAjouterGroupe() {		
 		// ajout du référent
 		$ref = $data = $this->input->post('ref');
 		unset($ref['categorie']);

@@ -28,7 +28,7 @@
 			}
 			newSelect += "</select>";
 			
-			$(this).next().remove();
+			$(this).nextAll().remove();
 			
 			if(count != 0)
 				$(newSelect).insertAfter(this);
@@ -83,22 +83,22 @@
 		<label>Societe, Organisme ou Publication</label>
 		<input type="text" value="<?php echo set_value('titre'); ?>" id="titre" name="titre" />
 		
-		<label>Voulez-vous spécifier un rôle ?</label>
-		<div class="encadrer" >
-		<input type=radio class="choixRole" name="choixRole" value="Non" <?php echo set_radio('choixRole', 'Non', TRUE); ?> >Non
-		<input type=radio class="choixRole" name="choixRole" value="Oui" <?php echo set_radio('choixRole', 'Oui'); ?> >Oui
-		</div>
-		<input type="text" value="<?php echo set_value('role'); ?>" id="role" name="role" />
-		
 		<div>
-		<label>Categorie</label>
+		<label>Catégorie</label>
 		<select  id="categorie" name="categorie[]" class="select dyn-selector">
 			<option value="-1">Je ne sais pas encore</option>
 			<?php foreach($listeSurCategorie as $categorie): ?>
-			<option VALUE="<?php echo $categorie->idcategorie; ?>" <?php echo set_select('pays', $categorie->libellecategorie); ?> ><?php echo $categorie->libellecategorie; ?></option>
+			<option VALUE="<?php echo $categorie->idcategorie; ?>" <?php echo set_select('categorie', $categorie->libellecategorie); ?> ><?php echo $categorie->libellecategorie; ?></option>
 			<?php endforeach; ?>
 		</select>
 		</div>
+				
+		<label>Voulez-vous spécifier une fonction ?</label>
+		<div class="encadrer" >
+			<input type=radio class="choixRole" name="choixRole" value="Non" <?php echo set_radio('choixRole', 'Non', TRUE); ?> >Non
+			<input type=radio class="choixRole" name="choixRole" value="Oui" <?php echo set_radio('choixRole', 'Oui'); ?> >Oui
+		</div>
+		<input type="text" value="<?php echo set_value('role'); ?>" id="role" name="role" />
 		
 		<div class="sous-categories"></div>			
 		
