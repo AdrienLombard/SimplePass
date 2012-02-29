@@ -8,9 +8,13 @@ class Accreditation extends Cafe {
 		parent::__construct();
 		
 		// Chargement des modeles.
+		$this->load->model('modelclient');
+		$this->load->model('modelpays');
 		$this->load->model('modelaccreditation');
+		$this->load->model('modelevenement');
+		$this->load->model('modelcategorie');
 		$this->load->model('modelzone');
-		
+		$this->load->library('form_validation');
 		$this->layout->ajouter_css('utilisateur/accreditation');
 		$this->layout->ajouter_js('utilisateur/CRUDAccred');
 		
@@ -29,6 +33,7 @@ class Accreditation extends Cafe {
 	 */
 	public function demandes() {
 		
+		//$data['accreds'] = $this->modelaccreditation->getAccreditationsEnAttente($idEvenement);
 		$data['accreds'] = $this->modelaccreditation->getAccreditationsEnAttente(1);
 		$this->layout->view('utilisateur/accreditation/UADemandes', $data);
 		
@@ -41,12 +46,6 @@ class Accreditation extends Cafe {
 	 */
 	public function voir($idClient) {
 		
-		$this->load->model('modelclient');
-		$this->load->model('modelpays');
-		$this->load->model('modelaccreditation');
-		$this->load->model('modelevenement');
-		$this->load->model('modelcategorie');
-		$this->load->model('modelzone');
 		
 		$data = Array();
 		
@@ -90,7 +89,66 @@ class Accreditation extends Cafe {
 		$this->layout->view('utilisateur/accreditation/UAVoir', $data);
 		
 	}
-	
+	public function voirEquipe($idClient, $idEvenement){
+		$data=Array();
+		
+		$data['client'] = $this->modelclient->getClientParId($idClient);
+		$data['accreditation'] = $this->modelaccreditation->getAccreditationsReferentParEvenement($idClient, $idEvenement);
+		//$data['equipe']=$this->modelaccreditation->getAccreditationsGroupeParEvenement($idClient);
+		$data['pays'] = $this->modelpays->getpays();
+		$data['evenements'] = $this->modelevenement->getEvenements();
+		$data['categories'] = $this->modelcategorie->getCategorieDansEvenement( $idEvenement );
+		$data['zones'] = $this->modelzone->getZoneParEvenement( $idEvenement );
+		$data['accredAttente'] = array();
+		$data['accredValide'] = array();
+		//$data['demandes'] = $this->modelaccreditation->getDemandesParClient($idClient);
+		
+		// On récpère les accréditations de ce client.
+		$equipe = $this->modelaccreditation->getAccreditationsGroupeParEvenement( $idClient , $idEvenement);
+		$idCategories = array();
+		foreach ($equipe as $accred) {
+			if($accred->idclient != $idClient) {
+				if($accred->etataccreditation == ACCREDITATION_A_VALIDE) {
+					$data['accredAttente'][] = $accred;
+				}
+				else {
+					$data['accredValide'][] = $accred;
+				}
+				$idAccred[] = $accred->idaccreditation;
+				$data['accredMembre'] = $accred;
+				$idCategories[] = $accred->idcategorie;
+			}
+		}
+		
+		$listeZonesAccred = array();
+		if(count($idCategories)) {
+
+			// On récupère et on traite la liste des zones utilisé par les accréditation de ce client.
+			$zonesCate = $this->modelzone->getZoneParIdMultipleParEvenement( $idCategories , $idEvenement );
+			$cateZones = Array();
+			foreach($zonesCate as $zones) {
+				$cateZones[$zones->idcategorie][$zones->idzone] = true;
+
+			}
+			/*foreach($equipe as $accred) {
+				$listeZonesAccred[$accred->idaccreditation] = $cateZones[$accred->idcategorie];
+			}*/
+
+			// on prend les zone + accred.
+			//$accredZones = $this->modelzone->getZoneParAccreditationMultiple( $idAccred );
+
+			// on merge dans le meme tableau, avec [idaccred][idzone] = true; de la meme facon.
+			/*foreach ($accredZones as $key => $zones) {
+				$listeZonesAccred[$zones->idacreditation][$zones->idzone] = true;
+			}*/
+
+			$data['listeZonesAccred'] = $cateZones;
+		
+		}
+		$this->layout->view('utilisateur/accreditation/UAVoirEquipe',$data);
+		
+		
+	}
 	public function ajouter() {
 		
 		$this->load->model('modelclient');

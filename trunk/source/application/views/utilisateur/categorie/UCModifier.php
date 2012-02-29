@@ -3,7 +3,7 @@
 <div class="wrap">
 
     <div class="tabs">
-        <a href="<?php echo site_url('categorie/voir'); ?>">Liste</a>
+        <a href="<?php echo site_url('categorie/liste'); ?>">Liste</a>
         <a href="<?php echo site_url('categorie/ajouter'); ?>">Ajouter</a>
 		<a href="#" class="current">Modifier</a>
     </div>

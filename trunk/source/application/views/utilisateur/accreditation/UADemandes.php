@@ -43,7 +43,7 @@
                         <td><?php echo display_date($accred->dateaccreditation); ?></td>
 						<td><?php echo $accred->libellecategorie; ?></td>
 						<td><a href="<?php  if($accred->groupe==null) echo site_url('accreditation/voir/' . $accred->idclient); 
-						else echo site_url('accreditation/voirEquipe/' . $accred->idclient);?>">Voir</a></td>
+						else echo site_url('accreditation/voirEquipe/' . $accred->idclient . '/1');?>">Voir</a></td>
 					</tr>
                
 					 <?php endforeach; ?>
