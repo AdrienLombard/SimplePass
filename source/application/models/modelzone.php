@@ -24,6 +24,16 @@ class modelZone extends MY_Model {
 		
 	}
 	
+	public function getZoneParCategorieEtEvenement( $idCategorie, $idEvenement ) {
+		return $this->db->select('*')
+						->from(DB_PARAMETRES_EVENEMENTS)
+						->where('idcategorie', $idCategorie)
+						->where('idevenement', $idEvenement)
+						->get()
+						->result();
+
+	}
+	
 	public function getZoneParIdMultipleParEvenement( $idCategorie, $idEvenement ) {
 		$where = '';
 		$k = true;
@@ -39,7 +49,7 @@ class modelZone extends MY_Model {
 		$where .= ' )';
 		
 		return $this->db->select('*')
-						->from(DB_PARAMETRE_EVENEMENT)
+						->from(DB_PARAMETRES_EVENEMENTS)
 						->where($where)
 						->where('idevenement', $idEvenement)
 						->get()
@@ -61,14 +71,23 @@ class modelZone extends MY_Model {
 		}
 		
 		return $this->db->select('*')
-						->from(DB_PARAMETRE_EVENEMENT)
+						->from(DB_PARAMETRES_EVENEMENTS)
 						->where($where)
 						->get()
 						->result();
 
 	}
 	
-	/*public function getZoneParAccreditationMultiple ( $idAccred ) {
+	public function getZoneParAccreditation ( $idAccred ) {
+		return $this->db->select('*')
+						->from(DB_ACCREDITATION_ZONES)
+						->where('idaccreditation', $idAccred)
+						->get()
+						->result();
+
+	}
+	
+	public function getZoneParAccreditationMultiple ( $idAccred ) {
 		$where = '';
 		$k = true;
 		foreach($idAccred as $id) {
@@ -82,7 +101,7 @@ class modelZone extends MY_Model {
 		}
 		
 		return $this->db->select('*')
-						->from(DB_PERMET)
+						->from(DB_ACCREDITATION_ZONES)
 						->where($where)
 						->get()
 						->result();
@@ -91,10 +110,10 @@ class modelZone extends MY_Model {
 	*/
 	
 	public function getZoneParEvenement( $idEvenement ) {
-		return $this->db->select('ze.idzone, ze.codezone, z.libellezone')
+		return $this->db->select('*')
 						->distinct()
 					    ->from(DB_ZONE . ' z')
-					    ->join(DB_PARAMETRE_EVENEMENT . ' ze', 'z.idzone = ze.idzone AND ze.idevenement = ' . $idEvenement, 'left')
+					    ->join(DB_PARAMETRES_EVENEMENTS . ' ze', 'z.idzone = ze.idzone AND ze.idevenement = ' . $idEvenement, 'left')
 					    ->get()
 					    ->result();
 	}

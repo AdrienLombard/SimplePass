@@ -36,31 +36,38 @@
     background: #2e6f92;
 }
 
+.accred .client .infos label {
+	width: 50px;
+	display: inline-block;
+	color: #888;
+}
 .accred .client .infos input[type=text], .accred .client .infos select {
+	border: 1px solid #CCC;
 	font-size: 16px;
-	border: 0;
 	padding: 2px 6px 2px 6px;
 	box-shadow: 0 0 0;
-	width: 520px;
-	border: 1px solid #FFF;
+	width: 400px;
 	border-radius: 0;
+	display: inline-block;
+	color: inherit;
 }
-.accred .client .infos input[type=text]:focus, .accred .client .infos select:focus {
-	border: 1px solid #CCC;
+.accred .client .infos input[type=text][readonly], .accred .client .infos select[readonly], .accred .client .infos select:disabled {
+	border: 1px solid #FFF;
 }
 .accred .client .infos input.nom, .accred .client .infos input.prenom {
 	font-size: 26px;
+	padding: 0px;
+	padding-left: 10px;
 }
 .accred .client .infos input.prenom {
-	margin-bottom: 8px;
-}
-.accred .client .infos input.organisme {
-	margin-top: 8px;
+	margin-top: 5px;
+	margin-bottom: 5px;
 }
 .accred .client .infos select.pays {
 	width: auto;
-	margin-left: 7px;
-	font-size: 14px;
+	padding-left: 15px;
+	font-size: 16px;
+	background: #FFF;
 }
 .accred .client .infos select.pays option {
 	padding-left: 20px;
@@ -69,7 +76,7 @@
 	font-style: italic;
 }
 .accred .client .infos input.tel {
-	margin-top: 8px;
+	margin-top: 5px;
 }
 .accred .client .infos .valideInfos {
     background: #999;
@@ -92,10 +99,11 @@
 	margin-top: 30px;
 }
 .accred .listeAccred .ligneAccred {
-	border-bottom: 1px solid #DDD;
-	border-left: 1px solid #DDD;
-	border-right: 1px solid #DDD;
-	padding: 10px;
+	border: 1px solid #DDD;
+	background: #E3E3E3;
+	margin-top: 3px;
+}
+.accred .listeAccred .ligneAccred.close {
 	background: #EEE;
 }
 .accred .listeAccred .ligneAccred:hover {
@@ -104,6 +112,12 @@
 .accred .listeAccred .ligneAccred.close:hover {
 	background: #E3E3E3;
 }
+
+.accred .listeAccred .ligneAccred div.fixe, .accred .listeAccred .ligneAccred form, .accred .listeAccred .ligneAccred .detailZones {
+	padding: 10px;
+}
+
+
 .accred .listeAccred .ligneAccred span {
 	display: inline-block;
 	font-size: 16px;
@@ -121,10 +135,8 @@
 }
 
 .accred .listeAccred .ligneAccred form.editAccred {
-	border: 1px dashed #CCC;
 	background: #E3E3E3;
-	padding: 10px;
-	margin-top: 10px;
+	border-top: 1px dashed #CCC; 
 }
 .accred .listeAccred .ligneAccred form.editAccred div {
 	margin-bottom: 6px;
@@ -160,7 +172,6 @@
 .accred .listeAccred .ligneAccred div.detailZones {
 	border-top: 1px dashed #CCC;
 	font-size: 16px;
-	margin-top: 10px;
 	padding-top: 10px;
 }
 
@@ -207,4 +218,11 @@ form.rechercheClient div.listeTempsReel div.itemFlowSearch:hover {
 }
 form.rechercheClient div.listeTempsReel div.itemFlowSearch span.pays {
 	float: right;
+}
+
+
+
+
+*[disabled] {
+	background: red;
 }
