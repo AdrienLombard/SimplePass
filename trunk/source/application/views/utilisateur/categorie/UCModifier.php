@@ -14,19 +14,26 @@
 
             <b>Options :</b>
             <ul>
-                <li><a href="<?php echo site_url('categorie/voir/'.$id); ?>">Retour</a></li>
+				<?php if($nom): ?>
+					<li><a href="<?php echo site_url('categorie/voir/'.$id); ?>">Retour</a></li>
+				<?php else: ?>
+					<a href="<?php echo site_url('categorie/liste'); ?>">Retour</a>
+				<?php endif; ?>
             </ul>
 
         </aside>
 
         <div id="main">
-			
-			<form action="<?php echo site_url('categorie/exeModifier/'.$id); ?>" method="post">
-				<h2><?php echo $nom?></h2>	
-				<label>Nom catégorie</label>
-				<input type="text" value="<?php echo $nom; ?>" name="nom"/>
-				<input type="submit" name="valider" />
-			</form>
+			<?php if($nom): ?>
+				<form action="<?php echo site_url('categorie/exeModifier/'.$id); ?>" method="post">
+					<h2><?php echo $nom?></h2>	
+					<label>Nom catégorie</label>
+					<input type="text" value="<?php echo $nom; ?>" name="nom"/>
+					<input type="submit" name="valider" />
+				</form>
+			<?php else: ?>
+				Cette catégorie n'existe pas.
+			<?php endif; ?>
 			
         </div>
 
