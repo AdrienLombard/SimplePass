@@ -64,14 +64,14 @@
         </aside>
 		
 		<div id="main" class="accred">
+		
+			<h2 class="infos">Référent du groupe</h2><br/>
         	
 			<div class="client">
 				
 				<div class="groupe">
 					
-					
 					<b> Groupe </b>
-					
 					
 				</div>
 					
@@ -104,7 +104,7 @@
 			
 			<div class="listeAccred">
 				
-				<h3>En cours</h3>
+				<h3>Membres du groupe</h3>
 				
 				<form class="accredForm">
 					
@@ -117,9 +117,8 @@
 				<div class="ligneAccred close">
 					<div class="fixe">
 						<span class="nomprenom"><?php echo $demande->nom.' '.$demande->prenom.'    '; ?></span>
-						<span class="date"><?php echo $demande->dateaccreditation; ?></span>
+						<span class="date"><?php echo display_date($demande->dateaccreditation); ?></span>
 						<span class="categorie"><?php echo $demande->libellecategorie; ?></span>
-						<span class="evenement"><?php echo $demande->libelleevenement; ?></span>
 					</div>
 					<form class="editAccred" >
 						<div class="client">
@@ -165,17 +164,16 @@
 								</tbody>
 							</table>
 
-							<input type="submit" value="Enregistrer" />
-
 							<div class="clear"></div>
 						</div>
+						<input type="submit" value="Enregistrer les modifications" />
 					</form>
 					
 				</div>
 				
 				<?php endforeach; ?>
 				
-				
+				</form>
 			</div>
 			
         </div>
