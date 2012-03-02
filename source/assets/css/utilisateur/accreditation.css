@@ -72,7 +72,7 @@
 .accred .client .infos select.pays option {
 	padding-left: 20px;
 }
-.accred .client .infos input.role {
+.accred .client .infos input.fonction {
 	font-style: italic;
 }
 .accred .client .infos input.tel {

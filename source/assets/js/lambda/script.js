@@ -10,9 +10,9 @@ $(document).ready(function(){
 		$('#lienEquipe').attr('href', 'http://localhost/courchevel_src/index.php/inscription/groupe/'+idGroupe);
 	});
 	
-	$("input[name=role]").hide();
-	$("input.choixRole").change(function() {
-		$("input[name=role]").toggle();
+	$("input[name=fonction]").hide();
+	$("input.choixFonction").change(function() {
+		$("input[name=fonction]").toggle();
 		
 	});
 		
