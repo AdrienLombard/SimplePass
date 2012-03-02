@@ -133,7 +133,9 @@
 							</div>
 
 							<div>
+								<label for="fonction">Fonction : </label>
 								<input type="text" id="fonction" />
+								<label for="categorie">Catégorie : </label>
 								<select  id="categorie" name="categorie[]" class="select dyn-selector">
 									<option value="-1">Je ne sais pas encore</option>
 									<?php foreach($categories as $categorie): ?>
