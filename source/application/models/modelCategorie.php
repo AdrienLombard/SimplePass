@@ -45,7 +45,7 @@ class modelCategorie extends CI_Model {
 		return $this->db->select('c.idcategorie, c.libellecategorie')
 						->distinct()
 						->from(DB_CATEGORIE . ' c')
-						->join(DB_PARAMETRE_EVENEMENT . ' pe', 'pe.idcategorie = c.idcategorie', 'left')
+						->join(DB_PARAMETRES_EVENEMENTS . ' pe', 'pe.idcategorie = c.idcategorie', 'left')
 						->where('idevenement',$idEvenement)
 						->get()
 						->result();

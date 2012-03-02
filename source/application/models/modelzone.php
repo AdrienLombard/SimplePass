@@ -107,7 +107,7 @@ class modelZone extends MY_Model {
 						->result();
 
 	}
-	*/
+	
 	
 	public function getZoneParEvenement( $idEvenement ) {
 		return $this->db->select('*')
