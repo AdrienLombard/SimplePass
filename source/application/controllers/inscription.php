@@ -329,7 +329,7 @@ class Inscription extends Chocolat {
 		$accred['idcategorie'] = $data['categorie'];
 		$accred['idevenement'] = $this->input->post('evenement');
 		$accred['idclient'] = $id;
-		$accred['etataccreditation'] = 1;
+		$accred['etataccreditation'] = ACCREDITATION_A_VALIDE;
 		$this->modelaccreditation->ajouter($accred);
 		
 		// ajout des membres
@@ -338,7 +338,6 @@ class Inscription extends Chocolat {
 			$membre = null;
 			$membre['nom'] = $ligne['nom'];
 			$membre['prenom'] = $ligne['prenom'];
-			$membre['role'] = $ligne['role'];
 			$membre['pays'] = $data['pays'];
 			$membre['groupe'] = $data['groupe'];
 			$membre['referent'] = $id;
@@ -349,7 +348,8 @@ class Inscription extends Chocolat {
 			$accred['idcategorie'] = $ligne['categorie'];
 			$accred['idevenement'] = $this->input->post('evenement');
 			$accred['idclient'] = $idNewClient;
-			$accred['etataccreditation'] = 1;
+			$accred['role'] = $ligne['role'];
+			$accred['etataccreditation'] = ACCREDITATION_A_VALIDE;
 			$this->modelaccreditation->ajouter($accred);
 		}
 		
