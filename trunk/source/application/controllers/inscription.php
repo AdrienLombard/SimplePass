@@ -255,12 +255,12 @@ class Inscription extends Chocolat {
 			array(
 				'field'   => 'role',
 				'label'   => 'Rôle', 
-				'rules'   => 'required'
+				'rules'   => ''
 			),
 			array(
 				'field'   => 'tel',
 				'label'   => 'Téléphone', 
-				'rules'   => 'required'
+				'rules'   => ''
 			),
 			array(
 				'field'   => 'mail',
