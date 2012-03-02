@@ -115,12 +115,12 @@
 				<?php foreach($accredAttente as $demande): ?>
 				
 				<div class="ligneAccred close">
-					
-					<span class="nomprenom"><?php echo $demande->nom.' '.$demande->prenom.'    '; ?></span>
-					<span class="date"><?php echo $demande->dateaccreditation; ?></span>
-					<span class="categorie"><?php echo $demande->libellecategorie; ?></span>
-					<span class="evenement"><?php echo $demande->libelleevenement; ?></span>
-					
+					<div class="fixe">
+						<span class="nomprenom"><?php echo $demande->nom.' '.$demande->prenom.'    '; ?></span>
+						<span class="date"><?php echo $demande->dateaccreditation; ?></span>
+						<span class="categorie"><?php echo $demande->libellecategorie; ?></span>
+						<span class="evenement"><?php echo $demande->libelleevenement; ?></span>
+					</div>
 					<form class="editAccred" >
 						<div class="client">
 						
