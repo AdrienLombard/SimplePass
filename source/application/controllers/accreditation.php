@@ -181,6 +181,65 @@ class Accreditation extends Cafe {
 		
 	}
 	
+	public function exeModifierGroupe() {
+	
+		/* Modification des infos du référent */
+		$id				= $this->input->post('idRef');
+		$data['nom']	= $this->input->post('nomRef');
+		$data['prenom'] = $this->input->post('prenomRef');
+		$data['pays']	= $this->input->post('paysRef');
+		$data['organisme'] = $this->input->post('organismeRef');
+		$data['tel']	= $this->input->post('telRef');
+		$data['mail']	= $this->input->post('mailRef');
+		
+		echo "Id client : " . $id;
+	
+		$this->load->model('modelclient');
+		$this->load->model('modelaccreditation');
+		
+		$this->modelclient->modifier($id, $data);
+		
+		$dataAccred = array();
+		
+		$dataAccred['fonction'] = $this->input->post('fonctionRef');
+		
+		if(empty($dataAccred['fonction'])) {
+			$dataAccred['fonction'] = "";
+		}
+		
+		$idAccred = $this->input->post('idAccredRef');
+		
+		echo "Id accred : " . $idAccred;
+		
+		$this->modelaccreditation->modifier($idAccred, $dataAccred);
+		
+		display_tab($this->input->post('groupe'));
+		
+		/* Modification des membres du groupe */
+ 		foreach($this->input->post('groupe') as $ligne) {
+			
+			/* Modification de l'accréditation */
+			$accred = array();
+			$accred['idcategorie'] = $ligne['categorie'];
+			$accred['idevenement'] = $this->input->post('evenement');
+			$accred['idclient'] = $ligne['idClient'];
+			
+			if(!empty($ligne['fonction'])) {
+				$accred['fonction'] = $ligne['fonction'];
+			}
+			else
+				$accred['fonction'] = "";
+			
+			$accred['etataccreditation'] = 0;
+			$this->modelaccreditation->modifier($ligne['idAccreditation'], $accred);
+			
+		}
+		
+		
+		//redirect('accreditation/voir/' . $id);
+	
+	}
+	
 	public function valider ($idAccreditation ) {
 		
 		$this->modelaccreditation->valideraccreditation( $idAccreditation );
