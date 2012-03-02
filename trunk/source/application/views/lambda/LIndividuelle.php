@@ -95,10 +95,10 @@
 				
 		<label>Voulez-vous spécifier une fonction ?</label>
 		<div class="encadrer" >
-			<input type=radio class="choixRole" name="choixRole" value="Non" <?php echo set_radio('choixRole', 'Non', TRUE); ?> >Non
-			<input type=radio class="choixRole" name="choixRole" value="Oui" <?php echo set_radio('choixRole', 'Oui'); ?> >Oui
+			<input type=radio class="choixFonction" name="choixFonction" value="Non" <?php echo set_radio('choixFonction', 'Non', TRUE); ?> >Non
+			<input type=radio class="choixFonction" name="choixFonction" value="Oui" <?php echo set_radio('choixFonction', 'Oui'); ?> >Oui
 		</div>
-		<input type="text" value="<?php echo set_value('role'); ?>" id="role" name="role" />
+		<input type="text" value="<?php echo set_value('fonction'); ?>" id="fonction" name="fonction" />
 		
 		<div class="sous-categories"></div>			
 		

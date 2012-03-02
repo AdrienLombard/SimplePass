@@ -86,8 +86,8 @@ class Inscription extends Chocolat {
 				'rules'   => ''
 			),
 			array(
-				'field'   => 'role',
-				'label'   => 'Rôle', 
+				'field'   => 'fonction',
+				'label'   => 'Fonction', 
 				'rules'   => ''
 			),
 			array(
@@ -173,11 +173,11 @@ class Inscription extends Chocolat {
 					'dateaccreditation' => time()
 				);
 
-				$role = $this->input->post('choixRole');
-				if($role == 'Oui') {
-					$role = $this->input->post('role');
-					if(isset($role) && !empty($role)) {
-						$accredData['fonction'] = $role;
+				$fonction = $this->input->post('choixFonction');
+				if($fonction == 'Oui') {
+					$fonction = $this->input->post('fonction');
+					if(isset($fonction) && !empty($fonction)) {
+						$accredData['fonction'] = $fonction;
 					}
 				}
 
@@ -253,8 +253,8 @@ class Inscription extends Chocolat {
 				'rules'   => 'required'
 			),
 			array(
-				'field'   => 'role',
-				'label'   => 'Rôle', 
+				'field'   => 'fonction',
+				'label'   => 'Fonction', 
 				'rules'   => ''
 			),
 			array(
@@ -277,7 +277,7 @@ class Inscription extends Chocolat {
 			$values->pays 		= $this->input->post('pays');
 			$values->nom 		= strtoupper($this->input->post('nom'));
 			$values->prenom 	= $this->input->post('prenom');
-			$values->role 		= $this->input->post('role');
+			$values->fonction 		= $this->input->post('fonction');
 			$values->mail 		= $this->input->post('mail');
 			$values->tel 		= $this->input->post('tel');
 			$values->categorie 	= $this->input->post('categorie');
@@ -292,7 +292,7 @@ class Inscription extends Chocolat {
 			$data['nom'] 		= $this->input->post('nom');
 			$data['prenom'] 	= $this->input->post('prenom');
 			$data['categorie'] 	= $this->input->post('categorie');
-			$data['role'] 		= $this->input->post('role');
+			$data['fonction'] 		= $this->input->post('fonction');
 			$data['tel'] 		= $this->input->post('tel');
 			$data['mail'] 		= $this->input->post('mail');
 			$data['evenement'] 	= $this->input->post('evenement');
@@ -309,7 +309,6 @@ class Inscription extends Chocolat {
 	 * Méthode pour l'ajout de tous les membres d"une équipe.
 	 */
 	public function ajouterGroupe($data) {
-		$data['listeCategorie'] = $this->modelcategorie->getCategories();
 		$this->layout->ajouter_js('lambda/scriptGroupe');
 		$this->layout->view('lambda/LGroupeDetails', $data);
 	}
@@ -322,6 +321,8 @@ class Inscription extends Chocolat {
 		// ajout du référent
 		$ref = $data = $this->input->post('ref');
 		unset($ref['categorie']);
+		unset($ref['fonction']);
+		unset($ref['groupe']);
 		$id = $this->modelclient->ajouter($ref);
 		
 		// création de l'accreditation pour le referent
@@ -330,6 +331,8 @@ class Inscription extends Chocolat {
 		$accred['idevenement'] = $this->input->post('evenement');
 		$accred['idclient'] = $id;
 		$accred['etataccreditation'] = ACCREDITATION_A_VALIDE;
+		$accred['fonction'] = $data['fonction'];
+		$accred['groupe'] = $data['groupe'];
 		$this->modelaccreditation->ajouter($accred);
 		
 		// ajout des membres
@@ -339,16 +342,16 @@ class Inscription extends Chocolat {
 			$membre['nom'] = $ligne['nom'];
 			$membre['prenom'] = $ligne['prenom'];
 			$membre['pays'] = $data['pays'];
-			$membre['groupe'] = $data['groupe'];
 			$membre['referent'] = $id;
 			$idNewClient = $this->modelclient->ajouter($membre);
 
 			// création de l'accreditation
 			$accred = null;
+			$accred['groupe'] = $data['groupe'];
 			$accred['idcategorie'] = $ligne['categorie'];
 			$accred['idevenement'] = $this->input->post('evenement');
 			$accred['idclient'] = $idNewClient;
-			$accred['role'] = $ligne['role'];
+			$accred['fonction'] = $ligne['fonction'];
 			$accred['etataccreditation'] = ACCREDITATION_A_VALIDE;
 			$this->modelaccreditation->ajouter($accred);
 		}

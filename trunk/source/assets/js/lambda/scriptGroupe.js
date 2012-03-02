@@ -23,7 +23,7 @@ $(document).ready(function(){
 		var categorie = parent.find('#ligneCategorie');
 		
 		// récupère le rôle
-		var role = parent.find('#ligneRole');
+		var fonction = parent.find('#ligneFonction');
 		
 		var erreur = false;
 		if(nom.val() == '') {
@@ -52,7 +52,7 @@ $(document).ready(function(){
 			parent.parent().attr('etat', true);
 
 			// met à jours le h3 avec les infos des inputs
-			parent.parent().find('h3').html(nom.val() + ' ' + prenom.val() + ' - ' + categorie.val() + ' (' + role.val() + ')' + '<span class="modifier">modifier</span>');
+			parent.parent().find('h3').html(nom.val() + ' ' + prenom.val() + ' - ' + categorie.val() + ' (' + fonction.val() + ')' + '<span class="modifier">modifier</span>');
 		} else {
 			// refuser l'etat de la ligne
 			parent.parent().attr('etat', false);

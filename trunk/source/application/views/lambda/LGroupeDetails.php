@@ -48,7 +48,7 @@
 				<input type="hidden" name="ref[nom]" value="<?php echo $nom; ?>" />
 				<input type="hidden" name="ref[prenom]" value="<?php echo $prenom; ?>" />
 				<input type="hidden" name="ref[categorie]" value="<?php echo $categorie; ?>" />
-				<input type="hidden" name="ref[role]" value="<?php echo $role; ?>" />
+				<input type="hidden" name="ref[fonction]" value="<?php echo $fonction; ?>" />
 				<input type="hidden" name="ref[tel]" value="<?php echo $tel; ?>" />
 				<input type="hidden" name="ref[mail]" value="<?php echo $mail; ?>" />
 				<input type="hidden" name="ref[groupe]" value="<?php echo $groupe; ?>" />
@@ -102,7 +102,7 @@
 			</div>
 			<div class="split">
 				<label>fonction </label>
-				<input type="text" id="ligneRole" name="groupe[nbLigne][role]" />
+				<input type="text" id="ligneFonction" name="groupe[nbLigne][fonction]" />
 			</div>
 			<div class="split splitRight">
 				<a href="#" class="button" id="validerLigne">Valider</a>
