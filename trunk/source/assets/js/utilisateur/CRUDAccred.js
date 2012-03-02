@@ -1,6 +1,6 @@
 $(document).ready(function(){
 	
-	$("form.editAccred").hide();
+	$(".editAccred").hide();
 	$("div.detailZones").hide();
 	
 	$(".ligneAccred .fixe").live('click', function(){

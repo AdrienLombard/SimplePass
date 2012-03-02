@@ -134,15 +134,15 @@
 	float: right;
 }
 
-.accred .listeAccred .ligneAccred form.editAccred {
+.accred .listeAccred .ligneAccred .editAccred {
 	background: #E3E3E3;
 	border-top: 1px dashed #CCC; 
 }
-.accred .listeAccred .ligneAccred form.editAccred div {
+.accred .listeAccred .ligneAccred .editAccred div {
 	margin-bottom: 6px;
 }
-.accred .listeAccred .ligneAccred form.editAccred input[type=text],
-.accred .listeAccred .ligneAccred form.editAccred select {
+.accred .listeAccred .ligneAccred .editAccred input[type=text],
+.accred .listeAccred .ligneAccred .editAccred select {
     border: 1px solid #CCC;
     padding: 4px 8px 4px 8px;
     font-size: 16px;
@@ -150,21 +150,21 @@
 	box-shadow: 0 0 0 0 !important;
 	display: inline-block;
 }
-.accred .listeAccred .ligneAccred form.editAccred table.choixZones {
+.accred .listeAccred .ligneAccred .editAccred table.choixZones {
     width: 100%;
 	border-top: 1px solid #CCC;
 	border-bottom: 1px solid #CCC;
 	margin-top: 10px;
 }
-.accred .listeAccred .ligneAccred form.editAccred table.choixZones td {
+.accred .listeAccred .ligneAccred .editAccred table.choixZones td {
     padding: 4px;
 }
-.accred .listeAccred .ligneAccred form.editAccred input[type=submit] {
+.accred .listeAccred .ligneAccred .editAccred input[type=submit] {
     background: #999;
 	box-shadow: 0 0 0;
 	border-radius: 2px;
 }
-.accred .listeAccred .ligneAccred form.editAccred input[type=submit]:hover {
+.accred .listeAccred .ligneAccred .editAccred input[type=submit]:hover {
     background: #666;
 	color: #FFF;
 }
