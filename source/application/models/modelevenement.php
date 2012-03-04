@@ -90,7 +90,6 @@ class modelEvenement extends MY_Model {
 	
 	/**
 	 * Supprimer l'evenement
-	 * 
 	 */
 	public function supprimer($id){
 		
@@ -99,6 +98,19 @@ class modelEvenement extends MY_Model {
         $this->db->delete(DB_EVENEMENT);
 			                  
 	}
+	
+	
+	public function supprimerParametreParZone ( $idZone ) {
+		$this->db->delete(DB_PARAMETRES_EVENEMENTS, array( 'idzone' => $idZone));
+	}
+	
+	public function supprimerparametreParCategorie( $idCategorie ) {
+		$this->db->delete(DB_PARAMETRES_EVENEMENTS, array( 'idcategorie' => $idCategorie));
+	}
+	
+	
+	
+	
 	
 }
 ?>
