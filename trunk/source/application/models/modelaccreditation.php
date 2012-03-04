@@ -163,8 +163,48 @@ class modelAccreditation extends MY_Model {
 	 * DELETE
 	 */
 	
+	
 	public function supprimer($id) {
-		$this->db->delete(DB_ACCREDITATION, array('idaccreditation = ' . $id));
+		
+		$this->db->delete(DB_ACCREDITATION, array('idaccreditation' => $id));
+		
 	}
+	
+	
+	public function supprimerParClient( $idClient ) {
+		$this->db->delete(DB_ACCREDITATION, array ( 'idclient' => $idClient));
+	}
+	
+	
+	public function supprimerParCategorie ( $idCategorie ) {
+		// recup des evenement que l'on peut supprimer.
+		$res = $this->db->select('idevenement')
+						->where('datefin <=', time())
+						->from(DB_EVENEMENT)
+						->get()
+						->result();
+		
+		$where = '';
+		$k = true;
+		foreach($res as $id) {
+			if($k) {
+				$where .= '( idevenement = ' . $id->idevenement;
+				$k = false;
+			}
+			else {
+				$where .= ' OR idevenement = ' . $id->idevenement;
+			}
+		}
+		$where .= ' )';
+		
+		$this->db->where($where)
+				 ->where('idcategorie', $idCategorie)
+				 ->delete(DB_ACCREDITATION);
+	}
+	
+	
+	
+	
+	
 	
 }

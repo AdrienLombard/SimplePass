@@ -7,6 +7,7 @@ class Zone extends Cafe {
 		parent::__construct();
 		
 		$this->load->model('modelzone');
+		$this->load->model('modelevenement');
 		
 		$this->load->library('form_validation');
 		
@@ -160,7 +161,14 @@ class Zone extends Cafe {
 	 * @param $id : Id de la données a supprimer.
 	 */
 	public function supprimer($id) {
-	   
+		
+		// On supprime les paramètres dévènement qui utilisent cette zone.
+		$this->modelevenement->supprimerParametreParZone( $id );
+		
+		// on supprime les liens entre les accréditations et cette zone.
+		$this->modelzone->supprimerZoneParZone ( $id );
+		
+		// On supprime la zone.
 		$this->modelzone->supprimer( $id );
 		
 		$data['titre']		= 'Suppression';

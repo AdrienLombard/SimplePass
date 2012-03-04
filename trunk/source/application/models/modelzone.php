@@ -133,5 +133,20 @@ class modelZone extends MY_Model {
 		return $this->db->delete(DB_ZONE, array('idzone' => $idZone) );
 	}
 	
+	
+	public function supprimerZoneParAccreditation ( $idAccred ) {
+		return $this->db->delete(DB_ZONES_ACCREDITATION, array('idaccreditation' => $idAccred) );
+	}
+	
+	public function supprimerZoneParZone ( $idzone ) {
+		return $this->db->delete(DB_ZONES_ACCREDITATION, array('idzone' => $idzone) );
+	}
+	
+	
+	
+	
+	
+	
+	
 }
 ?>

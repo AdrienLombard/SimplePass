@@ -6,27 +6,29 @@ class Categorie extends Cafe {
 	public function __construct() {
 		
 		parent::__construct();
-		$this->load->model('modelCategorie');
+		
+		$this->load->model('modelcategorie');
+		$this->load->model('modelevenement');
+		$this->load->model('modelaccreditation');
+		
 		$this->load->library('form_validation');
+		
 		$this->layout->ajouter_js('utilisateur/scriptDate');
-		
-		
 	}
 
 
-	/*public function index() {
+	public function index() {
 		
-		$data['categories'] = $this->modelCategorie->getCategorieMere();
-		$this->layout->view('utilisateur/categorie/UCIndex', $data);
+		$this->liste();
 		
-	}*/
+	}
 
 	
 	public function liste() {
 		
 		$this->layout->ajouter_css('utilisateur/liste');
 		
-		$data['resultats']=$this->modelCategorie->getCategorieMere();
+		$data['resultats']=$this->modelcategorie->getCategorieMere();
 		
 		$this->layout->view('utilisateur/categorie/UCIndex', $data);
 	}
@@ -35,8 +37,8 @@ class Categorie extends Cafe {
 		
 		$this->layout->ajouter_css('utilisateur/details');
 		
-		$data['nom']		= $this->modelCategorie->getCategorieMereid($id);
-		$data['resultats']	= $this->modelCategorie->getSousCategorie($id);
+		$data['nom']		= $this->modelcategorie->getCategorieMereid($id);
+		$data['resultats']	= $this->modelcategorie->getSousCategorie($id);
 		$data['id']			= $id;
 		
 		$this->layout->view('utilisateur/categorie/VoirCateg', $data);
@@ -45,7 +47,7 @@ class Categorie extends Cafe {
 	public function ajouter($values='') {
 		
 		$data['info'] = $values;
-		$data['categories']=$this->modelCategorie->getCategories();
+		$data['categories']=$this->modelcategorie->getCategories();
 		$this->layout->view('utilisateur/categorie/AjoutCateg', $data);
 		
 	}
@@ -69,9 +71,9 @@ class Categorie extends Cafe {
 			$idcategorie=$_POST['categories'];
 			
 			if( $idcategorie!=-1)
-			$this->modelCategorie->ajouter( $nom,$idcategorie);
+			$this->modelcategorie->ajouter( $nom,$idcategorie);
 			else
-				$this->modelCategorie->ajouter( $nom,NULL);
+				$this->modelcategorie->ajouter( $nom,NULL);
 			$this->layout->view('utilisateur/UMessage', $data);	 
 		}
 		else {
@@ -83,26 +85,6 @@ class Categorie extends Cafe {
 		
 	}
 	
-	public function supprimer($id) {
-		
-		$categories =$this->modelCategorie->getSousCategorieid($id);
-		
-		if(isset($categories) && !empty($categories)) {
-		
-			foreach ($categories as $categorie)
-			{
-				$this->modelCategorie->supprimerCategorie($categorie->idcategorie);
-			}
-		}
-		
-		$this->modelCategorie->supprimerCategorie($id);
-		
-		$data['titre']		= 'Suppression';
-		$data['message']	= 'Votre catégorie a bien été supprimée.';
-		$data['redirect'] 	= 'categorie/liste';
-		$this->layout->view('utilisateur/UMessage', $data);
-		
-	}
 	
 	public function modifier($id,$re=false) {
 		
@@ -115,7 +97,7 @@ class Categorie extends Cafe {
 		}
 		else {
 			
-			$reponse = $this->modelCategorie->getCategorieMereid($id);
+			$reponse = $this->modelcategorie->getCategorieMereid($id);
 			$data['nom'] = ($reponse) ? $reponse[0]->libellecategorie : null;
 			
 		}
@@ -136,7 +118,7 @@ class Categorie extends Cafe {
 		echo $nom;
 		if ($this->form_validation->run()==true)
 	{ 
-			$resultat = $this->modelCategorie->modifier( $id,$nom );
+			$resultat = $this->modelcategorie->modifier( $id,$nom );
 			$data['titre']		= 'Modification';
 			$data['message']	= 'Votre catégorie à bien été modifié.';
 			$data['redirect'] 	= 'categorie/liste';
@@ -152,8 +134,34 @@ class Categorie extends Cafe {
 		
 	}
 	
-	public function exeSupprimer()
-	{
+	
+	public function supprimer($id) {
+		
+		// on supprime les accréditations liées à cette catégorie qui sont déjà passé.
+		$this->modelaccreditation->supprimerParcategorie( $id );
+		
+		// On supprime les entrées dans la tables des paramètres des évènement.
+		$this->modelevenement->supprimerparametreParCategorie( $id );
+		
+		// on supprimes les catégorie et ses sous-catégorie.
+		$categories =$this->modelcategorie->getSousCategorieid($id);
+		
+		if(isset($categories) && !empty($categories)) {
+		
+			foreach ($categories as $categorie)
+			{
+				$this->modelcategorie->supprimerCategorie($categorie->idcategorie);
+			}
+		}
+		
+		$this->modelcategorie->supprimerCategorie($id);
+		
+		$data['titre']		= 'Suppression';
+		$data['message']	= 'Votre catégorie a bien été supprimée.';
+		$data['redirect'] 	= 'categorie/liste';
+		$this->layout->view('utilisateur/UMessage', $data);
 		
 	}
+	
+	
 }

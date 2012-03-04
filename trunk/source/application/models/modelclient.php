@@ -55,7 +55,7 @@ class modelClient extends MY_Model {
 	 */
 	
 	public function supprimer($id) {
-		$this->db->delete(DB_CLIENT, array('idclient = ' . $id));
+		$this->db->delete(DB_CLIENT, array('idclient' => $id));
 	}
 	
 }

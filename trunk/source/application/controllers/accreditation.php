@@ -240,6 +240,36 @@ class Accreditation extends Cafe {
 	
 	}
 	
+	
+	public function supprimer( $id ) {
+		
+		// suppréssion de toute les zones liée a l'accréditation.
+		$this->modelzone->supprimerZonesParAccreditation( $id );
+		
+		// Suppréssion de notre accreditation.
+		$this->modelaccreditation->supprimer( $id );
+		
+		$data['titre']		= 'Suppression';
+		$data['message']	= 'Votre accréditation à bien été supprimée.';
+		$this->layout->view('utilisateur/UMessage', $data);
+		
+	}
+	
+	public function supprimerClient ( $idClient ) {
+		
+		// on supprime les accréditation de ce membres.
+		$this->modelcategorie->supprimerParClient( $idClient );
+		
+		// On supprime notre accréditation.
+		$this->modelcategorie->supprimerClient();
+		
+		$data['titre']		= 'Suppression';
+		$data['message']	= 'Votre client et ses accréditation ont bien été supprimée.';
+		$this->layout->view('utilisateur/UMessage', $data);
+		
+	}
+	
+	
 	public function valider ($idAccreditation ) {
 		
 		$this->modelaccreditation->valideraccreditation( $idAccreditation );

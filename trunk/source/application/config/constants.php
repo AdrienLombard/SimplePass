@@ -56,7 +56,7 @@ define('DB_PARAMETRES_EVENEMENTS',	'courchevel_parametres_evenements');
 define('DB_PAYS',					'courchevel_pays');
 define('DB_UTILISATEUR',			'courchevel_utilisateur');
 define('DB_ZONE',					'courchevel_zone');
-
+define('DB_ZONES_ACCREDITATION', 	'courchevel_accreditation_zones');
 
 /* End of file constants.php */
 /* Location: ./application/config/constants.php */
