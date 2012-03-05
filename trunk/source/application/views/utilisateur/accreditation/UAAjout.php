@@ -4,37 +4,110 @@
 
     <div class="tabs">
 		<a href="<?php echo site_url('accreditation/index'); ?>">Liste</a>
-		<a href="<?php echo site_url('accreditation/index'); ?>">Demandes</a>
-		<a href="<?php echo site_url('accreditation/ajouter'); ?>" class="current">Ajouter</a>
+		<a href="<?php echo site_url('accreditation/demandes'); ?>">Demandes</a>
+		<a href="#" class="current">Ajouter</a>
     </div>
 
     <div class="box-full">
 
-        <div id="main" class="nomargin">
-			
-			<form class="rechercheClient">
+        <aside>
+			<a href="#">Retour</a>
+        </aside>
+		
+		<div id="main" class="accred">
         	
-				<div class="flowSearch">
-					<label>Nom de la personne :</label>
-					<input type="text" />
-				</div>
+			<div class="client nouveau">
 				
-				<div class="listeTempsReel">
-					
-					<?php foreach($clients as $client): ?>
-					<a href="<?php echo site_url('accreditation/voir/'.$client->idclient); ?>">
-						<div username="<?php echo strtolower($client->nom. ' ' .$client->prenom); ?>" class="itemFlowSearch">
-							<span class="username"><?php echo $client->nom. ' ' .$client->prenom; ?></span>
-							<span class="pays"><?php echo $client->pays; ?></span>
+				<form class="infos nouveau" method="post" action="<?php echo site_url('accreditation/exeAjouter'); ?>">
+
+					<div class="photo">
+
+						<div class="simulPhoto"></div>
+
+						<div class="optionPhoto">
+							<a href="#">FICHIER</a>
+							<a href="#">WEBCAM</a>
 						</div>
-					</a>
-					<?php endforeach; ?>
+
+					</div>
 					
-				</div>
-				
-				<input type="submit" value="Personne ne correspond ? Créer une nouvelle personne" />
-				
-			</form>
+					<div class="inputs">
+
+						<h2>Personne</h2>
+						
+						<div>
+							<label>Nom : </label>
+							<input type="text" name="nom" class="nom" value="<?php echo $nom; ?>" />
+						</div>
+
+						<div>
+							<label>Prénom : </label>
+							<input type="text" name="prenom" class="prenom" value="<?php echo $prenom; ?>" />
+						</div>
+
+						<div>
+							<label>Pays : </label>
+							<select class="pays" name="pays" style="padding-left: 0px;">
+
+							<?php foreach($pays as $p): ?>
+								<option value="<?php echo $p->idpays; ?>" style="background: url(<?php echo img_url('drapeaux/'.strtolower($p->idpays).'.gif'); ?>) no-repeat left;"><?php echo $p->nompays; ?></option>
+							<?php endforeach; ?>
+
+							</select>
+						</div>
+
+						<div>
+							<label>Tel : </label>
+							<input type="text" name="tel" class="tel">
+						</div>
+
+						<div>
+							<label>Mail : </label>
+							<input type="text" name="mail" class="email">
+						</div>
+						
+						<br><br>
+						
+						<h2>Accréditation</h2>
+
+						<div>
+							<label>Fonction : </label>
+							<input type="text" name="fonction"/>
+						</div>
+
+						<div>
+							<label>Catégorie : </label>
+							<select name="categorie">
+								<option value="">---</option>
+								<?php foreach($categories as $categorie): ?>
+								<option value="<?php echo $categorie['cat']->idcategorie; ?>" zone="<?php echo $categorie['zones']; ?>">
+									<?php echo $categorie['cat']->libellecategorie; ?>
+								</option>
+								<?php endforeach; ?>
+							</select>
+						</div>
+
+						<div class="contientZones">
+							<label>Zones : </label>
+							<div>
+								<?php foreach($zones as $zone): ?>
+								<div class="checkzone" id="<?php echo $zone->idzone; ?>">
+									<?php echo $zone->idzone; ?>
+									<input type="checkbox" name="zone[<?php echo $zone->idzone; ?>]" />
+								</div>
+								<?php endforeach; ?>
+							</div>
+						</div>
+
+						<div class="clear"></div>
+						
+					</div>
+
+					<input type="submit" class="button" value="Enregistrer" />
+
+				</form>
+
+			</div>
 			
         </div>
 

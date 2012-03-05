@@ -34,6 +34,15 @@ class modelZone extends MY_Model {
 
 	}
 	
+	public function getZoneParCategorie( $idCategorie ) {
+		return $this->db->select('*')
+						->from(DB_PARAMETRES_EVENEMENTS)
+						->where('idcategorie', $idCategorie)
+						->get()
+						->result();
+
+	}
+	
 	public function getZoneParIdMultipleParEvenement( $idCategorie, $idEvenement ) {
 		$where = '';
 		$k = true;

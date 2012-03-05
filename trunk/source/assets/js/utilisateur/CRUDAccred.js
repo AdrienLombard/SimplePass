@@ -15,9 +15,13 @@ $(document).ready(function(){
 	$('.flowSearch input').keyup(function(){
 		
 		var val = $(this).val().toLowerCase();
-		$('.itemFlowSearch').hide();
-		if(val.length >= 2) 
-			$('.itemFlowSearch[username*='+val+']').show();
+		
+		if(val.length >= 2) {
+			var tab = val.split(' ');
+			$('.itemFlowSearch').hide();
+			for(var i=0; i<tab.length; i++)
+				$('.itemFlowSearch[username*='+tab[i]+']').show();
+		}
 
 	});
 	
@@ -27,6 +31,7 @@ $(document).ready(function(){
 	 */
 	
 	$("form.infos input[type=submit]").hide();
+	$("form.infos.nouveau input[type=submit]").show();
 	
 	$('a.editClient').live('click', function(){
 		$('form.infos input, form.infos select').removeAttr('readonly').removeAttr('disabled');
@@ -35,6 +40,25 @@ $(document).ready(function(){
 
 	$("select.pays").change(function(){
 		$(this).attr('style', 'background: url(http://localhost/courchevel_src/assets/images/drapeaux/' + $(this).val().toLowerCase() + '.gif) no-repeat left;');
+	});
+	
+	
+	/*
+	 * Ergonomie des checkzones
+	 */
+	$('.checkzone').live('click', function(){
+		$(this).toggleClass('on').find('input').attr('checked', 'checked');
+	});
+	
+	/*
+	 * Auto check des zone au changement de catégorie
+	 */
+	$('select[name=categorie]').change(function(){
+		var zones = $(this).find('option:selected').attr('zone').split('-');
+		$('.checkzone').removeClass('on').find('input').removeAttr('checked');
+		$.each(zones, function(k, v){
+			$('.checkzone[id='+v+']').toggleClass('on').find('input').attr('checked', 'checked');
+		});
 	});
 	
 });

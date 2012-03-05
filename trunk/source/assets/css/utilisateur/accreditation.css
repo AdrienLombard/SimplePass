@@ -37,15 +37,14 @@
 }
 
 .accred .client .infos label {
-	width: 50px;
+	width: 100px;
 	display: inline-block;
 	color: #888;
 }
 .accred .client .infos input[type=text], .accred .client .infos select {
-	border: 1px solid #CCC;
+	border: 1px solid #AAA;
 	font-size: 16px;
 	padding: 2px 6px 2px 6px;
-	box-shadow: 0 0 0;
 	width: 400px;
 	border-radius: 0;
 	display: inline-block;
@@ -87,6 +86,22 @@
     background: #666;
 	color: #FFF;
 }
+
+/*
+ * Nouveau client
+ */
+
+.accred .client.nouveau .infos input[type=text], .accred .client.nouveau .infos select {
+	font-size: 16px;
+	padding: 5px 10px 5px 10px;
+}
+.accred .client.nouveau .infos select {
+	width: 422px;
+}
+
+/*
+ * Liste des accred
+ */
 
 .accred .listeAccred {
 	margin-top: 30px;
@@ -221,8 +236,51 @@ form.rechercheClient div.listeTempsReel div.itemFlowSearch span.pays {
 }
 
 
-
+/* 
+ * AUTRES
+ */
 
 *[disabled] {
 	background: red;
+}
+
+div.inputs {
+	margin-left: 180px;
+}
+
+
+
+/*
+ * Ergonomie zone
+ */
+ 
+.contientZones {
+	margin-top: 15px;
+}
+ .contientZones label {
+	float: left;
+	margin-right: 5px;height: 50px;
+}
+.checkzone {
+	display: inline-block;
+	margin-bottom: 5px;
+	background: #CCC;
+	color: #666;
+	font-size: 11px;
+	border-radius: 4px;
+	width: 40px;
+	text-align: center;
+	padding: 5px 2px 5px 2px;
+}
+.checkzone:hover {
+	background: #AAA;
+	cursor: pointer;
+}
+.checkzone input {
+	display: none;
+}
+.checkzone.on {
+	background: #2e6f92;
+	color: #FFF;
+	box-shadow: 1px 1px 3px rgba(0,0,0,0.5);
 }
