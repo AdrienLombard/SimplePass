@@ -22,7 +22,6 @@ class Categorie extends Cafe {
 		$this->liste();
 		
 	}
-
 	
 	public function liste() {
 		

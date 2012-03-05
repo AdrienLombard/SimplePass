@@ -75,8 +75,8 @@
 						
 					</div>
 						
-						<input type="hidden" id="idRef" value="<?php echo $client->idclient; ?>" />
-						<input type="hidden" id="idAccredRef" value="<?php echo $accreditation[0]->idaccreditation; ?>" />
+						<input type="hidden" name="idRef" value="<?php echo $client->idclient; ?>" />
+						<input type="hidden" name="idAccredRef" value="<?php echo $accreditation[0]->idaccreditation; ?>" />
 						<input type="text" class="nom" id="nomRef" init="<?php echo $client->nom; ?>" value="<?php echo $client->nom; ?>">
 						<input type="text" class="prenom" id="prenomRef" init="<?php echo $client->prenom; ?>" value="<?php echo $client->prenom; ?>">
 						
