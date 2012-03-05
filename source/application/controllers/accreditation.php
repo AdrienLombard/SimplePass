@@ -70,7 +70,7 @@ class Accreditation extends Cafe {
 		}
 		
 		foreach($validees as $validee) {
-			$sortie['accred'] = $demande;
+			$sortie['accred'] = $validee;
 			$sortie['allZones'] = $this->modelzone->getZoneParEvenement($validee->idevenement);
 			$sortie['zones'] = $this->modelzone->getZoneParAccreditation($validee->idaccreditation);
 			$data['accredValide'][] = $sortie;
@@ -95,6 +95,7 @@ class Accreditation extends Cafe {
 		
 		// On récpère les accréditations de ce client.
 		$equipe = $this->modelaccreditation->getAccreditationsGroupeParEvenement( $idClient , $idEvenement);
+		
 		$idCategories = array();
 		foreach ($equipe as $accred) {
 			if($accred->idclient != $idClient) {
@@ -172,19 +173,24 @@ class Accreditation extends Cafe {
 		$data['pays']	= $this->input->post('pays');
 		$data['tel']	= $this->input->post('tel');
 		$data['mail']	= $this->input->post('mail');
-		
-		$this->load->model('modelclient');
+		$message['message']= 'Votre l accreditation  de client  à bien été modifié.';
 		$this->modelclient->modifier($id, $data);
-		
+		$message['titre']		= 'Modification';
+		$message['redirect'] 	= 'accreditation/liste';
+		$this->layout->view('utilisateur/UMessage', $message);
 		$this->load->helper('url');
 		redirect('accreditation/voir/' . $id);
 		
 	}
 	
-	public function exeModifierGroupe() {
+	public function exeModifierGroupe($ref=false) {
 	
 		/* Modification des infos du référent */
 		$id				= $this->input->post('idRef');
+		$idAccred = $this->input->post('idAccredRef');
+		if($ref)
+		{
+		
 		$data['nom']	= $this->input->post('nomRef');
 		$data['prenom'] = $this->input->post('prenomRef');
 		$data['pays']	= $this->input->post('paysRef');
@@ -192,13 +198,23 @@ class Accreditation extends Cafe {
 		$data['tel']	= $this->input->post('telRef');
 		$data['mail']	= $this->input->post('mailRef');
 		
-		echo "Id client : " . $id;
-	
-		$this->load->model('modelclient');
-		$this->load->model('modelaccreditation');
+	     display_tab($this->input->post('data'));
 		
 		$this->modelclient->modifier($id, $data);
-		
+		}
+		else 
+		{
+			$reponse=$this->modelaccreditation->getDemandesParClient($id);
+			if($reponse)
+			{
+				$data['nom'] 		= $reponse[0]->nom;
+				$data['prenom'] 	= $reponse[0]->prenom;
+				$data['pays'] 	= $reponse[0]->pays;
+				$data['organisme'] = $reponse[0]->organisme;
+		        $data['tel']	= $reponse[0]->tel;
+		        $data['mail']	= $reponse[0]->mail;
+			}
+		}
 		$dataAccred = array();
 		
 		$dataAccred['fonction'] = $this->input->post('fonctionRef');
@@ -206,16 +222,12 @@ class Accreditation extends Cafe {
 		if(empty($dataAccred['fonction'])) {
 			$dataAccred['fonction'] = "";
 		}
-		
-		$idAccred = $this->input->post('idAccredRef');
-		
-		echo "Id accred : " . $idAccred;
-		
 		$this->modelaccreditation->modifier($idAccred, $dataAccred);
 		
-		display_tab($this->input->post('groupe'));
+		//display_tab($this->input->post('groupe'));
 		
 		/* Modification des membres du groupe */
+		
  		foreach($this->input->post('groupe') as $ligne) {
 			
 			/* Modification de l'accréditation */
@@ -232,6 +244,10 @@ class Accreditation extends Cafe {
 			
 			$accred['etataccreditation'] = 0;
 			$this->modelaccreditation->modifier($ligne['idAccreditation'], $accred);
+			$message['titre']		= 'Modification';
+			$message['message']= 'l accreditation  à bien été modifié.';
+			$message['redirect'] 	= 'accreditation/demandes';
+		    $this->layout->view('utilisateur/UMessage', $message);
 			
 		}
 		
@@ -279,5 +295,4 @@ class Accreditation extends Cafe {
 		$this->layout->view('utilisateur/UMessage', $data);	 
 		
 	}
-
 }
