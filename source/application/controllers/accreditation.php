@@ -140,35 +140,91 @@ class Accreditation extends Cafe {
 		
 		
 	}
-	public function ajouter() {
+	public function rechercher() {
 		
 		$this->load->model('modelclient');
 		$data['clients'] = $this->modelclient->getClients();
+		
+		$this->layout->view('utilisateur/accreditation/UARecherche', $data);
+		
+	}
+	
+	public function ajouter() {
+	
+		/*
+		 * Traitement du nom et du prénom : répercusion depuis la recherche
+		 */
+		
+		$username = $this->input->post('username');
+		$username = explode(' ', $username);
+		
+		$data['nom'] = '';
+		$data['prenom'] = '';
+		
+		if(count($username)>0) {
+			$data['nom'] = array_shift($username);
+			$data['prenom'] = implode(' ', $username);
+		}
+		else
+			$data['nom'] = $username;
+		
+		/*
+		 * Liste de catégorie, zone et pays
+		 */
+		
+		$data['evenements'] = $this->modelevenement->getEvenements();
+		$data['zones'] = $this->modelzone->getZones();
+		$data['pays'] = $this->modelpays->getPays();
+		
+		/*
+		 * Liste des catégories avec les zones associées
+		 */
+		$cats = $this->modelcategorie->getCategories();
+		foreach($cats as $cat) {
+			$push = array();
+			$push['cat'] = $cat;
+			$push['zones'] = '';
+			$catZones = $this->modelzone->getZoneParCategorie($cat->idcategorie);
+			foreach($catZones as $cz) $push['zones'] .= $cz->idzone.'-';
+			$data['categories'][] = $push;
+		}
 		
 		$this->layout->view('utilisateur/accreditation/UAAjout', $data);
 		
 	}
 	
-	public function ajouterClient() {
+	public function exeAjouter() {
 		
-	}
-	
-	public function exeAjouterClient() {
+		$client = array();
+		$client['nom'] = strtoupper($this->input->post('nom'));
+		$client['prenom'] = $this->input->post('prenom');
+		$client['pays'] = $this->input->post('pays');
+		$client['tel'] = $this->input->post('tel');
+		$client['mail'] = $this->input->post('mail');
+		$this->modelclient->ajouter($client);
 		
-	}
-	
-	public function ajouterAccreditation() {
+		$idClient = $this->modelclient->lastId();
 		
-	}
-	
-	public function exeAjouterAccreditation() {
+		$accred = array();
+		$accred['idclient'] = $idClient;
+		$accred['idevenement'] = $this->input->post('evenement');
+		$accred['fonction'] = $this->input->post('fonction');
+		$accred['etataccreditation'] = 0;
+		$accred['dateaccreditation'] = time();
+		$this->modelaccreditation->ajouter($accred);
 		
+		$idAccred = $this->modelaccreditation->lastId();
+		
+		// todo : ajout zones
+		
+		$this->load->helper('url');
+		redirect('accreditation/voir/' . $idClient);		
 	}
 
 	public function exeModifierClient() {
 		
 		$id				= $this->input->post('id');
-		$data['nom']	= $this->input->post('nom');
+		$data['nom']	= strtoupper($this->input->post('nom'));
 		$data['prenom'] = $this->input->post('prenom');
 		$data['pays']	= $this->input->post('pays');
 		$data['tel']	= $this->input->post('tel');
