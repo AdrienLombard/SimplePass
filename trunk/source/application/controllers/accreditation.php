@@ -85,7 +85,6 @@ class Accreditation extends Cafe {
 		$data['idevenement'] = $idEvenement;
 		$data['client'] = $this->modelclient->getClientParId($idClient);
 		$data['accreditation'] = $this->modelaccreditation->getAccreditationsReferentParEvenement($idClient, $idEvenement);
-		//$data['equipe']=$this->modelaccreditation->getAccreditationsGroupeParEvenement($idClient);
 		$data['pays'] = $this->modelpays->getpays();
 		$data['evenements'] = $this->modelevenement->getEvenements();
 		$data['categories'] = $this->modelcategorie->getCategorieDansEvenement( $idEvenement );
@@ -118,21 +117,11 @@ class Accreditation extends Cafe {
 			// On récupère et on traite la liste des zones utilisé par les accréditation de ce client.
 			$zonesCate = $this->modelzone->getZoneParIdMultipleParEvenement( $idCategories , $idEvenement );
 			$cateZones = Array();
+			
 			foreach($zonesCate as $zones) {
 				$cateZones[$zones->idcategorie][$zones->idzone] = true;
 
 			}
-			/*foreach($equipe as $accred) {
-				$listeZonesAccred[$accred->idaccreditation] = $cateZones[$accred->idcategorie];
-			}*/
-
-			// on prend les zone + accred.
-			//$accredZones = $this->modelzone->getZoneParAccreditationMultiple( $idAccred );
-
-			// on merge dans le meme tableau, avec [idaccred][idzone] = true; de la meme facon.
-			/*foreach ($accredZones as $key => $zones) {
-				$listeZonesAccred[$zones->idacreditation][$zones->idzone] = true;
-			}*/
 
 			$data['listeZonesAccred'] = $cateZones;
 		
@@ -248,20 +237,20 @@ class Accreditation extends Cafe {
 		if($ref)
 		{
 		
-		$data['nom']	= $this->input->post('nomRef');
-		$data['prenom'] = $this->input->post('prenomRef');
-		$data['pays']	= $this->input->post('paysRef');
-		$data['organisme'] = $this->input->post('organismeRef');
-		$data['tel']	= $this->input->post('telRef');
-		$data['mail']	= $this->input->post('mailRef');
-	
-		$this->load->model('modelclient');
-		$this->load->model('modelaccreditation');
-		$this->load->model('modelzone');
+			$data['nom']	= $this->input->post('nomRef');
+			$data['prenom'] = $this->input->post('prenomRef');
+			$data['pays']	= $this->input->post('paysRef');
+			$data['organisme'] = $this->input->post('organismeRef');
+			$data['tel']	= $this->input->post('telRef');
+			$data['mail']	= $this->input->post('mailRef');
 		
-		display_tab($data);
-		
-		$this->modelclient->modifier($id, $data);
+			$this->load->model('modelclient');
+			$this->load->model('modelaccreditation');
+			$this->load->model('modelzone');
+			
+			display_tab($data);
+			
+			$this->modelclient->modifier($id, $data);
 		}
 		else 
 		{

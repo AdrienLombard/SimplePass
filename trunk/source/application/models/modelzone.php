@@ -123,6 +123,7 @@ class modelZone extends MY_Model {
 						->distinct()
 					    ->from(DB_ZONE . ' z')
 					    ->join(DB_PARAMETRES_EVENEMENTS . ' ze', 'z.idzone = ze.idzone AND ze.idevenement = ' . $idEvenement, 'left')
+					    ->order_by('ze.idcategorie', 'asc')
 					    ->get()
 					    ->result();
 	}
