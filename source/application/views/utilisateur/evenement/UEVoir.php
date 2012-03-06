@@ -20,7 +20,7 @@
 
         <div id="main">
 			<?php if($resultats): ?>
-				<?php foreach ($resultats as $resultat):{?>
+				<?php foreach ($resultats as $resultat):?>
 				<h2><?php echo $resultat->libelleevenement?></h2>
 
 				<table class="details">
@@ -32,8 +32,9 @@
 						<th>Date fin</th>
 						<td><?php echo display_date($resultat->datefin)?></td>
 					</tr>
-					<?php } endforeach; ?>
 				</table>
+				<?php  endforeach; ?>
+				
 				
 							
         </div>

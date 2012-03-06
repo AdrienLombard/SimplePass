@@ -35,8 +35,10 @@
 					<label>Date fin</label>
 					<input type="text" value="<?php echo display_date ($datefin) ;?>" id="datepicker-fin" name="datefin" READONLY="READONLY" />
 
-					<hr/>
-
+					<br/><hr/><br/>
+		</div>
+		<div class="clear"></div>
+		
 					<table class="listeCategorieEvent">
 						<thead>
 							<th></th>
@@ -123,7 +125,5 @@
         </div>
 
         <div class="clear"></div>
-
-    </div>
 
 </div>
