@@ -11,16 +11,11 @@
     <div class="box-full">
 		
 		<aside>
-
-            <b>Options :</b>
-            <ul>
-				<?php if($resultats): ?>
-					<a href="<?php echo site_url('evenement/modifier/'.$id); ?>">Modifier</a>
-					<a href="<?php echo site_url('evenement/supprimer/'.$id);?>" confirm="Êtes-vous sûr de vouloir supprimer cet évènement ?">Supprimer</a>
-				<?php endif; ?>
-				<a href="<?php echo site_url('evenement/liste'); ?>">Retour</a>
-			</ul>
-
+			<?php if($resultats): ?>
+				<a href="<?php echo site_url('evenement/modifier/'.$id); ?>">Modifier</a>
+				<a href="<?php echo site_url('evenement/supprimer/'.$id);?>" confirm="Êtes-vous sûr de vouloir supprimer cet évènement ?">Supprimer</a>
+			<?php endif; ?>
+			<a href="<?php echo site_url('evenement/liste'); ?>">Retour</a>
         </aside>
 
         <div id="main">
@@ -39,83 +34,66 @@
 					</tr>
 					<?php } endforeach; ?>
 				</table>
+				
+							
+        </div>
+		
+		<div class="clear"></div>
+		
+		<br><br>
 
-				<table class="listeCategorieEvent">
-					<thead>
-						<th></th>
+		<table class="listeCategorieEvent">
+			<thead>
+				<th></th>
+				<?php foreach($listeZones as $zone): ?>
+
+					<th class="rotate">
+						<div class="itemRotate" zone="<?php echo $zone->idzone; ?>"><?php echo $zone->libellezone; ?></div>
+					</th>
+
+				<?php endforeach; ?>
+
+					<th class="rotate">
+						<div class="itemRotate"></div>
+					</th>
+
+			</thead>
+
+			<tbody>
+
+				<tr class="ligneCodeZone">
+					<td class="titreCodeDeLaZone">code de la zone :</td>
+					<?php foreach($listeZones as $zone): ?>
+						<td><?php echo $zone->codezone; ?></td>
+					<?php endforeach; ?>
+				</tr>
+
+				<?php if(isset($listeCategorie)): ?>
+					<?php foreach ($listeCategorie as $categorie): ?>
+					<tr class="ligneChoixZoneCat">
+
+						<td style="padding-left: <?php echo ($categorie['depth'] * 20) + 10; ?>px">
+							<?php echo $categorie['db']->libellecategorie?>
+						</td>
+
 						<?php foreach($listeZones as $zone): ?>
-
-							<th class="rotate">
-								<div class="itemRotate" zone="<?php echo $zone->idzone; ?>"><?php echo $zone->libellezone; ?></div>
-							</th>
-
+						<td>
+							<?php if(isset($listeCatgorieZone[$categorie['db']->idcategorie][$zone->idzone])): ?>
+							<?php echo img('checkmark.png') ?>
+							<?php endif; ?>
+						</td>								
 						<?php endforeach; ?>
 
-							<th class="rotate">
-								<div class="itemRotate"></div>
-							</th>
+					</tr>
+					<?php endforeach; ?>
+				<?php endif; ?>
 
-					</thead>
-
-					<tbody>
-
-						<tr class="ligneCodeZone">
-							<td class="titreCodeDeLaZone">code de la zone :</td>
-							<?php foreach($listeZones as $zone): ?>
-								<td>
-									<input type="text" 
-										   maxlength="3" 
-										   name="<?php echo 'code_' . $zone->idzone; ?>" 
-										   zone="<?php echo $zone->idzone; ?>" 
-										   class="codeZone"
-										   value="<?php echo $zone->codezone; ?>"
-										   disabled="disabled" />
-								</td>
-							<?php endforeach; ?>
-						</tr>
-
-						<?php if(isset($listeCategorie)): ?>
-							<?php foreach ($listeCategorie as $categorie): ?>
-							<tr class="ligneChoixZoneCat">
-
-								<td style="padding-left: <?php echo ($categorie['depth'] * 20) + 10; ?>px">
-									<?php echo $categorie['db']->libellecategorie?>
-								</td>
-
-								<?php foreach($listeZones as $zone): ?>
-
-									<?php if(isset($listeCatgorieZone[$categorie['db']->idcategorie][$zone->idzone])): ?>
-
-										<td>
-											<input type="checkbox"
-												   name="<?php echo $categorie['db']->idcategorie . '_' . $zone->idzone; ?>"
-												   cat="<?php echo $categorie['db']->idcategorie; ?>"
-												   zone="<?php echo $zone->idzone; ?>"
-												   checked="checked"
-												   disabled="disabled" />
-										</td>
-
-									<?php else: ?>
-
-										<td>
-
-										</td>
-
-									<?php endif; ?>
-
-								<?php endforeach; ?>
-
-							</tr>
-							<?php endforeach; ?>
-						<?php endif; ?>
-
-					</tbody>
-				</table>
+			</tbody>
+		</table>
+		
 			<?php else: ?>
 				Cette catégorie n'existe pas.
 			<?php endif; ?>
-			
-        </div>
 
         <div class="clear"></div>
 

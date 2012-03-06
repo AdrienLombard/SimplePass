@@ -12,17 +12,7 @@
     <div class="box-full">
 		
 		<aside>
-           
-            <b>Options :</b>
-            <ul>
-				
-				<?php if(isset($ajoute)):?>
-				<li><span class="ajoute"><?php echo $ajoute; ?></span></li>
-				<?php endif; ?>
-				
-                <li><a href="<?php echo site_url('categorie/liste'); ?>">Retour</a></li>
-            </ul>
-
+			<a href="<?php echo site_url('categorie/liste'); ?>">Retour</a>
         </aside>
 
         <div id="main">

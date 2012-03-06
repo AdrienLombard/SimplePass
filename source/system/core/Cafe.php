@@ -33,6 +33,11 @@ class Cafe extends CI_Controller {
 		$this->layout->ajouter_js('utilisateur/scriptGeneral');
 		
 		$this->layout->ajouter_css('utilisateur/cafe');
+		
+		
+		// Barre des evenements
+		$this->load->model('modelevenement');
+		$this->layout->add_var('topMenuEvenements', $this->modelevenement->getEvenements());
         
     }
 	

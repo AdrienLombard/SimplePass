@@ -112,6 +112,15 @@ class Layout
 	
 	
 	/**
+	 * fonction pour savoir si l'utilisateur est connecté
+	 * @param Boolean etat du login
+	 */
+	public function add_var($key, $val) {
+		$this->var[$key] = $val;
+	}
+	
+	
+	/**
 	 * fonction pour demander l'affichage d'une flash_message sur la vue appeler ensuite.
 	 * @param char $message
 	 * @param int  $flag

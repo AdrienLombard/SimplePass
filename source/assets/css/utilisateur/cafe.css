@@ -15,14 +15,6 @@ header .wrap-h {
     text-align:  right;
 }
 header .wrap-h #logo {
-    /*
-	font-size: 12px;
-    float: left;
-    background: #2e6f92;
-    padding: 2px 10px 5px 10px;
-    border-radius: 0 0 100% 100%;
-    box-shadow: 0 0 2px rgba(0, 0, 0, 0.4);
-	*/
     float: left;
     background: #2e6f92;
     padding: 12px 30px 15px 30px;
@@ -39,15 +31,72 @@ header .wrap-h #logo .subtitle {
 	font-size: 10px;
 	letter-spacing: 3px;
 }
-header .wrap-h nav a {
+header .wrap-h nav a, header .wrap-h span.switchMenu, header .wrap-h span.switchMenu a {
     display: inline-block;
     padding: 15px 10px 15px 10px;
     font-size: 12px;
 }
-header .wrap-h nav a:hover {
+header .wrap-h nav a:hover, header .wrap-h span.switchMenu:hover {
     background: #2e6f92;
+	cursor: pointer;
+}
+header .wrap-h span.switchMenu div.toggleMenu {
+	display: none;
+	margin-top: 15px;
+	margin-left: -10px;
+	box-shadow: 0 2px 2px rgba(0,0,0,0.6);
+	text-align: left;
+
+}
+header .wrap-h span.switchMenu div.toggleMenu a {
+	display: block;
+	background: #2e6f92;
+	margin: 0;
+	padding-left: 20px;
+	padding-right: 20px;
+}
+header .wrap-h span.switchMenu div.toggleMenu a:hover {
+	color: #1d465b;
+	background: #FFF;
+}
+header .wrap-h span.switchMenu:hover div.toggleMenu {
+	display: block;
+	position: absolute;
 }
 
+
+/*
+ * Top menu evenements
+ */
+#topMenuEvenements {
+	float: left;
+	margin-left: 10px;
+}
+#topMenuEvenements * {
+	font-size: 12px;
+}
+ /*
+#topMenuEvenements {
+	float: left;
+	margin-top: 8px;
+	margin-left: 5px;
+	border: 1px solid #1d465b;
+	background: #1d465b;
+	color: #BBB;
+	font-size: 12px;
+	padding: 4px 8px 4px 8px;
+	cursor: pointer;
+	border-radius: 5px;
+	outline: none;
+}
+#topMenuEvenements option {
+	padding: 4px 8px 4px 8px;
+}
+#topMenuEvenements:hover, #topMenuEvenements:focus {
+	background: #2e6f92;
+	color: #FFF;
+}
+ */
 
 #content {
     width: 1000px;

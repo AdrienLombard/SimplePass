@@ -14,7 +14,7 @@
 			
 			<br /><br />
 			
-			Ici sera affiché un récapitulatif de vos données.
+			Evènement en cours : <?php echo $evenement; ?>
 			
         </div>
 
