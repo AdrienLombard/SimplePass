@@ -75,12 +75,13 @@
 						
 					</div>
 						
-						<input type="hidden" name="idRef" value="<?php echo $client->idclient; ?>" />
-						<input type="hidden" name="idAccredRef" value="<?php echo $accreditation[0]->idaccreditation; ?>" />
-						<input type="text" class="nom" id="nomRef" init="<?php echo $client->nom; ?>" value="<?php echo $client->nom; ?>">
-						<input type="text" class="prenom" id="prenomRef" init="<?php echo $client->prenom; ?>" value="<?php echo $client->prenom; ?>">
+						<input type="hidden" id="evenement" name="evenement" value="<?php echo $idevenement; ?>" />
+						<input type="hidden" id="idRef" name="idRef" value="<?php echo $client->idclient; ?>" />
+						<input type="hidden" id="idAccredRef" name="idAccredRef" value="<?php echo $accreditation[0]->idaccreditation; ?>" />
+						<input type="text" class="nom" id="nomRef" name="nomRef" init="<?php echo $client->nom; ?>" value="<?php echo $client->nom; ?>">
+						<input type="text" class="prenom" id="prenomRef" name="prenomRef" init="<?php echo $client->prenom; ?>" value="<?php echo $client->prenom; ?>">
 						
-						<select class="pays" id="paysRef" init="<?php echo $client->pays; ?>"
+						<select class="pays" id="paysRef" name="paysRef" init="<?php echo $client->pays; ?>"
 								style="background: url(<?php echo img_url('drapeaux/'.strtolower($client->pays).'.gif'); ?>) no-repeat left; padding-left: 15px">
 							
 						<?php foreach($pays as $p): ?>
@@ -89,13 +90,13 @@
 						
 						</select>
 					
-						<input type="text" class="organisme" id="organismeRef" init="<?php echo $client->organisme; ?>" value="<?php echo $client->organisme; ?>">
-						<input type="text" class="role" id="fonctionRef" init="<?php echo $accreditation[0]->fonction; ?>" value="<?php echo $accreditation[0]->fonction; ?>">
+						<input type="text" class="organisme" id="organismeRef" name="organismeRef" init="<?php echo $client->organisme; ?>" value="<?php echo $client->organisme; ?>">
+						<input type="text" class="role" id="fonctionRef" name="fonctionRef" init="<?php echo $accreditation[0]->fonction; ?>" value="<?php echo $accreditation[0]->fonction; ?>">
 						
-						<input type="text" class="tel" id="telRef" init="<?php echo $client->tel; ?>" value="<?php echo $client->tel; ?>">
-						<input type="text" class="email" id="mailRef" init="<?php echo $client->mail; ?>" value="<?php echo $client->mail; ?>">
+						<input type="text" class="tel" id="telRef" name="telRef" init="<?php echo $client->tel; ?>" value="<?php echo $client->tel; ?>">
+						<input type="text" class="email" id="mailRef" name="mailRef" init="<?php echo $client->mail; ?>" value="<?php echo $client->mail; ?>">
 						
-						<input type="submit" class="valideInfos" value="Enregistrer les modifications" />
+						<!-- <input type="submit" class="valideInfos" value="Enregistrer les modifications" /> -->
 					
 					<div class="clear"></div>
 					
@@ -106,15 +107,15 @@
 					<h3>Membres du groupe</h3>
 					
 					<?php if(count($accredAttente)==0) echo '<br/>Aucune demande en cours.' ?>
-					
+					<?php $nbLigne = 0; ?>
 					<?php foreach($accredAttente as $demande): ?>
 					
 					<div class="ligneAccred close">
 						<div class="fixe">
-							<input type="hidden" id="idClient" name="groupe[nbLigne][idClient]" value="<?php echo $demande->idclient; ?>" />
-							<input type="hidden" id="idAccreditation" name="groupe[nbLigne][idAccreditation]" value="<?php echo $demande->idaccreditation; ?>" />
-							<input type="hidden" id="groupe" name="groupe[nbLigne][groupe]" value="<?php echo $demande->groupe; ?>" />
-							<span class="nomprenom" name="groupe[nbLigne][nom]" ><?php echo $demande->nom.' '.$demande->prenom.'    '; ?></span>
+							<input type="hidden" id="idClient" name="<?php echo "groupe[" . $nbLigne . "][idClient]"; ?>" value="<?php echo $demande->idclient; ?>" />
+							<input type="hidden" id="idAccreditation" name="<?php echo "groupe[" . $nbLigne . "][idAccreditation]"; ?>" value="<?php echo $demande->idaccreditation; ?>" />
+							<input type="hidden" id="groupe" name="<?php echo "groupe[" . $nbLigne . "][groupe]"; ?>" value="<?php echo $demande->groupe; ?>" />
+							<span class="nomprenom" name="<?php echo "groupe[" . $nbLigne . "][nom]"; ?>" ><?php echo $demande->nom.' '.$demande->prenom.'    '; ?></span>
 							<span class="date"><?php echo display_date($demande->dateaccreditation); ?></span>
 							<span class="categorie"><?php echo $demande->libellecategorie; ?></span>
 						</div>
@@ -131,9 +132,9 @@
 	
 								<div>
 									<label for="fonction">Fonction : </label>
-									<input type="text" id="ligneFonction" name="groupe[nbLigne][fonction]" value="<?php echo $demande->fonction; ?>"/>
+									<input type="text" id="ligneFonction" name="<?php echo "groupe[" . $nbLigne . "][fonction]"; ?>" value="<?php echo $demande->fonction; ?>"/>
 									<label for="categorie">Catégorie : </label>
-									<select  id="categorie" name="groupe[nbLigne][categorie]" class="select dyn-selector">
+									<select  id="categorie" name="<?php echo "groupe[" . $nbLigne . "][categorie]"; ?>" class="select dyn-selector">
 										<option value="-1">Je ne sais pas encore</option>
 										<?php foreach($categories as $categorie): ?>
 										<option value="<?php echo $categorie->idcategorie; ?>" <?php if($categorie->idcategorie == $demande->idcategorie) { echo "selected='selected'"; } echo set_select('categorie', $categorie->libellecategorie); ?> ><?php echo $categorie->libellecategorie; ?></option>
@@ -151,7 +152,7 @@
 										<tr>
 											<?php foreach($zones as $zone) :
 												if(!empty($zone->idzone)) {
-													echo "<td><input type='checkbox' id='" . $zone->idzone ."' name='groupe[nbLigne][" . $zone->idzone . "]' "; 
+													echo "<td><input type='checkbox' id='" . $zone->idzone ."' name='groupe[" . $nbLigne . "][zones][" . $zone->idzone . "]' "; 
 													if(isset($listeZonesAccred[$accredMembre->idcategorie][$zone->idzone]) && $listeZonesAccred[$accredMembre->idcategorie][$zone->idzone]) {
 														echo "checked='checked'";
 													} 
@@ -168,7 +169,7 @@
 						</div>
 						
 					</div>
-					
+					<?php $nbLigne++; ?>
 					<?php endforeach; ?>
 					
 				</div>

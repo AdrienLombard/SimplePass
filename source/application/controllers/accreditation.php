@@ -82,6 +82,7 @@ class Accreditation extends Cafe {
 	public function voirEquipe($idClient, $idEvenement){
 		$data=Array();
 		
+		$data['idevenement'] = $idEvenement;
 		$data['client'] = $this->modelclient->getClientParId($idClient);
 		$data['accreditation'] = $this->modelaccreditation->getAccreditationsReferentParEvenement($idClient, $idEvenement);
 		//$data['equipe']=$this->modelaccreditation->getAccreditationsGroupeParEvenement($idClient);
@@ -253,8 +254,12 @@ class Accreditation extends Cafe {
 		$data['organisme'] = $this->input->post('organismeRef');
 		$data['tel']	= $this->input->post('telRef');
 		$data['mail']	= $this->input->post('mailRef');
+	
+		$this->load->model('modelclient');
+		$this->load->model('modelaccreditation');
+		$this->load->model('modelzone');
 		
-	     display_tab($this->input->post('data'));
+		display_tab($data);
 		
 		$this->modelclient->modifier($id, $data);
 		}
@@ -274,29 +279,104 @@ class Accreditation extends Cafe {
 		$dataAccred = array();
 		
 		$dataAccred['fonction'] = $this->input->post('fonctionRef');
+		$dataAccred['etataccreditation'] = 0;
 		
 		if(empty($dataAccred['fonction'])) {
 			$dataAccred['fonction'] = "";
 		}
+		
+		$idAccred = $this->input->post('idAccredRef');
+		
 		$this->modelaccreditation->modifier($idAccred, $dataAccred);
 		
 		//display_tab($this->input->post('groupe'));
+		
+		$idevenement = $this->input->post('evenement');
+
 		
 		/* Modification des membres du groupe */
 		
  		foreach($this->input->post('groupe') as $ligne) {
 			
 			/* Modification de l'accréditation */
-			$accred = array();
+ 			$accred = array();
+ 			$accred['idevenement'] = $idevenement;
 			$accred['idcategorie'] = $ligne['categorie'];
-			$accred['idevenement'] = $this->input->post('evenement');
 			$accred['idclient'] = $ligne['idClient'];
 			
 			if(!empty($ligne['fonction'])) {
 				$accred['fonction'] = $ligne['fonction'];
 			}
-			else
+			else {
 				$accred['fonction'] = "";
+			}
+			
+			$zonesCategorie = $this->modelzone->getZoneParCategorieEtEvenement( $ligne['categorie'], $idevenement );
+		
+			$zonesAccreditation = $this->modelzone->getZoneParAccreditation( $ligne['idAccreditation'] );
+		
+			echo "Zones catégories \n";
+			display_tab($zonesCategorie);
+		
+			echo "Zones accreditation \n";
+			display_tab($zonesAccreditation);
+			
+			/*if(isset($zonesCategorie) && !empty($zonesCategorie)) {
+
+				// Pour chaque zone accessible par la catégorie
+				foreach($zonesCategorie as $zonecat) {
+					
+					
+					if(!isset($ligne[zones][$zonecat->idzone]) || empty($ligne[zones][$zonecat->idzone])) {
+						
+						if(isset($zonesAccreditation) && !empty($zonesAccreditation)) {
+							
+							$rechercheZoneParticuliere = false;
+							foreach($zonesAccreditation as $zoneaccred) {
+								
+								if($zoneaccred->idzone == $zonecat->idzone) {
+									$rechercheZoneParticuliere = true;
+								}
+							}
+							
+							if(!$rechercheZoneParticuliere) {
+								ajouterZoneAccreditation( $idAccreditation, $idZone );
+							}
+						}
+						
+					}
+				}
+			}*/
+			
+			if(isset($zonesCategorie) && !empty($zonesCategorie)) {
+			
+				// Pour chaque zone accessible par la catégorie
+				foreach($zonesCategorie as $zonecat) {
+						
+						
+					if(isset($ligne['zones'][$zonecat->idzone]) && !empty($ligne['zones'][$zonecat->idzone])) {
+			
+						unset($ligne['zones'][$zonecat->idzone]);
+					}
+					
+					if(!empty($ligne['zones'])) {
+						
+						foreach($zonesAccreditation as $zoneaccred) {
+							if(isset($ligne['zones'][$zoneaccred->idzone]) && !empty($ligne['zones'][$zoneaccred->idzone])) {
+								unset($ligne['zones'][$zoneaccred->idzone]);
+							}
+						}
+						
+						if(!empty($ligne['zones'])) {
+							foreach($ligne['zones'] as $idzone => $etatZone ) {
+								$this->modelzone->ajouterZoneAccreditation( $ligne['idAccreditation'], $idzone );
+							}
+						}
+						
+					}
+				}
+			}
+			
 			
 			$accred['etataccreditation'] = 0;
 			$this->modelaccreditation->modifier($ligne['idAccreditation'], $accred);
@@ -308,7 +388,7 @@ class Accreditation extends Cafe {
 		}
 		
 		
-		//redirect('accreditation/voir/' . $id);
+		//redirect('accreditation/demandes');
 	
 	}
 	
