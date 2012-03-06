@@ -12,4 +12,7 @@ $(function(){
 		
 	});
 	
+	// gestion des evenements
+	// todo
+	
 });

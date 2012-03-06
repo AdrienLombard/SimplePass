@@ -45,6 +45,16 @@ class modelEvenement extends MY_Model {
 		
 	}
 	
+	public function getLastEvenement() {
+		$req = $this->db->select('*')
+				          ->from(DB_EVENEMENT)
+						  ->order_by('idevenement', 'desc')
+						  ->limit(1)
+						  ->get()
+				          ->result();
+		return $req[0];
+	}
+	
 	
 	public function ajouter($libelle,$datedebut,$datefin){
 		
