@@ -32,6 +32,18 @@
 
 		});
 
+	}
+
+	function() {
+
+		var tabZones = new Array();
+
+		<?php $i = 0; ?>
+		<?php foreach($categories as $cat): ?>
+			tabCat[<?php echo $i; ?>] = [<?php echo $cat->idcategorie ?>, <?php echo $cat->surcategorie ?>, "<?php echo $cat->libellecategorie ?>"];
+			<?php $i++; ?>
+		<?php endforeach; ?>
+		
 	});
 
 </script>
@@ -64,7 +76,7 @@
         </aside>
 		
 		<div id="main" class="accred">
-			<form method="post" action="<?php echo site_url('accreditation/exeModifierGroupe'); ?>" >
+			<form class="infos" method="post" action="<?php echo site_url('accreditation/exeModifierGroupe'); ?>" >
 				<h2 class="infos">Référent du groupe</h2><br/>
 	        	
 				<div class="client">
