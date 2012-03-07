@@ -290,8 +290,6 @@ class Accreditation extends Cafe {
 			$this->load->model('modelaccreditation');
 			$this->load->model('modelzone');
 			
-			display_tab($data);
-			
 			$this->modelclient->modifier($id, $data);
 
 		}
@@ -348,17 +346,9 @@ class Accreditation extends Cafe {
 				$accred['fonction'] = "";
 			}
 			
-			echo "Categorie groupe : " . $ligne['categorieGroupe'];
-			
 			$zonesCategorie = $this->modelzone->getZoneParCategorieEtEvenement( $ligne['categorieGroupe'], $idevenement );
 		
 			$zonesAccreditation = $this->modelzone->getZoneParAccreditation( $ligne['idAccreditation'] );
-			
-			display_tab($ligne['zone']);
-			
-			display_tab($zonesCategorie);
-			
-			display_tab($zonesAccreditation);
 			
 			$this->modelzone->supprimerZoneParAccreditation ( $ligne['idAccreditation'] );
 			

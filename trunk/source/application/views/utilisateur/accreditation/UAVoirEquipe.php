@@ -41,6 +41,7 @@
 
     <div class="tabs">
 		<a href="<?php echo site_url('accreditation/index'); ?>">Liste</a>
+		<a href="<?php echo site_url('accreditation/demandes'); ?>">Demandes</a>
 		<a href="<?php echo site_url('accreditation/rechercher'); ?>">Ajouter</a>
 		<a href="#" class="current">Voir</a>
     </div>
@@ -63,7 +64,7 @@
         </aside>
 		
 		<div id="main" class="accred">
-			<form class="infos groupee" method="post" action="<?php echo site_url('accreditation/exeModifierGroupe'); ?>" >
+			<form class="infos groupee" method="post" action="<?php echo site_url('accreditation/exeModifierGroupe/' . $client->idclient); ?>" >
 				<h2 class="infos">Référent du groupe</h2><br/>
 	        	
 				<div class="client">
