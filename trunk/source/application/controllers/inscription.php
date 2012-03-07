@@ -196,11 +196,8 @@ class Inscription extends Chocolat {
 			
 			
 			
-			$this->layout->view('lambda/LMessage', $data);
-			 
-		
+			$this->layout->view('lambda/LMessage', $data); 
 		}
-		
 	}
 	
 	
@@ -291,13 +288,20 @@ class Inscription extends Chocolat {
 			$data['pays'] 				= $this->input->post('pays');	
 			$data['nom'] 				= $this->input->post('nom');
 			$data['prenom'] 			= $this->input->post('prenom');
-			$data['categorie'] 			= $this->input->post('categorie');
 			$data['fonction'] 			= $this->input->post('fonction');
 			$data['tel'] 				= $this->input->post('tel');
 			$data['mail'] 				= $this->input->post('mail');
 			$data['evenement'] 			= $this->input->post('evenement');
 			$data['listeCategorie'] 	= $this->modelcategorie->getCategories();
 			$data['listeSurCategorie'] 	= $this->modelcategorie->getCategorieMere();
+			
+			// Gestion pour les catégorie.
+			$tab = $this->input->post('categorie');
+			$temp = -1;
+			while($temp == -1) {
+				$temp = array_pop($tab);
+			}
+			$data['categorie'] = $temp;
 			
 			$this->ajouterGroupe($data);
 		}
@@ -327,7 +331,7 @@ class Inscription extends Chocolat {
 		
 		// création de l'accreditation pour le referent
 		$accred = null;
-		$accred['idcategorie'] = array_pop(explode(',', $data['categorie']));
+		$accred['idcategorie'] = $data['categorie'];
 		$accred['idevenement'] = $this->input->post('evenement');
 		$accred['idclient'] = $id;
 		$accred['etataccreditation'] = ACCREDITATION_A_VALIDE;
@@ -335,27 +339,33 @@ class Inscription extends Chocolat {
 		$accred['groupe'] = $data['groupe'];
 		$this->modelaccreditation->ajouter($accred);
 		
-		// ajout des membres
-		// foreach($this->input->post('groupe') as $ligne) {
-			// // création du client
-			// $membre = null;
-			// $membre['nom'] = $ligne['nom'];
-			// $membre['prenom'] = $ligne['prenom'];
-			// $membre['pays'] = $data['pays'];
-			// $membre['referent'] = $id;
-			// $idNewClient = $this->modelclient->ajouter($membre);
-// 
-			// // création de l'accreditation
-			// $accred = null;
-			// $accred['groupe'] = $data['groupe'];
-			// $accred['idcategorie'] = $ligne['categorie'];
-			// $accred['idevenement'] = $this->input->post('evenement');
-			// $accred['idclient'] = $idNewClient;
-			// $accred['fonction'] = $ligne['fonction'];
-			// $accred['etataccreditation'] = ACCREDITATION_A_VALIDE;
-			// //$this->modelaccreditation->ajouter($accred);
-		// }
-// 		
+		// Ajout des membres
+		foreach($this->input->post('groupe') as $ligne) {
+			// création du client
+			$membre = null;
+			$membre['nom'] = $ligne['nom'];
+			$membre['prenom'] = $ligne['prenom'];
+			$membre['pays'] = $data['pays'];
+			$membre['referent'] = $id;
+			$idNewClient = $this->modelclient->ajouter($membre);
+
+			// création de l'accreditation
+			$accred = null;
+			$accred['groupe'] = $data['groupe'];
+			$accred['idevenement'] = $this->input->post('evenement');
+			$accred['idclient'] = $idNewClient;
+			$accred['fonction'] = $ligne['fonction'];
+			$accred['etataccreditation'] = ACCREDITATION_A_VALIDE;
+			
+			$tab = $ligne['categorie'];
+			$temp = -1;
+			while($temp == -1) {
+				$temp = array_pop($tab);
+			}
+			$accred['idcategorie'] = $temp;
+			$this->modelaccreditation->ajouter($accred);
+		}
+		
 		$msg['titre']	= 'Confirmation de demande';
 		$msg['message']	= 'Vos demandes ont bien été prises en compte.<br>Merci de votre pré-enregistrement.';
 		$this->layout->view('lambda/LMessage', $msg);
