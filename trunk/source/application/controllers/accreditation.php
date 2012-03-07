@@ -89,11 +89,9 @@ class Accreditation extends Cafe {
 		$data['accreditation'] = $this->modelaccreditation->getAccreditationsReferentParEvenement($idClient, $idEvenement);
 		$data['pays'] = $this->modelpays->getpays();
 		$data['evenements'] = $this->modelevenement->getEvenements();
-		//$data['categories'] = $this->modelcategorie->getCategorieDansEvenement( $idEvenement );
 		$data['zones'] = $this->modelzone->getZoneParEvenement( $idEvenement );
 		$data['accredAttente'] = array();
 		$data['accredValide'] = array();
-		//$data['demandes'] = $this->modelaccreditation->getDemandesParClient($idClient);
 		
 		// On récpère les accréditations de ce client.
 		$equipe = $this->modelaccreditation->getAccreditationsGroupeParEvenement( $idClient , $idEvenement);
@@ -112,6 +110,7 @@ class Accreditation extends Cafe {
 		}
 		
 		
+		
 		$idCategories = array();
 		foreach ($equipe as $accred) {
 		
@@ -126,6 +125,7 @@ class Accreditation extends Cafe {
 				$data['accredMembre'] = $accred;
 				$idCategories[] = $accred->idcategorie;
 				
+				
 				/*
 				 * Liste des zones de l'accred
 				 */
@@ -135,6 +135,7 @@ class Accreditation extends Cafe {
 					$sortie[] = $za->idzone;
 				$data['zonesAccred'][$accred->idaccreditation] = $sortie;
 			}
+			
 		}
 		
 		//display_tab($data);

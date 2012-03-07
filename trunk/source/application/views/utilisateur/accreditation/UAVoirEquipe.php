@@ -96,7 +96,7 @@
 						<input type="text" class="tel" id="telRef" name="telRef" init="<?php echo $client->tel; ?>" value="<?php echo $client->tel; ?>">
 						<input type="text" class="email" id="mailRef" name="mailRef" init="<?php echo $client->mail; ?>" value="<?php echo $client->mail; ?>">
 						
-						<!-- <input type="submit" class="valideInfos" value="Enregistrer les modifications" /> -->
+						<input type="submit" class="valideInfos" value="Enregistrer les modifications" />
 					
 					<div class="clear"></div>
 					
@@ -136,10 +136,10 @@
 									<label for="categorie">Catégorie : </label>
 									<select id="categorie" name="categorie">
 										<option value="">---</option>
-										<?php foreach($categories as $categorie): ?>
-										<option value="<?php echo $categorie['cat']->idcategorie; ?>" zone="<?php echo $categorie['zones']; ?>" <?php echo ($categorie['cat']->idcategorie == $demande->idcategorie)? 'selected' : '' ; ?>>
-											<?php echo $categorie['cat']->libellecategorie; ?>
-										</option>
+										<?php foreach($categories as $idAccredCategories => $categorie): ?>
+											<option value="<?php echo $categorie['cat']->idcategorie; ?>" zone="<?php echo $categorie['zones']; ?>" <?php echo ($categorie['cat']->idcategorie == $demande->idcategorie)? 'selected' : '' ; ?>>
+												<?php echo $categorie['cat']->libellecategorie; ?>
+											</option>
 										<?php endforeach; ?>
 									</select>
 								</div>
@@ -147,8 +147,8 @@
 								<div class="contientZones">
 									<label>Zones : </label>
 									<div>
-										<?php foreach($zonesAccred as $key => $zonesAccredMembre): ?>
-											<?php if($key == $demande->idaccreditation) { ?>
+										<?php foreach($zonesAccred as $idAccredZones => $zonesAccredMembre): ?>
+											<?php if($idAccredZones == $demande->idaccreditation) { ?>
 												<?php foreach($zones as $zone): ?>
 													<div class="checkzone <?php echo in_array($zone->idzone, $zonesAccredMembre)? 'on' : '' ; ?>" id="<?php echo $zone->idzone; ?>">
 														<?php echo $zone->idzone; ?>
