@@ -37,7 +37,7 @@ class Cafe extends CI_Controller {
 		
 		// Barre des evenements
 		$this->load->model('modelevenement');
-		$this->layout->add_var('topMenuEvenements', $this->modelevenement->getEvenements());
+		$this->layout->add_var('topMenuEvenements', $this->modelevenement->getEvenementEnCours());
         
     }
 	
