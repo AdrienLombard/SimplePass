@@ -41,6 +41,9 @@
 	display: inline-block;
 	color: #888;
 }
+.accred .client .infos label.short {
+	width: 60px;
+}
 .accred .client .infos input[type=text], .accred .client .infos select {
 	border: 1px solid #AAA;
 	font-size: 16px;
@@ -240,10 +243,6 @@ form.rechercheClient div.listeTempsReel div.itemFlowSearch span.pays {
  * AUTRES
  */
 
-*[disabled] {
-	background: red;
-}
-
 div.inputs {
 	margin-left: 180px;
 }
@@ -261,7 +260,7 @@ div.inputs {
 	float: left;
 	margin-right: 5px;height: 50px;
 }
-.checkzone {
+.contientZones .checkzone {
 	display: inline-block;
 	margin-bottom: 5px;
 	background: #CCC;
@@ -272,15 +271,32 @@ div.inputs {
 	text-align: center;
 	padding: 5px 2px 5px 2px;
 }
-.checkzone:hover {
+.contientZones .checkzone:hover {
 	background: #AAA;
 	cursor: pointer;
 }
-.checkzone input {
+.contientZones.readonly .checkzone:hover {
+	background: #CCC;
+	cursor: auto;
+}
+.contientZones.readonly .checkzone.on:hover {
+	background: #2e6f92;
+	cursor: auto;
+}
+.contientZones .checkzone input {
 	display: none;
 }
-.checkzone.on {
+.contientZones .checkzone.on {
 	background: #2e6f92;
 	color: #FFF;
 	box-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+}
+
+
+
+/*
+ * Form accred en place pour modification
+ */
+form#editAccredRealTime input[type=text][readonly], form#editAccredRealTime select[disabled] {
+	border: 1px solid #FFF;
 }

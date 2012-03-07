@@ -11,7 +11,7 @@ class modelAccreditation extends MY_Model {
 		return $this->db->select('*')
 						->from(DB_ACCREDITATION . ' a')
 						->join(DB_CLIENT . ' cl', 'a.idclient = cl.idclient')
-						->join(DB_CATEGORIE . ' ca', 'a.idcategorie = ca.idcategorie')
+						->join(DB_CATEGORIE . ' ca', 'a.idcategorie = ca.idcategorie', 'left')
 						->get()
 						->result();
 	}
@@ -21,7 +21,7 @@ class modelAccreditation extends MY_Model {
 		$result = $this->db->select('*')
 							->from(DB_ACCREDITATION . ' a')
 							->join(DB_CLIENT . ' cl', 'a.idclient = cl.idclient')
-							->join(DB_CATEGORIE . ' ca', 'a.idcategorie = ca.idcategorie')
+							->join(DB_CATEGORIE . ' ca', 'a.idcategorie = ca.idcategorie', 'left')
 							->where('a.idaccreditation', $id)
 							->get()
 							->result();
@@ -32,7 +32,7 @@ class modelAccreditation extends MY_Model {
 		return $this->db->select('*')
 						->from(DB_ACCREDITATION . ' a')
 						->join(DB_CLIENT . ' cl', 'a.idclient = cl.idclient')
-						->join(DB_CATEGORIE . ' ca', 'a.idcategorie = ca.idcategorie')
+						->join(DB_CATEGORIE . ' ca', 'a.idcategorie = ca.idcategorie', 'left')
 						->join(DB_EVENEMENT . ' e', 'e.idevenement = a.idevenement')
 						->where('cl.idclient', $idclient)
 				        ->where('e.idevenement', $idEvenement)
@@ -44,7 +44,7 @@ class modelAccreditation extends MY_Model {
 		return $this->db->select('*')
 						->from(DB_ACCREDITATION . ' a')
 						->join(DB_CLIENT . ' cl', 'a.idclient = cl.idclient')
-						->join(DB_CATEGORIE . ' ca', 'a.idcategorie = ca.idcategorie')
+						->join(DB_CATEGORIE . ' ca', 'a.idcategorie = ca.idcategorie', 'left')
 						->join(DB_EVENEMENT . ' e', 'e.idevenement = a.idevenement')
 						->where('cl.referent', $idclient)
 				        ->where('e.idevenement', $idEvenement)
@@ -66,7 +66,7 @@ class modelAccreditation extends MY_Model {
 		return $this->db->select('*')
 						->from(DB_ACCREDITATION . ' a')
 						->join(DB_CLIENT . ' cl', 'a.idclient = cl.idclient')
-						->join(DB_CATEGORIE . ' ca', 'a.idcategorie = ca.idcategorie')
+						->join(DB_CATEGORIE . ' ca', 'a.idcategorie = ca.idcategorie', 'left')
 						->join(DB_EVENEMENT . ' e', 'e.idevenement = a.idevenement')
 						->where('a.idclient', $idClient)
 						->get()
@@ -77,7 +77,7 @@ class modelAccreditation extends MY_Model {
 		return $this->db->select('*')
 						->from(DB_ACCREDITATION . ' a')
 						->join(DB_CLIENT . ' cl', 'a.idclient = cl.idclient')
-						->join(DB_CATEGORIE . ' ca', 'a.idcategorie = ca.idcategorie')
+						->join(DB_CATEGORIE . ' ca', 'a.idcategorie = ca.idcategorie', 'left')
 						->join(DB_EVENEMENT . ' e', 'e.idevenement = a.idevenement')
 						->where('a.idclient', $idClient)
 						->where('etataccreditation', ACCREDITATION_A_VALIDE)
@@ -89,7 +89,7 @@ class modelAccreditation extends MY_Model {
 		return $this->db->select('*')
 						->from(DB_ACCREDITATION . ' a')
 						->join(DB_CLIENT . ' cl', 'a.idclient = cl.idclient')
-						->join(DB_CATEGORIE . ' ca', 'a.idcategorie = ca.idcategorie')
+						->join(DB_CATEGORIE . ' ca', 'a.idcategorie = ca.idcategorie', 'left')
 						->join(DB_EVENEMENT . ' e', 'e.idevenement = a.idevenement')
 						->where('a.idclient', $idClient)
 						->where('etataccreditation', ACCREDITATION_VALIDE)
@@ -153,9 +153,7 @@ class modelAccreditation extends MY_Model {
 	}
 	
 	public function valideraccreditation( $id ) {
-		$this->db->set('etataccreditation', ACCREDITATION_VALIDE)
-				 ->where('idaccreditation', $id) 
-				 ->update();
+		$this->db->update(DB_ACCREDITATION, array('etataccreditation' => 0), array('idaccreditation' => $id));
 	}
 	
 	

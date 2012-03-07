@@ -121,7 +121,9 @@ class modelZone extends MY_Model {
 	public function getZoneParEvenement( $idEvenement ) {
 		return $this->db->select('*')
 					    ->from(DB_ZONE . ' z')
-					    ->join(DB_PARAMETRES_EVENEMENTS . ' ze', 'z.idzone = ze.idzone AND ze.idevenement = ' . $idEvenement, 'left')
+					    ->join(DB_PARAMETRES_EVENEMENTS . ' ze', 'z.idzone = ze.idzone', 'left')
+						->where('ze.idevenement', $idEvenement)
+						->group_by('z.idzone')
 					    ->order_by('ze.idcategorie', 'asc')
 					    ->get()
 					    ->result();

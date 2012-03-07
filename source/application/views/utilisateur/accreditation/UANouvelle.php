@@ -5,22 +5,21 @@
     <div class="tabs">
 		<a href="<?php echo site_url('accreditation/index'); ?>">Liste</a>
 		<a href="<?php echo site_url('accreditation/demandes'); ?>">Demandes</a>
-		<a href="#" class="current">Ajouter</a>
+		<a href="<?php echo site_url('accreditation/rechercher'); ?>">Ajouter</a>
+		<a href="#" class="current">Nouvelle</a>
     </div>
 
     <div class="box-full">
 
         <aside>
-			<a href="#">Retour</a>
-        </aside>
+			<a href="<?php echo site_url('accreditation/voir/'.$client->idclient); ?>">Retour</a>
+		</aside>
 		
 		<div id="main" class="accred">
         	
 			<div class="client nouveau">
 				
-				<form class="infos nouveau" method="post" action="<?php echo site_url('accreditation/exeAjouter'); ?>">
-					
-					<input type="hidden" name="evenement" value="<?php echo $this->session->userdata('idEvenementEnCours'); ?>"/>
+				<form class="infos nouveau" method="post" action="<?php echo site_url('accreditation/exeNouvelle'); ?>">
 
 					<div class="photo">
 
@@ -37,14 +36,16 @@
 
 						<h2>Personne</h2>
 						
+						<input type="hidden" name="idClient" value="<?php echo $client->idclient; ?>" />
+						
 						<div>
 							<label>Nom : </label>
-							<input type="text" name="nom" class="nom" value="<?php echo $nom; ?>" style="text-transform: uppercase" />
+							<input type="text" name="nom" class="nom" value="<?php echo $client->nom; ?>" style="text-transform: uppercase" />
 						</div>
 
 						<div>
 							<label>Prénom : </label>
-							<input type="text" name="prenom" class="prenom" value="<?php echo $prenom; ?>" />
+							<input type="text" name="prenom" class="prenom" value="<?php echo $client->prenom; ?>" />
 						</div>
 
 						<div>
@@ -52,7 +53,7 @@
 							<select class="pays" name="pays" style="padding-left: 0px;">
 
 							<?php foreach($pays as $p): ?>
-								<option value="<?php echo $p->idpays; ?>" <?php echo ($p->idpays == 'FRA')? 'selected' : '' ;?> style="background: url(<?php echo img_url('drapeaux/'.strtolower($p->idpays).'.gif'); ?>) no-repeat left;"><?php echo $p->nompays; ?></option>
+								<option value="<?php echo $p->idpays; ?>" <?php echo ($p->idpays == $client->pays)? 'selected' : '' ;?> style="background: url(<?php echo img_url('drapeaux/'.strtolower($p->idpays).'.gif'); ?>) no-repeat left;"><?php echo $p->nompays; ?></option>
 							<?php endforeach; ?>
 
 							</select>
@@ -60,12 +61,12 @@
 
 						<div>
 							<label>Tel : </label>
-							<input type="text" name="tel" class="tel">
+							<input type="text" name="tel" class="tel" value="<?php echo $client->tel; ?>">
 						</div>
 
 						<div>
 							<label>Mail : </label>
-							<input type="text" name="mail" class="email">
+							<input type="text" name="mail" class="email" value="<?php echo $client->mail; ?>">
 						</div>
 						
 						<br><br>
@@ -74,7 +75,7 @@
 
 						<div>
 							<label>Fonction : </label>
-							<input type="text" name="fonction"/>
+							<input type="text" name="fonction" />
 						</div>
 
 						<div>
