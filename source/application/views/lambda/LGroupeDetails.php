@@ -13,9 +13,10 @@
 		$("select.dyn-selector").live("change",function(){
 			
 			var id = $(this).find("option:selected").val();
+			var nbLigne = $(this).parent().parent().parent().attr('data');
 			var count = 0;
 			
-			var newSelect = "<select name='categorie[]' class='select dyn-selector'>";
+			var newSelect = "<select name='groupe["+ nbLigne +"][categorie][]' class='select dyn-selector'>";
 			newSelect += "<option value='-1'>Je ne sais pas encore</option>";
 			for(var i=0; i<tabCat.length; i++) {
 				if(tabCat[i][1] == id) {
@@ -47,7 +48,7 @@
 				
 				<input type="hidden" name="ref[nom]" value="<?php echo $nom; ?>" />
 				<input type="hidden" name="ref[prenom]" value="<?php echo $prenom; ?>" />
-				<input type="hidden" name="ref[categorie]" value="<?php echo implode(',', $categorie); ?>" />
+				<input type="hidden" name="ref[categorie]" value="<?php echo $categorie; ?>" />
 				<input type="hidden" name="ref[fonction]" value="<?php echo $fonction; ?>" />
 				<input type="hidden" name="ref[tel]" value="<?php echo $tel; ?>" />
 				<input type="hidden" name="ref[mail]" value="<?php echo $mail; ?>" />
@@ -93,8 +94,7 @@
 			<div class="clear"></div>
 			<div class="split">
 				<label for="">Catégorie</label>
-				<input type="hidden" name="groupe[nbLigne][categorie]" value="" />
-				<select  id="categorie" name="categorie[]" class="select dyn-selector">
+				<select  id="categorie" name="groupe[nbLigne][categorie][]" class="select dyn-selector">
 					<option value="-1">Je ne sais pas encore</option>
 					<?php foreach($listeSurCategorie as $categorie): ?>
 					<option VALUE="<?php echo $categorie->idcategorie; ?>" <?php echo set_select('categorie', $categorie->libellecategorie); ?> ><?php echo $categorie->libellecategorie; ?></option>

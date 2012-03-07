@@ -73,7 +73,7 @@ class modelEvenement extends MY_Model {
 	 * @param Array $parametre : le tableau associatif des ligne a insérer.
 	 */
 	public function ajouterDonnees( $parametre ) {
-		return $this->db->insert_batch(DB_PARAMETRE_EVENEMENT, $parametre );
+		return $this->db->insert_batch(DB_PARAMETRES_EVENEMENTS, $parametre );
 	}
 	
 	/**
@@ -109,6 +109,9 @@ class modelEvenement extends MY_Model {
 			                  
 	}
 	
+	public function supprimerParametreParEvenement( $idEvenement ) {
+		$this->db->delete(DB_PARAMETRES_EVENEMENTS, array( 'idevenement' => $idEvenement));
+	}
 	
 	public function supprimerParametreParZone ( $idZone ) {
 		$this->db->delete(DB_PARAMETRES_EVENEMENTS, array( 'idzone' => $idZone));

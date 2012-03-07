@@ -316,21 +316,21 @@ class Evenement extends Cafe {
 		$data['id'] = $id;
 		
 		$config = array(
-		array(
-			'field'   => 'nom',
-			'label'   => 'Nom', 
-			'rules'   => 'required'
-		),
-		array(
-			'field'   => 'datedebut',
-			'label'   => 'Date de début', 
-			'rules'   => ''
-		),
-		array(
-			'field'   => 'datefin',
-			'label'   => 'Date de fin', 
-			'rules'   => ''
-		)
+			array(
+				'field'   => 'nom',
+				'label'   => 'Nom', 
+				'rules'   => 'required'
+			),
+			array(
+				'field'   => 'datedebut',
+				'label'   => 'Date de début', 
+				'rules'   => ''
+			),
+			array(
+				'field'   => 'datefin',
+				'label'   => 'Date de fin', 
+				'rules'   => ''
+			)
 		);
 		$this->form_validation->set_rules($config);
 		
@@ -340,6 +340,38 @@ class Evenement extends Cafe {
 		$datedebutTstmp= date_to_timestamp($datedebut);
 		$datefinTstmp  = date_to_timestamp($datefin);
 		if ($this->form_validation->run() == true && $datedebutTstmp < $datefinTstmp ) {
+			// on vire les anciens paramètres.
+			$this->modelevenement->supprimerParametreParEvenement( $id );
+			
+			// On récupère les nouveaux paramètres.
+			// Récupération de la liste des zones.
+			$zones = $this->modelzone->getZones();
+			
+			// recup liste des categorie.
+			$categories = $this->input->post('name');
+			
+			$newentry = false;
+			$newDonneesEvenement = Array();
+			foreach( $categories as $categorie) {
+				foreach($zones as $zone) {
+					if($this->input->post($categorie . '_' . $zone->idzone) == 'on') {
+						$entry = Array(
+							'idzone'		=> $zone->idzone,
+							'idcategorie'	=> $categorie,
+							'idevenement'	=> $id,
+							'codezone'		=> $this->input->post('code_' . $zone->idzone)
+						);
+						$newDonneesEvenement[] = $entry;
+						$newentry = true;
+					}
+				}
+			}
+				
+			// ajout dans la base des données.
+			if( $newentry ) {
+				$this->modelevenement->ajouterDonnees( $newDonneesEvenement );
+			}
+			
 			// Si la verification est ok.
 			$resultat = $this->modelevenement->modifier($nom, $datedebutTstmp, $datefinTstmp, $id);
 			
