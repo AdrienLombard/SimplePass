@@ -1,9 +1,9 @@
-<h1>Evènements</h1>
+<h1>Zones</h1>
 
 <div class="wrap">
 
     <div class="tabs">
-        <a href="<?php echo site_url('zone/voir'); ?>">Liste</a>
+        <a href="<?php echo site_url('zone/liste'); ?>">Liste</a>
         <a href="<?php echo site_url('zone/ajouter'); ?>">Ajouter</a>
 		<a href="#" class="current">Modifier</a>
     </div>
@@ -13,15 +13,11 @@
 		<aside>
 
             <b>Options :</b>
-            <ul>
 				<?php if($libelle): ?>
-					<li><a href="<?php echo site_url('zone/voir/'.$id); ?>">Retour</a></li>
+					<a href="<?php echo site_url('zone/voir/'.$id); ?>">Retour</a>
 				<?php else: ?>
-					<li><a href="<?php echo site_url('zone/liste'); ?>">Retour</a></li>
+					<a href="<?php echo site_url('zone/liste'); ?>">Retour</a>
 				<?php endif; ?>
-                
-            </ul>
-
         </aside>
 
         <div id="main">
