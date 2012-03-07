@@ -32,6 +32,7 @@ $(document).ready(function(){
 	
 	$("form.infos input[type=submit]").hide();
 	$("form.infos.nouveau input[type=submit]").show();
+	$("form.infos.groupee input[type=submit]").show();
 	
 	$('a.editClient').live('click', function(){
 		$('form.infos input, form.infos select').removeAttr('readonly').removeAttr('disabled');
@@ -62,6 +63,17 @@ $(document).ready(function(){
 		});
 	});
 	
+	/*
+	 * Auto check des zone au changement de catégorie pour l'accréditation des groupes
+	 */
+	$('select[name=categorieGroupe]').change(function(){
+		var zones = $(this).find('option:selected').attr('zone').split('-');
+		var id = $(this).attr('data');
+		$('.contientZones[data='+id+'] .checkzone').removeClass('on').find('input').removeAttr('checked');
+		$.each(zones, function(k, v){
+			$('.contientZones[data='+id+'] .checkzone[id='+v+']').toggleClass('on').find('input').attr('checked', 'checked');
+		});
+	});
 	
 	/*
 	 * Modifier le formulaire d'accred en place
