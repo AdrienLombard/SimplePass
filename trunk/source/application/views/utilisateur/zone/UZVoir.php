@@ -13,7 +13,7 @@
 		<aside>
 			<?php if($resultats): ?>
 				<a href="<?php echo site_url('zone/modifier/'.$id); ?>">Modifier</a>
-				<a href="<?php echo site_url('zone/supprimer/'.$id);?>" confirm="Êtes-vous sûr de vouloir supprimer cet zone ?">Supprimer</a>
+				<a href="<?php echo site_url('zone/supprimer/'.$id);?>" confirm="Êtes-vous sûr de vouloir supprimer cette zone ?">Supprimer</a>
 			<?php endif; ?>
 			<a href="<?php echo site_url('zone'); ?>">Retour</a>
         </aside>
@@ -26,11 +26,6 @@
 			<?php else: ?>
 				Cette zone n'éxiste pas.
 			<?php endif; ?>
-			
-			<?php
-			// <table class="details">
-			// </table>
-			?>
         </div>
 
         <div class="clear"></div>

@@ -25,9 +25,10 @@ class Categorie extends Cafe {
 	
 	public function liste() {
 		
-		$this->layout->ajouter_css('utilisateur/liste');
+		$this->layout->ajouter_css('utilisateur/categorie');
+		$this->layout->ajouter_js('utilisateur/CRUDCategorie');
 		
-		$data['resultats']=$this->modelcategorie->getCategorieMere();
+		$data['resultats']=$this->modelcategorie->getCategorieDansEvenementToutBien();
 		
 		$this->layout->view('utilisateur/categorie/UCIndex', $data);
 	}

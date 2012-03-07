@@ -4,19 +4,22 @@
 
     <div class="tabs">
         <a href="<?php echo site_url('categorie/liste'); ?>" class="current">Liste</a>
-        <a href="<?php echo site_url('categorie/ajouter'); ?>">Ajouter</a>
     </div>
 
     <div class="box-full">
+		
+		<aside>
+			<a href="#">Nouvelle catégorie mère</a>
+        </aside>
 
-        <div id="main" class="nomargin">
+        <div id="main">
         	
-			<table class="liste">
+			<table class="liste categorieAllInOne">
                 <thead>
 					
 					<tr>
-						<th>Catégorie mère</th>
-						<th></th>
+						<th>Catégories</th>
+						<th colspan="3">Actions</th>
 					</tr>
 					
                 </thead>
@@ -25,8 +28,24 @@
                     <?php foreach ($resultats as $categorie): ?>
 					<tr>
 			
-						<td><?php echo $categorie->libellecategorie?></td>
-						<td><a href="<?php echo site_url('categorie/voir/'.$categorie->idcategorie ); ?>">Voir</a></td>
+						<td>
+							<?php echo repeat('- ', $categorie['depth']); ?> 
+							<form method="post" action="#" class="disabled" data="<?php echo $categorie['db']->idcategorie?>">
+								<input type="hidden" name="id" value="<?php echo $categorie['db']->idcategorie?>" />
+								<input type="text" name="libelle" value="<?php echo $categorie['db']->libellecategorie?>" readonly />
+								<input type="submit" value="valider" />
+							</form>
+						</td>
+						
+						<td class="little"><a href="#">Ajouter sous-catégorie</a></td>
+						
+						<td class="icon"><a href="#" class="modifCat" data="<?php echo $categorie['db']->idcategorie?>"><?php echo img('b_edit.png', 'Modifier'); ?></a></td>
+						
+						<td class="icon">
+<a href="<?php echo site_url('categorie/supprimer/'.$categorie['db']->idcategorie ); ?>"
+confirm='Êtes-vous sûr de vouloir supprimer cette catégorie ?
+Cela entrainera la suppression de toutes ses sous-catégories.'><?php echo img('b_drop.png', 'Supprimer'); ?></a>
+						</td>
 				   
 				  </tr>
                     <?php endforeach; ?>
