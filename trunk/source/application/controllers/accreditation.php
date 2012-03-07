@@ -85,6 +85,7 @@ class Accreditation extends Cafe {
 		$data=Array();
 		
 		$data['idevenement'] = $idEvenement;
+		echo $idEvenement;
 		$data['client'] = $this->modelclient->getClientParId($idClient);
 		$data['accreditation'] = $this->modelaccreditation->getAccreditationsReferentParEvenement($idClient, $idEvenement);
 		$data['pays'] = $this->modelpays->getpays();
@@ -113,8 +114,8 @@ class Accreditation extends Cafe {
 		
 		$idCategories = array();
 		foreach ($equipe as $accred) {
-		
-			if($accred->idclient != $idClient) {
+		       
+			if($accred->idclient != $idClient ) {
 				if($accred->etataccreditation == ACCREDITATION_A_VALIDE) {
 					$data['accredAttente'][] = $accred;
 				}
@@ -131,8 +132,9 @@ class Accreditation extends Cafe {
 				 */
 				$sortie = array();
 				$zonesAccred = $this->modelzone->getZoneParAccreditation($accred->idaccreditation);
-				foreach($zonesAccred as $za)
+				foreach($zonesAccred as $za)	
 					$sortie[] = $za->idzone;
+
 					
 				$zonesAccred = array();
 				$zonesAccred = $this->modelzone->getZoneParCategorieEtEvenement( $accred->idcategorie, $this->session->userdata('idEvenementEnCours') );
@@ -140,6 +142,7 @@ class Accreditation extends Cafe {
 				foreach($zonesAccred as $za)
 					$sortie[] = $za->idzone;
 				
+
 				$data['zonesAccred'][$accred->idaccreditation] = $sortie;
 			}
 			
@@ -277,7 +280,12 @@ class Accreditation extends Cafe {
 			$data['organisme'] = $this->input->post('organismeRef');
 			$data['tel']	= $this->input->post('telRef');
 			$data['mail']	= $this->input->post('mailRef');
+		$data['role']   =$this->input->post('fonctionRef');
 		
+
+	    //display_tab($this->input->post('data'));
+		
+		$this->modelclient->modifier($id, $data);
 			$this->load->model('modelclient');
 			$this->load->model('modelaccreditation');
 			$this->load->model('modelzone');
@@ -285,6 +293,7 @@ class Accreditation extends Cafe {
 			display_tab($data);
 			
 			$this->modelclient->modifier($id, $data);
+
 		}
 		else 
 		{
@@ -297,12 +306,14 @@ class Accreditation extends Cafe {
 				$data['organisme'] = $reponse[0]->organisme;
 		        $data['tel']	= $reponse[0]->tel;
 		        $data['mail']	= $reponse[0]->mail;
+				$data['role']   =$reponse[0]->fonction;
 			}
+			//$dataAccred['etataccreditation'] = 0;
 		}
 		$dataAccred = array();
 		
 		$dataAccred['fonction'] = $this->input->post('fonctionRef');
-		$dataAccred['etataccreditation'] = 0;
+		
 		
 		if(empty($dataAccred['fonction'])) {
 			$dataAccred['fonction'] = "";
@@ -325,6 +336,9 @@ class Accreditation extends Cafe {
  			$accred = array();
  			$accred['idevenement'] = $idevenement;
 			$accred['idcategorie'] = $ligne['categorieGroupe'];
+
+			//$accred['idevenement'] = $this->input->post('evenement');
+
 			$accred['idclient'] = $ligne['idClient'];
 			
 			if(!empty($ligne['fonction'])) {
@@ -358,8 +372,8 @@ class Accreditation extends Cafe {
 			$message['message']= 'l accreditation a bien été modifiée.';
 			$message['redirect'] 	= 'accreditation/demandes';
 			
-		}
 		
+		}
 		
 		redirect('accreditation/index');
 	
