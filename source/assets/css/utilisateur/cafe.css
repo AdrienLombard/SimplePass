@@ -62,6 +62,7 @@ header .wrap-h span.switchMenu div.toggleMenu a:hover {
 header .wrap-h span.switchMenu:hover div.toggleMenu {
 	display: block;
 	position: absolute;
+	z-index: 50;
 }
 
 

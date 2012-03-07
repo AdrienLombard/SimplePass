@@ -13,13 +13,13 @@ class modelZone extends MY_Model {
 	
 	
 	public function getZonesAvecCode($idEvenement) {
-		return $this->db->select('*')
+		// ne pas changer le select !! conflit de champs entre les 2 tables !! Merci ^^ (Aymeric)
+		return $this->db->select('z.idzone, z.codezone, z.libellezone, ze.idevenement, ze.idcategorie, ze.codezone, ze.idzone as enable')
 						->from(DB_ZONE . ' z')
 						->join(DB_PARAMETRES_EVENEMENTS . ' ze', 'z.idzone = ze.idzone AND ze.idevenement = ' . $idEvenement, 'left')
 						->group_by('z.idzone')
 						->get()
-						->result();
-			
+						->result();	
 	}
 	
 	/**

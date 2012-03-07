@@ -45,7 +45,11 @@
 			<thead>
 				<th></th>
 				<?php foreach($listeZones as $zone): ?>
-				<th class="rotate"><div class="itemRotate" zone="<?php echo $zone->idzone; ?>"><?php echo $zone->libellezone; ?></div></th>
+				<th class="rotate">
+					<div class="itemRotate" zone="<?php echo $zone->idzone; ?>" <?php echo is_null($zone->enable)? 'style="color: #CCC;"':''; ?>>
+						<?php echo $zone->libellezone; ?>
+					</div>
+				</th>
 				<?php endforeach; ?>
 				<th class="rotate"><div class="itemRotate"></div></th>
 			</thead>
@@ -61,7 +65,8 @@
 							   name="<?php echo 'code_' . $zone->idzone; ?>" 
 							   zone="<?php echo $zone->idzone; ?>" 
 							   class="codeZone" 
-							   <?php if($modeleEvenement) echo 'value="' . $zone->codezone . '"'; ?> />
+							   <?php if($modeleEvenement) echo 'value="' . $zone->codezone . '"'; ?>
+							   <?php echo is_null($zone->enable)? 'disabled value="" style="background: #CCC; opacity: 0.5;"':''; ?> />
 					</td>
 					<?php endforeach; ?>
 				</tr>
@@ -83,6 +88,7 @@
 						<?php if(isset($listeCategorieZone[$categorie['db']->idcategorie][$zone->idzone])): ?>
 							<td>
 								<input type="checkbox"
+									   <?php echo is_null($zone->enable)? 'style="opacity: 0.5;"':''; ?>
 									   name="<?php echo $categorie['db']->idcategorie . '_' . $zone->idzone; ?>"
 									   cat="<?php echo $categorie['db']->idcategorie; ?>"
 									   zone="<?php echo $zone->idzone; ?>"
@@ -91,6 +97,7 @@
 						<?php else: ?>
 							<td>
 								<input type="checkbox"
+									   <?php echo is_null($zone->enable)? 'style="opacity: 0.5;"':''; ?>
 									   name="<?php echo $categorie['db']->idcategorie . '_' . $zone->idzone; ?>"
 									   cat="<?php echo $categorie['db']->idcategorie; ?>"
 									   zone="<?php echo $zone->idzone; ?>" />
