@@ -13,14 +13,11 @@
 		<aside>
 
             <b>Options :</b>
-            <ul>
 				<?php if($nom): ?>
-					<li><a href="<?php echo site_url('categorie/voir/'.$id); ?>">Retour</a></li>
+					<a href="<?php echo site_url('categorie/voir/'.$id); ?>">Retour</a>
 				<?php else: ?>
 					<a href="<?php echo site_url('categorie/liste'); ?>">Retour</a>
 				<?php endif; ?>
-            </ul>
-
         </aside>
 
         <div id="main">
