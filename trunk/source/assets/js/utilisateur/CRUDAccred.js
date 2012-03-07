@@ -47,7 +47,8 @@ $(document).ready(function(){
 	 * Ergonomie des checkzones
 	 */
 	$('.checkzone').live('click', function(){
-		$(this).toggleClass('on').find('input').attr('checked', 'checked');
+		if(!$('.contientZones').hasClass('readonly'))
+			$(this).toggleClass('on').find('input').attr('checked', 'checked');
 	});
 	
 	/*
@@ -59,6 +60,18 @@ $(document).ready(function(){
 		$.each(zones, function(k, v){
 			$('.checkzone[id='+v+']').toggleClass('on').find('input').attr('checked', 'checked');
 		});
+	});
+	
+	
+	/*
+	 * Modifier le formulaire d'accred en place
+	 */
+	$('#editAccredRealTime #saveAccred').hide();
+	$('.startEditAccred').live('click', function(){
+		$('.contientZones').removeClass('readonly');
+		$('#editAccredRealTime input[type=text]').removeAttr('readonly');
+		$('#editAccredRealTime select').removeAttr('disabled');
+		$('#editAccredRealTime #saveAccred').show();
 	});
 	
 });

@@ -6,4 +6,14 @@ class modelPays extends MY_Model {
 		return $this->db->get(DB_PAYS)->result();
 	}
 	
+	public function getPaysParId($id) {
+		$pays = $this->db->select('*')
+						->from(DB_PAYS)
+						->where('idpays',$id)
+						->get()
+						->result();
+		
+		return $pays[0];
+	}
+	
 }

@@ -23,7 +23,8 @@ class Accreditation extends Cafe {
 
 	public function index() {
 		
-		$data['accreds'] = $this->modelaccreditation->getAccreditationsValidees(1);
+		$id = $this->session->userdata('idEvenementEnCours');
+		$data['accreds'] = $this->modelaccreditation->getAccreditationsValidees($id);
 		$this->layout->view('utilisateur/accreditation/UAIndex', $data);
 		
 	}
@@ -33,8 +34,8 @@ class Accreditation extends Cafe {
 	 */
 	public function demandes() {
 		
-		//$data['accreds'] = $this->modelaccreditation->getAccreditationsEnAttente($idEvenement);
-		$data['accreds'] = $this->modelaccreditation->getAccreditationsEnAttente(1);
+		$id = $this->session->userdata('idEvenementEnCours');
+		$data['accreds'] = $this->modelaccreditation->getAccreditationsEnAttente($id);
 		$this->layout->view('utilisateur/accreditation/UADemandes', $data);
 		
 	}
@@ -52,6 +53,7 @@ class Accreditation extends Cafe {
 		// On récupère les informations sur le client.
 		$data['client'] = $this->modelclient->getClientParId($idClient);
 		$data['pays'] = $this->modelpays->getpays();
+		$data['indicatif'] = $this->modelpays->getPaysParId($data['client']->pays)->indicatiftel;
 		$data['evenements'] = $this->modelevenement->getEvenements();
 		$data['categories'] = $this->modelcategorie->getCategorieDansEvenementToutBien();
 		$data['zones'] = $this->modelzone->getZones();
@@ -159,22 +161,21 @@ class Accreditation extends Cafe {
 			$data['nom'] = $username;
 		
 		/*
-		 * Liste de catégorie, zone et pays
+		 * Liste de zone et pays
 		 */
 		
-		$data['evenements'] = $this->modelevenement->getEvenements();
-		$data['zones'] = $this->modelzone->getZones();
+		$data['zones'] = $this->modelzone->getZoneParEvenement($this->session->userdata('idEvenementEnCours'));
 		$data['pays'] = $this->modelpays->getPays();
 		
 		/*
 		 * Liste des catégories avec les zones associées
 		 */
-		$cats = $this->modelcategorie->getCategories();
+		$cats = $this->modelcategorie->getCategorieDansEvenement($this->session->userdata('idEvenementEnCours'));
 		foreach($cats as $cat) {
 			$push = array();
 			$push['cat'] = $cat;
 			$push['zones'] = '';
-			$catZones = $this->modelzone->getZoneParCategorie($cat->idcategorie);
+			$catZones = $this->modelzone->getZoneParCategorieEtEvenement($cat->idcategorie, $this->session->userdata('idEvenementEnCours'));
 			foreach($catZones as $cz) $push['zones'] .= $cz->idzone.'-';
 			$data['categories'][] = $push;
 		}
@@ -199,7 +200,7 @@ class Accreditation extends Cafe {
 		$accred['idclient'] = $idClient;
 		$accred['idevenement'] = $this->input->post('evenement');
 		$accred['fonction'] = $this->input->post('fonction');
-		$accred['etataccreditation'] = 0;
+		$accred['etataccreditation'] = ACCREDITATION_VALIDE;
 		$accred['dateaccreditation'] = time();
 		$this->modelaccreditation->ajouter($accred);
 		
@@ -382,17 +383,16 @@ class Accreditation extends Cafe {
 	}
 	
 	
-	public function supprimer( $id ) {
+	public function supprimer( $id, $idClient ) {
 		
 		// suppréssion de toute les zones liée a l'accréditation.
-		$this->modelzone->supprimerZonesParAccreditation( $id );
+		$this->modelzone->supprimerZoneParAccreditation( $id );
 		
 		// Suppréssion de notre accreditation.
 		$this->modelaccreditation->supprimer( $id );
 		
-		$data['titre']		= 'Suppression';
-		$data['message']	= 'Votre accréditation à bien été supprimée.';
-		$this->layout->view('utilisateur/UMessage', $data);
+		$this->load->helper('url');
+		redirect('accreditation/voir/' . $idClient);
 		
 	}
 	
@@ -404,9 +404,141 @@ class Accreditation extends Cafe {
 		// On supprime notre accréditation.
 		$this->modelcategorie->supprimerClient();
 		
-		$data['titre']		= 'Suppression';
-		$data['message']	= 'Votre client et ses accréditation ont bien été supprimée.';
-		$this->layout->view('utilisateur/UMessage', $data);
+		$this->load->helper('url');
+		redirect('accreditation');
+		
+	}
+	
+	
+	public function modifier($idAccred) {
+		
+		/*
+		 * Liste de zone et pays
+		 */
+		
+		$data['zones'] = $this->modelzone->getZoneParEvenement($this->session->userdata('idEvenementEnCours'));
+		$data['pays'] = $this->modelpays->getPays();
+
+		
+		/*
+		 * Liste des catégories avec les zones associées
+		 */
+		$cats = $this->modelcategorie->getCategorieDansEvenement($this->session->userdata('idEvenementEnCours'));
+		foreach($cats as $cat) {
+			$push = array();
+			$push['cat'] = $cat;
+			$push['zones'] = '';
+			$catZones = $this->modelzone->getZoneParCategorieEtEvenement($cat->idcategorie, $this->session->userdata('idEvenementEnCours'));
+			foreach($catZones as $cz) $push['zones'] .= $cz->idzone.'-';
+			$data['categories'][] = $push;
+		}
+		
+		/*
+		 * Accred et client
+		 */
+		
+		$data['accred'] = $this->modelaccreditation->getAccreditationParId($idAccred);
+		
+		
+		/*
+		 * Liste des zones de l'accred
+		 */
+		$sortie = array();
+		$zonesAccred = $this->modelzone->getZoneParAccreditation($idAccred);
+		foreach($zonesAccred as $za)
+			$sortie[] = $za->idzone;
+		$data['zonesAccred'] = $sortie;
+		
+		
+		$this->layout->view('utilisateur/accreditation/UAModifier', $data);
+		
+	}
+	
+	public function exeModifier() {
+		
+		$idClient = $this->input->post('idClient');
+		$client = array();
+		$client['nom'] = strtoupper($this->input->post('nom'));
+		$client['prenom'] = $this->input->post('prenom');
+		$client['pays'] = $this->input->post('pays');
+		$client['tel'] = $this->input->post('tel');
+		$client['mail'] = $this->input->post('mail');
+		
+		$this->modelclient->modifier($idClient, $client);
+		
+		$idAccred = $this->input->post('idAccred');
+		$accred = array();
+		$accred['idclient'] = $idClient;
+		$accred['idcategorie'] = $this->input->post('categorie');
+		$accred['fonction'] = $this->input->post('fonction');
+		
+		$this->modelaccreditation->modifier($idAccred, $accred);
+		
+		// todo : modif zones
+		
+		$this->load->helper('url');
+		redirect('accreditation/modifier/' . $idAccred);
+		
+	}
+	
+	
+	public function nouvelle($idClient) {
+		
+		/*
+		 * Client et liste de zone et pays
+		 */
+		
+		$data['client'] = $this->modelclient->getClientParId($idClient);
+		$data['zones'] = $this->modelzone->getZoneParEvenement($this->session->userdata('idEvenementEnCours'));
+		$data['pays'] = $this->modelpays->getPays();
+
+		
+		/*
+		 * Liste des catégories avec les zones associées
+		 */
+		$cats = $this->modelcategorie->getCategorieDansEvenement($this->session->userdata('idEvenementEnCours'));
+		foreach($cats as $cat) {
+			$push = array();
+			$push['cat'] = $cat;
+			$push['zones'] = '';
+			$catZones = $this->modelzone->getZoneParCategorieEtEvenement($cat->idcategorie, $this->session->userdata('idEvenementEnCours'));
+			foreach($catZones as $cz) $push['zones'] .= $cz->idzone.'-';
+			$data['categories'][] = $push;
+		}
+		
+		
+		$this->layout->view('utilisateur/accreditation/UANouvelle', $data);
+		
+	}
+	
+	
+	public function exeNouvelle() {
+		
+		$idClient = $this->input->post('idClient');
+		$client = array();
+		$client['nom'] = strtoupper($this->input->post('nom'));
+		$client['prenom'] = $this->input->post('prenom');
+		$client['pays'] = $this->input->post('pays');
+		$client['tel'] = $this->input->post('tel');
+		$client['mail'] = $this->input->post('mail');
+		
+		$this->modelclient->modifier($idClient, $client);
+		
+		$accred = array();
+		$accred['idclient'] = $idClient;
+		$accred['idevenement'] = $this->session->userdata('idEvenementEnCours');
+		$accred['fonction'] = $this->input->post('fonction');
+		$accred['idcategorie'] = $this->input->post('categorie');
+		$accred['etataccreditation'] = ACCREDITATION_VALIDE;
+		$accred['dateaccreditation'] = time();
+		$this->modelaccreditation->ajouter($accred);
+		
+		$idAccred = $this->modelaccreditation->lastId();
+		
+		// todo : modif zones
+		
+		$this->load->helper('url');
+		redirect('accreditation/modifier/' . $idAccred);
 		
 	}
 	
@@ -415,9 +547,8 @@ class Accreditation extends Cafe {
 		
 		$this->modelaccreditation->valideraccreditation( $idAccreditation );
 				
-		$data['titre']		= 'Validation';
-		$data['message']	= 'L\'accréditation a été validée avec succes.';
-		$this->layout->view('utilisateur/UMessage', $data);	 
+		$this->load->helper('url');
+		redirect('accreditation/modifier/' . $idAccreditation); 
 		
 	}
 }
