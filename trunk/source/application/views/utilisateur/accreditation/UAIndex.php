@@ -24,6 +24,7 @@
 					
 					<tr>
 						<th>Personne</th>
+						<th>Groupe</th>
 						<th>Pays</th>
 						<th>Date</th>
 						<th>Catégorie</th>
@@ -36,6 +37,7 @@
                     <?php foreach ($accreds as $accred): ?>
 					<tr>
 						<td><?php echo $accred->nom . ' ' . $accred->prenom ?></td>
+						<td><?php if (isset($accred->groupe) && !empty($accred->groupe) && $accred->groupe != "") echo $accred->groupe; else echo " - "; ?></td>
 						<td><?php echo $accred->pays ?></td>
                         <td><?php echo display_date($accred->dateaccreditation); ?></td>
 						<td><?php echo $accred->libellecategorie; ?></td>
