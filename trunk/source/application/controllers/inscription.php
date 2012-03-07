@@ -231,7 +231,7 @@ class Inscription extends Chocolat {
 		$idEvenement = $this->input->post('evenement');
 		
 		// On regle les paramètres du formulaire.
-		$this->form_validation->set_message('roequired', 'Le champ %s est obligatoire.');
+		$this->form_validation->set_message('required', 'Le champ %s est obligatoire.');
 		$this->form_validation->set_message('valid_email', 'Veuillez rentrer un mail valide.');
 		$this->form_validation->set_error_delimiters('<p class="error_message" >', '<p>');
 		
@@ -277,7 +277,7 @@ class Inscription extends Chocolat {
 			$values->pays 		= $this->input->post('pays');
 			$values->nom 		= strtoupper($this->input->post('nom'));
 			$values->prenom 	= $this->input->post('prenom');
-			$values->fonction 		= $this->input->post('fonction');
+			$values->fonction 	= $this->input->post('fonction');
 			$values->mail 		= $this->input->post('mail');
 			$values->tel 		= $this->input->post('tel');
 			$values->categorie 	= $this->input->post('categorie');
@@ -287,17 +287,17 @@ class Inscription extends Chocolat {
 		}
 		else {
 			
-			$data['groupe'] 	= $this->input->post('groupe');
-			$data['pays'] 		= $this->input->post('pays');	
-			$data['nom'] 		= $this->input->post('nom');
-			$data['prenom'] 	= $this->input->post('prenom');
-			$data['categorie'] 	= $this->input->post('categorie');
-			$data['fonction'] 		= $this->input->post('fonction');
-			$data['tel'] 		= $this->input->post('tel');
-			$data['mail'] 		= $this->input->post('mail');
-			$data['evenement'] 	= $this->input->post('evenement');
-			$data['listeCategorie'] = $this->modelcategorie->getCategories();
-			$data['listeSurCategorie'] = $this->modelcategorie->getCategorieMere();
+			$data['groupe'] 			= $this->input->post('groupe');
+			$data['pays'] 				= $this->input->post('pays');	
+			$data['nom'] 				= $this->input->post('nom');
+			$data['prenom'] 			= $this->input->post('prenom');
+			$data['categorie'] 			= $this->input->post('categorie');
+			$data['fonction'] 			= $this->input->post('fonction');
+			$data['tel'] 				= $this->input->post('tel');
+			$data['mail'] 				= $this->input->post('mail');
+			$data['evenement'] 			= $this->input->post('evenement');
+			$data['listeCategorie'] 	= $this->modelcategorie->getCategories();
+			$data['listeSurCategorie'] 	= $this->modelcategorie->getCategorieMere();
 			
 			$this->ajouterGroupe($data);
 		}
@@ -327,7 +327,7 @@ class Inscription extends Chocolat {
 		
 		// création de l'accreditation pour le referent
 		$accred = null;
-		$accred['idcategorie'] = $data['categorie'];
+		$accred['idcategorie'] = array_pop(explode(',', $data['categorie']));
 		$accred['idevenement'] = $this->input->post('evenement');
 		$accred['idclient'] = $id;
 		$accred['etataccreditation'] = ACCREDITATION_A_VALIDE;
@@ -336,26 +336,26 @@ class Inscription extends Chocolat {
 		$this->modelaccreditation->ajouter($accred);
 		
 		// ajout des membres
-		foreach($this->input->post('groupe') as $ligne) {
-			// création du client
-			$membre = null;
-			$membre['nom'] = $ligne['nom'];
-			$membre['prenom'] = $ligne['prenom'];
-			$membre['pays'] = $data['pays'];
-			$membre['referent'] = $id;
-			$idNewClient = $this->modelclient->ajouter($membre);
-
-			// création de l'accreditation
-			$accred = null;
-			$accred['groupe'] = $data['groupe'];
-			$accred['idcategorie'] = $ligne['categorie'];
-			$accred['idevenement'] = $this->input->post('evenement');
-			$accred['idclient'] = $idNewClient;
-			$accred['fonction'] = $ligne['fonction'];
-			$accred['etataccreditation'] = ACCREDITATION_A_VALIDE;
-			$this->modelaccreditation->ajouter($accred);
-		}
-		
+		// foreach($this->input->post('groupe') as $ligne) {
+			// // création du client
+			// $membre = null;
+			// $membre['nom'] = $ligne['nom'];
+			// $membre['prenom'] = $ligne['prenom'];
+			// $membre['pays'] = $data['pays'];
+			// $membre['referent'] = $id;
+			// $idNewClient = $this->modelclient->ajouter($membre);
+// 
+			// // création de l'accreditation
+			// $accred = null;
+			// $accred['groupe'] = $data['groupe'];
+			// $accred['idcategorie'] = $ligne['categorie'];
+			// $accred['idevenement'] = $this->input->post('evenement');
+			// $accred['idclient'] = $idNewClient;
+			// $accred['fonction'] = $ligne['fonction'];
+			// $accred['etataccreditation'] = ACCREDITATION_A_VALIDE;
+			// //$this->modelaccreditation->ajouter($accred);
+		// }
+// 		
 		$msg['titre']	= 'Confirmation de demande';
 		$msg['message']	= 'Vos demandes ont bien été prises en compte.<br>Merci de votre pré-enregistrement.';
 		$this->layout->view('lambda/LMessage', $msg);

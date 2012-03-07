@@ -18,9 +18,13 @@
 		<br>
 
 		<div class="center">
-			<a id="lienLambda" href="<?php echo site_url('inscription/ajouter/1'); ?>" class="button">Demande individuelle</a>
+			<a id="lienLambda" 
+				href="<?php echo site_url('inscription/ajouter/' . $events[0]->idevenement); ?>" 
+				class="button">Demande individuelle</a>
 			ou
-			<a id="lienEquipe" href="<?php echo site_url('inscription/groupe/1'); ?>" class="button">Demandes groupées</a>
+			<a id="lienEquipe" 
+				href="<?php echo site_url('inscription/groupe/' . $events[0]->idevenement); ?>" 
+				class="button">Demandes groupées</a>
 		</div>
 		
 	</div>
