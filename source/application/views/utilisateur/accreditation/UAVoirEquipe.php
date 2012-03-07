@@ -64,7 +64,7 @@
         </aside>
 		
 		<div id="main" class="accred">
-			<form class="infos" method="post" action="<?php echo site_url('accreditation/exeModifierGroupe'); ?>" >
+			<form class="infos groupee" method="post" action="<?php echo site_url('accreditation/exeModifierGroupe'); ?>" >
 				<h2 class="infos">Référent du groupe</h2><br/>
 	        	
 				<div class="client">
@@ -95,8 +95,6 @@
 						
 						<input type="text" class="tel" id="telRef" name="telRef" init="<?php echo $client->tel; ?>" value="<?php echo $client->tel; ?>">
 						<input type="text" class="email" id="mailRef" name="mailRef" init="<?php echo $client->mail; ?>" value="<?php echo $client->mail; ?>">
-						
-						<input type="submit" class="valideInfos" value="Enregistrer les modifications" />
 					
 					<div class="clear"></div>
 					
@@ -134,7 +132,7 @@
 									<label for="fonction">Fonction : </label>
 									<input type="text" id="ligneFonction" name="<?php echo "groupe[" . $nbLigne . "][fonction]"; ?>" value="<?php echo $demande->fonction; ?>"/>
 									<label for="categorie">Catégorie : </label>
-									<select id="categorie" name="categorie">
+									<select id="categorieGroupe" name="categorieGroupe" data="<?php echo $demande->idaccreditation; ?>">
 										<option value="">---</option>
 										<?php foreach($categories as $idAccredCategories => $categorie): ?>
 											<option value="<?php echo $categorie['cat']->idcategorie; ?>" zone="<?php echo $categorie['zones']; ?>" <?php echo ($categorie['cat']->idcategorie == $demande->idcategorie)? 'selected' : '' ; ?>>
@@ -144,7 +142,7 @@
 									</select>
 								</div>
 								
-								<div class="contientZones">
+								<div class="contientZones" data="<?php echo $demande->idaccreditation; ?>">
 									<label>Zones : </label>
 									<div>
 										<?php foreach($zonesAccred as $idAccredZones => $zonesAccredMembre): ?>
