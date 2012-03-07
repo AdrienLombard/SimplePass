@@ -142,7 +142,7 @@ class modelZone extends MY_Model {
 	}
 	
 	public function ajouterZoneAccreditation( $idAccreditation, $idZone ) {
-		return $this->db->insert(DB_ACCREDITATION_ZONES, array('idzone' => $idZone, 'idaccreditation' => $idAccreditation));
+		return $this->db->insert(DB_ACCREDITATION_ZONES, array('idaccreditation' => $idAccreditation, 'idzone' => $idZone));
 	}
 	
 	

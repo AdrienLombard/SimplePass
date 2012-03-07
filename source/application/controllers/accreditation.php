@@ -133,12 +133,17 @@ class Accreditation extends Cafe {
 				$zonesAccred = $this->modelzone->getZoneParAccreditation($accred->idaccreditation);
 				foreach($zonesAccred as $za)
 					$sortie[] = $za->idzone;
+					
+				$zonesAccred = array();
+				$zonesAccred = $this->modelzone->getZoneParCategorieEtEvenement( $accred->idcategorie, $this->session->userdata('idEvenementEnCours') );
+				
+				foreach($zonesAccred as $za)
+					$sortie[] = $za->idzone;
+				
 				$data['zonesAccred'][$accred->idaccreditation] = $sortie;
 			}
 			
 		}
-		
-		//display_tab($data);
 		
 		$listeZonesAccred = array();
 		if(count($idCategories)) {
@@ -319,7 +324,7 @@ class Accreditation extends Cafe {
 			/* Modification de l'accréditation */
  			$accred = array();
  			$accred['idevenement'] = $idevenement;
-			$accred['idcategorie'] = $ligne['categorie'];
+			$accred['idcategorie'] = $ligne['categorieGroupe'];
 			$accred['idclient'] = $ligne['idClient'];
 			
 			if(!empty($ligne['fonction'])) {
@@ -329,84 +334,34 @@ class Accreditation extends Cafe {
 				$accred['fonction'] = "";
 			}
 			
-			$zonesCategorie = $this->modelzone->getZoneParCategorieEtEvenement( $ligne['categorie'], $idevenement );
+			echo "Categorie groupe : " . $ligne['categorieGroupe'];
+			
+			$zonesCategorie = $this->modelzone->getZoneParCategorieEtEvenement( $ligne['categorieGroupe'], $idevenement );
 		
 			$zonesAccreditation = $this->modelzone->getZoneParAccreditation( $ligne['idAccreditation'] );
-		
-			echo "Zones catégories \n";
+			
+			display_tab($ligne['zone']);
+			
 			display_tab($zonesCategorie);
-		
-			echo "Zones accreditation \n";
+			
 			display_tab($zonesAccreditation);
 			
-			/*if(isset($zonesCategorie) && !empty($zonesCategorie)) {
-
-				// Pour chaque zone accessible par la catégorie
-				foreach($zonesCategorie as $zonecat) {
-					
-					
-					if(!isset($ligne[zones][$zonecat->idzone]) || empty($ligne[zones][$zonecat->idzone])) {
-						
-						if(isset($zonesAccreditation) && !empty($zonesAccreditation)) {
-							
-							$rechercheZoneParticuliere = false;
-							foreach($zonesAccreditation as $zoneaccred) {
-								
-								if($zoneaccred->idzone == $zonecat->idzone) {
-									$rechercheZoneParticuliere = true;
-								}
-							}
-							
-							if(!$rechercheZoneParticuliere) {
-								ajouterZoneAccreditation( $idAccreditation, $idZone );
-							}
-						}
-						
-					}
-				}
-			}*/
+			$this->modelzone->supprimerZoneParAccreditation ( $ligne['idAccreditation'] );
 			
-			if(isset($zonesCategorie) && !empty($zonesCategorie)) {
-			
-				// Pour chaque zone accessible par la catégorie
-				foreach($zonesCategorie as $zonecat) {
-						
-						
-					if(isset($ligne['zones'][$zonecat->idzone]) && !empty($ligne['zones'][$zonecat->idzone])) {
-			
-						unset($ligne['zones'][$zonecat->idzone]);
-					}
-					
-					if(!empty($ligne['zones'])) {
-						
-						foreach($zonesAccreditation as $zoneaccred) {
-							if(isset($ligne['zones'][$zoneaccred->idzone]) && !empty($ligne['zones'][$zoneaccred->idzone])) {
-								unset($ligne['zones'][$zoneaccred->idzone]);
-							}
-						}
-						
-						if(!empty($ligne['zones'])) {
-							foreach($ligne['zones'] as $idzone => $etatZone ) {
-								$this->modelzone->ajouterZoneAccreditation( $ligne['idAccreditation'], $idzone );
-							}
-						}
-						
-					}
-				}
+			foreach($ligne['zone'] as $idzone => $etat) {
+				$this->modelzone->ajouterZoneAccreditation( $ligne['idAccreditation'], $idzone );
 			}
-			
 			
 			$accred['etataccreditation'] = 0;
 			$this->modelaccreditation->modifier($ligne['idAccreditation'], $accred);
 			$message['titre']		= 'Modification';
-			$message['message']= 'l accreditation  à bien été modifié.';
+			$message['message']= 'l accreditation a bien été modifiée.';
 			$message['redirect'] 	= 'accreditation/demandes';
-		    $this->layout->view('utilisateur/UMessage', $message);
 			
 		}
 		
 		
-		//redirect('accreditation/demandes');
+		redirect('accreditation/index');
 	
 	}
 	

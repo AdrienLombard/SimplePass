@@ -66,7 +66,7 @@ $(document).ready(function(){
 	/*
 	 * Auto check des zone au changement de catégorie pour l'accréditation des groupes
 	 */
-	$('select[name=categorieGroupe]').change(function(){
+	$('select[id=categorieGroupe]').change(function(){
 		var zones = $(this).find('option:selected').attr('zone').split('-');
 		var id = $(this).attr('data');
 		$('.contientZones[data='+id+'] .checkzone').removeClass('on').find('input').removeAttr('checked');
