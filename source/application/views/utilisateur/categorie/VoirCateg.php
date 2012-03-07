@@ -12,7 +12,6 @@
 		
 		<aside>
 
-            <b>Options :</b>
 			<?php if($nom): ?>
 				<a href="<?php echo site_url('categorie/modifier/'.$id); ?>">Modifier</a>
 				<a href="<?php echo site_url('categorie/supprimer/'.$id);?>" confirm="Êtes-vous sûr de vouloir supprimer cette catégorie et ses sous-catégories ?">Supprimer</a>

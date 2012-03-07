@@ -11,13 +11,11 @@
     <div class="box-full">
 		
 		<aside>
-
-            <b>Options :</b>
-				<?php if($nom): ?>
-					<a href="<?php echo site_url('categorie/voir/'.$id); ?>">Retour</a>
-				<?php else: ?>
-					<a href="<?php echo site_url('categorie/liste'); ?>">Retour</a>
-				<?php endif; ?>
+			<?php if($nom): ?>
+				<a href="<?php echo site_url('categorie/voir/'.$id); ?>">Retour</a>
+			<?php else: ?>
+				<a href="<?php echo site_url('categorie/liste'); ?>">Retour</a>
+			<?php endif; ?>
         </aside>
 
         <div id="main">
