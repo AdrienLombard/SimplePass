@@ -11,6 +11,17 @@ class modelZone extends MY_Model {
 			
 	}
 	
+	
+	public function getZonesAvecCode($idEvenement) {
+		return $this->db->select('*')
+						->from(DB_ZONE . ' z')
+						->join(DB_PARAMETRES_EVENEMENTS . ' ze', 'z.idzone = ze.idzone AND ze.idevenement = ' . $idEvenement, 'left')
+						->group_by('z.idzone')
+						->get()
+						->result();
+			
+	}
+	
 	/**
 	 * Fonction pour recuperer l'id d'un evenement
 	 * @return l'id Evenement 

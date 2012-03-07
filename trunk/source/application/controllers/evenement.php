@@ -59,7 +59,7 @@ class Evenement extends Cafe {
 			$data['id'] = $id;
 		
 			// Récupération de la liste des zones.
-			$data['listeZones'] = $this->modelzone->getZones();
+			$data['listeZones'] = $this->modelzone->getZonesAvecCode($id);
 
 
 
@@ -263,7 +263,7 @@ class Evenement extends Cafe {
 		$data['modeleEvenement'] = true;
 		
 		// On récupère la liste des zones avec les codes zone de l'évènement.
-		$data['listeZones'] = $this->modelzone->getZones();
+		$data['listeZones'] = $this->modelzone->getZonesAvecCode($id);
 
 		// On traite la récupération des catégorie de l'évènement modèle.
 		$categories = $this->modelcategorie->getCategorieDansEvenementToutBien();

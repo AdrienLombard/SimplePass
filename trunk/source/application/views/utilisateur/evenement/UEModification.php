@@ -71,8 +71,8 @@
 				<?php foreach ($listeCategorie as $categorie): ?>
 				<tr class="ligneChoixZoneCat">
 
-					<td style="padding-left: <?php echo ($categorie['depth'] * 20) + 10; ?>px">
-						<?php echo $categorie['db']->libellecategorie; ?>
+					<td>
+						<?php repeat('- ', $categorie['depth']) ?> <?php echo $categorie['db']->libellecategorie; ?>
 						<input type="hidden" 
 							   value="<?php echo $categorie['db']->idcategorie; ?>" 
 							   name="name[]" />
