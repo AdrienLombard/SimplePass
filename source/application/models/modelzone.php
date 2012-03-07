@@ -124,7 +124,8 @@ class modelZone extends MY_Model {
 					    ->join(DB_PARAMETRES_EVENEMENTS . ' ze', 'z.idzone = ze.idzone', 'left')
 						->where('ze.idevenement', $idEvenement)
 						->group_by('z.idzone')
-					    ->order_by('ze.idcategorie', 'asc')
+					    ->order_by('z.idzone', 'asc')
+						->order_by('ze.idcategorie', 'asc')
 					    ->get()
 					    ->result();
 	}
