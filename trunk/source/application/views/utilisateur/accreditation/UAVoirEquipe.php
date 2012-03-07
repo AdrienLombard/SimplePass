@@ -32,18 +32,6 @@
 
 		});
 
-	}
-
-	function() {
-
-		var tabZones = new Array();
-
-		<?php $i = 0; ?>
-		<?php foreach($categories as $cat): ?>
-			tabCat[<?php echo $i; ?>] = [<?php echo $cat->idcategorie ?>, <?php echo $cat->surcategorie ?>, "<?php echo $cat->libellecategorie ?>"];
-			<?php $i++; ?>
-		<?php endforeach; ?>
-		
 	});
 
 </script>
@@ -146,37 +134,34 @@
 									<label for="fonction">Fonction : </label>
 									<input type="text" id="ligneFonction" name="<?php echo "groupe[" . $nbLigne . "][fonction]"; ?>" value="<?php echo $demande->fonction; ?>"/>
 									<label for="categorie">Catégorie : </label>
-									<select  id="categorie" name="<?php echo "groupe[" . $nbLigne . "][categorie]"; ?>" class="select dyn-selector">
-										<option value="-1">Je ne sais pas encore</option>
+									<select id="categorie" name="categorie">
+										<option value="">---</option>
 										<?php foreach($categories as $categorie): ?>
-										<option value="<?php echo $categorie->idcategorie; ?>" <?php if($categorie->idcategorie == $demande->idcategorie) { echo "selected='selected'"; } echo set_select('categorie', $categorie->libellecategorie); ?> ><?php echo $categorie->libellecategorie; ?></option>
+										<option value="<?php echo $categorie['cat']->idcategorie; ?>" zone="<?php echo $categorie['zones']; ?>" <?php echo ($categorie['cat']->idcategorie == $demande->idcategorie)? 'selected' : '' ; ?>>
+											<?php echo $categorie['cat']->libellecategorie; ?>
+										</option>
 										<?php endforeach; ?>
 									</select>
 								</div>
-	
-								<table class="choixZones">
-									<thead>
-										<tr>
-											<?php foreach($zones as $zone) {if(!empty($zone->idzone)) echo "<td>" . $zone->idzone . "</td>\n";}?>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-											<?php foreach($zones as $zone) :
-												if(!empty($zone->idzone)) {
-													echo "<td><input type='checkbox' id='" . $zone->idzone ."' name='groupe[" . $nbLigne . "][zones][" . $zone->idzone . "]' "; 
-													if(isset($listeZonesAccred[$accredMembre->idcategorie][$zone->idzone]) && $listeZonesAccred[$accredMembre->idcategorie][$zone->idzone]) {
-														echo "checked='checked'";
-													} 
-													echo "/></td>\n";			
-												}
-											endforeach; ?>
-										</tr>
-									</tbody>
-								</table>
+								
+								<div class="contientZones">
+									<label>Zones : </label>
+									<div>
+										<?php foreach($zonesAccred as $key => $zonesAccredMembre): ?>
+											<?php if($key == $demande->idaccreditation) { ?>
+												<?php foreach($zones as $zone): ?>
+													<div class="checkzone <?php echo in_array($zone->idzone, $zonesAccredMembre)? 'on' : '' ; ?>" id="<?php echo $zone->idzone; ?>">
+														<?php echo $zone->idzone; ?>
+														<input type="checkbox" name="zone[<?php echo $zone->idzone; ?>]" <?php echo in_array($zone->idzone, $zonesAccredMembre)? 'checked' : '' ; ?> />
+													</div>
+												<?php endforeach; ?>
+											<?php } ?>
+										<?php endforeach; ?>
+									</table>
+								</div>
 	
 								<div class="clear"></div>
-							</div>
+								</div>
 							
 						</div>
 						
