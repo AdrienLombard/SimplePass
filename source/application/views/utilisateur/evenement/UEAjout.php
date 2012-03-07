@@ -32,7 +32,7 @@
 				<input type="text" id="datepicker-fin" name="datefin" value="<?php if($info) echo $info->dateFin; ?>" READONLY="READONLY" />
 
 				</br>
-				<label>Voulez-vous télécharger une ancienne évenement ? </label>
+				<label>Voulez-vous reprendre les paramètres d'un ancien évènement ?</label>
 				</br>
 
 				<div class="encadrer" >

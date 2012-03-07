@@ -27,6 +27,7 @@
 	border-right: 1px dashed #CCC;
 	background: #FFF;
 	text-align: center;
+	font-size: 10px;
 }
 .listeCategorieEvent tr td:first-child {
 	text-align: left;
@@ -34,6 +35,10 @@
 .listeCategorieEvent input.codeZone {
 	width: 25px;
 	border: 1px solid #BBB;
+	border-radius: 0;
+	padding: 2px 0 2px 0;
+	font-size: 10px;
+	text-align: center;
 }
 
 .listeCategorieEvent tr  td.titreCodeDeLaZone {
