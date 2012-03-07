@@ -131,8 +131,8 @@
 								<div>
 									<label for="fonction">Fonction : </label>
 									<input type="text" id="ligneFonction" name="<?php echo "groupe[" . $nbLigne . "][fonction]"; ?>" value="<?php echo $demande->fonction; ?>"/>
-									<label for="categorie">Catégorie : </label>
-									<select id="categorieGroupe" name="categorieGroupe" data="<?php echo $demande->idaccreditation; ?>">
+									<label for="categorieGroupe">Catégorie : </label>
+									<select id="categorieGroupe" name="<?php echo "groupe[" . $nbLigne . "][categorieGroupe]"; ?>" data="<?php echo $demande->idaccreditation; ?>">
 										<option value="">---</option>
 										<?php foreach($categories as $idAccredCategories => $categorie): ?>
 											<option value="<?php echo $categorie['cat']->idcategorie; ?>" zone="<?php echo $categorie['zones']; ?>" <?php echo ($categorie['cat']->idcategorie == $demande->idcategorie)? 'selected' : '' ; ?>>
@@ -150,7 +150,7 @@
 												<?php foreach($zones as $zone): ?>
 													<div class="checkzone <?php echo in_array($zone->idzone, $zonesAccredMembre)? 'on' : '' ; ?>" id="<?php echo $zone->idzone; ?>">
 														<?php echo $zone->idzone; ?>
-														<input type="checkbox" name="zone[<?php echo $zone->idzone; ?>]" <?php echo in_array($zone->idzone, $zonesAccredMembre)? 'checked' : '' ; ?> />
+														<input type="checkbox" name="<?php echo "groupe[" . $nbLigne . "][zone][" . $zone->idzone . "]" ?>" <?php echo in_array($zone->idzone, $zonesAccredMembre)? 'checked' : '' ; ?> />
 													</div>
 												<?php endforeach; ?>
 											<?php } ?>
