@@ -14,7 +14,7 @@
 			
 			<br /><br />
 			
-			Evènement en cours : <?php echo $evenement; ?>
+			Evènement en cours : <?php echo $this->session->userdata('libelleEvenementEnCours'); ?>
 			
         </div>
 
