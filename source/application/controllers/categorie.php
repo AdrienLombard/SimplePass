@@ -47,20 +47,25 @@ class Categorie extends Cafe {
 	public function ajouter($values='') {
 		
 		$data['info'] = $values;
-		$data['categories']=$this->modelcategorie->getCategories();
-		$this->layout->view('utilisateur/categorie/AjoutCateg', $data);
 		
+		$data['categories'] = $this->modelcategorie->getCategorieDansEvenementToutBien();
+		
+		$this->layout->view('utilisateur/categorie/UCAjout', $data);
 	}
+
+
+
 	public function exeAjouter() {
-	$config = array(
-		array(
-					'field'   => 'nom',
-					'label'   => 'Nom', 
-					'rules'   => 'required'
-		));
+		$config = array(
+			array(
+				'field'   => 'nom',
+				'label'   => 'Nom', 
+				'rules'   => 'required'
+			)
+		);
 		$this->form_validation->set_rules($config);
 		
-		$nom 		= $this->input->post('nom');
+		$nom = $this->input->post('nom');
 		
 		echo $nom;
 		
