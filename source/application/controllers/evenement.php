@@ -245,6 +245,11 @@ class Evenement extends Cafe {
 		if( $newentry ) {
 			$this->modelevenement->ajouterDonnees( $newDonneesEvenement );
 		}
+		// Appel de la vue.
+			$data['titre']		= 'Ajout';
+			$data['message']	= 'Votre évènement à bien été ajouté.';
+			$data['redirect'] = 'evenement/liste';
+			$this->layout->view('utilisateur/UMessage', $data);	
 		
 		
 		// on affiche le message de reussite de l'ajout de l'evenement.
