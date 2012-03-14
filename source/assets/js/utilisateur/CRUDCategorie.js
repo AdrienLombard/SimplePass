@@ -34,8 +34,11 @@ $('.categorieAllInOne form').live("blur", function(){
 	
 	$("div.picker span").live( "click", function() {
 		var color = $(this).attr("ref");
+		var id = $(this).parent().attr("colorId");
 		
-		$(".colorpicker[data="+id+"]").css("background", color).find("input").attr("value", color)
+		$(".colorpicker[colorId="+id+"]").css("backgroundColor", "#"+color).find("input").attr('value', color);
+		
+		$(this).parent().toggle();
 		
 	});
 	

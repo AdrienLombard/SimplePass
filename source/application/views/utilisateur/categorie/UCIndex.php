@@ -39,22 +39,25 @@
 							<form method="post" action="#" class="disabled" data="<?php echo $categorie['db']->idcategorie?>">
 								
 								<input type="hidden" name="id" value="<?php echo $categorie['db']->idcategorie?>" />
-								<input type="hidden" name="couleur" />
+								
 								
 								<input type="text" name="libelle" init="<?php echo $categorie['db']->libellecategorie?>" value="<?php echo $categorie['db']->libellecategorie?>" readonly />
 								
-								<span class="colorpicker" init="">&nbsp;</span>
+								<span class="colorpicker" init="" colorId="<?php echo $categorie['db']->idcategorie?>" >
+									<input type="hidden" name="couleur" />
+									&nbsp;
+								</span>
 								
-								<div class="hide picker">
+								<div class="hide picker" colorId="<?php echo $categorie['db']->idcategorie?>" >
 									<span ref="FF0000" style="background: #FF0000">&nbsp;</span>
 									<span ref="32CD32" style="background: #32CD32">&nbsp;</span>
 									<span ref="C71585" style="background: #C71585">&nbsp;</span>
 									<span ref="FF4500" style="background: #FF4500">&nbsp;</span>
-									<span ref="FFFF00" style="background: #FFFF00">&nbsp;</span>
+									<span ref="FFD700" style="background: #FFD700">&nbsp;</span>
 									<span ref="808000" style="background: #808000">&nbsp;</span>
 									<span ref="008B8B" style="background: #008B8B">&nbsp;</span>
-									<span ref="00FFFF" style="background: #00FFFF">&nbsp;</span>
-									<span ref="0000FF" style="background: #0000FF">&nbsp;</span>
+									<span ref="4169E1" style="background: #4169E1">&nbsp;</span>
+									<span ref="4682B4" style="background: #4682B4">&nbsp;</span>
 									<span ref="F4A460" style="background: #F4A460">&nbsp;</span>
 									<span ref="A52A2A" style="background: #A52A2A">&nbsp;</span>
 									<span ref="696969" style="background: #696969">&nbsp;</span>
