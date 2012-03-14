@@ -1,0 +1,58 @@
+.photo
+{
+	margin-left: 2cm;
+	margin-top: 1.7cm;
+}
+
+.infosPerso
+{
+	margin-left: 2cm;
+	margin-top: 1.1cm;
+}
+.infosPerso .nom
+{
+	margin-left: 0.2cm;
+	margin-top: 0.1cm;
+}
+.infosPerso .prenom
+{
+	margin-left: 3cm;
+	margin-top: 0.1cm;
+}
+.infosPerso .drapeau
+{
+	margin-left: 0.3cm;
+	margin-top: 0.1cm;
+}
+.infosPerso .pays
+{
+	margin-left: 0.5cm;
+	margin-top: 0.1cm;
+}
+.infosPerso .categorie
+{
+	margin-left: 0.2cm;
+	margin-top: 0.1cm;
+}
+.infosPerso .societe
+{
+	margin-left: 0.2cm;
+	margin-top: 0.1cm;
+}
+.infosPerso .facultatif
+{
+	margin-left: 0.2cm;
+	margin-top: 0.1cm;
+	border: none;
+}
+
+.infosZones
+{
+	margin-left: 2cm;
+	margin-top: 0.5cm;
+}
+.infosZones .zones
+{
+	margin-left: 0.2cm;
+	margin-top: 0.1cm;
+}
