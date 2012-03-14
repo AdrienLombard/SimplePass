@@ -50,16 +50,7 @@
 
         <aside>
            
-            <b>Options :</b>
-			<ul>
-				<li>Modifier</li>
-				<li>Retour</li>
-			</ul>
-			
-			<b>Actions :</b>
-			<ul>
-				<li>Ajouter</li>
-			</ul>
+			<a href="<?php echo site_url('accreditation/demandes'); ?>">Retour</a>
 
         </aside>
 		
