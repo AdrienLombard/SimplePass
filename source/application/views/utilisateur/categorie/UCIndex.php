@@ -9,7 +9,7 @@
     <div class="box-full">
 		
 		<aside>
-			<a href="#">Nouvelle catégorie mère</a>
+			<a href="#" class="afficheNouvelleCatMere">Nouvelle catégorie mère</a>
         </aside>
 
         <div id="main">
@@ -25,6 +25,47 @@
                 </thead>
                 <tbody>
 					
+					<tr class="nouvelleCatMere">
+			
+						<td colspan="3">
+							
+							<form method="post" action="<?php echo site_url('categorie/exeAjouter') ?>">
+
+								<input type="hidden" name="couleur" />
+								<input type="hidden" name="surcategorie" value="-1" />
+								
+								Nouvelle catégorie mère : <input type="text" name="nom" />
+								
+								<span class="colorpicker" init="">&nbsp;</span>
+								
+								<div class="hide picker">
+									<span ref="FF0000" style="background: #FF0000">&nbsp;</span>
+									<span ref="32CD32" style="background: #32CD32">&nbsp;</span>
+									<span ref="C71585" style="background: #C71585">&nbsp;</span>
+									<span ref="FF4500" style="background: #FF4500">&nbsp;</span>
+									<span ref="FFFF00" style="background: #FFFF00">&nbsp;</span>
+									<span ref="808000" style="background: #808000">&nbsp;</span>
+									<span ref="008B8B" style="background: #008B8B">&nbsp;</span>
+									<span ref="00FFFF" style="background: #00FFFF">&nbsp;</span>
+									<span ref="0000FF" style="background: #0000FF">&nbsp;</span>
+									<span ref="F4A460" style="background: #F4A460">&nbsp;</span>
+									<span ref="A52A2A" style="background: #A52A2A">&nbsp;</span>
+									<span ref="696969" style="background: #696969">&nbsp;</span>
+									<span ref="BDB76B" style="background: #BDB76B">&nbsp;</span>
+									<span ref="CD5C5C" style="background: #CD5C5C">&nbsp;</span>
+									<span ref="9ACD32" style="background: #9ACD32">&nbsp;</span>
+								</div>
+								
+								<input type="submit" value="valider" />
+								
+							</form>
+							
+						</td>
+						
+						<td class="icon">
+						<a href="#" class="icons delete deleteNouvelleCatMere"></a>
+						</td>
+					
                     <?php foreach ($resultats as $categorie): ?>
 					
 					<?php if($categorie['depth'] == 0): ?>
@@ -34,8 +75,9 @@
 					<tr>
 			
 						<td>
-							<?php echo repeat('&nbsp;', $categorie['depth']); ?>
-							<?php if($categorie['depth'] != 0) echo '&#9492;'; ?>
+							<?php if($categorie['depth'] != 0): ?>
+								&nbsp;&nbsp;<?php echo repeat('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;', $categorie['depth']-1); ?><span class="arbo">&#9492;</span>
+							<?php endif; ?>
 							<form method="post" action="#" class="disabled" data="<?php echo $categorie['db']->idcategorie?>">
 								
 								<input type="hidden" name="id" value="<?php echo $categorie['db']->idcategorie?>" />

@@ -33,29 +33,9 @@ class Categorie extends Cafe {
 		$this->layout->view('utilisateur/categorie/UCIndex', $data);
 	}
 	
-	public function voir($id) {
-		
-		$this->layout->ajouter_css('utilisateur/details');
-		
-		$data['nom']		= $this->modelcategorie->getCategorieMereid($id);
-		$data['resultats']	= $this->modelcategorie->getSousCategorie($id);
-		$data['id']			= $id;
-		
-		$this->layout->view('utilisateur/categorie/VoirCateg', $data);
-	}
 	
-	public function ajouter($values='') {
-		
-		$data['info'] = $values;
-		
-		$data['categories'] = $this->modelcategorie->getCategorieDansEvenementToutBien();
-		
-		$this->layout->view('utilisateur/categorie/UCAjout', $data);
-	}
-
-
-
 	public function exeAjouter() {
+		
 		$config = array(
 			array(
 				'field'   => 'nom',
@@ -63,54 +43,30 @@ class Categorie extends Cafe {
 				'rules'   => 'required'
 			)
 		);
+		
 		$this->form_validation->set_rules($config);
 		
-		$nom = $this->input->post('nom');
-		
-		echo $nom;
+		$nom = ucfirst($this->input->post('nom'));
+		$id = $this->input->post('categorie');
+		$couleur = $this->input->post('couleur');
 		
 		if ($this->form_validation->run() == true ) {
-	    	$data['titre']		= 'Ajout';
-			$data['message']	= 'Votre catégorie a bien été ajoutée.';
-			$data['redirect'] 	= 'categorie/liste';
-			$idcategorie=$_POST['categories'];
 			
-			if( $idcategorie!=-1)
-			$this->modelcategorie->ajouter( $nom,$idcategorie);
+			if($idcategorie != -1)
+				$this->modelcategorie->ajouter( $nom, $id);
 			else
-				$this->modelcategorie->ajouter( $nom,NULL);
-			$this->layout->view('utilisateur/UMessage', $data);	 
-		}
-		else {
+				$this->modelcategorie->ajouter( $nom, NULL);	
 			
-			$values->nom		= $nom;
-			
-			$this->ajouter($values);
 		}
 		
-	}
-	
-	
-	public function modifier($id,$re=false) {
+		$this->load->helper('url');
+		redirect('categorie/liste');
 		
-		// Traitement
-		$data['id'] = $id;
-		if($re)
-		{
-			$data['nom'] = $re['nom'];
-	   	
-		}
-		else {
-			
-			$reponse = $this->modelcategorie->getCategorieMereid($id);
-			$data['nom'] = ($reponse) ? $reponse[0]->libellecategorie : null;
-			
-		}
-		$this->layout->view('utilisateur/categorie/UCModifier',$data);
 	}
 	
 	
 	public function exeModifier($id) {
+		
 		$config = array(
 			'field'   => 'nom',
 			'label'   => 'Nom', 
@@ -119,18 +75,13 @@ class Categorie extends Cafe {
 		
 		$this->form_validation->set_rules($config);
 		
-		$nom 		= $this->input->post('nom');
-		echo $nom;
-		if ($this->form_validation->run()==true)
-	{ 
-			$resultat = $this->modelcategorie->modifier( $id,$nom );
-			$data['titre']		= 'Modification';
-			$data['message']	= 'Votre catégorie à bien été modifié.';
-			$data['redirect'] 	= 'categorie/liste';
-			$this->layout->view('utilisateur/UMessage', $data);
-		
+		$nom = $this->input->post('nom');
+		$couleur = $this->input->post('couleur');
+		$id = $this->input->post('id');
+		$surCategorie = $this->input->post('surcategorie');
 
-	}
+		if ($this->form_validation->run()==true)
+			$resultat = $this->modelcategorie->modifier( $id, $nom );
 		else {
 			
 			$donnees['nom'] = $nom;

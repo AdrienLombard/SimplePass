@@ -2,7 +2,7 @@ $("document").ready( function() {
 
 	$('.modifCat').live('click', function(){
 		var id = $(this).attr('data');
-		$('form[data='+id+']').removeClass('disabled').find('input[type=text]').focus().removeAttr('readonly');
+		$('form[data='+id+']').removeClass('disabled').find('input[type=text]').removeAttr('readonly').focus();
 	});
 
 /*
@@ -19,6 +19,14 @@ $('.categorieAllInOne form').live("blur", function(){
  * Aymeric
  */
 
+
+$('.afficheNouvelleCatMere').live('click', function(){
+	$('.nouvelleCatMere').show().find('input[type=text]').focus();
+});
+
+$('.deleteNouvelleCatMere').live('click', function(){
+	$('.nouvelleCatMere').hide();
+});
 
 
 
