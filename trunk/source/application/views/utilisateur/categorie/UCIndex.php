@@ -26,10 +26,16 @@
                 <tbody>
 					
                     <?php foreach ($resultats as $categorie): ?>
+					
+					<?php if($categorie['depth'] == 0): ?>
+					<tr><td colspan="4"></td></tr>
+					<?php endif; ?>
+					
 					<tr>
 			
 						<td>
-							<?php echo repeat('- ', $categorie['depth']); ?> 
+							<?php echo repeat('&nbsp;', $categorie['depth']); ?>
+							<?php if($categorie['depth'] != 0) echo '&#9492;'; ?>
 							<form method="post" action="#" class="disabled" data="<?php echo $categorie['db']->idcategorie?>">
 								
 								<input type="hidden" name="id" value="<?php echo $categorie['db']->idcategorie?>" />
