@@ -36,6 +36,15 @@
 								<span class="colorpicker" init="">color
 									<input type="hidden" name="couleur" />
 								</span>
+								<div class="hide picker">
+									<span ref="ffffff" > #ffffff </span>
+									<span ref="ffffff" > #ffffff </span>
+									<span ref="ffffff" > #ffffff </span>
+									<span ref="ffffff" > #ffffff </span>
+									<span ref="ffffff" > #ffffff </span>
+									<span ref="ffffff" > #ffffff </span>
+								</div>
+								
 								<input type="submit" value="valider" />
 							</form>
 						</td>
