@@ -175,19 +175,19 @@ insert into courchevel_evenement (libelleevenement,datedebut,datefin) values ('C
 insert into courchevel_evenement (libelleevenement,datedebut,datefin) values ('Coupe du monde d été de saut a ski 2011','1313013600','1313100000');
 insert into courchevel_evenement (libelleevenement,datedebut,datefin) values ('Coupe du monde feminine de ski alpin hiver 2012','1355612400','1355698800');
 
-insert into courchevel_categorie (libellecategorie) values ('Presse');
-insert into courchevel_categorie (surcategorie,libellecategorie) values (1,'Presse oral');
-insert into courchevel_categorie (surcategorie,libellecategorie) values (1,'Presse écrite');
-insert into courchevel_categorie (surcategorie,libellecategorie) values (2,'Presse TV');
-insert into courchevel_categorie (surcategorie,libellecategorie) values (2,'Presse radio');
-insert into courchevel_categorie (libellecategorie) values ('Bénévole');
-insert into courchevel_categorie (surcategorie, libellecategorie) values (6, 'Serveur restaurant');
-insert into courchevel_categorie (surcategorie, libellecategorie) values (6, 'Conducteur navette');
-insert into courchevel_categorie (surcategorie, libellecategorie) values (6, 'Responsable parkings');
-insert into courchevel_categorie (surcategorie, libellecategorie) values (9, 'Responsable parking altiport');
-insert into courchevel_categorie (surcategorie, libellecategorie) values (9, 'Responsable parking stade');
-insert into courchevel_categorie (libellecategorie) values ('Sportif');
-insert into courchevel_categorie (libellecategorie) values ('VIP');
+insert into courchevel_categorie (libellecategorie, couleur) values ('Presse', 'FF0000');
+insert into courchevel_categorie (surcategorie,libellecategorie, couleur) values (1,'Presse oral', 'FF0000');
+insert into courchevel_categorie (surcategorie,libellecategorie, couleur) values (1,'Presse écrite', 'FF0000');
+insert into courchevel_categorie (surcategorie,libellecategorie, couleur) values (2,'Presse TV', 'FF0000');
+insert into courchevel_categorie (surcategorie,libellecategorie, couleur) values (2,'Presse radio', 'FF0000');
+insert into courchevel_categorie (libellecategorie, couleur) values ('Bénévole', '008B8B');
+insert into courchevel_categorie (surcategorie, libellecategorie, couleur) values (6, 'Serveur restaurant', '008B8B');
+insert into courchevel_categorie (surcategorie, libellecategorie, couleur) values (6, 'Conducteur navette', '008B8B');
+insert into courchevel_categorie (surcategorie, libellecategorie, couleur) values (6, 'Responsable parkings', '008B8B');
+insert into courchevel_categorie (surcategorie, libellecategorie, couleur) values (9, 'Responsable parking altiport', '008B8B');
+insert into courchevel_categorie (surcategorie, libellecategorie, couleur) values (9, 'Responsable parking stade', '008B8B');
+insert into courchevel_categorie (libellecategorie, couleur) values ('Sportif', 'F4A460');
+insert into courchevel_categorie (libellecategorie, couleur) values ('VIP', '9ACD32');
 
 insert into courchevel_parametres_evenements (idevenement, idcategorie, idzone, codezone) values (1, 4, 7, 06);
 insert into courchevel_parametres_evenements (idevenement, idcategorie, idzone, codezone) values (1, 4, 8, 07);

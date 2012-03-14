@@ -46,26 +46,23 @@ class Categorie extends Cafe {
 		
 		$this->form_validation->set_rules($config);
 		
-		$nom = ucfirst($this->input->post('nom'));
-		$id = $this->input->post('categorie');
-		$couleur = $this->input->post('couleur');
+		$data['libellecategorie'] = ucfirst($this->input->post('nom'));
+		$data['couleur'] = $this->input->post('couleur');
+		$data['surcategorie'] = $this->input->post('surcategorie');
 		
-		if ($this->form_validation->run() == true ) {
-			
-			if($idcategorie != -1)
-				$this->modelcategorie->ajouter( $nom, $id);
-			else
-				$this->modelcategorie->ajouter( $nom, NULL);	
-			
-		}
+		if($data['surcategorie'] == -1)
+			$data['surcategorie'] = null;
 		
+		if($this->form_validation->run() == true )
+				$this->modelcategorie->ajouter($data);	
+
 		$this->load->helper('url');
 		redirect('categorie/liste');
 		
 	}
 	
 	
-	public function exeModifier($id) {
+	public function exeModifier() {
 		
 		$config = array(
 			'field'   => 'nom',
@@ -75,23 +72,26 @@ class Categorie extends Cafe {
 		
 		$this->form_validation->set_rules($config);
 		
-		$nom = $this->input->post('nom');
-		$couleur = $this->input->post('couleur');
 		$id = $this->input->post('id');
-		$surCategorie = $this->input->post('surcategorie');
-
-		if ($this->form_validation->run()==true)
-			$resultat = $this->modelcategorie->modifier( $id, $nom );
-		else {
-			
-			$donnees['nom'] = $nom;
-			$this->modifier($id, $donnees);
+		$info['libellecategorie'] = $this->input->post('nom');
+		$info['couleur'] = $this->input->post('couleur');
+		$surcategorie = $this->input->post('surcategorie');
+		
+		if($surcategorie != -1  && !empty($surcategorie))
+			$info['surcategorie'] = $surcategorie;
+		
+		if($this->form_validation->run()==true) {
+			$resultat = $this->modelcategorie->modifier($id, $info);
+			$this->modelcategorie->majCouleur();
 		}
+		
+		$this->load->helper('url');
+		redirect('categorie/liste');
 		
 	}
 	
 	
-	public function supprimer($id) {
+	public function exeSupprimer($id) {
 		
 		// on supprime les accréditations liées à cette catégorie qui sont déjà passé.
 		$this->modelaccreditation->supprimerParcategorie( $id );
@@ -112,10 +112,8 @@ class Categorie extends Cafe {
 		
 		$this->modelcategorie->supprimerCategorie($id);
 		
-		$data['titre']		= 'Suppression';
-		$data['message']	= 'Votre catégorie a bien été supprimée.';
-		$data['redirect'] 	= 'categorie/liste';
-		$this->layout->view('utilisateur/UMessage', $data);
+		$this->load->helper('url');
+		redirect('categorie/liste');
 		
 	}
 	

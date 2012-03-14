@@ -95,9 +95,8 @@ class modelCategorie extends CI_Model {
 	}
 	
 	
-	public function ajouter($nom, $id) {
-		$values = array('libellecategorie' => $nom, 'surcategorie' => $id);
-		$this->db->insert(DB_CATEGORIE, $values);
+	public function ajouter($data) {
+		$this->db->insert(DB_CATEGORIE, $data);
 	}
 	
 	
@@ -111,8 +110,22 @@ class modelCategorie extends CI_Model {
         $this->db->delete(DB_CATEGORIE);
 	}
 	
-	public function modifier($id,$nom) {
-		return $this->db->update(DB_CATEGORIE, array( 'libellecategorie' => $nom), 'idcategorie = '.$id);
+	public function modifier($id, $data) {
+		return $this->db->update(DB_CATEGORIE, $data, 'idcategorie = '.$id);
+	}
+	
+	public function majCouleur() {
+		
+		$cats = $this->getCategories();
+		
+		foreach($cats as $cat) {
+			
+			$surcat = $this->getCategorieMereid($cat->surcategorie);
+			
+			// todo maj couleur
+			
+		}
+
 	}
 	
 	

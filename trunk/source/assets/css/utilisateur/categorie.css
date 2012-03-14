@@ -116,13 +116,12 @@
 	height: 20px;
 	cursor: pointer;
 }
-}
 
 .arbo {
 	color: #999;
 }
 
 
-.nouvelleCatMere {
+.nouvelleCatMere, .nouvelleSousCat {
 	display: none;
 }
