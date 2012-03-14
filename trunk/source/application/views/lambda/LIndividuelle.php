@@ -63,9 +63,11 @@
 		
 		<label>Nom*</label>
 		<input type="text" value="<?php echo set_value('nom'); ?>" id="nom" name="nom" />
+		<?php echo form_error('nom'); ?>
 		
 		<label>Prénom*</label>
 		<input type="text" value="<?php echo set_value('prenom'); ?>" id="prenom" name="prenom" />
+		<?php echo form_error('prenom'); ?>
 		
 		<label>Pays*</label>
 		<select  id="pays" name="pays" class="select">
@@ -79,6 +81,7 @@
 		
 		<label>Mail*</label>
 		<input type="text" value="<?php echo set_value('mail'); ?>" id="mail" name="mail" />
+		<?php echo form_error('mail'); ?>
 		
 		<label>Societe, Organisme ou Publication</label>
 		<input type="text" value="<?php echo set_value('titre'); ?>" id="titre" name="titre" />

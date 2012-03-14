@@ -56,6 +56,7 @@
 			
 			<label>Nom*</label>
 			<input type="text" value="<?php if($values) echo $values->groupe; ?>" name="groupe" />
+			<?php echo form_error('groupe'); ?>
 			
 			<label>Pays*</label>
 			<select  id="pays" name="pays" class="select">
@@ -71,15 +72,18 @@
 			
 			<label>Nom*</label>
 			<input type="text" value="<?php if($values) echo $values->nom; ?>" name="nom" />
+			<?php echo form_error('nom'); ?>
 			
 			<label>Prénom*</label>
-			<input type="text" value="<?php if($values) echo $values->prenom; ?>" name="prenom" />	
+			<input type="text" value="<?php if($values) echo $values->prenom; ?>" name="prenom" />
+			<?php echo form_error('prenom'); ?>
 			
 			<label>Télephone</label>
 			<input type="text" value="<?php if($values) echo $values->tel; ?>" name="tel" />
 
 			<label>Mail*</label>
 			<input type="text" value="<?php if($values) echo $values->mail; ?>" name="mail" />
+			<?php echo form_error('mail'); ?>
 			
 			<div>
 			<label>Catégorie</label>

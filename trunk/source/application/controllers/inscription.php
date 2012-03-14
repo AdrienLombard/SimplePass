@@ -56,7 +56,7 @@ class Inscription extends Chocolat {
 		// On regle les paramètres du formulaire.
 		$this->form_validation->set_message('required', 'Le champ %s est obligatoire.');
 		$this->form_validation->set_message('valid_email', 'Veuillez rentrer un e-Mail valide.');
-		$this->form_validation->set_error_delimiters('<p class="error_message" >', '<p>');
+		$this->form_validation->set_error_delimiters('<p class="error_message" > *', '</p>');
 		
 		// On définie les règles de validation du formulaire.
 		$config = array(
@@ -230,7 +230,7 @@ class Inscription extends Chocolat {
 		// On regle les paramètres du formulaire.
 		$this->form_validation->set_message('required', 'Le champ %s est obligatoire.');
 		$this->form_validation->set_message('valid_email', 'Veuillez rentrer un mail valide.');
-		$this->form_validation->set_error_delimiters('<p class="error_message" >', '<p>');
+		$this->form_validation->set_error_delimiters('<p class="error_message" > *', '</p>');
 		
 		// On définie les règles de validation du formulaire.
 		$config = array(
