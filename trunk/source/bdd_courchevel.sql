@@ -40,10 +40,12 @@ create table courchevel_accreditation
    idclient             bigint not null,
    idcategorie          bigint,
    idevenement          bigint not null,
+   referent		        bigint default null,
    etataccreditation    tinyint not null,
    dateaccreditation    bigint not null,
    fonction             text default null,
    groupe				varchar(50) default null,
+   allaccess			tinyint not null,
    primary key (idaccreditation)
 ) engine = InnoDB, charset = utf8;
 
@@ -65,6 +67,7 @@ create table courchevel_categorie
    idcategorie          bigint not null auto_increment,
    surcategorie         bigint,
    libellecategorie     text not null,
+   couleur				varchar(6) default 'FFFFFF',
    primary key (idcategorie)
 ) engine = InnoDB, charset = utf8;
 
@@ -75,7 +78,6 @@ create table courchevel_client
 (
    idclient             bigint not null auto_increment,
    pays                 varchar(3) not null,
-   referent		        bigint default null,
    nom                  varchar(50) not null,
    prenom               varchar(50) not null,
    civilite             varchar(10) not null,
