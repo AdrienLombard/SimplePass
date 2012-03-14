@@ -31,18 +31,23 @@
 						<td>
 							<?php echo repeat('- ', $categorie['depth']); ?> 
 							<form method="post" action="#" class="disabled" data="<?php echo $categorie['db']->idcategorie?>">
+								
 								<input type="hidden" name="id" value="<?php echo $categorie['db']->idcategorie?>" />
+								<input type="hidden" name="couleur" />
+								
 								<input type="text" name="libelle" init="<?php echo $categorie['db']->libellecategorie?>" value="<?php echo $categorie['db']->libellecategorie?>" readonly />
-								<span class="colorpicker" init="">color
-									<input type="hidden" name="couleur" />
-								</span>
+								
+								<span class="colorpicker" init="">&nbsp;</span>
+								
 								<div class="hide picker">
-									<span ref="ffffff" > #ffffff </span>
-									<span ref="ffffff" > #ffffff </span>
-									<span ref="ffffff" > #ffffff </span>
-									<span ref="ffffff" > #ffffff </span>
-									<span ref="ffffff" > #ffffff </span>
-									<span ref="ffffff" > #ffffff </span>
+									<span ref="ffffff" style="background: #ffff99">&nbsp;</span>
+									<span ref="ffffff" style="background: #ff99ff">&nbsp;</span>
+									<span ref="ffffff" style="background: #ffffff">&nbsp;</span>
+									<span ref="ffffff" style="background: #99ffff">&nbsp;</span>
+									<span ref="ffffff" style="background: #9999ff">&nbsp;</span>
+									<span ref="ffffff" style="background: #ff9999">&nbsp;</span>
+									<span ref="ffffff" style="background: #999999">&nbsp;</span>
+									<span ref="ffffff" style="background: #f9f9f9">&nbsp;</span>
 								</div>
 								
 								<input type="submit" value="valider" />
@@ -50,11 +55,11 @@
 						</td>
 						
 						<td class="icon">
-							<a href="#" class="icons add"></a>
+							<div class="icons add"></div>
 						</td>
 						
 						<td class="icon">
-							<a href="#" class="modifCat icons update" data="<?php echo $categorie['db']->idcategorie?>"></a>
+							<div class="modifCat icons update" data="<?php echo $categorie['db']->idcategorie?>"></div>
 						</td>
 						
 						<td class="icon">

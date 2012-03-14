@@ -29,10 +29,10 @@ $('.categorieAllInOne form').live("blur", function(){
 	$(".hide").hide();
 	
 	$(".colorpicker").click( function(){
-		$(this).find("div.picker").toggle();
+		$(this).next("div.picker").toggle();
 	});
 	
-	$("div.picker").children().live( "click", function() {
+	$("div.picker span").live( "click", function() {
 		var color = $(this).attr("ref");
 		
 		$(".colorpicker[data="+id+"]").css("background", color).find("input").attr("value", color)
