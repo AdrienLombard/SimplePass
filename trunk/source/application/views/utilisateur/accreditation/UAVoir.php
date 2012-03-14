@@ -15,6 +15,7 @@
            
             <a href="#" class="editClient">Modifier la personne</a>
 			<a href="<?php echo site_url('accreditation/nouvelle/'.$client->idclient); ?>">Nouvelle accréditation</a>
+			<a href="<?php echo site_url('impression/index'); ?>">Imprimer l'accréditation</a>
 
         </aside>
 		

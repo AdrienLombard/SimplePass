@@ -229,6 +229,7 @@
 	require BASEPATH.'core/Controller.php';
     require BASEPATH.'core/Cafe.php';
     require BASEPATH.'core/Chocolat.php';
+    require BASEPATH.'core/The.php';
 
 	function &get_instance()
 	{
