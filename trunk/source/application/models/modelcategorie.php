@@ -95,21 +95,18 @@ class modelCategorie extends CI_Model {
 	}
 	
 	
-	public function ajouter($nom,$id) {
-		$values=array('libellecategorie'=>$nom,'surcategorie'=>$id);
+	public function ajouter($nom, $id) {
+		$values = array('libellecategorie' => $nom, 'surcategorie' => $id);
 		$this->db->insert(DB_CATEGORIE, $values);
 	}
 	
 	
 	public function supprimerCategorie($id) {
-		
 		$this->db->where('idcategorie', $id);
-		
         $this->db->delete(DB_CATEGORIE);
 	}
 	
 	public function supprimersousCategorie($id) {
-		
 		$this->db->where('surcategorie', $id);
         $this->db->delete(DB_CATEGORIE);
 	}
