@@ -38,16 +38,17 @@
 	background: transparent;
 }
 
-.categorieAllInOne form span.colorpicker {
-	border: 1px solid #999;
-	padding: 7px 5px 5px 5px;
-	margin-right: 5px;
-	font-size: 9px;
-	line-height: 12px;
+.categorieAllInOne form span.colorpicker {;
 	display: inline-block;
+	border-radius: 4px;
+	text-align: center;
+	padding: 5px 0 0 0;
+	background: red;
+	width: 27px;
+	height: 21px;
 }
 .categorieAllInOne form span.colorpicker:hover {
-	border: 1px solid #444;
+	box-shadow: 0 0 3px rgba(0,0,0,1);
 	cursor: pointer;
 }
 
@@ -55,6 +56,8 @@
 	border-radius: 0;
 	width: auto;
 	padding: 4px 8px 4px 8px;
+	margin-left: 20px;
+	border-radius: 4px;
 }
 .categorieAllInOne form.disabled input[type=submit] {
 	display: none;
@@ -64,35 +67,47 @@
 }
 
 
-a.icons {
+.icons {
 	display: inline-block;
 	height: 25px;
 	width: 25px;
 	margin-top: 4px;
 	background: no-repeat 5px 5px;
 }
-a.icons:hover {
+.icons:hover {
 	box-shadow: 0 0 3px rgba(0,0,0,0.4);
 	border-radius: 4px;
+	cursor: pointer;
 }
 
-a.icons.update {
+.icons.update {
 	background-image: url(../../images/icons/update.png);
 }
-a.icons.update:hover {
+.icons.update:hover {
 	background-image: url(../../images/icons/update_hover.png);
 }
 
-a.icons.delete {
+.icons.delete {
 	background-image: url(../../images/icons/delete.png);
 }
-a.icons.delete:hover {
+.icons.delete:hover {
 	background-image: url(../../images/icons/delete_hover.png);
 }
 
-a.icons.add {
+.icons.add {
 	background-image: url(../../images/icons/add.png);
 }
-a.icons.add:hover {
+.icons.add:hover {
 	background-image: url(../../images/icons/add_hover.png);
+}
+
+
+
+
+.picker {
+	position: absolute;
+	background: #666;
+}
+.picker span {
+	display: inline-block;
 }
