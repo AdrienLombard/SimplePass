@@ -1,8 +1,14 @@
 $("document").ready( function() {
 
+	var newCat = true;
+	var updateCat = true;
+	
 	$('.modifCat').live('click', function(){
-		var id = $(this).attr('data');
-		$('form[data='+id+']').removeClass('disabled').find('input[type=text]').removeAttr('readonly').focus();
+		if(updateCat == true) {
+			var id = $(this).attr('data');
+			$('form[data='+id+']').removeClass('disabled').find('input[type=text]').removeAttr('readonly').focus();
+			updateCat = false;
+		}
 	});
 
 /*
@@ -21,11 +27,30 @@ $('.categorieAllInOne form').live("blur", function(){
 
 
 $('.afficheNouvelleCatMere').live('click', function(){
-	$('.nouvelleCatMere').show().find('input[type=text]').focus();
+	if(newCat == true){
+		$('.nouvelleCatMere').show().find('input[type=text]').focus();
+		newCat = false;
+	}
 });
 
 $('.deleteNouvelleCatMere').live('click', function(){
 	$('.nouvelleCatMere').hide();
+	newCat = true;
+});
+
+
+$('.addCat').live('click', function(){
+	if(newCat == true){
+		var id = $(this).attr('data');
+		$('.nouvelleSousCat[data='+id+']').show();
+		newCat = false;
+	}
+});
+
+$('.removeCat').live('click', function(){
+	var id = $(this).attr('data');
+	$('.nouvelleSousCat[data='+id+']').hide();
+	newCat = true;
 });
 
 

@@ -29,16 +29,18 @@
 			
 						<td colspan="3">
 							
-							<form method="post" action="<?php echo site_url('categorie/exeAjouter') ?>">
-
-								<input type="hidden" name="couleur" />
+							<form method="post" action="<?php echo site_url('categorie/exeAjouter') ?>" data="-1">
+								
 								<input type="hidden" name="surcategorie" value="-1" />
 								
 								Nouvelle catégorie mère : <input type="text" name="nom" />
 								
-								<span class="colorpicker" init="">&nbsp;</span>
+								<span class="colorpicker" init="" colorId="-1" >
+									<input type="hidden" name="couleur" />
+									&nbsp;
+								</span>
 								
-								<div class="hide picker">
+								<div class="hide picker" colorId="-1">
 									<span ref="FF0000" style="background: #FF0000">&nbsp;</span>
 									<span ref="32CD32" style="background: #32CD32">&nbsp;</span>
 									<span ref="C71585" style="background: #C71585">&nbsp;</span>
@@ -65,6 +67,8 @@
 						<td class="icon">
 						<a href="#" class="icons delete deleteNouvelleCatMere"></a>
 						</td>
+						
+					</tr>
 					
                     <?php foreach ($resultats as $categorie): ?>
 					
@@ -74,19 +78,20 @@
 					
 					<tr>
 			
-						<td>
+						<td style="border-left: 2px solid #<?php echo $categorie['db']->couleur?>">
 							<?php if($categorie['depth'] != 0): ?>
 								&nbsp;&nbsp;<?php echo repeat('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;', $categorie['depth']-1); ?><span class="arbo">&#9492;</span>
 							<?php endif; ?>
-							<form method="post" action="#" class="disabled" data="<?php echo $categorie['db']->idcategorie?>">
+							<form method="post" action="<?php echo site_url('categorie/exeModifier'); ?>" class="disabled" data="<?php echo $categorie['db']->idcategorie?>">
 								
-								<input type="hidden" name="id" value="<?php echo $categorie['db']->idcategorie?>" />
+								<input type="hidden" name="id" value="<?php echo $categorie['db']->idcategorie ?>" />
+								<input type="hidden" name="surcategorie" value="<?php echo $categorie['db']->surcategorie?>" />
 								
+								<input type="text" name="nom" init="<?php echo $categorie['db']->libellecategorie?>" value="<?php echo $categorie['db']->libellecategorie?>" readonly />
 								
-								<input type="text" name="libelle" init="<?php echo $categorie['db']->libellecategorie?>" value="<?php echo $categorie['db']->libellecategorie?>" readonly />
-								
-								<span class="colorpicker" init="" colorId="<?php echo $categorie['db']->idcategorie?>" >
-									<input type="hidden" name="couleur" />
+								<?php if($categorie['db']->surcategorie == null): ?>
+								<span class="colorpicker" init="" colorId="<?php echo $categorie['db']->idcategorie?>" style="background: #<?php echo $categorie['db']->couleur; ?>" >
+									<input type="hidden" name="couleur" value="<?php echo $categorie['db']->couleur; ?>" />
 									&nbsp;
 								</span>
 								
@@ -107,13 +112,16 @@
 									<span ref="CD5C5C" style="background: #CD5C5C">&nbsp;</span>
 									<span ref="9ACD32" style="background: #9ACD32">&nbsp;</span>
 								</div>
+								<?php else: ?>
+								<input type="hidden" name="couleur" value="<?php echo $categorie['db']->couleur; ?>" />
+								<?php endif; ?>
 								
 								<input type="submit" value="valider" />
 							</form>
 						</td>
 						
 						<td class="icon">
-							<div class="icons add"></div>
+							<div class="addCat icons add" data="<?php echo $categorie['db']->idcategorie?>"></div>
 						</td>
 						
 						<td class="icon">
@@ -121,13 +129,36 @@
 						</td>
 						
 						<td class="icon">
-<a href="<?php echo site_url('categorie/supprimer/'.$categorie['db']->idcategorie ); ?>" class="icons delete"
+<a href="<?php echo site_url('categorie/exeSupprimer/'.$categorie['db']->idcategorie ); ?>" class="icons delete"
 confirm='Êtes-vous sûr de vouloir supprimer cette catégorie ?
 Cela entrainera la suppression de toutes ses sous-catégories.'></a>
 						</td>
 				   
 				  </tr>
-                    <?php endforeach; ?>
+				  
+				  <tr class="nouvelleSousCat" data="<?php echo $categorie['db']->idcategorie?>">
+					  
+					  <td colspan="3">
+							
+						&nbsp;&nbsp;<?php echo repeat('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;', $categorie['depth']); ?><span class="arbo">&#9492;</span>	
+						  <form method="post" action="<?php echo site_url('categorie/exeAjouter') ?>" data="<?php echo $categorie['db']->idcategorie?>">
+								
+								<input type="hidden" name="surcategorie" value="<?php echo $categorie['db']->idcategorie?>" />
+								<input type="hidden" name="couleur" value="<?php echo $categorie['db']->couleur ?>" />
+								<input type="text" name="nom" />
+								<input type="submit" value="valider" />
+								
+							</form>
+							
+						</td>
+						
+						<td class="icon">
+						<a href="#" class="icons delete removeCat" data="<?php echo $categorie['db']->idcategorie?>"></a>
+						</td>
+					  
+				  </tr>
+				  
+                  <?php endforeach; ?>
                 </tbody>
             </table>
         </div>
