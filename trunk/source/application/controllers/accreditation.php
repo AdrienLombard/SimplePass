@@ -85,7 +85,6 @@ class Accreditation extends Cafe {
 		$data=Array();
 		
 		$data['idevenement'] = $idEvenement;
-		echo $idEvenement;
 		$data['client'] = $this->modelclient->getClientParId($idClient);
 		$data['accreditation'] = $this->modelaccreditation->getAccreditationsReferentParEvenement($idClient, $idEvenement);
 		$data['pays'] = $this->modelpays->getpays();
