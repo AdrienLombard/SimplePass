@@ -2,13 +2,9 @@
 	
 }
 
-.categorieAllInOne tr:hover td {
-	background: #F3F3F3;
-	padding: 2px;
-}
-
 .categorieAllInOne td.icon {
 	width: 30px;
+	padding: 4px 6px 4px 6px;
 }
 
 .categorieAllInOne td.little {
@@ -34,9 +30,25 @@
 	width: 250px;
 	text-align: left;
 }
+.categorieAllInOne form input[type=text].error {
+	border: 2px solid #FFA07A;
+}
 .categorieAllInOne form input[type=text][readonly] {
 	border: 1px solid transparent;
 	background: transparent;
+}
+
+.categorieAllInOne form span.colorpicker {
+	border: 1px solid #999;
+	padding: 7px 5px 5px 5px;
+	margin-right: 5px;
+	font-size: 9px;
+	line-height: 12px;
+	display: inline-block;
+}
+.categorieAllInOne form span.colorpicker:hover {
+	border: 1px solid #444;
+	cursor: pointer;
 }
 
 .categorieAllInOne form input[type=submit] {
@@ -46,4 +58,41 @@
 }
 .categorieAllInOne form.disabled input[type=submit] {
 	display: none;
+}
+.categorieAllInOne form.disabled span.colorpicker {
+	display: none;
+}
+
+
+a.icons {
+	display: inline-block;
+	height: 25px;
+	width: 25px;
+	margin-top: 4px;
+	background: no-repeat 5px 5px;
+}
+a.icons:hover {
+	box-shadow: 0 0 3px rgba(0,0,0,0.4);
+	border-radius: 4px;
+}
+
+a.icons.update {
+	background-image: url(../../images/icons/update.png);
+}
+a.icons.update:hover {
+	background-image: url(../../images/icons/update_hover.png);
+}
+
+a.icons.delete {
+	background-image: url(../../images/icons/delete.png);
+}
+a.icons.delete:hover {
+	background-image: url(../../images/icons/delete_hover.png);
+}
+
+a.icons.add {
+	background-image: url(../../images/icons/add.png);
+}
+a.icons.add:hover {
+	background-image: url(../../images/icons/add_hover.png);
 }
