@@ -337,6 +337,7 @@ class Inscription extends Chocolat {
 		$accred['etataccreditation'] = ACCREDITATION_A_VALIDE;
 		$accred['fonction'] = $data['fonction'];
 		$accred['groupe'] = $data['groupe'];
+		$accred['dateaccreditation'] = time();
 		$this->modelaccreditation->ajouter($accred);
 		
 		// Ajout des membres
@@ -356,6 +357,7 @@ class Inscription extends Chocolat {
 			$accred['idclient'] = $idNewClient;
 			$accred['fonction'] = $ligne['fonction'];
 			$accred['etataccreditation'] = ACCREDITATION_A_VALIDE;
+			$accred['dateaccreditation'] = time();
 			
 			$tab = $ligne['categorie'];
 			$temp = -1;
