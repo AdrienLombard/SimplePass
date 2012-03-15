@@ -104,7 +104,16 @@ class modelZone extends MY_Model {
 						->where('idaccreditation', $idAccred)
 						->get()
 						->result();
-
+	}
+	
+	public function getZoneParAccredParEvenement ($idaccred, $idevenement) {
+		return $this->db->select('*')
+						->from(DB_PARAMETRES_EVENEMENTS. ' pe')
+						->where('az.idaccreditation', $idaccred)
+						->join(DB_ACCREDITATION_ZONES. ' az','az.idzone = pe.idzone AND pe.idevenement = '.$idevenement,'left')
+						->group_by('pe.codezone')
+						->get()
+						->result();
 	}
 	
 	public function getZoneParAccreditationMultiple ( $idAccred ) {

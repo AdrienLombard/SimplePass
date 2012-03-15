@@ -66,7 +66,7 @@ create table courchevel_categorie
 (
    idcategorie          bigint not null auto_increment,
    surcategorie         bigint,
-   libellecategorie     text not null,
+   libellecategorie     varchar(50) not null,
    couleur				varchar(6) default 'FFFFFF',
    primary key (idcategorie)
 ) engine = InnoDB, charset = utf8;
@@ -149,7 +149,7 @@ create table courchevel_zone
 
 insert into courchevel_utilisateur (login,mdp) values ('root', 'root');
 
-insert into courchevel_client (pays,nom,prenom,civilite,organisme,tel,mail) values ('CHE','ASSIER','Aymeric','M','World Company','0123456789','aymeric.assier@gmail.com');
+insert into courchevel_client (pays,nom,prenom,civilite,organisme,tel,mail,urlphoto) values ('CHE','ASSIER','Aymeric','M','World Company','0123456789','aymeric.assier@gmail.com','C:\Users\Micka\Pictures\test.jpg');
 insert into courchevel_client (pays,nom,prenom,civilite,organisme,tel,mail) values ('FRA','LOMBARD','Adrien','M','World Company','0234567891','adrien.lombard@gmail.com');
 insert into courchevel_client (pays,nom,prenom,civilite,tel,mail) values ('BEL','ARNOULD','Mickaël','M','0345678912','mickael.arnould@gmail.com');
 insert into courchevel_client (pays,nom,prenom,civilite,tel,mail) values ('FRA','FRANCHON','Sebastien','M','0456789123','seb.franchon@gmail.com');

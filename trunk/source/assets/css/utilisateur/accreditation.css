@@ -141,15 +141,13 @@
 	font-size: 16px;
 }
 .accred .listeAccred .ligneAccred span.date {
-	width: 115px;
+	width: 100px;
 }
 .accred .listeAccred .ligneAccred span.categorie {
-	min-width: 115px;
+	min-width: 105px;
 }
 .accred .listeAccred .ligneAccred span.etat {
-	width: 90px;
-	text-align: center;
-	float: right;
+	margin-left: 20px;
 }
 
 .accred .listeAccred .ligneAccred .editAccred {
