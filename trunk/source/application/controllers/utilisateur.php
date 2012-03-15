@@ -26,6 +26,10 @@ class utilisateur extends Cafe {
 			$this->layout->ajouter_css('utilisateur/login');
 			$this->layout->view('utilisateur/ULogin', $data);
 		}
+		
+		$val = hexaToRGB("FF1493");
+		
+		echo "(" . $val->red . "," . $val->green . "," . $val->blue . ")";
 	}
 	 
 	
