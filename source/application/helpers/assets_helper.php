@@ -25,7 +25,7 @@ if ( ! function_exists('img_url'))
 		if(file_exists(base_url()."assets/images/".$nom))
 			return base_url()."assets/images/".$nom;
 		else
-			return null;
+			return NULL;
 	}
 }
 
