@@ -22,7 +22,10 @@ if ( ! function_exists('img_url'))
 {
 	function img_url ($nom)
 	{
-		return base_url()."assets/images/".$nom;
+		if(file_exists(base_url()."assets/images/".$nom))
+			return base_url()."assets/images/".$nom;
+		else
+			return null;
 	}
 }
 
