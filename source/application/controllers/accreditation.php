@@ -24,7 +24,7 @@ class Accreditation extends Cafe {
 	public function index() {
 		
 		$id = $this->session->userdata('idEvenementEnCours');
-		$data['accreds'] = $this->modelaccreditation->getAccreditationsValidees($id);
+		$data['accreds'] = $this->modelaccreditation->getAccreditationsParEvenement($id);
 		$this->layout->view('utilisateur/accreditation/UAIndex', $data);
 		
 	}
@@ -46,35 +46,35 @@ class Accreditation extends Cafe {
 	 * @param int $idClient : id du client dont on veut voire les accréditation.
 	 */
 	public function voir($idClient) {
-		
+		$id = $this->session->userdata('idEvenementEnCours');
 		
 		$data = Array();
-		
+
 		// On récupère les informations sur le client.
 		$data['client'] = $this->modelclient->getClientParId($idClient);
 		$data['pays'] = $this->modelpays->getpays();
 		$data['indicatif'] = $this->modelpays->getPaysParId($data['client']->pays)->indicatiftel;
 		$data['evenements'] = $this->modelevenement->getEvenements();
 		$data['categories'] = $this->modelcategorie->getCategorieDansEvenementToutBien();
-		$data['zones'] = $this->modelzone->getZones();
+		$data['zones'] = $this->modelzone->getZoneParEvenement($id);
 		
 		$data['accredAttente'] = array();
 		$data['accredValide'] = array();
 		
-		$demandes = $this->modelaccreditation->getDemandesParClient($idClient);
-		$validees = $this->modelaccreditation->getAccreditationsValideesParClient($idClient);
+		$demandes = $this->modelaccreditation->getAccreditationsEnCourParClientParEvenement($idClient,$id);
+		$validees = $this->modelaccreditation->getAccreditationsHistoriqueParClient($idClient);
 		
 		foreach($demandes as $demande) {
 			$sortie['accred'] = $demande;
 			$sortie['allZones'] = $this->modelzone->getZoneParEvenement($demande->idevenement);
-			$sortie['zones'] = $this->modelzone->getZoneParAccreditation($demande->idaccreditation);
+			$sortie['zones'] = $this->modelzone->getZoneParAccredParEvenement($demande->idaccreditation, $demande->idevenement);
 			$data['accredAttente'][] = $sortie;
 		}
 		
 		foreach($validees as $validee) {
 			$sortie['accred'] = $validee;
 			$sortie['allZones'] = $this->modelzone->getZoneParEvenement($validee->idevenement);
-			$sortie['zones'] = $this->modelzone->getZoneParAccreditation($validee->idaccreditation);
+			$sortie['zones'] = $this->modelzone->getZoneParAccredParEvenement($validee->idaccreditation, $validee->idevenement);
 			$data['accredValide'][] = $sortie;
 		}
 		
@@ -279,7 +279,7 @@ class Accreditation extends Cafe {
 			$data['organisme'] = $this->input->post('organismeRef');
 			$data['tel']	= $this->input->post('telRef');
 			$data['mail']	= $this->input->post('mailRef');
-		$data['role']   =$this->input->post('fonctionRef');
+			$data['role']   =$this->input->post('fonctionRef');
 		
 
 	    //display_tab($this->input->post('data'));

@@ -4,7 +4,6 @@
 
     <div class="tabs">
 		<a href="<?php echo site_url('accreditation/index'); ?>" class="current">Liste</a>
-		<a href="<?php echo site_url('accreditation/demandes'); ?>">Demandes</a>
 		<a href="<?php echo site_url('accreditation/rechercher'); ?>">Ajouter</a>
     </div>
 
@@ -28,6 +27,7 @@
 						<th>Pays</th>
 						<th>Date</th>
 						<th>Catégorie</th>
+						<th>Etat</th>
 						<th></th>
 					</tr>
 					
@@ -41,6 +41,7 @@
 						<td><?php echo $accred->pays ?></td>
                         <td><?php echo display_date($accred->dateaccreditation); ?></td>
 						<td><?php echo $accred->libellecategorie; ?></td>
+						<td><?php if($accred->etataccreditation == 0) echo "validée"; else echo "demande"; ?></td>
 						<td><a href="<?php echo site_url('accreditation/voir/' . $accred->idclient); ?>">Voir</a></td>
 					</tr>
                     <?php endforeach; ?>

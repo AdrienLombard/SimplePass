@@ -58,6 +58,7 @@ class modelAccreditation extends MY_Model {
 						->join(DB_CLIENT . ' cl', 'a.idclient = cl.idclient', 'left')
 						->join(DB_CATEGORIE . ' ca', 'a.idcategorie = ca.idcategorie', 'left')
 						->where('a.idevenement', $idEvenement)
+						->Order_by('a.etataccreditation')
 						->get()
 						->result();
 	}
@@ -69,6 +70,32 @@ class modelAccreditation extends MY_Model {
 						->join(DB_CATEGORIE . ' ca', 'a.idcategorie = ca.idcategorie', 'left')
 						->join(DB_EVENEMENT . ' e', 'e.idevenement = a.idevenement')
 						->where('a.idclient', $idClient)
+						->get()
+						->result();
+	}
+	
+		public function getAccreditationsHistoriqueParClient($idClient) {
+		$current_date = time();
+		
+		return $this->db->select('*')
+						->from(DB_ACCREDITATION . ' a')
+						->join(DB_CLIENT . ' cl', 'a.idclient = cl.idclient')
+						->join(DB_CATEGORIE . ' ca', 'a.idcategorie = ca.idcategorie', 'left')
+						->join(DB_EVENEMENT . ' e', 'e.idevenement = a.idevenement')
+						->where('a.idclient', $idClient)
+						->where('e.datefin <', $current_date)
+						->get()
+						->result();
+	}
+	
+		public function getAccreditationsEnCourParClientParEvenement($idClient, $idevenement) {
+			return $this->db->select('*')
+						->from(DB_ACCREDITATION . ' a')
+						->join(DB_CLIENT . ' cl', 'a.idclient = cl.idclient')
+						->join(DB_CATEGORIE . ' ca', 'a.idcategorie = ca.idcategorie', 'left')
+						->join(DB_EVENEMENT . ' e', 'e.idevenement = a.idevenement')
+						->where('a.idclient', $idClient)
+						->where('e.idevenement', $idevenement)
 						->get()
 						->result();
 	}

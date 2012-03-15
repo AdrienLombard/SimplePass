@@ -4,7 +4,6 @@
 
     <div class="tabs">
 		<a href="<?php echo site_url('accreditation/index'); ?>">Liste</a>
-		<a href="<?php echo site_url('accreditation/demandes'); ?>">Demandes</a>
 		<a href="<?php echo site_url('accreditation/rechercher'); ?>">Ajouter</a>
 		<a href="#" class="current">Modifier</a>
     </div>
@@ -18,7 +17,7 @@
 			<?php if($accred->etataccreditation == ACCREDITATION_A_VALIDE): ?>
 			<a href="<?php echo site_url('accreditation/valider/'.$accred->idaccreditation); ?>">Valider la demande</a>
 			<?php else: ?>
-			<a href="#">Imprimer</a>
+			<a href="<?php echo site_url('impression/index/'.$accred->idclient.'/'.$accred->idaccreditation.'/'.$accred->idevenement); ?>">Imprimer</a>
 			<?php endif; ?>
 			<br>
 			<a href="<?php echo site_url('accreditation/supprimer/'.$accred->idaccreditation.'/'.$accred->idclient); ?>" confirm="Êtes-vous sûr de vouloir supprimer cette accréditation ?">Supprimer</a>
@@ -106,7 +105,7 @@
 							<div>
 								<?php foreach($zones as $zone): ?>
 								<div class="checkzone <?php echo in_array($zone->idzone, $zonesAccred)? 'on' : '' ; ?>" id="<?php echo $zone->idzone; ?>">
-									<?php echo $zone->idzone; ?>
+									<?php echo $zone->codezone; ?>
 									<input type="checkbox" name="zone[<?php echo $zone->idzone; ?>]" <?php echo in_array($zone->idzone, $zonesAccred)? 'checked' : '' ; ?> />
 								</div>
 								<?php endforeach; ?>
@@ -118,7 +117,6 @@
 					</div>
 
 					<input type="submit" class="button" id="saveAccred" value="Enregistrer" />
-
 				</form>
 
 			</div>

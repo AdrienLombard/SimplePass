@@ -4,7 +4,6 @@
 
     <div class="tabs">
 		<a href="<?php echo site_url('accreditation/index'); ?>">Liste</a>
-		<a href="<?php echo site_url('accreditation/demandes'); ?>">Demandes</a>
 		<a href="<?php echo site_url('accreditation/rechercher'); ?>">Ajouter</a>
 		<a href="#" class="current">Voir</a>
     </div>
@@ -15,7 +14,6 @@
            
             <a href="#" class="editClient">Modifier la personne</a>
 			<a href="<?php echo site_url('accreditation/nouvelle/'.$client->idclient); ?>">Nouvelle accréditation</a>
-			<a href="<?php echo site_url('impression/index'); ?>">Imprimer l'accréditation</a>
 
         </aside>
 		
@@ -77,7 +75,7 @@
 			
 			<div class="listeAccred">
 				
-				<h3>Demandes en cours</h3>
+				<h3>Accréditation en cours</h3>
 				
 				<?php if(count($accredAttente)==0) echo '<br/>Aucune demande en cours.' ?>
 				
@@ -90,6 +88,8 @@
 							<span class="date"><?php echo display_date($demande['accred']->dateaccreditation); ?></span>
 							<span class="categorie"><?php echo $demande['accred']->libellecategorie; ?></span>
 							<span class="evenement"><?php echo $demande['accred']->libelleevenement; ?></span>
+							<span class="etat"><?php if($demande['accred']->etataccreditation == 0) echo 'Val';
+														else echo 'Dem'?></span>
 						</div>
 					</a>
 					
@@ -115,7 +115,7 @@
 							Zones :
 							
 							<?php foreach($accred['zones'] as $z): ?>
-								<?php echo $z->idzone; ?> 
+								<?php echo $z->codezone; ?> 
 							<?php endforeach; ?>
 							
 						</div>

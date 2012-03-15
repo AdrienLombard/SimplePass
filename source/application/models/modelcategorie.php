@@ -1,6 +1,6 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class modelCategorie extends CI_Model {
+class modelCategorie extends MY_Model {
 	
 	public function getCategorieMere() {
 		return $this->db->select('*')
@@ -13,6 +13,15 @@ class modelCategorie extends CI_Model {
 	public function getCategories() {
 		return $this->db->select('*')
 						->from(DB_CATEGORIE )
+						->get()
+						->result();
+	}
+	
+	public function getCategoriesParIdaccred($id){
+		return $this->db->select('*')
+						->from(DB_CATEGORIE .' c')
+						->join(DB_ACCREDITATION .' a', 'c.idcategorie = a.idcategorie', 'left')
+						->where('a.idaccreditation', $id)
 						->get()
 						->result();
 	}
@@ -49,7 +58,6 @@ class modelCategorie extends CI_Model {
 						->where('idevenement',$idEvenement)
 						->get()
 						->result();
-		
 	}
 	
 	public function getCategorieDansEvenementToutBien() {
