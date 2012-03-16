@@ -124,16 +124,14 @@ class modelCategorie extends MY_Model {
 	
 	public function majCouleur() {
 		
-		$cats = $this->getCategories();
-		
-		foreach($cats as $cat) {
-			
-			$surcat = $this->getCategorieMereid($cat->surcategorie);
-			
-			// todo maj couleur
-			
+		foreach($this->getCategories() as $cat) {
+			if($cat->surcategorie != null) {
+				$surcat = $this->getCategorieMereid($cat->surcategorie);
+				$data['couleur'] = $surcat[0]->couleur;
+				$this->modifier($cat->idcategorie, $data);
+			}
 		}
-
+		
 	}
 	
 	
