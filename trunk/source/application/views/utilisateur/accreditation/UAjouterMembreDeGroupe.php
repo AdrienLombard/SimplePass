@@ -2,22 +2,28 @@
 
 	$(document).ready(function(){
 
-	var nbLigne = 1;
-	$('a.ajoutNbPersonne').click(function(){
-		var pattern = $('#zoneNouvellesPersonnes').html().replace(/nbLigne/g, nbLigne);
-		var tableau = $('#tableau').html().replace(/nbLigne/g, nbLigne);
-		if(nbLigne==1)
-			{
-				
-				$('#insererligne').append('<Label>Référent</Label>');
-				$('#insererligne').append(tableau);
-			}
-			else{
-		          $('#insererligne').append(pattern);
-			    }
+	var nbLigne = 0;
+	
+	$('.ajoutNbPersonne').click(function(){
+		
+		var insert = '<table id="tableauPersonne">';
+		insert +=		'<tr>';
+		insert +=			'<td>Nom : <input type="text" id="nom" name="personne[nbLigne][nom]"  /></td>';
+		insert +=			'<td>Prénom : <input type="text" id="prenom" name="personne[nbLigne][prenom]" /></td>';
+		insert +=			'<td>Fonction : <input type="text" id="fonction" name="personne[nbLigne][fonction]" /></td>';
+		insert +=		'</tr>'
+		insert +=	'</table>';
+		
+		var pattern = insert.replace(/nbLigne/g, nbLigne);
+		$('#insererligne').append(pattern);
+		
 		nbLigne++;
 		
 	});
+	
+	
+	
+	
 	$('#imprimer').live('click', function(){
 		
 		// récupère le parent : div.form
@@ -79,41 +85,36 @@
 						<h2> Informations générales </h2>
 						
 						<div>
-							<label>Nom de la société : </label>
-							<input type="text" name="nomsociete" value="" class="nom" value="" style="text-transform: uppercase" />
+							<label>Groupe : </label>
+							<input type="text" name="info[groupe]" value="" class="nom" value="" />
+						</div>
+						
+						<div>
+							<label>Société : </label>
+							<input type="text" name="info[societe]" value="" class="nom" value="" />
 						</div>
 
 						<div>
 							<label>Tel : </label>
-							<input type="text" name="tel" class="tel" value=""  />
+							<input type="text" name="info[tel]" class="tel" value=""  />
+						</div>
+						
+						<div>
+							<label>mail : </label>
+							<input type="text" name="info[mail]" class="mail" value=""  />
 						</div>
 						
 						
 						<div>
 							
 							<label>Pays : </label>
-							<select class="pays" name="pays" style="padding-left: 0px;">
+							<select class="pays" name="info[pays]" style="padding-left: 0px;">
 
 							<?php foreach($pays as $p): ?>
 								<option value="<?php echo $p->idpays; ?>" <?php echo ($p->idpays == 'FRA')? 'selected' : '' ;?> style="background: url(<?php echo img_url('drapeaux/'.strtolower($p->idpays).'.gif'); ?>) no-repeat left;"><?php echo $p->nompays; ?></option>
 							<?php endforeach; ?>
 
 							</select>
-						</div>
-						
-                        <div>
-							<label>Nombre des personnes : </label>			
-							<input type="text" name="nbpersonne" class="personne"  />
-						</div>
-                         
-						
-						<br><br>
-						
-						<h2>Accréditation</h2>
-
-						<div>
-							<label>Fonction : </label>
-							<input type="text" name="fonction"/>
 						</div>
 
 						<div>
@@ -143,35 +144,43 @@
 						<div class="clear"></div>
 						
 					</div>
+
+					<h2>Référent</h2>
+
+					<table id="tableauReferent">
+						<tr>
+							<td>Nom : <input type="text" id="nom" name="ref[nom]"  /></td>
+							<td>Prénom : <input type="text" id="prenom" name="ref[prenom]" /></td>
+							<td>Fonction : <input type="text" id="fonction" name="ref[fonction]" /></td>
+						</tr>
+					</table>
 					
-		<div class="hidden" id="zoneNouvellesPersonnes">
-			<div class="ligne" data="nbLigne" etat="false">
-				<div id="toggle1"><h4> Nouvelle personne</h4></div>
-				    <table id="tableau">
+					<br><br>
+					
+					<h2>Personnes</h2>
+					
+					<div id="insererligne"></div>
+					
+					<!--
+				    <table id="tableauPersonne">
 						<tr>
-							<th>
-								<label>Nom: </label>
-							</th>
-							<th>
-								<label>Prenom: </label>
-							</th>
-							
+							<td>Nom : <input type="text" id="nom" name="personne[nbLigne][nom]"  /></td>
+							<td>Prénom : <input type="text" id="prenom" name="personne[nbLigne][prenom]" /></td>
+							<td>Fonction : <input type="text" id="fonction" name="personne[nbLigne][fonction]" /></td>
 						</tr>
-						<tr>
-							<td>
-								<input style="height:20px; width:150px" type="text" id="nom" name="nompersonne[nbLigne][nom]"  />
-							</td>
-							<td>
-								<input style="height:20px; width:150px" type="text" id="prenom" name="prenompersonne[nbLigne][prenom]" />
-							</td>
-						</tr>
-					</table>	
-						 </div>
-					</div>
-				<div id="insererligne"></div>
-				<a href="#" class ="button ajoutNbPersonne">+Ajouter une nouvelle personne </a>
+					</table>
+					-->
+
+					<span class="button ajoutNbPersonne">+</span>
+				
 				</form>
-		<a href="<?php echo site_url('impression/index'); ?>" class ="button imprimer">Imprimer </a>		
+				
+				<br>
+				
+				<div style="text-align: right">
+					<a href="<?php echo site_url('impression/index'); ?>" class ="button imprimer">Valider</a>
+					<a href="<?php echo site_url('impression/index'); ?>" class ="button imprimer">Valider et imprimer</a>
+				</div>
 
 			</div>
 	
