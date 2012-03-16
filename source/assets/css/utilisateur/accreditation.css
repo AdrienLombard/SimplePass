@@ -298,3 +298,20 @@ div.inputs {
 form#editAccredRealTime input[type=text][readonly], form#editAccredRealTime select[disabled] {
 	border: 1px solid #FFF;
 }
+
+
+/* ajout de groupe */
+#tableauReferent td, #tableauPersonne td  {
+	font-size: 12px;
+}
+#tableauReferent input[type=text], #tableauPersonne input[type=text] {
+	width: 208px;
+	display: block;
+	margin-right: 10px;
+}
+
+#tableauPersonne {
+	padding-bottom: 10px;
+	margin-top: 5px;
+	border-bottom: 1px dashed #CCC;
+}
