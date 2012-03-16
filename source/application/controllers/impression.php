@@ -42,14 +42,14 @@ class Impression extends The {
 			$pdf->Image(img_url('ombre.jpg'), 25, 17);
 		}
 			
-		$pdf->Text(25, 73, $accred->nom);
-		$pdf->Text(55, 73, $accred->prenom);
-		$pdf->Image(img_url('drapeaux/'.$client->pays.'.gif'), 25, 74);
-		$pdf->Text(35, 77, $client->pays);
+		$pdf->Text(25, 73, utf8_decode($accred->nom));
+		$pdf->Text(55, 73, utf8_decode($accred->prenom));
+		$pdf->Image(img_url('drapeaux/'.utf8_decode($client->pays).'.gif'), 25, 74);
+		$pdf->Text(35, 77, utf8_decode($client->pays));
 		$pdf->SetFillColor($couleur->red,$couleur->green,$couleur->blue);
 		$pdf->Rect(25, 78, 50, 5, 'DF');
-		$pdf->Text(30, 82, $accred->libellecategorie);
-		$pdf->Text(30, 87, $client->organisme);
+		$pdf->Text(30, 82, utf8_decode($accred->libellecategorie));
+		$pdf->Text(30, 87, utf8_decode($client->organisme));
 		$pdf->Text(30, 91, "Facultatif");
 		
 		$pdf->SetFont('helvetica', '', 18);
