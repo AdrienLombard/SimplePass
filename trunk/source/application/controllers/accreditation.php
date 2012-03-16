@@ -176,6 +176,13 @@ class Accreditation extends Cafe {
 		
 	}
 	
+	public function rechercherReferent() {
+		
+		$this->load->model('modelclient');
+		$data['referents'] = $this->modelclient->getReferents();
+		$this->layout->view('utilisateur/accreditation/UAjouterGroupe', $data);
+		
+	}
 	public function ajouter() {
 	
 		/*
@@ -214,10 +221,49 @@ class Accreditation extends Cafe {
 			foreach($catZones as $cz) $push['zones'] .= $cz->idzone.'-';
 			$data['categories'][] = $push;
 		}
-		
-		$this->layout->view('utilisateur/accreditation/UAAjout', $data);
-		
 	}
+	
+		public function ajouterGroupe() {
+	
+		/*
+		 * Traitement du nom et du prénom : répercusion depuis la recherche
+		*/
+		$username = $this->input->post('username');
+		$username = explode(' ', $username);
+		
+		$data['nom'] = '';
+		$data['prenom'] = '';
+		
+		if(count($username)>0) {
+			$data['nom'] = array_shift($username);
+			$data['prenom'] = implode(' ', $username);
+		}
+		else
+			$data['nom'] = $username;
+		
+		/*
+		 * Liste de zone et pays
+		 */
+		
+		$data['zones'] = $this->modelzone->getZoneParEvenement($this->session->userdata('idEvenementEnCours'));
+		$data['pays'] = $this->modelpays->getPays();
+		
+		/*
+		 * Liste des catégories avec les zones associées
+		 */
+		$cats = $this->modelcategorie->getCategorieDansEvenement($this->session->userdata('idEvenementEnCours'));
+		foreach($cats as $cat) {
+			$push = array();
+			$push['cat'] = $cat;
+			$push['zones'] = '';
+			$catZones = $this->modelzone->getZoneParCategorieEtEvenement($cat->idcategorie, $this->session->userdata('idEvenementEnCours'));
+			foreach($catZones as $cz) $push['zones'] .= $cz->idzone.'-';
+			$data['categories'][] = $push;
+		}
+		$this->layout->view('utilisateur/accreditation/UAjouterMembreDeGroupe', $data);
+		}
+	
+	
 	
 	public function exeAjouter() {
 		
@@ -450,9 +496,6 @@ class Accreditation extends Cafe {
 		$client['pays'] = $this->input->post('pays');
 		$client['tel'] = $this->input->post('tel');
 		$client['mail'] = $this->input->post('mail');
-		
-		$this->modelclient->modifier($idClient, $client);
-		
 		$idAccred = $this->input->post('idAccred');
 		$accred = array();
 		$accred['idclient'] = $idClient;
@@ -485,12 +528,9 @@ class Accreditation extends Cafe {
 		/*
 		 * Client et liste de zone et pays
 		 */
-		
 		$data['client'] = $this->modelclient->getClientParId($idClient);
 		$data['zones'] = $this->modelzone->getZoneParEvenement($this->session->userdata('idEvenementEnCours'));
 		$data['pays'] = $this->modelpays->getPays();
-
-		
 		/*
 		 * Liste des catégories avec les zones associées
 		 */
@@ -544,9 +584,63 @@ class Accreditation extends Cafe {
 	public function valider ($idAccreditation ) {
 		
 		$this->modelaccreditation->valideraccreditation( $idAccreditation );
-				
+			$data['zones'] = $this->modelzone->getZoneParEvenement($this->session->userdata('idEvenementEnCours'));
+
+		
 		$this->load->helper('url');
 		redirect('accreditation/modifier/' . $idAccreditation); 
 		
+	}
+	
+	
+	public function AjouterGroupeUtilisateur() {	
+		
+	    echo $this->input->post('nomsociete');
+		$membre['tel']=$this->input->post('tel');
+		$membre['pays']=$this->input->post('pays');
+		$membre['categorie']=$this->input->post('categorie');
+		$var=$this->input->post('nomsociete');
+		
+		//display_tab($membre);
+		foreach($this->input->post('nompersonne') as $ligne) {
+			// création du client
+			$membre = null;
+			$membre['nom'] = $ligne['nom'];
+			$membre['prenom'] = $ligne['prenom'];
+			$idNewClient = $this->modelclient->ajouter($membre);
+
+			// création de l'accreditation
+			$accred = null;
+			$accred['groupe'] = $data['groupe'];
+			$accred['idevenement'] = $this->input->post('evenement');
+			$accred['idclient'] = $idNewClient;
+			$accred['fonction'] = $ligne['fonction'];
+			$accred['referent'] = $id;
+			$accred['etataccreditation'] = ACCREDITATION_A_VALIDE;
+			$accred['dateaccreditation'] = time();
+     		$data['pays'] = $this->modelpays->getPays();
+		
+		/*
+		 * Liste des catégories avec les zones associées
+		 */
+		$cats = $this->modelcategorie->getCategorieDansEvenement($this->session->userdata('idEvenementEnCours'));
+		foreach($cats as $cat) {
+			$push = array();
+			$push['cat'] = $cat;
+			$push['zones'] = '';
+			$catZones = $this->modelzone->getZoneParCategorieEtEvenement($cat->idcategorie, $this->session->userdata('idEvenementEnCours'));
+			foreach($catZones as $cz) $push['zones'] .= $cz->idzone.'-';
+			$data['categories'][] = $push;
+		}
+			$tab = $ligne['categorie'];
+			$temp = -1;
+			while($temp == -1) {
+				$temp = array_pop($tab);
+			}
+			$accred['idcategorie'] = $temp;
+			$this->modelaccreditation->ajouter($accred);
+		}	
+		$this->layout->view('utilisateur/accreditation/UAjouterMembreDeGroupe',$membre);
+
 	}
 }
