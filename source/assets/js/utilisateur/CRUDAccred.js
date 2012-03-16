@@ -103,4 +103,8 @@ $(document).ready(function(){
 		$('#editAccredRealTime input[type=checkbox]').removeAttr('disabled');
 	});
 	
+	
+	
+	
+	
 });

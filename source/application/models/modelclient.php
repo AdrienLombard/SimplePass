@@ -29,6 +29,15 @@ class modelClient extends MY_Model {
 							->result();
 	}
 	
+	public function getReferents() {
+		
+		return $this->db->select('*')
+							->from(DB_CLIENT )
+							->where('referent',NULL)
+							->get()
+							->result();
+		
+	}
 	
 	/*
 	 * CREATE

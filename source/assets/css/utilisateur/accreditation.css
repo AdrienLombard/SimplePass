@@ -80,6 +80,10 @@
 .accred .client .infos input.tel {
 	margin-top: 5px;
 }
+
+.accred .client .infos input.nbpersonne {
+	margin-top: 5px;
+}
 .accred .client .infos .valideInfos {
     background: #999;
 	box-shadow: 0 0 0;
@@ -190,10 +194,6 @@
 	font-size: 16px;
 	padding-top: 10px;
 }
-
-
-
-
 
 /*
  * RECHERCHE CLIENT POUR AJOUT

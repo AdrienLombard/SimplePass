@@ -4,7 +4,8 @@
 
     <div class="tabs">
 		<a href="<?php echo site_url('accreditation/index'); ?>">Liste</a>
-		<a href="<?php echo site_url('accreditation/rechercher'); ?>" class="current">Ajouter</a>
+		<a href="<?php echo site_url('accreditation/rechercher'); ?>" class="current">Ajouter personne</a>
+		<a href="<?php echo site_url('accreditation/ajouterGroupe'); ?>" class="current">Ajouter groupe</a>
     </div>
 
     <div class="box-full">
@@ -31,7 +32,7 @@
 					
 				</div>
 				
-				<input type="submit" value="Personne ne correspond ? Créer une nouvelle personne" />
+				<input type="submit" value="Personne ne correspond ? Créer un nouveau personne " />
 				
 			</form>
 			
