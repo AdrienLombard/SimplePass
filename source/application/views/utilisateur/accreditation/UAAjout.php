@@ -10,7 +10,7 @@
     <div class="box-full">
 
         <aside>
-			<a href="#">Retour</a>
+			<a href="<?php echo site_url('accreditation/index'); ?>">Retour</a>
         </aside>
 		
 		<div id="main" class="accred">
@@ -99,6 +99,12 @@
 								<?php endforeach; ?>
 							</div>
 						</div>
+												
+						<div>
+							<label> Mode All-Accees : </label>
+							<input type="checkbox" id="all" name="allAccess" />
+						</div>
+						
 
 						<div class="clear"></div>
 						

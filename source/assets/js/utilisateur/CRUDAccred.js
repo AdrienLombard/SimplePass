@@ -64,6 +64,22 @@ $(document).ready(function(){
 	});
 	
 	/*
+	 * Auto check des zones a la coche de la catégorie all accees.
+	 */
+	$('#all').change( function() {
+		$('.checkzone').removeClass('on').find('input').removeAttr('checked');
+		if($('#all').attr('checked') == 'checked') {
+			$('.checkzone').toggleClass('on').find('input').attr('checked', 'checked');
+		}
+		else {
+			var zones = $('select[name=categorie]').find('option:selected').attr('zone').split('-');
+			$.each(zones, function(k, v){
+				$('.checkzone[id='+v+']').toggleClass('on').find('input').attr('checked', 'checked');
+			});
+		}
+	});
+	
+	/*
 	 * Auto check des zone au changement de catégorie pour l'accréditation des groupes
 	 */
 	$('select[id=categorieGroupe]').change(function(){
@@ -84,6 +100,7 @@ $(document).ready(function(){
 		$('#editAccredRealTime input[type=text]').removeAttr('readonly');
 		$('#editAccredRealTime select').removeAttr('disabled');
 		$('#editAccredRealTime #saveAccred').show();
+		$('#editAccredRealTime input[type=checkbox]').removeAttr('disabled');
 	});
 	
 });

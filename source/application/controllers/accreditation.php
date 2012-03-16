@@ -237,6 +237,7 @@ class Accreditation extends Cafe {
 		$accred['fonction'] = $this->input->post('fonction');
 		$accred['etataccreditation'] = ACCREDITATION_VALIDE;
 		$accred['dateaccreditation'] = time();
+		$accred['allaccess'] = ($this->input->post('allAccess'))? ALL_ACCESS : NON_ALL_ACCESS;
 		$this->modelaccreditation->ajouter($accred);
 		
 		$idAccred = $this->modelaccreditation->lastId();
@@ -457,10 +458,21 @@ class Accreditation extends Cafe {
 		$accred['idclient'] = $idClient;
 		$accred['idcategorie'] = $this->input->post('categorie');
 		$accred['fonction'] = $this->input->post('fonction');
+		$accred['allaccess'] = ($this->input->post('allAccess'))? ALL_ACCESS : NON_ALL_ACCESS;
 		
 		$this->modelaccreditation->modifier($idAccred, $accred);
 		
-		// todo : modif zones
+		// modification des zone.
+		$this->modelzone->supprimerZoneParAccreditation($idAccred);
+		
+		$values = array();
+		foreach( $this->input->post('zone') as $key => $value ) {
+			
+			$values[] = array('idaccreditation' => $idAccred, 'idzone' => $key);
+		}
+		
+		$this->modelzone->ajouterZonesAccreditation($values);
+		
 		
 		$this->load->helper('url');
 		redirect('accreditation/modifier/' . $idAccred);

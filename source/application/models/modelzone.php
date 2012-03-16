@@ -154,6 +154,9 @@ class modelZone extends MY_Model {
 		return $this->db->insert(DB_ACCREDITATION_ZONES, array('idaccreditation' => $idAccreditation, 'idzone' => $idZone));
 	}
 	
+	public function ajouterZonesAccreditation( $values ) {
+		return $this->db->insert_batch(DB_ACCREDITATION_ZONES, $values);
+	}
 	
 	public function ajouter( $libelle ) {
 		return $this->db->insert(DB_ZONE, array('libellezone' => $libelle) );

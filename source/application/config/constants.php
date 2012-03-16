@@ -43,6 +43,8 @@ define('FOPEN_READ_WRITE_CREATE_STRICT',		'x+b');
 define('ACCREDITATION_A_VALIDE', 1);
 define('ACCREDITATION_VALIDE', 0);
 
+define('NON_ALL_ACCESS', 0);
+define('ALL_ACCESS', 1);
 
 /*
  * Nom des tables de la bdd.
