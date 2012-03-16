@@ -585,8 +585,7 @@ class Accreditation extends Cafe {
 		
 		$this->modelaccreditation->valideraccreditation( $idAccreditation );
 			$data['zones'] = $this->modelzone->getZoneParEvenement($this->session->userdata('idEvenementEnCours'));
-
-		
+	
 		$this->load->helper('url');
 		redirect('accreditation/modifier/' . $idAccreditation); 
 		
