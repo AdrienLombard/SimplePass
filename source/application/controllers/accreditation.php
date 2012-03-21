@@ -644,4 +644,75 @@ class Accreditation extends Cafe {
 		$this->layout->view('utilisateur/accreditation/UAjouterMembreDeGroupe',$membre);
 
 	}
+	
+	
+	public function exeAjoutGroupe() {
+		
+		$info = $this->input->post('info');
+		$ref = $this->input->post('ref');
+		$personnes = $this->input->post('personne');
+		$zones = $this->input->post('zone');
+		
+		// ajout du référent
+		$ref['pays'] = $info['pays'];
+		$ref['tel'] = $info['tel'];
+		$ref['organisme'] = $info['societe'];
+		$ref['mail'] = $info['mail'];
+		$fonction = $ref['fonction'];
+		unset($ref['fonction']);
+		$this->modelclient->ajouter($ref);
+		$id = $this->modelclient->lastId();
+		
+		// ajout de son accred
+		$aref = array();
+		$aref['idclient'] = $id;
+		$aref['idcategorie'] = $info['categorie'];
+		$aref['idevenement'] = $this->session->userdata('idEvenementEnCours');
+		$aref['fonction'] = $fonction;
+		$aref['groupe'] = $info['groupe'];
+		$aref['dateaccreditation'] = time();
+		$this->modelaccreditation->ajouter($aref);
+		$idAccredRef = $this->modelaccreditation->lastId();
+
+		// ajout des zones
+		$this->modelzone->supprimerZoneParAccreditation($idAccredRef);
+		$values = array();
+		foreach($zones as $key => $value )
+			$values[] = array('idaccreditation' => $idAccredRef, 'idzone' => $key);
+		$this->modelzone->ajouterZonesAccreditation($values);
+
+		// boucle personnes
+		foreach($personnes as $p) {
+			
+			// création du client
+			$p['pays'] = $info['pays'];
+			$p['organisme'] = $info['societe'];
+			$fonction = $p['fonction'];
+			unset($p['fonction']);
+			$this->modelclient->ajouter($p);
+			$pid = $this->modelclient->lastId();
+			
+			// ajout de l'accred
+			$ap = array();
+			$ap['idclient'] = $pid;
+			$ap['idcategorie'] = $info['categorie'];
+			$ap['idevenement'] = $this->session->userdata('idEvenementEnCours');
+			$ap['fonction'] = $fonction;
+			$ap['groupe'] = $info['groupe'];
+			$ap['referent'] = $id;
+			$ap['dateaccreditation'] = time();
+			$this->modelaccreditation->ajouter($ap);
+			$idap = $this->modelaccreditation->lastId();
+			
+			// ajout des zones
+			$this->modelzone->supprimerZoneParAccreditation($idap);
+			$values = array();
+			foreach($zones as $key => $value )
+				$values[] = array('idaccreditation' => $idap, 'idzone' => $key);
+			$this->modelzone->ajouterZonesAccreditation($values);
+		}
+		
+		$this->load->helper('url');
+		redirect('accreditation/index');
+	}
 }
