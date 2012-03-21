@@ -21,18 +21,20 @@
         	
 			<div class="client">
 				
+				<form class="infos" method="post" action="<?php echo site_url('accreditation/exeModifierClient'); ?>" enctype="multipart/form-data">
+					
+				<input type="file" name="photo_file" id="photo_file" />
+				
 				<div class="photo">
 					
 					<div class="simulPhoto"></div>
 					
 					<div class="optionPhoto">
-						<a href="#">FICHIER</a>
+						<a href="#" class="uploadFichier">FICHIER</a>
 						<a href="#">WEBCAM</a>
 					</div>
 					
 				</div>
-				
-				<form class="infos" method="post" action="<?php echo site_url('accreditation/exeModifierClient'); ?>">
 					
 					<input type="hidden" name="id" value="<?php echo $client->idclient; ?>" />
 					

@@ -304,11 +304,8 @@ class Accreditation extends Cafe {
 		$data['mail']	= $this->input->post('mail');
 		$message['message']= 'Votre l accreditation  de client  à bien été modifié.';
 		$this->modelclient->modifier($id, $data);
-		$message['titre']		= 'Modification';
-		$message['redirect'] 	= 'accreditation/liste';
-		$this->layout->view('utilisateur/UMessage', $message);
-		$this->load->helper('url');
-		redirect('accreditation/voir/' . $id);
+
+		$this->upload($id);
 		
 	}
 	
@@ -712,5 +709,42 @@ class Accreditation extends Cafe {
 		
 		$this->load->helper('url');
 		redirect('accreditation/index');
+	}
+	
+	
+	/*
+	 * Upload
+	 * Recoit la photo à mettre à jours
+	 */
+	public function upload($id)
+	{
+		$config['upload_path'] = './assets/images/photos/';
+		$config['allowed_types'] = 'jpg';
+		$config['max_size']	= '4000';
+		$config['max_width']  = '1024';
+		$config['max_height']  = '768';
+		$config['file_name'] = $id.".jpg";
+		$config['overwrite'] = true;
+		
+		$this->load->library('upload', $config);
+		$this->upload->do_upload('photo_file');
+		$data = $this->upload->data();
+		
+		$this->load->helper('url');
+		
+		if($data['image_width'] == IMG_WIDTH && $data['image_height'] == IMG_HEIGHT) {
+			
+			$update['urlphoto'] = $data['full_path'];
+			$client = $this->modelclient->modifier($id, $update);
+			redirect('accreditation/voir/' . $id);
+			
+		} else {
+			
+			// todo : crop
+			$update['urlphoto'] = $data['full_path'];
+			$client = $this->modelclient->modifier($id, $update);
+			redirect('accreditation/voir/' . $id);
+			
+		}
 	}
 }
