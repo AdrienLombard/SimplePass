@@ -65,7 +65,7 @@
         	
 			<div class="client nouveau">
 				
-				<form class="infos nouveau" method="post" action="<?php echo site_url('accreditation/AjouterGroupeUtilisateur'); ?>">
+				<form class="infos nouveau" method="post" action="<?php echo site_url('accreditation/exeAjoutGroupe'); ?>">
 					
 					<input type="hidden" name="evenement" value="<?php echo $this->session->userdata('idEvenementEnCours'); ?>"/>
 
@@ -100,7 +100,7 @@
 						</div>
 						
 						<div>
-							<label>mail : </label>
+							<label>Mail : </label>
 							<input type="text" name="info[mail]" class="mail" value=""  />
 						</div>
 						
@@ -119,7 +119,7 @@
 
 						<div>
 							<label>Catégorie : </label>
-							<select name="categorie">
+							<select name="info[categorie]">
 								<option value="">---</option>
 								<?php foreach($categories as $categorie): ?>
 								<option value="<?php echo $categorie['cat']->idcategorie; ?>" zone="<?php echo $categorie['zones']; ?>">
@@ -160,27 +160,16 @@
 					<h2>Personnes</h2>
 					
 					<div id="insererligne"></div>
-					
-					<!--
-				    <table id="tableauPersonne">
-						<tr>
-							<td>Nom : <input type="text" id="nom" name="personne[nbLigne][nom]"  /></td>
-							<td>Prénom : <input type="text" id="prenom" name="personne[nbLigne][prenom]" /></td>
-							<td>Fonction : <input type="text" id="fonction" name="personne[nbLigne][fonction]" /></td>
-						</tr>
-					</table>
-					-->
 
 					<span class="button ajoutNbPersonne">+</span>
+					
+					<br>
+				
+					<div style="text-align: right">
+						<input type="submit" value="Valider" />
+					</div>
 				
 				</form>
-				
-				<br>
-				
-				<div style="text-align: right">
-					<a href="<?php echo site_url('impression/index'); ?>" class ="button imprimer">Valider</a>
-					<a href="<?php echo site_url('impression/index'); ?>" class ="button imprimer">Valider et imprimer</a>
-				</div>
 
 			</div>
 	
