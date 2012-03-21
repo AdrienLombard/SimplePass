@@ -19,7 +19,7 @@ class Impression extends The {
 	}
 
 
-	public function index($idclient, $idaccred, $idevenement) {
+	public function index($idclient, $idaccred, $idevenement, $facult='') {
 		
 		//$this->layout->view('utilisateur/accreditation/UAImprimer');
 		
@@ -30,6 +30,8 @@ class Impression extends The {
 		$accred = $this->modelaccreditation->getAccreditationParId($idaccred);
 		$zones = $this->modelzone->getZoneParAccredParEvenement ($idaccred, $idevenement);
 		$couleur = hexaToRGB($accred->couleur);
+		$facult = str_replace('%20', ' ', $facult);
+		$indice = 0;
 		
 		$pdf = new phpToPDF();
 		$pdf->AddPage();
@@ -48,9 +50,13 @@ class Impression extends The {
 		$pdf->Text(35, 78, utf8_decode($client->pays));
 		$pdf->SetFillColor($couleur->red,$couleur->green,$couleur->blue);
 		$pdf->Rect(25, 79, 50, 5, 'DF');
-		$pdf->Text(30, 83, utf8_decode($accred->libellecategorie));
-		$pdf->Text(30, 88, utf8_decode($client->organisme));
-		$pdf->Text(30, 92, "Facultatif");
+		$pdf->Text(27, 83, utf8_decode($accred->libellecategorie));
+		if($facult != ''){
+			$pdf->Text(25, 88, utf8_decode($facult));
+			$indice = $indice + 4;
+		}
+		$pdf->Text(25, 88 + $indice, utf8_decode($client->organisme));
+		
 		
 		$pdf->SetFont('helvetica', '', 15);
 		$nb = count($zones);
@@ -68,7 +74,7 @@ class Impression extends The {
 		
 	}
 	
-	public function impcarte($idclient, $idaccred, $idevenement){
+	public function impcarte($idclient, $idaccred, $idevenement, $facult=''){
 		//$this->layout->view('utilisateur/accreditation/UAImprimer');
 		
 		include("phpToPDF.php");
@@ -78,6 +84,8 @@ class Impression extends The {
 		$accred = $this->modelaccreditation->getAccreditationParId($idaccred);
 		$zones = $this->modelzone->getZoneParAccredParEvenement ($idaccred, $idevenement);
 		$couleur = hexaToRGB($accred->couleur);
+		$facult = str_replace('%20', ' ', $facult);
+		$indice = 0;
 		
 		$pdf = new phpToPDF();
 		$pdf->AddPage();
@@ -96,8 +104,11 @@ class Impression extends The {
 		$pdf->SetFillColor($couleur->red,$couleur->green,$couleur->blue);
 		$pdf->Rect(58, 35, 44, 6, 'DF');
 		$pdf->Text(60, 40, utf8_decode($accred->libellecategorie));
-		$pdf->Text(58, 46, utf8_decode($client->organisme));
-		$pdf->Text(58, 52, "Facultatif");
+		if($facult != ''){
+			$pdf->Text(58, 46, $facult);
+			$indice = $indice + 6;
+		};
+		$pdf->Text(58, 46 + $indice, utf8_decode($client->organisme));
 		$zonetxt = '- ';
 		foreach($zones as $z){
 			$zonetxt = $zonetxt.$z->codezone.' - ';
