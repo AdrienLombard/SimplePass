@@ -17,6 +17,11 @@ $(document).ready(function(){
 		}
 	});
 	
+	$('#imprimerCarte').click(function() {
+		if($('#facultatif').find('input').attr('value').length > 0) {
+			$(this).attr('href', $(this).attr('href')+'/'+$('#facultatif').find('input').attr('value'));
+		}
+	});
 	
 	/*
 	 * Recherche de personne dans 'ajouter'
