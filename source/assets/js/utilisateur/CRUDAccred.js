@@ -12,8 +12,8 @@ $(document).ready(function(){
 	 * Popup pour l'impression.
 	 */
 	$('#imprimer').click(function() {
-		if($('#facultatif').find('input').attr('value').lenght > 0) {
-			$(this).attr('href', attr('href')+$('#facultatif').find('input').attr('value'))
+		if($('#facultatif').find('input').attr('value').length > 0) {
+			$(this).attr('href', $(this).attr('href')+'/'+$('#facultatif').find('input').attr('value'));
 		}
 	});
 	
