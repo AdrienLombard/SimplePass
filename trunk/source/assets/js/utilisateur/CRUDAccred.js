@@ -128,7 +128,13 @@ $(document).ready(function(){
 	});
 	
 	
-	
+	/*
+	 * upload fichier
+	 */
+	$('#photo_file').css('opacity', 0).css('position', 'absolute');
+	$('.uploadFichier').live('click', function(){
+		$('#photo_file').trigger('click');
+	})
 	
 	
 });

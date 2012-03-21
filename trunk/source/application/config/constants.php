@@ -60,5 +60,11 @@ define('DB_UTILISATEUR',			'courchevel_utilisateur');
 define('DB_ZONE',					'courchevel_zone');
 define('DB_ZONES_ACCREDITATION', 	'courchevel_accreditation_zones');
 
+/*
+ * DIMENSIONS DES IMAGES
+ */
+define('IMG_WIDTH', 160);
+define('IMG_HEIGHT', 204);
+
 /* End of file constants.php */
 /* Location: ./application/config/constants.php */
