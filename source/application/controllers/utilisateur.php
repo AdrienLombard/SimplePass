@@ -95,6 +95,15 @@ class utilisateur extends Cafe {
 		redirect(str_replace('__', '/', $url));
 		
 	}
+
+	public function test() {
+		
+		$this->layout->ajouter_js('test');
+		
+		$this->layout->view('test.php');
+	}
+	
+	
 }
 
 /* End of file utilisateur.php */
