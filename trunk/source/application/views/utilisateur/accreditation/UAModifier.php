@@ -83,11 +83,6 @@
 						<h2>Accréditation</h2>
 						
 						<input type="hidden" name="idAccred" value="<?php echo $accred->idaccreditation; ?>" />
-						
-						<div id="facultatif" >
-							<label>Champ facultatif : </label>
-							<input type="text" name="facultatif" maxlength="23"/>
-						</div>
 
 						<div>
 							<label>Fonction : </label>

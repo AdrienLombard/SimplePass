@@ -12,15 +12,25 @@ $(document).ready(function(){
 	 * Popup pour l'impression.
 	 */
 	$('#imprimer').click(function() {
-		if($('#facultatif').find('input').attr('value').length > 0) {
-			$(this).attr('href', $(this).attr('href')+'/'+$('#facultatif').find('input').attr('value'));
+		// if($('#facultatif').find('input').attr('value').length > 0) {
+			// $(this).attr('href', $(this).attr('href')+'/'+$('#facultatif').find('input').attr('value'));
+		// }
+		var facultatif = prompt("Votre texte pour le champs facultatif : ", "");
+		if (facultatif != null) {
+			$(this).attr('href', $(this).attr('href')+'/'+facultatif);
 		}
+		
 	});
 	
 	$('#imprimerCarte').click(function() {
-		if($('#facultatif').find('input').attr('value').length > 0) {
-			$(this).attr('href', $(this).attr('href')+'/'+$('#facultatif').find('input').attr('value'));
+		// if($('#facultatif').find('input').attr('value').length > 0) {
+			// $(this).attr('href', $(this).attr('href')+'/'+$('#facultatif').find('input').attr('value'));
+		// }
+		var facultatif = prompt("Votre texte pour le champs facultatif : ", "");
+		if (facultatif != null) {
+			$(this).attr('href', $(this).attr('href')+'/'+facultatif);
 		}
+		
 	});
 	
 	/*
