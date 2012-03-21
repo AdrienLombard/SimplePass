@@ -18,7 +18,7 @@
 			<a href="<?php echo site_url('accreditation/valider/'.$accred->idaccreditation); ?>">Valider la demande</a>
 			<?php else: ?>
 			<a id="imprimer" href="<?php echo site_url('impression/index/'.$accred->idclient.'/'.$accred->idaccreditation.'/'.$accred->idevenement); ?>">Imprimer</a>
-			<a href="<?php echo site_url('impression/impcarte/'.$accred->idclient.'/'.$accred->idaccreditation.'/'.$accred->idevenement); ?>">Imprimer carte</a>
+			<a id="imprimerCarte" href="<?php echo site_url('impression/impcarte/'.$accred->idclient.'/'.$accred->idaccreditation.'/'.$accred->idevenement); ?>">Imprimer carte</a>
 			<?php endif; ?>
 			<br>
 			<a href="<?php echo site_url('accreditation/supprimer/'.$accred->idaccreditation.'/'.$accred->idclient); ?>" confirm="Êtes-vous sûr de vouloir supprimer cette accréditation ?">Supprimer</a>
@@ -86,7 +86,7 @@
 						
 						<div id="facultatif" >
 							<label>Champ facultatif : </label>
-							<input type="text" name="facultatif" />
+							<input type="text" name="facultatif" maxlength="23"/>
 						</div>
 
 						<div>
