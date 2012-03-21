@@ -8,7 +8,16 @@ $(document).ready(function(){
 		$(this).next().slideToggle('fast');
 	});
 	
-		
+	/*
+	 * Popup pour l'impression.
+	 */
+	$('#imprimer').click(function() {
+		if($('#facultatif').find('input').attr('value').lenght > 0) {
+			$(this).attr('href', attr('href')+$('#facultatif').find('input').attr('value'))
+		}
+	});
+	
+	
 	/*
 	 * Recherche de personne dans 'ajouter'
 	 */

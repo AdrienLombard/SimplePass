@@ -17,7 +17,7 @@
 			<?php if($accred->etataccreditation == ACCREDITATION_A_VALIDE): ?>
 			<a href="<?php echo site_url('accreditation/valider/'.$accred->idaccreditation); ?>">Valider la demande</a>
 			<?php else: ?>
-			<a href="<?php echo site_url('impression/index/'.$accred->idclient.'/'.$accred->idaccreditation.'/'.$accred->idevenement); ?>">Imprimer</a>
+			<a id="imprimer" href="<?php echo site_url('impression/index/'.$accred->idclient.'/'.$accred->idaccreditation.'/'.$accred->idevenement); ?>">Imprimer</a>
 			<?php endif; ?>
 			<br>
 			<a href="<?php echo site_url('accreditation/supprimer/'.$accred->idaccreditation.'/'.$accred->idclient); ?>" confirm="Êtes-vous sûr de vouloir supprimer cette accréditation ?">Supprimer</a>
@@ -82,6 +82,11 @@
 						<h2>Accréditation</h2>
 						
 						<input type="hidden" name="idAccred" value="<?php echo $accred->idaccreditation; ?>" />
+						
+						<div id="facultatif" >
+							<label>Champ facultatif : </label>
+							<input type="text" name="facultatif" />
+						</div>
 
 						<div>
 							<label>Fonction : </label>
