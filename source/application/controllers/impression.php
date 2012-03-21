@@ -37,11 +37,11 @@ class Impression extends The {
 		$pdf->AddPage();
 		$pdf->SetFont('helvetica', '', 12);
 		if(img_url('photos/'.$client->nom.'.jpg') != NULL){
-			$pdf->Image(img_url('photos/'.$client->nom.'.jpg'), 25, 22);
+			$pdf->Image(img_url('photos/'.$client->nom.'.jpg'), 25, 22, 30, 38);
 			
 		}
 		else{
-			$pdf->Image(img_url('photos/ombre.jpg'), 25, 22);
+			$pdf->Image(img_url('photos/ombre.jpg'), 25, 22, 30, 38);
 		}
 			
 		$pdf->Text(25, 74, utf8_decode($accred->nom));
@@ -91,11 +91,11 @@ class Impression extends The {
 		$pdf->AddPage();
 		$pdf->SetFont('helvetica', '', 12);
 		if(img_url('photos/'.$client->nom.'_bis.jpg') != NULL){
-			$pdf->Image(img_url('photos/'.$client->nom.'_bis.jpg'), 30, 22);
+			$pdf->Image(img_url('photos/'.$client->nom.'.jpg'), 30, 22, 25, 32);
 			
 		}
 		else{
-			$pdf->Image(img_url('photos/ombre_bis.jpg'), 30, 22);
+			$pdf->Image(img_url('photos/ombre.jpg'), 30, 22, 25, 32);
 		}
 		$nomprenom = $accred->nom.' '.$accred->prenom;	
 		$pdf->Text(58, 28, utf8_decode($nomprenom));
