@@ -33,39 +33,78 @@ class Impression extends The {
 		
 		$pdf = new phpToPDF();
 		$pdf->AddPage();
-		$pdf->SetFont('times', '', 12);
-		if(img_url($client->nom.'.jpg') != NULL){
-			$pdf->Image(img_url($client->nom.'.jpg'), 25, 17);
+		$pdf->SetFont('helvetica', '', 12);
+		if(img_url('photos/'.$client->nom.'.jpg') != NULL){
+			$pdf->Image(img_url('photos/'.$client->nom.'.jpg'), 25, 22);
 			
 		}
 		else{
-			$pdf->Image(img_url('ombre.jpg'), 25, 17);
+			$pdf->Image(img_url('photos/ombre.jpg'), 25, 22);
 		}
 			
-		$pdf->Text(25, 73, utf8_decode($accred->nom));
-		$pdf->Text(55, 73, utf8_decode($accred->prenom));
-		$pdf->Image(img_url('drapeaux/'.utf8_decode($client->pays).'.gif'), 25, 74);
-		$pdf->Text(35, 77, utf8_decode($client->pays));
+		$pdf->Text(25, 74, utf8_decode($accred->nom));
+		$pdf->Text(55, 74, utf8_decode($accred->prenom));
+		$pdf->Image(img_url('drapeaux/'.utf8_decode($client->pays).'.gif'), 25, 75);
+		$pdf->Text(35, 78, utf8_decode($client->pays));
 		$pdf->SetFillColor($couleur->red,$couleur->green,$couleur->blue);
-		$pdf->Rect(25, 78, 50, 5, 'DF');
-		$pdf->Text(30, 82, utf8_decode($accred->libellecategorie));
-		$pdf->Text(30, 87, utf8_decode($client->organisme));
-		$pdf->Text(30, 91, "Facultatif");
+		$pdf->Rect(25, 79, 50, 5, 'DF');
+		$pdf->Text(30, 83, utf8_decode($accred->libellecategorie));
+		$pdf->Text(30, 88, utf8_decode($client->organisme));
+		$pdf->Text(30, 92, "Facultatif");
 		
-		$pdf->SetFont('helvetica', '', 18);
+		$pdf->SetFont('helvetica', '', 15);
 		$nb = count($zones);
-		$nbligne = ($nb % 4 == 0)?$nb / 4 : round(($nb / 4), 0, PHP_ROUND_HALF_DOWN)+1;
+		$nbligne = ($nb % 5 == 0)?$nb / 5 : round(($nb / 5), 0, PHP_ROUND_HALF_DOWN)+1;
 		$zonetxt = "- ";
-		$px = 6;
+		$px = 5;
 		for($i=0;$i<$nbligne;$i++){
-			for($j=0;$j<4 && ($j+$i*4)<$nb;$j++){
-				$zonetxt = $zonetxt.$zones[$j+$i*4]->codezone." - ";
+			for($j=0;$j<5 && ($j+$i*5)<$nb;$j++){
+				$zonetxt = $zonetxt.$zones[$j+$i*5]->codezone." - ";
 			}
 			$pdf->Text(25, 105 + $px*$i, $zonetxt);
 			$zonetxt = '- ';
 		}
 		$pdf->Output();
 		
+	}
+	
+	public function impcarte($idclient, $idaccred, $idevenement){
+		//$this->layout->view('utilisateur/accreditation/UAImprimer');
+		
+		include("phpToPDF.php");
+		
+		
+		$client = $this->modelclient->getClientParId($idclient);
+		$accred = $this->modelaccreditation->getAccreditationParId($idaccred);
+		$zones = $this->modelzone->getZoneParAccredParEvenement ($idaccred, $idevenement);
+		$couleur = hexaToRGB($accred->couleur);
+		
+		$pdf = new phpToPDF();
+		$pdf->AddPage();
+		$pdf->SetFont('helvetica', '', 12);
+		if(img_url('photos/'.$client->nom.'_bis.jpg') != NULL){
+			$pdf->Image(img_url('photos/'.$client->nom.'_bis.jpg'), 30, 22);
+			
+		}
+		else{
+			$pdf->Image(img_url('photos/ombre_bis.jpg'), 30, 22);
+		}
+		$nomprenom = $accred->nom.' '.$accred->prenom;	
+		$pdf->Text(58, 28, utf8_decode($nomprenom));
+		$pdf->Image(img_url('drapeaux/'.utf8_decode($client->pays).'.gif'), 58, 30);
+		$pdf->Text(65, 33, utf8_decode($client->pays));
+		$pdf->SetFillColor($couleur->red,$couleur->green,$couleur->blue);
+		$pdf->Rect(58, 35, 44, 6, 'DF');
+		$pdf->Text(60, 40, utf8_decode($accred->libellecategorie));
+		$pdf->Text(58, 46, utf8_decode($client->organisme));
+		$pdf->Text(58, 52, "Facultatif");
+		$zonetxt = '- ';
+		foreach($zones as $z){
+			$zonetxt = $zonetxt.$z->codezone.' - ';
+		}
+		$pdf->SetFont('helvetica', 'B', 12);
+		$pdf->Text(30, 62, $zonetxt);
+		$pdf->Output();
 	}
 	
 }
