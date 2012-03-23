@@ -23,12 +23,13 @@ class modelEvenement extends MY_Model {
 	}
 
 	
-	public function getCategoriesZonesPourEvenement( $idEvenment ) {
+	public function getCategoriesZonesPourEvenement( $idEvenement ) {
 		return $this->db->select('*')
-						->from(DB_CATEGORIE_EVENEMENT . ' ce')
-						->join(DB_CATEGORIE . ' c', 'c.idcategorie = ce.idcategorie')
-						->join(DB_CATEGORIE_ZONE . ' cz', 'cz.idcategorie = c.idcategorie')
-						->where('ce.idevenement', $idEvenment)
+						->from(DB_PARAMETRES_EVENEMENTS. ' pe')
+						->join(DB_CATEGORIE. ' c', 'pe.idcategorie = c.idcategorie', 'left')
+						->join(DB_ZONE. ' z', 'z.idzone = pe.idzone', 'left')
+						->join(DB_EVENEMENT. ' e', 'e.idevenement = pe.idevenement', 'left')
+						->where('pe.idevenement', $idEvenement)
 						->get()
 						->result();
 	}
