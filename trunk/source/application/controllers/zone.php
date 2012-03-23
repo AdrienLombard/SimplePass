@@ -13,7 +13,8 @@ class Zone extends Cafe {
 		
 		$this->layout->ajouter_js('utilisateur/scriptDate');
 		
-		$this->securise(array('voir'));
+		// Mise en place de la sécurisation.
+		$this->securiseAll();
 	}
 
 

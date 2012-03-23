@@ -16,6 +16,9 @@ class Impression extends The {
 		$this->layout->ajouter_css('utilisateur/impressionaccred');
 		//$this->layout->ajouter_js('utilisateur/CRUDAccred');
 		
+		// Mise en place de la sécurisation.
+		$this->securiseAll();
+		
 	}
 
 

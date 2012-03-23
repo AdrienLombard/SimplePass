@@ -14,9 +14,16 @@ class Accreditation extends Cafe {
 		$this->load->model('modelevenement');
 		$this->load->model('modelcategorie');
 		$this->load->model('modelzone');
-		$this->load->library('form_validation');
+		
+		// Chargement des javascript.
 		$this->layout->ajouter_css('utilisateur/accreditation');
 		$this->layout->ajouter_js('utilisateur/CRUDAccred');
+		
+		// Chargement des librairie.
+		$this->load->library('form_validation');
+		
+		// Mise en place de la sécurisation.
+		$this->securiseAll();
 		
 	}
 

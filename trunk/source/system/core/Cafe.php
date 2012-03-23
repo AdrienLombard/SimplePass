@@ -45,6 +45,10 @@ class Cafe extends CI_Controller {
 		$this->auth = $array;
 	}
 	
+	public function securiseAll() {
+		$this->auth = get_class_methods($this);
+	}
+	
 	/*
 	 * Remapage de l'URL, permet de vérifier la sécurité en amont
 	 * @param $method : nom de la méthode demandée

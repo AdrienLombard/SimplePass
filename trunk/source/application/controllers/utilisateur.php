@@ -11,6 +11,7 @@ class utilisateur extends Cafe {
 		$this->load->model('modelutilisateur');
 		
 		$this->lang->load('test');
+		
 	}
 	
 	
