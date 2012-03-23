@@ -19,6 +19,11 @@ class Accreditation extends Cafe {
 		$this->layout->ajouter_css('utilisateur/accreditation');
 		$this->layout->ajouter_js('utilisateur/CRUDAccred');
 		
+		$this->layout->ajouter_css('jquery.Jcrop');
+		$this->layout->ajouter_js('jquery.Jcrop.min');
+		
+		$this->layout->ajouter_js('webcam/jquery.webcam');
+		
 		// Chargement des librairie.
 		$this->load->library('form_validation');
 		
@@ -53,6 +58,7 @@ class Accreditation extends Cafe {
 	 * @param int $idClient : id du client dont on veut voire les accréditation.
 	 */
 	public function voir($idClient) {
+
 		$id = $this->session->userdata('idEvenementEnCours');
 		
 		$data = Array();
@@ -729,33 +735,71 @@ class Accreditation extends Cafe {
 	 */
 	public function upload($id)
 	{
-		$config['upload_path'] = './assets/images/photos/';
+		$client = $this->modelclient->getClientParId($id);
+		
+		$config['upload_path'] = UPLOAD_DIR;
 		$config['allowed_types'] = 'jpg';
 		$config['max_size']	= '4000';
-		$config['max_width']  = '1024';
-		$config['max_height']  = '768';
+		//$config['max_width']  = '1024';
+		//$config['max_height']  = '768';
+		//$config['file_name'] = urlencode($client->nom . '_' . $client->prenom . '_' . $id.".jpg");
 		$config['file_name'] = $id.".jpg";
 		$config['overwrite'] = true;
 		
 		$this->load->library('upload', $config);
 		$this->upload->do_upload('photo_file');
+		echo $this->upload->display_errors();
 		$data = $this->upload->data();
 		
-		$this->load->helper('url');
+		$img = imagecreatefromjpeg(UPLOAD_DIR . $data['file_name']);
 		
-		if($data['image_width'] == IMG_WIDTH && $data['image_height'] == IMG_HEIGHT) {
-			
-			$update['urlphoto'] = $data['full_path'];
-			$client = $this->modelclient->modifier($id, $update);
+		echo UPLOAD_DIR . $data['file_name'];
+		
+		$this->load->helper('url');
+		$this->load->helper('image');
+		
+		$update['urlphoto'] = $data['file_name'];
+		$client = $this->modelclient->modifier($id, $update);
+		
+		if($data['image_width'] == IMG_WIDTH && $data['image_height'] == IMG_HEIGHT)
 			redirect('accreditation/voir/' . $id);
-			
-		} else {
-			
-			// todo : crop
-			$update['urlphoto'] = $data['full_path'];
-			$client = $this->modelclient->modifier($id, $update);
-			redirect('accreditation/voir/' . $id);
-			
-		}
+		elseif($data['image_width'] > IMG_WIDTH && $data['image_height'] > IMG_HEIGHT) {
+			if($data['image_width'] > 940)
+				resizeWidthRatio($data['full_path'], 940);
+			redirect('accreditation/crop/' . $id);
+		} else
+			die('Image trop petite.');
+	}
+	
+	
+	/*
+	 * Crop : coupe une image trop grande
+	 */
+	public function crop($id) {
+		
+		$data['client'] = $this->modelclient->getClientParId($id);
+		$this->layout->view('utilisateur/accreditation/UACrop', $data);
+		
+	}
+	
+	
+	/*
+	 * ExeCrop : redimensionne l'image avec les paramères passés
+	 */
+	public function exeCrop() {
+		
+		$id = $this->input->post('id');
+		$x = $this->input->post('x');
+		$y = $this->input->post('y');
+		$w = $this->input->post('w');
+		$h = $this->input->post('h');
+		
+		$client = $this->modelclient->getClientParId($id);
+		
+		$this->load->helper('image');
+		crop(UPLOAD_DIR . $client->urlphoto, $x, $y, $w, $h);
+		
+		$this->load->helper('url');
+		redirect('accreditation/voir/' . $id);
 	}
 }

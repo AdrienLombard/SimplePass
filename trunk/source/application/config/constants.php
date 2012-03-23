@@ -63,6 +63,7 @@ define('DB_ZONES_ACCREDITATION', 	'courchevel_accreditation_zones');
 /*
  * DIMENSIONS DES IMAGES
  */
+define('UPLOAD_DIR', './assets/images/photos/');
 define('IMG_WIDTH', 160);
 define('IMG_HEIGHT', 204);
 
