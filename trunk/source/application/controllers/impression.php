@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Impression extends The {
+class Impression extends Cafe {
 	
 	
 	public function __construct() {
@@ -12,6 +12,7 @@ class Impression extends The {
 		$this->load->model('modelclient');
 		$this->load->model('modelcategorie');
 		$this->load->model('modelaccreditation');
+		$this->load->model('modelevenement');
 		$this->load->library('form_validation');
 		$this->layout->ajouter_css('utilisateur/impressionaccred');
 		//$this->layout->ajouter_js('utilisateur/CRUDAccred');
@@ -81,14 +82,13 @@ class Impression extends The {
 	}
 	
 	public function impcarte($idclient, $idaccred, $idevenement, $facult=''){
-		//$this->layout->view('utilisateur/accreditation/UAImprimer');
 		
 		include("phpToPDF.php");
 		
 		
 		$client = $this->modelclient->getClientParId($idclient);
 		$accred = $this->modelaccreditation->getAccreditationParId($idaccred);
-		$zones = $this->modelzone->getZoneParAccredParEvenement ($idaccred, $idevenement);
+		$zones = $this->modelzone->getZoneParAccredParEvenement($idaccred, $idevenement);
 		$facult = str_replace('%20', ' ', $facult);
 		$indice = 0;
 		
@@ -119,13 +119,43 @@ class Impression extends The {
 			$indice = $indice + 6;
 		}
 		$pdf->Text(58, 40 + $indice, utf8_decode($client->organisme));
-		$zonetxt = '- ';
-		foreach($zones as $z){
-			$zonetxt = $zonetxt.$z->codezone.' - ';
-		}
+		//$zonetxt = '- ';
+		//foreach($zones as $z){
+		//	$zonetxt = $zonetxt.$z->codezone.' - ';
+		//}
 		$pdf->SetFont('helvetica', 'B', 12);
-		$pdf->Text(30, 62, $zonetxt);
+		$nb = count($zones);
+		$nbligne = ($nb % 8 == 0)?$nb / 8 : floor($nb / 8)+1;
+		$zonetxt = "- ";
+		$px = 6;
+		for($i=0;$i<$nbligne;$i++){
+			for($j=0;$j<8 && ($j+$i*8)<$nb;$j++){
+				$zonetxt = $zonetxt.$zones[$j+$i*8]->codezone." - ";
+			}
+			$pdf->Text(32, 58 + $px*$i, $zonetxt);
+			$zonetxt = '- ';
+		}
+		
+		//$pdf->Text(30, 62, $zonetxt);
 		$pdf->Output();
+	}
+	
+	public function imptableau($idevent){
+		
+		include("phpToPDF.php");
+		
+		$evenement = $this->modelevenement->getCategoriesZonesPourEvenement($idevent);
+		$categorie = $this->modelcategorie->getcategories();
+		$header = array('test1','test2','test3','test4','test5');
+		
+		
+		$pdf = new phpToPDF();
+		$pdf->AddPage();
+		
+		 foreach($header as $col){
+			 $pdf->Cell(40,7,$col,1);
+		 }
+		 $pdf->Output();
 	}
 	
 }
