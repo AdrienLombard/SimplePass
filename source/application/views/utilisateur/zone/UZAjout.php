@@ -23,6 +23,7 @@
 				
 				<label>Nom</label>
 				<input type="text" name="libelle" value="<?php if($info) echo $info->libelle; ?>" />
+				<?php if(isset($info->erreurNom)) echo '<span class="erreurMessage" >* ' . $info->erreurNom . '</span>'; ?>
 				
 				<input type="submit" name="valider" />
 				
