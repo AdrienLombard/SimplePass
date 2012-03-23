@@ -112,7 +112,7 @@
 		
 		<div class="clear"></div>
 		
-		<input type="submit" name="valider" id="valider" />
+		<input type="submit" name="valider" id="valider" value="<?php echo lang('valider'); ?>"/>
 		
 		<div class="clear"></div>
 	</form>
