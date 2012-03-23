@@ -10,11 +10,8 @@
 
     <div class="box-full">
 
-        <aside>
-           
-            <b>Recherche :</b>
-			<input type="text" class="search" />
-			
+        <aside>  
+		<a href="<?php echo site_url('accreditation/PHPToExcel/generer'); ?>">Exporter un fichier excel</a>	
         </aside>
 		
 		<div id="main">
