@@ -97,6 +97,9 @@ class Zone extends Cafe {
 			
 			$values->libelle = $libelle;
 			
+			if(empty($libelle))
+				$values->erreurNom = "Veuillez spécifier un nom.";
+			
 			$this->ajouter($values);
 		}
 	}

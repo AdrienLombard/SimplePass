@@ -104,3 +104,14 @@ header .wrap-h span.switchMenu:hover div.toggleMenu {
     padding: 35px 0 80px 0;
     margin: auto;
 }
+
+/*
+ * Mise en forme des méssages d'erreurs dans les formulaires.
+ */
+
+.erreurMessage {
+	display: inline-block;
+	margin-left: 15px;
+	font-weight: bold;
+	color: orange;
+}
