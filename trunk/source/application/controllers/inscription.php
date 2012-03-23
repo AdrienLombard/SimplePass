@@ -20,6 +20,10 @@ class Inscription extends Chocolat {
 		$this->load->model('modelcategorie');
 		$this->load->model('modellambda');
 		$this->load->model('modelclient');
+		
+		// Chargement du fichier de langue
+		$this->lang->load('fr');
+		$this->load->helper('language');
 	}
 	
 	
@@ -54,55 +58,55 @@ class Inscription extends Chocolat {
 		$data = Array();
 		
 		// On regle les paramètres du formulaire.
-		$this->form_validation->set_message('required', 'Le champ %s est obligatoire.');
-		$this->form_validation->set_message('valid_email', 'Veuillez rentrer un e-Mail valide.');
+		$this->form_validation->set_message('required', $this->lang->line('champRequis'));
+		$this->form_validation->set_message('valid_email', $this->lang->line('emailValide'));
 		$this->form_validation->set_error_delimiters('<p class="error_message" > *', '</p>');
 		
 		// On définie les règles de validation du formulaire.
 		$config = array(
 			array(
 				'field'   => 'nom',
-				'label'   => 'Nom', 
+				'label'   => $this->lang->line('nom'), 
 				'rules'   => 'required'
 			),
 			array(
 				'field'   => 'prenom',
-				'label'   => 'Prenom', 
+				'label'   => $this->lang->line('prenom'), 
 				'rules'   => 'required'
 			),
 			array(
 				'field'   => 'pays',
-				'label'   => 'Pays', 
+				'label'   => $this->lang->line('pays'), 
 				'rules'   => ''
 			),
 			array(
 				'field'   => 'tel',
-				'label'   => 'numéro de téléphone', 
+				'label'   => $this->lang->line('tel'), 
 				'rules'   => ''
 			),
 			array(
 				'field'   => 'titre',
-				'label'   => 'Titre', 
+				'label'   => $this->lang->line('titre'), 
 				'rules'   => ''
 			),
 			array(
 				'field'   => 'fonction',
-				'label'   => 'Fonction', 
+				'label'   => $this->lang->line('fonction'), 
 				'rules'   => ''
 			),
 			array(
 				'field'   => 'civilite',
-				'label'   => 'Civilité', 
+				'label'   => $this->lang->line('civilite'), 
 				'rules'   => ''
 			),
 			array(
 				'field'   => 'categorie',
-				'label'   => 'Catégorie', 
+				'label'   => $this->lang->line('categorie'), 
 				'rules'   => ''
 			),
 			array(
 				'field'   => 'mail',
-				'label'   => 'e-Mail', 
+				'label'   => $this->lang->line('mail'), 
 				'rules'   => 'required|valid_email'
 			)
 		);
@@ -184,13 +188,13 @@ class Inscription extends Chocolat {
 				$this->modelaccreditation->ajouter($accredData);
 
 
-				$data['titre']		= 'Confirmation de demande';
-				$data['message']	= 'Votre demande a bien été prise en compte.<br>Merci de votre pré-enregistrement.';
+				$data['titre']		= $this->lang->line('titreConfirmeDemande');
+				$data['message']	= $this->lang->line('confirmeDemande');
 				
 			}
 			else {
-				$data['titre']		= 'Information';
-				$data['message']	= 'Vous avez déjà une demande d\'accréditation enregistré pour cette évènement.';
+				$data['titre']		= $this->lang->line('titreDemandeNon');
+				$data['message']	= $this->lang->line('demandeNon');
 				
 			}
 			
@@ -236,32 +240,32 @@ class Inscription extends Chocolat {
 		$config = array(
 			array(
 				'field'   => 'groupe',
-				'label'   => 'Nom du groupe', 
+				'label'   => $this->lang->line('nomGroupe'), 
 				'rules'   => 'required'
 			),
 			array(
 				'field'   => 'nom',
-				'label'   => 'Nom', 
+				'label'   => $this->lang->line('nom'), 
 				'rules'   => 'required'
 			),
 			array(
 				'field'   => 'prenom',
-				'label'   => 'Prénom', 
+				'label'   => $this->lang->line('prenom'), 
 				'rules'   => 'required'
 			),
 			array(
 				'field'   => 'fonction',
-				'label'   => 'Fonction', 
+				'label'   => $this->lang->line('fonction'), 
 				'rules'   => ''
 			),
 			array(
 				'field'   => 'tel',
-				'label'   => 'Téléphone', 
+				'label'   => $this->lang->line('tel'), 
 				'rules'   => ''
 			),
 			array(
 				'field'   => 'mail',
-				'label'   => 'Mail', 
+				'label'   => $this->lang->line('mail'), 
 				'rules'   => 'required|valid_email'
 			)
 		);
@@ -368,8 +372,8 @@ class Inscription extends Chocolat {
 			$this->modelaccreditation->ajouter($accred);
 		}
 		
-		$msg['titre']	= 'Confirmation de demande';
-		$msg['message']	= 'Vos demandes ont bien été prises en compte.<br>Merci de votre pré-enregistrement.';
+		$msg['titre']	= $this->lang->line('titreConfirmeDemandeGroupe');
+		$msg['message']	= $this->lang->line('confirmeDemandeGroupe');
 		$this->layout->view('lambda/LMessage', $msg);
 	}
 	
