@@ -10,7 +10,7 @@ class utilisateur extends Cafe {
 		parent::__construct();
 		$this->load->model('modelutilisateur');
 		
-		$this->lang->load('test');
+		$this->lang->load('fr');
 		
 	}
 	

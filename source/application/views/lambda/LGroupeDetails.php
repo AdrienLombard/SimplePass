@@ -17,7 +17,7 @@
 			var count = 0;
 			
 			var newSelect = "<select name='groupe["+ nbLigne +"][categorie][]' class='select dyn-selector'>";
-			newSelect += "<option value='-1'>Je ne sais pas encore</option>";
+			newSelect += "<option value='-1'><?php echo lang('neSaisPas'); ?></option>";
 			for(var i=0; i<tabCat.length; i++) {
 				if(tabCat[i][1] == id) {
 					newSelect += "<option value='" + tabCat[i][0] + "'>" + tabCat[i][2] + "</option>";
@@ -40,7 +40,7 @@
 <div id="content">
 	<div class="wrap2">
 		
-		<h1>Liste des membres de l'equipe</h1>
+		<h1><?php echo lang('titreListeMembres'); ?></h1>
 
 		<div class="box-small">
 			
@@ -57,17 +57,17 @@
 				
 				<input type="hidden" name="evenement" value="<?php echo $evenement; ?>" />
 				
-				<span class="info"><h4>Groupe :</h4> <?php echo $groupe; ?></span><br>
-				<span class="info"><h4>Responsable :</h4> <?php echo $nom; ?> <?php echo $prenom; ?></span><br>
+				<span class="info"><h4><?php echo lang('groupe'); ?> :</h4> <?php echo $groupe; ?></span><br>
+				<span class="info"><h4><?php echo lang('responsable'); ?> :</h4> <?php echo $nom; ?> <?php echo $prenom; ?></span><br>
 	
 				<br><br>
-				<span class="info">* champs obligatoire</span><br>
+				<span class="info">* <?php echo lang('mentionChampObligatoire'); ?></span><br>
 				
 				<div id="insererLigne"></div>
 				
-				<span class="button" id="ajouterLigne">+ Ajouter un nouveau membre</span>
+				<span class="button" id="ajouterLigne">+ <?php echo lang('ajoutNouveauMembre'); ?></span>
 				
-				<input type="submit" value="Tout envoyer" />
+				<input type="submit" value="<?php echo lang('toutEnvoyer'); ?>" />
 				
 				<div class="clear"></div>
 				
@@ -81,35 +81,35 @@
 
 <div class="hidden" id="pattern">
 	<div class="ligne" data="nbLigne" etat="false">
-		<h3>Nouveau membre <span class="modifier">modifier</span></h3>
+		<h3><?php echo lang('nouveauMembre'); ?> <span class="modifier"><?php echo lang('modifier'); ?></span></h3>
 		<div class="form">
 			<div class="split">
-				<label for="">Nom*</label>
+				<label for=""><?php echo lang('nom'); ?>*</label>
 				<input type="text" id="ligneNom" name="groupe[nbLigne][nom]" />
 			</div>
 			<div class="split">
-				<label for="">Prénom*</label>
+				<label for=""><?php echo lang('prenom'); ?>*</label>
 				<input type="text" id="lignePrenom" name="groupe[nbLigne][prenom]" />
 			</div>
 			<div class="clear"></div>
 			<div class="split">
-				<label for="">Catégorie</label>
+				<label for=""><?php echo lang('categorie'); ?></label>
 				<select  id="categorie" name="groupe[nbLigne][categorie][]" class="select dyn-selector">
-					<option value="-1">Je ne sais pas encore</option>
+					<option value="-1"><?php echo lang('neSaisPas'); ?></option>
 					<?php foreach($listeSurCategorie as $categorie): ?>
 					<option VALUE="<?php echo $categorie->idcategorie; ?>" <?php echo set_select('categorie', $categorie->libellecategorie); ?> ><?php echo $categorie->libellecategorie; ?></option>
 					<?php endforeach; ?>
 				</select>
 			</div>
 			<div class="split">
-				<label>fonction </label>
+				<label><?php echo lang('fonction'); ?> </label>
 				<input type="text" id="ligneFonction" name="groupe[nbLigne][fonction]" />
 			</div>
 			<div class="split splitRight">
-				<a href="#" class="button" id="validerLigne">Valider</a>
+				<a href="#" class="button" id="validerLigne"><?php echo lang('valider'); ?></a>
 			</div>
 			<div class="split splitRight">
-				<a href="#" class="button" id="supprimerLigne">Supprimer</a>
+				<a href="#" class="button" id="supprimerLigne"><?php echo lang('supprimer'); ?></a>
 			</div>
 			<div class="clear"></div>
 		</div>
