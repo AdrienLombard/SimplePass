@@ -27,13 +27,14 @@
 
 					<label>Nom</label>
 					<input type="text" value="<?php echo $nom; ?>" name="nom" style="width: 80%"/>
+					<?php if(isset($info->erreurNom)) echo '<span class="erreurMessage" >* ' . $info->erreurNom . '</span>'; ?>
 
 					<label>Date début</label>
 					<input type="text" value="<?php echo display_date ($datedebut) ;?>" id="datepicker-debut" name="datedebut" READONLY="READONLY" />
 
 					<label>Date fin</label>
 					<input type="text" value="<?php echo display_date ($datefin) ;?>" id="datepicker-fin" name="datefin" READONLY="READONLY" />
-
+					<?php if(isset($info->erreurDate)) echo '<span class="erreurMessage" >* ' . $info->erreurDate . '</span>'; ?>
 		</div>
 		
 		<div class="clear"></div>

@@ -171,7 +171,7 @@ class Evenement extends Cafe {
 			$values->dateFin	= $datefin;
 			
 			if(!empty ($datedebut) && !empty ($datefin)) {
-				if($datedebutTstmp > $datefinTstmp)
+				if($datedebutTstmp >= $datefinTstmp)
 					$values->erreurDate = "La date de début doit être antèrieur à la date de fin.";
 			}
 			else {
@@ -292,6 +292,9 @@ class Evenement extends Cafe {
 			$data['datedebut'] 	= date_to_timestamp($re['datedebut']);
 			$data['datefin'] 	= date_to_timestamp($re['datefin']);
 			
+			$data['listeCategorieZone'] = $re['coupleZoneCategorie'];
+			
+			$data['info'] = $re['info'];
 			
 		}
 		else {
@@ -356,13 +359,13 @@ class Evenement extends Cafe {
 		$datefin 	= $this->input->post('datefin');
 		$datedebutTstmp= date_to_timestamp($datedebut);
 		$datefinTstmp  = date_to_timestamp($datefin);
+		
+		// Récupération de la liste des zones.
+		$zones = $this->modelzone->getZones();
+		
 		if ($this->form_validation->run() == true && $datedebutTstmp < $datefinTstmp ) {
 			// on vire les anciens paramètres.
 			$this->modelevenement->supprimerParametreParEvenement( $id );
-			
-			// On récupère les nouveaux paramètres.
-			// Récupération de la liste des zones.
-			$zones = $this->modelzone->getZones();
 			
 			// recup liste des categorie.
 			$categories = $this->input->post('name');
@@ -416,7 +419,21 @@ class Evenement extends Cafe {
 					}
 				}
 			}
+			//var_dump($donnees['coupleZoneCategorie']);
 			//==========================================
+			$values = '';
+			if(!empty ($datedebut) && !empty ($datefin)) {
+				if($datedebutTstmp >= $datefinTstmp)
+					$values->erreurDate = "La date de début doit être antèrieur à la date de fin.";
+			}
+			else {
+				$values->erreurDate = "Veuillez spécifier une date de début et une date de fin.";
+			}
+			
+			if(empty($nom))
+				$values->erreurNom = "Veuillez spécifier un nom.";
+			
+			$donnees['info'] = $values;
 			
 			$this->modifier($id, $donnees);
 		}
