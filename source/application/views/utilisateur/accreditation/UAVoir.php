@@ -27,11 +27,16 @@
 				
 				<div class="photo">
 					
-					<div class="simulPhoto"></div>
+					<div class="simulPhoto" style="background-image: url(<?php echo img_url('photos/' . $client->urlphoto); ?>);">
+						<div class="webcam"></div>
+						<div class="clear"></div>
+					</div>
+					
+					<div class="clear"></div>
 					
 					<div class="optionPhoto">
 						<a href="#" class="uploadFichier">FICHIER</a>
-						<a href="#">WEBCAM</a>
+						<a href="#" class="startWebcam">WEBCAM</a>
 					</div>
 					
 				</div>
