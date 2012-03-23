@@ -22,7 +22,8 @@ class Inscription extends Chocolat {
 		$this->load->model('modelclient');
 		
 		// Chargement du fichier de langue
-		$this->lang->load('fr');
+		$this->config->set_item('language', 'english'); 
+		$this->lang->load('en');
 		$this->load->helper('language');
 	}
 	

@@ -106,7 +106,7 @@
 			
 			<br>
 			
-			<input type="submit"/>
+			<input type="submit" value="<?php echo lang('valider'); ?>"/>
 			<div class="clear"></div>
 			
 		</form>
