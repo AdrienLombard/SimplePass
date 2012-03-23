@@ -59,3 +59,17 @@
 .listeCategorieEvent  .ligneChoixZoneCat td.subcategorie {
 	padding-left: 25px;
 }
+
+
+/*
+ * Mise en forme des méssages d'erreurs dans les formulaires.
+ */
+
+
+.erreurMessage {
+	display: inline-block;
+	margin-left: 15px;
+	font-weight: bold;
+	color: orange;
+}
+

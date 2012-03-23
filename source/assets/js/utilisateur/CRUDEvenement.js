@@ -20,4 +20,13 @@ $(document).ready(function(){
 		
 	});
 	
+	
+	/*
+	 * Code pour la validation du formulaire de saisie des données d'un nouvel évènement.
+	 */
+	$('#formAjoutEvenement').submit(function(){
+		
+		
+	});
+	
 });
