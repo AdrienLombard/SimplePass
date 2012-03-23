@@ -39,8 +39,8 @@ class Impression extends Cafe {
 		$pdf = new phpToPDF();
 		$pdf->AddPage();
 		$pdf->SetFont('helvetica', '', 12);
-		if(img_url('photos/'.$client->nom.'.jpg') != NULL){
-			$pdf->Image(img_url('photos/'.$client->nom.'.jpg'), 25, 22, 30, 38);
+		if(img_url('photos/'.$client->idclient.'.jpg') != NULL){
+			$pdf->Image(img_url('photos/'.$client->idclient.'.jpg'), 25, 22, 30, 38);
 			
 		}
 		else{
@@ -96,8 +96,8 @@ class Impression extends Cafe {
 		$pdf = new phpToPDF();
 		$pdf->AddPage();
 		$pdf->SetFont('helvetica', '', 12);
-		if(img_url('photos/'.$client->nom.'_bis.jpg') != NULL){
-			$pdf->Image(img_url('photos/'.$client->nom.'.jpg'), 30, 22, 25, 32);
+		if(img_url('photos/'.$client->idclient.'.jpg') != NULL){
+			$pdf->Image(img_url('photos/'.$client->idclient.'.jpg'), 30, 22, 25, 32);
 			
 		}
 		else{
