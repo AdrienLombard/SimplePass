@@ -12,7 +12,6 @@
 		
 		<aside>
 
-            <b>Options :</b>
 				<?php if($libelle): ?>
 					<a href="<?php echo site_url('zone/voir/'.$id); ?>">Retour</a>
 				<?php else: ?>
@@ -21,12 +20,13 @@
         </aside>
 
         <div id="main">
-			<?php if($libelle): ?>
+			<?php if($libelle || isset($info)): ?>
 				<form action="<?php echo site_url('zone/exeModifier/'.$id); ?>" method="post">
 					<h2><?php echo $libelle; ?></h2>
 
 					<label>Nom</label>
 					<input type="text" value="<?php echo $libelle; ?>" name="libelle"/>
+					<?php if(isset($info->erreurNom)) echo '<span class="erreurMessage" >* ' . $info->erreurNom . '</span>'; ?>
 
 					<input type="submit" name="valider" />
 				</form>

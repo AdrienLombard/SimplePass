@@ -116,6 +116,7 @@ class Zone extends Cafe {
 		
 		if($re) {
 			$data['libelle'] = $re['libelle'];
+			$data['info'] = $re['info'];
 		}
 		else {
 			$reponse = $this->modelzone->getZoneParId( $id );
@@ -155,6 +156,11 @@ class Zone extends Cafe {
 		}
 		else {
 			$donnees['libelle'] 	= $libelle;
+			
+			$values = '';
+			if(empty($libelle))
+				$values->erreurNom = "Veuillez spécifier un nom.";
+			$donnees['info'] = $values;
 			
 			$this->modifier($id, $donnees);
 		}
