@@ -196,7 +196,6 @@ class Accreditation extends Cafe {
 		/*
 		 * Traitement du nom et du prénom : répercusion depuis la recherche
 		 */
-		
 		$username = $this->input->post('username');
 		$username = explode(' ', $username);
 		

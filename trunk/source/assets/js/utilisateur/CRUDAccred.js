@@ -69,11 +69,18 @@ $(document).ready(function(){
 	
 	
 	/*
-	 * Ergonomie des checkzones
+	 * Ergonomie des checkzones.
 	 */
 	$('.checkzone').live('click', function(){
-		if(!$('.contientZones').hasClass('readonly'))
-			$(this).toggleClass('on').find('input').attr('checked', 'checked');
+		if(!$('.contientZones').hasClass('readonly')) {
+			if($(this).hasClass('on')) {
+				$(this).removeClass('on').find('input').removeAttr('checked');
+				$('#all').removeAttr('checked');
+			}
+			else {
+				$(this).toggleClass('on').find('input').attr('checked', 'checked');
+			}
+		}	
 	});
 	
 	/*

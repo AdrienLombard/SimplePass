@@ -17,20 +17,21 @@
 
         <div id="main">
 			
-			<form action="<?php echo site_url('evenement/exeAjouter'); ?>" method="post">
+			<form action="<?php echo site_url('evenement/exeAjouter'); ?>" method="post" id="formAjoutEvenement" >
 				
 				<h2>Nouvel évènement</h2>
 				
 				<label>Nom</label>
 				<input type="text" name="nom" value="<?php if($info) echo $info->nom; ?>" />
+				<?php if(isset($info->erreurNom)) echo '<span class="erreurMessage" >* ' . $info->erreurNom . '</span>'; ?>
 				
 				<label>Date début</label>
-<!-- 				<input type="text" name="datedebut"/> -->
 				<input type="text" id="datepicker-debut" name="datedebut" value="<?php if($info) echo $info->dateDebut; ?>" READONLY="READONLY" />
 				
 				<label>Date fin</label>
 				<input type="text" id="datepicker-fin" name="datefin" value="<?php if($info) echo $info->dateFin; ?>" READONLY="READONLY" />
-
+				<?php if(isset($info->erreurDate)) echo '<span class="erreurMessage" >* ' . $info->erreurDate . '</span>'; ?>
+				
 				</br>
 				<label>Voulez-vous reprendre les paramètres d'un ancien évènement ?</label>
 				</br>

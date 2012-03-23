@@ -116,21 +116,21 @@ class Evenement extends Cafe {
 	 */
 	public function exeAjouter() {
 		$config = array(
-		array(
-					'field'   => 'nom',
-					'label'   => 'Nom', 
-					'rules'   => 'required'
-		),
-		array(
-					'field'   => 'datedebut',
-					'label'   => 'Date de début', 
-					'rules'   => 'required'
-		),
-		array(
-					'field'   => 'datefin',
-					'label'   => 'Date de fin', 
-					'rules'   => 'required'
-		)
+			array(
+				'field'   => 'nom',
+				'label'   => 'Nom', 
+				'rules'   => 'required'
+			),
+			array(
+				'field'   => 'datedebut',
+				'label'   => 'Date de début', 
+				'rules'   => 'required'
+			),
+			array(
+				'field'   => 'datefin',
+				'label'   => 'Date de fin', 
+				'rules'   => 'required'
+			)
 		);
 		$this->form_validation->set_rules($config);
 		
@@ -170,6 +170,16 @@ class Evenement extends Cafe {
 			$values->dateDebut	= $datedebut;
 			$values->dateFin	= $datefin;
 			
+			if(!empty ($datedebut) && !empty ($datefin)) {
+				if($datedebutTstmp > $datefinTstmp)
+					$values->erreurDate = "La date de début doit être antèrieur à la date de fin.";
+			}
+			else {
+				$values->erreurDate = "Veuillez spécifier une date de début et une date de fin.";
+			}
+			
+			if(empty($nom))
+				$values->erreurNom = "Veuillez spécifier un nom.";
 			
 			$this->ajouter($values);
 		}
