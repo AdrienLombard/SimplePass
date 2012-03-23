@@ -21,7 +21,16 @@
 					
 					<input type="hidden" name="evenement" value="<?php echo $this->session->userdata('idEvenementEnCours'); ?>"/>
 
-				
+					<div class="photo">
+
+						<div class="simulPhoto"></div>
+
+						<div class="optionPhoto">
+							<a href="#">FICHIER</a>
+							<a href="#">WEBCAM</a>
+						</div>
+
+					</div>
 					
 					<div class="inputs">
 

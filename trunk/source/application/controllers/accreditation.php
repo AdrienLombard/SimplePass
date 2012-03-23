@@ -190,6 +190,7 @@ class Accreditation extends Cafe {
 		$this->layout->view('utilisateur/accreditation/UAjouterGroupe', $data);
 		
 	}
+	
 	public function ajouter() {
 	
 		/*
@@ -212,7 +213,6 @@ class Accreditation extends Cafe {
 		/*
 		 * Liste de zone et pays
 		 */
-		
 		$data['zones'] = $this->modelzone->getZoneParEvenement($this->session->userdata('idEvenementEnCours'));
 		$data['pays'] = $this->modelpays->getPays();
 		
@@ -228,9 +228,13 @@ class Accreditation extends Cafe {
 			foreach($catZones as $cz) $push['zones'] .= $cz->idzone.'-';
 			$data['categories'][] = $push;
 		}
+		
+		$this->layout->view('utilisateur/accreditation/UAAjout', $data);
+		
 	}
+
 	
-		public function ajouterGroupe() {
+	public function ajouterGroupe() {
 	
 		/*
 		 * Traitement du nom et du prénom : répercusion depuis la recherche
@@ -251,7 +255,6 @@ class Accreditation extends Cafe {
 		/*
 		 * Liste de zone et pays
 		 */
-		
 		$data['zones'] = $this->modelzone->getZoneParEvenement($this->session->userdata('idEvenementEnCours'));
 		$data['pays'] = $this->modelpays->getPays();
 		
@@ -267,8 +270,10 @@ class Accreditation extends Cafe {
 			foreach($catZones as $cz) $push['zones'] .= $cz->idzone.'-';
 			$data['categories'][] = $push;
 		}
+		
 		$this->layout->view('utilisateur/accreditation/UAjouterMembreDeGroupe', $data);
-		}
+		
+	}
 	
 	
 	
