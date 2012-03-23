@@ -85,6 +85,7 @@ $(document).ready(function(){
 		$.each(zones, function(k, v){
 			$('.checkzone[id='+v+']').toggleClass('on').find('input').attr('checked', 'checked');
 		});
+		$('#all').removeAttr('checked');
 	});
 	
 	/*

@@ -18,9 +18,11 @@ class Evenement extends Cafe {
 		$this->layout->ajouter_js('utilisateur/scriptDate');
 		$this->layout->ajouter_js('utilisateur/CRUDEvenement');
 		
-		// Mise en place des vérification sur l'authentification.
+		// Chargement d'un css particulier.
 		$this->layout->ajouter_css('utilisateur/evenement');
-		$this->securise(array('voir'));
+		
+		// Mise en place de la sécurisation.
+		$this->securiseAll();
 	}
 
 
