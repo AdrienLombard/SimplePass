@@ -117,6 +117,7 @@
 							</select>
 						</div>
 
+						
 						<div>
 							<label>Catégorie : </label>
 							<select name="info[categorie]">

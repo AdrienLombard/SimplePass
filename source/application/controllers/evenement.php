@@ -335,6 +335,7 @@ class Evenement extends Cafe {
 	public function exeModifier($id) {
 		$data['id'] = $id;
 		
+		
 		$config = array(
 			array(
 				'field'   => 'nom',

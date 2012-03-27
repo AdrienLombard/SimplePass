@@ -27,7 +27,7 @@
 						<div class="simulPhoto"></div>
 
 						<div class="optionPhoto">
-							<a href="#">FICHIER</a>
+							<a href="">FICHIER</a>
 							<a href="#">WEBCAM</a>
 						</div>
 
@@ -80,6 +80,7 @@
 						</div>
 						
 						<br><br>
+						
 						
 						<h2>Accréditation</h2>
 

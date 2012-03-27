@@ -912,6 +912,65 @@ class Accreditation extends Cafe {
 		} else
 			die('Image trop petite.');
 	}
+
+	public function generer( )
+	{
+//	header("Content-type: text/csv");
+//    header('Content-Disposition: attachment; filename="liste_des_demandes.csv"');
+//    
+///* Récupérer les données de la base de données par exemple */
+// //echo " liste"."\n";
+//  $id = $this->session->userdata('idEvenementEnCours');
+//  echo $id;
+// $tableau=$this->modelaccreditation->getAccreditationsEnAttente($id);
+// //envoi des headers csv
+//	//header('Content-Type: application/csv-tab-delimited-table');
+//	//nommage du fichier avec la date du jour
+//	//header('Content-disposition: filename=monfichier_'.date('Ymd').'.csv');
+//
+// 
+// echo "      Liste des demandes     "."\n";	
+//echo "Nom;Prenom;Civilité;Pays;Organisme;Tel;Mail"."\n";
+//foreach($tableau as $ligne)
+//	
+//	   {
+//	//Pour chaque ligne, création d'une ligne dans le csv.
+//	//Les champs sont entourés de guillemets, séparés par des points-virgules
+//	//Les lignes sont terminées par un retour-chariot.
+//	
+//	echo '"'.$ligne->nom.'";"'.$ligne->prenom.'";"'.$ligne->civilite.'";"'.$ligne->pays.'";"'.$ligne->organisme.'";"'.$ligne->tel.'";"'.$ligne->mail.'"'."\n";
+//	   }
+//	 
+//	mysql_close();
+//
+//	exit;
+	
+include "Spreadsheet/Excel/Writer.php";
+
+// Création d'un manuel de travail
+$workbook = new Spreadsheet_Excel_Writer();
+
+// Envoi des en-têtes HTTP
+$workbook->send('test.xls');
+
+// Création d'une feuille de travail
+$worksheet =& $workbook->addWorksheet('My first worksheet');
+
+// Les données actuelles
+$worksheet->write(0, 0, 'Nom');
+$worksheet->write(0, 1, 'Age');
+$worksheet->write(1, 0, 'John Smith');
+$worksheet->write(1, 1, 30);
+$worksheet->write(2, 0, 'Johann Schmidt');
+$worksheet->write(2, 1, 31);
+$worksheet->write(3, 0, 'Juan Herrera');
+$worksheet->write(3, 1, 32);
+
+// Envoi du fichier
+$workbook->close();
+ 
+}
+
 	
 	
 	/*
@@ -944,4 +1003,5 @@ class Accreditation extends Cafe {
 		$this->load->helper('url');
 		redirect('accreditation/voir/' . $id);
 	}
+
 }
