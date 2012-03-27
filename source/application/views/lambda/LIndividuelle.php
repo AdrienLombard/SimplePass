@@ -1,4 +1,3 @@
-
 <?php //echo validation_errors(); ?>
 
 <script type="text/javascript">
@@ -95,20 +94,23 @@
 			<?php endforeach; ?>
 		</select>
 		</div>
-				
+		
+		<div class="sous-categories"></div>	
+		
 		<label><?php echo lang('demandeAjoutFonction'); ?></label>
-		<div class="encadrer" >
-			<input type=radio class="choixFonction" name="choixFonction" value="Non" <?php echo set_radio('choixFonction', 'Non', TRUE); ?> ><?php echo lang('non'); ?>
-			<input type=radio class="choixFonction" name="choixFonction" value="Oui" <?php echo set_radio('choixFonction', 'Oui'); ?> ><?php echo lang('oui'); ?>
-		</div>
 		<input type="text" value="<?php echo set_value('fonction'); ?>" id="fonction" name="fonction" />
-		
-		<div class="sous-categories"></div>			
-		
-		<label><?php echo lang('photo'); ?></label>
-		<?php echo img('ombre.jpg'); ?>
-		<br>
-		<input type="file" name="fichier">
+				
+		<div class="photo">
+				<fieldset class="encadrePhoto">
+					<legend><?php echo lang('photo'); ?></legend>
+					<div class="optionPhoto">
+						<a href="#">FICHIER</a>
+					</div>
+					<div class="optionPhoto">
+						<a href="#">WEBCAM</a>
+					</div>
+				</fieldset>
+			</div>
 		
 		<div class="clear"></div>
 		

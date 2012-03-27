@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Impression extends Cafe {
+class Impression extends The {
 	
 	
 	public function __construct() {
@@ -18,7 +18,7 @@ class Impression extends Cafe {
 		//$this->layout->ajouter_js('utilisateur/CRUDAccred');
 		
 		// Mise en place de la sécurisation.
-		$this->securiseAll();
+		//$this->securiseAll();
 		
 	}
 
@@ -40,11 +40,11 @@ class Impression extends Cafe {
 		$pdf->AddPage();
 		$pdf->SetFont('helvetica', '', 12);
 		if(img_url('photos/'.$client->idclient.'.jpg') != NULL){
-			$pdf->Image(img_url('photos/'.$client->idclient.'.jpg'), 25, 22, 30, 38);
+			$pdf->Image(img_url('photos/'.$client->idclient.'.jpg'), 24, 22, 29, 37);
 			
 		}
 		else{
-			$pdf->Image(img_url('photos/ombre.jpg'), 25, 22, 30, 38);
+			$pdf->Image(img_url('photos/ombre.jpg'), 24, 22, 29, 37);
 		}
 			
 		$pdf->Text(25, 74, utf8_decode($accred->nom));
@@ -67,7 +67,7 @@ class Impression extends Cafe {
 		
 		$pdf->SetFont('helvetica', '', 15);
 		$nb = count($zones);
-		$nbligne = ($nb % 5 == 0)?$nb / 5 : round(($nb / 5), 0, PHP_ROUND_HALF_DOWN)+1;
+		$nbligne = ($nb % 5 == 0)?$nb / 5 : floor($nb / 5)+1;
 		$zonetxt = "- ";
 		$px = 5;
 		for($i=0;$i<$nbligne;$i++){

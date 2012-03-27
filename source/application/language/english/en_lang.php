@@ -45,7 +45,7 @@ $lang['mentionChampObligatoire'] = 'required field';
 
 // Formulaire d'inscription groupée
 $lang['responsable'] = 'Responsible';
-$lang['demandeAjoutFonction'] = 'Do you want to specify a function ?';
+$lang['demandeAjoutFonction'] = 'What is your function ?';
 $lang['titreListeMembres'] = 'Team members list';
 $lang['ajoutNouveauMembre'] = 'Add a new member';
 $lang['toutEnvoyer'] = 'Send all';

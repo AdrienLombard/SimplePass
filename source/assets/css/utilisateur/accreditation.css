@@ -14,7 +14,7 @@
 	float: left;
 }
 .accred .client .photo .simulPhoto {
-	background: #666;
+	background-image: url(../../images/photos/0.jpg);
 	height: 204px;
 	width: 160px;
 	margin-right: 20px;

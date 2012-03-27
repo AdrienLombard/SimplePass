@@ -83,6 +83,17 @@
 	<div class="ligne" data="nbLigne" etat="false">
 		<h3><?php echo lang('nouveauMembre'); ?> <span class="modifier"><?php echo lang('modifier'); ?></span></h3>
 		<div class="form">
+			<div class="photo">
+				<fieldset class="encadrePhoto">
+					<legend><?php echo lang('photo'); ?></legend>
+					<div class="optionPhoto">
+						<a href="#">FICHIER</a>
+					</div>
+					<div class="optionPhoto">
+						<a href="#">WEBCAM</a>
+					</div>
+				</fieldset>
+			</div>
 			<div class="split">
 				<label for=""><?php echo lang('nom'); ?>*</label>
 				<input type="text" id="ligneNom" name="groupe[nbLigne][nom]" />
@@ -91,7 +102,7 @@
 				<label for=""><?php echo lang('prenom'); ?>*</label>
 				<input type="text" id="lignePrenom" name="groupe[nbLigne][prenom]" />
 			</div>
-			<div class="clear"></div>
+			
 			<div class="split">
 				<label for=""><?php echo lang('categorie'); ?></label>
 				<select  id="categorie" name="groupe[nbLigne][categorie][]" class="select dyn-selector">
@@ -105,6 +116,7 @@
 				<label><?php echo lang('fonction'); ?> </label>
 				<input type="text" id="ligneFonction" name="groupe[nbLigne][fonction]" />
 			</div>
+			<div class="clear"></div>
 			<div class="split splitRight">
 				<a href="#" class="button" id="validerLigne"><?php echo lang('valider'); ?></a>
 			</div>

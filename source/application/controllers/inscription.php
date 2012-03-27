@@ -25,6 +25,10 @@ class Inscription extends Chocolat {
 		$this->config->set_item('language', 'french'); 
 		$this->lang->load('fr');
 		$this->load->helper('language');
+		
+		$this->layout->ajouter_css('jquery.Jcrop');
+		$this->layout->ajouter_js('jquery.Jcrop.min');
+		$this->layout->ajouter_js('webcam/jquery.webcam');
 	}
 	
 	public function index() {
@@ -177,12 +181,9 @@ class Inscription extends Chocolat {
 					'dateaccreditation' => time()
 				);
 
-				$fonction = $this->input->post('choixFonction');
-				if($fonction == 'Oui') {
-					$fonction = $this->input->post('fonction');
-					if(isset($fonction) && !empty($fonction)) {
-						$accredData['fonction'] = $fonction;
-					}
+				$fonction = $this->input->post('fonction');
+				if(isset($fonction) && !empty($fonction)) {
+					$accredData['fonction'] = $fonction;
 				}
 
 				$this->modelaccreditation->ajouter($accredData);

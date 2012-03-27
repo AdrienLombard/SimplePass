@@ -18,7 +18,7 @@ $lang['femme'] = 'Femme';
 $lang['categorie'] = 'Catégorie';
 $lang['mail'] = 'Mail';
 $lang['societe'] = 'Société, Organisme ou Publication';
-$lang['photo'] = 'Photo';
+$lang['photo'] = 'photo';
 
 // Messages de confirmation
 $lang['titreConfirmeDemande'] = 'Confirmation de demande';
@@ -45,7 +45,7 @@ $lang['mentionChampObligatoire'] = 'champ obligatoire';
 
 // Formulaire d'inscription groupée
 $lang['responsable'] = 'Responsable';
-$lang['demandeAjoutFonction'] = 'Voulez-vous spécifier une fonction ?';
+$lang['demandeAjoutFonction'] = 'quelle est votre fonction ?';
 $lang['titreListeMembres'] = 'Liste des membres de l\'équipe';
 $lang['ajoutNouveauMembre'] = 'Ajouter un nouveau membre';
 $lang['toutEnvoyer'] = 'Tout envoyer';
