@@ -61,10 +61,7 @@
 			<label><?php echo lang('pays'); ?>*</label>
 			<select  id="pays" name="pays" class="select">
 				<?php foreach($listePays as $pays): ?>
-				<option VALUE="<?php echo $pays->idpays; ?>" <?php if($values && $values->pays==$pays->idpays) echo 'selected="selected"'; ?> >
-					<?php echo $pays->nompays; ?>
-				</option>
-				<?php endforeach; ?>
+	            <option value="<?php echo $pays->idpays; ?>" <?php echo ($pays->idpays == 'FRA')? 'selected' : '' ;?> style="background: url(<?php echo img_url('drapeaux/'.strtolower($pays->idpays).'.gif'); ?>) no-repeat left;"><?php echo $pays->nompays; ?></option><?php endforeach; ?> 
 			</select>
 			
 			<br><br>
