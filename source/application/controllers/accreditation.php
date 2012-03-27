@@ -411,10 +411,25 @@ class Accreditation extends Cafe {
 		$data['pays']	= $this->input->post('pays');
 		$data['tel']	= $this->input->post('tel');
 		$data['mail']	= $this->input->post('mail');
-		$message['message']= 'Votre l accreditation  de client  à bien été modifié.';
+		
+		$webcam = $this->input->post('photo_webcam');
+		if($webcam != null) {
+			$png = imagecreatefrompng($webcam);
+			$jpg = imagecreatetruecolor(160, 204);
+			imagecopyresampled($jpg, $png, 0, 0, 0, 0, 160, 204, 160, 204);
+			imagejpeg($jpg, UPLOAD_DIR . $id.".jpg", 100);
+			$data['urlphoto'] = $id.".jpg";
+		}
+
 		$this->modelclient->modifier($id, $data);
 
-		$this->upload($id);
+		if($_FILES['photo_file']['size'] != 0)
+			$this->upload($id);
+		else {
+			$this->load->helper('url');
+			redirect('accreditation/voir/' . $id);
+		}
+			
 		
 	}
 	

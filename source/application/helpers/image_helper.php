@@ -37,7 +37,6 @@ if ( ! function_exists('crop'))
 		$src = imagecreatefromjpeg($url);	
 		$img = imagecreatetruecolor(IMG_WIDTH, IMG_HEIGHT);
 		imagecopyresampled($img, $src, 0, 0, $x, $y, IMG_WIDTH, IMG_HEIGHT, $w, $h);
-		unlink($url);
 		imagejpeg($img, $url, 100);
 		
 	}
