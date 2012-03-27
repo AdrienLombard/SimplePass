@@ -25,17 +25,20 @@
 				<form class="infos" method="post" action="<?php echo site_url('accreditation/exeModifierClient'); ?>" enctype="multipart/form-data">
 					
 				<input type="file" name="photo_file" id="photo_file" />
+				<input type="hidden" name="photo_webcam" id="photo_webcam" />
 				
 				<div class="photo">
-				<?php	if(img_url('photos/'.$client->idclient.'.jpg') != NULL){
-							$photo = 'photos/'.$client->idclient.'.jpg';
-						}else{
-							$photo = 'photos/0.jpg';
-						}
-				?>
-					<div class="simulPhoto" style="background-image: url(<?php echo img_url($photo); ?>);">
-						<div class="webcam"></div>
-						<div class="clear"></div>
+					
+					<div class="simulPhoto">
+						<div class="webcamWrapper">
+							<a href="#" class="closeCam">x</a>
+							<span>Placer votre visage au centre de l'image :</span>
+							<div class="webcam"></div>
+							<a href="#" class="captureCam">Prendre une photo</a>
+						</div>
+						<canvas id="canvas" width="160" height="204"></canvas> 
+						<div class="photoMessage"></div>
+						<?php if($client->urlphoto != null) echo '<img src="' . img_url('photos/' . $client->urlphoto) . '" />'; ?>
 					</div>
 					
 					<div class="clear"></div>
@@ -51,6 +54,8 @@
 					<div>
 						<input type="text" name="prenom" class="prenom" init="<?php echo $client->prenom; ?>" value="<?php echo $client->prenom; ?>" readonly>
 					</div>
+					
+					<br>
 
 					<div>
 						<label class="short">Pays : </label>

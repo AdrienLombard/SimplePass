@@ -1,4 +1,3 @@
-
 $(document).ready(function(){
 	
 	$("select[name=evenements]").hide();
@@ -6,6 +5,5 @@ $(document).ready(function(){
 		$("select[name=evenements]").toggle();
 		
 	});
-		
 	
 });

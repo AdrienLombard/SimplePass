@@ -328,13 +328,58 @@ form#editAccredRealTime input[type=text][readonly], form#editAccredRealTime sele
 /*
  * Webcam
  */
-.webcam {
-	display:none;
-	border: 5px solid #1D465B;
-	box-shadow: 0 0 3px rgba(0,0,0,1);
-	border-radius: 4px;
-	width: 260px;
+.webcamWrapper {
+	display: none;
 	position: absolute;
 	z-index: 50;
-	background: #AAA;
+	padding: 10px 20px 20px 20px;
+	background: #FFF;
+	box-shadow: 0 0 20px rgba(0,0,0,0.8);
+}
+.webcamWrapper span {
+	font-style: italic;
+	font-size: 10px;
+}
+.captureCam {
+    display: block;
+	padding: 8px;
+    background: #6c8693;
+    color: #FFF;
+	text-align: center;
+	width: 272px;
+}
+.captureCam:hover {
+    background: #2e6f92;
+}
+.closeCam {
+	position: absolute;
+	padding: 1px 6px 3px 6px;
+	border-radius: 100%;
+	margin-top: -18px;
+	margin-left: 325px;
+	background: #FFF;
+	font-size: 16px;
+	box-shadow: 0 0 5px rgba(0,0,0,0.8);
+}
+.closeCam:hover {
+	color: #FFF;
+	background: #000;
+}
+
+
+.photoMessage {
+	height: 119px;
+	width: 160px;
+	background: rgba(255, 255, 255, 0.6);
+	z-index: 50;
+	position: absolute;
+	text-align: center;
+	display: none;
+	padding: 5px;
+	padding-top: 80px;
+}
+
+#canvas {
+	position:absolute;
+	z-index: 5000
 }
