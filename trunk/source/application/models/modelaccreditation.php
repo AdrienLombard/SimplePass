@@ -141,7 +141,7 @@ class modelAccreditation extends MY_Model {
 						->join(DB_CLIENT . ' cl', 'a.idclient = cl.idclient', 'left')
 						->join(DB_CATEGORIE . ' ca', 'a.idcategorie = ca.idcategorie', 'left')
 						->where('a.idevenement', $idEvenement)
-				        ->where('cl.referent', Null)
+				        ->where('a.referent', Null)
 						->where('a.etataccreditation', ACCREDITATION_A_VALIDE)
 						->get()
 						->result();

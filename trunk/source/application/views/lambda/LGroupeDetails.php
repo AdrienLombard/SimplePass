@@ -79,6 +79,7 @@
 	
 </div>
 
+
 <div class="hidden" id="pattern">
 	<div class="ligne" data="nbLigne" etat="false">
 		<h3><?php echo lang('nouveauMembre'); ?> <span class="modifier"><?php echo lang('modifier'); ?></span></h3>

@@ -113,6 +113,7 @@ class Impression extends The {
 			$pdf->Rect(58, 35, 44, 6, 'DF');
 			$pdf->Text(60, 40, utf8_decode($accred->libellecategorie));
 			$indice = $indice + 6;
+			
 		}
 		if($facult != ''){
 			$pdf->Text(58, 40 + $indice, $facult);
