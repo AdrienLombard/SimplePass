@@ -81,11 +81,9 @@ create table courchevel_client
    pays                 varchar(3) not null,
    nom                  varchar(50) not null,
    prenom               varchar(50) not null,
-   civilite             varchar(10) not null,
    organisme            varchar(100) default null,
    tel                  varchar(25) default null,
    mail                 text default null,
-   urlphoto             text not null,
    primary key (idclient)
 ) engine = InnoDB, charset = utf8;
 
@@ -150,11 +148,11 @@ create table courchevel_zone
 
 insert into courchevel_utilisateur (login,mdp) values ('root', 'root');
 
-insert into courchevel_client (pays,nom,prenom,civilite,organisme,tel,mail,urlphoto) values ('CHE','ASSIER','Aymeric','M','World Company','0123456789','aymeric.assier@gmail.com','C:\Users\Micka\Pictures\test.jpg');
-insert into courchevel_client (pays,nom,prenom,civilite,organisme,tel,mail) values ('FRA','LOMBARD','Adrien','M','World Company','0234567891','adrien.lombard@gmail.com');
-insert into courchevel_client (pays,nom,prenom,civilite,tel,mail) values ('BEL','ARNOULD','Mickaël','M','0345678912','mickael.arnould@gmail.com');
-insert into courchevel_client (pays,nom,prenom,civilite,tel,mail) values ('FRA','FRANCHON','Sebastien','M','0456789123','seb.franchon@gmail.com');
-insert into courchevel_client (pays,nom,prenom,civilite,tel,mail) values ('TUN','CHRIGUI','Hajer','Mlle','0567891234','hajer.chrigui@gmail.com');
+insert into courchevel_client (pays,nom,prenom,organisme,tel,mail) values ('CHE','ASSIER','Aymeric','World Company','0123456789','aymeric.assier@gmail.com');
+insert into courchevel_client (pays,nom,prenom,organisme,tel,mail) values ('FRA','LOMBARD','Adrien','World Company','0234567891','adrien.lombard@gmail.com');
+insert into courchevel_client (pays,nom,prenom,tel,mail) values ('BEL','ARNOULD','Mickaël','0345678912','mickael.arnould@gmail.com');
+insert into courchevel_client (pays,nom,prenom,tel,mail) values ('FRA','FRANCHON','Sebastien','0456789123','seb.franchon@gmail.com');
+insert into courchevel_client (pays,nom,prenom,tel,mail) values ('TUN','CHRIGUI','Hajer','0567891234','hajer.chrigui@gmail.com');
 
 insert into courchevel_zone (libellezone) values ('Data / Timing');
 insert into courchevel_zone (libellezone) values ('Team Areas');
