@@ -346,7 +346,7 @@ form#editAccredRealTime input[type=text][readonly], form#editAccredRealTime sele
     background: #6c8693;
     color: #FFF;
 	text-align: center;
-	width: 272px;
+	width: 256px;
 }
 .captureCam:hover {
     background: #2e6f92;
@@ -356,7 +356,7 @@ form#editAccredRealTime input[type=text][readonly], form#editAccredRealTime sele
 	padding: 1px 6px 3px 6px;
 	border-radius: 100%;
 	margin-top: -18px;
-	margin-left: 325px;
+	margin-left: 280px;
 	background: #FFF;
 	font-size: 16px;
 	box-shadow: 0 0 5px rgba(0,0,0,0.8);

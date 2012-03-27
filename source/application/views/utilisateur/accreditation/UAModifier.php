@@ -31,19 +31,34 @@
 				
 				<form class="infos nouveau" id="editAccredRealTime" method="post" action="<?php echo site_url('accreditation/exeModifier'); ?>">
 
+					<input type="file" name="photo_file" id="photo_file" />
+					<input type="hidden" name="photo_webcam" id="photo_webcam" />
+
 					<div class="photo">
-						
-						<?php	if(img_url('photos/'.$accred->idclient.'.jpg') != NULL){
-									$photo = 'photos/'.$accred->idclient.'.jpg';
-								}else{
-									$photo = 'photos/0.jpg';
-								}
-						?>
-						
-						<img src="<?php echo img_url($photo); ?>" />
+
+						<div class="simulPhoto">
+
+							<div class="webcamWrapper">
+								<a href="#" class="closeCam">x</a>
+								<span>Placer votre visage au centre de l'image :</span>
+								<div class="webcam"></div>
+								<a href="#" class="captureCam">Prendre une photo</a>
+							</div>
+
+							<canvas id="canvas" width="160" height="204"></canvas> 
+
+							<div class="photoMessage"></div>
+
+							<?php $photo = (img_url('photos/'.$accred->idclient.'.jpg') != NULL)? 'photos/'.$accred->idclient.'.jpg' : 'photos/0.jpg'; ?>
+							<img src="<?php echo img_url($photo); ?>" />
+
+						</div>
+
+						<div class="clear"></div>
+
 						<div class="optionPhoto">
-							<a href="#">FICHIER</a>
-							<a href="#">WEBCAM</a>
+							<a href="#" class="uploadFichier">FICHIER</a>
+							<a href="#" class="startWebcam">WEBCAM</a>
 						</div>
 
 					</div>
@@ -121,7 +136,7 @@
 						</div>
 						
 						<div>
-							<label> Mode All-Accees : </label>
+							<label> Mode All-Access : </label>
 							<input type="checkbox" id="all" name="allAccess" disabled <?php if($accred->allaccess == 1) echo 'checked'; ?>/>
 						</div>
 
