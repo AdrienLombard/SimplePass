@@ -29,7 +29,7 @@
         	
 			<div class="client nouveau">
 				
-				<form class="infos nouveau" id="editAccredRealTime" method="post" action="<?php echo site_url('accreditation/exeModifier'); ?>">
+				<form class="infos nouveau" id="editAccredRealTime" method="post" action="<?php echo site_url('accreditation/exeModifier'); ?>" enctype="multipart/form-data">
 
 					<input type="file" name="photo_file" id="photo_file" />
 					<input type="hidden" name="photo_webcam" id="photo_webcam" />
