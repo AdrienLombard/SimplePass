@@ -1,5 +1,3 @@
-<?php //echo validation_errors(); ?>
-
 <script type="text/javascript">
 	
 	$(document).ready(function(){
@@ -97,17 +95,18 @@
 		<input type="text" value="<?php echo set_value('fonction'); ?>" id="fonction" name="fonction" />
 				
 		<div class="photo">
-				<fieldset class="encadrePhoto">
-					<legend><?php echo lang('photo'); ?></legend>
-					<div class="optionPhoto">
-						<a href="#">FICHIER</a>
-					</div>
-					<div class="optionPhoto">
-						<a href="#">WEBCAM</a>
-					</div>
-				</fieldset>
-			</div>
-		
+			<fieldset class="encadrePhoto">
+				<legend><?php echo lang('photo'); ?></legend>
+				<div class="optionPhoto">
+					<a href="#" class="uploadFichier">FICHIER</a>
+				</div>
+				<div class="optionPhoto">
+					<a href="#" class="startWebcam">WEBCAM</a>
+				</div>
+			</fieldset>
+		</div>
+		<div class="webcam"></div>
+		<input type="file" name="photo_file" id="photo_file" />
 		<div class="clear"></div>
 		
 		<input type="submit" name="valider" id="valider" value="<?php echo lang('valider'); ?>"/>

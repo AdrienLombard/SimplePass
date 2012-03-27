@@ -39,12 +39,7 @@
 					</div>
 					
 					<div class="clear"></div>
-					
-					<div class="optionPhoto">
-						<a href="#" class="uploadFichier">FICHIER</a>
-						<a href="#" class="startWebcam">WEBCAM</a>
-					</div>
-					
+										
 				</div>
 					
 					<input type="hidden" name="id" value="<?php echo $client->idclient; ?>" />

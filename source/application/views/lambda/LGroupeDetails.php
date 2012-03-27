@@ -88,13 +88,15 @@
 				<fieldset class="encadrePhoto">
 					<legend><?php echo lang('photo'); ?></legend>
 					<div class="optionPhoto">
-						<a href="#">FICHIER</a>
+						<a href="#" class="uploadFichier">FICHIER</a>
 					</div>
 					<div class="optionPhoto">
-						<a href="#">WEBCAM</a>
+						<a href="#" class="startWebcam">WEBCAM</a>
 					</div>
 				</fieldset>
 			</div>
+			<div class="webcam"></div>
+			<input type="file" name="photo_file" id="photo_file" />
 			<div class="split">
 				<label for=""><?php echo lang('nom'); ?>*</label>
 				<input type="text" id="ligneNom" name="groupe[nbLigne][nom]" />

@@ -101,13 +101,16 @@
 				<fieldset class="encadrePhoto">
 					<legend><?php echo lang('photo'); ?></legend>
 					<div class="optionPhoto">
-						<a href="#">FICHIER</a>
+						<a href="#" class="uploadFichier">FICHIER</a>
 					</div>
 					<div class="optionPhoto">
-						<a href="#">WEBCAM</a>
+						<a href="#" class="startWebcam">WEBCAM</a>
 					</div>
 				</fieldset>
 			</div>
+			<div class="webcam"></div>
+			<input type="file" name="photo_file" id="photo_file" />
+			
 			<div class="clear"></div>
 			<input type="submit" value="<?php echo lang('valider'); ?>"/>
 			<div class="clear"></div>
