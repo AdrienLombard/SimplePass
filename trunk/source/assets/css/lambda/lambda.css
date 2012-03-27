@@ -203,7 +203,55 @@ td{
 	margin-left: 30px;
 }
 
+.photo {
+	float: left;
+}
 
+.photo .simulPhoto {
+	background-image: url(../../images/photos/0.jpg);
+	height: 204px;
+	width: 160px;
+	margin-right: 20px;
+}
+
+.photo .simulPhotoGroupe {
+	background-image: url(../../images/photos/0_bis.jpg);
+	height: 125px;
+	width: 98px;
+	margin-right: 20px;
+	margin-top: 20px;
+}
+
+.photo .encadrePhoto {
+	margin-top: 20px;
+	margin-right: 20px;
+	width: 98px;
+	height: 98px;
+	border-color: #1d465b;
+}
+
+.optionPhoto {
+	margin-top: 5px;
+	margin-left: 10px;
+}
+
+.optionPhoto a {
+	display: inline-block;
+    padding: 8px 0 8px 0;
+    background: #1d465b;
+    border-radius: 5px;
+    color: #FFF;
+	width: 78px;
+	text-align: center;
+	font-size: 10px;
+	box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.2);
+}
+
+.optionPhoto a:hover {
+	background: #FFF;
+    color: #1d465b;
+    box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.8);
+}
 
 
 

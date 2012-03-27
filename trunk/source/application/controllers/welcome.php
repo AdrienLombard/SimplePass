@@ -12,6 +12,9 @@ class Welcome extends Cafe {
 		/* on charge le model user*/
 		$this->load->model('modelutilisateur');
 
+		$this->layout->ajouter_css('jquery.Jcrop');
+		$this->layout->ajouter_js('jquery.Jcrop.min');
+		$this->layout->ajouter_js('webcam/jquery.webcam');
 	}
 	public function index()
 	{

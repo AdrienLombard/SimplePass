@@ -27,8 +27,13 @@
 				<input type="file" name="photo_file" id="photo_file" />
 				
 				<div class="photo">
-					
-					<div class="simulPhoto" style="background-image: url(<?php echo img_url('photos/' . $client->urlphoto); ?>);">
+				<?php	if(img_url('photos/'.$client->idclient.'.jpg') != NULL){
+							$photo = 'photos/'.$client->idclient.'.jpg';
+						}else{
+							$photo = 'photos/0.jpg';
+						}
+				?>
+					<div class="simulPhoto" style="background-image: url(<?php echo img_url($photo); ?>);">
 						<div class="webcam"></div>
 						<div class="clear"></div>
 					</div>
