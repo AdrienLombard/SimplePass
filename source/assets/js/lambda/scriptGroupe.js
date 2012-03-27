@@ -20,7 +20,8 @@ $(document).ready(function(){
 		var prenom = parent.find('#lignePrenom');
 		
 		// récupère la catégorie
-		var categorie = parent.find('#ligneCategorie');
+		var listeCategorie = parent.find('.dyn-selector');
+		alert(listeCategorie);
 		
 		// récupère le rôle
 		var fonction = parent.find('#ligneFonction');

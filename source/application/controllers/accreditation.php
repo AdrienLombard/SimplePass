@@ -197,7 +197,7 @@ class Accreditation extends Cafe {
 		
 	}
 	
-	public function ajouter() {
+	public function ajouter( $re = '' ) {
 	
 		/*
 		 * Traitement du nom et du prénom : répercusion depuis la recherche
@@ -215,15 +215,11 @@ class Accreditation extends Cafe {
 		else
 			$data['nom'] = $username;
 		
-		/*
-		 * Liste de zone et pays
-		 */
+		// Liste de zone et pays.
 		$data['zones'] = $this->modelzone->getZoneParEvenement($this->session->userdata('idEvenementEnCours'));
 		$data['pays'] = $this->modelpays->getPays();
 		
-		/*
-		 * Liste des catégories avec les zones associées
-		 */
+		// Liste des catégories avec les zones associées.
 		$cats = $this->modelcategorie->getCategorieDansEvenement($this->session->userdata('idEvenementEnCours'));
 		foreach($cats as $cat) {
 			$push = array();
@@ -234,9 +230,138 @@ class Accreditation extends Cafe {
 			$data['categories'][] = $push;
 		}
 		
+		// On passe les infos dans data.
+		if(!empty($re)) {
+			$data['re'] = $re;
+		}
+		
 		$this->layout->view('utilisateur/accreditation/UAAjout', $data);
 		
 	}
+
+	public function exeAjouter() {
+		// mise en place de la vérification de CI.
+		$config = array(
+			array(
+				'field'   => 'nom',
+				'label'   => 'Nom', 
+				'rules'   => 'required'
+			),
+			array(
+				'field'   => 'prenom',
+				'label'   => 'Prenom', 
+				'rules'   => 'required'
+			),
+			array(
+				'field'   => 'pays',
+				'label'   => 'Pays', 
+				'rules'   => ''
+			),
+			array(
+				'field'   => 'tel',
+				'label'   => 'Téléphone', 
+				'rules'   => ''
+			),
+			array(
+				'field'   => 'mail',
+				'label'   => 'e-Mail', 
+				'rules'   => ''
+			),
+			array(
+				'field'   => 'evenement',
+				'label'   => 'Evènement', 
+				'rules'   => 'required'
+			),
+			array(
+				'field'   => 'fonction',
+				'label'   => 'Fonction / Role', 
+				'rules'   => ''
+			),
+			array(
+				'field'   => 'categorie',
+				'label'   => 'Catégorie', 
+				'rules'   => ''
+			)
+		);
+		$this->form_validation->set_rules($config);
+		
+		$re = '';
+		
+		// Création du client.
+		$client = array();
+		$client['nom'] 		= strtoupper($this->input->post('nom'));
+		$client['prenom'] 	= $this->input->post('prenom');
+		$client['pays'] 	= $this->input->post('pays');
+		$client['tel'] 		= $this->input->post('tel');
+		$client['mail'] 	= $this->input->post('mail');
+		
+		// Création de son accréditation.
+		$accred = array();
+		$accred['idevenement'] 	= $this->input->post('evenement');
+		$accred['fonction'] 	= $this->input->post('fonction');
+		$accred['idcategorie'] 	= $this->input->post('categorie');
+		$accred['allaccess'] 	= ($this->input->post('allAccess'))? ALL_ACCESS : NON_ALL_ACCESS;
+		
+		// Construction du tableau de ses zones.
+		$accredZone = array();
+		if($this->input->post('zone')) {
+			foreach( $this->input->post('zone') as $key => $value ) {
+				$accredZone[$key] = $key;
+			}
+		}
+		
+		// si le formulaire est correct.
+		if ($this->form_validation->run() == true) {
+			// On ajoute le client.
+			$this->modelclient->ajouter($client);
+			$idClient = $this->modelclient->lastId();
+			
+			// On ajoute son accréditation.
+			$accred['idclient'] = $idClient;
+			$accred['etataccreditation'] = ACCREDITATION_VALIDE;
+			$accred['dateaccreditation'] = time();
+			$this->modelaccreditation->ajouter($accred);
+			$idAccred = $this->modelaccreditation->lastId();
+			
+			// Mise en place de ses zones.
+			if($this->input->post('zone')) {
+				$valuess = array();
+				if($this->input->post('zone')) {
+					foreach( $this->input->post('zone') as $key => $value ) {
+						$values[] = array('idaccreditation' => $idAccred, 'idzone' => $key);
+					}
+				}
+				$this->modelzone->ajouterZonesAccreditation($values);
+			}
+			
+			
+			// redirection vers la fiche ainsi créer.
+			$this->load->helper('url');
+			redirect('accreditation/voir/' . $idClient);
+			
+		}
+		else {
+			// construction de la variable de retour d'informations.
+			$re->client = $client;
+			$re->accred = $accred;
+			$re->zones = $accredZone;
+			
+			// Création des méssage d'erreur sur les champs du formulaire.
+			if(empty($re->client['nom']))
+				$re->erreurNom = 'Veuillez spécifier un nom.';
+			if(empty($re->client['prenom']))
+				$re->erreurPrenom = 'Veuillez spécifier un prenom.';
+		
+			// On recharge le formulaire.
+			$this->ajouter($re);
+			
+		}
+
+	}
+
+
+
+
 
 	
 	public function ajouterGroupe() {
@@ -282,34 +407,6 @@ class Accreditation extends Cafe {
 	
 	
 	
-	public function exeAjouter() {
-		
-		$client = array();
-		$client['nom'] = strtoupper($this->input->post('nom'));
-		$client['prenom'] = $this->input->post('prenom');
-		$client['pays'] = $this->input->post('pays');
-		$client['tel'] = $this->input->post('tel');
-		$client['mail'] = $this->input->post('mail');
-		$this->modelclient->ajouter($client);
-		
-		$idClient = $this->modelclient->lastId();
-		
-		$accred = array();
-		$accred['idclient'] = $idClient;
-		$accred['idevenement'] = $this->input->post('evenement');
-		$accred['fonction'] = $this->input->post('fonction');
-		$accred['etataccreditation'] = ACCREDITATION_VALIDE;
-		$accred['dateaccreditation'] = time();
-		$accred['allaccess'] = ($this->input->post('allAccess'))? ALL_ACCESS : NON_ALL_ACCESS;
-		$this->modelaccreditation->ajouter($accred);
-		
-		$idAccred = $this->modelaccreditation->lastId();
-		
-		// todo : ajout zones
-		
-		$this->load->helper('url');
-		redirect('accreditation/voir/' . $idClient);		
-	}
 
 	public function exeModifierClient() {
 		
@@ -325,6 +422,7 @@ class Accreditation extends Cafe {
 		$this->upload($id);
 		
 	}
+	
 	
 	public function exeModifierGroupe($ref=false) {
 	
@@ -502,6 +600,50 @@ class Accreditation extends Cafe {
 	}
 	
 	public function exeModifier() {
+		// mise en place de la vérification de CI.
+		// $config = array(
+			// array(
+				// 'field'   => 'nom',
+				// 'label'   => 'Nom', 
+				// 'rules'   => 'required'
+			// ),
+			// array(
+				// 'field'   => 'prenom',
+				// 'label'   => 'Prenom', 
+				// 'rules'   => 'required'
+			// ),
+			// array(
+				// 'field'   => 'pays',
+				// 'label'   => 'Pays',
+				// 'rules'   => ''
+			// ),
+			// array(
+				// 'field'   => 'tel',
+				// 'label'   => 'Téléphone',
+				// 'rules'   => ''
+			// ),
+			// array(
+				// 'field'   => 'mail',
+				// 'label'   => 'e-Mail',
+				// 'rules'   => ''
+			// ),
+			// array(
+				// 'field'   => 'evenement',
+				// 'label'   => 'Evènement', 
+				// 'rules'   => 'required'
+			// ),
+			// array(
+				// 'field'   => 'fonction',
+				// 'label'   => 'Fonction / Role', 
+				// 'rules'   => ''
+			// ),
+			// array(
+				// 'field'   => 'categorie',
+				// 'label'   => 'Catégorie', 
+				// 'rules'   => ''
+			// )
+		// );
+		// $this->form_validation->set_rules($config);
 		
 		$idClient = $this->input->post('idClient');
 		$client = array();

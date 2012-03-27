@@ -3,8 +3,9 @@
 <div class="wrap">
 
     <div class="tabs">
-		<a href="<?php echo site_url('accreditation/index'); ?>">Liste</a>
-		<a href="<?php echo site_url('accreditation/rechercher'); ?>">Ajouter</a>
+		<a href="<?php echo site_url('accreditation/index'); ?>" >Liste</a>
+		<a href="<?php echo site_url('accreditation/rechercher'); ?>" >Ajouter personne</a>
+		<a href="<?php echo site_url('accreditation/ajouterGroupe'); ?>" class="current" >Ajouter groupe</a>
 		<a href="#" class="current">Nouvelle</a>
     </div>
 
