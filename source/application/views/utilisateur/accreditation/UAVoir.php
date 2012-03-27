@@ -44,7 +44,7 @@
 						</div>
 						<canvas id="canvas" width="160" height="204"></canvas> 
 						<div class="photoMessage"></div>
-						<?php if($client->urlphoto != null) echo '<img src="' . img_url('photos/' . $client->urlphoto) . '" />'; ?>
+						<img src="<?php echo img_url($photo); ?>" />
 					</div>
 					
 					<div class="clear"></div>

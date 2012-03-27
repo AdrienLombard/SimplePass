@@ -32,9 +32,15 @@
 				<form class="infos nouveau" id="editAccredRealTime" method="post" action="<?php echo site_url('accreditation/exeModifier'); ?>">
 
 					<div class="photo">
-
-						<div class="simulPhoto"></div>
-
+						
+						<?php	if(img_url('photos/'.$accred->idclient.'.jpg') != NULL){
+									$photo = 'photos/'.$accred->idclient.'.jpg';
+								}else{
+									$photo = 'photos/0.jpg';
+								}
+						?>
+						
+						<img src="<?php echo img_url($photo); ?>" />
 						<div class="optionPhoto">
 							<a href="#">FICHIER</a>
 							<a href="#">WEBCAM</a>
