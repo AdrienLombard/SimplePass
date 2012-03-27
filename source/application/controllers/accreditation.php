@@ -359,11 +359,6 @@ class Accreditation extends Cafe {
 
 	}
 
-
-
-
-
-	
 	public function ajouterGroupe() {
 	
 		/*
