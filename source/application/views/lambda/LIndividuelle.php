@@ -91,8 +91,6 @@
 		
 		<div class="sous-categories"></div>	
 		
-		<label>Qu'elle est votre fonction ?</label>
-		
 		<label><?php echo lang('demandeAjoutFonction'); ?></label>
 
 		<input type="text" value="<?php echo set_value('fonction'); ?>" id="fonction" name="fonction" />
