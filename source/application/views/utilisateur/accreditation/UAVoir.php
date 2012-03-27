@@ -28,6 +28,12 @@
 				<input type="hidden" name="photo_webcam" id="photo_webcam" />
 				
 				<div class="photo">
+				<?php	if(img_url('photos/'.$client->idclient.'.jpg') != NULL){
+							$photo = 'photos/'.$client->idclient.'.jpg';
+						}else{
+							$photo = 'photos/0.jpg';
+						}
+				?>
 					
 					<div class="simulPhoto">
 						<div class="webcamWrapper">
