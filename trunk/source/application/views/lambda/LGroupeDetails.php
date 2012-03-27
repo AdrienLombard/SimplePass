@@ -41,7 +41,10 @@
 	<div class="wrap2">
 		
 		<h1><?php echo lang('titreListeMembres'); ?></h1>
-
+		<!--
+	<a href="<?php //echo site_url('inscription/changerLangage/fra/' . str_replace('/', ':', uri_string())); ?>" ><img src="<?php //echo img_url('drapeaux/fra.gif'); ?>" alt="fra" /></a>
+	<a href="<?php //echo site_url('inscription/changerLangage/gbr/' . str_replace('/', ':', uri_string())); ?>" ><img src="<?php //echo img_url('drapeaux/gbr.gif'); ?>" alt="gbr" /></a>
+	-->
 		<div class="box-small">
 			
 			<form id="inscriptionGroupe" method="post" action="<?php echo site_url('inscription/exeAjouterGroupe'); ?>">
@@ -88,11 +91,9 @@
 				<fieldset class="encadrePhoto">
 					<legend><?php echo lang('photo'); ?></legend>
 					<div class="optionPhoto">
-						<a href="#" class="uploadFichier">FICHIER</a>
-					</div>
+						<a href="#" class="uploadFichier"><?php echo lang('fichier'); ?></a>					</div>
 					<div class="optionPhoto">
-						<a href="#" class="startWebcam">WEBCAM</a>
-					</div>
+						<a href="#" class="startWebcam"><?php echo lang('camera'); ?></a>					</div>
 				</fieldset>
 			</div>
 			<div class="webcam"></div>

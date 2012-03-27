@@ -13,7 +13,6 @@ class Inscription extends Chocolat {
 		
 		// Chargement du css.
 		
-		
 		// Chargement du modele.
 		$this->load->model('modelaccreditation');
 		$this->load->model('modelevenement');
@@ -22,9 +21,8 @@ class Inscription extends Chocolat {
 		$this->load->model('modelclient');
 		
 		// Chargement du fichier de langue
-		$this->config->set_item('language', 'french'); 
-		$this->lang->load('fr');
 		$this->load->helper('language');
+		$this->chargerLangue();
 		
 		$this->layout->ajouter_css('jquery.Jcrop');
 		$this->layout->ajouter_js('jquery.Jcrop.min');
@@ -32,11 +30,44 @@ class Inscription extends Chocolat {
 	}
 	
 	public function index() {
-		
+
 		$this->lambda();
 		
 	}
+	/**
+	 * Méthode pour le changement de langue
+	 */
+	public function changerLangage($langage, $url) {
+		
+		if($langage === 'fra') {
+			$this->session->set_userdata('lang', 'fra');
+		}
+		else if($langage === 'gbr') {
+			$this->session->set_userdata('lang', 'gbr');
+		}
+		$urlOk = str_replace(':', '/', $url);
+		redirect($urlOk);
+		
+	}
 	
+	public function chargerLangue() {
+		
+		if($this->session->userdata('lang')) {
+		
+			if($this->session->userdata('lang') == 'fra') {
+				$this->config->set_item('language', 'french'); 
+				$this->lang->load('fr');
+			}
+			else if($this->session->userdata('lang') == 'gbr') {
+				$this->config->set_item('language', 'english'); 
+				$this->lang->load('en');
+			}
+		}
+		else {
+			$this->config->set_item('language', 'french'); 
+			$this->lang->load('fr');
+		}
+	}
 	
 	/**
 	 * Méthode pour le choix d'une inscription individuelle ou par équipe et de l'évènement.
