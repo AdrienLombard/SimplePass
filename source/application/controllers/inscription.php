@@ -147,7 +147,6 @@ class Inscription extends Chocolat {
 					'nom' 		=> strtoupper($this->input->post('nom')),
 					'prenom' 	=> $this->input->post('prenom'),
 					'pays' 		=> $this->input->post('pays'),
-					'civilite' 	=> $this->input->post('civilite'),
 					'mail' 		=> $this->input->post('mail')
 				);
 

@@ -54,12 +54,6 @@
 		
 		<input type="hidden" id="evenement" name="evenement" value="<?php echo $event_id; ?>" />
 		
-		<label><?php echo lang('civilite'); ?>*</label>
-		<div class="encadrer" >
-			<?php echo lang('homme'); ?> : <input type=radio id="civilite" name="civilite" value="M" <?php echo set_radio('civilite', 'M', TRUE); ?> >
-			<?php echo lang('femme'); ?> : <input type=radio id="civilite" name="civilite" value="F" <?php echo set_radio('civilite', 'F'); ?> >
-		</div>
-		
 		<label><?php echo lang('nom'); ?>*</label>
 		<input type="text" value="<?php echo set_value('nom'); ?>" id="nom" name="nom" />
 		<?php echo form_error('nom'); ?>
