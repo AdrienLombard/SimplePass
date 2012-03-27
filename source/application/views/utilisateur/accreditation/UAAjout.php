@@ -22,16 +22,36 @@
 					
 					<input type="hidden" name="evenement" value="<?php echo $this->session->userdata('idEvenementEnCours'); ?>"/>
 
-					<div class="photo">
+					<input type="file" name="photo_file" id="photo_file" />
+				<input type="hidden" name="photo_webcam" id="photo_webcam" />
+				
+				<div class="photo">
+					
+					<div style="float: left">
 
-						<div class="simulPhoto"></div>
+						<div class="simulPhoto">
 
-						<div class="optionPhoto">
-							<a href="">FICHIER</a>
-							<a href="#">WEBCAM</a>
+							<div class="webcamWrapper">
+								<a href="#" class="closeCam">x</a>
+								<span>Placer votre visage au centre de l'image :</span>
+								<div class="webcam"></div>
+								<a href="#" class="captureCam">Prendre une photo</a>
+							</div>
+
+							<canvas id="canvas" width="160" height="204"></canvas> 
+
+							<div class="photoMessage"></div>
+
 						</div>
-
+							<div class="optionPhoto visible">
+							<a href="#" class="uploadFichier">FICHIER</a>
+							<a href="#" class="startWebcam">WEBCAM</a>
+						</div>
+						
 					</div>
+						
+					
+					
 					
 					<div class="inputs">
 

@@ -670,11 +670,11 @@ class Accreditation extends Cafe {
 			$png = imagecreatefrompng($webcam);
 			$jpg = imagecreatetruecolor(160, 204);
 			imagecopyresampled($jpg, $png, 0, 0, 0, 0, 160, 204, 160, 204);
-			imagejpeg($jpg, UPLOAD_DIR . $id.".jpg", 100);
-			$data['urlphoto'] = $id.".jpg";
+			imagejpeg($jpg, UPLOAD_DIR . $idClient.".jpg", 100);
+			$data['urlphoto'] = $idClient.".jpg";
 		}
 
-		$this->modelclient->modifier($id, $client);
+		$this->modelclient->modifier($idClient, $client);
 		
 		$idAccred = $this->input->post('idAccred');
 		$accred = array();
@@ -689,25 +689,19 @@ class Accreditation extends Cafe {
 		$this->modelzone->supprimerZoneParAccreditation($idAccred);
 		
 		$values = array();
-		foreach( $this->input->post('zone') as $key => $value ) {
-			
+		foreach( $this->input->post('zone') as $key => $value )
 			$values[] = array('idaccreditation' => $idAccred, 'idzone' => $key);
-		}
 		
 		$this->modelzone->ajouterZonesAccreditation($values);
-		
-		
-		$this->load->helper('url');
-		redirect('accreditation/modifier/' . $idAccred);
-		
+
 		if($_FILES['photo_file']['size'] != 0)
-			$this->upload($id);
+			$this->upload($idClient);
 		else {
 			$this->load->helper('url');
 			$this->layout->add_redirect('accreditation/modifier/' . $idAccred, 0.1);
-			$this->voir($id);
+			$this->modifier($idAccred);
 		}
-		
+
 	}
 	
 	
@@ -935,12 +929,15 @@ class Accreditation extends Cafe {
 		$update['urlphoto'] = $data['file_name'];
 		$client = $this->modelclient->modifier($id, $update);
 		
-		if($data['image_width'] == IMG_WIDTH && $data['image_height'] == IMG_HEIGHT)
-			redirect('accreditation/voir/' . $id);
-		elseif($data['image_width'] > IMG_WIDTH && $data['image_height'] > IMG_HEIGHT) {
-			if($data['image_width'] > 940)
+		if($data['image_width'] == IMG_WIDTH && $data['image_height'] == IMG_HEIGHT) {
+			$this->layout->add_redirect('accreditation/voir/' . $id, 0.1);
+			$this->voir($id);
+		} elseif($data['image_width'] > IMG_WIDTH && $data['image_height'] > IMG_HEIGHT) {
+			if($data['image_width'] > 940) {
 				resizeWidthRatio($data['full_path'], 940);
-			redirect('accreditation/crop/' . $id);
+				$this->layout->add_redirect('accreditation/crop/' . $id, 0.1);
+				$this->crop($id);
+			}
 		} else
 			die('Image trop petite.');
 	}

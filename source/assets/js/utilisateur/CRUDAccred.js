@@ -197,7 +197,9 @@ $(document).ready(function(){
 			
 			onCapture: function() {
 				
-				$('.webcamWrapper').hide('fast');			
+				$('.webcamWrapper').hide('fast');
+				image = ctx.getImageData(0, 0, 160, 204);
+				pos = 0;
 				webcam.save();
 			},
 			
@@ -235,5 +237,7 @@ $(document).ready(function(){
 		$('.webcamWrapper').hide('fast');
 	});
 	
+	
+	$('.visible').show();
 	
 });
