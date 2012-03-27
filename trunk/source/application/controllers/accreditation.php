@@ -58,7 +58,7 @@ class Accreditation extends Cafe {
 	 * @param int $idClient : id du client dont on veut voire les accréditation.
 	 */
 	public function voir($idClient) {
-
+		
 		$id = $this->session->userdata('idEvenementEnCours');
 		
 		$data = Array();
@@ -427,7 +427,9 @@ class Accreditation extends Cafe {
 			$this->upload($id);
 		else {
 			$this->load->helper('url');
-			redirect('accreditation/voir/' . $id);
+			//redirect('accreditation/voir/' . $id);
+			$this->layout->add_redirect('accreditation/voir/' . $id, 0.1);
+			$this->voir($id);
 		}
 			
 		
@@ -662,6 +664,18 @@ class Accreditation extends Cafe {
 		$client['pays'] = $this->input->post('pays');
 		$client['tel'] = $this->input->post('tel');
 		$client['mail'] = $this->input->post('mail');
+		
+		$webcam = $this->input->post('photo_webcam');
+		if($webcam != null) {
+			$png = imagecreatefrompng($webcam);
+			$jpg = imagecreatetruecolor(160, 204);
+			imagecopyresampled($jpg, $png, 0, 0, 0, 0, 160, 204, 160, 204);
+			imagejpeg($jpg, UPLOAD_DIR . $id.".jpg", 100);
+			$data['urlphoto'] = $id.".jpg";
+		}
+
+		$this->modelclient->modifier($id, $client);
+		
 		$idAccred = $this->input->post('idAccred');
 		$accred = array();
 		$accred['idclient'] = $idClient;
@@ -685,6 +699,14 @@ class Accreditation extends Cafe {
 		
 		$this->load->helper('url');
 		redirect('accreditation/modifier/' . $idAccred);
+		
+		if($_FILES['photo_file']['size'] != 0)
+			$this->upload($id);
+		else {
+			$this->load->helper('url');
+			$this->layout->add_redirect('accreditation/modifier/' . $idAccred, 0.1);
+			$this->voir($id);
+		}
 		
 	}
 	

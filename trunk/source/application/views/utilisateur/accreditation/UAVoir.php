@@ -6,7 +6,7 @@
 		<a href="<?php echo site_url('accreditation/index'); ?>" >Liste</a>
 		<a href="<?php echo site_url('accreditation/rechercher'); ?>" >Ajouter personne</a>
 		<a href="<?php echo site_url('accreditation/ajouterGroupe'); ?>" >Ajouter groupe</a>
-		<a href="#" class="current">Voir</a>
+		<a href="#" class="current">Personne</a>
     </div>
 
     <div class="box-full">
@@ -28,26 +28,31 @@
 				<input type="hidden" name="photo_webcam" id="photo_webcam" />
 				
 				<div class="photo">
-				<?php	if(img_url('photos/'.$client->idclient.'.jpg') != NULL){
-							$photo = 'photos/'.$client->idclient.'.jpg';
-						}else{
-							$photo = 'photos/0.jpg';
-						}
-				?>
-					
+
 					<div class="simulPhoto">
+						
 						<div class="webcamWrapper">
 							<a href="#" class="closeCam">x</a>
 							<span>Placer votre visage au centre de l'image :</span>
 							<div class="webcam"></div>
 							<a href="#" class="captureCam">Prendre une photo</a>
 						</div>
+						
 						<canvas id="canvas" width="160" height="204"></canvas> 
+						
 						<div class="photoMessage"></div>
+						
+						<?php $photo = (img_url('photos/'.$client->idclient.'.jpg') != NULL)? 'photos/'.$client->idclient.'.jpg' : 'photos/0.jpg'; ?>
 						<img src="<?php echo img_url($photo); ?>" />
+						
 					</div>
 					
 					<div class="clear"></div>
+					
+					<div class="optionPhoto">
+						<a href="#" class="uploadFichier">FICHIER</a>
+						<a href="#" class="startWebcam">WEBCAM</a>
+					</div>
 										
 				</div>
 					

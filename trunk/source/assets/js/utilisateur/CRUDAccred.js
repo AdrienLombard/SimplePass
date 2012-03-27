@@ -135,13 +135,14 @@ $(document).ready(function(){
 		$('#editAccredRealTime select').removeAttr('disabled');
 		$('#editAccredRealTime #saveAccred').show();
 		$('#editAccredRealTime input[type=checkbox]').removeAttr('disabled');
+		$('.optionPhoto').show();
 	});
 	
 	
 	/*
 	 * upload fichier
 	 */
-	$('#photo_file').css('opacity', 0).css('position', 'absolute');
+	$('#photo_file').css('opacity', 0).css('position', 'absolute').css('top', -500);
 	$('.uploadFichier').live('click', function(){
 		$('#photo_file').trigger('click');
 		$('.photoMessage').show().text('Fichier chargé, enregistrez pour valider ->');
@@ -195,7 +196,8 @@ $(document).ready(function(){
 			swffile: "http://localhost/courchevel_src/assets/flash/jscam_canvas_only.swf",
 			
 			onCapture: function() {
-				$('.webcamWrapper').hide('fast');
+				
+				$('.webcamWrapper').hide('fast');			
 				webcam.save();
 			},
 			
