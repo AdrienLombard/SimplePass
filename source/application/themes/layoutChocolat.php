@@ -20,8 +20,6 @@
         <!-- page vue chocolat -->
         <header>
             <?php echo img('s5_seg_logo.png'); ?>
-			<img src="<?php echo img_url('drapeaux/fra.gif'); ?>" alt="fra" />
-			<img src="<?php echo img_url('drapeaux/gbr.gif'); ?>" alt="gbr" />
 		</header>
         
         <div id="content">

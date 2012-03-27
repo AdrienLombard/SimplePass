@@ -11,7 +11,7 @@ $lang['prenom'] = 'First name';
 $lang['pays'] = 'Country';
 $lang['tel'] = 'Telephone';
 $lang['titre'] = 'Titre';
-$lang['fonction'] = 'Function';
+$lang['fonction'] = 'Job';
 $lang['civilite'] = 'Civility';
 $lang['homme'] = 'Man';
 $lang['femme'] = 'Woman';
@@ -19,6 +19,8 @@ $lang['categorie'] = 'Category';
 $lang['mail'] = 'Mail';
 $lang['societe'] = 'Company, Organization or Publication';
 $lang['photo'] = 'Photo';
+$lang['fichier'] = 'File';
+$lang['camera'] = 'Webcam';
 
 // Messages de confirmation
 $lang['titreConfirmeDemande'] = 'Request Confirmation';
@@ -45,7 +47,7 @@ $lang['mentionChampObligatoire'] = 'required field';
 
 // Formulaire d'inscription groupée
 $lang['responsable'] = 'Responsible';
-$lang['demandeAjoutFonction'] = 'What is your function ?';
+$lang['demandeAjoutFonction'] = 'What is your job ?';
 $lang['titreListeMembres'] = 'Team members list';
 $lang['ajoutNouveauMembre'] = 'Add a new member';
 $lang['toutEnvoyer'] = 'Send all';
