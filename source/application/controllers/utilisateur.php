@@ -75,7 +75,7 @@ class utilisateur extends Cafe {
 		if($this->session->userdata('login')) {
 			$this->session->unset_userdata('login');
 		}
-		$this->layout->add_redirect('utilisateur', 0.1);
+		//$this->layout->add_redirect('utilisateur', 0.1);
 		
 		$data['titre']		= 'Déconnexion';
 		$data['message']	= 'Vous avez bien été déconnecté.';
