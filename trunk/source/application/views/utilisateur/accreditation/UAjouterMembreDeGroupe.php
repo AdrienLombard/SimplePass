@@ -50,15 +50,15 @@
 <div class="wrap">
 
     <div class="tabs">
-		<a href="<?php echo site_url('accreditation/index'); ?>">Liste</a>
-		<a href="<?php echo site_url('accreditation/demandes'); ?>">Demandes</a>
-		<a href="#" class="current">Ajouter</a>
+		<a href="<?php echo site_url('accreditation/index'); ?>" >Liste</a>
+		<a href="<?php echo site_url('accreditation/rechercher'); ?>" >Ajouter personne</a>
+		<a href="<?php echo site_url('accreditation/ajouterGroupe'); ?>" class="current" >Ajouter groupe</a>
     </div>
 
     <div class="box-full">
 
         <aside>
-			<a href="#">Retour</a>
+			<a href="<?php echo site_url('accreditation/index'); ?>">Retour</a>
         </aside>
 		
 		<div id="main" class="accred">
