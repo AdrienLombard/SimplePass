@@ -104,9 +104,11 @@
 				<fieldset class="encadrePhoto">
 					<legend><?php echo lang('photo'); ?></legend>
 					<div class="optionPhoto">
-						<a href="#" class='uploadFichier"><?php echo lang('fichier'); ?></a>					</div>
+						<a href="#" class="uploadFichier"><?php echo lang('fichier'); ?></a>
+					</div>
 					<div class="optionPhoto">
-						<a href="#" class="startWebcam><?php echo lang('camera'); ?</a>					</div>
+						<a href="#" class="startWebcam"><?php echo lang('camera'); ?></a>
+					</div>
 				</fieldset>
 			</div>
 			<div class="webcam"></div>
