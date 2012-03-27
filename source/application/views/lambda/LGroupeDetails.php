@@ -17,10 +17,10 @@
 			var count = 0;
 			
 			var newSelect = "<select name='groupe["+ nbLigne +"][categorie][]' class='select dyn-selector'>";
-			newSelect += "<option value='-1'><?php echo lang('neSaisPas'); ?></option>";
+			newSelect += "<option value='-1' libelle=' '><?php echo lang('neSaisPas'); ?></option>";
 			for(var i=0; i<tabCat.length; i++) {
 				if(tabCat[i][1] == id) {
-					newSelect += "<option value='" + tabCat[i][0] + "'>" + tabCat[i][2] + "</option>";
+					newSelect += "<option value='" + tabCat[i][0] + "' libelle='" + tabCat[i][2] + "' >" + tabCat[i][2] + "</option>";
 					count++;
 				}
 			}
@@ -95,9 +95,9 @@
 			<div class="split">
 				<label for=""><?php echo lang('categorie'); ?></label>
 				<select  id="categorie" name="groupe[nbLigne][categorie][]" class="select dyn-selector">
-					<option value="-1"><?php echo lang('neSaisPas'); ?></option>
+					<option value="-1" libelle=" " ><?php echo lang('neSaisPas'); ?></option>
 					<?php foreach($listeSurCategorie as $categorie): ?>
-					<option VALUE="<?php echo $categorie->idcategorie; ?>" <?php echo set_select('categorie', $categorie->libellecategorie); ?> ><?php echo $categorie->libellecategorie; ?></option>
+					<option VALUE="<?php echo $categorie->idcategorie; ?>" libelle="<?php echo $categorie->libellecategorie; ?>" <?php echo set_select('categorie', $categorie->libellecategorie); ?> ><?php echo $categorie->libellecategorie; ?></option>
 					<?php endforeach; ?>
 				</select>
 			</div>

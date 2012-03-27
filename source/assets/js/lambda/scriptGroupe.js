@@ -20,8 +20,14 @@ $(document).ready(function(){
 		var prenom = parent.find('#lignePrenom');
 		
 		// récupère la catégorie
-		var listeCategorie = parent.find('.dyn-selector');
-		alert(listeCategorie);
+		var listeCategorie = parent.find('.dyn-selector').find('option:selected');
+		var len = listeCategorie.length -1;
+		var categorieId = listeCategorie[len].value;
+		var categorie = listeCategorie[len].getAttribute('libelle');
+		if(categorieId == -1 && listeCategorie.length != 1) {
+			categorieId = listeCategorie[len-1].value;
+			categorie = listeCategorie[len-1].getAttribute('libelle');
+		}
 		
 		// récupère le rôle
 		var fonction = parent.find('#ligneFonction');
@@ -35,16 +41,12 @@ $(document).ready(function(){
 			erreur = true;
 			prenom.addClass('erreur');
 		}
-		if(categorie.val() == '') {
-			erreur = true;
-			categorie.addClass('erreur');
-		}
+		
 		
 		if(!erreur) {
 			// enlever la class erreur
 			nom.removeClass('erreur');
 			prenom.removeClass('erreur');
-			categorie.removeClass('erreur');
 			
 			// ferme le div.form
 			parent.slideUp('fast');
@@ -53,7 +55,7 @@ $(document).ready(function(){
 			parent.parent().attr('etat', true);
 
 			// met à jours le h3 avec les infos des inputs
-			parent.parent().find('h3').html(nom.val() + ' ' + prenom.val() + ' - ' + categorie.val() + ' (' + fonction.val() + ')' + '<span class="modifier">modifier</span>');
+			parent.parent().find('h3').html(nom.val() + ' ' + prenom.val() + ' - ' + categorie + ' (' + fonction.val() + ')' + '<span class="modifier">modifier</span>');
 		} else {
 			// refuser l'etat de la ligne
 			parent.parent().attr('etat', false);
