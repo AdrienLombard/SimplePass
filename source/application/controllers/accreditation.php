@@ -426,7 +426,7 @@ class Accreditation extends Cafe {
 			$jpg = imagecreatetruecolor(160, 204);
 			imagecopyresampled($jpg, $png, 0, 0, 0, 0, 160, 204, 160, 204);
 			imagejpeg($jpg, UPLOAD_DIR . $id.".jpg", 100);
-			$data['urlphoto'] = $id.".jpg";
+			//$data['urlphoto'] = $id.".jpg";
 		}
 
 		$this->modelclient->modifier($id, $data);
@@ -682,7 +682,7 @@ class Accreditation extends Cafe {
 			$jpg = imagecreatetruecolor(160, 204);
 			imagecopyresampled($jpg, $png, 0, 0, 0, 0, 160, 204, 160, 204);
 			imagejpeg($jpg, UPLOAD_DIR . $idClient.".jpg", 100);
-			$data['urlphoto'] = $idClient.".jpg";
+			//$data['urlphoto'] = $idClient.".jpg";
 		}
 
 		$this->modelclient->modifier($idClient, $client);
@@ -937,8 +937,8 @@ class Accreditation extends Cafe {
 		$this->load->helper('url');
 		$this->load->helper('image');
 		
-		$update['urlphoto'] = $data['file_name'];
-		$client = $this->modelclient->modifier($id, $update);
+		//$update['urlphoto'] = $data['file_name'];
+		//$client = $this->modelclient->modifier($id, $update);
 		
 		if($data['image_width'] == IMG_WIDTH && $data['image_height'] == IMG_HEIGHT) {
 			$this->layout->add_redirect('accreditation/voir/' . $id, 0.2);
@@ -1037,7 +1037,7 @@ $workbook->close();
 		$client = $this->modelclient->getClientParId($id);
 		
 		$this->load->helper('image');
-		crop(UPLOAD_DIR . $client->urlphoto, $x, $y, $w, $h);
+		crop(UPLOAD_DIR . $client->idclient . '.jpg', $x, $y, $w, $h);
 		
 		$this->load->helper('url');
 		redirect('accreditation/voir/' . $id);
