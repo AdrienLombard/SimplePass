@@ -208,14 +208,12 @@ td{
 }
 
 .photo .simulPhoto {
-	background-image: url(../../images/photos/0.jpg);
 	height: 204px;
 	width: 160px;
 	margin-right: 20px;
 }
 
 .photo .simulPhotoGroupe {
-	background-image: url(../../images/photos/0_bis.jpg);
 	height: 125px;
 	width: 98px;
 	margin-right: 20px;
@@ -235,7 +233,7 @@ td{
 	margin-left: 10px;
 }
 
-.optionPhoto a {
+.optionPhoto span {
 	display: inline-block;
     padding: 8px 0 8px 0;
     background: #1d465b;
@@ -247,14 +245,55 @@ td{
 	box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.2);
 }
 
-.optionPhoto a:hover {
+.optionPhoto span:hover {
 	background: #FFF;
     color: #1d465b;
     box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.8);
+	cursor: pointer;
 }
 
 
-
+/*
+ * Webcam
+ */
+.webcamWrapper {
+	display: none;
+	position: absolute;
+	z-index: 50;
+	padding: 10px 20px 20px 20px;
+	background: #FFF;
+	box-shadow: 0 0 20px rgba(0,0,0,0.8);
+	margin-top: -30px;
+}
+.webcamWrapper span {
+	font-style: italic;
+	font-size: 10px;
+}
+.captureCam {
+    display: block;
+	padding: 8px;
+    background: #6c8693;
+    color: #FFF;
+	text-align: center;
+	width: 256px;
+}
+.captureCam:hover {
+    background: #2e6f92;
+}
+.closeCam {
+	position: absolute;
+	padding: 1px 6px 3px 6px;
+	border-radius: 100%;
+	margin-top: -18px;
+	margin-left: 280px;
+	background: #FFF;
+	font-size: 16px;
+	box-shadow: 0 0 5px rgba(0,0,0,0.8);
+}
+.closeCam:hover {
+	color: #FFF;
+	background: #000;
+}
 
 
 
