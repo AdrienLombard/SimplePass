@@ -878,6 +878,8 @@ class Accreditation extends Cafe {
 			// création du client
 			$p['pays'] = $info['pays'];
 			$p['organisme'] = $info['societe'];
+			$p['tel']=$ref['tel'];
+			$p['mail']=$ref['mail'];
 			$fonction = $p['fonction'];
 			unset($p['fonction']);
 			$this->modelclient->ajouter($p);
