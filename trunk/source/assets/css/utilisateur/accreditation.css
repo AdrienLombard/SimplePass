@@ -244,6 +244,9 @@ form.rechercheClient div.listeTempsReel div.itemFlowSearch span.pays {
 div.inputs {
 	margin-left: 180px;
 }
+div.no-margin {
+	margin-left: 0;
+}
 
 
 

@@ -14,7 +14,7 @@
 
 					<div class="cropper">
 						
-						<img src="<?php echo img_url('photos/' . $client->idclient . '.jpg'); ?>" />
+						<img src="<?php echo site_url('image/generate/' . $client->idclient); ?>" />
 						
 					</div>
 					

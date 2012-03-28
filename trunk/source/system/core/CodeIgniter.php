@@ -230,6 +230,7 @@
     require BASEPATH.'core/Cafe.php';
     require BASEPATH.'core/Chocolat.php';
     require BASEPATH.'core/The.php';
+	require BASEPATH.'core/Caramel.php';
 
 	function &get_instance()
 	{

@@ -18,8 +18,8 @@
 			<?php if($accred->etataccreditation == ACCREDITATION_A_VALIDE): ?>
 			<a href="<?php echo site_url('accreditation/valider/'.$accred->idaccreditation); ?>">Valider la demande</a>
 			<?php else: ?>
-			<a id="imprimer" href="<?php echo site_url('impression/index/'.$accred->idclient.'/'.$accred->idaccreditation.'/'.$accred->idevenement); ?>">Imprimer</a>
-			<a id="imprimerCarte" href="<?php echo site_url('impression/impcarte/'.$accred->idclient.'/'.$accred->idaccreditation.'/'.$accred->idevenement); ?>">Imprimer carte</a>
+			<a id="imprimer" target="_blank" href="<?php echo site_url('impression/index/'.$accred->idclient.'/'.$accred->idaccreditation.'/'.$accred->idevenement); ?>">Imprimer</a>
+			<a id="imprimerCarte" target="_blank" href="<?php echo site_url('impression/impcarte/'.$accred->idclient.'/'.$accred->idaccreditation.'/'.$accred->idevenement); ?>">Imprimer carte</a>
 			<?php endif; ?>
 			<br>
 			<a href="<?php echo site_url('accreditation/supprimer/'.$accred->idaccreditation.'/'.$accred->idclient); ?>" confirm="Êtes-vous sûr de vouloir supprimer cette accréditation ?">Supprimer</a>
@@ -31,7 +31,7 @@
 				
 				<form class="infos nouveau" id="editAccredRealTime" method="post" action="<?php echo site_url('accreditation/exeModifier'); ?>" enctype="multipart/form-data">
 
-					<input type="file" name="photo_file" id="photo_file" />
+					<input type="file" name="photo_file" id="photo_file" accept="image/jpeg" />
 					<input type="hidden" name="photo_webcam" id="photo_webcam" />
 
 					<div class="photo">
@@ -49,8 +49,9 @@
 
 							<div class="photoMessage"></div>
 
-							<?php $photo = (img_url('photos/'.$accred->idclient.'.jpg') != NULL)? 'photos/'.$accred->idclient.'.jpg' : 'photos/0.jpg'; ?>
-							<img src="<?php echo img_url($photo); ?>" />
+							<?php if(img_url('photos/'.$accred->idclient.'.jpg') != NULL): ?>
+							<img src="<?php echo site_url('image/generate/' . $accred->idclient); ?>" />
+							<?php endif; ?>
 
 						</div>
 
