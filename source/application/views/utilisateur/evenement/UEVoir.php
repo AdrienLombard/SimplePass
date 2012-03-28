@@ -14,7 +14,6 @@
 			<?php if($resultats): ?>
 				<a href="<?php echo site_url('evenement/modifier/'.$id); ?>">Modifier</a>
 				<a href="<?php echo site_url('evenement/supprimer/'.$id);?>" confirm="Êtes-vous sûr de vouloir supprimer cet évènement ?">Supprimer</a>
-				<a href="<?php echo site_url('impression/imptableau/'.$id); ?>">Imprimer</a>
 			<?php endif; ?>
 			<a href="<?php echo site_url('evenement/liste'); ?>">Retour</a>
         </aside>
