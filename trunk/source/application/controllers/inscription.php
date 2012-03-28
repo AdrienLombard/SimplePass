@@ -433,8 +433,8 @@ class Inscription extends Chocolat {
 		$this->load->helper('url');
 		$this->load->helper('image');
 		
-		$update['urlphoto'] = $data['file_name'];
-		$client = $this->modelclient->modifier($id, $update);
+		//$update['urlphoto'] = $data['file_name'];
+		//$client = $this->modelclient->modifier($id, $update);
 		
 		if($data['image_width'] == IMG_WIDTH && $data['image_height'] == IMG_HEIGHT) {
 			$this->layout->add_redirect('accreditation/voir/' . $id, 0.1);
@@ -474,7 +474,7 @@ class Inscription extends Chocolat {
 		$client = $this->modelclient->getClientParId($id);
 		
 		$this->load->helper('image');
-		crop(UPLOAD_DIR . $client->urlphoto, $x, $y, $w, $h);
+		crop(UPLOAD_DIR . $client->idclient . '.jpg', $x, $y, $w, $h);
 		
 		$this->load->helper('url');
 		redirect('accreditation/voir/' . $id);
