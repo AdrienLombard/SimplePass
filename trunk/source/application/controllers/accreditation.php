@@ -269,7 +269,7 @@ class Accreditation extends Cafe {
 			array(
 				'field'   => 'mail',
 				'label'   => 'e-Mail', 
-				'rules'   => ''
+				'rules'   => 'valid_email'
 			),
 			array(
 				'field'   => 'evenement',
@@ -313,9 +313,10 @@ class Accreditation extends Cafe {
 				$accredZone[$key] = $key;
 			}
 		}
+		$mailOk = preg_match('/^[a-z0-9._-]+@[a-z0-9._-]+\.[a-z]{2,6}$/', $client['mail'] );
 		
 		// si le formulaire est correct.
-		if ($this->form_validation->run() == true) {
+		if ($this->form_validation->run() == true && $mailOk == 1) {
 			// On ajoute le client.
 			$this->modelclient->ajouter($client);
 			$idClient = $this->modelclient->lastId();
@@ -355,6 +356,9 @@ class Accreditation extends Cafe {
 				$re->erreurNom = 'Veuillez spécifier un nom.';
 			if(empty($re->client['prenom']))
 				$re->erreurPrenom = 'Veuillez spécifier un prenom.';
+			
+			if($mailOk == 0)
+				$re->erreurMail = 'Veuillez spécifier un e-mail valide.';
 		
 			// On recharge le formulaire.
 			$this->ajouter($re);

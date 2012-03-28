@@ -96,6 +96,7 @@
 						<div>
 							<label>Mail : </label>
 							<input type="text" name="mail" class="email" value="<?php if(isset($re->client['mail'])) echo $re->client['mail']; ?>" >
+							<?php if(isset($re->erreurMail)) echo '<label>-</label><span class="erreurMessage" >* ' . $re->erreurMail . '</span>'; ?>
 						</div>
 						
 						<br><br>
