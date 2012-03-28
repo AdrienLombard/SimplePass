@@ -22,8 +22,6 @@ class Accreditation extends Cafe {
 		$this->layout->ajouter_css('jquery.Jcrop');
 		$this->layout->ajouter_js('jquery.Jcrop.min');
 		
-		$this->layout->ajouter_js('webcam/jquery.webcam');
-		
 		// Chargement des librairie.
 		$this->load->library('form_validation');
 		
@@ -58,6 +56,9 @@ class Accreditation extends Cafe {
 	 * @param int $idClient : id du client dont on veut voire les accréditation.
 	 */
 	public function voir($idClient) {
+		
+		$this->layout->ajouter_js('webcam/jquery.webcam');
+		$this->layout->ajouter_js('webcam/webcam');
 		
 		$id = $this->session->userdata('idEvenementEnCours');
 		
@@ -198,6 +199,9 @@ class Accreditation extends Cafe {
 	}
 	
 	public function ajouter( $re = '' ) {
+		
+		$this->layout->ajouter_js('webcam/jquery.webcam');
+		$this->layout->ajouter_js('webcam/webcam');
 	
 		/*
 		 * Traitement du nom et du prénom : répercusion depuis la recherche
@@ -569,6 +573,9 @@ class Accreditation extends Cafe {
 	
 	public function modifier($idAccred) {
 		
+		$this->layout->ajouter_js('webcam/jquery.webcam');
+		$this->layout->ajouter_js('webcam/webcam');
+		
 		/*
 		 * Liste de zone et pays
 		 */
@@ -907,7 +914,7 @@ class Accreditation extends Cafe {
 		
 		$config['upload_path'] = UPLOAD_DIR;
 		$config['allowed_types'] = 'jpg';
-		$config['max_size']	= '4000';
+		//$config['max_size']	= '4000';
 		//$config['max_width']  = '1024';
 		//$config['max_height']  = '768';
 		//$config['file_name'] = urlencode($client->nom . '_' . $client->prenom . '_' . $id.".jpg");
@@ -921,8 +928,6 @@ class Accreditation extends Cafe {
 		
 		$img = imagecreatefromjpeg(UPLOAD_DIR . $data['file_name']);
 		
-		echo UPLOAD_DIR . $data['file_name'];
-		
 		$this->load->helper('url');
 		$this->load->helper('image');
 		
@@ -930,14 +935,13 @@ class Accreditation extends Cafe {
 		$client = $this->modelclient->modifier($id, $update);
 		
 		if($data['image_width'] == IMG_WIDTH && $data['image_height'] == IMG_HEIGHT) {
-			$this->layout->add_redirect('accreditation/voir/' . $id, 0.1);
+			$this->layout->add_redirect('accreditation/voir/' . $id, 0.2);
 			$this->voir($id);
 		} elseif($data['image_width'] > IMG_WIDTH && $data['image_height'] > IMG_HEIGHT) {
-			if($data['image_width'] > 940) {
+			if($data['image_width'] > 940)
 				resizeWidthRatio($data['full_path'], 940);
-				$this->layout->add_redirect('accreditation/crop/' . $id, 0.1);
-				$this->crop($id);
-			}
+			$this->layout->add_redirect('accreditation/crop/' . $id, 0.2);
+			$this->crop($id);
 		} else
 			die('Image trop petite.');
 	}
