@@ -43,7 +43,8 @@
 							<div class="photoMessage"></div>
 
 						</div>
-							<div class="optionPhoto visible">
+						
+						<div class="optionPhoto visible">
 							<a href="#" class="uploadFichier">FICHIER</a>
 							<a href="#" class="startWebcam">WEBCAM</a>
 						</div>

@@ -88,12 +88,21 @@
 		<h3><?php echo lang('nouveauMembre'); ?> <span class="modifier"><?php echo lang('modifier'); ?></span></h3>
 		<div class="form">
 			<div class="photo">
+				<canvas id="canvas" width="160" height="204" style="display:none;"></canvas>
+				<div class="webcamWrapper">
+					<a href="#" class="closeCam">x</a>
+					<span style="color:black"><?php echo lang('centreWebcam').' :'; ?></span>
+					<div class="webcam"></div>
+					<a href="#" class="captureCam"><?php echo lang('prendrePhoto'); ?></a>
+				</div>
 				<fieldset class="encadrePhoto">
 					<legend><?php echo lang('photo'); ?></legend>
 					<div class="optionPhoto">
-						<a href="#" class="uploadFichier"><?php echo lang('fichier'); ?></a>					</div>
+						<span class="uploadFichier"><?php echo lang('fichier'); ?></span>
+					</div>
 					<div class="optionPhoto">
-						<a href="#" class="startWebcam"><?php echo lang('camera'); ?></a>					</div>
+						<span class="startWebcam"><?php echo lang('camera'); ?></span>
+					</div>
 				</fieldset>
 			</div>
 			<div class="webcam"></div>

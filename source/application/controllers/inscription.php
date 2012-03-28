@@ -408,6 +408,78 @@ class Inscription extends Chocolat {
 		$this->layout->view('lambda/LMessage', $msg);
 	}
 	
+	public function upload($id)
+	{
+		$client = $this->modelclient->getClientParId($id);
+		
+		$config['upload_path'] = UPLOAD_DIR;
+		$config['allowed_types'] = 'jpg';
+		$config['max_size']	= '4000';
+		//$config['max_width']  = '1024';
+		//$config['max_height']  = '768';
+		//$config['file_name'] = urlencode($client->nom . '_' . $client->prenom . '_' . $id.".jpg");
+		$config['file_name'] = $id.".jpg";
+		$config['overwrite'] = true;
+		
+		$this->load->library('upload', $config);
+		$this->upload->do_upload('photo_file');
+		echo $this->upload->display_errors();
+		$data = $this->upload->data();
+		
+		$img = imagecreatefromjpeg(UPLOAD_DIR . $data['file_name']);
+		
+		echo UPLOAD_DIR . $data['file_name'];
+		
+		$this->load->helper('url');
+		$this->load->helper('image');
+		
+		$update['urlphoto'] = $data['file_name'];
+		$client = $this->modelclient->modifier($id, $update);
+		
+		if($data['image_width'] == IMG_WIDTH && $data['image_height'] == IMG_HEIGHT) {
+			$this->layout->add_redirect('accreditation/voir/' . $id, 0.1);
+			$this->voir($id);
+		} elseif($data['image_width'] > IMG_WIDTH && $data['image_height'] > IMG_HEIGHT) {
+			if($data['image_width'] > 940) {
+				resizeWidthRatio($data['full_path'], 940);
+				$this->layout->add_redirect('accreditation/crop/' . $id, 0.1);
+				$this->crop($id);
+			}
+		} else
+			die('Image trop petite.');
+	}
+	
+	/*
+	 * Crop : coupe une image trop grande
+	 */
+	public function crop($id) {
+		
+		$data['client'] = $this->modelclient->getClientParId($id);
+		$this->layout->view('utilisateur/accreditation/UACrop', $data);
+		
+	}
+	
+	
+	/*
+	 * ExeCrop : redimensionne l'image avec les paramères passés
+	 */
+	public function exeCrop() {
+		
+		$id = $this->input->post('id');
+		$x = $this->input->post('x');
+		$y = $this->input->post('y');
+		$w = $this->input->post('w');
+		$h = $this->input->post('h');
+		
+		$client = $this->modelclient->getClientParId($id);
+		
+		$this->load->helper('image');
+		crop(UPLOAD_DIR . $client->urlphoto, $x, $y, $w, $h);
+		
+		$this->load->helper('url');
+		redirect('accreditation/voir/' . $id);
+	}
+	
 }
 
 /* End of file inscription.php */
