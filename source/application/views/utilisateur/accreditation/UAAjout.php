@@ -51,9 +51,7 @@
 						
 					</div>
 						
-					
-					
-					
+
 					<div class="inputs">
 
 						<h2>Personne</h2>
@@ -63,10 +61,10 @@
 							<input type="text" 
 								name="nom" 
 								class="nom" 
-								value="<?php if(isset($re->client['nom'])) echo $re->client['nom']; ?>" 
+								value="<?php if(isset($re->client['nom'])) echo $re->client['nom']; else echo $nom; ?>" 
 								style="text-transform: uppercase" 
 							/>
-							<label>-</label><?php if(isset($re->erreurNom)) echo '<span class="erreurMessage" >* ' . $re->erreurNom . '</span>'; ?>
+							<?php if(isset($re->erreurNom)) echo '<label>-</label><span class="erreurMessage" >* ' . $re->erreurNom . '</span>'; ?>
 						</div>
 
 						<div>
@@ -74,9 +72,9 @@
 							<input type="text" 
 								name="prenom" 
 								class="prenom" 
-								value="<?php if(isset($re->client['prenom'])) echo $re->client['prenom']; ?>" 
+								value="<?php if(isset($re->client['prenom'])) echo $re->client['prenom']; else echo $prenom; ?>" 
 							/>
-							<label>-</label><?php if(isset($re->erreurPrenom)) echo '<span class="erreurMessage" >* ' . $re->erreurPrenom . '</span>'; ?>
+							<?php if(isset($re->erreurPrenom)) echo '<label>-</label><span class="erreurMessage" >* ' . $re->erreurPrenom . '</span>'; ?>
 						</div>
 
 						<div>
