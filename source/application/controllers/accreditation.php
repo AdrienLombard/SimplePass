@@ -426,7 +426,6 @@ class Accreditation extends Cafe {
 			$jpg = imagecreatetruecolor(160, 204);
 			imagecopyresampled($jpg, $png, 0, 0, 0, 0, 160, 204, 160, 204);
 			imagejpeg($jpg, UPLOAD_DIR . $id.".jpg", 100);
-			//$data['urlphoto'] = $id.".jpg";
 		}
 
 		$this->modelclient->modifier($id, $data);
@@ -682,7 +681,6 @@ class Accreditation extends Cafe {
 			$jpg = imagecreatetruecolor(160, 204);
 			imagecopyresampled($jpg, $png, 0, 0, 0, 0, 160, 204, 160, 204);
 			imagejpeg($jpg, UPLOAD_DIR . $idClient.".jpg", 100);
-			//$data['urlphoto'] = $idClient.".jpg";
 		}
 
 		$this->modelclient->modifier($idClient, $client);
@@ -936,9 +934,6 @@ class Accreditation extends Cafe {
 		
 		$this->load->helper('url');
 		$this->load->helper('image');
-		
-		//$update['urlphoto'] = $data['file_name'];
-		//$client = $this->modelclient->modifier($id, $update);
 		
 		if($data['image_width'] == IMG_WIDTH && $data['image_height'] == IMG_HEIGHT) {
 			$this->layout->add_redirect('accreditation/voir/' . $id, 0.2);
