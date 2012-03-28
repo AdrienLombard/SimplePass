@@ -8,7 +8,7 @@
 		
 		var insert = '<table id="tableauPersonne">';
 		insert +=		'<tr>';
-		insert +=			'<td>Nom : <input type="text" id="nom" name="personne[nbLigne][nom]"  /></td>';
+		insert +=			'<td>Nom : <input type="text" id="nom" name="personne[nbLigne][nom]"  style="text-transform: uppercase"  /></td>';
 		insert +=			'<td>Prénom : <input type="text" id="prenom" name="personne[nbLigne][prenom]" /></td>';
 		insert +=			'<td>Fonction : <input type="text" id="fonction" name="personne[nbLigne][fonction]" /></td>';
 		insert +=		'</tr>'
@@ -150,7 +150,7 @@
 
 					<table id="tableauReferent">
 						<tr>
-							<td>Nom : <input type="text" id="nom" name="ref[nom]"  /></td>
+							<td>Nom : <input type="text" id="nom" name="ref[nom]"  style="text-transform: uppercase" /></td>
 							<td>Prénom : <input type="text" id="prenom" name="ref[prenom]" /></td>
 							<td>Fonction : <input type="text" id="fonction" name="ref[fonction]" /></td>
 						</tr>
