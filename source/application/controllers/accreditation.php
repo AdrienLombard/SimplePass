@@ -321,6 +321,19 @@ class Accreditation extends Cafe {
 			$this->modelclient->ajouter($client);
 			$idClient = $this->modelclient->lastId();
 			
+			//upload ou webcam
+			$webcam = $this->input->post('photo_webcam');
+			if($webcam != null) {
+				$png = imagecreatefrompng($webcam);
+				$jpg = imagecreatetruecolor(IMG_WIDTH, IMG_HEIGHT);
+				imagecopyresampled($jpg, $png, 0, 0, 0, 0, IMG_WIDTH, IMG_HEIGHT, IMG_WIDTH, IMG_HEIGHT);
+				imagejpeg($jpg, UPLOAD_DIR . $idClient.".jpg", 100);
+			}
+
+			if($_FILES['photo_file']['size'] != 0)
+				$this->upload($idClient);
+
+			
 			// On ajoute son accréditation.
 			$accred['idclient'] = $idClient;
 			$accred['etataccreditation'] = ACCREDITATION_VALIDE;
@@ -339,10 +352,8 @@ class Accreditation extends Cafe {
 				$this->modelzone->ajouterZonesAccreditation($values);
 			}
 			
-			
 			// redirection vers la fiche ainsi créer.
-			$this->load->helper('url');
-			redirect('accreditation/voir/' . $idClient);
+			//redirect('accreditation/voir/' . $idClient);
 			
 		}
 		else {
@@ -433,10 +444,7 @@ class Accreditation extends Cafe {
 		if($_FILES['photo_file']['size'] != 0)
 			$this->upload($id);
 		else {
-			$this->load->helper('url');
-			//redirect('accreditation/voir/' . $id);
-			$this->layout->add_redirect('accreditation/voir/' . $id, 0.1);
-			$this->voir($id);
+			redirect('accreditation/voir/' . $id);
 		}
 			
 		
@@ -549,13 +557,12 @@ class Accreditation extends Cafe {
 	
 	public function supprimer( $id, $idClient ) {
 		
-		// suppréssion de toute les zones liée a l'accréditation.
+		// suppression de toute les zones liée a l'accréditation.
 		$this->modelzone->supprimerZoneParAccreditation( $id );
 		
-		// Suppréssion de notre accreditation.
+		// Suppression de notre accreditation.
 		$this->modelaccreditation->supprimer( $id );
 		
-		$this->load->helper('url');
 		redirect('accreditation/voir/' . $idClient);
 		
 	}
@@ -568,7 +575,6 @@ class Accreditation extends Cafe {
 		// On supprime notre accréditation.
 		$this->modelcategorie->supprimerClient();
 		
-		$this->load->helper('url');
 		redirect('accreditation');
 		
 	}
@@ -705,11 +711,8 @@ class Accreditation extends Cafe {
 
 		if($_FILES['photo_file']['size'] != 0)
 			$this->upload($idClient);
-		else {
-			$this->load->helper('url');
-			$this->layout->add_redirect('accreditation/modifier/' . $idAccred, 0.1);
-			$this->modifier($idAccred);
-		}
+		else
+			redirect('accreditation/modifier/' . $idAccred);
 
 	}
 	
@@ -764,9 +767,6 @@ class Accreditation extends Cafe {
 		
 		$idAccred = $this->modelaccreditation->lastId();
 		
-		// todo : modif zones
-		
-		$this->load->helper('url');
 		redirect('accreditation/modifier/' . $idAccred);
 		
 	}
@@ -777,7 +777,6 @@ class Accreditation extends Cafe {
 		$this->modelaccreditation->valideraccreditation( $idAccreditation );
 			$data['zones'] = $this->modelzone->getZoneParEvenement($this->session->userdata('idEvenementEnCours'));
 	
-		$this->load->helper('url');
 		redirect('accreditation/modifier/' . $idAccreditation); 
 		
 	}
@@ -903,7 +902,6 @@ class Accreditation extends Cafe {
 			$this->modelzone->ajouterZonesAccreditation($values);
 		}
 		
-		$this->load->helper('url');
 		redirect('accreditation/index');
 	}
 	
@@ -936,13 +934,11 @@ class Accreditation extends Cafe {
 		$this->load->helper('image');
 		
 		if($data['image_width'] == IMG_WIDTH && $data['image_height'] == IMG_HEIGHT) {
-			$this->layout->add_redirect('accreditation/voir/' . $id, 0.2);
-			$this->voir($id);
+			redirect('accreditation/voir/' . $id, 0.2);
 		} elseif($data['image_width'] > IMG_WIDTH && $data['image_height'] > IMG_HEIGHT) {
 			if($data['image_width'] > 940)
 				resizeWidthRatio($data['full_path'], 940);
-			$this->layout->add_redirect('accreditation/crop/' . $id, 0.2);
-			$this->crop($id);
+			redirect('accreditation/crop/' . $id);
 		} else
 			die('Image trop petite.');
 	}
@@ -1033,8 +1029,6 @@ $workbook->close();
 		
 		$this->load->helper('image');
 		crop(UPLOAD_DIR . $client->idclient . '.jpg', $x, $y, $w, $h);
-		
-		$this->load->helper('url');
 		redirect('accreditation/voir/' . $id);
 	}
 

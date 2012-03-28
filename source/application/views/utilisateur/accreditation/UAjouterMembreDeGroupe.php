@@ -68,19 +68,8 @@
 				<form class="infos nouveau" method="post" action="<?php echo site_url('accreditation/exeAjoutGroupe'); ?>">
 					
 					<input type="hidden" name="evenement" value="<?php echo $this->session->userdata('idEvenementEnCours'); ?>"/>
-
-					<div class="photo">
-
-						<div class="simulPhoto"></div>
-
-						<div class="optionPhoto">
-							<a href="#">FICHIER</a>
-							<a href="#">WEBCAM</a>
-						</div>
- 
-					</div>
                    
-                   <div class="inputs">
+                   <div class="inputs no-margin">
 					
 						<h2> Informations générales </h2>
 						

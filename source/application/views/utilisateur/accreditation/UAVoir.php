@@ -24,7 +24,7 @@
 				
 				<form class="infos" method="post" action="<?php echo site_url('accreditation/exeModifierClient'); ?>" enctype="multipart/form-data">
 					
-				<input type="file" name="photo_file" id="photo_file" />
+				<input type="file" name="photo_file" id="photo_file" accept="image/jpeg" />
 				<input type="hidden" name="photo_webcam" id="photo_webcam" />
 				
 				<div class="photo">
@@ -42,8 +42,9 @@
 						
 						<div class="photoMessage"></div>
 						
-						<?php $photo = (img_url('photos/'.$client->idclient.'.jpg') != NULL)? 'photos/'.$client->idclient.'.jpg' : 'photos/0.jpg'; ?>
-						<img src="<?php echo img_url($photo); ?>" />
+						<?php if(img_url('photos/'.$client->idclient.'.jpg') != NULL): ?>
+						<img src="<?php echo site_url('image/generate/' . $client->idclient); ?>" />
+						<?php endif; ?>
 						
 					</div>
 					
