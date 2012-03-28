@@ -229,7 +229,8 @@ class Inscription extends Chocolat {
 				
 			}
 			
-			
+			if($_FILES['photo_file']['size'] != 0)
+				$this->upload($idClient);
 			
 			$this->layout->view('lambda/LMessage', $data); 
 		}
