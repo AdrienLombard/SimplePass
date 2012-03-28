@@ -40,29 +40,28 @@ class Impression extends The {
 		$pdf->AddPage();
 		$pdf->SetFont('helvetica', '', 12);
 		if(img_url('photos/'.$client->idclient.'.jpg') != NULL){
-			$pdf->Image(img_url('photos/'.$client->idclient.'.jpg'), 24, 22, 29, 37);
+			$pdf->Image(img_url('photos/'.$client->idclient.'.jpg'), 24, 19, 29, 37);
 			
 		}
 		else{
-			$pdf->Image(img_url('photos/0.jpg'), 24, 22, 29, 37);
+			$pdf->Image(img_url('photos/0.jpg'), 24, 19, 29, 37);
 		}
-			
-		$pdf->Text(25, 74, utf8_decode($accred->nom));
-		$pdf->Text(55, 74, utf8_decode($accred->prenom));
-		$pdf->Image(img_url('drapeaux/'.utf8_decode($client->pays).'.gif'), 25, 75);
-		$pdf->Text(35, 78, utf8_decode($client->pays));
+		$nomprenom = $accred->nom.' '.$accred->prenom;	
+		$pdf->Text(25, 71, utf8_decode($nomprenom));
+		$pdf->Image(img_url('drapeaux/'.utf8_decode($client->pays).'.gif'), 25, 72);
+		$pdf->Text(35, 75, utf8_decode($client->pays));
 		if ($accred->libellecategorie != null){
 			$couleur = hexaToRGB($accred->couleur);
 			$pdf->SetFillColor($couleur->red,$couleur->green,$couleur->blue);
-			$pdf->Rect(25, 79, 50, 5, 'DF');
-			$pdf->Text(27, 83, utf8_decode($accred->libellecategorie));
+			$pdf->Rect(25, 76, 50, 5, 'DF');
+			$pdf->Text(27, 80, utf8_decode($accred->libellecategorie));
 			$indice = $indice + 5;
 		}
 		if($facult != ''){
-			$pdf->Text(25, 83 + $indice, utf8_decode($facult));
+			$pdf->Text(25, 80 + $indice, utf8_decode($facult));
 			$indice = $indice + 4;
 		}
-		$pdf->Text(25, 83 + $indice, utf8_decode($client->organisme));
+		$pdf->Text(25, 80 + $indice, utf8_decode($client->organisme));
 		
 		
 		$pdf->SetFont('helvetica', '', 15);
@@ -74,7 +73,7 @@ class Impression extends The {
 			for($j=0;$j<5 && ($j+$i*5)<$nb;$j++){
 				$zonetxt = $zonetxt.$zones[$j+$i*5]->codezone." - ";
 			}
-			$pdf->Text(25, 105 + $px*$i, $zonetxt);
+			$pdf->Text(25, 102 + $px*$i, $zonetxt);
 			$zonetxt = '- ';
 		}
 		$pdf->Output();
