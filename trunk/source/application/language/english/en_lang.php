@@ -45,6 +45,7 @@ $lang['individuelle'] = 'individual';
 $lang['groupe'] = 'Group';
 $lang['mentionChampObligatoire'] = 'required field';
 $lang['centreWebcam'] = 'Put your face in the middle of the screen';
+$lang['prendrePhoto'] = 'take a picture';
 
 // Formulaire d'inscription groupée
 $lang['responsable'] = 'Responsible';
