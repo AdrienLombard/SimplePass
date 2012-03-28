@@ -51,7 +51,7 @@
 	
 	<br><br>
 	<span class="info">* <?php echo lang('mentionChampObligatoire'); ?></span><br>
-	<form action="<?php echo site_url('inscription/ajouter/' . $event_id); ?>" method="POST" >
+	<form action="<?php echo site_url('inscription/ajouter/' . $event_id); ?>" method="POST" enctype="multipart/form-data">
 		
 		<input type="hidden" id="evenement" name="evenement" value="<?php echo $event_id; ?>" />
 		
@@ -66,7 +66,7 @@
 		<label><?php echo lang('pays'); ?>*</label>
 		<select  id="pays" name="pays" class="select">
 			<?php foreach($listePays as $pays): ?>
-            <option value="<?php echo $pays->idpays; ?>" <?php echo ($pays->idpays == 'FRA')? 'selected' : '' ;?> style="background: url(<?php echo img_url('drapeaux/'.strtolower($pays->idpays).'.gif'); ?>) no-repeat left;"><?php echo $pays->nompays; ?></option><?php endforeach; ?> 
+            <option value="<?php echo $pays->idpays; ?>" <?php echo ($pays->idpays == 'FRA')? 'selected' : '' ;?> style="background: url(<?php echo img_url('drapeaux/'.strtolower($pays->idpays).'.gif'); ?>)no-repeat left;"><?php echo $pays->nompays; ?></option><?php endforeach; ?> 
 		</select>
 		
 		<label><?php echo lang('tel'); ?></label>
@@ -95,6 +95,8 @@
 
 		<input type="text" value="<?php echo set_value('fonction'); ?>" id="fonction" name="fonction" />
 				
+		<input type="file" name="photo_file" id="photo_file" />	
+		
 		<div class="photo">
 			<canvas id="canvas" width="160" height="204" style="display:none;"></canvas>
 			<div class="webcamWrapper">
@@ -112,9 +114,9 @@
 					<span class="startWebcam"><?php echo lang('camera'); ?></span>
 				</div>
 			</fieldset>
-		</div>
-
-		<input type="file" name="photo_file" id="photo_file" />		<div class="clear"></div>
+		</div>	
+		
+		<div class="clear"></div>
 		
 		<input type="submit" name="valider" id="valider" value="<?php echo lang('valider'); ?>"/>
 		
