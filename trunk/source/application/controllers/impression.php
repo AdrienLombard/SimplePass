@@ -44,7 +44,7 @@ class Impression extends The {
 			
 		}
 		else{
-			$pdf->Image(img_url('photos/ombre.jpg'), 24, 22, 29, 37);
+			$pdf->Image(img_url('photos/0.jpg'), 24, 22, 29, 37);
 		}
 			
 		$pdf->Text(25, 74, utf8_decode($accred->nom));
@@ -101,7 +101,7 @@ class Impression extends The {
 			
 		}
 		else{
-			$pdf->Image(img_url('photos/ombre.jpg'), 30, 22, 25, 32);
+			$pdf->Image(img_url('photos/0.jpg'), 30, 22, 25, 32);
 		}
 		$nomprenom = $accred->nom.' '.$accred->prenom;	
 		$pdf->Text(58, 28, utf8_decode($nomprenom));
