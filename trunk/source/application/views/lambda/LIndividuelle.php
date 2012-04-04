@@ -70,6 +70,7 @@
 		</select>
 		
 		<label><?php echo lang('tel'); ?></label>
+		
 		<input type="text" value="<?php echo set_value('tel'); ?>" id="tel" name="tel" />
 		
 		<label><?php echo lang('mail'); ?>*</label>
@@ -114,8 +115,11 @@
 					<span class="startWebcam"><?php echo lang('camera'); ?></span>
 				</div>
 			</fieldset>
+
+		</div>
+		<div class="clear"></div>
+
 		</div>	
-		
 		<div class="clear"></div>
 		
 		<input type="submit" name="valider" id="valider" value="<?php echo lang('valider'); ?>"/>

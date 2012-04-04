@@ -32,6 +32,8 @@ drop table if exists courchevel_utilisateur;
 
 drop table if exists courchevel_zone;
 
+drop table if exists courchevel_presse;
+
 /*==============================================================*/
 /* Table : courchevel_accreditation                             */
 /*==============================================================*/
@@ -86,6 +88,26 @@ create table courchevel_client
    mail                 text default null,
    primary key (idclient)
 ) engine = InnoDB, charset = utf8;
+
+/*===============================================================*/
+/* Table : courchevel_presse
+/*===============================================================*/
+create table courchevel_presse
+(
+  idclientpresse      bigint not null auto_increment,
+  pays                varchar(3) not null,
+  nom                 varchar(50) not null,
+  prenom              varchar(50) not null,
+  fonction            varchar(50) default  null,
+  tel_fixe            varchar(50) default null,
+  tel_portable        varchar(50) default null,
+  tel_ligne_directe   varchar(50) default null,
+  numero_carte        varchar(50) default null,
+  organisme           varchar(100) default null,
+  information         varchar(50) default null,
+  adresse             varchar(100) default null,
+  primary key (idclientpresse)
+)engine = InnoDB, charset = utf8;
 
 /*==============================================================*/
 /* Table : courchevel_evenement                                 */

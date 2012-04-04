@@ -59,7 +59,7 @@ define('DB_PAYS',					'courchevel_pays');
 define('DB_UTILISATEUR',			'courchevel_utilisateur');
 define('DB_ZONE',					'courchevel_zone');
 define('DB_ZONES_ACCREDITATION', 	'courchevel_accreditation_zones');
-
+define ('DB_PRESSE',                'courchevel_presse');
 /*
  * DIMENSIONS DES IMAGES
  */

@@ -39,11 +39,11 @@
 <div id="content">
 	<div class="wrap">
 		
-	<h1><?php echo lang('demandeAccred'); ?></h1>
-	<!--
-	<a href="<?php //echo site_url('inscription/changerLangage/fra/' . str_replace('/', ':', uri_string())); ?>" ><img src="<?php //echo img_url('drapeaux/fra.gif'); ?>" alt="fra" /></a>
-	<a href="<?php //echo site_url('inscription/changerLangage/gbr/' . str_replace('/', ':', uri_string())); ?>" ><img src="<?php //echo img_url('drapeaux/gbr.gif'); ?>" alt="gbr" /></a>
-	-->
+	<h1><?php echo lang('demandeAccred');  echo " Presse";?></h1>
+	
+	<a href="<?php echo site_url('inscription/changerLangage/fra/' . str_replace('/', ':', uri_string())); ?>" ><img src="<?php //echo img_url('drapeaux/fra.gif'); ?>" alt="fra" /></a>
+	<a href="<?php echo site_url('inscription/changerLangage/gbr/' . str_replace('/', ':', uri_string())); ?>" ><img src="<?php //echo img_url('drapeaux/gbr.gif'); ?>" alt="gbr" /></a>
+	
 	<div class="box-small">
 		
 		<span class="info"><h4><?php echo lang('inscription'); ?></h4> <?php echo lang('groupe'); ?></span><br>
@@ -51,7 +51,7 @@
 	
 		<br><br>
 		<span class="info">* <?php echo lang('mentionChampObligatoire'); ?></span><br>
-		<form method="post" action="<?php echo site_url('inscription/exeGroupe/' . $idEvenement); ?>">
+		<form method="post" action="<?php echo site_url('presse/exeGroupe/' . $idEvenement); ?>">
 			
 			<input type="hidden" name="evenement" value="<?php echo $infoEvenement[0]->idevenement; ?>" />
 			
@@ -78,28 +78,44 @@
 			<input type="text" value="<?php if($values) echo $values->prenom; ?>" name="prenom" />
 			<?php echo form_error('prenom'); ?>
 			
-			<label><?php echo lang('tel'); ?></label>
-			<input type="text" value="<?php if($values) echo $values->tel; ?>" name="tel" />
-
+			<label> Adresse* </label>
+		    <input type="text"  value="<?php echo set_value('adresse');?>"/>
+		    <label> Code postale* </label>
+		    <input type="text" name="code_postale" value="<?php echo set_value('code_postale');?>"/>
+		 <div class="tel">
+		    <label > Fixe </label>
+			<input id="tel" type="text" value="<?php echo set_value('tel'); ?>" id="tel" name="tel" />
+			<label> Portable* </label>
+			<input id="tel" type="text" value="<?php echo set_value('tel'); ?>" id="tel" name="tel" />
+			<label> Ligne directe</label>
+		    <input id="tel" type="text" value="<?php echo set_value('tel'); ?>" id="tel" name="tel" />
+		 </div>
+			<label> Numero de carte* </label>	
+	        <input type="text" name="numr_carte" value="<?php echo set_value('numero_carte');?>"/>
 			<label><?php echo lang('mail'); ?>*</label>
 			<input type="text" value="<?php if($values) echo $values->mail; ?>" name="mail" />
 			<?php echo form_error('mail'); ?>
-			
 			<div>
+		<label><?php echo lang('societe'); ?>*</label>
+		<input type="text" value="<?php echo set_value('titre'); ?>" id="titre" name="titre" />
 			<label><?php echo lang('categorie'); ?></label>
 			<select  id="categorie" name="categorie[]" class="select dyn-selector">
 				<option value="-1"><?php echo lang('neSaisPas'); ?></option>
 				<?php foreach($listeSurCategorie as $categorie): ?>
-				<option VALUE="<?php  echo $categorie->idcategorie; ?>" <?php echo set_select('categorie', $categorie->libellecategorie); ?> ><?php if($categorie->idcategorie!=1) {echo $categorie->libellecategorie;} ?></option>
+				<option VALUE="<?php echo $categorie->idcategorie; ?>" <?php echo set_select('categorie', $categorie->libellecategorie); ?> ><?php echo $categorie->libellecategorie; ?></option>
 				<?php endforeach; ?>
 			</select>
 			</div>
+		   <label>Souhaitez vous une plasse de parking ? </label>
+		   <input type="checkbox" value="Oui"/>Oui
+		   <input type="checkbox" value="Non"/>Non
+		   
+		   <label> Souhaitez vous recevoir les informations sur courchevel ? </label>
+		   <input type="checkbox" value="info"/>Compétitions sportives
+		   <input type="checkbox" value="info"/>Sports
+		   <input type="checkbox" value="info"/>Tourisme
 		
-			<div class="sous-categories"></div>	
-								
-			<label><?php echo lang('demandeAjoutFonction'); ?></label>
-			<input type="text" value="<?php echo set_value('fonction'); ?>" id="fonction" name="fonction" />
-			
+			<div class="sous-categories"></div>				
 			<div class="photo">
 				<canvas id="canvas" width="160" height="204" style="display:none;"></canvas>
 				<div class="webcamWrapper">
