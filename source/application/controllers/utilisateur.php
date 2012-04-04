@@ -98,10 +98,13 @@ class utilisateur extends Cafe {
 	}
 
 	public function test() {
-		
-		$this->layout->ajouter_js('test');
-		
-		$this->layout->view('test.php');
+		$this->load->model('modelcategorie');
+
+		$data['categories'] = $this->modelcategorie->getCategorieDansEvenementToutBien();
+
+		//var_dump($data['categories']);
+
+		$this->layout->view('test.php', $data);
 	}
 	
 	
