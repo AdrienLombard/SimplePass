@@ -223,6 +223,7 @@ class Presse extends Chocolat{
 		}
 	}
 	/**
+
 	 * Méthode pour le formulaire pour la saisie du responsable d'une équipe.
 	 */
 	public function groupe($evenement, $categorie, $info=false) {
@@ -243,13 +244,16 @@ class Presse extends Chocolat{
 	
 	
 	/**
+
 	 * Méthode de traitement pour la saisie du responsable.
 	 */
+
+	public function exeGroupe($categorie) {
 	public function exeGroupe( $categorie ) {
+
 				
 		$idEvenement = $this->input->post('evenement');
-		$categorie=$this->session->userdata('categorie');
-	    echo $categorie;
+		
 		// On regle les paramètres du formulaire.
 		$this->form_validation->set_message('required', 'Le champ %s est obligatoire.');
 		$this->form_validation->set_message('valid_email', 'Veuillez rentrer un mail valide.');
@@ -356,6 +360,25 @@ class Presse extends Chocolat{
 	}
 
 	/**
+	 * Méthode pour le formulaire pour la saisie du responsable d'une équipe.
+	 */
+	public function groupe($evenement, $categorie, $info=false) {
+		// Chargement du js.
+		$this->layout->ajouter_js('lambda/script');
+		$data['idEvenement']	= $evenement;
+		$data['infoEvenement'] 	= $this->modelevenement->getEvenementParId($evenement);
+		$data['listePays'] 		= $this->modellambda->listePays();
+		$data['listeCategorie'] = $this->modelcategorie->getCategories();
+		$data['listeSurCategorie'] 	= $this->modelcategorie->getSousCategorie($categorie);
+		$data['values'] = $info;
+		
+		$this->layout->view('presse/LPresseGroupe', $data);
+			
+	}
+	
+
+
+	/**
 	 * Méthode pour l'ajout de tous les membres d"une équipe.
 	 */
 	public function ajouterGroupe($data) {
@@ -365,4 +388,9 @@ class Presse extends Chocolat{
 	}
 
 
+
+
+	
+	
+	
 }
