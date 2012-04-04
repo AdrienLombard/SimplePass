@@ -53,7 +53,7 @@ define('DIRECT', 		2);
 /*
  * Nom des tables de la bdd.
  */
-define('DB_CCREDITATION',			'courchevel_accreditation');
+define('DB_ACCREDITATION',			'courchevel_accreditation');
 define('DB_ACCREDITATION_ZONES',	'courchevel_accreditation_zones');
 define('DB_CATEGORIE',				'courchevel_categorie');
 define('DB_CLIENT',					'courchevel_client');

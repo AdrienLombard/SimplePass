@@ -219,9 +219,14 @@ class Inscription extends Chocolat {
 						$categorie = $cat;
 				}
 
-				//Insertion dans la base.
-				$this->modelclient->ajouter($values);
-				$idClient = $this->modelclient->lastId();
+				// On vérifie si le client exite dans la base.
+				$idClient = $this->modelclient->verifierClient($values['nom'], $values['prenom'], $values['mail']);
+
+				if(!$idClient) {
+					//Insertion dans la base.
+					$this->modelclient->ajouter($values);
+					$idClient = $this->modelclient->lastId();
+				}
 
 				$accredData = Array(
 					'idcategorie'		=> $categorie,
