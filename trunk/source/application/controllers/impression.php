@@ -32,6 +32,7 @@ class Impression extends The {
 		
 		$client = $this->modelclient->getClientParId($idclient);
 		$accred = $this->modelaccreditation->getAccreditationParId($idaccred);
+		$zonesEvent = $this->modelzone->getZoneParEvenement($idevenement);
 		$zones = $this->modelzone->getZoneParAccredParEvenement ($idaccred, $idevenement);
 		$facult = str_replace('%20', ' ', $facult);
 		$indice = 0;
@@ -64,20 +65,37 @@ class Impression extends The {
 		$pdf->Text(25, 80 + $indice, utf8_decode($client->organisme));
 		
 		
-		$pdf->SetFont('helvetica', '', 15);
-		$nb = count($zones);
-		$nbligne = ($nb % 5 == 0)?$nb / 5 : floor($nb / 5)+1;
-		$zonetxt = "- ";
-		$px = 5;
-		for($i=0;$i<$nbligne;$i++){
-			for($j=0;$j<5 && ($j+$i*5)<$nb;$j++){
-				$zonetxt = $zonetxt.$zones[$j+$i*5]->codezone." - ";
-			}
-			$pdf->Text(25, 102 + $px*$i, $zonetxt);
-			$zonetxt = '- ';
-		}
-		$pdf->Output();
+		$pdf->SetFont('helvetica', 'B', 13);
+		$nb = count($zonesEvent);
+		$nbligne = ($nb % 6 == 0)?$nb / 6 : floor($nb / 6)+1;
 		
+		$px = 6;
+		for($i=0;$i<$nbligne;$i++){
+			$py = 0;
+			for($j=0;$j<6 && ($j+$i*6)<$nb;$j++){
+				if($this->zone_exist($zones, $zonesEvent[$j+$i*6]->codezone)){
+					$pdf->SetFillColor(0,0,0);
+					$pdf->Rect(25 + $py, 97 + $px*$i, 6, 6, 'DF');
+					$pdf->SetTextColor(255,255,255);
+				}
+				else{
+					$pdf->SetTextColor(200,200,200);
+				}
+				$pdf->Text(25.5 + $py, 102 + $px*$i, $zonesEvent[$j+$i*6]->codezone);
+				$py = $py + 8;
+			}
+		}
+		$pdf->Output();	
+	}
+	
+	private function zone_exist($tab, $champ){
+		$test = false;
+		foreach ($tab as $t){
+			if ($t->codezone == $champ){
+				$test = true;
+			}
+		}
+		return $test;
 	}
 	
 	public function impcarte($idclient, $idaccred, $idevenement, $facult=''){
@@ -87,6 +105,7 @@ class Impression extends The {
 		
 		$client = $this->modelclient->getClientParId($idclient);
 		$accred = $this->modelaccreditation->getAccreditationParId($idaccred);
+		$zonesEvent = $this->modelzone->getZoneParEvenement($idevenement);
 		$zones = $this->modelzone->getZoneParAccredParEvenement($idaccred, $idevenement);
 		$facult = str_replace('%20', ' ', $facult);
 		$indice = 0;
@@ -124,20 +143,162 @@ class Impression extends The {
 		//	$zonetxt = $zonetxt.$z->codezone.' - ';
 		//}
 		$pdf->SetFont('helvetica', 'B', 12);
-		$nb = count($zones);
-		$nbligne = ($nb % 8 == 0)?$nb / 8 : floor($nb / 8)+1;
-		$zonetxt = "- ";
+		$nb = count($zonesEvent);
+		$nbligne = ($nb % 10 == 0)?$nb / 10 : floor($nb / 10)+1;
+
 		$px = 6;
 		for($i=0;$i<$nbligne;$i++){
-			for($j=0;$j<8 && ($j+$i*8)<$nb;$j++){
-				$zonetxt = $zonetxt.$zones[$j+$i*8]->codezone." - ";
+			$py = 0;
+			for($j=0;$j<10 && ($j+$i*10)<$nb;$j++){
+				if($this->zone_exist($zones, $zonesEvent[$j+$i*10]->codezone)){
+					$pdf->SetFillColor(0,0,0);
+					$pdf->Rect(30 + $py, 55 + $px*$i, 6, 6, 'DF');
+					$pdf->SetTextColor(255,255,255);
+				}
+				else{
+					$pdf->SetTextColor(200,200,200);
+				}
+				$pdf->Text(30.5 + $py, 59.5 + $px*$i, $zonesEvent[$j+$i*10]->codezone);
+				$py = $py + 7;
 			}
-			$pdf->Text(32, 58 + $px*$i, $zonetxt);
-			$zonetxt = '- ';
 		}
 		
 		//$pdf->Text(30, 62, $zonetxt);
 		$pdf->Output();
+	}
+	
+	public function impgroupe($data){
+		
+		include("phpToPDF.php");
+		
+		
+		$client = $this->modelclient->getClientParId($idclient);
+		$accred = $this->modelaccreditation->getAccreditationParId($idaccred);
+		$zonesEvent = $this->modelzone->getZoneParEvenement($idevenement);
+		$zones = $this->modelzone->getZoneParAccredParEvenement ($idaccred, $idevenement);
+		$facult = str_replace('%20', ' ', $facult);
+		$indice = 0;
+		
+		$pdf = new phpToPDF();
+		$pdf->AddPage();
+		$pdf->SetFont('helvetica', '', 12);
+		if(img_url('photos/'.$client->idclient.'.jpg') != NULL){
+			$pdf->Image(img_url('photos/'.$client->idclient.'.jpg'), 24, 19, 29, 37);
+			
+		}
+		else{
+			$pdf->Image(img_url('photos/0.jpg'), 24, 19, 29, 37);
+		}
+		$nomprenom = $accred->nom.' '.$accred->prenom;	
+		$pdf->Text(25, 71, utf8_decode($nomprenom));
+		$pdf->Image(img_url('drapeaux/'.utf8_decode($client->pays).'.gif'), 25, 72);
+		$pdf->Text(35, 75, utf8_decode($client->pays));
+		if ($accred->libellecategorie != null){
+			$couleur = hexaToRGB($accred->couleur);
+			$pdf->SetFillColor($couleur->red,$couleur->green,$couleur->blue);
+			$pdf->Rect(25, 76, 50, 5, 'DF');
+			$pdf->Text(27, 80, utf8_decode($accred->libellecategorie));
+			$indice = $indice + 5;
+		}
+		if($facult != ''){
+			$pdf->Text(25, 80 + $indice, utf8_decode($facult));
+			$indice = $indice + 4;
+		}
+		$pdf->Text(25, 80 + $indice, utf8_decode($client->organisme));
+		
+		
+		$pdf->SetFont('helvetica', 'B', 13);
+		$nb = count($zonesEvent);
+		$nbligne = ($nb % 6 == 0)?$nb / 6 : floor($nb / 6)+1;
+		
+		$px = 6;
+		for($i=0;$i<$nbligne;$i++){
+			$py = 0;
+			for($j=0;$j<6 && ($j+$i*6)<$nb;$j++){
+				if($this->zone_exist($zones, $zonesEvent[$j+$i*6]->codezone)){
+					$pdf->SetFillColor(0,0,0);
+					$pdf->Rect(25 + $py, 97 + $px*$i, 6, 6, 'DF');
+					$pdf->SetTextColor(255,255,255);
+				}
+				else{
+					$pdf->SetTextColor(200,200,200);
+				}
+				$pdf->Text(25.5 + $py, 102 + $px*$i, $zonesEvent[$j+$i*6]->codezone);
+				$py = $py + 8;
+			}
+		}
+		$pdf->Output();
+		
+	}
+	
+	public function impcartegroupe(){
+		
+		include("phpToPDF.php");
+		
+		
+		$client = $this->modelclient->getClientParId($idclient);
+		$accred = $this->modelaccreditation->getAccreditationParId($idaccred);
+		$zonesEvent = $this->modelzone->getZoneParEvenement($idevenement);
+		$zones = $this->modelzone->getZoneParAccredParEvenement($idaccred, $idevenement);
+		$facult = str_replace('%20', ' ', $facult);
+		$indice = 0;
+		
+		
+		$pdf = new phpToPDF();
+		$pdf->AddPage();
+		$pdf->SetFont('helvetica', '', 12);
+		if(img_url('photos/'.$client->idclient.'.jpg') != NULL){
+			$pdf->Image(img_url('photos/'.$client->idclient.'.jpg'), 30, 22, 25, 32);
+			
+		}
+		else{
+			$pdf->Image(img_url('photos/0.jpg'), 30, 22, 25, 32);
+		}
+		$nomprenom = $accred->nom.' '.$accred->prenom;	
+		$pdf->Text(58, 28, utf8_decode($nomprenom));
+		$pdf->Image(img_url('drapeaux/'.utf8_decode($client->pays).'.gif'), 58, 30);
+		$pdf->Text(65, 33, utf8_decode($client->pays));
+		if ($accred->libellecategorie != null){
+			$couleur = hexaToRGB($accred->couleur);
+			$pdf->SetFillColor($couleur->red,$couleur->green,$couleur->blue);
+			$pdf->Rect(58, 35, 44, 6, 'DF');
+			$pdf->Text(60, 40, utf8_decode($accred->libellecategorie));
+			$indice = $indice + 6;
+			
+		}
+		if($facult != ''){
+			$pdf->Text(58, 40 + $indice, $facult);
+			$indice = $indice + 6;
+		}
+		$pdf->Text(58, 40 + $indice, utf8_decode($client->organisme));
+		//$zonetxt = '- ';
+		//foreach($zones as $z){
+		//	$zonetxt = $zonetxt.$z->codezone.' - ';
+		//}
+		$pdf->SetFont('helvetica', 'B', 12);
+		$nb = count($zonesEvent);
+		$nbligne = ($nb % 10 == 0)?$nb / 10 : floor($nb / 10)+1;
+
+		$px = 6;
+		for($i=0;$i<$nbligne;$i++){
+			$py = 0;
+			for($j=0;$j<10 && ($j+$i*10)<$nb;$j++){
+				if($this->zone_exist($zones, $zonesEvent[$j+$i*10]->codezone)){
+					$pdf->SetFillColor(0,0,0);
+					$pdf->Rect(30 + $py, 55 + $px*$i, 6, 6, 'DF');
+					$pdf->SetTextColor(255,255,255);
+				}
+				else{
+					$pdf->SetTextColor(200,200,200);
+				}
+				$pdf->Text(30.5 + $py, 59.5 + $px*$i, $zonesEvent[$j+$i*10]->codezone);
+				$py = $py + 7;
+			}
+		}
+		
+		//$pdf->Text(30, 62, $zonetxt);
+		$pdf->Output();
+		
 	}
 	
 	public function imptableau($idevent){

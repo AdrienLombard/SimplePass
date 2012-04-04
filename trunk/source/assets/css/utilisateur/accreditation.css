@@ -293,6 +293,11 @@ div.no-margin {
 	box-shadow: 1px 1px 3px rgba(0,0,0,0.5);
 }
 
+.retirerNbPersonne{
+	margin-left: -9px;
+	margin-top: 16px;
+}
+
 /*
  * STYLE DE SEB SUR CHAMPS FACULTATIF.
  */
@@ -385,4 +390,12 @@ form#editAccredRealTime input[type=text][readonly], form#editAccredRealTime sele
 #canvas {
 	position:absolute;
 	z-index: 5000
+}
+
+.champ {
+	margin-left:-18px
+}
+
+.champ2 {
+	margin-left:-24px
 }
