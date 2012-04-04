@@ -126,7 +126,7 @@
 				</select>
 			</div>
 			<div class="split">
-				<label>fonction*</label>
+			<label>fonction*</label>
 		    <select id="fonction" name="fonction" class="select" >
 		       	<option value="1">rédacteur en chef</option> 
 		        <option value="2">journaliste</option>
@@ -134,7 +134,7 @@
 			    <option value="4">preneur de son</option>
 			    <option value="5">photographe</option>
 			    <option value="6">technecien</option>
-		   </select>
+		   	</select>
 			</div>
 			<input type="hidden" name="categorie" value="<?php echo $categorie; ?>" />
 			<div class="clear"></div>

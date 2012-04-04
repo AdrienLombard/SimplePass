@@ -30,9 +30,33 @@ class Inscription extends Chocolat {
 	
 	public function index() {
 
-		$this->lambda();
+		$this->presse();
 		
 	}
+
+	public function presse() {
+		$data['listeSurCategorie'] 	= $this->modelcategorie->getCategorieMere();
+		$this->layout->view('presse/LPageEntre',$data);
+	}
+
+	public function exePresse(){
+		$this->layout->ajouter_js('lambda/script');
+		$categorie = $this->input->post('categorie');
+
+		$this->session->set_userdata('categorie', $categorie);
+
+		if($categorie != "1")
+		{
+			$this->lambda();
+
+		}
+		else
+
+			redirect('presse/lambda/' . $categorie);
+
+
+	}
+
 	/**
 	 * Méthode pour le changement de langue
 	 */

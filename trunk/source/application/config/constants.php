@@ -46,6 +46,10 @@ define('ACCREDITATION_VALIDE', 0);
 define('NON_ALL_ACCESS', 0);
 define('ALL_ACCESS', 1);
 
+define('FIXE', 			0);
+define('PORTABLE', 	1);
+define('DIRECT', 		2);
+
 /*
  * Nom des tables de la bdd.
  */
