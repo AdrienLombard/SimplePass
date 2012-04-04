@@ -67,5 +67,10 @@ define('UPLOAD_DIR', './assets/images/photos/');
 define('IMG_WIDTH', 160);
 define('IMG_HEIGHT', 204);
 
+/*
+ * Adresse mail où sera envoyée une copie des mails de confirmation
+ */
+define('MAIL_COPIE', 'adrilomb@gmail.com');
+ 
 /* End of file constants.php */
 /* Location: ./application/config/constants.php */

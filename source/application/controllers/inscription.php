@@ -221,34 +221,32 @@ class Inscription extends Chocolat {
 				if($_FILES['photo_file']['size'] != 0)
 					$this->upload($idClient);
 
-				/*
 				$evenement = $this->modelevenement->getEvenementParId($event);
 				
 				// Préparation et envoi du mail de confirmation
-				$this->email->from('accreditation@courchevel.com', 'Accréditations Courchevel'); // L'adresse qui enverra le mail
+				$this->email->from('accreditations@courchevel.com', 'Accréditations Courchevel'); // L'adresse qui enverra le mail
 				$this->email->to($values['mail']); // Le destinataire du mail
-				$this->email->bcc('adrilomb@gmail.com'); // Placer ici l'adresse de Courchevel qui recevra une copie du mail
+				$this->email->bcc(MAIL_COPIE); // Placer ici l'adresse de Courchevel qui recevra une copie du mail
 				
 				// Le sujet du mail
 				$this->email->subject('Votre accréditation pour l\'évènement ' . $evenement[0]->libelleevenement);
 				
 				// Le contenu du mail
-				$contenuMail = 	'Cher ' . $values['prenom'] . ' ' . $values['nom'] . ', \r\n' .
-								'\r\n' .
-								'Votre accréditation pour l\'évènement ' . $evenement[0]->libelleevenement . ' a bien été prise en compte.\r\n' .
-								'\r\n' .
-								'Merci pour votre pré-enregistrement.' .
-								'\r\n' . 
-								'Le club des sports de Courchevel';
+				$contenuMail = 	'<html>' .
+									'<head></head>' .
+									'<body>' .
+										'<p>Cher(e) ' . $values['prenom'] . ' ' . $values['nom'] . ', </p>' .
+										'<p>Votre accréditation pour l\'évènement ' . $evenement[0]->libelleevenement . ' a bien été prise en compte.</p>' .
+										'<p>Merci pour votre pré-enregistrement.</p>' .
+										'<p>Le club des sports de Courchevel</p>' .
+									'</body>' .
+								'</html>';
 				
 				// Inclusion du contenu dans le mail
 				$this->email->message($contenuMail);
 				
 				// Envoi du mail
-				$this->email->send();
-				*/
-
-				echo $this->email->print_debugger();
+				//$this->email->send();
 				
 				$data['titre']		= $this->lang->line('titreConfirmeDemande');
 				$data['message']	= $this->lang->line('confirmeDemande');
@@ -404,6 +402,16 @@ class Inscription extends Chocolat {
 		$accred['dateaccreditation'] = time();
 		$this->modelaccreditation->ajouter($accred);
 		
+		$evenement = $this->modelevenement->getEvenementParId($accred['idevenement']);
+		
+		$contenuMail = 	'<html>' .
+					'<head></head>' .
+					'<body>' .
+						'<p>Cher(e) ' . $ref['prenom'] . ' ' . $ref['nom'] . ', </p>' .
+						'<p>Votre accréditation pour l\'évènement ' . $evenement[0]->libelleevenement . ' a bien été prise en compte.</p>' .
+						'<p>Cette accréditation est valable pour les personnes suivantes : </p>' .
+						'<ul title="listeMembres" >';
+		
 		// Ajout des membres
 		foreach($this->input->post('groupe') as $ligne) {
 			// création du client
@@ -423,6 +431,13 @@ class Inscription extends Chocolat {
 			$accred['etataccreditation'] = ACCREDITATION_A_VALIDE;
 			$accred['dateaccreditation'] = time();
 			
+			if($accred['fonction'] != '') {
+				$contenuMail .= '<li>' . $membre['prenom'] . ' ' . $membre['nom'] . ' - ' . $accred['fonction'] . '</li>';
+			}
+			else {
+				$contenuMail .= '<li>' . $membre['prenom'] . ' ' . $membre['nom'] . ' - Pas de fonction définie</li>';
+			}
+			
 			$tab = $ligne['categorie'];
 			$temp = -1;
 			while($temp == -1) {
@@ -431,6 +446,27 @@ class Inscription extends Chocolat {
 			$accred['idcategorie'] = $temp;
 			$this->modelaccreditation->ajouter($accred);
 		}
+				
+		// Préparation et envoi du mail de confirmation
+		$this->email->from('accreditations@courchevel.com', 'Accréditations Courchevel'); // L'adresse qui enverra le mail
+		$this->email->to($values['mail']); // Le destinataire du mail
+		$this->email->bcc(MAIL_COPIE); // L'adresse de Courchevel qui recevra une copie du mail
+		
+		// Le sujet du mail
+		$this->email->subject('Votre accréditation groupée pour l\'évènement ' . $evenement[0]->libelleevenement);
+		
+		// Le contenu du mail
+		$contenuMail = 			'</ul>' .
+								'<p>Merci pour votre pré-enregistrement.</p>' .
+								'<p>Le club des sports de Courchevel</p>' .
+							'</body>' .
+						'</html>';
+		
+		// Inclusion du contenu dans le mail
+		$this->email->message($contenuMail);
+		
+		// Envoi du mail
+		//$this->email->send();
 		
 		$msg['titre']	= $this->lang->line('titreConfirmeDemandeGroupe');
 		$msg['message']	= $this->lang->line('confirmeDemandeGroupe');
