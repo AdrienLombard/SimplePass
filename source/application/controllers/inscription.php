@@ -11,6 +11,11 @@ class Inscription extends Chocolat {
 		// Charge la librairie de validation de formulaire
 		$this->load->library('form_validation');
 		
+		// Charge la librairie mail
+		$this->load->library('email');
+		
+		// Chargement du css.
+		
 		// Chargement du modele.
 		$this->load->model('modelaccreditation');
 		$this->load->model('modelevenement');
@@ -216,7 +221,35 @@ class Inscription extends Chocolat {
 				if($_FILES['photo_file']['size'] != 0)
 					$this->upload($idClient);
 
+				/*
+				$evenement = $this->modelevenement->getEvenementParId($event);
+				
+				// Préparation et envoi du mail de confirmation
+				$this->email->from('accreditation@courchevel.com', 'Accréditations Courchevel'); // L'adresse qui enverra le mail
+				$this->email->to($values['mail']); // Le destinataire du mail
+				$this->email->bcc('adrilomb@gmail.com'); // Placer ici l'adresse de Courchevel qui recevra une copie du mail
+				
+				// Le sujet du mail
+				$this->email->subject('Votre accréditation pour l\'évènement ' . $evenement[0]->libelleevenement);
+				
+				// Le contenu du mail
+				$contenuMail = 	'Cher ' . $values['prenom'] . ' ' . $values['nom'] . ', \r\n' .
+								'\r\n' .
+								'Votre accréditation pour l\'évènement ' . $evenement[0]->libelleevenement . ' a bien été prise en compte.\r\n' .
+								'\r\n' .
+								'Merci pour votre pré-enregistrement.' .
+								'\r\n' . 
+								'Le club des sports de Courchevel';
+				
+				// Inclusion du contenu dans le mail
+				$this->email->message($contenuMail);
+				
+				// Envoi du mail
+				$this->email->send();
+				*/
 
+				echo $this->email->print_debugger();
+				
 				$data['titre']		= $this->lang->line('titreConfirmeDemande');
 				$data['message']	= $this->lang->line('confirmeDemande');
 				
