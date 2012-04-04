@@ -399,3 +399,7 @@ form#editAccredRealTime input[type=text][readonly], form#editAccredRealTime sele
 .champ2 {
 	margin-left:-24px
 }
+
+.pays {
+	background: #FFF;
+}
