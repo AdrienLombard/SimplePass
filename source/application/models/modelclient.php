@@ -19,6 +19,20 @@ class modelClient extends MY_Model {
 							->result();
 		return $result[0];
 	}
+
+	public function verifierCLient($nom, $prenom, $mail) {
+		$result = $this->db->select('*')
+						->from(DB_CLIENT . ' c')
+						->where('c.nom', $nom)
+						->where('c.prenom', $prenom)
+						->where('c.mail', $mail)
+						->get()
+						->result();
+		if(isset($result[0]))
+			return $result[0]->idclient;
+		else
+			return false;
+	}
 	
 	public function getClientsAvecAccred() {
 		return $this->db->select('*')

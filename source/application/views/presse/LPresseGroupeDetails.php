@@ -108,12 +108,12 @@
 			<div class="webcam"></div>
 			<input type="file" name="photo_file" id="photo_file" />
 			<div class="split">
-				<label for=""><?php echo lang('nom'); ?>*</label>
+				<label ><?php echo lang('nom'); ?>*</label>
 				<input type="text" id="ligneNom" name="groupe[nbLigne][nom]" />
 			</div>
 			
 			<div class="split">
-				<label for=""><?php echo lang('prenom'); ?>*</label>
+				<label><?php echo lang('prenom'); ?>*</label>
 				<input type="text" id="lignePrenom" name="groupe[nbLigne][prenom]" />
 			</div>
 			
@@ -134,7 +134,7 @@
 			<input type="text" name="numr_carte" value="<?php echo set_value('numr_carte');?>"/>
 			
 			<div class="split">
-				<label for=""><?php echo lang('categorie'); ?></label>
+				<label ><?php echo lang('categorie'); ?></label>
 				<select  id="categorie" name="groupe[nbLigne][categorie][]" class="select dyn-selector">
 					<option value="-1" libelle=" " ><?php echo lang('neSaisPas'); ?></option>
 					<?php foreach($listeSurCategorie as $categorie): ?>
