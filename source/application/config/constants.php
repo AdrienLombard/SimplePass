@@ -53,7 +53,7 @@ define('DIRECT', 		2);
 /*
  * Nom des tables de la bdd.
  */
-define('DB_ACCREDITATION',			'courchevel_accreditation');
+define('DB_CCREDITATION',			'courchevel_accreditation');
 define('DB_ACCREDITATION_ZONES',	'courchevel_accreditation_zones');
 define('DB_CATEGORIE',				'courchevel_categorie');
 define('DB_CLIENT',					'courchevel_client');
@@ -71,10 +71,5 @@ define('UPLOAD_DIR', './assets/images/photos/');
 define('IMG_WIDTH', 160);
 define('IMG_HEIGHT', 204);
 
-/*
- * Adresse mail où sera envoyée une copie des mails de confirmation
- */
-define('MAIL_COPIE', 'adrilomb@gmail.com');
- 
 /* End of file constants.php */
 /* Location: ./application/config/constants.php */
