@@ -295,7 +295,7 @@ class Inscription extends Chocolat {
 				$this->email->message($contenuMail);
 				
 				// Envoi du mail
-				$this->email->send();
+				//$this->email->send();
 				
 				$data['titre']		= $this->lang->line('titreConfirmeDemande');
 				$data['message']	= $this->lang->line('confirmeDemande');
@@ -551,7 +551,7 @@ class Inscription extends Chocolat {
 		$this->email->message($contenuMail);
 		
 		// Envoi du mail
-		$this->email->send();
+		//$this->email->send();
 		
 		$msg['titre']	= $this->lang->line('titreConfirmeDemandeGroupe');
 		$msg['message']	= $this->lang->line('confirmeDemandeGroupe');
