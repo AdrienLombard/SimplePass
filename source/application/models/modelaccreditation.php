@@ -227,9 +227,15 @@ class modelAccreditation extends MY_Model {
 				 ->delete(DB_ACCREDITATION);
 	}
 	
-	
-	
-	
-	
+	public function getAccreditationGroupeParEvenement( $nomGroupe, $idEvent) {
+		return $this->db->select('*')
+						->from(DB_ACCREDITATION . ' a')
+						->join(DB_CLIENT . ' c', 'c.idclient = a.idclient')
+						->join(DB_CATEGORIE . ' ct', 'ct.idcategorie = a.idcategorie')
+						->where('a.groupe', $nomGroupe)
+						->where('a.idevenement', $idEvent)
+						->get()
+						->result();
+	}	
 	
 }

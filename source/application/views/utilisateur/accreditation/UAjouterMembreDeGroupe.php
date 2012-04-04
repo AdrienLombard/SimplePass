@@ -6,11 +6,12 @@
 	
 	$('.ajoutNbPersonne').click(function(){
 		
-		var insert = '<table id="tableauPersonne">';
+		var insert = '<table id="tableauPersonne" data="nbLigne">';
 		insert +=		'<tr>';
 		insert +=			'<td>Nom : <input type="text" id="nom" name="personne[nbLigne][nom]"  style="text-transform: uppercase"  /></td>';
 		insert +=			'<td>Prénom : <input type="text" id="prenom" name="personne[nbLigne][prenom]" /></td>';
 		insert +=			'<td>Fonction : <input type="text" id="fonction" name="personne[nbLigne][fonction]" /></td>';
+		insert +=			'<td><span class="button retirerNbPersonne" id="nbLigne">-</span></td>';
 		insert +=		'</tr>'
 		insert +=	'</table>';
 		
@@ -21,7 +22,9 @@
 		
 	});
 	
-	
+	$('.retirerNbPersonne').live('click', function(){
+		$('table[data=' + $(this).attr('id') + ']').remove();
+	});
 	
 	
 	$('#imprimer').live('click', function(){
@@ -100,7 +103,7 @@
 							<select class="pays" name="info[pays]" style="padding-left: 0px;">
 
 							<?php foreach($pays as $p): ?>
-								<option value="<?php echo $p->idpays; ?>" <?php echo ($p->idpays == 'FRA')? 'selected' : '' ;?> style="background: url(<?php echo img_url('drapeaux/'.strtolower($p->idpays).'.gif'); ?>) no-repeat left;"><?php echo $p->nompays; ?></option>
+								<option value="<?php echo $p->idpays; ?>" <?php echo ($p->idpays == 'FRA')? 'selected' : '' ;?> style="background: url(<?php echo img_url('drapeaux/'.strtolower($p->idpays).'.gif'); ?>)no-repeat left;"><?php echo $p->nompays; ?></option>
 							<?php endforeach; ?>
 
 							</select>
@@ -124,7 +127,7 @@
 							<div>
 								<?php foreach($zones as $zone): ?>
 								<div class="checkzone" id="<?php echo $zone->idzone; ?>">
-									<?php echo $zone->idzone; ?>
+									<?php echo $zone->codezone; ?>
 									<input type="checkbox" name="zone[<?php echo $zone->idzone; ?>]" />
 								</div>
 								<?php endforeach; ?>
@@ -152,7 +155,6 @@
 					<div id="insererligne"></div>
 
 					<span class="button ajoutNbPersonne">+</span>
-					
 					<br>
 				
 					<div style="text-align: right">

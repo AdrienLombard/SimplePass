@@ -1,40 +1,3 @@
-<script type="text/javascript">
-
-	$(document).ready(function(){
-
-		var tabCat = new Array();
-
-		<?php $i = 0; ?>
-		<?php foreach($categories as $cat): ?>
-			tabCat[<?php echo $i; ?>] = [<?php echo $cat->idcategorie ?>, <?php echo $cat->surcategorie ?>, "<?php echo $cat->libellecategorie ?>"];
-			<?php $i++; ?>
-		<?php endforeach; ?>
-
-		$("select.dyn-selector").live("change",function(){
-
-			var id = $(this).find("option:selected").val();
-			var count = 0;
-
-			var newSelect = "<select name='categorie[]' class='select dyn-selector'>";
-			newSelect += "<option value='-1'>Je ne sais pas encore</option>";
-			for(var i=0; i<tabCat.length; i++) {
-				if(tabCat[i][1] == id) {
-					newSelect += "<option value='" + tabCat[i][0] + "'>" + tabCat[i][2] + "</option>";
-					count++;
-				}
-			}
-			newSelect += "</select>";
-
-			$(this).next().remove();
-
-			if(count != 0)
-				$(newSelect).insertAfter(this);
-
-		});
-}
-
-</script>
-
 <h1>Accréditations</h1>
 
 <div class="wrap">
@@ -42,138 +5,114 @@
     <div class="tabs">
 		<a href="<?php echo site_url('accreditation/index'); ?>" >Liste</a>
 		<a href="<?php echo site_url('accreditation/rechercher'); ?>" >Ajouter personne</a>
-		<a href="<?php echo site_url('accreditation/ajouterGroupe'); ?>" >Ajouter groupe</a>
-		<a href="#" class="current">Voir</a>
+		<a href="<?php echo site_url('accreditation/ajouterGroupe'); ?>" class="current" >Ajouter groupe</a>
     </div>
 
     <div class="box-full">
 
         <aside>
-           
-			<a href="<?php echo site_url('accreditation/demandes'); ?>">Retour</a>
-
+			<a href="<?php echo site_url('impression/impgroupe'); ?>">Imprimer</a>
+			<a href="<?php echo site_url('impression/impcartegroupe'); ?>">Imprimer Carte</a>
+			<a href="<?php echo site_url('accreditation/index'); ?>">Retour</a>
         </aside>
 		
 		<div id="main" class="accred">
-			<form class="infos groupee" method="post" action="<?php echo site_url('accreditation/exeModifierGroupe/' . $client->idclient); ?>" >
-				<h2 class="infos">Référent du groupe</h2><br/>
-	        	
-				<div class="client">
-					
-					<div class="groupe">
+        	
+			<div class="client nouveau">
+				
+				<form class="infos nouveau" method="post" action="<?php echo site_url('accreditation/exeAjoutGroupe'); ?>">
+                   
+                   <div class="inputs no-margin">
+						<h2> Informations générales </h2>
+						<div>
+							<label>Groupe : </label>
+							<input type="text" name="info[groupe]" init="<?php echo $ref[0]->groupe; ?>" value="<?php echo $ref[0]->groupe; ?>" class="nom" disabled="disabled">
+						</div>
 						
-						<b> Groupe </b>
+						<div>
+							<label>Société : </label>
+							<input type="text" name="info[societe]" value="<?php echo $ref[0]->organisme; ?>" class="nom" disabled="disabled"/>
+						</div>
+
+						<div>
+							<label>Tel : </label>
+							<input type="text" name="info[tel]" class="tel" value="<?php echo $ref[0]->tel; ?>" disabled="disabled"/>
+						</div>
+						
+						<div>
+							<label>Mail : </label>
+							<input type="text" name="info[mail]" class="mail" value="<?php echo $ref[0]->mail; ?>"  disabled="disabled"/>
+						</div>
+						
+						
+						<div>
+							<label>Pays : </label>
+							<select name="pays" value="<?php echo $ref[0]->pays; ?>"  disabled="disabled">
+								<option value="<?php echo $ref[0]->pays; ?>"><?php echo $pays->nompays; ?></option>
+							</select>
+						</div>
+					
+						<div class="clear"></div>
 						
 					</div>
-						
-						<input type="hidden" id="evenement" name="evenement" value="<?php echo $idevenement; ?>" />
-						<input type="hidden" id="idRef" name="idRef" value="<?php echo $client->idclient; ?>" />
-						<input type="hidden" nom="idAccredRef" name="idAccredRef" value="<?php echo $accreditation[0]->idaccreditation; ?>" />
-						<input type="text" class="nom" id="nomRef" name="nomRef" init="<?php echo $client->nom; ?>" value="<?php echo $client->nom; ?>">
-						<input type="text" class="prenom" id="prenomRef" name="prenomRef" init="<?php echo $client->prenom; ?>" value="<?php echo $client->prenom; ?>">
-						
-						<select class="pays" id="paysRef" name="paysRef" init="<?php echo $client->pays; ?>"
-								style="background: url(<?php echo img_url('drapeaux/'.strtolower($client->pays).'.gif'); ?>) no-repeat left; padding-left: 15px">
-							
-						<?php foreach($pays as $p): ?>
-							<option value="<?php echo $p->idpays; ?>" style="background: url(<?php echo img_url('drapeaux/'.strtolower($p->idpays).'.gif'); ?>) no-repeat left;" <?php echo ($p->idpays == $client->pays)? 'selected' : '' ?>><?php echo $p->nompays; ?></option>
-						<?php endforeach; ?>
-						
-						</select>
+
+					<h2>Référent</h2>
 					
-
-						<input type="text" class="organisme" id="organismeRef" init="<?php echo $client->organisme; ?>" value="<?php echo $client->organisme; ?>">
-						<input type="text" class="role" name="fonctionRef" init="<?php echo $accreditation[0]->fonction; ?>" value="<?php echo $accreditation[0]->fonction; ?>">
-
-						<input type="text" class="organisme" id="organismeRef" name="organismeRef" init="<?php echo $client->organisme; ?>" value="<?php echo $client->organisme; ?>">
-						<input type="text" class="role" id="fonctionRef" name="fonctionRef" init="<?php echo $accreditation[0]->fonction; ?>" value="<?php echo $accreditation[0]->fonction; ?>">
-
-						
-						<input type="text" class="tel" id="telRef" name="telRef" init="<?php echo $client->tel; ?>" value="<?php echo $client->tel; ?>">
-						<input type="text" class="email" id="mailRef" name="mailRef" init="<?php echo $client->mail; ?>" value="<?php echo $client->mail; ?>">
+					<div class="referent">
+						<div>
+							<label>Nom : </label><input type="text" id="nom" class="champ" style="text-transform: uppercase; width:180px;" name="ref[nom]" value="<?php echo $ref[0]->nom; ?>" disabled="disabled"/>
+							<label>Prénom : </label><input type="text" id="prenom" class="champ2" style="width:180px;" name="ref[prenom]" value="<?php echo $ref[0]->prenom; ?>" disabled="disabled"/>
+						</div>
+						<div>
+							<label>Catégorie : </label><input type="text" id="categorie" class="champ" style="width:180px;" name="ref[categorie]" value="<?php echo $ref[0]->libellecategorie; ?>" disabled="disabled"/>
+							<label>Fonction : </label><input type="text" id="fonction" class="champ2" style="width:180px;" name="ref[fonction]" value="<?php echo $ref[0]->fonction; ?>" disabled="disabled"/>
+						</div>
+						<div class="contientZones">
+							<label>Zones : </label>
+							<div>
+								<?php foreach($zonesEvent as $zone): ?>
+								<div class="checkzone" id="<?php echo $zone->idzone; ?>">
+									<?php echo $zone->codezone; ?>
+									<input type="checkbox" name="zone[<?php echo $zone->idzone; ?>]"/>
+								</div>
+								<?php endforeach; ?>
+							</div>
+						</div>
 					
+					<br><br>
+					
+					<h2>Personnes</h2>
+					
+					<?php foreach($personnes as $p): ?>
+						<div>
+							<label>Nom : </label><input type="text" id="nom" class="champ" style="text-transform: uppercase; width:180px;" name="ref[nom]" value="<?php echo $p->nom; ?>" disabled="disabled"/>
+							<label>Prénom : </label><input type="text" id="prenom" class="champ2" style="width:180px;" name="ref[prenom]" value="<?php echo $p->prenom; ?>" disabled="disabled"/>
+						</div>
+						<div class="ligne">
+							<label>Catégorie : </label><input type="text" id="categorie" class="champ" style="width:180px;" name="ref[categorie]" value="<?php echo $p->libellecategorie; ?>" disabled="disabled"/>
+							<label>Fonction : </label><input type="text" id="fonction" class="champ2" style="width:180px;" name="ref[fonction]" value="<?php echo $p->fonction; ?>" disabled="disabled"/>
+						</div>
+						<div class="contientZones">
+							<label>Zones : </label>
+							<div>
+								<?php foreach($zonesEvent as $zone): ?>
+								<div class="checkzone" id="<?php echo $zone->idzone; ?>">
+									<?php echo $zone->codezone; ?>
+									<input type="checkbox" name="zone[<?php echo $zone->idzone; ?>]"/>
+								</div>
+								<?php endforeach; ?>
+							</div>
+						</div>
 					<div class="clear"></div>
-					
-				</div>
-				
-				<div class="listeAccred">
-					
-					<h3>Membres du groupe</h3>
-					
-					<?php if(count($accredAttente)==0) echo '<br/>Aucune demande en cours.' ?>
-					<?php $nbLigne = 0; ?>
-					<?php foreach($accredAttente as $demande): ?>
-					
-					<div class="ligneAccred close">
-						<div class="fixe">
-							<input type="hidden" name="idClient" name="<?php echo "groupe[" . $nbLigne . "][idClient]"; ?>" value="<?php echo $demande->idclient; ?>" />
-							<input type="hidden" id="idAccreditation" name="<?php echo "groupe[" . $nbLigne . "][idAccreditation]"; ?>" value="<?php echo $demande->idaccreditation; ?>" />
-							<input type="hidden" id="groupe" name="<?php echo "groupe[" . $nbLigne . "][groupe]"; ?>" value="<?php echo $demande->groupe; ?>" />
-							<span class="nomprenom" name="<?php echo "groupe[" . $nbLigne . "][nom]"; ?>" ><?php echo $demande->nom.' '.$demande->prenom.'    '; ?></span>
-							<span class="date"><?php echo display_date($demande->dateaccreditation); ?></span>
-							<span class="categorie"><?php echo $demande->libellecategorie; ?></span>
-						</div>
-						<div class="editAccred" >
-							<div class="client">
-							
-								<div class="groupe">
-	
-	
-									<b> Groupe </b>
-	
-	
-								</div>
-	
-								<div>
-									<label for="fonction">Fonction : </label>
-									<input type="text" id="ligneFonction" name="<?php echo "groupe[" . $nbLigne . "][fonction]"; ?>" value="<?php echo $demande->fonction; ?>"/>
-									<label for="categorieGroupe">Catégorie : </label>
-									<select id="categorieGroupe" name="<?php echo "groupe[" . $nbLigne . "][categorieGroupe]"; ?>" data="<?php echo $demande->idaccreditation; ?>">
-										<option value="">---</option>
-										<?php foreach($categories as $idAccredCategories => $categorie): ?>
-											<option value="<?php echo $categorie['cat']->idcategorie; ?>" zone="<?php echo $categorie['zones']; ?>" <?php echo ($categorie['cat']->idcategorie == $demande->idcategorie)? 'selected' : '' ; ?>>
-												<?php echo $categorie['cat']->libellecategorie; ?>
-											</option>
-										<?php endforeach; ?>
-									</select>
-								</div>
-								
-								<div class="contientZones" data="<?php echo $demande->idaccreditation; ?>">
-									<label>Zones : </label>
-									<div>
-										<?php foreach($zonesAccred as $idAccredZones => $zonesAccredMembre): ?>
-											<?php if($idAccredZones == $demande->idaccreditation) { ?>
-												<?php foreach($zones as $zone): ?>
-													<div class="checkzone <?php echo in_array($zone->idzone, $zonesAccredMembre)? 'on' : '' ; ?>" id="<?php echo $zone->idzone; ?>">
-														<?php echo $zone->idzone; ?>
-														<input type="checkbox" name="<?php echo "groupe[" . $nbLigne . "][zone][" . $zone->idzone . "]" ?>" <?php echo in_array($zone->idzone, $zonesAccredMembre)? 'checked' : '' ; ?> />
-													</div>
-												<?php endforeach; ?>
-											<?php } ?>
-										<?php endforeach; ?>
-									</table>
-								</div>
-	
-								<div class="clear"></div>
-								</div>
-							
-						</div>
-						
-					</div>
-					<?php $nbLigne++; ?>
 					<?php endforeach; ?>
-	                   
-			    	</div>
-                        
-               </div>
-				
-				<input type="submit" class="button" value="Enregistrer les modifications" />
-		 </form>
-	    
 
+				
+				</form>
+
+			</div>
+	
         <div class="clear"></div>
 
     </div>
- 
 		
 </div>

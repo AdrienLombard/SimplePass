@@ -95,87 +95,27 @@ class Accreditation extends Cafe {
 		$this->layout->view('utilisateur/accreditation/UAVoir', $data);
 		
 	}
-	public function voirEquipe($idClient, $idEvenement){
-		$data=Array();
-		
-		$data['idevenement'] = $idEvenement;
-		$data['client'] = $this->modelclient->getClientParId($idClient);
-		$data['accreditation'] = $this->modelaccreditation->getAccreditationsReferentParEvenement($idClient, $idEvenement);
-		$data['pays'] = $this->modelpays->getpays();
-		$data['evenements'] = $this->modelevenement->getEvenements();
-		$data['zones'] = $this->modelzone->getZoneParEvenement( $idEvenement );
-		$data['accredAttente'] = array();
-		$data['accredValide'] = array();
-		
-		// On récpère les accréditations de ce client.
-		$equipe = $this->modelaccreditation->getAccreditationsGroupeParEvenement( $idClient , $idEvenement);
-		
-		/*
-		 * Liste des catégories avec les zones associées
-		 */
-		$cats = $this->modelcategorie->getCategorieDansEvenement($this->session->userdata('idEvenementEnCours'));
-		foreach($cats as $cat) {
-			$push = array();
-			$push['cat'] = $cat;
-			$push['zones'] = '';
-			$catZones = $this->modelzone->getZoneParCategorieEtEvenement($cat->idcategorie, $this->session->userdata('idEvenementEnCours'));
-			foreach($catZones as $cz) $push['zones'] .= $cz->idzone.'-';
-			$data['categories'][] = $push;
-		}
-		
-		
-		
-		$idCategories = array();
-		foreach ($equipe as $accred) {
-		       
-			if($accred->idclient != $idClient ) {
-				if($accred->etataccreditation == ACCREDITATION_A_VALIDE) {
-					$data['accredAttente'][] = $accred;
-				}
-				else {
-					$data['accredValide'][] = $accred;
-				}
-				$idAccred[] = $accred->idaccreditation;
-				$data['accredMembre'] = $accred;
-				$idCategories[] = $accred->idcategorie;
-				
-				
-				/*
-				 * Liste des zones de l'accred
-				 */
-				$sortie = array();
-				$zonesAccred = $this->modelzone->getZoneParAccreditation($accred->idaccreditation);
-				foreach($zonesAccred as $za)	
-					$sortie[] = $za->idzone;
-
-					
-				$zonesAccred = array();
-				$zonesAccred = $this->modelzone->getZoneParCategorieEtEvenement( $accred->idcategorie, $this->session->userdata('idEvenementEnCours') );
-				
-				foreach($zonesAccred as $za)
-					$sortie[] = $za->idzone;
-				
-
-				$data['zonesAccred'][$accred->idaccreditation] = $sortie;
+	public function voirEquipe($nomGroupe){
+		$data = Array();
+		$ref = Array();
+		$pers = Array();
+		$nomGroupe=str_replace('%20', ' ', $nomGroupe);;
+		$idEvent = $this->session->userdata('idEvenementEnCours');
+		$membres = $this->modelaccreditation->getAccreditationGroupeParEvenement( $nomGroupe, $idEvent);
+		$zonesEvent = $this->modelzone->getZoneParEvenement($idEvent);
+		foreach($membres as $m){
+			if ($m->referent == null){
+				$ref[] = $m;
 			}
-			
-		}
-		
-		$listeZonesAccred = array();
-		if(count($idCategories)) {
-
-			// On récupère et on traite la liste des zones utilisé par les accréditation de ce client.
-			$zonesCate = $this->modelzone->getZoneParIdMultipleParEvenement( $idCategories , $idEvenement );
-			$cateZones = Array();
-			
-			foreach($zonesCate as $zones) {
-				$cateZones[$zones->idcategorie][$zones->idzone] = true;
-
+			else{
+				$pers[] =$m; 
 			}
-
-			$data['listeZonesAccred'] = $cateZones;
-		
 		}
+		
+		$data['zonesEvent'] = $zonesEvent;
+		$data['ref'] = $ref;
+		$data['personnes'] = $pers;
+		$data['pays'] = $this->modelpays->getPaysParId($ref[0]->pays);
 		
 		$this->layout->view('utilisateur/accreditation/UAVoirEquipe',$data);
 		
@@ -901,8 +841,8 @@ class Accreditation extends Cafe {
 				$values[] = array('idaccreditation' => $idap, 'idzone' => $key);
 			$this->modelzone->ajouterZonesAccreditation($values);
 		}
-		
-		redirect('accreditation/index');
+		//$this->layout->view('utilisateur/accreditation/UAVoirEquipe', $data);
+		redirect('accreditation/voirEquipe/'.$info['groupe']);
 	}
 	
 	
