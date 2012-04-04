@@ -27,33 +27,24 @@ class Presse extends Chocolat{
 	}
 
 	public function index() {
-	
-		$data['listeSurCategorie'] 	= $this->modelcategorie->getCategorieMere();
-		$this->layout->view('presse/LPageEntre',$data);
-		
+
+		redirect('inscription');
+
 	}
 
-   public function inscription(){
-	  //$data['listeSurCategorie'] 	= $this->modelcategorie->getSousCategorie($categorie);
-	   $this->layout->ajouter_js('lambda/script');
-	   $categorie=$this->input->post('categorie');
-	   
-	   $this->session->set_userdata('categorie',$categorie);
-        // $this->session->set_userdata('categorie');
-	   $data['categorie']=$categorie;
-	   $data['events'] = $this->modelevenement->getEvenementEnCours();
-				//$categorie = null;
-				
-					if($categorie != "1")
-					{
-					 //$categorie = $cat;
-				    $this->layout->view('lambda/LAccueil',$data);
-					 
-				    }
-					else 
-						
-                    $this->layout->view('presse/LAccueilPress',$data);
-}
+	/**
+	 * Méthode pour le choix d'une inscription individuelle ou par équipe et de l'évènement.
+	 */
+	public function lambda( $categorie ) {
+		$this->layout->ajouter_js('lambda/script');
+
+		$data['events'] 	= $this->modelevenement->getEvenementEnCours();
+		$data['categorie']	= $categorie;
+
+		$this->layout->view('presse/LAccueilPress', $data);
+	}
+
+
    public function changerLangage($langage, $url) {
 		
 		if($langage === 'fra') {
@@ -93,7 +84,7 @@ class Presse extends Chocolat{
 			$this->lang->load('fr');
 		}
 	}
-	public function ajouter($event='',$categorie) {
+	public function ajouter($event='',$categorie='') {
 		// Chargement du js.
 	   $this->layout->ajouter_js('lambda/script'); 
 	 
@@ -124,38 +115,28 @@ class Presse extends Chocolat{
 				'rules'   => ''
 			),
 			array(
-				'field'   => 'tel_fixe',
-				'label'   => $this->lang->line('tel_fixe'), 
-				'rules'   => ''
+				'field'   => 'adresse',
+				'label'   => 'Adresse',
+				'rules'   => 'required',
 			),
 			array(
-				'field'   => 'tel_portable',
-				'label'   => $this->lang->line('tel_portable'), 
-				'rules'   => ''
-			),
-			array(
-				'field'   => 'tel_ligne_directe',
-				'label'   => $this->lang->line('tel_ligne_directe'), 
-				'rules'   => ''
+				'field'   => 'tel',
+				'label'   => $this->lang->line('tel'),
+				'rules'   => 'required'
 			),
 		    array(
 				'field'   => 'numr_carte',
-				'label'   => $this->lang->line('numr_carte'), 
-				'rules'   => ''
+				'label'   => 'Numero carte de presse',
+				'rules'   => 'required'
 			),
 			array(
 				'field'   => 'titre',
 				'label'   => $this->lang->line('titre'), 
-				'rules'   => ''
+				'rules'   => 'required'
 			),
 			array(
 				'field'   => 'fonction',
 				'label'   => $this->lang->line('fonction'), 
-				'rules'   => ''
-			),
-			array(
-				'field'   => 'civilite',
-				'label'   => $this->lang->line('civilite'), 
 				'rules'   => ''
 			),
 			array(
@@ -183,80 +164,52 @@ class Presse extends Chocolat{
 		    $data['listeSurCategorie'] 	= $this->modelcategorie->getSousCategorie($categorie);
 			
 			$data['listeCategorie'] = $this->modelcategorie->getCategories();
+
+			$data['categorie'] = $categorie;
 			
 			$this->layout->view('presse/LPresseindividuelle', $data);
 		
 		}
 		else {
-			
+
+			// On vérifie si une accréditation a deja été faite.
 			$verification = $this->modelaccreditation->verificationAccred(
 					$event, 
 					strtoupper($this->input->post('nom')), 
 					$this->input->post('prenom'),
 					$this->input->post('pays')
  			);
-			
+
+			// Si aucune accréditation on ajoute celle-ci.
 			if(!$verification) {
 				$values = Array (
-					'nom' 		=> strtoupper($this->input->post('nom')),
-					'prenom' 	=> $this->input->post('prenom'),
-					'pays' 		=> $this->input->post('pays'),
-					'mail' 		=> $this->input->post('mail')
+					'nom' 			=> strtoupper($this->input->post('nom')),
+					'prenom' 		=> $this->input->post('prenom'),
+					'pays' 			=> $this->input->post('pays'),
+					'mail' 			=> $this->input->post('mail'),
+					'tel'			=> $this->input->post('tel'),
+					'adresse'		=> $this->input->post('adresse'),
+					'organisme'		=> $this->input->post('titre')
 				);
 
 				// On gère les champs facultatif.
-				$tel_fixe = $this->input->post('tel_fixe');
-				if(isset($tel_fixe) && !empty($tel_fixe)) {
-					$values['tel_fixe'] = $tel_fixe;
-				}
-				
-                $tel_portable = $this->input->post('tel_portable');
-				if(isset($tel_portable) && !empty($tel_portable)) {
-					$values['tel_portable'] = $tel_portable;
-				}
-				
-				$tel_ligne_directe = $this->input->post('tel_ligne_directe');
-				if(isset($tel_ligne_directe) && !empty($tel_ligne_directe)) {
-					$values['tel_ligne_directe'] = $tel_ligne_directe;
-				}
-				
-				$fonction = $this->input->post('fonction');
-				if(isset($fonction) && !empty($fonction)) {
-					$values['fonction'] = $fonction;
-				}
-				
-				$organisme = $this->input->post('titre');
-				if(isset($organisme) && !empty($organisme)) {
-					$values['organisme'] = $organisme;
-				}
-				
-               $numr_carte = $this->input->post('numr_carte');
-				if(isset($numr_carte) && !empty($numr_carte)) {
-					$values['numr_carte'] = $numr_carte;
-				}
 				$categories = $this->input->post('categorie');
-				$categorie = null;
-				foreach($categories as $cat) {
-					if($cat != "-1")
-						$categorie = $cat;
-				}
+				$categorie = end($categories);
 
 				//Insertion dans la base.
-				$idClient = $this->modelpresse->ajouter($values);
+				$idClient = $this->modelclient->ajouter($values);
 
-
+				// On construit l'accréditation.
 				$accredData = Array(
 					'idcategorie'		=> $categorie,
 					'idevenement'		=> $event,
 					'idclient'			=> $idClient,
 					'etataccreditation'	=> ACCREDITATION_A_VALIDE,
-					'dateaccreditation' => time()
+					'dateaccreditation' => time(),
+					'numeropresse'		=> $this->input->post('numr_carte'),
+					'fonction'			=> $this->input->post('fonction')
 				);
 
-				$fonction = $this->input->post('fonction');
-				if(isset($fonction) && !empty($fonction)) {
-					$accredData['fonction'] = $fonction;
-				}
 
 				$this->modelaccreditation->ajouter($accredData);
 

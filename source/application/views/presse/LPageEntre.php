@@ -2,7 +2,7 @@
 <div class="wrap">
 	
 	<h1>Demande d'accréditation</h1>
-	<form action="<?php echo site_url('presse/inscription/'); ?>" method="POST" enctype="multipart/form-data">
+	<form action="<?php echo site_url('inscription/exePresse'); ?>" method="POST" enctype="multipart/form-data">
         <div class="box-small">
 		    
 		     <label> Choisissez votre catégorie</label>
