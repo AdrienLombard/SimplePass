@@ -102,6 +102,7 @@ create table courchevel_evenement
    datedebut            bigint not null,
    datefin              bigint not null,
    listezones           text not null,
+   textmail				text default '',
    primary key (idevenement)
 ) engine = InnoDB, charset = utf8;
 

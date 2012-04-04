@@ -59,6 +59,10 @@
 .listeCategorieEvent  .ligneChoixZoneCat td.subcategorie {
 	padding-left: 25px;
 }
-
-
-
+.details th {
+	width: 150px;
+}
+.details textarea {
+	border-width: 1px;
+	border-color: rgb(220,220,220);
+}

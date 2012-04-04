@@ -35,6 +35,9 @@
 					<label>Date fin</label>
 					<input type="text" value="<?php echo display_date ($datefin) ;?>" id="datepicker-fin" name="datefin" READONLY="READONLY" />
 					<?php if(isset($info->erreurDate)) echo '<span class="erreurMessage" >* ' . $info->erreurDate . '</span>'; ?>
+					
+					<label>Texte à ajouter au mail de confirmation (Facultatif)</label>
+					<textarea cols="80" rows="5" wrap="soft" name="textmail" ><?php echo $textmail; ?></textarea>
 		</div>
 		
 		<div class="clear"></div>
