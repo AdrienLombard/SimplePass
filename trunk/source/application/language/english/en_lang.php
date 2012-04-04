@@ -36,7 +36,7 @@ $lang['evenement'] = 'Event :';
 $lang['bienvenue'] = 'Welcome to the accreditation request website.';
 $lang['demandeIndiv'] = 'Individual request';
 $lang['ou'] = 'or';
-$lang['demandeGroupe'] = 'Combined request';
+$lang['demandeGroupe'] = 'Collective request';
 
 // Formulaire d'inscription individuelle
 $lang['neSaisPas'] = 'I don\'t know yet.';
@@ -48,7 +48,7 @@ $lang['centreWebcam'] = 'Put your face in the middle of the screen';
 $lang['prendrePhoto'] = 'take a picture';
 
 // Formulaire d'inscription groupée
-$lang['responsable'] = 'Responsible';
+$lang['responsable'] = 'Person in charge';
 $lang['demandeAjoutFonction'] = 'What is your job ?';
 $lang['titreListeMembres'] = 'Team members list';
 $lang['ajoutNouveauMembre'] = 'Add a new member';

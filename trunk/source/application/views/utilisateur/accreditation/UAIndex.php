@@ -11,7 +11,7 @@
     <div class="box-full">
 
         <aside>  
-		<!--<a href="<?php echo site_url('accreditation/generer'); ?>">Exporter un fichier excel</a>-->	
+			<a href="<?php echo site_url('export/accreds/'.$this->session->userdata('idEvenementEnCours')); ?>">Exporter</a>
         </aside>
 		
 		<div id="main">

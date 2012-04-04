@@ -68,7 +68,7 @@
         	
 			<div class="client nouveau">
 				
-				<form class="infos nouveau" method="post" action="<?php echo site_url('accreditation/exeAjoutGroupe'); ?>">
+				<form class="infos nouveau" method="post" action="<?php echo site_url('accreditation/exeAjoutGroupe'); ?>" enctype="multipart/form-data">
 					
 					<input type="hidden" name="evenement" value="<?php echo $this->session->userdata('idEvenementEnCours'); ?>"/>
                    
@@ -96,6 +96,10 @@
 							<input type="text" name="info[mail]" class="mail" value=""  />
 						</div>
 						
+						<div>
+							<label>Image : </label>
+							<input type="file" name="photo_file"  />
+						</div>
 						
 						<div>
 							
@@ -133,7 +137,7 @@
 								<?php endforeach; ?>
 							</div>
 						</div>
-
+						
 						<div class="clear"></div>
 						
 					</div>

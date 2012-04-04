@@ -40,10 +40,12 @@
 	<div class="wrap">
 		
 	<h1><?php echo lang('demandeAccred'); ?></h1>
-	<!--
-	<a href="<?php //echo site_url('inscription/changerLangage/fra/' . str_replace('/', ':', uri_string())); ?>" ><img src="<?php //echo img_url('drapeaux/fra.gif'); ?>" alt="fra" /></a>
-	<a href="<?php //echo site_url('inscription/changerLangage/gbr/' . str_replace('/', ':', uri_string())); ?>" ><img src="<?php //echo img_url('drapeaux/gbr.gif'); ?>" alt="gbr" /></a>
-	-->
+	
+	<div style="float: right; margin-top: 5px; margin-right: 5px;">
+		<a href="<?php echo site_url('inscription/changerLangage/fra/' . str_replace('/', ':', uri_string())); ?>" ><img src="<?php echo img_url('drapeaux/fra.gif'); ?>" alt="fra" /></a>
+		<a href="<?php echo site_url('inscription/changerLangage/gbr/' . str_replace('/', ':', uri_string())); ?>" ><img src="<?php echo img_url('drapeaux/gbr.gif'); ?>" alt="gbr" /></a>
+	</div>
+	
 	<div class="box-small">
 		
 		<span class="info"><h4><?php echo lang('inscription'); ?></h4> <?php echo lang('groupe'); ?></span><br>
@@ -57,7 +59,7 @@
 			
 			<h2><?php echo lang('groupe'); ?></h2>
 			
-			<label><?php echo lang('nom'); ?>*</label>
+			<label><?php echo lang('nomGroupe'); ?>*</label>
 			<input type="text" value="<?php if($values) echo $values->groupe; ?>" name="groupe" />
 			<?php echo form_error('groupe'); ?>
 			
