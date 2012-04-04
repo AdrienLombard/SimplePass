@@ -11,8 +11,6 @@ class Inscription extends Chocolat {
 		// Charge la librairie de validation de formulaire
 		$this->load->library('form_validation');
 		
-		// Chargement du css.
-		
 		// Chargement du modele.
 		$this->load->model('modelaccreditation');
 		$this->load->model('modelevenement');
@@ -23,10 +21,6 @@ class Inscription extends Chocolat {
 		// Chargement du fichier de langue
 		$this->load->helper('language');
 		$this->chargerLangue();
-		
-		$this->layout->ajouter_css('jquery.Jcrop');
-		$this->layout->ajouter_js('jquery.Jcrop.min');
-		$this->layout->ajouter_js('webcam/jquery.webcam');
 	}
 	
 	public function index() {
@@ -88,6 +82,7 @@ class Inscription extends Chocolat {
 	public function ajouter($event='') {
 		// Chargement du js.
 		$this->layout->ajouter_js('lambda/script');
+		$this->layout->ajouter_js('webcam/jquery.webcam');
 		
 		// variable pour transmettre des données à la vue.
 		$data = Array();
@@ -200,8 +195,8 @@ class Inscription extends Chocolat {
 				}
 
 				//Insertion dans la base.
-				$idClient = $this->modelclient->ajouter($values);
-
+				$this->modelclient->ajouter($values);
+				$idClient = $this->modelclient->lastId();
 
 				$accredData = Array(
 					'idcategorie'		=> $categorie,
@@ -217,6 +212,9 @@ class Inscription extends Chocolat {
 				}
 
 				$this->modelaccreditation->ajouter($accredData);
+				
+				if($_FILES['photo_file']['size'] != 0)
+					$this->upload($idClient);
 
 
 				$data['titre']		= $this->lang->line('titreConfirmeDemande');
@@ -228,9 +226,6 @@ class Inscription extends Chocolat {
 				$data['message']	= $this->lang->line('demandeNon');
 				
 			}
-			
-			if($_FILES['photo_file']['size'] != 0)
-				$this->upload($idClient);
 			
 			$this->layout->view('lambda/LMessage', $data); 
 		}
@@ -429,20 +424,16 @@ class Inscription extends Chocolat {
 		
 		$img = imagecreatefromjpeg(UPLOAD_DIR . $data['file_name']);
 		
-		echo UPLOAD_DIR . $data['file_name'];
-		
-		$this->load->helper('url');
 		$this->load->helper('image');
 		
 		if($data['image_width'] == IMG_WIDTH && $data['image_height'] == IMG_HEIGHT) {
-			$this->layout->add_redirect('accreditation/voir/' . $id, 0.1);
-			$this->voir($id);
+			$data['titre']		= $this->lang->line('titreConfirmeDemande');
+			$data['message']	= $this->lang->line('confirmeDemande');
+			$this->layout->view('lambda/LMessage', $data);
 		} elseif($data['image_width'] > IMG_WIDTH && $data['image_height'] > IMG_HEIGHT) {
-			if($data['image_width'] > 940) {
+			if($data['image_width'] > 940)
 				resizeWidthRatio($data['full_path'], 940);
-				$this->layout->add_redirect('accreditation/crop/' . $id, 0.1);
-				$this->crop($id);
-			}
+			redirect('inscription/crop/' . $id);
 		} else
 			die('Image trop petite.');
 	}
@@ -453,7 +444,11 @@ class Inscription extends Chocolat {
 	public function crop($id) {
 		
 		$data['client'] = $this->modelclient->getClientParId($id);
-		$this->layout->view('utilisateur/accreditation/UACrop', $data);
+		
+		$this->layout->ajouter_css('jquery.Jcrop');
+		$this->layout->ajouter_js('jquery.Jcrop.min');
+		
+		$this->layout->view('lambda/LCrop', $data);
 		
 	}
 	
@@ -474,8 +469,9 @@ class Inscription extends Chocolat {
 		$this->load->helper('image');
 		crop(UPLOAD_DIR . $client->idclient . '.jpg', $x, $y, $w, $h);
 		
-		$this->load->helper('url');
-		redirect('accreditation/voir/' . $id);
+		$data['titre']		= $this->lang->line('titreConfirmeDemande');
+		$data['message']	= $this->lang->line('confirmeDemande');
+		$this->layout->view('lambda/LMessage', $data);
 	}
 	
 }
