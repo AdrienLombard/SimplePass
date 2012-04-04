@@ -34,7 +34,7 @@ class Accreditation extends Cafe {
 	public function index() {
 		
 		$id = $this->session->userdata('idEvenementEnCours');
-		$data['accreds'] = $this->modelaccreditation->getAccreditationsParEvenement($id);
+		$data['accreds'] = $this->modelaccreditation->getAccreditationsParEvenementSansMembre($id);
 		$this->layout->view('utilisateur/accreditation/UAIndex', $data);
 		
 	}
@@ -104,11 +104,16 @@ class Accreditation extends Cafe {
 		$membres = $this->modelaccreditation->getAccreditationGroupeParEvenement( $nomGroupe, $idEvent);
 		$zonesEvent = $this->modelzone->getZoneParEvenement($idEvent);
 		foreach($membres as $m){
+			$zonesAccred = $this->modelzone->getZoneParAccreditation($m->idaccreditation);
+			foreach($zonesAccred as $z){
+				$m->zonesAccred[] = $z->idzone;
+			}
 			if ($m->referent == null){
 				$ref[] = $m;
 			}
 			else{
-				$pers[] =$m; 
+				$pers[] =$m;
+				
 			}
 		}
 		
@@ -129,15 +134,7 @@ class Accreditation extends Cafe {
 		$this->layout->view('utilisateur/accreditation/UARecherche', $data);
 		
 	}
-	
-	public function rechercherReferent() {
 		
-		$this->load->model('modelclient');
-		$data['referents'] = $this->modelclient->getReferents();
-		$this->layout->view('utilisateur/accreditation/UAjouterGroupe', $data);
-		
-	}
-	
 	public function ajouter( $re = '' ) {
 		
 		$this->layout->ajouter_js('webcam/jquery.webcam');
@@ -390,6 +387,35 @@ class Accreditation extends Cafe {
 		
 	}
 	
+	public function modifierGroupe($nomGroupe){		
+		$data = Array();
+		$ref = Array();
+		$pers = Array();
+		$nomGroupe=str_replace('%20', ' ', $nomGroupe);;
+		$idEvent = $this->session->userdata('idEvenementEnCours');
+		$membres = $this->modelaccreditation->getAccreditationGroupeParEvenement( $nomGroupe, $idEvent);
+		$zonesEvent = $this->modelzone->getZoneParEvenement($idEvent);
+		foreach($membres as $m){
+			$zonesAccred = $this->modelzone->getZoneParAccreditation($m->idaccreditation);
+			foreach($zonesAccred as $z){
+				$m->zonesAccred[] = $z->idzone;
+			}
+			if ($m->referent == null){
+				$ref[] = $m;
+			}
+			else{
+				$pers[] =$m;
+				
+			}
+		}
+		
+		$data['zonesEvent'] = $zonesEvent;
+		$data['ref'] = $ref;
+		$data['personnes'] = $pers;
+		$data['pays'] = $this->modelpays->getPaysParId($ref[0]->pays);
+		
+		$this->layout->view('utilisateur/accreditation/UAModifierGroupe', $data);
+	}
 	
 	public function exeModifierGroupe($ref=false) {
 	
@@ -482,15 +508,10 @@ class Accreditation extends Cafe {
 			}
 			
 			$accred['etataccreditation'] = 0;
-			$this->modelaccreditation->modifier($ligne['idAccreditation'], $accred);
-			$message['titre']		= 'Modification';
-			$message['message']= 'l accreditation a bien été modifiée.';
-			$message['redirect'] 	= 'accreditation/demandes';
-			
-		
+			$this->modelaccreditation->modifier($ligne['idAccreditation'], $accred);		
 		}
-		
-		redirect('accreditation/index');
+		$groupe = $this->input->post('info');
+		redirect('accreditation/voirEquipe/'.$groupe['groupe']);
 	
 	}
 	
@@ -719,60 +740,7 @@ class Accreditation extends Cafe {
 	
 		redirect('accreditation/modifier/' . $idAccreditation); 
 		
-	}
-	
-	
-	public function AjouterGroupeUtilisateur() {	
-		
-	    echo $this->input->post('nomsociete');
-		$membre['tel']=$this->input->post('tel');
-		$membre['pays']=$this->input->post('pays');
-		$membre['categorie']=$this->input->post('categorie');
-		$var=$this->input->post('nomsociete');
-		
-		//display_tab($membre);
-		foreach($this->input->post('nompersonne') as $ligne) {
-			// création du client
-			$membre = null;
-			$membre['nom'] = $ligne['nom'];
-			$membre['prenom'] = $ligne['prenom'];
-			$idNewClient = $this->modelclient->ajouter($membre);
-
-			// création de l'accreditation
-			$accred = null;
-			$accred['groupe'] = $data['groupe'];
-			$accred['idevenement'] = $this->input->post('evenement');
-			$accred['idclient'] = $idNewClient;
-			$accred['fonction'] = $ligne['fonction'];
-			$accred['referent'] = $id;
-			$accred['etataccreditation'] = ACCREDITATION_A_VALIDE;
-			$accred['dateaccreditation'] = time();
-     		$data['pays'] = $this->modelpays->getPays();
-		
-		/*
-		 * Liste des catégories avec les zones associées
-		 */
-		$cats = $this->modelcategorie->getCategorieDansEvenement($this->session->userdata('idEvenementEnCours'));
-		foreach($cats as $cat) {
-			$push = array();
-			$push['cat'] = $cat;
-			$push['zones'] = '';
-			$catZones = $this->modelzone->getZoneParCategorieEtEvenement($cat->idcategorie, $this->session->userdata('idEvenementEnCours'));
-			foreach($catZones as $cz) $push['zones'] .= $cz->idzone.'-';
-			$data['categories'][] = $push;
-		}
-			$tab = $ligne['categorie'];
-			$temp = -1;
-			while($temp == -1) {
-				$temp = array_pop($tab);
-			}
-			$accred['idcategorie'] = $temp;
-			$this->modelaccreditation->ajouter($accred);
-		}	
-		$this->layout->view('utilisateur/accreditation/UAjouterMembreDeGroupe',$membre);
-
-	}
-	
+	}	
 	
 	public function exeAjoutGroupe() {
 		
@@ -863,7 +831,7 @@ class Accreditation extends Cafe {
 				$values[] = array('idaccreditation' => $idap, 'idzone' => $key);
 			$this->modelzone->ajouterZonesAccreditation($values);
 		}
-		//$this->layout->view('utilisateur/accreditation/UAVoirEquipe', $data);
+		
 		redirect('accreditation/voirEquipe/'.$info['groupe']);
 	}
 	
@@ -878,10 +846,6 @@ class Accreditation extends Cafe {
 		
 		$config['upload_path'] = UPLOAD_DIR;
 		$config['allowed_types'] = 'jpg';
-		//$config['max_size']	= '4000';
-		//$config['max_width']  = '1024';
-		//$config['max_height']  = '768';
-		//$config['file_name'] = urlencode($client->nom . '_' . $client->prenom . '_' . $id.".jpg");
 		$config['file_name'] = $id.".jpg";
 		$config['overwrite'] = true;
 		
@@ -904,66 +868,6 @@ class Accreditation extends Cafe {
 		} else
 			die('Image trop petite.');
 	}
-
-	public function generer( )
-	{
-//	header("Content-type: text/csv");
-//    header('Content-Disposition: attachment; filename="liste_des_demandes.csv"');
-//    
-///* Récupérer les données de la base de données par exemple */
-// //echo " liste"."\n";
-//  $id = $this->session->userdata('idEvenementEnCours');
-//  echo $id;
-// $tableau=$this->modelaccreditation->getAccreditationsEnAttente($id);
-// //envoi des headers csv
-//	//header('Content-Type: application/csv-tab-delimited-table');
-//	//nommage du fichier avec la date du jour
-//	//header('Content-disposition: filename=monfichier_'.date('Ymd').'.csv');
-//
-// 
-// echo "      Liste des demandes     "."\n";	
-//echo "Nom;Prenom;Civilité;Pays;Organisme;Tel;Mail"."\n";
-//foreach($tableau as $ligne)
-//	
-//	   {
-//	//Pour chaque ligne, création d'une ligne dans le csv.
-//	//Les champs sont entourés de guillemets, séparés par des points-virgules
-//	//Les lignes sont terminées par un retour-chariot.
-//	
-//	echo '"'.$ligne->nom.'";"'.$ligne->prenom.'";"'.$ligne->civilite.'";"'.$ligne->pays.'";"'.$ligne->organisme.'";"'.$ligne->tel.'";"'.$ligne->mail.'"'."\n";
-//	   }
-//	 
-//	mysql_close();
-//
-//	exit;
-	
-include "Spreadsheet/Excel/Writer.php";
-
-// Création d'un manuel de travail
-$workbook = new Spreadsheet_Excel_Writer();
-
-// Envoi des en-têtes HTTP
-$workbook->send('test.xls');
-
-// Création d'une feuille de travail
-$worksheet =& $workbook->addWorksheet('My first worksheet');
-
-// Les données actuelles
-$worksheet->write(0, 0, 'Nom');
-$worksheet->write(0, 1, 'Age');
-$worksheet->write(1, 0, 'John Smith');
-$worksheet->write(1, 1, 30);
-$worksheet->write(2, 0, 'Johann Schmidt');
-$worksheet->write(2, 1, 31);
-$worksheet->write(3, 0, 'Juan Herrera');
-$worksheet->write(3, 1, 32);
-
-// Envoi du fichier
-$workbook->close();
- 
-}
-
-	
 	
 	/*
 	 * Crop : coupe une image trop grande
@@ -993,5 +897,5 @@ $workbook->close();
 		crop(UPLOAD_DIR . $client->idclient . '.jpg', $x, $y, $w, $h);
 		redirect('accreditation/voir/' . $id);
 	}
-
+	
 }

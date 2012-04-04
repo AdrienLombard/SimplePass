@@ -63,6 +63,18 @@ class modelAccreditation extends MY_Model {
 						->result();
 	}
 	
+	public function getAccreditationsParEvenementSansMembre($idEvenement) {
+		return $this->db->select('*')
+						->from(DB_ACCREDITATION . ' a')
+						->join(DB_CLIENT . ' cl', 'a.idclient = cl.idclient', 'left')
+						->join(DB_CATEGORIE . ' ca', 'a.idcategorie = ca.idcategorie', 'left')
+						->where('a.idevenement', $idEvenement)
+						->where('a.referent', null)
+						->Order_by('a.etataccreditation')
+						->get()
+						->result();
+	}
+	
 	public function getAccreditationsParClient($idClient) {
 		return $this->db->select('*')
 						->from(DB_ACCREDITATION . ' a')

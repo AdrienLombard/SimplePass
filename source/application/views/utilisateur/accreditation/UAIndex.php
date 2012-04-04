@@ -40,7 +40,11 @@
                         <td><?php echo display_date($accred->dateaccreditation); ?></td>
 						<td><?php echo $accred->libellecategorie; ?></td>
 						<td><?php if($accred->etataccreditation == 0) echo "validée"; else echo "demande"; ?></td>
-						<td><a href="<?php echo site_url('accreditation/voir/' . $accred->idclient); ?>">Voir</a></td>
+						<td><?php if($accred->groupe == null): ?>
+							<a href="<?php echo site_url('accreditation/voir/' . $accred->idclient); ?>">Voir</a></td>
+							<?php else: ?>
+							<a href="<?php echo site_url('accreditation/voirEquipe/' . $accred->groupe); ?>">Voir Groupe</a></td>
+							<?php endif; ?>
 					</tr>
                     <?php endforeach; ?>
 					
