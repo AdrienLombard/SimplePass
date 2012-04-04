@@ -15,6 +15,9 @@ class Presse extends Chocolat{
 		$this->load->model('modelzone');
 		$this->load->model('modellambda');
 		
+		// Charge la librairie mail
+		$this->load->library('email');
+		
 		$this->layout->ajouter_css('jquery.Jcrop');
 		$this->layout->ajouter_js('jquery.Jcrop.min');
 		
@@ -248,7 +251,7 @@ class Presse extends Chocolat{
 	 * Méthode de traitement pour la saisie du responsable.
 	 */
 
-	public function exeGroupe($categorie) {
+	
 	public function exeGroupe( $categorie ) {
 
 				
@@ -358,26 +361,7 @@ class Presse extends Chocolat{
 		}
 		
 	}
-
-	/**
-	 * Méthode pour le formulaire pour la saisie du responsable d'une équipe.
-	 */
-	public function groupe($evenement, $categorie, $info=false) {
-		// Chargement du js.
-		$this->layout->ajouter_js('lambda/script');
-		$data['idEvenement']	= $evenement;
-		$data['infoEvenement'] 	= $this->modelevenement->getEvenementParId($evenement);
-		$data['listePays'] 		= $this->modellambda->listePays();
-		$data['listeCategorie'] = $this->modelcategorie->getCategories();
-		$data['listeSurCategorie'] 	= $this->modelcategorie->getSousCategorie($categorie);
-		$data['values'] = $info;
-		
-		$this->layout->view('presse/LPresseGroupe', $data);
-			
-	}
 	
-
-
 	/**
 	 * Méthode pour l'ajout de tous les membres d"une équipe.
 	 */
@@ -386,11 +370,138 @@ class Presse extends Chocolat{
 
 		$this->layout->view('presse/LPresseGroupeDetails', $data);
 	}
+/**
+	 * Méthode pour le traitement de l'ajout des membres d'une équipe.
+	 */
+	public function exeAjouterGroupe() {		
+		// ajout du référent
+		$ref = $data = $this->input->post('ref');
+		unset($ref['categorie']);
+		unset($ref['fonction']);
+		unset($ref['groupe']);
+		$id = $this->modelclient->ajouter($ref);
+		
+		// création de l'accreditation pour le referent
+		$accred = null;
+		$accred['idcategorie'] = $data['categorie'];
+		$accred['idevenement'] = $this->input->post('evenement');
+		$accred['idclient'] = $id;
+		$accred['etataccreditation'] = ACCREDITATION_A_VALIDE;
+		$accred['fonction'] = $data['fonction'];
+		$accred['groupe'] = $data['groupe'];
+		$accred['dateaccreditation'] = time();
+		$this->modelaccreditation->ajouter($accred);
+		
+		$evenement = $this->modelevenement->getEvenementParId($accred['idevenement']);
+		
+		$contenuMail = 	'<html>' .
+					'<head></head>' .
+					'<body>' .
+						'<p>Cher(e) ' . $ref['prenom'] . ' ' . $ref['nom'] . ', </p>' .
+						'<p>Votre accréditation pour l\'évènement ' . $evenement[0]->libelleevenement . ' a bien été prise en compte.</p>' .
+						'<p>Cette accréditation est valable pour les personnes suivantes : </p>' .
+						'<ul title="listeMembres" >';
+		
+		// Ajout des membres
+		foreach($this->input->post('groupe') as $ligne) {
+			// création du client
+			$membre = null;
+			$membre['nom']     = $ligne['nom'];
+			$membre['prenom']  = $ligne['prenom'];
+			$memmbre['adresse']=$ligne['adresse_membre'];
+			$membre['tel']     =$ligne['tel_membre'];
+			//$membre['fonction']=$ligne['fonction'];
+			$membre['pays'] = $data['pays'];
+			$idNewClient = $this->modelclient->ajouter($membre);
 
-
-
-
+			// création de l'accreditation
+			$accred = null;
+			$accred['groupe'] = $data['groupe'];
+			$accred['idevenement'] = $this->input->post('evenement');
+			$accred['idclient'] = $idNewClient;
+			$accred['fonction'] = $ligne['fonction'];
+			$accred['numeropresse']=$ligne['numr_carte_membre'];
+			$accred['referent'] = $id;
+			$accred['etataccreditation'] = ACCREDITATION_A_VALIDE;
+			$accred['dateaccreditation'] = time();
+			
+			if($accred['fonction'] != '') {
+				$contenuMail .= '<li>' . $membre['prenom'] . ' ' . $membre['nom'] . ' - ' . $accred['fonction'] . '</li>';
+			}
+			else {
+				$contenuMail .= '<li>' . $membre['prenom'] . ' ' . $membre['nom'] . ' - Pas de fonction définie</li>';
+			}
+			
+			$tab = $ligne['categorie'];
+			$temp = -1;
+			while($temp == -1) {
+				$temp = array_pop($tab);
+			}
+			$accred['idcategorie'] = $temp;
+			$this->modelaccreditation->ajouter($accred);
+		}
+		/*		
+		// Préparation et envoi du mail de confirmation
+		$this->email->from('accreditations@courchevel.com', 'Accréditations Courchevel'); // L'adresse qui enverra le mail
+		$this->email->to($values['mail']); // Le destinataire du mail
+		$this->email->bcc(MAIL_COPIE); // L'adresse de Courchevel qui recevra une copie du mail
+		
+		// Le sujet du mail
+		$this->email->subject('Votre accréditation groupée pour l\'évènement ' . $evenement[0]->libelleevenement);
+		
+		// Le contenu du mail
+		$contenuMail = 			'</ul>' .
+								'<p>Merci pour votre pré-enregistrement.</p>' .
+								'<p>Le club des sports de Courchevel</p>' .
+							'</body>' .
+						'</html>';
+		
+		// Inclusion du contenu dans le mail
+		$this->email->message($contenuMail);
+		
+		// Envoi du mail
+		//$this->email->send();
+		*/
+		$msg['titre']	= $this->lang->line('titreConfirmeDemandeGroupe');
+		$msg['message']	= $this->lang->line('confirmeDemandeGroupe');
+		
+		$this->layout->view('lambda/LMessage', $msg);
+		 
+		 
+	}
 	
-	
-	
+	public function upload($id)
+	{
+		$client = $this->modelclient->getClientParId($id);
+		
+		$config['upload_path'] = UPLOAD_DIR;
+		$config['allowed_types'] = 'jpg';
+		$config['max_size']	= '4000';
+		//$config['max_width']  = '1024';
+		//$config['max_height']  = '768';
+		//$config['file_name'] = urlencode($client->nom . '_' . $client->prenom . '_' . $id.".jpg");
+		$config['file_name'] = $id.".jpg";
+		$config['overwrite'] = true;
+		
+		$this->load->library('upload', $config);
+		$this->upload->do_upload('photo_file');
+		echo $this->upload->display_errors();
+		$data = $this->upload->data();
+		
+		$img = imagecreatefromjpeg(UPLOAD_DIR . $data['file_name']);
+		
+		$this->load->helper('image');
+		
+		if($data['image_width'] == IMG_WIDTH && $data['image_height'] == IMG_HEIGHT) {
+			$data['titre']		= $this->lang->line('titreConfirmeDemande');
+			$data['message']	= $this->lang->line('confirmeDemande');
+			$this->layout->view('lambda/LMessage', $data);
+		} elseif($data['image_width'] > IMG_WIDTH && $data['image_height'] > IMG_HEIGHT) {
+			if($data['image_width'] > 940)
+				resizeWidthRatio($data['full_path'], 940);
+			redirect('inscription/crop/' . $id);
+		} else
+			die('Image trop petite.');
+	}
+		
 }

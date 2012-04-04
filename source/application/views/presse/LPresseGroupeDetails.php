@@ -116,25 +116,33 @@
 				<label><?php echo lang('prenom'); ?>*</label>
 				<input type="text" id="lignePrenom" name="groupe[nbLigne][prenom]" />
 			</div>
-			
-			<label> Adresse* </label>
-			<textarea rows="5" cols="73" name="adresse" ><?php echo set_value('adresse'); ?></textarea>
-			
-			
+			<br>
+			<div class="split">	
 			<div class="tel">
-				<label> Téléphone* : </label>
+				<label> Téléphone* : 
 				<input  type="radio" value="<?php echo FIXE ?>" 		id="tel_fixe" 		name="tel_type" checked />Fixe
 				<input  type="radio" value="<?php echo PORTABLE ?>" 	id="tel_portable" 	name="tel_type" />Portable
 				<input  type="radio" value="<?php echo DIRECT ?>" 		id="tel_direct" 	name="tel_type" />Ligne directe
-
-				<input  type="text" value="<?php echo set_value('tel'); ?>" id="tel" name="tel" />
+                </label>
+				<input  type="text" value="<?php echo set_value('tel_membre'); ?>" id="tel" name="groupe[nbLigne][tel_membre]" />
 			 </div>
+		   </div>
 			
-			<label> Numero de carte de presse* : </label>
-			<input type="text" name="numr_carte" value="<?php echo set_value('numr_carte');?>"/>
+			
 			
 			<div class="split">
+
+				<label> Numero de carte de presse* : </label>
+			<input type="text" name="groupe[nbLigne][numr_carte_membre]" value="<?php echo set_value('numr_carte_membre');?>"/>
+			</div>
+			
+			<div class="split"> 
+			<label> Adresse* </label>
+			<textarea rows="5" cols="73" name="groupe[nbLigne][adresse_membre]" ><?php echo set_value('adresse_membre'); ?></textarea>
+			</div>
+			<div class="split">
 				<label ><?php echo lang('categorie'); ?></label>
+
 				<select  id="categorie" name="groupe[nbLigne][categorie][]" class="select dyn-selector">
 					<option value="-1" libelle=" " ><?php echo lang('neSaisPas'); ?></option>
 					<?php foreach($listeSurCategorie as $categorie): ?>
@@ -144,7 +152,7 @@
 			</div>
 			<div class="split">
 			<label>Fonction*</label>
-		    <select id="fonction" name="fonction" class="select" >
+		    <select id="fonction" name="groupe[nbLigne][fonction]" class="select" >
 		       	<option value="1">rédacteur en chef</option> 
 		        <option value="2">journaliste</option>
 		        <option value="3">caméramen</option>
