@@ -252,9 +252,9 @@ class Presse extends Chocolat{
 	 */
 
 	
-	public function exeGroupe( $categorie ) {
+	public function exeGroupe( $idevent,$cate ) {
 
-				
+	  echo $cate;
 		$idEvenement = $this->input->post('evenement');
 		
 		// On regle les paramètres du formulaire.
@@ -346,8 +346,9 @@ class Presse extends Chocolat{
 			$data['numr_carte']         = $this->input->post('numr_carte');
 			$data['adresse ']           = $this->input->post('adresse ');
 			$data['evenement'] 			= $this->input->post('evenement');
+			$data['organisme']          =$this->input->post('titre');
 			$data['listeCategorie'] 	= $this->modelcategorie->getCategories();
-			$data['listeSurCategorie'] 	= $this->modelcategorie->getCategorieMere();
+			$data['listeSurCategorie'] 	= $this->modelcategorie->getSousCategorie($cate);
 			
 			// Gestion pour les catégorie.
 			$tab = $this->input->post('categorie');
@@ -357,7 +358,7 @@ class Presse extends Chocolat{
 			}
 			$data['categorie'] = $temp;
 
-			$this->ajouterGroupe($data, $categorie);
+			$this->ajouterGroupe($data, $cate);
 		}
 		
 	}
@@ -388,6 +389,7 @@ class Presse extends Chocolat{
 		$accred['idclient'] = $id;
 		$accred['etataccreditation'] = ACCREDITATION_A_VALIDE;
 		$accred['fonction'] = $data['fonction'];
+		//$accred['numeropresse']=$ligne['numr_carte_membre'];
 		$accred['groupe'] = $data['groupe'];
 		$accred['dateaccreditation'] = time();
 		$this->modelaccreditation->ajouter($accred);
@@ -408,9 +410,10 @@ class Presse extends Chocolat{
 			$membre = null;
 			$membre['nom']     = $ligne['nom'];
 			$membre['prenom']  = $ligne['prenom'];
-			$memmbre['adresse']=$ligne['adresse_membre'];
+			$membre['adresse']=$ligne['adresse_membre'];
 			$membre['tel']     =$ligne['tel_membre'];
-			//$membre['fonction']=$ligne['fonction'];
+			$membre['mail']=$ligne['mail_membre'];
+			$membre['organisme']= $data['organisme'];
 			$membre['pays'] = $data['pays'];
 			$idNewClient = $this->modelclient->ajouter($membre);
 

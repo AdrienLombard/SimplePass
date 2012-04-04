@@ -128,8 +128,6 @@
 			 </div>
 		   </div>
 			
-			
-			
 			<div class="split">
 
 				<label> Numero de carte de presse* : </label>
@@ -140,7 +138,14 @@
 			<label> Adresse* </label>
 			<textarea rows="5" cols="73" name="groupe[nbLigne][adresse_membre]" ><?php echo set_value('adresse_membre'); ?></textarea>
 			</div>
+			
 			<div class="split">
+			<label><?php echo lang('mail'); ?>*</label>
+			<input type="text" value="<?php echo set_value('mail_membre'); ?>" id="mail" name="groupe[nbLigne][mail_membre]" />
+			<?php echo form_error('mail'); ?>
+			</div>	 
+			<div class="split">
+				
 				<label ><?php echo lang('categorie'); ?></label>
 
 				<select  id="categorie" name="groupe[nbLigne][categorie][]" class="select dyn-selector">
