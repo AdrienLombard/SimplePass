@@ -11,11 +11,18 @@
     <div class="box-full">
 		
 		<aside>
+			<a href="<?php echo site_url('export/evenement/'.$id); ?>">Exporter</a>
+			
+			<br>
+			
 			<?php if($resultats): ?>
 				<a href="<?php echo site_url('evenement/modifier/'.$id); ?>">Modifier</a>
 				<a href="<?php echo site_url('evenement/supprimer/'.$id);?>" confirm="Êtes-vous sûr de vouloir supprimer cet évènement ?">Supprimer</a>
+				<br>
 			<?php endif; ?>
+	
 			<a href="<?php echo site_url('evenement/liste'); ?>">Retour</a>
+
         </aside>
 
         <div id="main">

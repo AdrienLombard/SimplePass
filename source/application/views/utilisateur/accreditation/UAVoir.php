@@ -111,9 +111,9 @@
 					<a href="<?php echo site_url('accreditation/modifier/'.$demande['accred']->idaccreditation); ?>">
 						<div class="fixe">
 							<span class="date"><?php echo display_date($demande['accred']->dateaccreditation); ?></span>
-							<span class="categorie"><?php echo $demande['accred']->libellecategorie; ?></span>
-							<span class="evenement"><?php echo $demande['accred']->libelleevenement; ?></span>
-							<span class="etat"><?php if($demande['accred']->etataccreditation == 0) echo 'Val';
+							<span class="categorie">- <?php echo $demande['accred']->libellecategorie; ?></span>
+							<span class="evenement">- <?php echo $demande['accred']->libelleevenement; ?></span>
+							<span class="etat">- <?php if($demande['accred']->etataccreditation == 0) echo 'Val';
 														else echo 'Dem'?></span>
 						</div>
 					</a>

@@ -791,6 +791,24 @@ class Accreditation extends Cafe {
 		$this->modelclient->ajouter($ref);
 		$id = $this->modelclient->lastId();
 		
+		// upload photo pour referent
+		if($_FILES['photo_file']['size'] != 0) {
+			
+			$config['upload_path'] = UPLOAD_DIR;
+			$config['allowed_types'] = 'jpg';
+			$config['file_name'] = $id.".jpg";
+			$config['overwrite'] = true;
+
+			$this->load->library('upload', $config);
+			$this->upload->do_upload('photo_file');
+			$data = $this->upload->data();
+
+			$this->load->helper('image');
+			if($data['image_width'] > 160)
+				resizeWidthRatio($data['full_path'], 160);
+			
+		}
+		
 		// ajout de son accred
 		$aref = array();
 		$aref['idclient'] = $id;
@@ -821,6 +839,10 @@ class Accreditation extends Cafe {
 			unset($p['fonction']);
 			$this->modelclient->ajouter($p);
 			$pid = $this->modelclient->lastId();
+			
+			// duplication de l'image
+			if($_FILES['photo_file']['size'] != 0)
+				copy($data['full_path'], UPLOAD_DIR . '/' . $pid . '.jpg');
 			
 			// ajout de l'accred
 			$ap = array();
