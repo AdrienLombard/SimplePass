@@ -111,10 +111,27 @@
 				<label for=""><?php echo lang('nom'); ?>*</label>
 				<input type="text" id="ligneNom" name="groupe[nbLigne][nom]" />
 			</div>
+			
 			<div class="split">
 				<label for=""><?php echo lang('prenom'); ?>*</label>
 				<input type="text" id="lignePrenom" name="groupe[nbLigne][prenom]" />
 			</div>
+			
+			<label> Adresse* </label>
+			<textarea rows="5" cols="73" name="adresse" ><?php echo set_value('adresse'); ?></textarea>
+			
+			
+			<div class="tel">
+				<label> Téléphone* : </label>
+				<input  type="radio" value="<?php echo FIXE ?>" 		id="tel_fixe" 		name="tel_type" checked />Fixe
+				<input  type="radio" value="<?php echo PORTABLE ?>" 	id="tel_portable" 	name="tel_type" />Portable
+				<input  type="radio" value="<?php echo DIRECT ?>" 		id="tel_direct" 	name="tel_type" />Ligne directe
+
+				<input  type="text" value="<?php echo set_value('tel'); ?>" id="tel" name="tel" />
+			 </div>
+			
+			<label> Numero de carte de presse* : </label>
+			<input type="text" name="numr_carte" value="<?php echo set_value('numr_carte');?>"/>
 			
 			<div class="split">
 				<label for=""><?php echo lang('categorie'); ?></label>
@@ -126,7 +143,7 @@
 				</select>
 			</div>
 			<div class="split">
-			<label>fonction*</label>
+			<label>Fonction*</label>
 		    <select id="fonction" name="fonction" class="select" >
 		       	<option value="1">rédacteur en chef</option> 
 		        <option value="2">journaliste</option>

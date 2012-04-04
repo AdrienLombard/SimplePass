@@ -83,7 +83,7 @@
 				<option value="<?php echo $pays->idpays; ?>" <?php echo ($pays->idpays == 'FRA')? 'selected' : '' ;?> style="background: url(<?php echo img_url('drapeaux/'.strtolower($pays->idpays).'.gif'); ?>)no-repeat left;"><?php echo $pays->nompays; ?></option><?php endforeach; ?>
 			</select>
 
-			 <label> Adresse* </label>
+			<label> Adresse* </label>
 			<textarea rows="5" cols="73" name="adresse" ><?php echo set_value('adresse'); ?></textarea>
 			<?php echo form_error('adresse'); ?>
 

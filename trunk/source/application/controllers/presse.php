@@ -279,6 +279,26 @@ class Presse extends Chocolat{
 				'rules'   => 'required'
 			),
 			array(
+				'field'   => 'adresse',
+				'label'   => 'Adresse',
+				'rules'   => 'required',
+			),
+			array(
+				'field'   => 'tel',
+				'label'   => $this->lang->line('tel'),
+				'rules'   => 'required'
+			),
+		    array(
+				'field'   => 'numr_carte',
+				'label'   => 'Numero carte de presse',
+				'rules'   => 'required'
+			),
+			array(
+				'field'   => 'titre',
+				'label'   => $this->lang->line('titre'), 
+				'rules'   => 'required'
+			),
+			array(
 				'field'   => 'fonction',
 				'label'   => $this->lang->line('fonction'), 
 				'rules'   => ''
@@ -306,6 +326,8 @@ class Presse extends Chocolat{
 			$values->fonction 	= $this->input->post('fonction');
 			$values->mail 		= $this->input->post('mail');
 			$values->tel 		= $this->input->post('tel');
+			$values->adresse    =$this->input->post('adresse');
+			$values->numr_carte =$this->input->post('numr_carte');
 			$values->categorie 	= $this->input->post('categorie');
 			
 			$this->groupe($idEvenement, $values);
@@ -320,6 +342,8 @@ class Presse extends Chocolat{
 			$data['fonction'] 			= $this->input->post('fonction');
 			$data['tel'] 				= $this->input->post('tel');
 			$data['mail'] 				= $this->input->post('mail');
+			$data['numr_carte']         = $this->input->post('numr_carte');
+			$data['adresse ']           = $this->input->post('adresse ');
 			$data['evenement'] 			= $this->input->post('evenement');
 			$data['listeCategorie'] 	= $this->modelcategorie->getCategories();
 			$data['listeSurCategorie'] 	= $this->modelcategorie->getCategorieMere();

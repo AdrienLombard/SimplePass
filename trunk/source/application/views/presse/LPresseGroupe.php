@@ -10,13 +10,27 @@
 			<?php $i++; ?>
 		<?php endforeach; ?>
 
+		//remplissage de la 1ere box des sous-catégorie de presse au chargement.
+		var id = $("#categorie").find("option:selected").val();
+		var count = 0;
+		var newSelect = "<select name='categorie[]' class='select dyn-selector'>";
+		for(var i=0; i<tabCat.length; i++) {
+			if(tabCat[i][1] == id) {
+				newSelect += "<option value='" + tabCat[i][0] + "'>" + tabCat[i][2] + "</option>";
+				count++;
+			}
+		}
+		newSelect += "</select>";
+		$("#categorie").nextAll().remove();
+		if(count != 0)
+			$(newSelect).insertAfter("#categorie");
+
 		$("select.dyn-selector").live("change",function(){
 			
 			var id = $(this).find("option:selected").val();
 			var count = 0;
 			
 			var newSelect = "<select name='categorie[]' class='select dyn-selector'>";
-			newSelect += "<option value='-1'><?php echo lang('neSaisPas'); ?></option>";
 			for(var i=0; i<tabCat.length; i++) {
 				if(tabCat[i][1] == id) {
 					newSelect += "<option value='" + tabCat[i][0] + "'>" + tabCat[i][2] + "</option>";
@@ -79,42 +93,49 @@
 			<?php echo form_error('prenom'); ?>
 			
 			<label> Adresse* </label>
-		    <input type="text"  value="<?php echo set_value('adresse');?>"/>
-		    <label> Code postale* </label>
-		    <input type="text" name="code_postale" value="<?php echo set_value('code_postale');?>"/>
+			<textarea rows="5" cols="73" name="adresse" ><?php echo set_value('adresse'); ?></textarea>
+			<?php echo form_error('adresse'); ?>
+			
 		 <div class="tel">
-		    <label > Fixe </label>
-			<input id="tel" type="text" value="<?php echo set_value('tel'); ?>" id="tel" name="tel" />
-			<label> Portable* </label>
-			<input id="tel" type="text" value="<?php echo set_value('tel'); ?>" id="tel" name="tel" />
-			<label> Ligne directe</label>
-		    <input id="tel" type="text" value="<?php echo set_value('tel'); ?>" id="tel" name="tel" />
+		    <label> Téléphone* : </label>
+				<input  type="radio" value="<?php echo FIXE ?>" 		id="tel_fixe" 		name="tel_type" checked />Fixe
+				<input  type="radio" value="<?php echo PORTABLE ?>" 	id="tel_portable" 	name="tel_type" />Portable
+				<input  type="radio" value="<?php echo DIRECT ?>" 		id="tel_direct" 	name="tel_type" />Ligne directe
+
+				<input  type="text" value="<?php echo set_value('tel'); ?>" id="tel" name="tel" />
 		 </div>
-			<label> Numero de carte* </label>	
-	        <input type="text" name="numr_carte" value="<?php echo set_value('numero_carte');?>"/>
+			<label> Numero de carte de presse* : </label>
+			<input type="text" name="numr_carte" value="<?php echo set_value('numr_carte');?>"/>
+			<?php echo form_error('numr_carte'); ?>
+
 			<label><?php echo lang('mail'); ?>*</label>
-			<input type="text" value="<?php if($values) echo $values->mail; ?>" name="mail" />
+			<input type="text" value="<?php echo set_value('mail'); ?>" id="mail" name="mail" />
 			<?php echo form_error('mail'); ?>
+
+			<label><?php echo lang('societe'); ?>*</label>
+			<input type="text" value="<?php echo set_value('titre'); ?>" id="titre" name="titre" />
+			<?php echo form_error('titre'); ?>
+
+
+			<label>Fonction* : </label>
+			<select id="fonction" name="fonction" class="select" >
+				<option name="op1" value="1">Rédacteur en chef</option>
+				<option name="op2" value="2">Journaliste</option>
+				<option name="op3" value="3">Caméramen</option>
+				<option name="op4" value="4">Preneur de son</option>
+				<option name="op5" value="5">Photographe</option>
+				<option name="op6" value="6">Technecien</option>
+			</select>
 			<div>
-		<label><?php echo lang('societe'); ?>*</label>
-		<input type="text" value="<?php echo set_value('titre'); ?>" id="titre" name="titre" />
+
 			<label><?php echo lang('categorie'); ?></label>
 			<select  id="categorie" name="categorie[]" class="select dyn-selector">
-				<option value="-1"><?php echo lang('neSaisPas'); ?></option>
 				<?php foreach($listeSurCategorie as $categorie): ?>
 				<option VALUE="<?php echo $categorie->idcategorie; ?>" <?php echo set_select('categorie', $categorie->libellecategorie); ?> ><?php echo $categorie->libellecategorie; ?></option>
 				<?php endforeach; ?>
 			</select>
 			</div>
-		   <label>Souhaitez vous une plasse de parking ? </label>
-		   <input type="checkbox" value="Oui"/>Oui
-		   <input type="checkbox" value="Non"/>Non
 		   
-		   <label> Souhaitez vous recevoir les informations sur courchevel ? </label>
-		   <input type="checkbox" value="info"/>Compétitions sportives
-		   <input type="checkbox" value="info"/>Sports
-		   <input type="checkbox" value="info"/>Tourisme
-		
 			<div class="sous-categories"></div>				
 			<div class="photo">
 				<canvas id="canvas" width="160" height="204" style="display:none;"></canvas>
