@@ -65,7 +65,7 @@
 	
 		<br><br>
 		<span class="info">* <?php echo lang('mentionChampObligatoire'); ?></span><br>
-		<form method="post" action="<?php echo site_url('presse/exeGroupe/' . $idEvenement); ?>">
+		<form method="post" action="<?php echo site_url('presse/exeGroupe/' . $idEvenement . '/' . $cate); ?>">
 			
 			<input type="hidden" name="evenement" value="<?php echo $infoEvenement[0]->idevenement; ?>" />
 			
@@ -95,7 +95,7 @@
 			<label> Adresse* </label>
 			<textarea rows="5" cols="73" name="adresse" ><?php echo set_value('adresse'); ?></textarea>
 			<?php echo form_error('adresse'); ?>
-			
+
 		 <div class="tel">
 		    <label> Téléphone* : </label>
 				<input  type="radio" value="<?php echo FIXE ?>" 		id="tel_fixe" 		name="tel_type" checked />Fixe
@@ -103,6 +103,7 @@
 				<input  type="radio" value="<?php echo DIRECT ?>" 		id="tel_direct" 	name="tel_type" />Ligne directe
 
 				<input  type="text" value="<?php echo set_value('tel'); ?>" id="tel" name="tel" />
+				<?php echo form_error('tel'); ?>
 		 </div>
 			<label> Numero de carte de presse* : </label>
 			<input type="text" name="numr_carte" value="<?php echo set_value('numr_carte');?>"/>

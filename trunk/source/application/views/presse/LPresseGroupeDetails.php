@@ -153,7 +153,6 @@
 			    <option value="6">technecien</option>
 		   	</select>
 			</div>
-			<input type="hidden" name="categorie" value="<?php echo $categorie; ?>" />
 			<div class="clear"></div>
 			<div class="split splitRight">
 				<a href="#" class="button" id="validerLigne"><?php echo lang('valider'); ?></a>
