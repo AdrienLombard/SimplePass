@@ -71,7 +71,7 @@
 			<h2><?php echo lang('responsable'); ?></h2>
 			
 			<label><?php echo lang('nom'); ?>*</label>
-			<input type="text" value="<?php if($values) echo $values->nom; ?>" name="nom" />
+			<input type="text" value="<?php if($values) echo $values->nom; ?>" name="nom" style="text-transform: uppercase"/>
 			<?php echo form_error('nom'); ?>
 			
 			<label><?php echo lang('prenom'); ?>*</label>
