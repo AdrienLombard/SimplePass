@@ -32,6 +32,10 @@
 						<th>Date fin</th>
 						<td><?php echo display_date($resultat->datefin)?></td>
 					</tr>
+					<tr>
+						<th>Texte à ajouter au mail de confirmation (Facultatif)</th>
+						<td><textarea cols="70" rows="5" wrap="soft" readonly ><?php echo $resultat->textmail; ?></textarea></td>
+					</tr>
 				</table>
 				<?php  endforeach; ?>
 				

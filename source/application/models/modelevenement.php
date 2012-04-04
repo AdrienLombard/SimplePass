@@ -68,6 +68,18 @@ class modelEvenement extends MY_Model {
 		$this->db->insert(DB_EVENEMENT, $data);
 	}
 	
+	public function ajouterAvecTextMail($libelle,$datedebut,$datefin, $textmail){
+		
+		$data = array(
+		 	'libelleevenement'	=> $libelle,
+		 	'datedebut'			=> $datedebut,
+		 	'datefin'			=> $datefin,
+			'textmail'			=> $textmail
+		 );
+		
+		$this->db->insert(DB_EVENEMENT, $data);
+	}
+	
 	
 	/**
 	 * Fonction pour ajouter les paramètre d'un évènment : trio evenement / zone / categorie.
@@ -91,6 +103,29 @@ class modelEvenement extends MY_Model {
 		 	'libelleevenement' => $libelle,
 		 	'datedebut' => $datedebut,
 		 	'datefin' => $datefin
+		 );
+		
+		 $this->db->where('idevenement', $id);
+		 $this->db->update(DB_EVENEMENT, $data);
+		
+	}
+	
+	/**
+	 * 
+	 * Enter description here ...
+	 * @param unknown_type $libelle
+	 * @param unknown_type $datedebut
+	 * @param unknown_type $datefin
+	 * @param unknown_type $id
+	 * @param unknown_type $textmail
+	 */
+	public function modifierAvecTextMail($libelle, $datedebut, $datefin, $id, $textmail){
+
+		$data = array(
+		 	'libelleevenement' => $libelle,
+		 	'datedebut' => $datedebut,
+		 	'datefin' => $datefin,
+			'textmail' => $textmail
 		 );
 		
 		 $this->db->where('idevenement', $id);

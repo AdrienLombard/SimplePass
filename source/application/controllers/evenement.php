@@ -138,6 +138,7 @@ class Evenement extends Cafe {
 		$nom 		= $this->input->post('nom');
 		$datedebut 	= $this->input->post('datedebut');
 		$datefin 	= $this->input->post('datefin');
+		$textmail	= $this->input->post('textmail');
 		
 		if(!empty ($datedebut)) {
 			$datedebutTstmp= date_to_timestamp($datedebut);
@@ -158,7 +159,7 @@ class Evenement extends Cafe {
 			}
 				
 			
-			$this->modelevenement->ajouter( $nom, $datedebutTstmp, $datefinTstmp);
+			$this->modelevenement->ajouterAvecTextMail( $nom, $datedebutTstmp, $datefinTstmp, $textmail);
 			
 			$id = $this->modelevenement->lastId();
 			
@@ -169,6 +170,7 @@ class Evenement extends Cafe {
 			$values->nom		= $nom;
 			$values->dateDebut	= $datedebut;
 			$values->dateFin	= $datefin;
+			$values->textmail	= $textmail;
 			
 			if(!empty ($datedebut) && !empty ($datefin)) {
 				if($datedebutTstmp >= $datefinTstmp)
@@ -291,6 +293,7 @@ class Evenement extends Cafe {
 			$data['nom'] 		= $re['nom'];
 			$data['datedebut'] 	= date_to_timestamp($re['datedebut']);
 			$data['datefin'] 	= date_to_timestamp($re['datefin']);
+			$data['textmail']	= $re['textmail'];
 			
 			$data['listeCategorieZone'] = $re['coupleZoneCategorie'];
 			
@@ -303,6 +306,7 @@ class Evenement extends Cafe {
 				$data['nom'] 		= $reponse[0]->libelleevenement;
 				$data['datedebut'] 	= $reponse[0]->datedebut;
 				$data['datefin'] 	= $reponse[0]->datefin;
+				$data['textmail']	= $reponse[0]->textmail;
 
 				$data['listeCategorieZone'] = Array();
 				if($categories) {
@@ -358,6 +362,8 @@ class Evenement extends Cafe {
 		$nom 		= $this->input->post('nom');
 		$datedebut 	= $this->input->post('datedebut');
 		$datefin 	= $this->input->post('datefin');
+		$textmail	= $this->input->post('textmail');
+		
 		$datedebutTstmp= date_to_timestamp($datedebut);
 		$datefinTstmp  = date_to_timestamp($datefin);
 		
@@ -394,7 +400,7 @@ class Evenement extends Cafe {
 			}
 			
 			// Si la verification est ok.
-			$resultat = $this->modelevenement->modifier($nom, $datedebutTstmp, $datefinTstmp, $id);
+			$resultat = $this->modelevenement->modifierAvecTextMail($nom, $datedebutTstmp, $datefinTstmp, $id, $textmail);
 			
 			$data['titre']		= 'Modification';
 			$data['message']	= 'Votre évènement à  bien été modifié.';
