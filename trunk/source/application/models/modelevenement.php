@@ -36,13 +36,13 @@ class modelEvenement extends MY_Model {
 	
 	
 	public function getEvenementEnCours() {
-		$current_date = time();
 		
-		 return $this->db->select('*')
-				          ->from(DB_EVENEMENT)
-						  ->where('datefin >', $current_date)
-						  ->get()
-				          ->result();
+		$current_date = time();
+		return $this->db->select('*')
+				        ->from(DB_EVENEMENT)
+						->where('datefin >=', $current_date)
+						->get()
+				        ->result();
 		
 	}
 	

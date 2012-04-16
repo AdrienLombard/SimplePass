@@ -142,7 +142,54 @@ table.listeZoneEvent {
 	padding: 5px;
 	
 }
-	
+
+
+
+
+/*
+ * Intro welcome
+ */
+ 
+.intro {
+	margin-top: 40px;
+}
+.intro .desc, .intro .suggestion {
+	float: left;
+}
+
+.intro .desc {
+	width: 360px;
+	text-align: right;
+	padding: 20px 40px 20px 0px;
+	border-right: 1px solid #DDD;
+	line-height: 25px;
+}
+.intro strong {
+	color: #2E6F92;
+	text-shadow: 1px 1px 0 #CCC;
+}
+
+.intro .suggestion {
+	width: 440px;
+	margin-left: 40px;
+	padding: 20px 20px 0 0;
+	font-size: 14px;
+	line-height: 20px;
+}
+.intro .suggestion li {
+	margin-left: 20px;
+}
+.intro .suggestion .alert {
+	display: block;
+	font-size: 12px;
+	color: orange;
+	margin-top: 10px;
+}
+.intro .suggestion .actions {
+	text-align: center;
+	margin-top: 15px;
+	margin-bottom: 30px;
+}
 	
 	
 	
