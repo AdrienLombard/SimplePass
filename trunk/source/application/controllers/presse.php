@@ -41,10 +41,9 @@ class Presse extends Chocolat{
 	public function lambda( $categorie ) {
 		$this->layout->ajouter_js('lambda/script');
 
-		$data['events'] 	= $this->modelevenement->getEvenementEnCours();
-		$data['categorie']	= $categorie;
+		$data['listeSurCategorie'] 	= $this->modelcategorie->getCategorieMere();
 
-		$this->layout->view('presse/LAccueilPress', $data);
+		$this->layout->view('presse/LPageEntre', $data);
 	}
 
 
@@ -346,7 +345,7 @@ class Presse extends Chocolat{
 			$data['tel'] 				= $this->input->post('tel');
 			$data['mail'] 				= $this->input->post('mail');
 			$data['numr_carte']         = $this->input->post('numr_carte');
-			$data['adresse ']           = $this->input->post('adresse ');
+			$data['adresse ']           = $this->input->post('adresse');
 			$data['evenement'] 			= $this->input->post('evenement');
 			$data['organisme']          =$this->input->post('titre');
 			$data['listeCategorie'] 	= $this->modelcategorie->getCategories();

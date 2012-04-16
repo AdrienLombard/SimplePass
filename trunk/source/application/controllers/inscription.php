@@ -35,6 +35,10 @@ class Inscription extends Chocolat {
 	}
 
 	public function presse() {
+		
+		$data['events'] 	= $this->modelevenement->getEvenementEnCours();
+		$data['categorie']	= $categorie;
+		$categorie = $this->input->post('categorie');
 		$data['listeSurCategorie'] 	= $this->modelcategorie->getCategorieMere();
 		$this->layout->view('presse/LPageEntre',$data);
 	}
