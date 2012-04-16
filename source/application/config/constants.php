@@ -61,8 +61,8 @@ define('DB_EVENEMENT',				'courchevel_evenement');
 define('DB_PARAMETRES_EVENEMENTS',	'courchevel_parametres_evenements');
 define('DB_PAYS',					'courchevel_pays');
 define('DB_UTILISATEUR',			'courchevel_utilisateur');
-define('DB_ZONE',					'courchevel_zone');
 define('DB_ZONES_ACCREDITATION', 	'courchevel_accreditation_zones');
+define('DB_ZONE',					'courchevel_zone');
 define ('DB_PRESSE',                'courchevel_presse');
 /*
  * DIMENSIONS DES IMAGES
@@ -70,6 +70,35 @@ define ('DB_PRESSE',                'courchevel_presse');
 define('UPLOAD_DIR', './assets/images/photos/');
 define('IMG_WIDTH', 160);
 define('IMG_HEIGHT', 204);
+
+/*
+ * INFORMATIONS DU MAIL
+ */
+define('MAIL_EXPEDITEUR', 'accreditation-skiworldcup@sportcourchevel.com');
+define('MAIL_COPIE', 'adrilomb@gmail.com');
+define('OBJET_MAIL', 'Accreditations FIS Alpine Ski World Cup Courchevel');
+define('CHER', 'Cher(e) ');
+define('DEAR', 'Dear ');
+define('INTRO_MAIL', 	'<p>Nous vous remercions pour votre demande d\'accréditation.<br />' .
+						'Thank you very much for your application for accreditation.</p>' .
+						'<p>Pour rappel, voici le résumé des informations fournies : <br />' .
+						'As a reminder, please find below your information : </p>');
+					
+define('TRAITEMENT_MAIL',	'<p>Nous les traiterons dans les plus brefs délais.<br />' .
+							'Please allow a while for the processing</p>');
+						
+define('SIGNATURE_MAIL',	'<p>Sincères salutations, <br />' .
+							'Best Regards, </p>' .
+							'<p>Comité d\'organisation de la Coupe du Monde FIS de Ski - Courchevel<br />' .
+							'FIS Alpine Ski World Cup Organizing Committee - Courchevel</p>' .
+							'<p>Club des Sports de Courchevel<br />' .
+							'Le Forum<br />' .
+							'BP 10<br />' .
+							'F - 73 121 Courchevel<br />' .
+							'tel: +33 (0)4 79 08 08 21<br />' .
+							'fax: +33 (0)4 79 08 40 93<br /></p>' .
+							'<p>www.courchevel.com/skiworldcup</p>');
+
 
 /* End of file constants.php */
 /* Location: ./application/config/constants.php */
