@@ -74,6 +74,10 @@
             <!-- /output -->
             
         </div>
+		
+		<footer>
+			SimplePass Accreditation 2012 : Gestion des accréditations - <a href="<?php echo site_url('welcome/about'); ?>">À propos</a>
+		</footer>
         
     </body>
 </html>
