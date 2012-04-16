@@ -18,14 +18,18 @@ class utilisateur extends Cafe {
 	public function index($message = '')
 	{
 		if($this->session->userdata('login')) {
-			$data['nom'] = $this->session->userdata('login');
-			$data['evenement'] = $this->modelevenement->getLastEvenement()->libelleevenement;
+			
+			$data['evenement'] = end($this->modelevenement->getEvenementEnCours());
+			$data['nb'] = count($this->modelevenement->getEvenements());
 			$this->layout->view('utilisateur/UWelcome', $data);
+			
 		}
 		else {
+			
 			$data['message'] = $message;
 			$this->layout->ajouter_css('utilisateur/login');
 			$this->layout->view('utilisateur/ULogin', $data);
+			
 		}
 	}
 	 
@@ -42,16 +46,17 @@ class utilisateur extends Cafe {
 			if(!empty($donnesUtilisateur)){
 				if($donnesUtilisateur[0]->mdp == $mdp) {
 					$this->session->set_userdata('login', $donnesUtilisateur[0]->login);
-					$data['nom'] = $donnesUtilisateur[0]->login;
 					
-					$this->load->model('modelevenement');
-					$this->session->set_userdata('idEvenementEnCours', $this->modelevenement->getLastEvenement()->idevenement);
-					$this->session->set_userdata('libelleEvenementEnCours', $this->modelevenement->getLastEvenement()->libelleevenement);
+					$this->load->model('modelevenement');			
+					$evenement = end($this->modelevenement->getEvenementEnCours());
 					
-					$data['evenement'] = $this->modelevenement->getLastEvenement()->libelleevenement;
+					if($evenement != null) {
+						$this->session->set_userdata('idEvenementEnCours', $evenement->idevenement);
+						$this->session->set_userdata('libelleEvenementEnCours', $evenement->libelleevenement);
+					}
 
 					$this->layout->add_redirect('utilisateur', 0.1);
-					$this->layout->view('utilisateur/UWelcome', $data);
+					$this->layout->view('utilisateur/UWelcome');
 				}
 				else {
 					$message = 'Le mot de passe est incorrect.';

@@ -261,7 +261,7 @@ class Evenement extends Cafe {
 		}
 		// Appel de la vue.
 			$data['titre']		= 'Ajout';
-			$data['message']	= 'Votre évènement à bien été ajouté.';
+			$data['message']	= 'Votre événement a bien été ajouté.';
 			$data['redirect'] = 'evenement/liste';
 			$this->layout->view('utilisateur/UMessage', $data);	
 		
