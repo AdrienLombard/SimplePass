@@ -79,6 +79,8 @@ class Presse extends Chocolat{
 			$this->lang->load('fr');
 		}
 	}
+	
+	
 	public function ajouter($event='',$categorie='') {
 		// Chargement du js.
 	   $this->layout->ajouter_js('lambda/script'); 
@@ -367,7 +369,7 @@ class Presse extends Chocolat{
 	 * Méthode pour l'ajout de tous les membres d"une équipe.
 	 */
 	public function ajouterGroupe($data) {
-		$this->layout->ajouter_js('lambda/scriptGroupe');
+		$this->layout->ajouter_js('lambda/scriptGroupePresse');
 
 		$this->layout->view('presse/LPresseGroupeDetails', $data);
 	}

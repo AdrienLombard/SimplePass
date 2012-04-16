@@ -13,13 +13,13 @@ $(document).ready(function(){
 		// récupère le parent : div.form
 		var parent = $(this).parent().parent();
 		
-		// récupère le nom
+		// Gstion du nom
 		var nom = parent.find('#ligneNom');
 		
-		// récupère le prenom
+		// Gestion du prenom
 		var prenom = parent.find('#lignePrenom');
 		
-		// récupère la catégorie
+		// Gestion de la catégorie
 		var listeCategorie = parent.find('.dyn-selector').find('option:selected');
 		var len = listeCategorie.length -1;
 		var categorieId = listeCategorie[len].value;
@@ -29,7 +29,7 @@ $(document).ready(function(){
 			categorie = listeCategorie[len-1].getAttribute('libelle');
 		}
 		
-		// récupère le rôle
+		// Gestion du rôle
 		var fonction = parent.find('#ligneFonction');
 		
 		var erreur = false;
@@ -43,6 +43,8 @@ $(document).ready(function(){
 		}
 		
 		
+		
+		// traitement en cas d'erreur sur le formulaire.
 		if(!erreur) {
 			// enlever la class erreur
 			nom.removeClass('erreur');
@@ -93,6 +95,11 @@ $(document).ready(function(){
 		
 		return bool;
 	});
+	
+	
+	/**
+	 * Gestion de la photo : webcam + crop.
+	 */
 	
 	/*
 	 * upload fichier

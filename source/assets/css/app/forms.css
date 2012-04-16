@@ -54,3 +54,8 @@ form input[type=submit]:hover, .button:hover {
 input[type=text].erreur {
 	border: 2px solid red;
 }
+
+
+textarea.erreur {
+	border: 2px solid red;
+}

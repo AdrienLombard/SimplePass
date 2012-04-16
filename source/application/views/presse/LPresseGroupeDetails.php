@@ -107,65 +107,78 @@
 			</div>
 			<div class="webcam"></div>
 			<input type="file" name="photo_file" id="photo_file" />
+			
+			<!-- gestion du nom -->
 			<div class="split">
 				<label ><?php echo lang('nom'); ?>*</label>
 				<input type="text" id="ligneNom" name="groupe[nbLigne][nom]" />
 			</div>
 			
+			<!-- gestion du prenom -->
 			<div class="split">
 				<label><?php echo lang('prenom'); ?>*</label>
 				<input type="text" id="lignePrenom" name="groupe[nbLigne][prenom]" />
 			</div>
 			<br>
-			<div class="split">	
-			<div class="tel">
-				<label> Téléphone* : 
+			
+			<!-- gestion du téléphone -->
+			<div class="split">
+				<label id='ligneTypeTel' > Téléphone* : 
 				<input  type="radio" value="<?php echo FIXE ?>" 		id="tel_fixe" 		name="tel_type" checked />Fixe
 				<input  type="radio" value="<?php echo PORTABLE ?>" 	id="tel_portable" 	name="tel_type" />Portable
 				<input  type="radio" value="<?php echo DIRECT ?>" 		id="tel_direct" 	name="tel_type" />Ligne directe
-                </label>
-				<input  type="text" value="<?php echo set_value('tel_membre'); ?>" id="tel" name="groupe[nbLigne][tel_membre]" />
-			 </div>
-		   </div>
+				</label>
+				<input  type="text" id="ligneTel" value="<?php echo set_value('tel_membre'); ?>" id="tel" name="groupe[nbLigne][tel_membre]" />
+			</div>
 			
+			<!-- gestion du numero de carte presse -->
 			<div class="split">
-
 				<label> Numero de carte de presse* : </label>
-			<input type="text" name="groupe[nbLigne][numr_carte_membre]" value="<?php echo set_value('numr_carte_membre');?>"/>
+				<input type="text" id="ligneNumero" name="groupe[nbLigne][numr_carte_membre]" value="<?php echo set_value('numr_carte_membre');?>"/>
 			</div>
 			
+			<!-- gestion de l'adresse postale -->
 			<div class="split"> 
-			<label> Adresse* </label>
-			<textarea rows="5" cols="73" name="groupe[nbLigne][adresse_membre]" ><?php echo set_value('adresse_membre'); ?></textarea>
+				<label> Adresse* </label>
+				<textarea rows="5" cols="73" id="ligneAdresse" name="groupe[nbLigne][adresse_membre]" ><?php echo set_value('adresse_membre'); ?></textarea>
 			</div>
 			
+			<!-- gestion du mail -->
 			<div class="split">
 			<label><?php echo lang('mail'); ?>*</label>
-			<input type="text" value="<?php echo set_value('mail_membre'); ?>" id="mail" name="groupe[nbLigne][mail_membre]" />
+			<input type="text" id="ligneMail" value="<?php echo set_value('mail_membre'); ?>" id="mail" name="groupe[nbLigne][mail_membre]" />
 			<?php echo form_error('mail'); ?>
-			</div>	 
+			</div>
+			
+			<!-- gestion de la catégorie -->
 			<div class="split">
-				
 				<label ><?php echo lang('categorie'); ?></label>
-
 				<select  id="categorie" name="groupe[nbLigne][categorie][]" class="select dyn-selector">
 					<option value="-1" libelle=" " ><?php echo lang('neSaisPas'); ?></option>
 					<?php foreach($listeSurCategorie as $categorie): ?>
-					<option VALUE="<?php echo $categorie->idcategorie; ?>" libelle="<?php echo $categorie->libellecategorie; ?>" <?php echo set_select('categorie', $categorie->libellecategorie); ?> ><?php echo $categorie->libellecategorie; ?></option>
+						<option VALUE="<?php echo $categorie->idcategorie; ?>" 
+							libelle="<?php echo $categorie->libellecategorie; ?>" 
+							<?php echo set_select('categorie', $categorie->libellecategorie); ?> >
+							<?php echo $categorie->libellecategorie; ?>
+						</option>
 					<?php endforeach; ?>
 				</select>
 			</div>
+			
+			<!-- gestion de la fonction -->
 			<div class="split">
-			<label>Fonction*</label>
-		    <select id="fonction" name="groupe[nbLigne][fonction]" class="select" >
-		       	<option value="1">rédacteur en chef</option> 
-		        <option value="2">journaliste</option>
-		        <option value="3">caméramen</option>
-			    <option value="4">preneur de son</option>
-			    <option value="5">photographe</option>
-			    <option value="6">technecien</option>
-		   	</select>
+				<label>Fonction*</label>
+				<select id="ligneFonction" name="groupe[nbLigne][fonction]" class="select" >
+					<option value="1" libelle="rédacteur en chef" >rédacteur en chef</option> 
+					<option value="2" libelle="journaliste" >journaliste</option>
+					<option value="3" libelle="caméramen" >caméramen</option>
+					<option value="4" libelle="preneur de son" >preneur de son</option>
+					<option value="5" libelle="photographe" >photographe</option>
+					<option value="6" libelle="technecien" >technecien</option>
+				</select>
 			</div>
+			
+			<!-- Boutons de validation du formulaire. -->
 			<div class="clear"></div>
 			<div class="split splitRight">
 				<a href="#" class="button" id="validerLigne"><?php echo lang('valider'); ?></a>
