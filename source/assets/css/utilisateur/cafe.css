@@ -101,7 +101,7 @@ header .wrap-h span.switchMenu:hover div.toggleMenu {
 
 #content {
     width: 1000px;
-    padding: 35px 0 80px 0;
+    padding: 35px 0 15px 0;
     margin: auto;
 }
 
@@ -114,4 +114,21 @@ header .wrap-h span.switchMenu:hover div.toggleMenu {
 	margin-left: 15px;
 	font-weight: bold;
 	color: orange;
+}
+
+
+
+/*
+ * Footer
+ */
+footer, footer * {
+ text-align: center;
+ margin-bottom: 20px;
+}
+footer, footer * {
+ font-size: 10px;
+ color: #666;
+}
+footer a:hover {
+	color: #222;
 }

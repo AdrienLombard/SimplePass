@@ -6,22 +6,23 @@ class Welcome extends Cafe {
 	/**
 	 * constucteur de notre classe de base.
 	 */
-	public function __construct()
-	{
+	public function __construct() {
+		
 		parent::__construct();
-		/* on charge le model user*/
-		$this->load->model('modelutilisateur');
-
-		$this->layout->ajouter_css('jquery.Jcrop');
-		$this->layout->ajouter_js('jquery.Jcrop.min');
-		$this->layout->ajouter_js('webcam/jquery.webcam');
+		
 	}
-	public function index()
-	{
+	
+	public function index() {
     
-            $this->layout->ajouter_css('utilisateur/login');
-            $this->layout->view('utilisateur/ULogin');
+		$this->layout->ajouter_css('utilisateur/login');
+		$this->layout->view('utilisateur/ULogin');
 
+	}
+	
+	public function about() {
+		
+		$this->layout->view('utilisateur/UAbout');
+		
 	}
      
 }
