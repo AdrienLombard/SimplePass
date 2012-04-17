@@ -170,12 +170,12 @@
 			<div class="split">
 				<label><?php echo lang('fonction'); ?>*</label>
 				<select id="ligneFonction" name="groupe[nbLigne][fonction]" class="select" >
-					<option value="1" libelle="<?php echo lang('redacChef'); ?>" ><?php echo lang('redacChef'); ?></option> 
-					<option value="2" libelle="<?php echo lang('journaliste'); ?>" ><?php echo lang('journaliste'); ?></option>
-					<option value="3" libelle="<?php echo lang('cameraman'); ?>" ><?php echo lang('cameraman'); ?></option>
-					<option value="4" libelle="<?php echo lang('preneurSon'); ?>" ><?php echo lang('preneurSon'); ?></option>
-					<option value="5" libelle="<?php echo lang('photographe'); ?>" ><?php echo lang('photographe'); ?></option>
-					<option value="6" libelle="<?php echo lang('technicien'); ?>" ><?php echo lang('technicien'); ?></option>
+					<option value="<?php echo lang('redacChef'); ?>" libelle="<?php echo lang('redacChef'); ?>" ><?php echo lang('redacChef'); ?></option> 
+					<option value="<?php echo lang('journaliste'); ?>" libelle="<?php echo lang('journaliste'); ?>" ><?php echo lang('journaliste'); ?></option>
+					<option value="<?php echo lang('cameraman'); ?>" libelle="<?php echo lang('cameraman'); ?>" ><?php echo lang('cameraman'); ?></option>
+					<option value="<?php echo lang('preneurSon'); ?>" libelle="<?php echo lang('preneurSon'); ?>" ><?php echo lang('preneurSon'); ?></option>
+					<option value="<?php echo lang('photographe'); ?>" libelle="<?php echo lang('photographe'); ?>" ><?php echo lang('photographe'); ?></option>
+					<option value="<?php echo lang('technicien'); ?>" libelle="<?php echo lang('technicien'); ?>" ><?php echo lang('technicien'); ?></option>
 				</select>
 			</div>
 			
