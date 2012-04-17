@@ -112,8 +112,13 @@ $(document).ready(function(){
 					pos = 0;
 				}
 				
+				var lang = $('#lang').val();
+				
 				$('input[name=photo_webcam]').val(canvas.toDataURL("image/png"));
-				$('.photoMessage').show().text('Photo prise, enregistrez pour valider ->');
+				if(lang == 'fra')
+					$('.photoMessage').show().text('Photo prise, enregistrez pour valider ->');
+				else
+					$('.photoMessage').show().text('Photo taken, save to validate ->');
 			}
 			
 		});

@@ -44,6 +44,8 @@ class Presse extends Chocolat{
 
 		$data['listeSurCategorie'] 	= $this->modelcategorie->getCategorieMere();
 
+		$data['lang'] = $this->session->userdata('lang');
+		
 		$this->layout->view('presse/LPageEntre', $data);
 	}
 
@@ -82,6 +84,9 @@ class Presse extends Chocolat{
 	
 	
 	public function ajouter($event='', $IDcategorie='') {
+	
+		$data['lang'] = $this->session->userdata('lang');
+	
 		// Chargement du js.
 	 	$this->layout->ajouter_js('lambda/script');
 
@@ -236,6 +241,8 @@ class Presse extends Chocolat{
 		// Chargement du js.
 		$this->layout->ajouter_js('lambda/script');
 
+		$data['lang'] = $this->session->userdata('lang');
+		
 		$data['idEvenement']	= $evenement;
 		$data['infoEvenement'] 	= $this->modelevenement->getEvenementParId($evenement);
 		$data['listePays'] 		= $this->modellambda->listePays();
@@ -255,6 +262,8 @@ class Presse extends Chocolat{
 	 * @param $cate
 	 */
 	public function exeGroupe( $idevent, $cate ) {
+	
+		$data['lang'] = $this->session->userdata('lang');
 
 		$idEvenement = $this->input->post('evenement');
 		
@@ -369,6 +378,9 @@ class Presse extends Chocolat{
 	 * @param $data
 	 */
 	public function ajouterGroupe($data) {
+	
+		$data['lang'] = $this->session->userdata('lang');
+	
 		$this->layout->ajouter_js('lambda/scriptGroupePresse');
 
 		$this->layout->view('presse/LPresseGroupeDetails', $data);
@@ -383,6 +395,8 @@ class Presse extends Chocolat{
 		unset($ref['fonction']);
 		unset($ref['groupe']);
 		$id = $this->modelclient->ajouter($ref);
+		
+		$data['lang'] = $this->session->userdata('lang');
 		
 		// création de l'accreditation pour le referent
 		$accred = null;
@@ -482,6 +496,9 @@ class Presse extends Chocolat{
 	
 	public function upload($id)
 	{
+	
+		$data['lang'] = $this->session->userdata('lang');
+	
 		$client = $this->modelclient->getClientParId($id);
 		
 		$config['upload_path'] = UPLOAD_DIR;

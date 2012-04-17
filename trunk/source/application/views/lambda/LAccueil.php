@@ -7,6 +7,8 @@
 		<a href="<?php echo site_url('inscription/changerLangage/gbr/' . str_replace('/', ':', uri_string())); ?>" ><img src="<?php echo img_url('drapeaux/gbr.gif'); ?>" alt="gbr" /></a>
 	</div>
 	
+	<input id="lang" type="hidden" value="<?php echo $lang; ?>" />
+	
 	<div class="box-small">
 		
 		<span class="info"><?php echo lang('bienvenue'); ?></span>
