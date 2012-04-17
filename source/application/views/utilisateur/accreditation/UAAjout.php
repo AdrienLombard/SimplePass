@@ -88,11 +88,17 @@
 								</select>
 							</div>
 
-						<div>
-							<label>Mail : </label>
-							<input type="text" name="mail" class="email" value="<?php if(isset($re->client['mail'])) echo $re->client['mail']; ?>" >
-							<?php if(isset($re->erreurMail)) echo '<label>-</label><span class="erreurMessage" >* ' . $re->erreurMail . '</span>'; ?>
-						</div>
+							<div>
+								<label>Organisme : </label>
+								<input type="text" name="organisme" value="<?php if(isset($re->accred['organisme'])) echo $re->accred['organisme']; ?>" />
+							</div>
+
+							<div>
+								<label>Mail : </label>
+								<input type="text" name="mail" class="email" value="<?php if(isset($re->client['mail'])) echo $re->client['mail']; ?>" >
+								<?php if(isset($re->erreurMail)) echo '<label>-</label><span class="erreurMessage" >* ' . $re->erreurMail . '</span>'; ?>
+							</div>
+
 							<div>
 								<label>Tel : </label>
 								<input type="text" name="tel" class="tel" value="<?php if(isset($re->client['tel'])) echo $re->client['tel']; ?>" >
