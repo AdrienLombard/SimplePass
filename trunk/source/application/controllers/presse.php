@@ -589,13 +589,6 @@ class Presse extends Chocolat{
 				$contenuMail .= ' (Pas de fonction définie / No function defined)</li>';
 			}
 			
-			// on continue le mail.
-			if($accred['fonction'] != '') {
-				$contenuMail .= '<li>' . $membre['prenom'] . ' ' . $membre['nom'] . ' - ' . $accred['fonction'] . '</li>';
-			}
-			else {
-				$contenuMail .= '<li>' . $membre['prenom'] . ' ' . $membre['nom'] . ' - Pas de fonction définie</li>';
-			}
 			if(isset($accred['categorie']))
 				$this->AssociationZoneAccred($idNewAccred, $accred['idcategorie'], $this->input->post('evenement'));
 		}
