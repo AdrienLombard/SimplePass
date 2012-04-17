@@ -139,7 +139,7 @@ class LoaderTool
    */
   public static function isBinaryContent($mime_type)
   {
-    list($mime_type_major, $mime_type_minor) = split('/', $mime_type);
+    list($mime_type_major, $mime_type_minor) = explode('/', $mime_type);
 
     switch($mime_type_major) // According to MIME type major.
     {
