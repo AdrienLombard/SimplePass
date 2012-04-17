@@ -119,6 +119,49 @@ class modelCategorie extends MY_Model {
 		return $sorted;
 	}
 	
+	public function getCategorieDansEvenementToutBienAvecId($idEvenement) {
+		$result =  $this->db->select('*')
+						->from(DB_CATEGORIE . ' c')
+						->join(DB_PARAMETRES_EVENEMENTS . ' pe', 'pe.idcategorie = c.idcategorie', 'left')
+						->where('pe.idevenement',$idEvenement)
+						->order_by('c.surcategorie')
+						->get()
+						->result();
+		
+		// tableau de sortie
+		$sorted = array();
+		
+		// on boucle sur tout les elements de result (tableau trié par surcategorie)
+		foreach($result as $cat){
+			
+			// variable qui check si une sous catégorie a été insérée
+			$inserted = false;
+			
+			// on boucle sur le tabeau de sortie
+			for($j=0; $j<=count($sorted); $j++) {
+				
+				// si la cat du tableau de sortie est mère de l'actuelle
+				if(isset($sorted[$j]) && $sorted[$j]['db']->idcategorie == $cat->surcategorie) {
+					
+					// insertion de la cat après sa cat mère
+					$before = array_slice($sorted, 0, $j+1);
+					$before[] = array('db' => $cat, 'depth' => $depth = ++$sorted[$j]['depth']);
+					$after = array_slice($sorted, $j+1);
+					$sorted = array_merge($before, $after);
+					
+					// une cat a été insérer après sa mère
+					$inserted = true;
+					break;
+				}
+			}
+			
+			// si la cat courante n'a pas trouver de cat mère, on l'insère à la fin
+			if(!$inserted)
+				$sorted[] = array('db' => $cat, 'depth' => $depth = 0);
+		}
+		
+		return $sorted;
+	}
 	
 	public function ajouter($data) {
 		$this->db->insert(DB_CATEGORIE, $data);

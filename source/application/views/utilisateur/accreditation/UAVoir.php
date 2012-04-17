@@ -43,7 +43,7 @@
 						<div class="photoMessage"></div>
 						
 						<?php if(img_url('photos/'.$client->idclient.'.jpg') != NULL): ?>
-						<img src="<?php echo site_url('image/generate/' . $client->idclient); ?>" />
+							<img src="<?php echo site_url('image/generate/' . $client->idclient); ?>" />
 						<?php endif; ?>
 						
 					</div>

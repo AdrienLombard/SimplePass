@@ -12,8 +12,8 @@
 
         <aside>
 			<a href="<?php echo site_url('accreditation/modifierGroupe/'.$ref[0]->groupe); ?>">Modifier</a>
-			<a href="<?php echo site_url('impression/impgroupe'); ?>">Imprimer</a>
-			<a href="<?php echo site_url('impression/impcartegroupe'); ?>">Imprimer Carte</a>
+			<a target="_blank" href="<?php echo site_url('impression/impgroupe/'.$ref[0]->groupe); ?>">Imprimer</a>
+			<a target="_blank" href="<?php echo site_url('impression/impcartegroupe/'.$ref[0]->groupe); ?>">Imprimer Carte</a>
 			<a href="<?php echo site_url('accreditation/index'); ?>">Retour</a>
         </aside>
 		
@@ -25,6 +25,11 @@
                    
                    <div class="inputs no-margin">
 						<h2> Informations générales </h2>
+						<div class="photo">
+							<?php if(img_url('photos/'.$ref[0]->idclient.'.jpg') != NULL): ?>
+								<img src="<?php echo site_url('image/generate/' . $ref[0]->idclient); ?>" />
+							<?php endif; ?>
+						</div>
 						<div>
 							<label>Groupe : </label>
 							<input type="text" name="info[groupe]" init="<?php echo $ref[0]->groupe; ?>" value="<?php echo $ref[0]->groupe; ?>" class="nom" readonly/>
@@ -48,7 +53,7 @@
 						
 						<div>
 							<label>Pays : </label>
-							<select class="pays" name="pays" value="<?php echo $ref[0]->pays; ?>" disabled>
+							<select class="pays" name="info[pays]" disabled>
 								<option value="<?php echo $ref[0]->pays; ?>"><?php echo $pays->nompays; ?></option>
 							</select>
 						</div>
@@ -61,12 +66,12 @@
 					
 					<div class="referent">
 						<div>
-							<label>Nom : </label><input type="text" id="nom" class="champ" style="text-transform: uppercase; width:180px;" name="ref[nom]" value="<?php echo $ref[0]->nom; ?>" readonly/>
-							<label>Prénom : </label><input type="text" id="prenom" class="champ2" style="width:180px;" name="ref[prenom]" value="<?php echo $ref[0]->prenom; ?>" readonly/>
+							<label>Nom : </label><input type="text" id="nomref" class="champ" style="text-transform: uppercase; width:180px;" name="ref[nom]" value="<?php echo $ref[0]->nom; ?>" readonly/>
+							<label>Prénom : </label><input type="text" id="prenomref" class="champ2" style="width:180px;" name="ref[prenom]" value="<?php echo $ref[0]->prenom; ?>" readonly/>
 						</div>
 						<div>
-							<label>Catégorie : </label><input type="text" id="categorie" class="champ" style="width:180px;" name="ref[categorie]" value="<?php echo $ref[0]->libellecategorie; ?>" readonly/>
-							<label>Fonction : </label><input type="text" id="fonction" class="champ2" style="width:180px;" name="ref[fonction]" value="<?php echo $ref[0]->fonction; ?>" readonly/>
+							<label>Catégorie : </label><input type="text" id="categorieref" class="champ" style="width:180px;" name="ref[categorie]" value="<?php echo $ref[0]->libellecategorie; ?>" readonly/>
+							<label>Fonction : </label><input type="text" id="fonctionref" class="champ2" style="width:180px;" name="ref[fonction]" value="<?php echo $ref[0]->fonction; ?>" readonly/>
 						</div>
 						<div class="contientZones readonly">
 							<label>Zones : </label>
@@ -81,7 +86,7 @@
 						</div>
 					
 					<br><br>
-					
+					<div class="clear">
 					<h2>Personnes</h2>
 					<?php foreach($personnes as $p): ?>
 						<div>

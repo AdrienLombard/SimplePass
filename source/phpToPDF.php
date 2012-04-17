@@ -1,5 +1,5 @@
 <?php
-require_once('external_lib/fpdf.php');
+require_once('fpdf.php');
 
 $red = array(255,0,0);
 $green = array(0,255,0);

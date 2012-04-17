@@ -316,42 +316,10 @@ class Accreditation extends Cafe {
 	}
 
 	public function ajouterGroupe() {
-	
-		/*
-		 * Traitement du nom et du prénom : répercusion depuis la recherche
-		*/
-		$username = $this->input->post('username');
-		$username = explode(' ', $username);
-		
-		$data['nom'] = '';
-		$data['prenom'] = '';
-		
-		if(count($username)>0) {
-			$data['nom'] = array_shift($username);
-			$data['prenom'] = implode(' ', $username);
-		}
-		else
-			$data['nom'] = $username;
-		
-		/*
-		 * Liste de zone et pays
-		 */
+
 		$data['zones'] = $this->modelzone->getZoneParEvenement($this->session->userdata('idEvenementEnCours'));
 		$data['pays'] = $this->modelpays->getPays();
-		
-		/*
-		 * Liste des catégories avec les zones associées
-		 */
-		$cats = $this->modelcategorie->getCategorieDansEvenement($this->session->userdata('idEvenementEnCours'));
-		foreach($cats as $cat) {
-			$push = array();
-			$push['cat'] = $cat;
-			$push['zones'] = '';
-			$catZones = $this->modelzone->getZoneParCategorieEtEvenement($cat->idcategorie, $this->session->userdata('idEvenementEnCours'));
-			foreach($catZones as $cz) $push['zones'] .= $cz->idzone.'-';
-			$data['categories'][] = $push;
-		}
-		
+		$data['categories'] = $this->modelcategorie->getCategorieDansEvenementToutBienAvecId($this->session->userdata('idEvenementEnCours'));
 		$this->layout->view('utilisateur/accreditation/UAjouterMembreDeGroupe', $data);
 		
 	}
