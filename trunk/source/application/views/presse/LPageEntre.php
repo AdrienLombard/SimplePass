@@ -1,10 +1,10 @@
 
 <div class="wrap">
 	
-	<h1><?php echo lang('demandeAccred'); echo " Presse"; ?></h1>
+	<h1><?php echo lang('demandeAccred'); ?></h1>
 	
-	<a href="<?php echo site_url('inscription/changerLangage/fra/' . str_replace('/', ':', uri_string())); ?>" ><img src="<?php //echo img_url('drapeaux/fra.gif'); ?>" alt="fra" /></a>
-	<a href="<?php echo site_url('inscription/changerLangage/gbr/' . str_replace('/', ':', uri_string())); ?>" ><img src="<?php //echo img_url('drapeaux/gbr.gif'); ?>" alt="gbr" /></a>
+	<a href="<?php echo site_url('inscription/changerLangage/fra/' . str_replace('/', ':', uri_string())); ?>" ><img src="<?php echo img_url('drapeaux/fra.gif'); ?>" alt="fra" /></a>
+	<a href="<?php echo site_url('inscription/changerLangage/gbr/' . str_replace('/', ':', uri_string())); ?>" ><img src="<?php echo img_url('drapeaux/gbr.gif'); ?>" alt="gbr" /></a>
 	
 	<div class="box-small">
 		
@@ -21,10 +21,10 @@
        
   
 		    
-		<label> Choisissez votre catégorie</label>
+		<label><?php echo lang('choixCat'); ?></label>
 		<select  id="categorie"  name="categorie" class="select dyn-selector" >
-			<option value="0"> Autre </option>
-			<option value="<?php echo $idcategorie; ?>">Presse</option>
+			<option value="0"><?php echo lang('autre'); ?></option>
+			<option value="<?php echo $idcategorie; ?>"><?php echo lang('presse'); ?></option>
 		</select>
 
 		<div class="center">
