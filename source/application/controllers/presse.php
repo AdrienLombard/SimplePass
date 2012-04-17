@@ -262,7 +262,7 @@ class Presse extends Chocolat{
 	 */
 	public function exeGroupe( $idevent, $cate ) {
 	
-		$data['lang'] = $this->session->userdata('lang');
+		$msg['lang'] = $this->session->userdata('lang');
 
 		$idEvenement = $this->input->post('evenement');
 		
