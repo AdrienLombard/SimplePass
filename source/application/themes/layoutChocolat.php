@@ -19,7 +19,7 @@
     <body>
         <!-- page vue chocolat -->
         <header>
-            <?php echo img('s5_seg_logo.png'); ?>
+            <a href="<?php echo site_url('inscription/'); ?>" ><?php echo img('s5_seg_logo.png'); ?></a>
 		</header>
         
         <div id="content">
