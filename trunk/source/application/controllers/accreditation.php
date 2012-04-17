@@ -214,6 +214,11 @@ class Accreditation extends Cafe {
 				'rules'   => 'required'
 			),
 			array(
+				'field'   => 'organisme',
+				'label'   => 'Organisme / Société',
+				'rules'   => ''
+			),
+			array(
 				'field'   => 'fonction',
 				'label'   => 'Fonction / Role', 
 				'rules'   => ''
@@ -233,6 +238,7 @@ class Accreditation extends Cafe {
 		$client['nom'] 		= strtoupper($this->input->post('nom'));
 		$client['prenom'] 	= $this->input->post('prenom');
 		$client['pays'] 	= $this->input->post('pays');
+		$client['organisme']= $this->input->post('organisme');
 		$client['tel'] 		= $this->input->post('tel');
 		$client['mail'] 	= $this->input->post('mail');
 		
@@ -323,6 +329,52 @@ class Accreditation extends Cafe {
 		$this->layout->view('utilisateur/accreditation/UAjouterMembreDeGroupe', $data);
 		
 	}
+
+
+	public function modifier($idAccred) {
+
+		$this->layout->ajouter_js('webcam/jquery.webcam');
+		$this->layout->ajouter_js('webcam/webcam');
+
+		/*
+		 * Liste de zone et pays
+		 */
+		$data['zones'] = $this->modelzone->getZoneParEvenement($this->session->userdata('idEvenementEnCours'));
+		$data['pays'] = $this->modelpays->getPays();
+
+
+		/*
+		 * Liste des catégories avec les zones associées
+		 */
+		$cats = $this->modelcategorie->getCategorieDansEvenement($this->session->userdata('idEvenementEnCours'));
+		foreach($cats as $cat) {
+			$push = array();
+			$push['cat'] = $cat;
+			$push['zones'] = '';
+			$catZones = $this->modelzone->getZoneParCategorieEtEvenement($cat->idcategorie, $this->session->userdata('idEvenementEnCours'));
+			foreach($catZones as $cz) $push['zones'] .= $cz->idzone.'-';
+			$data['categories'][] = $push;
+		}
+
+		/*
+		 * Accred et client
+		 */
+		$data['accred'] = $this->modelaccreditation->getAccreditationParId($idAccred);
+
+
+		/*
+		 * Liste des zones de l'accred
+		 */
+		$sortie = array();
+		$zonesAccred = $this->modelzone->getZoneParAccreditation($idAccred);
+		foreach($zonesAccred as $za)
+			$sortie[] = $za->idzone;
+		$data['zonesAccred'] = $sortie;
+
+
+		$this->layout->view('utilisateur/accreditation/UAModifier', $data);
+
+	}
 	
 	
 	
@@ -335,6 +387,7 @@ class Accreditation extends Cafe {
 		$data['pays']	= $this->input->post('pays');
 		$data['tel']	= $this->input->post('tel');
 		$data['mail']	= $this->input->post('mail');
+		$data['organisme'] = $this->input->post('organisme');
 		
 		$webcam = $this->input->post('photo_webcam');
 		if($webcam != null) {
@@ -520,52 +573,7 @@ class Accreditation extends Cafe {
 	}
 	
 	
-	public function modifier($idAccred) {
-		
-		$this->layout->ajouter_js('webcam/jquery.webcam');
-		$this->layout->ajouter_js('webcam/webcam');
-		
-		/*
-		 * Liste de zone et pays
-		 */
-		
-		$data['zones'] = $this->modelzone->getZoneParEvenement($this->session->userdata('idEvenementEnCours'));
-		$data['pays'] = $this->modelpays->getPays();
 
-		
-		/*
-		 * Liste des catégories avec les zones associées
-		 */
-		$cats = $this->modelcategorie->getCategorieDansEvenement($this->session->userdata('idEvenementEnCours'));
-		foreach($cats as $cat) {
-			$push = array();
-			$push['cat'] = $cat;
-			$push['zones'] = '';
-			$catZones = $this->modelzone->getZoneParCategorieEtEvenement($cat->idcategorie, $this->session->userdata('idEvenementEnCours'));
-			foreach($catZones as $cz) $push['zones'] .= $cz->idzone.'-';
-			$data['categories'][] = $push;
-		}
-		
-		/*
-		 * Accred et client
-		 */
-		
-		$data['accred'] = $this->modelaccreditation->getAccreditationParId($idAccred);
-		
-		
-		/*
-		 * Liste des zones de l'accred
-		 */
-		$sortie = array();
-		$zonesAccred = $this->modelzone->getZoneParAccreditation($idAccred);
-		foreach($zonesAccred as $za)
-			$sortie[] = $za->idzone;
-		$data['zonesAccred'] = $sortie;
-		
-		
-		$this->layout->view('utilisateur/accreditation/UAModifier', $data);
-		
-	}
 	
 	public function exeModifier() {
 		// mise en place de la vérification de CI.
