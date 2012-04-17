@@ -40,7 +40,9 @@ class Inscription extends Chocolat {
 		$data['events'] 	= $this->modelevenement->getEvenementEnCours();
 		$data['idcategorie'] = $this->modelcategorie->getIdPresse();
 		$data['listeSurCategorie'] 	= $this->modelcategorie->getCategorieMere();
+		$data['lang'] = $this->session->userdata('lang');
 		$this->layout->view('presse/LPageEntre',$data);
+
 	}
 
 	/*public function exePresse(){
@@ -101,6 +103,7 @@ class Inscription extends Chocolat {
 		$this->layout->ajouter_js('lambda/script');
 		
 		$data['events'] = $this->modelevenement->getEvenementEnCours();
+		$data['lang'] = $this->session->userdata('lang');
 		
 		$this->layout->view('lambda/LAccueil', $data);
 	}
@@ -112,12 +115,15 @@ class Inscription extends Chocolat {
 	 * @param string $event
 	 */
 	public function ajouter($event='') {
+	
 		// Chargement du js.
 		$this->layout->ajouter_js('lambda/script');
 		$this->layout->ajouter_js('webcam/jquery.webcam');
 		
 		// variable pour transmettre des données à la vue.
 		$data = Array();
+		
+		$data['lang'] = $this->session->userdata('lang');
 		
 		// On regle les paramètres du formulaire.
 		$this->form_validation->set_message('required', $this->lang->line('champRequis'));
@@ -397,6 +403,8 @@ class Inscription extends Chocolat {
 		$data['listeSurCategorie'] = $this->modelcategorie->getCategorieMere();
 		$data['values'] = $info;
 		
+		$data['lang'] = $this->session->userdata('lang');
+		
 		$this->layout->view('lambda/LGroupe', $data);
 			
 	}
@@ -495,6 +503,9 @@ class Inscription extends Chocolat {
 	 * Méthode pour l'ajout de tous les membres d"une équipe.
 	 */
 	public function ajouterGroupe($data) {
+	
+		$data['lang'] = $this->session->userdata('lang');
+	
 		$this->layout->ajouter_js('lambda/scriptGroupe');
 		$this->layout->view('lambda/LGroupeDetails', $data);
 	}
@@ -656,6 +667,8 @@ class Inscription extends Chocolat {
 		echo $this->upload->display_errors();
 		$data = $this->upload->data();
 		
+		$data['lang'] = $this->session->userdata('lang');
+		
 		$img = imagecreatefromjpeg(UPLOAD_DIR . $data['file_name']);
 		
 		$this->load->helper('image');
@@ -678,6 +691,8 @@ class Inscription extends Chocolat {
 	public function crop($id) {
 		
 		$data['client'] = $this->modelclient->getClientParId($id);
+		
+		$data['lang'] = $this->session->userdata('lang');
 		
 		$this->layout->ajouter_css('jquery.Jcrop');
 		$this->layout->ajouter_js('jquery.Jcrop.min');

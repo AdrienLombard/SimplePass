@@ -1,9 +1,8 @@
 <div class="wrap">
 	<h1><?php echo $titre; ?></h1>
-	<!--
-	<a href="<?php //echo site_url('inscription/changerLangage/fra/' . str_replace('/', ':', uri_string())); ?>" ><img src="<?php //echo img_url('drapeaux/fra.gif'); ?>" alt="fra" /></a>
-	<a href="<?php //echo site_url('inscription/changerLangage/gbr/' . str_replace('/', ':', uri_string())); ?>" ><img src="<?php //echo img_url('drapeaux/gbr.gif'); ?>" alt="gbr" /></a>
-	-->
+	
+	<input id="lang" type="hidden" value="<?php echo $lang; ?>" />
+	
 	<div class="box-small">
 		<?php echo $message; ?>
 		
