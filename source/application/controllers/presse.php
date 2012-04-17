@@ -563,6 +563,14 @@ class Presse extends Chocolat{
 			// Gestion du mail.
 			$contenuMail .= '<li>' . $membre['prenom'] . ' ' . $membre['nom'];
 			
+			$tab = $ligne['categorie'];
+			$temp = -1;
+			while($temp == -1) {
+				$temp = array_pop($tab);
+			}
+			$accred['idcategorie'] = $temp;
+			$idNewAccred = $this->modelaccreditation->ajouter($accred);
+
 			$cat = null;
 			
 			$cat = $this->modelcategorie->getCategorieMereid($accred['idcategorie']);
@@ -581,14 +589,6 @@ class Presse extends Chocolat{
 				$contenuMail .= ' (Pas de fonction définie / No function defined)</li>';
 			}
 			
-			$tab = $ligne['categorie'];
-			$temp = -1;
-			while($temp == -1) {
-				$temp = array_pop($tab);
-			}
-			$accred['idcategorie'] = $temp;
-			$idNewAccred = $this->modelaccreditation->ajouter($accred);
-
 			// on continue le mail.
 			if($accred['fonction'] != '') {
 				$contenuMail .= '<li>' . $membre['prenom'] . ' ' . $membre['nom'] . ' - ' . $accred['fonction'] . '</li>';
