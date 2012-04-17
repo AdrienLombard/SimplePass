@@ -89,6 +89,7 @@
 						<div>
 							<label>Nom : </label><input type="text" id="nom" class="champ" style="text-transform: uppercase; width:180px;" name="pers[<?php echo $nb; ?>][nom]" value="<?php echo $p->nom; ?>"/>
 							<label>Prénom : </label><input type="text" id="prenom" class="champ2" style="width:180px;" name="pers[<?php echo $nb; ?>][prenom]" value="<?php echo $p->prenom; ?>"/>
+							<a class="button" href="<?php echo site_url('accreditation/supprimerMembreGroupe/'.$p->idaccreditation.'/'.$ref[0]->groupe); ?>" confirm="Êtes-vous sûr de vouloir supprimer ce membre du groupe ?">Supprimer</a>
 						</div>
 						<div class="ligne">
 							<label>Catégorie : </label><input type="text" id="categorie" class="champ" style="width:180px;" name="pers[<?php echo $nb; ?>][categorie]" value="<?php echo $p->libellecategorie; ?>"/>

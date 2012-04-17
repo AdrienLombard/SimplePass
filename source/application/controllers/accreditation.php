@@ -496,6 +496,17 @@ class Accreditation extends Cafe {
 		
 	}
 	
+	public function supprimerMembreGroupe ($idaccred, $nomgroupe){
+		// suppression de toute les zones liée a l'accréditation.
+		$this->modelzone->supprimerZoneParAccreditation( $idaccred );
+		
+		// Suppression de notre accreditation.
+		$this->modelaccreditation->supprimer( $idaccred );
+		
+		$nomGroupe=str_replace('%20', ' ', $nomGroupe);
+		redirect('accreditation/modifierGroupe/' . $nomgroupe);
+	}
+	
 	public function supprimerClient ( $idClient ) {
 		
 		// on supprime les accréditation de ce membres.
