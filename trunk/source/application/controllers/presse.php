@@ -569,7 +569,6 @@ class Presse extends Chocolat{
 				$temp = array_pop($tab);
 			}
 			$accred['idcategorie'] = $temp;
-			$idNewAccred = $this->modelaccreditation->ajouter($accred);
 
 			$cat = null;
 			
@@ -588,6 +587,8 @@ class Presse extends Chocolat{
 			else {
 				$contenuMail .= ' (Pas de fonction définie / No function defined)</li>';
 			}
+			
+			$idNewAccred = $this->modelaccreditation->ajouter($accred);
 			
 			if(isset($accred['categorie']))
 				$this->AssociationZoneAccred($idNewAccred, $accred['idcategorie'], $this->input->post('evenement'));
