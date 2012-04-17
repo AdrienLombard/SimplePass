@@ -451,6 +451,7 @@ class Inscription extends Chocolat {
 		$this->form_validation->set_rules($config);
 		
 		if ($this->form_validation->run() == false) {
+			$values             = '';
 			$values->groupe 	= $this->input->post('groupe');
 			$values->pays 		= $this->input->post('pays');
 			$values->nom 		= strtoupper($this->input->post('nom'));
