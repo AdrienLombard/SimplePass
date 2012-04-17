@@ -2,14 +2,15 @@
 function change_link_lambda() {
     var idGroupe = $("select[name='evenement'] option:selected").val();
     var cate = $("select[name='categorie']").find('option:selected').val();
+    var base = $("#baseURL").val();
 
     if(cate == 0) {
-        $('#lienLambda').attr('href', 'http://localhost/courchevel_src/index.php/inscription/ajouter/'+idGroupe);
-        $('#lienEquipe').attr('href', 'http://localhost/courchevel_src/index.php/inscription/groupe/'+idGroupe);
+        $('#lienLambda').attr('href', base+'index.php/inscription/ajouter/'+idGroupe);
+        $('#lienEquipe').attr('href', base+'index.php/inscription/groupe/'+idGroupe);
     }
     else {
-        $('#lienLambda').attr('href', 'http://localhost/courchevel_src/index.php/presse/ajouter/'+idGroupe+'/'+cate);
-        $('#lienEquipe').attr('href', 'http://localhost/courchevel_src/index.php/presse/groupe/'+idGroupe+'/'+cate);
+        $('#lienLambda').attr('href', base+'index.php/presse/ajouter/'+idGroupe+'/'+cate);
+        $('#lienEquipe').attr('href', base+'index.php/presse/groupe/'+idGroupe+'/'+cate);
     }
 }
 

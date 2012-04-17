@@ -40,6 +40,8 @@ class Inscription extends Chocolat {
 		$data['idcategorie'] = $this->modelcategorie->getIdPresse();
 		$data['listeSurCategorie'] 	= $this->modelcategorie->getCategorieMere();
 		$data['lang'] = $this->session->userdata('lang');
+		$data['baseUrl'] = base_url();
+
 		$this->layout->view('presse/LPageEntre',$data);
 
 	}
