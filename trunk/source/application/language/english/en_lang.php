@@ -9,12 +9,13 @@ $lang['nomGroupe'] = 'Group name';
 $lang['nom'] = 'Last name';
 $lang['prenom'] = 'First name';
 $lang['pays'] = 'Country';
-$lang['tel'] = 'Telephone';
+$lang['tel'] = 'Phone number';
 $lang['titre'] = 'Titre';
 $lang['fonction'] = 'Job';
 $lang['civilite'] = 'Civility';
 $lang['homme'] = 'Man';
 $lang['femme'] = 'Woman';
+$lang['adresse'] = 'Address';
 $lang['categorie'] = 'Category';
 $lang['mail'] = 'Mail';
 $lang['societe'] = 'Company, Organization or Publication';
@@ -50,6 +51,19 @@ $lang['mentionChampObligatoire'] = 'required field';
 $lang['centreWebcam'] = 'Put your face in the middle of the screen';
 $lang['prendrePhoto'] = 'take a picture';
 
+// Formulaire d'inscription individuelle presse
+$lang['demandeAccredPresse'] = 'Press accreditation request';
+$lang['cartePresse'] = 'Press card number';
+$lang['telFixe'] = 'Home';
+$lang['telMobile'] = 'Mobile';
+$lang['ligneDirecte'] = 'Direct line';
+$lang['redacChef'] = 'Editor';
+$lang['journaliste'] = 'Journalist';
+$lang['cameraman'] = 'Cameraman';
+$lang['preneurSon'] = 'Soundman';
+$lang['photographe'] = 'Photographer';
+$lang['technicien'] = 'Technician';
+
 // Formulaire d'inscription groupée
 $lang['responsable'] = 'Person in charge';
 $lang['demandeAjoutFonction'] = 'What is your job ?';
@@ -62,6 +76,7 @@ $lang['valider'] = 'Validate';
 $lang['supprimer'] = 'Delete';
 $lang['oui'] = 'Yes';
 $lang['non'] = 'No';
+$lang['erreurValid'] = 'Please validate every member before submitting the request.';
 
 // Page de confirmation
 $lang['continuer'] = 'Continue';

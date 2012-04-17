@@ -53,11 +53,11 @@
 
 <div class="wrap">
 	
-	<h1><?php echo lang('demandeAccred'); echo " Presse" ?></h1>
-	
-	<a href="<?php echo site_url('inscription/changerLangage/fra/' . str_replace('/', ':', uri_string())); ?>" ><img src="<?php //echo img_url('drapeaux/fra.gif'); ?>" alt="fra" /></a>
-	<a href="<?php echo site_url('inscription/changerLangage/gbr/' . str_replace('/', ':', uri_string())); ?>" ><img src="<?php //echo img_url('drapeaux/gbr.gif'); ?>" alt="gbr" /></a>
-	
+	<h1><?php echo lang('demandeAccredPresse'); ?></h1>
+	<!--
+	<a href="<?php //echo site_url('inscription/changerLangage/fra/' . str_replace('/', ':', uri_string())); ?>" ><img src="<?php //echo img_url('drapeaux/fra.gif'); ?>" alt="fra" /></a>
+	<a href="<?php //echo site_url('inscription/changerLangage/gbr/' . str_replace('/', ':', uri_string())); ?>" ><img src="<?php //echo img_url('drapeaux/gbr.gif'); ?>" alt="gbr" /></a>
+	-->
 	<div class="box-small">
 	
 		<span class="info"><h4><?php echo lang('inscription'); ?></h4> <?php echo lang('individuelle'); ?></span><br>
@@ -83,20 +83,20 @@
 				<option value="<?php echo $pays->idpays; ?>" <?php echo ($pays->idpays == 'FRA')? 'selected' : '' ;?> style="background: url(<?php echo img_url('drapeaux/'.strtolower($pays->idpays).'.gif'); ?>)no-repeat left;"><?php echo $pays->nompays; ?></option><?php endforeach; ?>
 			</select>
 
-			 <label> Adresse* </label>
+			 <label><?php echo lang('adresse'); ?>* </label>
 			<textarea rows="5" cols="73" name="adresse" ><?php echo set_value('adresse'); ?></textarea>
 			<?php echo form_error('adresse'); ?>
 
 			 <div class="tel">
-				<label> Téléphone* : </label>
-				<input  type="radio" value="<?php echo FIXE ?>" 		id="tel_fixe" 		name="tel_type" checked />Fixe
-				<input  type="radio" value="<?php echo PORTABLE ?>" 	id="tel_portable" 	name="tel_type" />Portable
-				<input  type="radio" value="<?php echo DIRECT ?>" 		id="tel_direct" 	name="tel_type" />Ligne directe
+				<label><?php echo lang('tel'); ?>* : </label>
+				<input  type="radio" value="<?php echo FIXE ?>" 		id="tel_fixe" 		name="tel_type" checked /><?php echo lang('telFixe'); ?>
+				<input  type="radio" value="<?php echo PORTABLE ?>" 	id="tel_portable" 	name="tel_type" /><?php echo lang('telMobile'); ?>
+				<input  type="radio" value="<?php echo DIRECT ?>" 		id="tel_direct" 	name="tel_type" /><?php echo lang('ligneDirecte'); ?>
 
 				<input  type="text" value="<?php echo set_value('tel'); ?>" id="tel" name="tel" />
 			 </div>
 
-			<label> Numero de carte de presse* : </label>
+			<label><?php echo lang('cartePresse'); ?>* : </label>
 			<input type="text" name="numr_carte" value="<?php echo set_value('numr_carte');?>"/>
 			<?php echo form_error('numr_carte'); ?>
 
@@ -109,14 +109,14 @@
 			<?php echo form_error('titre'); ?>
 
 
-			<label>Fonction* : </label>
+			<label><?php echo lang('fonction'); ?>* : </label>
 			<select id="fonction" name="fonction" class="select" >
-				<option name="op1" value="1">Rédacteur en chef</option>
-				<option name="op2" value="2">Journaliste</option>
-				<option name="op3" value="3">Caméramen</option>
-				<option name="op4" value="4">Preneur de son</option>
-				<option name="op5" value="5">Photographe</option>
-				<option name="op6" value="6">Technecien</option>
+				<option name="op1" value="1"><?php echo lang('redacChef'); ?></option>
+				<option name="op2" value="2"><?php echo lang('journaliste'); ?></option>
+				<option name="op3" value="3"><?php echo lang('cameraman'); ?></option>
+				<option name="op4" value="4"><?php echo lang('preneurSon'); ?></option>
+				<option name="op5" value="5"><?php echo lang('photographe'); ?></option>
+				<option name="op6" value="6"><?php echo lang('technicien'); ?></option>
 			</select>
 			<div>
 

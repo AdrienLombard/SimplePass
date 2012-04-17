@@ -15,6 +15,7 @@ $lang['fonction'] = 'Fonction';
 $lang['civilite'] = 'Civilité';
 $lang['homme'] = 'Homme';
 $lang['femme'] = 'Femme';
+$lang['adresse'] = 'Adresse';
 $lang['categorie'] = 'Catégorie';
 $lang['mail'] = 'Mail';
 $lang['societe'] = 'Société, Organisme ou Publication';
@@ -50,6 +51,20 @@ $lang['mentionChampObligatoire'] = 'champ obligatoire';
 $lang['centreWebcam'] = "Placer votre visage au centre de l'image";
 $lang['prendrePhoto'] = 'Prendre une photo';
 
+// Formulaire d'inscription individuelle presse
+$lang['demandeAccredPresse'] = 'Demande d\'accréditation presse';
+$lang['cartePresse'] = 'Numéro de carte de presse';
+$lang['telFixe'] = 'Fixe';
+$lang['telMobile'] = 'Mobile';
+$lang['ligneDirecte'] = 'Ligne directe';
+$lang['redacChef'] = 'Rédacteur en chef';
+$lang['journaliste'] = 'Journaliste';
+$lang['cameraman'] = 'Caméraman';
+$lang['preneurSon'] = 'Preneur de son';
+$lang['photographe'] = 'Photographe';
+$lang['technicien'] = 'Technicien';
+
+
 // Formulaire d'inscription groupée
 $lang['responsable'] = 'Responsable';
 $lang['demandeAjoutFonction'] = 'Quelle est votre fonction ?';
@@ -62,6 +77,7 @@ $lang['valider'] = 'Valider';
 $lang['supprimer'] = 'Supprimer';
 $lang['oui'] = 'Oui';
 $lang['non'] = 'Non';
+$lang['erreurValid'] = 'Merci de valider chaque membre avant de soumettre votre demande.';
 
 // Page de confirmation
 $lang['continuer'] = 'Continuer';
