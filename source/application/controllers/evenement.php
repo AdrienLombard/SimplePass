@@ -413,6 +413,7 @@ class Evenement extends Cafe {
 			$donnees['nom'] 		= $nom;
 			$donnees['datedebut'] 	= $datedebut;
 			$donnees['datefin'] 	= $datefin;
+			$donnees['textmail']	= $textmail;
 			
 			$donnees['coupleZoneCategorie'] = Array();
 			//======================================
