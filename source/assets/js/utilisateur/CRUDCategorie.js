@@ -54,6 +54,21 @@ $('.removeCat').live('click', function(){
 });
 
 
+$("form").bind("submit", function(){
+		
+		var bool = true;
+		
+		$(this).find('input.required').each(function(){
+			if($(this).val() == "") {
+				bool = false;
+				$(this).css('backgroundColor', '#F7D2E1').focus();
+			}
+		});
+		
+		return bool;
+	});
+
+
 
 /*
  * Seb

@@ -33,7 +33,7 @@
 								
 								<input type="hidden" name="surcategorie" value="-1" />
 								
-								Nouvelle catégorie mère : <input type="text" name="nom" />
+								Nouvelle catégorie mère : <input type="text" name="nom" class="required" />
 								
 								<span class="colorpicker" init="" colorId="-1" >
 									<input type="hidden" name="couleur" />
@@ -87,7 +87,7 @@
 								<input type="hidden" name="id" value="<?php echo $categorie['db']->idcategorie ?>" />
 								<input type="hidden" name="surcategorie" value="<?php echo $categorie['db']->surcategorie?>" />
 								
-								<input type="text" name="nom" init="<?php echo $categorie['db']->libellecategorie?>" value="<?php echo $categorie['db']->libellecategorie?>" readonly />
+								<input type="text" class="required" name="nom" init="<?php echo $categorie['db']->libellecategorie?>" value="<?php echo $categorie['db']->libellecategorie?>" readonly />
 								
 								<?php if($categorie['db']->surcategorie == null): ?>
 								<span class="colorpicker" init="" colorId="<?php echo $categorie['db']->idcategorie?>" style="background: #<?php echo $categorie['db']->couleur; ?>" >
@@ -145,7 +145,7 @@ Cela entrainera la suppression de toutes ses sous-catégories.'></a>
 								
 								<input type="hidden" name="surcategorie" value="<?php echo $categorie['db']->idcategorie?>" />
 								<input type="hidden" name="couleur" value="<?php echo $categorie['db']->couleur ?>" />
-								<input type="text" name="nom" />
+								<input type="text" name="nom" class="required" />
 								<input type="submit" value="valider" />
 								
 							</form>
