@@ -21,6 +21,7 @@ $(document).ready(function(){
 	 * Affiche la webcam
 	 */
 	$('.startWebcam').live('click', function(){
+		
 		$('.webcamWrapper').show('fast');
 		$('.webcam').html('').webcam({
 			
