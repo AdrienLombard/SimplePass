@@ -224,6 +224,11 @@ class Accreditation extends Cafe {
 				'rules'   => ''
 			),
 			array(
+				'field'   => 'organisme',
+				'label'   => 'Organisme', 
+				'rules'   => ''
+			),
+			array(
 				'field'   => 'categorie',
 				'label'   => 'Catégorie', 
 				'rules'   => ''
@@ -235,13 +240,14 @@ class Accreditation extends Cafe {
 		
 		// Création du client.
 		$client = array();
-		$client['nom'] 		= strtoupper($this->input->post('nom'));
-		$client['prenom'] 	= $this->input->post('prenom');
-		$client['pays'] 	= $this->input->post('pays');
-		$client['organisme']= $this->input->post('organisme');
-		$client['tel'] 		= $this->input->post('tel');
-		$client['mail'] 	= $this->input->post('mail');
-		
+
+		$client['nom'] 		 = strtoupper($this->input->post('nom'));
+		$client['prenom'] 	 = $this->input->post('prenom');
+		$client['pays'] 	 = $this->input->post('pays');
+		$client['tel'] 		 = $this->input->post('tel');
+		$client['mail'] 	 = $this->input->post('mail');
+		$client['organisme'] = $this->input->post('organisme');
+
 		// Création de son accréditation.
 		$accred = array();
 		$accred['idevenement'] 	= $this->input->post('evenement');
