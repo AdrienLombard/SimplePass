@@ -13,6 +13,8 @@
 		<span class="info"><?php echo lang('bienvenue'); ?></span>
 		
 		<br><br>
+
+		<input id="baseURL" type="hidden" value="<?php echo $baseUrl; ?>" />
 		
 		<label><?php echo lang('evenement'); ?></label>
 		<select id="evenement" name="evenement" class="select">
