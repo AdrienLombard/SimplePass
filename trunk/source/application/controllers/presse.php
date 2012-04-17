@@ -406,8 +406,9 @@ class Presse extends Chocolat{
 		$accred['idevenement'] = $this->input->post('evenement');
 		$accred['idclient'] = $id;
 		$accred['etataccreditation'] = ACCREDITATION_A_VALIDE;
-		$accred['fonction'] = $data['fonction'];
-		//$accred['numeropresse']=$ligne['numr_carte_membre'];
+		//
+		//$accred['organisme'] = $this->input->post('organisme');
+	    $accred['numeropresse']=$this->input->post('numr_carte');
 		$accred['groupe'] = $data['groupe'];
 		$accred['dateaccreditation'] = time();
 		$newAccred = $this->modelaccreditation->ajouter($accred);

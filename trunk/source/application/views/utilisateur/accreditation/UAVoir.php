@@ -90,6 +90,10 @@
 						<input type="text" name="mail" class="email" init="<?php echo $client->mail; ?>" value="<?php echo $client->mail; ?>" readonly>
 					</div>
 					
+					<div>
+						<label class="short">Société: </label>
+						<input type="text" name="organisme" class="societe" init="<?php echo $client->organisme; ?>" value="<?php echo $client->organisme; ?>" readonly>
+					</div>
 					<input type="submit" class="valideInfos" value="Enregistrer les modifications" />
 					
 				</form>
