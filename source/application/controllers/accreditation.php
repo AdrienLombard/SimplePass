@@ -484,7 +484,7 @@ class Accreditation extends Cafe {
 		$values = array();
 		foreach( $pers['zone'] as $key => $value )
 			$values[] = array('idaccreditation' => $idAccred, 'idzone' => $key);
-//
+
 			$this->modelzone->ajouterZonesAccreditation($values);
 		}
 		redirect('accreditation/voirEquipe/'.$info['groupe']);

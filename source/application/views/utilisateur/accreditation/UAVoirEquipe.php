@@ -51,11 +51,6 @@
 						</div>
 						
 						<div>
-						<label class="short">Société : </label>
-						<input type="text" name="info[organisme]" class="organisme" init="<?php echo $client->organisme; ?>" value="<?php echo $client->organisme; ?>" readonly>
-					</div>
-						
-						<div>
 							<label>Pays : </label>
 							<select class="pays" name="info[pays]" disabled>
 								<option value="<?php echo $ref->pays; ?>"><?php echo $pays->nompays; ?></option>
