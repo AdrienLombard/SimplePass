@@ -22,6 +22,7 @@ class Inscription extends Chocolat {
 		$this->load->model('modelcategorie');
 		$this->load->model('modellambda');
 		$this->load->model('modelclient');
+		$this->load->model('modelzone');
 		
 		// Chargement du fichier de langue
 		$this->load->helper('language');
@@ -247,8 +248,13 @@ class Inscription extends Chocolat {
 					$accredData['fonction'] = $fonction;
 				}
 
-				$this->modelaccreditation->ajouter($accredData);
-				
+				// On ajoute une nouvelle accréditation dans la base et on récupère son ID.
+				$idNewAccred = $this->modelaccreditation->ajouter($accredData);
+
+				// On crée l'association entre cette accréditation et les zones.
+				$this->AssociationZoneAccred( $idNewAccred, $categorie, $event );
+
+
 				if($_FILES['photo_file']['size'] != 0)
 					$this->upload($idClient);
 				
@@ -349,10 +355,36 @@ class Inscription extends Chocolat {
 			$this->layout->view('lambda/LMessage', $data); 
 		}
 	}
-	
-	
+
+	/**
+	 * Fonction qui sert a créer les entrée entre des zones accéssible et une accréditation.
+	 * @param $idAccred
+	 * @param $idCategorie
+	 * @param $idEvenement
+	 */
+	private function AssociationZoneAccred( $idAccred, $idCategorie, $idEvenement ) {
+
+		// On récupère les zones de la catégorie pour cette évènement.
+		$zones = $this->modelzone->getZoneParCategorieEtEvenement( $idCategorie, $idEvenement);
+
+		// On construit notre array de couple zone/idAccreditation
+		$zonesAcccred = array();
+		foreach($zones as $zone) {
+			$zonesAcccred[] = array(
+				'idaccreditation' 	=> $idAccred,
+				'idzone'			=> $zone->idzone
+			);
+		}
+
+		// On lie ces zones à cette accréditation.
+		$this->modelzone->ajouterZonesAccreditation( $zonesAcccred );
+	}
+
+
 	/**
 	 * Méthode pour le formulaire pour la saisie du responsable d'une équipe.
+	 * @param      $evenement
+	 * @param bool $info
 	 */
 	public function groupe($evenement, $info=false) {
 		// Chargement du js.
@@ -471,14 +503,14 @@ class Inscription extends Chocolat {
 	 * Méthode pour le traitement de l'ajout des membres d'une équipe.
 	 */
 	public function exeAjouterGroupe() {		
-		// ajout du référent
+		// Ajout du référent.
 		$ref = $data = $this->input->post('ref');
 		unset($ref['categorie']);
 		unset($ref['fonction']);
 		unset($ref['groupe']);
 		$id = $this->modelclient->ajouter($ref);
 		
-		// création de l'accreditation pour le referent
+		// Création de l'accreditation pour le referent.
 		$accred = null;
 		$accred['idcategorie'] = $data['categorie'];
 		$accred['idevenement'] = $this->input->post('evenement');
@@ -487,8 +519,11 @@ class Inscription extends Chocolat {
 		$accred['fonction'] = $data['fonction'];
 		$accred['groupe'] = $data['groupe'];
 		$accred['dateaccreditation'] = time();
-		$this->modelaccreditation->ajouter($accred);
-		
+		$idNewAccred = $this->modelaccreditation->ajouter($accred);
+
+		// Création des zones accéssible pour cette accrédiation.
+		$this->AssociationZoneAccred($idNewAccred, $data['categorie'],$this->input->post('evenement') );
+
 		$evenement = $this->modelevenement->getEvenementParId($accred['idevenement']);
 		
 		$contenuMail = 	'<html>' .
@@ -542,11 +577,17 @@ class Inscription extends Chocolat {
 				$temp = array_pop($tab);
 			}
 			$accred['idcategorie'] = $temp;
-			
+
+			$idNewAccred = $this->modelaccreditation->ajouter($accred);
+
 			$cat = null;
 			
 			$cat = $this->modelcategorie->getCategorieMereid($accred['idcategorie']);
-			
+
+			// Création des zones accéssible pour cette accrédiation.
+			$this->AssociationZoneAccred($idNewAccred, $accred['idcategorie'],$this->input->post('evenement') );
+
+			// Gestion du mail.
 			$contenuMail .= '<li>' . $membre['prenom'] . ' ' . $membre['nom'];
 			
 			
@@ -563,8 +604,7 @@ class Inscription extends Chocolat {
 			else {
 				$contenuMail .= ' (Pas de fonction définie / No function defined)</li>';
 			}
-			
-			$this->modelaccreditation->ajouter($accred);
+
 		}
 				
 		// Préparation et envoi du mail de confirmation

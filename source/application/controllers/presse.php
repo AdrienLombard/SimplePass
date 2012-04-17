@@ -205,10 +205,9 @@ class Presse extends Chocolat{
 					'numeropresse'		=> $this->input->post('numr_carte'),
 					'fonction'			=> $this->input->post('fonction')
 				);
+				$newAccred = $this->modelaccreditation->ajouter($accredData);
 
-
-				$this->modelaccreditation->ajouter($accredData);
-
+				$this->AssociationZoneAccred($newAccred, $categorie, $event);
 
 				$data['titre']		= $this->lang->line('titreConfirmeDemande');
 				$data['message']	= $this->lang->line('confirmeDemande');
@@ -395,8 +394,10 @@ class Presse extends Chocolat{
 		//$accred['numeropresse']=$ligne['numr_carte_membre'];
 		$accred['groupe'] = $data['groupe'];
 		$accred['dateaccreditation'] = time();
-		$this->modelaccreditation->ajouter($accred);
-		
+		$newAccred = $this->modelaccreditation->ajouter($accred);
+
+		$this->AssociationZoneAccred($newAccred, $accred['idcategorie'], $this->input->post('evenement'));
+
 		$evenement = $this->modelevenement->getEvenementParId($accred['idevenement']);
 		
 		$contenuMail = 	'<html>' .
@@ -413,9 +414,9 @@ class Presse extends Chocolat{
 			$membre = null;
 			$membre['nom']     = $ligne['nom'];
 			$membre['prenom']  = $ligne['prenom'];
-			$membre['adresse']=$ligne['adresse_membre'];
+			$membre['adresse'] =$ligne['adresse_membre'];
 			$membre['tel']     =$ligne['tel_membre'];
-			$membre['mail']=$ligne['mail_membre'];
+			$membre['mail']		=$ligne['mail_membre'];
 			$membre['organisme']= $data['organisme'];
 			$membre['pays'] = $data['pays'];
 			$idNewClient = $this->modelclient->ajouter($membre);
@@ -428,7 +429,7 @@ class Presse extends Chocolat{
 			$accred['fonction'] = $ligne['fonction'];
 			$accred['numeropresse']=$ligne['numr_carte_membre'];
 			$accred['referent'] = $id;
-			$accred['etataccreditation'] = ACCREDITATION_A_VALIDE;
+			$accred['etataccreditation'] = ACCREDITATION_A_VALIDE ;
 			$accred['dateaccreditation'] = time();
 			
 			if($accred['fonction'] != '') {
@@ -444,7 +445,10 @@ class Presse extends Chocolat{
 				$temp = array_pop($tab);
 			}
 			$accred['idcategorie'] = $temp;
-			$this->modelaccreditation->ajouter($accred);
+
+			$newAccred = $this->modelaccreditation->ajouter($accred);
+
+			$this->AssociationZoneAccred($newAccred, $accred['idcategorie'], $this->input->post('evenement'));
 		}
 		/*		
 		// Préparation et envoi du mail de confirmation
@@ -509,5 +513,31 @@ class Presse extends Chocolat{
 		} else
 			die('Image trop petite.');
 	}
-		
+
+
+	/**
+	 * Fonction qui sert a créer les entrée entre des zones accéssible et une accréditation.
+	 * @param $idAccred
+	 * @param $idCategorie
+	 * @param $idEvenement
+	 */
+	private function AssociationZoneAccred( $idAccred, $idCategorie, $idEvenement ) {
+
+		// On récupère les zones de la catégorie pour cette évènement.
+		$zones = $this->modelzone->getZoneParCategorieEtEvenement( $idCategorie, $idEvenement);
+
+		// On construit notre array de couple zone/idAccreditation
+		$zonesAcccred = array();
+		foreach($zones as $zone) {
+			$zonesAcccred[] = array(
+				'idaccreditation' 	=> $idAccred,
+				'idzone'			=> $zone->idzone
+			);
+		}
+
+		// On lie ces zones à cette accréditation.
+		$this->modelzone->ajouterZonesAccreditation( $zonesAcccred );
+	}
+
+
 }
