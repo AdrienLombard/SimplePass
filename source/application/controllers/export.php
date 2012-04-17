@@ -21,6 +21,8 @@ class Export extends The {
 	
 	public function accreds($idEvenement) {
 		
+		error_reporting(0);
+
 		// evenement
 		$evenement = $this->modelevenement->getEvenementParId($idEvenement);
 
