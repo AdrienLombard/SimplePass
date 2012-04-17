@@ -50,7 +50,7 @@
 				<p>Nous vous invitons à faire remonter vos suggestions à l'administrateur concernant <em>SimplePass</em>
 					afin que ce projet évolue et s'adapte au mieux à vos besoins.</p>
 
-				<div id="signature">L'équipe de développement</div>
+				<div id="signature"><a href="<?php echo site_url('utilisateur/index') ?>" style="float: left"><< retour</a>L'équipe de développement</div>
 			
 			</div>
 			

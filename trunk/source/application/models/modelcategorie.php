@@ -178,6 +178,17 @@ class modelCategorie extends MY_Model {
         $this->db->delete(DB_CATEGORIE);
 	}
 	
+	public function supprimerSousCategories($id) {
+		
+		$this->db->where('idcategorie', $id);
+        $this->db->delete(DB_CATEGORIE);
+		
+		$cats = $this->getSousCategorie($id);
+		foreach($cats as $cat)
+			$this->supprimerSousCategories($cat->idcategorie);
+		
+	}
+	
 	public function modifier($id, $data) {
 		return $this->db->update(DB_CATEGORIE, $data, 'idcategorie = '.$id);
 	}
