@@ -21,28 +21,24 @@
        
   
 		    
-		     <label> Choisissez votre catégorie</label>
-		        <select  id="categorie"  name="categorie" class="select dyn-selector" >
-		     	<option value="0"> Autre </option>
-		       <option value="1">Presse</option>
-				</select>
-		</div>
-	
+		<label> Choisissez votre catégorie</label>
+		<select  id="categorie"  name="categorie" class="select dyn-selector" >
+			<option value="0"> Autre </option>
+			<option value="<?php echo $idcategorie; ?>">Presse</option>
+		</select>
+
 		<div class="center">
-			<a id="lienLambda" 
-				href="<?php if($categorie==1) echo site_url('presse/ajouter/' . $events[0]->idevenement.'/'.$categorie); 
-				else echo site_url('lamda/ajouter/' . $events[0]->idevenement.'/'.$categorie) ; ?>" 
-				class="button"><?php echo lang('demandeIndiv'); ?></a>
-				
+			<a id="lienLambda"
+			   href="<?php echo site_url('inscription/ajouter/' . $events[0]->idevenement); ?>"
+			   class="button"><?php echo lang('demandeIndiv'); ?></a>
 			<?php echo lang('ou'); ?>
-			<a id="lienEquipe" 
-				href="<?php if($categorie==1) echo site_url('presse/groupe/' . $events[0]->idevenement.'/'.$categorie);
-				else echo site_url('lamda/groupe/' . $events[0]->idevenement.'/'.$categorie) ; ?>" 
-				class="button"><?php echo lang('demandeGroupe'); ?></a>
+			<a id="lienEquipe"
+			   href="<?php echo site_url('inscription/groupe/' . $events[0]->idevenement); ?>"
+			   class="button"><?php echo lang('demandeGroupe'); ?></a>
 		</div>
+
+	</div>
 		
-	<form calss="">
-			<input type="submit" name="inscrire"  value="s'inscrire"/>
-	</form>
+
 
 </div>

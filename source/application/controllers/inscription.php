@@ -30,20 +30,19 @@ class Inscription extends Chocolat {
 	
 	public function index() {
 
-		$this->presse();
+		$this->entry();
 		
 	}
 
-	public function presse() {
-		
+	public function entry() {
+		$this->layout->ajouter_js('lambda/script');
 		$data['events'] 	= $this->modelevenement->getEvenementEnCours();
-		$data['categorie']	= $categorie;
-		$categorie = $this->input->post('categorie');
+		$data['idcategorie'] = $this->modelcategorie->getIdPresse();
 		$data['listeSurCategorie'] 	= $this->modelcategorie->getCategorieMere();
 		$this->layout->view('presse/LPageEntre',$data);
 	}
 
-	public function exePresse(){
+	/*public function exePresse(){
 		$this->layout->ajouter_js('lambda/script');
 		$categorie = $this->input->post('categorie');
 
@@ -55,10 +54,12 @@ class Inscription extends Chocolat {
 		else {
 			redirect('presse/lambda/' . $categorie);
 		}
-	}
+	}*/
 
 	/**
 	 * Méthode pour le changement de langue
+	 * @param $langage
+	 * @param $url
 	 */
 	public function changerLangage($langage, $url) {
 		
@@ -102,11 +103,12 @@ class Inscription extends Chocolat {
 		
 		$this->layout->view('lambda/LAccueil', $data);
 	}
-	
-	
+
+
 	/**
 	 * Méthode pour afficher le formulaire pour l'ajout individuelle.
 	 * Comprend également le traitement complet.
+	 * @param string $event
 	 */
 	public function ajouter($event='') {
 		// Chargement du js.

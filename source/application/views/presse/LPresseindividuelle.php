@@ -128,7 +128,7 @@
 			</select>
 			</div>
 		<!--
-			<label>Souhaitez vous une plasse de parking ? </label>
+			<label>Souhaitez vous une place de parking ? </label>
 			<input name ="parcking" type="checkbox" value="Oui"/>Oui
 			<input name ="parcking" type="checkbox" value="Non"/>Non
 

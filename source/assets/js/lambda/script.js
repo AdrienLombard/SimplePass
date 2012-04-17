@@ -1,14 +1,32 @@
-	
+
+function change_link_lambda() {
+    var idGroupe = $("select[name='evenement'] option:selected").val();
+    var cate = $("select[name='categorie']").find('option:selected').val();
+
+    if(cate == 0) {
+        $('#lienLambda').attr('href', 'http://localhost/courchevel_src/index.php/inscription/ajouter/'+idGroupe);
+        $('#lienEquipe').attr('href', 'http://localhost/courchevel_src/index.php/inscription/groupe/'+idGroupe);
+    }
+    else {
+        $('#lienLambda').attr('href', 'http://localhost/courchevel_src/index.php/presse/ajouter/'+idGroupe+'/'+cate);
+        $('#lienEquipe').attr('href', 'http://localhost/courchevel_src/index.php/presse/groupe/'+idGroupe+'/'+cate);
+    }
+}
+
 
 $(document).ready(function(){
-	
-	$('#evenement').change(function() {
-		var idGroupe = $("select[name='evenement'] option:selected").val();
 
-		$('#lienLambda').attr('href', 'http://localhost/courchevel_src/index.php/inscription/ajouter/'+idGroupe);
-		
-		$('#lienEquipe').attr('href', 'http://localhost/courchevel_src/index.php/inscription/groupe/'+idGroupe);
+
+    /**
+     * Changement dynamique des liens pour le point d'accés web.
+     */
+	$('#evenement').change(function() {
+		change_link_lambda();
 	});
+
+    $('#categorie').change( function() {
+        change_link_lambda();
+    });
 	
 	//$("input[name=fonction]").hide();
 	$("input.choixFonction").change(function() {
