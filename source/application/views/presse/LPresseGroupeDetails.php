@@ -170,12 +170,12 @@
 			<div class="split">
 				<label><?php echo lang('fonction'); ?>*</label>
 				<select id="ligneFonction" name="groupe[nbLigne][fonction]" class="select" >
-					<option value="1" libelle="rédacteur en chef" ><?php echo lang('redacChef'); ?></option> 
-					<option value="2" libelle="journaliste" ><?php echo lang('journaliste'); ?></option>
-					<option value="3" libelle="caméramen" ><?php echo lang('cameraman'); ?></option>
-					<option value="4" libelle="preneur de son" ><?php echo lang('preneurSon'); ?></option>
-					<option value="5" libelle="photographe" ><?php echo lang('photographe'); ?></option>
-					<option value="6" libelle="technecien" ><?php echo lang('technicien'); ?></option>
+					<option value="1" libelle="<?php echo lang('redacChef'); ?>" ><?php echo lang('redacChef'); ?></option> 
+					<option value="2" libelle="<?php echo lang('journaliste'); ?>" ><?php echo lang('journaliste'); ?></option>
+					<option value="3" libelle="<?php echo lang('cameraman'); ?>" ><?php echo lang('cameraman'); ?></option>
+					<option value="4" libelle="<?php echo lang('preneurSon'); ?>" ><?php echo lang('preneurSon'); ?></option>
+					<option value="5" libelle="<?php echo lang('photographe'); ?>" ><?php echo lang('photographe'); ?></option>
+					<option value="6" libelle="<?php echo lang('technicien'); ?>" ><?php echo lang('technicien'); ?></option>
 				</select>
 			</div>
 			
