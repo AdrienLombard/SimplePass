@@ -57,6 +57,8 @@
 				<input type="hidden" name="ref[mail]" value="<?php echo $mail; ?>" />
 				<input type="hidden" name="ref[groupe]" value="<?php echo $groupe; ?>" />
 				<input type="hidden" name="ref[pays]" value="<?php echo $pays; ?>" />
+				<input type="hidden" name="ref[organisme]" value="<?php echo $organisme; ?>" />
+
 				
 				<input type="hidden" name="evenement" value="<?php echo $evenement; ?>" />
 				

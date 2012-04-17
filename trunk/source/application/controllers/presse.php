@@ -37,6 +37,7 @@ class Presse extends Chocolat{
 
 	/**
 	 * Méthode pour le choix d'une inscription individuelle ou par équipe et de l'évènement.
+	 * @param $categorie
 	 */
 	public function lambda( $categorie ) {
 		$this->layout->ajouter_js('lambda/script');
@@ -80,11 +81,10 @@ class Presse extends Chocolat{
 	}
 	
 	
-	public function ajouter($event='',$categorie='') {
+	public function ajouter($event='', $IDcategorie='') {
 		// Chargement du js.
-	   $this->layout->ajouter_js('lambda/script'); 
-	 
-	
+	 	$this->layout->ajouter_js('lambda/script');
+
 		// variable pour transmettre des données à la vue.
 		$data = Array();
 		
@@ -157,12 +157,12 @@ class Presse extends Chocolat{
 			
 			$data['listePays'] = $this->modellambda->listePays();
 			
-		    $data['listeSurCategorie'] 	= $this->modelcategorie->getSousCategorie($categorie);
+		    $data['listeSurCategorie'] 	= $this->modelcategorie->getSousCategorie($IDcategorie);
 			
 			$data['listeCategorie'] = $this->modelcategorie->getCategories();
 
-			$data['categorie'] = $categorie;
-			
+			$data['categorie'] = $IDcategorie;
+
 			$this->layout->view('presse/LPresseindividuelle', $data);
 		
 		}
@@ -226,9 +226,12 @@ class Presse extends Chocolat{
 			$this->layout->view('lambda/LMessage', $data); 
 		}
 	}
-	/**
 
+	/**
 	 * Méthode pour le formulaire pour la saisie du responsable d'une équipe.
+	 * @param      $evenement
+	 * @param      $categorie
+	 * @param bool $info
 	 */
 	public function groupe($evenement, $categorie, $info=false) {
 		// Chargement du js.
@@ -245,17 +248,15 @@ class Presse extends Chocolat{
 		$this->layout->view('presse/LPresseGroupe', $data);
 			
 	}
-	
-	
+
+
 	/**
-
 	 * Méthode de traitement pour la saisie du responsable.
+	 * @param $idevent
+	 * @param $cate
 	 */
+	public function exeGroupe( $idevent, $cate ) {
 
-	
-	public function exeGroupe( $idevent,$cate ) {
-
-	  echo $cate;
 		$idEvenement = $this->input->post('evenement');
 		
 		// On regle les paramètres du formulaire.
@@ -332,7 +333,7 @@ class Presse extends Chocolat{
 			$values->numr_carte = $this->input->post('numr_carte');
 			$values->categorie 	= $this->input->post('categorie');
 			
-			$this->groupe($idEvenement, $categorie, $values);
+			$this->groupe($idEvenement, $cate, $values);
 			
 		}
 		else {
@@ -347,7 +348,7 @@ class Presse extends Chocolat{
 			$data['numr_carte']         = $this->input->post('numr_carte');
 			$data['adresse ']           = $this->input->post('adresse');
 			$data['evenement'] 			= $this->input->post('evenement');
-			$data['organisme']          =$this->input->post('titre');
+			$data['organisme']          = $this->input->post('titre');
 			$data['listeCategorie'] 	= $this->modelcategorie->getCategories();
 			$data['listeSurCategorie'] 	= $this->modelcategorie->getSousCategorie($cate);
 			
@@ -363,9 +364,10 @@ class Presse extends Chocolat{
 		}
 		
 	}
-	
+
 	/**
 	 * Méthode pour l'ajout de tous les membres d"une équipe.
+	 * @param $data
 	 */
 	public function ajouterGroupe($data) {
 		$this->layout->ajouter_js('lambda/scriptGroupePresse');

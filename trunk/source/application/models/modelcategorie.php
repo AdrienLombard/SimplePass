@@ -16,6 +16,23 @@ class modelCategorie extends MY_Model {
 						->get()
 						->result();
 	}
+
+
+	/**
+	 * Méthode pour récuperer l'id de la catégorie Presse.
+	 * @return mixed
+	 */
+	public function getIdPresse() {
+		$result = $this->db->select('*')
+							->from(DB_CATEGORIE )
+							->where('libellecategorie', 'Presse')
+							->or_where('libellecategorie', 'presse')
+							->get()
+							->result();
+
+		return $result[0]->idcategorie;
+	}
+
 	
 	public function getCategoriesParIdaccred($id){
 		return $this->db->select('*')
