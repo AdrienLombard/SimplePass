@@ -82,7 +82,8 @@ $(document).ready(function(){
 			mail.addClass('erreur');
 		}
 		
-		
+		// Récuperation de la langue courante
+		var lang = $('#lang').val();
 		
 		// traitement en cas d'erreur sur le formulaire.
 		if(!erreur) {
@@ -101,7 +102,10 @@ $(document).ready(function(){
 			parent.parent().attr('etat', true);
 
 			// met à jours le h3 avec les infos des inputs
-			parent.parent().find('h3').html(nom.val() + ' ' + prenom.val() + ' - ' + categorie + ' (' + fonction + ')' + '<span class="modifier">modifier</span>');
+			if(lang == 'fra')
+				parent.parent().find('h3').html(nom.val() + ' ' + prenom.val() + ' - ' + categorie + ' (' + fonction + ')' + '<span class="modifier">Modifier</span>');
+			else
+				parent.parent().find('h3').html(nom.val() + ' ' + prenom.val() + ' - ' + categorie + ' (' + fonction + ')' + '<span class="modifier">Modify</span>');
 		} else {
 			// refuser l'etat de la ligne
 			parent.parent().attr('etat', false);
@@ -134,8 +138,15 @@ $(document).ready(function(){
 				bool = false;
 		});
 		
-		if(bool == false)
-			alert('Merci de valider chaque membre avant de soumettre votre demande.');
+		// Récuperation de la langue courante
+		var lang = $('#lang').val();
+		
+		if(bool == false) {
+			if(lang == 'fra')
+				alert('Merci de valider chaque membre avant de soumettre votre demande.');
+			else
+				alert('Please validate every member before submitting your request.');
+		}
 		
 		return bool;
 	});
@@ -222,8 +233,15 @@ $(document).ready(function(){
 					pos = 0;
 				}
 				
+				// Récuperation de la langue courante
+				var lang = $('#lang').val();
+				
 				$('input[name=photo_webcam]').val(canvas.toDataURL("image/png"));
-				$('.photoMessage').show().text('Photo prise, enregistrez pour valider ->');
+				
+				if(lang == 'fra')
+					$('.photoMessage').show().text('Photo prise, enregistrez pour valider ->');
+				else
+					$('.photoMessage').show().text('Photo taken, save to validate ->');
 			}
 			
 		});

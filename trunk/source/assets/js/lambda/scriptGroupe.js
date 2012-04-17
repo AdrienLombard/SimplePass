@@ -42,6 +42,7 @@ $(document).ready(function(){
 			prenom.addClass('erreur');
 		}
 		
+		// Récuperation de la langue courante
 		var lang = $('#lang').val();
 		
 		// traitement en cas d'erreur sur le formulaire.

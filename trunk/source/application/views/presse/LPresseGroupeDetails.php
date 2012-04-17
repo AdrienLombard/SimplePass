@@ -124,23 +124,23 @@
 			
 			<!-- gestion du téléphone -->
 			<div class="split">
-				<label id='ligneTypeTel' > Téléphone* : 
-				<input  type="radio" value="<?php echo FIXE ?>" 		id="tel_fixe" 		name="tel_type" checked />Fixe
-				<input  type="radio" value="<?php echo PORTABLE ?>" 	id="tel_portable" 	name="tel_type" />Portable
-				<input  type="radio" value="<?php echo DIRECT ?>" 		id="tel_direct" 	name="tel_type" />Ligne directe
+				<label id='ligneTypeTel' ><?php echo lang('tel'); ?>* : 
+				<input  type="radio" value="<?php echo FIXE ?>" 		id="tel_fixe" 		name="tel_type" checked /><?php echo lang('telFixe'); ?>
+				<input  type="radio" value="<?php echo PORTABLE ?>" 	id="tel_portable" 	name="tel_type" /><?php echo lang('telMobile'); ?>
+				<input  type="radio" value="<?php echo DIRECT ?>" 		id="tel_direct" 	name="tel_type" /><?php echo lang('ligneDirecte'); ?>
 				</label>
 				<input  type="text" id="ligneTel" value="<?php echo set_value('tel_membre'); ?>" id="tel" name="groupe[nbLigne][tel_membre]" />
 			</div>
 			
 			<!-- gestion du numero de carte presse -->
 			<div class="split">
-				<label> Numero de carte de presse* : </label>
+				<label><?php echo lang('cartePresse'); ?>* : </label>
 				<input type="text" id="ligneNumero" name="groupe[nbLigne][numr_carte_membre]" value="<?php echo set_value('numr_carte_membre');?>"/>
 			</div>
 			
 			<!-- gestion de l'adresse postale -->
 			<div class="split"> 
-				<label> Adresse* </label>
+				<label><?php echo lang('adresse'); ?>* </label>
 				<textarea rows="5" cols="73" id="ligneAdresse" name="groupe[nbLigne][adresse_membre]" ><?php echo set_value('adresse_membre'); ?></textarea>
 			</div>
 			
@@ -168,14 +168,14 @@
 			
 			<!-- gestion de la fonction -->
 			<div class="split">
-				<label>Fonction*</label>
+				<label><?php echo lang('fonction'); ?>*</label>
 				<select id="ligneFonction" name="groupe[nbLigne][fonction]" class="select" >
-					<option value="1" libelle="rédacteur en chef" >rédacteur en chef</option> 
-					<option value="2" libelle="journaliste" >journaliste</option>
-					<option value="3" libelle="caméramen" >caméramen</option>
-					<option value="4" libelle="preneur de son" >preneur de son</option>
-					<option value="5" libelle="photographe" >photographe</option>
-					<option value="6" libelle="technecien" >technecien</option>
+					<option value="1" libelle="rédacteur en chef" ><?php echo lang('redacChef'); ?></option> 
+					<option value="2" libelle="journaliste" ><?php echo lang('journaliste'); ?></option>
+					<option value="3" libelle="caméramen" ><?php echo lang('cameraman'); ?></option>
+					<option value="4" libelle="preneur de son" ><?php echo lang('preneurSon'); ?></option>
+					<option value="5" libelle="photographe" ><?php echo lang('photographe'); ?></option>
+					<option value="6" libelle="technecien" ><?php echo lang('technicien'); ?></option>
 				</select>
 			</div>
 			
