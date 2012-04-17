@@ -119,12 +119,12 @@
 
 			<label><?php echo lang('fonction'); ?>* : </label>
 			<select id="fonction" name="fonction" class="select" >
-				<option name="op1" value="1"><?php echo lang('redacChef'); ?></option>
-				<option name="op2" value="2"><?php echo lang('journaliste'); ?></option>
-				<option name="op3" value="3"><?php echo lang('cameraman'); ?></option>
-				<option name="op4" value="4"><?php echo lang('preneurSon'); ?></option>
-				<option name="op5" value="5"><?php echo lang('photographe'); ?></option>
-				<option name="op6" value="6"><?php echo lang('technicien'); ?></option>
+				<option name="op1" value="<?php echo lang('redacChef'); ?>"><?php echo lang('redacChef'); ?></option>
+				<option name="op2" value="<?php echo lang('journaliste'); ?>"><?php echo lang('journaliste'); ?></option>
+				<option name="op3" value="<?php echo lang('cameraman'); ?>"><?php echo lang('cameraman'); ?></option>
+				<option name="op4" value="<?php echo lang('preneurSon'); ?>"><?php echo lang('preneurSon'); ?></option>
+				<option name="op5" value="<?php echo lang('photographe'); ?>"><?php echo lang('photographe'); ?></option>
+				<option name="op6" value="<?php echo lang('technicien'); ?>"><?php echo lang('technicien'); ?></option>
 			</select>
 			<div>
 
