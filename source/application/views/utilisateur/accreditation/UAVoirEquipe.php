@@ -50,6 +50,10 @@
 							<input type="text" name="info[mail]" class="mail" value="<?php echo $ref[0]->mail; ?>"  readonly/>
 						</div>
 						
+						<div>
+						<label class="short">Société : </label>
+						<input type="text" name="info[organisme]" class="organisme" init="<?php echo $client->organisme; ?>" value="<?php echo $client->organisme; ?>" readonly>
+					</div>
 						
 						<div>
 							<label>Pays : </label>

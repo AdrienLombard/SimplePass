@@ -97,7 +97,11 @@
 								<label>Tel : </label>
 								<input type="text" name="tel" class="tel" value="<?php if(isset($re->client['tel'])) echo $re->client['tel']; ?>" >
 							</div>
-
+							
+                         <div>
+								<label>Société: </label>
+								<input type="text" name="tel" class="tel" value="<?php if(isset($re->client['organisme'])) echo $re->client['organisme']; ?>" >
+							</div>
 						
 						
 							<h2>Accréditation</h2>
