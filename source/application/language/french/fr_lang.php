@@ -36,7 +36,10 @@ $lang['evenement'] = 'Evènement :';
 $lang['bienvenue'] = 'Bienvenue sur le site de demandes d\'accréditation';
 $lang['demandeIndiv'] = 'Demande individuelle';
 $lang['ou'] = 'ou';
-$lang['demandeGroupe'] = 'Demandes groupées';
+$lang['demandeGroupe'] = 'Demande groupée';
+$lang['choixCat'] = 'Choisissez votre catégorie';
+$lang['autre'] = 'Autre';
+$lang['presse'] = 'Presse';
 
 // Formulaire d'inscription individuelle
 $lang['neSaisPas'] = 'Je ne sais pas encore';
