@@ -103,17 +103,7 @@ class Categorie extends Cafe {
 		$this->modelevenement->supprimerparametreParCategorie( $id );
 		
 		// on supprimes les catégorie et ses sous-catégorie.
-		$categories =$this->modelcategorie->getSousCategorieid($id);
-		
-		if(isset($categories) && !empty($categories)) {
-		
-			foreach ($categories as $categorie)
-			{
-				$this->modelcategorie->supprimerCategorie($categorie->idcategorie);
-			}
-		}
-		
-		$this->modelcategorie->supprimerCategorie($id);
+		$this->modelcategorie->supprimerSousCategories($id);
 		
 		$this->load->helper('url');
 		redirect('categorie/liste');
