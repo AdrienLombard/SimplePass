@@ -48,7 +48,7 @@
 							<label>Pays : </label>
 							<select class="pays" name="info[pays]">
 								<?php foreach($pays as $p): ?>
-									<option value="<?php echo $ref->pays; ?>" <?php echo ($p->idpays == $ref->pays)? 'selected' : '' ;?> style="background: url(<?php echo img_url('drapeaux/'.strtolower($p->idpays).'.gif'); ?>)no-repeat left;"><?php echo $p->nompays; ?></option>
+									<option value="<?php echo $p->idpays; ?>" <?php echo ($p->idpays == $ref->pays)? 'selected' : '' ;?> style="background: url(<?php echo img_url('drapeaux/'.strtolower($p->idpays).'.gif'); ?>)no-repeat left;"><?php echo $p->nompays; ?></option>
 								<?php endforeach; ?>
 								
 							</select>
