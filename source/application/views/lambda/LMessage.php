@@ -1,7 +1,7 @@
 <div class="wrap">
 	<h1><?php echo $titre; ?></h1>
 	
-	<input id="lang" type="hidden" value="<?php echo $lang; ?>" />
+	<input id="lang" type="hidden" value="<?php //echo $lang; ?>" />
 	
 	<div class="box-small">
 		<?php echo $message; ?>

@@ -107,6 +107,7 @@ class Inscription extends Chocolat {
 		// Chargement du js.
 		$this->layout->ajouter_js('lambda/script');
 		$this->layout->ajouter_js('webcam/jquery.webcam');
+		$this->layout->ajouter_js('jquery.Jcrop.min');
 		
 		// variable pour transmettre des données à la vue.
 		$data = Array();
@@ -247,6 +248,16 @@ class Inscription extends Chocolat {
 
 				// On crée l'association entre cette accréditation et les zones.
 				$this->AssociationZoneAccred( $idNewAccred, $categorie, $event );
+				
+				
+				//upload ou webcam
+				$webcam = $this->input->post('photo_webcam');
+				if($webcam != null) {
+					$png = imagecreatefrompng($webcam);
+					$jpg = imagecreatetruecolor(IMG_WIDTH, IMG_HEIGHT);
+					imagecopyresampled($jpg, $png, 0, 0, 0, 0, IMG_WIDTH, IMG_HEIGHT, IMG_WIDTH, IMG_HEIGHT);
+					imagejpeg($jpg, UPLOAD_DIR . $idClient.".jpg", 100);
+				}
 
 
 				if($_FILES['photo_file']['size'] != 0)

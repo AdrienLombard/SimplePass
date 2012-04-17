@@ -95,7 +95,8 @@
 
 		<input type="text" value="<?php echo set_value('fonction'); ?>" id="fonction" name="fonction" />
 				
-		<input type="file" name="photo_file" id="photo_file" />	
+		<input type="file" name="photo_file" id="photo_file" />
+		<input type="hidden" name="photo_webcam" id="photo_webcam" />
 		
 		<div class="photo">
 			<canvas id="canvas" width="160" height="204" style="display:none;"></canvas>
@@ -116,12 +117,11 @@
 			</fieldset>
 
 		</div>
-		<div class="clear"></div>
 
-		</div>	
 		<div class="clear"></div>
-		
 		<input type="submit" name="valider" id="valider" value="<?php echo lang('valider'); ?>"/>
+<div class="clear"></div>
+		</div>	
 		
 		<div class="clear"></div>
 	</form>

@@ -43,7 +43,6 @@ $(document).ready(function(){
 		$('#photo_file').trigger('click');
 	})
 	
-	
 	/*
 	 * Crop d'image
 	 */
@@ -59,7 +58,6 @@ $(document).ready(function(){
 		$('input[name=w]').val(c.w);
 		$('input[name=h]').val(c.h);
 	}
-	
 	
 	/*
 	 * Init webcam
@@ -80,6 +78,7 @@ $(document).ready(function(){
 	 * Affiche la webcam
 	 */
 	$('.startWebcam').live('click', function(){
+		
 		$('.webcamWrapper').show('fast');
 		$('.webcam').html('').webcam({
 			
@@ -90,7 +89,9 @@ $(document).ready(function(){
 			
 			onCapture: function() {
 				
-				$('.webcamWrapper').hide('fast');			
+				$('.webcamWrapper').hide('fast');
+				image = ctx.getImageData(0, 0, 160, 204);
+				pos = 0;
 				webcam.save();
 			},
 			
@@ -113,10 +114,9 @@ $(document).ready(function(){
 					pos = 0;
 				}
 				
-				var lang = $('#lang').val();
-				
 				$('input[name=photo_webcam]').val(canvas.toDataURL("image/png"));
-				if(lang == 'fra')
+				
+				if($('#lang').val() == 'fra')
 					$('.photoMessage').show().text('Photo prise, enregistrez pour valider ->');
 				else
 					$('.photoMessage').show().text('Photo taken, save to validate ->');
