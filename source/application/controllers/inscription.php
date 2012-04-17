@@ -45,19 +45,6 @@ class Inscription extends Chocolat {
 
 	}
 
-	/*public function exePresse(){
-		$this->layout->ajouter_js('lambda/script');
-		$categorie = $this->input->post('categorie');
-
-		$this->session->set_userdata('categorie', $categorie);
-
-		if($categorie != "1") {
-			$this->lambda();
-		}
-		else {
-			redirect('presse/lambda/' . $categorie);
-		}
-	}*/
 
 	/**
 	 * Méthode pour le changement de langue
@@ -95,10 +82,9 @@ class Inscription extends Chocolat {
 			$this->lang->load('fr');
 		}
 	}
-	
-	/**
-	 * Méthode pour le choix d'une inscription individuelle ou par équipe et de l'évènement.
-	 */
+
+
+	/*
 	public function lambda() {
 		$this->layout->ajouter_js('lambda/script');
 		
@@ -106,7 +92,7 @@ class Inscription extends Chocolat {
 		$data['lang'] = $this->session->userdata('lang');
 		
 		$this->layout->view('lambda/LAccueil', $data);
-	}
+	}*/
 
 
 	/**

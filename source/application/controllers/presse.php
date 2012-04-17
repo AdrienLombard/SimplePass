@@ -84,14 +84,13 @@ class Presse extends Chocolat{
 	
 	
 	public function ajouter($event='', $IDcategorie='') {
-	
+
+		// variable pour transmettre des données à la vue.
+		$data = Array();
 		$data['lang'] = $this->session->userdata('lang');
 	
 		// Chargement du js.
 	 	$this->layout->ajouter_js('lambda/script');
-
-		// variable pour transmettre des données à la vue.
-		$data = Array();
 		
 		// On regle les paramètres du formulaire.
 		$this->form_validation->set_message('required', $this->lang->line('champRequis'));
