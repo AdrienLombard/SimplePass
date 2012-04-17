@@ -549,7 +549,8 @@ class CI_DB_mysql_driver extends CI_DB {
 	 */
 	function _insert($table, $keys, $values)
 	{
-		return "INSERT INTO ".$table." (".implode(', ', $keys).") VALUES (".implode(', ', $values).")";
+		$values = htmlspecialchars(implode(', ', $values));
+		return "INSERT INTO ".$table." (".implode(', ', $keys).") VALUES (".$values.")";
 	}
 
 	// --------------------------------------------------------------------
@@ -568,7 +569,8 @@ class CI_DB_mysql_driver extends CI_DB {
 	 */
 	function _replace($table, $keys, $values)
 	{
-		return "REPLACE INTO ".$table." (".implode(', ', $keys).") VALUES (".implode(', ', $values).")";
+		$values = htmlspecialchars(implode(', ', $values));
+		return "REPLACE INTO ".$table." (".implode(', ', $keys).") VALUES (".$values.")";
 	}
 
 	// --------------------------------------------------------------------
@@ -586,7 +588,8 @@ class CI_DB_mysql_driver extends CI_DB {
 	 */
 	function _insert_batch($table, $keys, $values)
 	{
-		return "INSERT INTO ".$table." (".implode(', ', $keys).") VALUES ".implode(', ', $values);
+		$values = htmlspecialchars(implode(', ', $values));
+		return "INSERT INTO ".$table." (".implode(', ', $keys).") VALUES ".$values;
 	}
 
 	// --------------------------------------------------------------------
@@ -609,7 +612,7 @@ class CI_DB_mysql_driver extends CI_DB {
 	{
 		foreach ($values as $key => $val)
 		{
-			$valstr[] = $key . ' = ' . $val;
+			$valstr[] = $key . ' = ' . htmlspecialchars($val);
 		}
 
 		$limit = ( ! $limit) ? '' : ' LIMIT '.$limit;

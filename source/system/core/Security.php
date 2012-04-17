@@ -275,6 +275,12 @@ class CI_Security {
 
 			return $str;
 		}
+		
+		/*
+		 * Remove html sepcial chars
+		 */
+		//$str = htmlspecialchars($str);
+		
 
 		/*
 		 * Remove Invisible Characters
