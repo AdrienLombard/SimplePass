@@ -18,6 +18,11 @@
                    
                    <div class="inputs no-margin">
 						<h2> Informations générales </h2>
+						<div class="photo">
+							<?php if(img_url('photos/'.$ref[0]->idclient.'.jpg') != NULL): ?>
+								<img src="<?php echo site_url('image/generate/' . $ref[0]->idclient); ?>" />
+							<?php endif; ?>
+						</div>
 						<div>
 							<label>Groupe : </label>
 							<input type="text" name="info[groupe]" init="<?php echo $ref[0]->groupe; ?>" value="<?php echo $ref[0]->groupe; ?>" class="nom"/>
@@ -41,11 +46,14 @@
 						
 						<div>
 							<label>Pays : </label>
-							<select class="pays" name="pays" value="<?php echo $ref[0]->pays; ?>">
+							<select class="pays" name="info[pays]">
 								<option value="<?php echo $ref[0]->pays; ?>"><?php echo $pays->nompays; ?></option>
 							</select>
 						</div>
-					
+						<div>
+							<label>Image : </label>
+							<input type="file" name="photo_file"  />
+						</div>
 						<div class="clear"></div>
 						
 					</div>
@@ -67,7 +75,7 @@
 								<?php foreach($zonesEvent as $zone): ?>
 								<div class="checkzone <?php echo in_array($zone->idzone, $ref[0]->zonesAccred)? 'on' : '' ; ?>" id="<?php echo $zone->idzone; ?>">
 									<?php echo $zone->codezone; ?>
-									<input type="checkbox" name="zone[<?php echo $zone->idzone; ?>]" <?php echo in_array($zone->idzone, $ref[0]->zonesAccred)? 'checked' : '' ; ?> />
+									<input type="checkbox" name="ref[zone][zone[<?php echo $zone->idzone; ?>]]" <?php echo in_array($zone->idzone, $ref[0]->zonesAccred)? 'checked' : '' ; ?> />
 								</div>
 								<?php endforeach; ?>
 							</div>
@@ -76,14 +84,15 @@
 					<br><br>
 					
 					<h2>Personnes</h2>
+					<?php $nb = 0; ?>
 					<?php foreach($personnes as $p): ?>
 						<div>
-							<label>Nom : </label><input type="text" id="nom" class="champ" style="text-transform: uppercase; width:180px;" name="ref[nom]" value="<?php echo $p->nom; ?>"/>
-							<label>Prénom : </label><input type="text" id="prenom" class="champ2" style="width:180px;" name="ref[prenom]" value="<?php echo $p->prenom; ?>"/>
+							<label>Nom : </label><input type="text" id="nom" class="champ" style="text-transform: uppercase; width:180px;" name="pers[<?php echo $nb; ?>][nom]" value="<?php echo $p->nom; ?>"/>
+							<label>Prénom : </label><input type="text" id="prenom" class="champ2" style="width:180px;" name="pers[<?php echo $nb; ?>][prenom]" value="<?php echo $p->prenom; ?>"/>
 						</div>
 						<div class="ligne">
-							<label>Catégorie : </label><input type="text" id="categorie" class="champ" style="width:180px;" name="ref[categorie]" value="<?php echo $p->libellecategorie; ?>"/>
-							<label>Fonction : </label><input type="text" id="fonction" class="champ2" style="width:180px;" name="ref[fonction]" value="<?php echo $p->fonction; ?>"/>
+							<label>Catégorie : </label><input type="text" id="categorie" class="champ" style="width:180px;" name="pers[<?php echo $nb; ?>][categorie]" value="<?php echo $p->libellecategorie; ?>"/>
+							<label>Fonction : </label><input type="text" id="fonction" class="champ2" style="width:180px;" name="pers[<?php echo $nb; ?>][fonction]" value="<?php echo $p->fonction; ?>"/>
 						</div>
 						<div class="contientZones">
 							<label>Zones : </label>
@@ -91,11 +100,12 @@
 								<?php foreach($zonesEvent as $zone): ?>
 								<div class="checkzone <?php echo in_array($zone->idzone, $p->zonesAccred)? 'on' : '' ; ?>" id="<?php echo $zone->idzone; ?>">
 									<?php echo $zone->codezone; ?>
-									<input type="checkbox" name="zone[<?php echo $zone->idzone; ?>]" <?php echo in_array($zone->idzone, $p->zonesAccred)? 'checked' : '' ; ?> />
+									<input type="checkbox" name="pers[<?php echo $nb; ?>][zone[<?php echo $zone->idzone; ?>]]" <?php echo in_array($zone->idzone, $p->zonesAccred)? 'checked' : '' ; ?> />
 								</div>
 								<?php endforeach; ?>
 							</div>
 						</div>
+					<?php $nb++; ?>
 					<div class="clear"><h2></h2></div>
 					<?php endforeach; ?>
 

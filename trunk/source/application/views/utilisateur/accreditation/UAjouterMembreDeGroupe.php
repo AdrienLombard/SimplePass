@@ -78,12 +78,12 @@
 						
 						<div>
 							<label>Groupe : </label>
-							<input type="text" name="info[groupe]" value="" class="nom" value="" />
+							<input type="text" name="info[groupe]" value="" class="nom" />
 						</div>
 						
 						<div>
 							<label>Société : </label>
-							<input type="text" name="info[societe]" value="" class="nom" value="" />
+							<input type="text" name="info[societe]" value="" class="nom" />
 						</div>
 
 						<div>
@@ -117,10 +117,10 @@
 						<div>
 							<label>Catégorie : </label>
 							<select name="info[categorie]">
-								<option value="">---</option>
 								<?php foreach($categories as $categorie): ?>
-								<option value="<?php echo $categorie['cat']->idcategorie; ?>" zone="<?php echo $categorie['zones']; ?>">
-									<?php echo $categorie['cat']->libellecategorie; ?>
+								<option value="<?php echo $categorie['db']->idcategorie; ?>" >
+									<?php for($i=0; $i<$categorie['depth']; $i++) echo '&#160;&#160;'; ?>
+									<?php echo $categorie['db']->libellecategorie; ?>
 								</option>
 								<?php endforeach; ?>
 							</select>
