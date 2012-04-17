@@ -215,6 +215,95 @@ class Presse extends Chocolat{
 				$newAccred = $this->modelaccreditation->ajouter($accredData);
 
 				$this->AssociationZoneAccred($newAccred, $categorie, $event);
+				
+				$cat = $this->modelcategorie->getCategorieMereid($accredData['idcategorie']);
+				
+				$evenement = $this->modelevenement->getEvenementParId($event);
+				
+				// Préparation et envoi du mail de confirmation
+				$this->email->from(MAIL_EXPEDITEUR, 'Accreditations Courchevel'); // L'adresse qui enverra le mail
+				$this->email->to($values['mail']); // Le destinataire du mail
+				$this->email->bcc(MAIL_COPIE); // Placer ici l'adresse de Courchevel qui recevra une copie du mail
+				
+				// Le sujet du mail
+				$this->email->subject(OBJET_MAIL);
+				
+				// Le contenu du mail
+				$contenuMail = 	'<html>' .
+									'<head></head>' .
+									'<body>' .
+										'<p>' . CHER . $values['prenom'] . ' ' . $values['nom'] . ' / ' . DEAR . $values['prenom'] . ' ' . $values['nom'] . ', </p>' . 
+										INTRO_MAIL .
+										'<table>' .
+											'<tr>' .
+												'<td>NOM / LASTNAME</td><td>' . $values['nom'] . '</td>' .
+											'</tr>' .
+											'<tr>' .
+												'<td>PRENOM / FIRSTNAME</td><td>' . $values['prenom'] . '</td>' .
+											'</tr>' .
+											'<tr>' .
+												'<td>PAYS / COUNTRY</td><td>' . $values['pays'] . '</td>' .
+											'</tr>' .
+											'<tr>' .
+												'<td>ADRESSE / ADDRESS</td><td>' . $values['adresse'] . '</td>' .
+											'</tr>' .
+											'<tr>' .
+												'<td>NUMERO DE CARTE PRESSE / PRESS CARD NUMBER</td><td>' . $accredData['numeropresse'] . '</td>' .
+											'</tr>' ;
+											if(isset($values['tel']) && !empty($values['tel'])) {
+				$contenuMail .=					'<tr>' .
+													'<td>TELEPHONE / PHONE NUMBER</td><td>' . $values['tel'] . '</td>' .
+												'</tr>' ;
+											}
+											else {
+				$contenuMail .=					'<tr>' .
+													'<td>TELEPHONE / PHONE NUMBER</td><td>Pas de numéro de téléphone / No phone number</td>' .
+												'</tr>' ;
+											}
+				$contenuMail .=				'<tr>' .
+												'<td>MAIL</td><td>' . $values['mail'] . '</td>' .
+											'</tr>' ;
+											if(isset($cat) && !empty($cat)) {
+				$contenuMail .=					'<tr>' .
+													'<td>CATEGORIE / CATEGORY</td><td>' . $cat[0]->libellecategorie . '</td>' .
+												'</tr>' ;
+											}
+											else {
+				$contenuMail .=					'<tr>' .
+													'<td>CATEGORIE / CATEGORY</td><td>Pas de catégorie définie / No defined category</td>' .
+												'</tr>' ;
+											}
+				$contenuMail .=				'<tr>' .
+												'<td>ORGANISME / COMPANY</td><td>' . $values['organisme'] . '</td>' .
+											'</tr>' ;
+											if(isset($accredData['fonction']) && !empty($accredData['fonction'])) {
+				$contenuMail .=					'<tr>' .
+													'<td>FONCTION / FUNCTION</td><td>' . $accredData['fonction'] . '</td>' .
+												'</tr>' ;
+											}
+											else {
+				$contenuMail .=					'<tr>' .
+													'<td>FONCTION / FUNCTION</td><td>Pas de fonction définie / No defined function</td>' .
+												'</tr>' ;
+											}
+				$contenuMail .=				'<tr>' .
+												'<td>DATE D\'ENREGISTREMENT / REGISTRATION DATE</td><td>' . display_date($accredData['dateaccreditation']) . '</td>' .
+											'</tr>' .
+										'</table>' .
+										TRAITEMENT_MAIL;
+				
+				if($evenement[0]->textmail != '')
+					$contenuMail .=		'<p>' . nl2br($evenement[0]->textmail) . '</p>';
+				
+				$contenuMail .=		SIGNATURE_MAIL .
+									'</body>' .
+								'</html>';
+				
+				// Inclusion du contenu dans le mail
+				$this->email->message($contenuMail);
+				
+				// Envoi du mail
+				//$this->email->send();
 
 				$data['titre']		= $this->lang->line('titreConfirmeDemande');
 				$data['message']	= $this->lang->line('confirmeDemande');
@@ -422,10 +511,28 @@ class Presse extends Chocolat{
 		$contenuMail = 	'<html>' .
 					'<head></head>' .
 					'<body>' .
-						'<p>Cher(e) ' . $ref['prenom'] . ' ' . $ref['nom'] . ', </p>' .
-						'<p>Votre accréditation pour l\'évènement ' . $evenement[0]->libelleevenement . ' a bien été prise en compte.</p>' .
-						'<p>Cette accréditation est valable pour les personnes suivantes : </p>' .
-						'<ul title="listeMembres" >';
+						'<p>' . CHER . $ref['prenom'] . ' ' . $ref['nom'] . ' / ' . DEAR . $ref['prenom'] . ' ' . $ref['nom'] . ', </p>' .
+						INTRO_MAIL .
+						'<p>Membres du groupe "' . $accred['groupe'] . '" : <br />' .
+						'"' . $accred['groupe'] . '" group members : </p>' .
+						'<ul title="Referent" >' .
+						'<li>' . $ref['prenom'] . ' ' . $ref['nom'];
+						
+		$cat = $this->modelcategorie->getCategorieMereid($accred['idcategorie']);
+						
+		if(isset($cat) && !empty($cat) && $cat[0]->libellecategorie != '') {
+			$contenuMail .= ' - ' . $cat[0]->libellecategorie;
+		}
+		else {
+			$contenuMail .= ' - Pas de catégorie définie / No category defined';
+		}
+		
+		if(isset($accred['fonction']) && !empty($accred['fonction']) && $accred['fonction'] != '') {
+			$contenuMail .= ' (' . $accred['fonction'] . ') - <strong>Référent(e) du groupe / Group referent</strong></li>';
+		}
+		else {
+			$contenuMail .= ' (Pas de fonction définie / No function defined) - <strong>Référent(e) du groupe / Group referent</strong></li>';
+		}
 		
 		// Ajout des membres
 
@@ -452,6 +559,28 @@ class Presse extends Chocolat{
 			$accred['referent'] 		 = $id;
 			$accred['etataccreditation'] = ACCREDITATION_A_VALIDE ;
 			$accred['dateaccreditation'] = time();
+			
+			// Gestion du mail.
+			$contenuMail .= '<li>' . $membre['prenom'] . ' ' . $membre['nom'];
+			
+			$cat = null;
+			
+			$cat = $this->modelcategorie->getCategorieMereid($accred['idcategorie']);
+			
+			if(isset($cat) && !empty($cat) && $cat[0]->libellecategorie != '') {
+				$contenuMail .= ' - ' . $cat[0]->libellecategorie;
+			}
+			else {
+				$contenuMail .= ' - Pas de catégorie définie / No category defined';
+			}
+			
+			if(isset($accred['fonction']) && !empty($accred['fonction']) && $accred['fonction'] != '') {
+				$contenuMail .= ' (' . $accred['fonction'] . ')</li>';
+			}
+			else {
+				$contenuMail .= ' (Pas de fonction définie / No function defined)</li>';
+			}
+			
 			$tab = $ligne['categorie'];
 			$temp = -1;
 			while($temp == -1) {
@@ -470,19 +599,23 @@ class Presse extends Chocolat{
 			if(isset($accred['categorie']))
 				$this->AssociationZoneAccred($idNewAccred, $accred['idcategorie'], $this->input->post('evenement'));
 		}
-		/*		
+		
 		// Préparation et envoi du mail de confirmation
-		$this->email->from('accreditations@courchevel.com', 'Accréditations Courchevel'); // L'adresse qui enverra le mail
-		$this->email->to($values['mail']); // Le destinataire du mail
+		$this->email->from(MAIL_EXPEDITEUR, 'Courchevel accreditations'); // L'adresse qui enverra le mail
+		$this->email->to($ref['mail']); // Le destinataire du mail
 		$this->email->bcc(MAIL_COPIE); // L'adresse de Courchevel qui recevra une copie du mail
 		
 		// Le sujet du mail
-		$this->email->subject('Votre accréditation groupée pour l\'évènement ' . $evenement[0]->libelleevenement);
+		$this->email->subject(OBJET_MAIL);
 		
 		// Le contenu du mail
-		$contenuMail = 			'</ul>' .
-								'<p>Merci pour votre pré-enregistrement.</p>' .
-								'<p>Le club des sports de Courchevel</p>' .
+		$contenuMail .= 	'</ul>' .
+							TRAITEMENT_MAIL;	
+		
+		if($evenement[0]->textmail != '')
+			$contenuMail .=		'<p>' . nl2br($evenement[0]->textmail) . '</p>';
+			
+		$contenuMail .= 		SIGNATURE_MAIL .
 							'</body>' .
 						'</html>';
 		
@@ -491,7 +624,7 @@ class Presse extends Chocolat{
 		
 		// Envoi du mail
 		//$this->email->send();
-		*/
+		
 		$msg['titre']	= $this->lang->line('titreConfirmeDemandeGroupe');
 		$msg['message']	= $this->lang->line('confirmeDemandeGroupe');
 		
