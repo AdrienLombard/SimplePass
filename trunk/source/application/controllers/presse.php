@@ -398,7 +398,7 @@ class Presse extends Chocolat{
 		unset($ref['groupe']);
 		$id = $this->modelclient->ajouter($ref);
 		
-		$data['lang'] = $this->session->userdata('lang');
+		$msg['lang'] = $this->session->userdata('lang');
 		
 		// création de l'accreditation pour le referent
 		$accred = null;
@@ -412,10 +412,12 @@ class Presse extends Chocolat{
 		$accred['dateaccreditation'] = time();
 		$newAccred = $this->modelaccreditation->ajouter($accred);
 
+		// Association zones/accred pour le referent.
 		$this->AssociationZoneAccred($newAccred, $accred['idcategorie'], $this->input->post('evenement'));
 
+
+		// Generation du debut du mail de confirmation.
 		$evenement = $this->modelevenement->getEvenementParId($accred['idevenement']);
-		
 		$contenuMail = 	'<html>' .
 					'<head></head>' .
 					'<body>' .
@@ -425,46 +427,47 @@ class Presse extends Chocolat{
 						'<ul title="listeMembres" >';
 		
 		// Ajout des membres
+
 		foreach($this->input->post('groupe') as $ligne) {
 			// création du client
 			$membre = null;
-			$membre['nom']     = $ligne['nom'];
-			$membre['prenom']  = $ligne['prenom'];
-			$membre['adresse'] =$ligne['adresse_membre'];
-			$membre['tel']     =$ligne['tel_membre'];
-			$membre['mail']		=$ligne['mail_membre'];
-			$membre['organisme']= $data['organisme'];
-			$membre['pays'] = $data['pays'];
+			$membre['nom']     		= $ligne['nom'];
+			$membre['prenom']  		= $ligne['prenom'];
+			$membre['adresse'] 		= $ligne['adresse_membre'];
+			$membre['tel']     		= $ligne['tel_membre'];
+			$membre['mail']			= $ligne['mail_membre'];
+			$membre['organisme']	= $data['organisme'];
+			$membre['pays'] 		= $data['pays'];
 			$idNewClient = $this->modelclient->ajouter($membre);
 
-			// création de l'accreditation
+
+			// création de l'accreditation de son accreditation.
 			$accred = null;
-			$accred['groupe'] = $data['groupe'];
-			$accred['idevenement'] = $this->input->post('evenement');
-			$accred['idclient'] = $idNewClient;
-			$accred['fonction'] = $ligne['fonction'];
-			$accred['numeropresse']=$ligne['numr_carte_membre'];
-			$accred['referent'] = $id;
+			$accred['groupe'] 			 = $data['groupe'];
+			$accred['idevenement']		 = $this->input->post('evenement');
+			$accred['idclient'] 		 = $idNewClient;
+			$accred['fonction'] 		 = $ligne['fonction'];
+			$accred['numeropresse']		 = $ligne['numr_carte_membre'];
+			$accred['referent'] 		 = $id;
 			$accred['etataccreditation'] = ACCREDITATION_A_VALIDE ;
 			$accred['dateaccreditation'] = time();
-			
-			if($accred['fonction'] != '') {
-				$contenuMail .= '<li>' . $membre['prenom'] . ' ' . $membre['nom'] . ' - ' . $accred['fonction'] . '</li>';
-			}
-			else {
-				$contenuMail .= '<li>' . $membre['prenom'] . ' ' . $membre['nom'] . ' - Pas de fonction définie</li>';
-			}
-			
 			$tab = $ligne['categorie'];
 			$temp = -1;
 			while($temp == -1) {
 				$temp = array_pop($tab);
 			}
 			$accred['idcategorie'] = $temp;
+			$idNewAccred = $this->modelaccreditation->ajouter($accred);
 
-			$newAccred = $this->modelaccreditation->ajouter($accred);
-
-			$this->AssociationZoneAccred($newAccred, $accred['idcategorie'], $this->input->post('evenement'));
+			// on continue le mail.
+			if($accred['fonction'] != '') {
+				$contenuMail .= '<li>' . $membre['prenom'] . ' ' . $membre['nom'] . ' - ' . $accred['fonction'] . '</li>';
+			}
+			else {
+				$contenuMail .= '<li>' . $membre['prenom'] . ' ' . $membre['nom'] . ' - Pas de fonction définie</li>';
+			}
+			if(isset($accred['categorie']))
+				$this->AssociationZoneAccred($idNewAccred, $accred['idcategorie'], $this->input->post('evenement'));
 		}
 		/*		
 		// Préparation et envoi du mail de confirmation
