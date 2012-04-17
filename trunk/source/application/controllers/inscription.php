@@ -30,7 +30,6 @@ class Inscription extends Chocolat {
 	}
 	
 	public function index() {
-
 		$this->entry();
 		
 	}
@@ -60,6 +59,7 @@ class Inscription extends Chocolat {
 			$this->session->set_userdata('lang', 'gbr');
 		}
 		$urlOk = str_replace(':', '/', $url);
+		$this->chargerLangue();
 		redirect($urlOk);
 		
 	}

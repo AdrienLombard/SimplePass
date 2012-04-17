@@ -40,6 +40,9 @@ class Presse extends Chocolat{
 	 * @param $categorie
 	 */
 	public function lambda( $categorie ) {
+	
+		$this->session->set_userdata('lang', 'fra');
+		
 		$this->layout->ajouter_js('lambda/script');
 
 		$data['listeSurCategorie'] 	= $this->modelcategorie->getCategorieMere();
