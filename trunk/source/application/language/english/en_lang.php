@@ -30,7 +30,7 @@ $lang['titreConfirmeDemandeGroupe'] = 'Request Confirmation';
 $lang['confirmeDemandeGroupe'] = 'Your requests have been sent.<br>Thanks for your pre-registration.';
 $lang['titreDemandeNon'] = 'Information';
 $lang['demandeNon'] = 'You have already made an accreditation request for this event.';
-$lang['choixCat'] = 'Select your category';
+$lang['choixCat'] = 'Check this box if you want to create a press accreditation';
 $lang['autre'] = 'Other';
 $lang['presse'] = 'Press';
 
