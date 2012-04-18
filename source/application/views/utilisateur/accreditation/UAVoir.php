@@ -91,7 +91,7 @@
 					</div>
 					
 					<div>
-						<label class="short">Société: </label>
+						<label class="short">Organisme :</label>
 						<input type="text" name="organisme" class="societe" init="<?php echo $client->organisme; ?>" value="<?php echo $client->organisme; ?>" readonly>
 					</div>
 					<input type="submit" class="valideInfos" value="Enregistrer les modifications" />
