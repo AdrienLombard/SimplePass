@@ -454,7 +454,23 @@ class Accreditation extends Cafe {
 	
 		$info				= $this->input->post('info');
 		$personnes				= $this->input->post('pers');
+		if($_FILES['photo_file']['size'] != 0) {
+			
+			$config['upload_path'] = UPLOAD_DIR;
+			$config['allowed_types'] = 'jpg';
+			$config['file_name'] = $personnes['0']['idclient'].".jpg";
+			$config['overwrite'] = true;
 
+			$this->load->library('upload', $config);
+			$this->upload->do_upload('photo_file');
+			$data = $this->upload->data();
+
+			$this->load->helper('image');
+			if($data['image_width'] > 160)
+				resizeWidthRatio($data['full_path'], 160);
+			
+		}
+		
 		foreach($personnes as $pers){
 		
 		//modification du client	
@@ -481,12 +497,16 @@ class Accreditation extends Cafe {
 		// modification des zones (suppression puis ajout).
 		$this->modelzone->supprimerZoneParAccreditation($idAccred);
 
+		if($_FILES['photo_file']['size'] != 0)
+				copy($data['full_path'], UPLOAD_DIR . '/' . $pid . '.jpg');
+		
 		$values = array();
 		foreach( $pers['zone'] as $key => $value )
 			$values[] = array('idaccreditation' => $idAccred, 'idzone' => $key);
 
 			$this->modelzone->ajouterZonesAccreditation($values);
 		}
+		
 		redirect('accreditation/voirEquipe/'.$info['groupe']);
 	
 	}
