@@ -23,6 +23,7 @@
 				<input type="hidden" name="ref[pays]" value="<?php echo $pays; ?>" />
 				<input type="hidden" name="ref[numeropresse]" value="<?php echo $numr_carte; ?>" />
 				<input type="hidden" name="ref[adresse]" value="<?php echo $adresse; ?>" />
+				<input type="hidden" name="ref[organisme]" value="<?php echo $organisme; ?>" />
 				
 				<input type="hidden" name="evenement" value="<?php echo $evenement; ?>" />
 				
