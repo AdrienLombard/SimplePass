@@ -49,7 +49,7 @@
 							<label>Mail : </label>
 							<input type="text" name="info[mail]" class="mail" value="<?php echo $ref->mail; ?>"  readonly/>
 						</div>
-						
+				
 						<div>
 							<label>Pays : </label>
 							<select class="pays" name="info[pays]" disabled>
