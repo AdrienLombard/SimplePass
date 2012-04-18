@@ -17,6 +17,14 @@ class modelCategorie extends MY_Model {
 						->result();
 	}
 
+    public function getCategoriesSaufpresse() {
+		return $this->db->select('*')
+						->from(DB_CATEGORIE )
+				        ->not_like('libellecategorie','Presse')
+			        	->where('surcategorie',null)
+						->get()
+						->result();
+	}
 
 	/**
 	 * Méthode pour récuperer l'id de la catégorie Presse.

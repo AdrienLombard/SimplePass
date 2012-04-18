@@ -181,7 +181,7 @@ class Inscription extends Chocolat {
 			
 			$data['listeSurCategorie'] = $this->modelcategorie->getCategorieMere();
 			
-			$data['listeCategorie'] = $this->modelcategorie->getCategories();
+			$data['listeCategorie'] = $this->modelcategorie-> getCategoriesSaufpresse();
 			
 			$this->layout->view('lambda/LIndividuelle', $data);
 		
@@ -399,7 +399,7 @@ class Inscription extends Chocolat {
 		$data['infoEvenement'] 	= $this->modelevenement->getEvenementParId($evenement);
 		$data['listePays'] 		= $this->modellambda->listePays();
 		$data['listeCategorie'] = $this->modelcategorie->getCategories();
-		$data['listeSurCategorie'] = $this->modelcategorie->getCategorieMere();
+		$data['listeSurCategorie'] = $this->modelcategorie->getCategoriesSaufpresse();
 		$data['values'] = $info;
 		
 		$data['lang'] = $this->session->userdata('lang');
@@ -482,7 +482,7 @@ class Inscription extends Chocolat {
 			$data['mail'] 				= $this->input->post('mail');
 			$data['evenement'] 			= $this->input->post('evenement');
 			$data['listeCategorie'] 	= $this->modelcategorie->getCategories();
-			$data['listeSurCategorie'] 	= $this->modelcategorie->getCategorieMere();
+			$data['listeSurCategorie'] 	= $this->modelcategorie->getCategoriesSaufpresse();
 			
 			// Gestion pour les catégorie.
 			$tab = $this->input->post('categorie');
