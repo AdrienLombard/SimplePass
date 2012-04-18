@@ -371,18 +371,37 @@ class Inscription extends Chocolat {
 
 		// On récupère les zones de la catégorie pour cette évènement.
 		$zones = $this->modelzone->getZoneParCategorieEtEvenement( $idCategorie, $idEvenement);
-
+		
 		// On construit notre array de couple zone/idAccreditation
-		$zonesAcccred = array();
+		$zonesAccred = array();
 		foreach($zones as $zone) {
-			$zonesAcccred[] = array(
+			$zonesAccred[] = array(
 				'idaccreditation' 	=> $idAccred,
 				'idzone'			=> $zone->idzone
 			);
 		}
 
 		// On lie ces zones à cette accréditation.
-		$this->modelzone->ajouterZonesAccreditation( $zonesAcccred );
+		$this->modelzone->ajouterZonesAccreditation( $zonesAccred );
+	}
+	
+	
+	private function listeCategorieToDisplay( $event ) {
+		// Gestion pour les catégorie.
+		$listeAllCategorie = $this->modelcategorie->getCategorieDansEvenementToutBien();
+		$listeCategorieEvent = $this->modelcategorie->getCategorieDansEvenement($event);
+		$listeCategories = array();
+		foreach($listeCategorieEvent as $categorie) {
+			$listeCategories[] = $categorie->idcategorie;
+		}
+		$categories = array();
+		foreach($listeAllCategorie as $cate) {
+			if(in_array($cate['db']->idcategorie, $listeCategories)) {
+				$categories[] = $cate;
+			}
+		}
+		
+		return $categories;
 	}
 
 
@@ -398,8 +417,9 @@ class Inscription extends Chocolat {
 		$data['idEvenement']	= $evenement;
 		$data['infoEvenement'] 	= $this->modelevenement->getEvenementParId($evenement);
 		$data['listePays'] 		= $this->modellambda->listePays();
-		$data['listeCategorie'] = $this->modelcategorie->getCategoriesSaufPresse();
-		$data['listeSurCategorie'] = $this->modelcategorie->getCategoriesMeresSaufpresse();
+		
+		$data['categorie'] = $this->listeCategorieToDisplay( $evenement );
+		
 		$data['values'] = $info;
 		
 		$data['lang'] = $this->session->userdata('lang');
@@ -481,8 +501,7 @@ class Inscription extends Chocolat {
 			$data['tel'] 				= $this->input->post('tel');
 			$data['mail'] 				= $this->input->post('mail');
 			$data['evenement'] 			= $this->input->post('evenement');
-			$data['listeCategorie'] 	= $this->modelcategorie->getCategoriesSaufPresse();
-			$data['listeSurCategorie'] 	= $this->modelcategorie->getCategoriesMeresSaufpresse();
+			$data['listeCategorie'] 	= $this->listeCategorieToDisplay( $idEvenement );
 			
 			// Gestion pour les catégorie.
 			$tab = $this->input->post('categorie');
@@ -533,7 +552,7 @@ class Inscription extends Chocolat {
 		$idNewAccred = $this->modelaccreditation->ajouter($accred);
 
 		// Création des zones accéssible pour cette accrédiation.
-		$this->AssociationZoneAccred($idNewAccred, $data['categorie'],$this->input->post('evenement') );
+		$this->AssociationZoneAccred($idNewAccred, $data['categorie'], $this->input->post('evenement') );
 
 		$evenement = $this->modelevenement->getEvenementParId($accred['idevenement']);
 		
@@ -570,7 +589,7 @@ class Inscription extends Chocolat {
 			$membre['nom'] = $ligne['nom'];
 			$membre['prenom'] = $ligne['prenom'];
 			$membre['pays'] = $data['pays'];
-			$idNewClient = $this->modelclient->ajouter($membre);
+			//$idNewClient = $this->modelclient->ajouter($membre);
 
 			// création de l'accreditation
 			$accred = null;
@@ -589,14 +608,14 @@ class Inscription extends Chocolat {
 			}
 			$accred['idcategorie'] = $temp;
 
-			$idNewAccred = $this->modelaccreditation->ajouter($accred);
+			//$idNewAccred = $this->modelaccreditation->ajouter($accred);
 
 			$cat = null;
 			
 			$cat = $this->modelcategorie->getCategorieMereid($accred['idcategorie']);
 
 			// Création des zones accéssible pour cette accrédiation.
-			$this->AssociationZoneAccred($idNewAccred, $accred['idcategorie'],$this->input->post('evenement') );
+			//$this->AssociationZoneAccred($idNewAccred, $accred['idcategorie'],$this->input->post('evenement') );
 
 			// Gestion du mail.
 			$contenuMail .= '<li>' . $membre['prenom'] . ' ' . $membre['nom'];
@@ -638,7 +657,7 @@ class Inscription extends Chocolat {
 						'</html>';
 		
 		// Inclusion du contenu dans le mail
-		$this->email->message($contenuMail);
+		//$this->email->message($contenuMail);
 		
 		// Envoi du mail
 		//$this->email->send();

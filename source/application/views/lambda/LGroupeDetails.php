@@ -1,5 +1,5 @@
 <script type="text/javascript">
-	
+	/*
 	$(document).ready(function(){
 		
 		var tabCat = new Array();
@@ -34,6 +34,7 @@
 		});
 
 	});
+	*/
 	
 </script>
 
@@ -119,8 +120,11 @@
 				<label for=""><?php echo lang('categorie'); ?></label>
 				<select  id="categorie" name="groupe[nbLigne][categorie][]" class="select dyn-selector">
 					<option value="-1" libelle=" " ><?php echo lang('neSaisPas'); ?></option>
-					<?php foreach($listeSurCategorie as $categorie): ?>
-					<option VALUE="<?php echo $categorie->idcategorie; ?>" libelle="<?php echo $categorie->libellecategorie; ?>" <?php echo set_select('categorie', $categorie->libellecategorie); ?> ><?php echo $categorie->libellecategorie; ?></option>
+					<?php foreach($listeCategorie as $cate): ?>
+					<option value="<?php echo $cate['db']->idcategorie; ?>" >
+						<?php for($i=0; $i<$cate['depth']; $i++) echo '&#160;&#160;'; ?>
+						<?php echo $cate['db']->libellecategorie; ?>
+					</option>
 					<?php endforeach; ?>
 				</select>
 			</div>
