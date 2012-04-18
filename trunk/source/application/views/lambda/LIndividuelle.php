@@ -1,39 +1,4 @@
 <script type="text/javascript">
-	
-	$(document).ready(function(){
-		
-		var tabCat = new Array();
-		
-		<?php $i = 0; ?>
-		<?php foreach($listeCategorie as $cat): ?>
-			tabCat[<?php echo $i; ?>] = [<?php echo $cat->idcategorie ?>, <?php echo $cat->surcategorie ?>, "<?php echo $cat->libellecategorie ?>"];
-			<?php $i++; ?>
-		<?php endforeach; ?>
-
-		$("select.dyn-selector").live("change",function(){
-			
-			var id = $(this).find("option:selected").val();
-			var count = 0;
-			
-			var newSelect = "<select name='categorie[]' class='select dyn-selector'>";
-			newSelect += "<option value='-1'><?php echo lang('neSaisPas'); ?></option>";
-			for(var i=0; i<tabCat.length; i++) {
-				if(tabCat[i][1] == id) {
-					newSelect += "<option value='" + tabCat[i][0] + "'>" + tabCat[i][2] + "</option>";
-					count++;
-				}
-			}
-			newSelect += "</select>";
-			
-			$(this).nextAll().remove();
-			
-			if(count != 0)
-				$(newSelect).insertAfter(this);
-			
-		});
-
-	});
-	
 </script>
 
 
@@ -82,9 +47,11 @@
 		<div>
 		<label><?php echo lang('categorie'); ?></label>
 		<select  id="categorie" name="categorie[]" class="select dyn-selector">
-			<option value="-1"><?php echo lang('neSaisPas'); ?></option>
-			<?php foreach($listeSurCategorie as $categorie): ?>
-				<option value="<?php echo $categorie->idcategorie; ?>" <?php echo set_select('categorie', $categorie->libellecategorie); ?> ><?php echo $categorie->libellecategorie; ?></option>
+			<?php foreach($listeCategorie as $cate): ?>
+			<option value="<?php echo $cate['db']->idcategorie; ?>" >
+				<?php for($i=0; $i<$cate['depth']; $i++) echo '&#160;&#160;'; ?>
+				<?php echo $cate['db']->libellecategorie; ?>
+			</option>
 			<?php endforeach; ?>
 		</select>
 		</div>

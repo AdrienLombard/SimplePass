@@ -1,40 +1,5 @@
 <script type="text/javascript">
-	
-	$(document).ready(function(){
-		
-		var tabCat = new Array();
-		
-		<?php $i = 0; ?>
-		<?php foreach($listeCategorie as $cat): ?>
-			tabCat[<?php echo $i; ?>] = [<?php echo $cat->idcategorie ?>, <?php echo $cat->surcategorie ?>, "<?php echo $cat->libellecategorie ?>"];
-			<?php $i++; ?>
-		<?php endforeach; ?>
 
-		$("select.dyn-selector").live("change",function(){
-			
-			var id = $(this).find("option:selected").val();
-			var nbLigne = $(this).parent().parent().parent().attr('data');
-			var count = 0;
-			
-			var newSelect = "<select name='groupe["+ nbLigne +"][categorie][]' class='select dyn-selector'>";
-			newSelect += "<option value='-1' libelle=' '><?php echo lang('neSaisPas'); ?></option>";
-			for(var i=0; i<tabCat.length; i++) {
-				if(tabCat[i][1] == id) {
-					newSelect += "<option value='" + tabCat[i][0] + "' libelle='" + tabCat[i][2] + "' >" + tabCat[i][2] + "</option>";
-					count++;
-				}
-			}
-			newSelect += "</select>";
-			
-			$(this).nextAll().remove();
-			
-			if(count != 0)
-				$(newSelect).insertAfter(this);
-			
-		});
-
-	});
-	
 </script>
 
 <div id="content">
@@ -56,8 +21,8 @@
 				<input type="hidden" name="ref[mail]" value="<?php echo $mail; ?>" />
 				<input type="hidden" name="ref[groupe]" value="<?php echo $groupe; ?>" />
 				<input type="hidden" name="ref[pays]" value="<?php echo $pays; ?>" />
-				<input type="hidden" name="ref[organisme]" value="<?php echo $organisme; ?>" />
-
+				<input type="hidden" name="ref[numeropresse]" value="<?php echo $numr_carte; ?>" />
+				<input type="hidden" name="ref[adresse]" value="<?php echo $adresse; ?>" />
 				
 				<input type="hidden" name="evenement" value="<?php echo $evenement; ?>" />
 				
@@ -169,13 +134,11 @@
 			<div class="split">
 				<label ><?php echo lang('categorie'); ?></label>
 				<select  id="categorie" name="groupe[nbLigne][categorie][]" class="select dyn-selector">
-					<option value="-1" libelle=" " ><?php echo lang('neSaisPas'); ?></option>
-					<?php foreach($listeSurCategorie as $categorie): ?>
-						<option VALUE="<?php echo $categorie->idcategorie; ?>" 
-							libelle="<?php echo $categorie->libellecategorie; ?>" 
-							<?php echo set_select('categorie', $categorie->libellecategorie); ?> >
-							<?php echo $categorie->libellecategorie; ?>
-						</option>
+					<?php foreach($listeCategorie as $cate): ?>
+					<option value="<?php echo $cate['db']->idcategorie; ?>" >
+						<?php for($i=0; $i<$cate['depth']; $i++) echo '&#160;&#160;'; ?>
+						<?php echo $cate['db']->libellecategorie; ?>
+					</option>
 					<?php endforeach; ?>
 				</select>
 			</div>
