@@ -5,6 +5,8 @@
         <title><?php echo $titre; ?></title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         
+		<link rel="shortcut icon" href="<?php echo img_url('favicon.ico'); ?>" type="image/x-icon" />
+		
         <?php foreach($css as $url): ?>
             <link rel="stylesheet" type="text/css" media="screen" href="<?php echo $url; ?>" />
         <?php endforeach; ?>
