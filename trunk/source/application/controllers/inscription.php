@@ -589,7 +589,7 @@ class Inscription extends Chocolat {
 			$membre['nom'] = $ligne['nom'];
 			$membre['prenom'] = $ligne['prenom'];
 			$membre['pays'] = $data['pays'];
-			//$idNewClient = $this->modelclient->ajouter($membre);
+			$idNewClient = $this->modelclient->ajouter($membre);
 
 			// création de l'accreditation
 			$accred = null;
@@ -608,14 +608,14 @@ class Inscription extends Chocolat {
 			}
 			$accred['idcategorie'] = $temp;
 
-			//$idNewAccred = $this->modelaccreditation->ajouter($accred);
+			$idNewAccred = $this->modelaccreditation->ajouter($accred);
 
 			$cat = null;
 			
 			$cat = $this->modelcategorie->getCategorieMereid($accred['idcategorie']);
 
 			// Création des zones accéssible pour cette accrédiation.
-			//$this->AssociationZoneAccred($idNewAccred, $accred['idcategorie'],$this->input->post('evenement') );
+			$this->AssociationZoneAccred($idNewAccred, $accred['idcategorie'],$this->input->post('evenement') );
 
 			// Gestion du mail.
 			$contenuMail .= '<li>' . $membre['prenom'] . ' ' . $membre['nom'];
