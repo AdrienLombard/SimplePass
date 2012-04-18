@@ -329,14 +329,156 @@ class Accreditation extends Cafe {
 
 	}
 
-	public function ajouterGroupe() {
-
+	public function ajouterGroupe( $re='' ) {
+		
+		// liste des zones pour l'evenement en cours.
 		$data['zones'] = $this->modelzone->getZoneParEvenement($this->session->userdata('idEvenementEnCours'));
+		
+		// liste des pays.
 		$data['pays'] = $this->modelpays->getPays();
-		$data['categories'] = $this->modelcategorie->getCategorieDansEvenementToutBienAvecId($this->session->userdata('idEvenementEnCours'));
+		
+		// liste des catégorie de l'événement.
+		$data['categories'] = $this->listeCategorieToDisplay($this->session->userdata('idEvenementEnCours'));
+		
+		// Info de reremplissage.
+		$data['re'] = $re;
+		
+		// on appelle la vue.
 		$this->layout->view('utilisateur/accreditation/UAjouterMembreDeGroupe', $data);
+	}
+	
+	
+	public function exeAjoutGroupe() {
+		/* liste des champs obligatoire.
+		verif info['groupe']
+		
+		
+		
+		
+		*/
+		
+		
+		$info 		= $this->input->post('info');
+		$ref 		= $this->input->post('ref');
+		$personnes 	= $this->input->post('personne');
+		$zones 		= $this->input->post('zone');
+		
+		/* Verification du formulaire */
+		$verif = true;
+		if(empty($info['groupe'])) {
+			$verif = false;
+		}
+		if(empty($ref['nom']) or empty($ref['prenom']) or empty($ref['fonction'])) {
+			$verif = false;
+		}
+		if($personnes) {
+			foreach($personnes as $personne) {
+				if(empty($personne['nom']) or empty($personne['prenom']) or empty($personne['fonction'])) {
+					$verif = false;
+				}
+			}
+		}
+		
+		
+		if($verif) {
+		
+			// ajout du référent
+			$ref['pays'] 		= $info['pays'];
+			$ref['tel'] 		= $info['tel'];
+			$ref['organisme'] 	= $info['societe'];
+			$ref['mail'] 		= $info['mail'];
+			$fonction 			= $ref['fonction'];
+			unset($ref['fonction']);
+			$this->modelclient->ajouter($ref);
+			$id = $this->modelclient->lastId();
+			
+			// upload photo pour referent
+			if($_FILES['photo_file']['size'] != 0) {
+				
+				$config['upload_path'] = UPLOAD_DIR;
+				$config['allowed_types'] = 'jpg';
+				$config['file_name'] = $id.".jpg";
+				$config['overwrite'] = true;
+
+				$this->load->library('upload', $config);
+				$this->upload->do_upload('photo_file');
+				$data = $this->upload->data();
+
+				$this->load->helper('image');
+				if($data['image_width'] > 160)
+					resizeWidthRatio($data['full_path'], 160);
+				
+			}
+			
+			// ajout de son accred
+			$aref = array();
+			$aref['idclient'] 		= $id;
+			$aref['idcategorie'] 	= $info['categorie'];
+			$aref['idevenement'] 	= $this->session->userdata('idEvenementEnCours');
+			$aref['fonction'] 		= $fonction;
+			$aref['groupe'] 		= $info['groupe'];
+			$aref['dateaccreditation'] = time();
+			$this->modelaccreditation->ajouter($aref);
+			$idAccredRef = $this->modelaccreditation->lastId();
+
+			// ajout des zones
+			$this->modelzone->supprimerZoneParAccreditation($idAccredRef);
+			$values = array();
+			foreach($zones as $key => $value )
+				$values[] = array('idaccreditation' => $idAccredRef, 'idzone' => $key);
+			$this->modelzone->ajouterZonesAccreditation($values);
+
+			// boucle personnes
+			foreach($personnes as $p) {
+				
+				// création du client
+				$p['pays'] = $info['pays'];
+				$p['organisme'] = $info['societe'];
+				$p['tel']=$ref['tel'];
+				$p['mail']=$ref['mail'];
+				$fonction = $p['fonction'];
+				unset($p['fonction']);
+				$this->modelclient->ajouter($p);
+				$pid = $this->modelclient->lastId();
+				
+				// duplication de l'image
+				if($_FILES['photo_file']['size'] != 0)
+					copy($data['full_path'], UPLOAD_DIR . '/' . $pid . '.jpg');
+				
+				// ajout de l'accred
+				$ap = array();
+				$ap['idclient'] = $pid;
+				$ap['idcategorie'] = $info['categorie'];
+				$ap['idevenement'] = $this->session->userdata('idEvenementEnCours');
+				$ap['fonction'] = $fonction;
+				$ap['groupe'] = $info['groupe'];
+				$ap['referent'] = $id;
+				$ap['dateaccreditation'] = time();
+				$this->modelaccreditation->ajouter($ap);
+				$idap = $this->modelaccreditation->lastId();
+				
+				// ajout des zones
+				$this->modelzone->supprimerZoneParAccreditation($idap);
+				$values = array();
+				foreach($zones as $key => $value )
+					$values[] = array('idaccreditation' => $idap, 'idzone' => $key);
+				$this->modelzone->ajouterZonesAccreditation($values);
+			}
+			
+			redirect('accreditation/voirEquipe/'.$info['groupe']);
+		}
+		else {
+			
+			$data->info 		= $info;
+			$data->ref 		= $ref;
+			$data->personne 	= $personnes;
+			
+			$this->ajouterGroupe($data);
+		}
+		
 		
 	}
+	
 
 
 	public function modifier($idAccred) {
@@ -706,99 +848,7 @@ class Accreditation extends Cafe {
 		
 	}	
 	
-	public function exeAjoutGroupe() {
-		
-		$info = $this->input->post('info');
-		$ref = $this->input->post('ref');
-		$personnes = $this->input->post('personne');
-		$zones = $this->input->post('zone');
-		
-		// ajout du référent
-		$ref['pays'] = $info['pays'];
-		$ref['tel'] = $info['tel'];
-		$ref['organisme'] = $info['societe'];
-		$ref['mail'] = $info['mail'];
-		$fonction = $ref['fonction'];
-		unset($ref['fonction']);
-		$this->modelclient->ajouter($ref);
-		$id = $this->modelclient->lastId();
-		
-		// upload photo pour referent
-		if($_FILES['photo_file']['size'] != 0) {
-			
-			$config['upload_path'] = UPLOAD_DIR;
-			$config['allowed_types'] = 'jpg';
-			$config['file_name'] = $id.".jpg";
-			$config['overwrite'] = true;
 
-			$this->load->library('upload', $config);
-			$this->upload->do_upload('photo_file');
-			$data = $this->upload->data();
-
-			$this->load->helper('image');
-			if($data['image_width'] > 160)
-				resizeWidthRatio($data['full_path'], 160);
-			
-		}
-		
-		// ajout de son accred
-		$aref = array();
-		$aref['idclient'] = $id;
-		$aref['idcategorie'] = $info['categorie'];
-		$aref['idevenement'] = $this->session->userdata('idEvenementEnCours');
-		$aref['fonction'] = $fonction;
-		$aref['groupe'] = $info['groupe'];
-		$aref['dateaccreditation'] = time();
-		$this->modelaccreditation->ajouter($aref);
-		$idAccredRef = $this->modelaccreditation->lastId();
-
-		// ajout des zones
-		$this->modelzone->supprimerZoneParAccreditation($idAccredRef);
-		$values = array();
-		foreach($zones as $key => $value )
-			$values[] = array('idaccreditation' => $idAccredRef, 'idzone' => $key);
-		$this->modelzone->ajouterZonesAccreditation($values);
-
-		// boucle personnes
-		foreach($personnes as $p) {
-			
-			// création du client
-			$p['pays'] = $info['pays'];
-			$p['organisme'] = $info['societe'];
-			$p['tel']=$ref['tel'];
-			$p['mail']=$ref['mail'];
-			$fonction = $p['fonction'];
-			unset($p['fonction']);
-			$this->modelclient->ajouter($p);
-			$pid = $this->modelclient->lastId();
-			
-			// duplication de l'image
-			if($_FILES['photo_file']['size'] != 0)
-				copy($data['full_path'], UPLOAD_DIR . '/' . $pid . '.jpg');
-			
-			// ajout de l'accred
-			$ap = array();
-			$ap['idclient'] = $pid;
-			$ap['idcategorie'] = $info['categorie'];
-			$ap['idevenement'] = $this->session->userdata('idEvenementEnCours');
-			$ap['fonction'] = $fonction;
-			$ap['groupe'] = $info['groupe'];
-			$ap['referent'] = $id;
-			$ap['dateaccreditation'] = time();
-			$this->modelaccreditation->ajouter($ap);
-			$idap = $this->modelaccreditation->lastId();
-			
-			// ajout des zones
-			$this->modelzone->supprimerZoneParAccreditation($idap);
-			$values = array();
-			foreach($zones as $key => $value )
-				$values[] = array('idaccreditation' => $idap, 'idzone' => $key);
-			$this->modelzone->ajouterZonesAccreditation($values);
-		}
-		
-		redirect('accreditation/voirEquipe/'.$info['groupe']);
-	}
-	
 	
 	/*
 	 * Upload
@@ -860,6 +910,25 @@ class Accreditation extends Cafe {
 		$this->load->helper('image');
 		crop(UPLOAD_DIR . $client->idclient . '.jpg', $x, $y, $w, $h);
 		redirect('accreditation/voir/' . $id);
+	}
+	
+	
+	private function listeCategorieToDisplay( $event ) {
+		// Gestion pour les catégorie.
+		$listeAllCategorie = $this->modelcategorie->getCategorieDansEvenementToutBien();
+		$listeCategorieEvent = $this->modelcategorie->getCategorieDansEvenement($event);
+		$listeCategories = array();
+		foreach($listeCategorieEvent as $categorie) {
+			$listeCategories[] = $categorie->idcategorie;
+		}
+		$categories = array();
+		foreach($listeAllCategorie as $cate) {
+			if(in_array($cate['db']->idcategorie, $listeCategories)) {
+				$categories[] = $cate;
+			}
+		}
+		
+		return $categories;
 	}
 	
 }

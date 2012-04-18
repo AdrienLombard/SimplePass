@@ -8,9 +8,9 @@
 		
 		var insert = '<table id="tableauPersonne" data="nbLigne">';
 		insert +=		'<tr>';
-		insert +=			'<td>Nom : <input type="text" id="nom" name="personne[nbLigne][nom]"  style="text-transform: uppercase"  /></td>';
-		insert +=			'<td>Prénom : <input type="text" id="prenom" name="personne[nbLigne][prenom]" /></td>';
-		insert +=			'<td>Fonction : <input type="text" id="fonction" name="personne[nbLigne][fonction]" /></td>';
+		insert +=			'<td>Nom : <input class="required" type="text" id="nom" name="personne[nbLigne][nom]"  style="text-transform: uppercase"  /></td>';
+		insert +=			'<td>Prénom : <input class="required" type="text" id="prenom" name="personne[nbLigne][prenom]" /></td>';
+		insert +=			'<td>Fonction : <input class="required" type="text" id="fonction" name="personne[nbLigne][fonction]" /></td>';
 		insert +=			'<td><span class="button retirerNbPersonne" id="nbLigne">-</span></td>';
 		insert +=		'</tr>'
 		insert +=	'</table>';
@@ -78,27 +78,27 @@
 						
 						<div>
 							<label>Groupe : </label>
-							<input type="text" name="info[groupe]" value="" class="nom" />
+							<input class="required" type="text" name="info[groupe]" value="<?php if(isset($re->info['groupe'])) echo $re->info['groupe']; ?>" class="nom" />
 						</div>
 						
 						<div>
 							<label>Société : </label>
-							<input type="text" name="info[societe]" value="" class="nom" />
+							<input class="required" type="text" name="info[societe]" value="<?php if(isset($re->info['societe'])) echo $re->info['societe']; ?>" class="nom" />
 						</div>
 
 						<div>
 							<label>Tel : </label>
-							<input type="text" name="info[tel]" class="tel" value=""  />
+							<input type="text" name="info[tel]" class="tel required" value="<?php if(isset($re->info['tel'])) echo $re->info['tel']; ?>"  />
 						</div>
 						
 						<div>
 							<label>Mail : </label>
-							<input type="text" name="info[mail]" class="mail" value=""  />
+							<input type="text" name="info[mail]" class="mail required" value="<?php if(isset($re->info['mail'])) echo $re->info['mail']; ?>"  />
 						</div>
 						
 						<div>
 							<label>Image : </label>
-							<input type="file" name="photo_file"  />
+							<input class="required" type="file" name="photo_file"  />
 						</div>
 						
 						<div>
@@ -107,7 +107,21 @@
 							<select class="pays" name="info[pays]" style="padding-left: 0px;">
 
 							<?php foreach($pays as $p): ?>
-								<option value="<?php echo $p->idpays; ?>" <?php echo ($p->idpays == 'FRA')? 'selected' : '' ;?> style="background: url(<?php echo img_url('drapeaux/'.strtolower($p->idpays).'.gif'); ?>)no-repeat left;"><?php echo $p->nompays; ?></option>
+								<option
+									value="<?php echo $p->idpays; ?>" 
+									<?php 
+									if(isset($re->info['pays'])) { 
+										if($re->info['pays'] == $p->idpays) 
+											echo 'selected';
+									}
+									else {
+										if('FRA' == $p->idpays) echo 'selected';
+									}
+									?> 
+									style="background: url(<?php echo img_url('drapeaux/'.strtolower($p->idpays).'.gif'); ?>)no-repeat left;"
+								>
+									<?php echo $p->nompays; ?>
+								</option>
 							<?php endforeach; ?>
 
 							</select>
@@ -117,10 +131,13 @@
 						<div>
 							<label>Catégorie : </label>
 							<select name="info[categorie]">
-								<?php foreach($categories as $categorie): ?>
-								<option value="<?php echo $categorie['db']->idcategorie; ?>" >
-									<?php for($i=0; $i<$categorie['depth']; $i++) echo '&#160;&#160;'; ?>
-									<?php echo $categorie['db']->libellecategorie; ?>
+								<?php foreach($categories as $cate): ?>
+								<option 
+									value="<?php echo $cate['db']->idcategorie; ?>" 
+									<?php if(isset($re->info['categorie']) and $cate['db']->idcategorie == $re->info['categorie']) echo 'selected'?>
+								>
+									<?php for($i=0; $i<$cate['depth']; $i++) echo '&#160;&#160;'; ?>
+									<?php echo $cate['db']->libellecategorie; ?>
 								</option>
 								<?php endforeach; ?>
 							</select>
@@ -146,9 +163,9 @@
 
 					<table id="tableauReferent">
 						<tr>
-							<td>Nom : <input type="text" id="nom" name="ref[nom]"  style="text-transform: uppercase" /></td>
-							<td>Prénom : <input type="text" id="prenom" name="ref[prenom]" /></td>
-							<td>Fonction : <input type="text" id="fonction" name="ref[fonction]" /></td>
+							<td>Nom : <input class="required" type="text" id="nom" name="ref[nom]"  value="<?php if(isset($re->ref['nom'])) echo $re->ref['nom']; ?>" style="text-transform: uppercase" /></td>
+							<td>Prénom : <input class="required" type="text" id="prenom" name="ref[prenom]" value="<?php if(isset($re->ref['prenom'])) echo $re->ref['prenom']; ?>" /></td>
+							<td>Fonction : <input class="required" type="text" id="fonction" name="ref[fonction]" value="<?php if(isset($re->ref['fonction'])) echo $re->ref['fonction']; ?>" /></td>
 						</tr>
 					</table>
 					
