@@ -528,9 +528,7 @@ class Presse extends Chocolat{
 		unset($ref['categorie']);
 		unset($ref['fonction']);
 		unset($ref['numeropresse']);
-		unset($ref['adresse']);
 		unset($ref['groupe']);
-		unset($ref['organisme']);
 		$id = $this->modelclient->ajouter($ref);
 		
 		$msg['lang'] = $this->session->userdata('lang');
@@ -608,12 +606,7 @@ class Presse extends Chocolat{
 			// Gestion du mail.
 			$contenuMail .= '<li>' . $membre['prenom'] . ' ' . $membre['nom'];
 			
-			$tab = $ligne['categorie'];
-			$temp = -1;
-			while($temp == -1) {
-				$temp = array_pop($tab);
-			}
-			$accred['idcategorie'] = $temp;
+			$accred['idcategorie'] = array_pop($ligne['categorie']);
 
 			$cat = null;
 			
@@ -635,8 +628,8 @@ class Presse extends Chocolat{
 			
 			$idNewAccred = $this->modelaccreditation->ajouter($accred);
 			
-			if(!empty($accred['categorie']))
-				$this->AssociationZoneAccred($idNewAccred, $accred['idcategorie'], $this->input->post('evenement'));
+			
+			$this->AssociationZoneAccred($idNewAccred, $accred['idcategorie'], $this->input->post('evenement'));
 		}
 		
 		// Préparation et envoi du mail de confirmation
