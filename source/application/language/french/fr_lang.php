@@ -38,7 +38,7 @@ $lang['bienvenue'] = 'Bienvenue sur le site de demandes d\'accréditation';
 $lang['demandeIndiv'] = 'Demande individuelle';
 $lang['ou'] = 'ou';
 $lang['demandeGroupe'] = 'Demande groupée';
-$lang['choixCat'] = 'Choisissez votre catégorie';
+$lang['choixCat'] = 'Cochez cette case si vous souhaitez créer des accréditations presse';
 $lang['autre'] = 'Autre';
 $lang['presse'] = 'Presse';
 

@@ -22,15 +22,13 @@
 				<option value="<?php echo $event->idevenement; ?>"> <?php echo $event->libelleevenement; ?> </option>
 			<?php endforeach; ?>
 		</select><br>
-       
-  
-		    
-		<label><?php echo lang('choixCat'); ?></label>
-		<select  id="categorie"  name="categorie" class="select dyn-selector" >
-			<option value="0"><?php echo lang('autre'); ?></option>
-			<option value="<?php echo $idcategorie; ?>"><?php echo lang('presse'); ?></option>
-		</select>
-
+		
+		<br />
+		<input type="hidden" id="idPresse" value="<?php echo $idcategorie; ?>" />
+		
+		<input type="checkbox" id="checkPresse" /><?php echo lang('choixCat'); ?>
+		
+		<br />
 		<div class="center">
 			<a id="lienLambda"
 			   href="<?php echo site_url('inscription/ajouter/' . $events[0]->idevenement); ?>"

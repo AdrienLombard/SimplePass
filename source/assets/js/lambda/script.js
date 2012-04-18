@@ -1,17 +1,18 @@
 
 function change_link_lambda() {
     var idGroupe = $("select[name='evenement'] option:selected").val();
-    var cate = $("select[name='categorie']").find('option:selected').val();
+    var cate = $("#idPresse").val();
     var base = $("#baseURL").val();
-
-    if(cate == 0) {
-        $('#lienLambda').attr('href', base+'index.php/inscription/ajouter/'+idGroupe);
-        $('#lienEquipe').attr('href', base+'index.php/inscription/groupe/'+idGroupe);
-    }
-    else {
-        $('#lienLambda').attr('href', base+'index.php/presse/ajouter/'+idGroupe+'/'+cate);
-        $('#lienEquipe').attr('href', base+'index.php/presse/groupe/'+idGroupe+'/'+cate);
-    }
+	
+	if($('#checkPresse').is(':checked')) {
+		$('#lienLambda').attr('href', base+'index.php/presse/ajouter/'+idGroupe+'/'+cate);
+		$('#lienEquipe').attr('href', base+'index.php/presse/groupe/'+idGroupe+'/'+cate);
+	}
+	else {
+		$('#lienLambda').attr('href', base+'index.php/inscription/ajouter/'+idGroupe);
+		$('#lienEquipe').attr('href', base+'index.php/inscription/groupe/'+idGroupe);
+	}
+	
 }
 
 
@@ -25,7 +26,7 @@ $(document).ready(function(){
 		change_link_lambda();
 	});
 
-    $('#categorie').change( function() {
+    $('#checkPresse').change( function() {
         change_link_lambda();
     });
 	
