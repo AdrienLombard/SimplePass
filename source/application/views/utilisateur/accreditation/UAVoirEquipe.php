@@ -82,6 +82,10 @@
 								</div>
 								<?php endforeach; ?>
 							</div>
+							<div>
+								<label> Mode All-Accees : </label>
+								<input type="checkbox" id="all" name="allAccess" value="1" <?php if(isset($re->accred['allaccess']) && $re->accred['allaccess'] == 1) echo 'checked'; ?> />
+							</div>
 						</div>
 					
 					<br><br>
@@ -105,6 +109,10 @@
 									<input type="checkbox" name="zone[<?php echo $zone->idzone; ?>]" <?php echo in_array($zone->idzone, $p->zonesAccred)? 'checked' : '' ; ?> />
 								</div>
 								<?php endforeach; ?>
+							</div>
+							<div>
+								<label> Mode All-Accees : </label>
+								<input type="checkbox" id="all" name="allAccess" value="1" <?php if(isset($re->accred['allaccess']) && $re->accred['allaccess'] == 1) echo 'checked'; ?> readonly/>
 							</div>
 						</div>
 					<div class="clear"><h2></h2></div>

@@ -14,7 +14,7 @@
         	
 			<div class="client nouveau">
 				
-				<form class="infos nouveau" method="post" action="<?php echo site_url('accreditation/exeModifierGroupe'); ?>">
+				<form class="infos nouveau" method="post" action="<?php echo site_url('accreditation/exeModifierGroupe'); ?>" enctype="multipart/form-data">
                    
                    <div class="inputs no-margin">
 						<h2> Informations générales </h2>
@@ -92,7 +92,7 @@
 						</div>
 					
 					<br><br>
-					
+					<div class="clear"></div>
 					<h2>Personnes</h2>
 					<?php $nb = 1; ?>
 					<?php foreach($personnes as $p): ?>
