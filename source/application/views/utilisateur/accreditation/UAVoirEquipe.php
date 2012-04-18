@@ -25,11 +25,6 @@
                    
                    <div class="inputs no-margin">
 						<h2> Informations générales </h2>
-						<div class="photo">
-							<?php if(img_url('photos/'.$ref->idclient.'.jpg') != NULL): ?>
-								<img src="<?php echo site_url('image/generate/' . $ref->idclient); ?>" />
-							<?php endif; ?>
-						</div>
 						<div>
 							<label>Groupe : </label>
 							<input type="text" name="info[groupe]" init="<?php echo $ref->groupe; ?>" value="<?php echo $ref->groupe; ?>" class="nom" readonly/>
@@ -64,13 +59,18 @@
 					<h2>Référent</h2>
 					
 					<div class="referent">
-						<div>
-							<label>Nom : </label><input type="text" id="nomref" class="champ" style="text-transform: uppercase; width:180px;" name="ref[nom]" value="<?php echo $ref->nom; ?>" readonly/>
-							<label>Prénom : </label><input type="text" id="prenomref" class="champ2" style="width:180px;" name="ref[prenom]" value="<?php echo $ref->prenom; ?>" readonly/>
+						<div class="photo">
+							<?php if(img_url('photos/'.$ref->idclient.'.jpg') != NULL): ?>
+								<img src="<?php echo site_url('image/generate/' . $ref->idclient); ?>" />
+							<?php endif; ?>
 						</div>
 						<div>
-							<label>Catégorie : </label><input type="text" id="categorieref" class="champ" style="width:180px;" name="ref[categorie]" value="<?php echo $ref->libellecategorie; ?>" readonly/>
-							<label>Fonction : </label><input type="text" id="fonctionref" class="champ2" style="width:180px;" name="ref[fonction]" value="<?php echo $ref->fonction; ?>" readonly/>
+							<label>Nom : </label><input type="text" id="nomref" class="champ" style="text-transform: uppercase; width:130px;" name="ref[nom]" value="<?php echo $ref->nom; ?>" readonly/>
+							<label>Prénom : </label><input type="text" id="prenomref" class="champ2" style="width:130px;" name="ref[prenom]" value="<?php echo $ref->prenom; ?>" readonly/>
+						</div>
+						<div>
+							<label>Catégorie : </label><input type="text" id="categorieref" class="champ" style="width:130px;" name="ref[categorie]" value="<?php echo $ref->libellecategorie; ?>" readonly/>
+							<label>Fonction : </label><input type="text" id="fonctionref" class="champ2" style="width:130px;" name="ref[fonction]" value="<?php echo $ref->fonction; ?>" readonly/>
 						</div>
 						<div class="contientZones readonly">
 							<label>Zones : </label>
@@ -92,13 +92,18 @@
 					<div class="clear">
 					<h2>Personnes</h2>
 					<?php foreach($personnes as $p): ?>
+						<div class="photo">
+							<?php if(img_url('photos/'.$p->idclient.'.jpg') != NULL): ?>
+								<img src="<?php echo site_url('image/generate/' . $p->idclient); ?>" />
+							<?php endif; ?>
+						</div>
 						<div>
-							<label>Nom : </label><input type="text" id="nom" class="champ" style="text-transform: uppercase; width:180px;" name="ref[nom]" value="<?php echo $p->nom; ?>" readonly/>
-							<label>Prénom : </label><input type="text" id="prenom" class="champ2" style="width:180px;" name="ref[prenom]" value="<?php echo $p->prenom; ?>" readonly/>
+							<label>Nom : </label><input type="text" id="nom" class="champ" style="text-transform: uppercase; width:130px;" name="ref[nom]" value="<?php echo $p->nom; ?>" readonly/>
+							<label>Prénom : </label><input type="text" id="prenom" class="champ2" style="width:130px;" name="ref[prenom]" value="<?php echo $p->prenom; ?>" readonly/>
 						</div>
 						<div class="ligne">
-							<label>Catégorie : </label><input type="text" id="categorie" class="champ" style="width:180px;" name="ref[categorie]" value="<?php echo $p->libellecategorie; ?>" readonly/>
-							<label>Fonction : </label><input type="text" id="fonction" class="champ2" style="width:180px;" name="ref[fonction]" value="<?php echo $p->fonction; ?>" readonly/>
+							<label>Catégorie : </label><input type="text" id="categorie" class="champ" style="width:130px;" name="ref[categorie]" value="<?php echo $p->libellecategorie; ?>" readonly/>
+							<label>Fonction : </label><input type="text" id="fonction" class="champ2" style="width:130px;" name="ref[fonction]" value="<?php echo $p->fonction; ?>" readonly/>
 						</div>
 						<div class="contientZones readonly">
 							<label>Zones : </label>
