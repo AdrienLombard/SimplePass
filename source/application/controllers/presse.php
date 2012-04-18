@@ -489,7 +489,7 @@ class Presse extends Chocolat{
 			$data['tel'] 				= $this->input->post('tel');
 			$data['mail'] 				= $this->input->post('mail');
 			$data['numr_carte']         = $this->input->post('numr_carte');
-			$data['adresse ']           = $this->input->post('adresse');
+			$data['adresse']           = $this->input->post('adresse');
 			$data['evenement'] 			= $this->input->post('evenement');
 			$data['organisme']          = $this->input->post('titre');
 			$data['listeCategorie'] 	= $this->listeCategoriePresse($idEvenement);
@@ -528,7 +528,9 @@ class Presse extends Chocolat{
 		unset($ref['categorie']);
 		unset($ref['fonction']);
 		unset($ref['numeropresse']);
+		unset($ref['adresse']);
 		unset($ref['groupe']);
+		unset($ref['organisme']);
 		$id = $this->modelclient->ajouter($ref);
 		
 		$msg['lang'] = $this->session->userdata('lang');
@@ -633,7 +635,7 @@ class Presse extends Chocolat{
 			
 			$idNewAccred = $this->modelaccreditation->ajouter($accred);
 			
-			if(isset($accred['categorie']))
+			if(!empty($accred['categorie']))
 				$this->AssociationZoneAccred($idNewAccred, $accred['idcategorie'], $this->input->post('evenement'));
 		}
 		
