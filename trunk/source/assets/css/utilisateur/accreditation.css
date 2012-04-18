@@ -408,3 +408,24 @@ form#editAccredRealTime input[type=text][readonly], form#editAccredRealTime sele
 .pays {
 	background: #FFF;
 }
+
+.icons {
+	display: inline-block;
+	height: 25px;
+	width: 25px;
+	margin-top: 4px;
+	background: no-repeat 5px 5px;
+	margin-left: 25px;
+}
+.icons:hover {
+	box-shadow: 0 0 3px rgba(0,0,0,0.4);
+	border-radius: 4px;
+	cursor: pointer;
+}
+
+.icons.delete {
+	background-image: url(../../images/icons/delete.png);
+}
+.icons.delete:hover {
+	background-image: url(../../images/icons/delete_hover.png);
+}

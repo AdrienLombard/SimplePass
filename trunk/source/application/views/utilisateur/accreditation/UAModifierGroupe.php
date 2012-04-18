@@ -18,11 +18,6 @@
                    
                    <div class="inputs no-margin">
 						<h2> Informations générales </h2>
-						<div class="photo">
-							<?php if(img_url('photos/'.$ref->idclient.'.jpg') != NULL): ?>
-								<img src="<?php echo site_url('image/generate/' . $ref->idclient); ?>" />
-							<?php endif; ?>
-						</div>
 						<div>
 							<label>Groupe : </label>
 							<input type="text" name="info[groupe]" init="<?php echo $ref->groupe; ?>" value="<?php echo $ref->groupe; ?>" class="nom"/>
@@ -53,10 +48,6 @@
 								
 							</select>
 						</div>
-						<div>
-							<label>Image : </label>
-							<input type="file" name="photo_file"  />
-						</div>
 						<div class="clear"></div>
 						
 					</div>
@@ -65,19 +56,28 @@
 					<div class="referent">
 						<input type="hidden"  name="pers[0][idclient]"  value="<?php echo $ref->idclient; ?>">
 						<input type="hidden"  name="pers[0][idaccreditation]"  value="<?php echo $ref->idaccreditation; ?>">
-						<div>
-							<label>Nom : </label><input type="text" id="nom" class="champ" style="text-transform: uppercase; width:180px;" name="pers[0][nom]" value="<?php echo $ref->nom; ?>"/>
-							<label>Prénom : </label><input type="text" id="prenom" class="champ2" style="width:180px;" name="pers[0][prenom]" value="<?php echo $ref->prenom; ?>"/>
+						<div class="photo">
+							<?php if(img_url('photos/'.$ref->idclient.'.jpg') != NULL): ?>
+								<img src="<?php echo site_url('image/generate/' . $ref->idclient); ?>" />
+							<?php endif; ?>
 						</div>
 						<div>
-							<label>Catégorie : </label><select name="pers[0][categorie]" class="champ" style="width:202px">
+							<label>Nom : </label><input type="text" id="nom" class="champ" style="text-transform: uppercase; width:130px;" name="pers[0][nom]" value="<?php echo $ref->nom; ?>"/>
+							<label>Prénom : </label><input type="text" id="prenom" class="champ2" style="width:130px;" name="pers[0][prenom]" value="<?php echo $ref->prenom; ?>"/>
+						</div>
+						<div>
+							<label>Catégorie : </label><select name="pers[0][categorie]" class="champ" style="width:152px">
 															<?php foreach($categories as $categorie): ?>
 															<option value="<?php echo $categorie->idcategorie; ?>" <?php echo ($categorie->idcategorie == $ref->idcategorie)? 'selected' : '' ;?>>
 																<?php echo $categorie->libellecategorie; ?>
 															</option>
 															<?php endforeach; ?>
 														</select>
-							<label>Fonction : </label><input type="text" id="fonction" class="champ2" style="width:180px;" name="pers[0][fonction]" value="<?php echo $ref->fonction; ?>"/>
+							<label>Fonction : </label><input type="text" id="fonction" class="champ2" style="width:130px;" name="pers[0][fonction]" value="<?php echo $ref->fonction; ?>"/>
+						</div>
+						<div>
+							<label>Image : </label>
+							<input type="file" name="pers[0][photo_file]"  />
 						</div>
 						<div class="contientZones">
 							<label>Zones : </label>
@@ -98,20 +98,29 @@
 					<?php foreach($personnes as $p): ?>
 						<input type="hidden"  name="pers[<?php echo $nb; ?>][idclient]"  value="<?php echo $p->idclient; ?>">
 						<input type="hidden"  name="pers[<?php echo $nb; ?>][idaccreditation]"  value="<?php echo $p->idaccreditation; ?>">
+						<div class="photo">
+							<?php if(img_url('photos/'.$ref->idclient.'.jpg') != NULL): ?>
+								<img src="<?php echo site_url('image/generate/' . $ref->idclient); ?>" />
+							<?php endif; ?>
+						</div>
 						<div>
-							<label>Nom : </label><input type="text" id="nom" class="champ" style="text-transform: uppercase; width:180px;" name="pers[<?php echo $nb; ?>][nom]" value="<?php echo $p->nom; ?>"/>
-							<label>Prénom : </label><input type="text" id="prenom" class="champ2" style="width:180px;" name="pers[<?php echo $nb; ?>][prenom]" value="<?php echo $p->prenom; ?>"/>
-							<a class="button" href="<?php echo site_url('accreditation/supprimerMembreGroupe/'.$p->idaccreditation.'/'.$ref->groupe); ?>" confirm="Êtes-vous sûr de vouloir supprimer ce membre du groupe ?">Supprimer</a>
+							<label>Nom : </label><input type="text" id="nom" class="champ" style="text-transform: uppercase; width:130px;" name="pers[<?php echo $nb; ?>][nom]" value="<?php echo $p->nom; ?>"/>
+							<label>Prénom : </label><input type="text" id="prenom" class="champ2" style="width:130px;" name="pers[<?php echo $nb; ?>][prenom]" value="<?php echo $p->prenom; ?>"/>
+							<a href="<?php echo site_url('accreditation/supprimerMembreGroupe/'.$p->idaccreditation.'/'.$ref->groupe); ?>" class="icons delete deleteNouvelleCatMere" confirm="Êtes-vous sûr de vouloir supprimer ce membre du groupe ?"></a>
 						</div>
 						<div class="ligne">
-							<label>Catégorie : </label><select name="pers[<?php echo $nb; ?>][categorie]" class="champ" style="width:202px">
+							<label>Catégorie : </label><select name="pers[<?php echo $nb; ?>][categorie]" class="champ" style="width:152px">
 															<?php foreach($categories as $categorie): ?>
 															<option value="<?php echo $categorie->idcategorie; ?>" <?php echo ($categorie->idcategorie == $p->idcategorie)? 'selected' : '' ;?>>
 																<?php echo $categorie->libellecategorie; ?>
 															</option>
 															<?php endforeach; ?>
 														</select>
-							<label>Fonction : </label><input type="text" id="fonction" class="champ2" style="width:180px;" name="pers[<?php echo $nb; ?>][fonction]" value="<?php echo $p->fonction; ?>"/>
+							<label>Fonction : </label><input type="text" id="fonction" class="champ2" style="width:130px;" name="pers[<?php echo $nb; ?>][fonction]" value="<?php echo $p->fonction; ?>"/>
+						</div>
+						<div>
+							<label>Image : </label>
+							<input type="file" name="pers[<?php echo $nb; ?>][photo_file]"  />
 						</div>
 						<div class="contientZones">
 							<label>Zones : </label>
