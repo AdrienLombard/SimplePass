@@ -175,13 +175,11 @@ class Inscription extends Chocolat {
 			
 			$data['event_id'] = $event;
 			
-			$data['event_info'] = $this->modelevenement->getEvenementParId($event);
+			$data['event_info'] = $this->modelevenement->getEvenementParId( $event );
 			
 			$data['listePays'] = $this->modellambda->listePays();
 			
-			$data['listeSurCategorie'] = $this->modelcategorie->getCategoriesMeresSaufpresse();
-			
-			$data['listeCategorie'] = $this->modelcategorie->getCategoriesSaufpresse();
+			$data['listeCategorie'] = $this->listeCategorieToDisplay( $event );
 			
 			$this->layout->view('lambda/LIndividuelle', $data);
 		

@@ -164,9 +164,7 @@ class Presse extends Chocolat{
 			
 			$data['listePays'] = $this->modellambda->listePays();
 			
-		    $data['listeSurCategorie'] 	= $this->modelcategorie->getSousCategorie($IDcategorie);
-			
-			$data['listeCategorie'] = $this->modelcategorie->getCategories();
+			$data['listeCategorie'] = $this->listeCategoriePresse( $event );
 
 			$data['categorie'] = $IDcategorie;
 
@@ -321,6 +319,54 @@ class Presse extends Chocolat{
 			$this->layout->view('lambda/LMessage', $data); 
 		}
 	}
+	
+	
+	private function listeCategoriePresse( $event ) {
+		$newCate = $this->modelcategorie->getCategorieDansEvenementToutBien();
+		
+		$presse = array();
+		$presse[] = $this->modelcategorie->getIdPresse();
+		
+		$infoCategorie = array();
+		
+		foreach($newCate as $cate) {
+			if($cate['db']->idcategorie == $presse[0]) {
+				$infoCategorie[] = $cate;
+			}
+		}
+		
+		Do {
+			$find = false;
+			$categorie = $newCate;
+			$newCate = array();
+			foreach($categorie as $cate) {
+				if(in_array($cate['db']->surcategorie, $presse)) {
+					$presse[] = $cate['db']->idcategorie;
+					$infoCategorie[] = $cate;
+					$find = true;
+				}
+				else {
+					$newCate[] = $cate;
+				}
+			}
+		}
+		while($find);
+		
+		$listeAllCategorie = $infoCategorie;
+		$listeCategorieEvent = $this->modelcategorie->getCategorieDansEvenement($event);
+		$listeCategories = array();
+		foreach($listeCategorieEvent as $cate) {
+			$listeCategories[] = $cate->idcategorie;
+		}
+		$categories = array();
+		foreach($listeAllCategorie as $cate) {
+			if(in_array($cate['db']->idcategorie, $listeCategories)) {
+				$categories[] = $cate;
+			}
+		}
+		
+		return $categories;
+	}
 
 	/**
 	 * Méthode pour le formulaire pour la saisie du responsable d'une équipe.
@@ -334,16 +380,14 @@ class Presse extends Chocolat{
 
 		$data['lang'] = $this->session->userdata('lang');
 		
-		$data['idEvenement']	= $evenement;
-		$data['infoEvenement'] 	= $this->modelevenement->getEvenementParId($evenement);
-		$data['listePays'] 		= $this->modellambda->listePays();
-		$data['listeCategorie'] = $this->modelcategorie->getCategories();
-		$data['listeSurCategorie'] 	= $this->modelcategorie->getSousCategorie($categorie);
-		$data['values'] = $info;
-		$data['cate'] = $categorie;
+		$data['idEvenement']		= $evenement;
+		$data['infoEvenement'] 		= $this->modelevenement->getEvenementParId($evenement);
+		$data['listePays'] 			= $this->modellambda->listePays();
+		$data['listeCategorie'] 	= $this->listeCategoriePresse($evenement);
+		$data['values'] 			= $info;
+		$data['cate'] 				= $categorie;
 		
 		$this->layout->view('presse/LPresseGroupe', $data);
-			
 	}
 
 
@@ -448,8 +492,7 @@ class Presse extends Chocolat{
 			$data['adresse ']           = $this->input->post('adresse');
 			$data['evenement'] 			= $this->input->post('evenement');
 			$data['organisme']          = $this->input->post('titre');
-			$data['listeCategorie'] 	= $this->modelcategorie->getCategories();
-			$data['listeSurCategorie'] 	= $this->modelcategorie->getSousCategorie($cate);
+			$data['listeCategorie'] 	= $this->listeCategoriePresse($idEvenement);
 			
 			// Gestion pour les catégorie.
 			$tab = $this->input->post('categorie');
@@ -484,6 +527,7 @@ class Presse extends Chocolat{
 		$ref = $data = $this->input->post('ref');
 		unset($ref['categorie']);
 		unset($ref['fonction']);
+		unset($ref['numeropresse']);
 		unset($ref['groupe']);
 		$id = $this->modelclient->ajouter($ref);
 		
@@ -495,9 +539,8 @@ class Presse extends Chocolat{
 		$accred['idevenement'] = $this->input->post('evenement');
 		$accred['idclient'] = $id;
 		$accred['etataccreditation'] = ACCREDITATION_A_VALIDE;
-		//
-		//$accred['organisme'] = $this->input->post('organisme');
-	    $accred['numeropresse']=$this->input->post('numr_carte');
+		$accred['fonction'] = $data['fonction'];
+	    $accred['numeropresse'] = $data['numeropresse'];
 		$accred['groupe'] = $data['groupe'];
 		$accred['dateaccreditation'] = time();
 		$newAccred = $this->modelaccreditation->ajouter($accred);
@@ -688,6 +731,25 @@ class Presse extends Chocolat{
 		// On lie ces zones à cette accréditation.
 		$this->modelzone->ajouterZonesAccreditation( $zonesAcccred );
 	}
+	
+	private function listeCategorieToDisplay( $event ) {
+		// Gestion pour les catégorie.
+		$listeAllCategorie = $this->modelcategorie->getCategorieDansEvenementToutBien();
+		$listeCategorieEvent = $this->modelcategorie->getCategorieDansEvenement($event);
+		$listeCategories = array();
+		foreach($listeCategorieEvent as $categorie) {
+			$listeCategories[] = $categorie->idcategorie;
+		}
+		$categories = array();
+		foreach($listeAllCategorie as $cate) {
+			if(in_array($cate['db']->idcategorie, $listeCategories)) {
+				$categories[] = $cate;
+			}
+		}
+		
+		return $categories;
+	}
+
 
 
 }

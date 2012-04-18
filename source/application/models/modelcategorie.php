@@ -24,6 +24,8 @@ class modelCategorie extends MY_Model {
 						->get()
 						->result();
 	}
+	
+	
 
     public function getCategoriesMeresSaufpresse() {
 		return $this->db->select('*')
