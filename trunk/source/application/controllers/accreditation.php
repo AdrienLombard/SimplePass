@@ -282,7 +282,8 @@ class Accreditation extends Cafe {
 
 			if($_FILES['photo_file']['size'] != 0)
 				$this->upload($idClient);
-
+            else 
+				redirect('accreditation/voir/' . $idClient);
 			
 			// On ajoute son accréditation.
 			$accred['idclient'] = $idClient;
