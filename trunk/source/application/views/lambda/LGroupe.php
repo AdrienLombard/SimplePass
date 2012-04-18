@@ -89,7 +89,7 @@
 			<select  id="categorie" name="categorie[]" class="select dyn-selector">
 				<option value="-1"><?php echo lang('neSaisPas'); ?></option>
 				<?php foreach($listeSurCategorie as $categorie): ?>
-				<option VALUE="<?php  echo $categorie->idcategorie; ?>" <?php echo set_select('categorie', $categorie->libellecategorie); ?> ><?php if($categorie->idcategorie!=1) {echo $categorie->libellecategorie;} ?></option>
+				<option VALUE="<?php  echo $categorie->idcategorie; ?>" <?php echo set_select('categorie', $categorie->libellecategorie); ?> ><?php echo $categorie->libellecategorie;?></option>
 				<?php endforeach; ?>
 			</select>
 			</div>
