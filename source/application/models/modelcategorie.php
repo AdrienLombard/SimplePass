@@ -16,8 +16,16 @@ class modelCategorie extends MY_Model {
 						->get()
 						->result();
 	}
+	
+	public function getCategoriesSaufPresse() {
+		return $this->db->select('*')
+						->from(DB_CATEGORIE )
+						->not_like('libellecategorie','Presse')
+						->get()
+						->result();
+	}
 
-    public function getCategoriesSaufpresse() {
+    public function getCategoriesMeresSaufpresse() {
 		return $this->db->select('*')
 						->from(DB_CATEGORIE )
 				        ->not_like('libellecategorie','Presse')

@@ -38,7 +38,7 @@ class Inscription extends Chocolat {
 		$this->layout->ajouter_js('lambda/script');
 		$data['events'] 	= $this->modelevenement->getEvenementEnCours();
 		$data['idcategorie'] = $this->modelcategorie->getIdPresse();
-		$data['listeSurCategorie'] 	= $this->modelcategorie->getCategorieMere();
+		$data['listeSurCategorie'] 	= $this->modelcategorie->getCategoriesMeresSaufpresse();
 		$data['lang'] = $this->session->userdata('lang');
 		$data['baseUrl'] = base_url();
 
@@ -179,9 +179,9 @@ class Inscription extends Chocolat {
 			
 			$data['listePays'] = $this->modellambda->listePays();
 			
-			$data['listeSurCategorie'] = $this->modelcategorie->getCategorieMere();
+			$data['listeSurCategorie'] = $this->modelcategorie->getCategoriesMeresSaufpresse();
 			
-			$data['listeCategorie'] = $this->modelcategorie-> getCategoriesSaufpresse();
+			$data['listeCategorie'] = $this->modelcategorie->getCategoriesSaufpresse();
 			
 			$this->layout->view('lambda/LIndividuelle', $data);
 		
@@ -398,8 +398,8 @@ class Inscription extends Chocolat {
 		$data['idEvenement']	= $evenement;
 		$data['infoEvenement'] 	= $this->modelevenement->getEvenementParId($evenement);
 		$data['listePays'] 		= $this->modellambda->listePays();
-		$data['listeCategorie'] = $this->modelcategorie->getCategories();
-		$data['listeSurCategorie'] = $this->modelcategorie->getCategoriesSaufpresse();
+		$data['listeCategorie'] = $this->modelcategorie->getCategoriesSaufPresse();
+		$data['listeSurCategorie'] = $this->modelcategorie->getCategoriesMeresSaufpresse();
 		$data['values'] = $info;
 		
 		$data['lang'] = $this->session->userdata('lang');
@@ -481,8 +481,8 @@ class Inscription extends Chocolat {
 			$data['tel'] 				= $this->input->post('tel');
 			$data['mail'] 				= $this->input->post('mail');
 			$data['evenement'] 			= $this->input->post('evenement');
-			$data['listeCategorie'] 	= $this->modelcategorie->getCategories();
-			$data['listeSurCategorie'] 	= $this->modelcategorie->getCategoriesSaufpresse();
+			$data['listeCategorie'] 	= $this->modelcategorie->getCategoriesSaufPresse();
+			$data['listeSurCategorie'] 	= $this->modelcategorie->getCategoriesMeresSaufpresse();
 			
 			// Gestion pour les catégorie.
 			$tab = $this->input->post('categorie');

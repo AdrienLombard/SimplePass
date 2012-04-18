@@ -39,7 +39,7 @@ create table courchevel_accreditation
 (
    idaccreditation      bigint not null auto_increment,
    idclient             bigint not null,
-   idcategorie          bigint,
+   idcategorie          bigint not null default -1,
    idevenement          bigint not null,
    referent		        bigint default null,
    etataccreditation    tinyint not null,
