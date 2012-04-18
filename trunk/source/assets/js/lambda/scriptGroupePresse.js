@@ -102,7 +102,7 @@ $(document).ready(function(){
 			parent.parent().attr('etat', true);
 
 			// met à jours le h3 avec les infos des inputs
-			if(lang == 'fra')
+			if(lang == 'fra' || lang == '')
 				parent.parent().find('h3').html(nom.val() + ' ' + prenom.val() + ' - ' + categorie + ' (' + fonction + ')' + '<span class="modifier">Modifier</span>');
 			else
 				parent.parent().find('h3').html(nom.val() + ' ' + prenom.val() + ' - ' + categorie + ' (' + fonction + ')' + '<span class="modifier">Modify</span>');
@@ -142,7 +142,7 @@ $(document).ready(function(){
 		var lang = $('#lang').val();
 		
 		if(bool == false) {
-			if(lang == 'fra')
+			if(lang == 'fra' || lang == '')
 				alert('Merci de valider chaque membre avant de soumettre votre demande.');
 			else
 				alert('Please validate every member before submitting your request.');
@@ -238,7 +238,7 @@ $(document).ready(function(){
 				
 				$('input[name=photo_webcam]').val(canvas.toDataURL("image/png"));
 				
-				if(lang == 'fra')
+				if(lang == 'fra' || lang == '')
 					$('.photoMessage').show().text('Photo prise, enregistrez pour valider ->');
 				else
 					$('.photoMessage').show().text('Photo taken, save to validate ->');

@@ -116,7 +116,7 @@ $(document).ready(function(){
 				
 				$('input[name=photo_webcam]').val(canvas.toDataURL("image/png"));
 				
-				if($('#lang').val() == 'fra')
+				if($('#lang').val() == 'fra' || $('#lang').val() == '')
 					$('.photoMessage').show().text('Photo prise, enregistrez pour valider ->');
 				else
 					$('.photoMessage').show().text('Photo taken, save to validate ->');

@@ -63,6 +63,6 @@
 	width: 150px;
 }
 .details textarea {
-	border-width: 1px;
+	border: none;
 	border-color: rgb(220,220,220);
 }
