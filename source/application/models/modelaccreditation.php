@@ -30,6 +30,7 @@ class modelAccreditation extends MY_Model {
 						->from(DB_ACCREDITATION . ' a')
 						->where('a.idevenement', $idEvenement)
 						->where('a.etataccreditation', ACCREDITATION_A_VALIDE)
+						->where('a.referent', NULL)
 						->get()
 						->result();
 	}
