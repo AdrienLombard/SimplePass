@@ -387,7 +387,7 @@ class Inscription extends Chocolat {
 	private function listeCategorieToDisplay( $event ) {
 		// Gestion pour les catégorie.
 		$listeAllCategorie = $this->modelcategorie->getCategorieDansEvenementToutBien();
-		$listeCategorieEvent = $this->modelcategorie->getCategorieDansEvenement($event);
+		$listeCategorieEvent = $this->modelcategorie->getCategoriesSaufPresse($event);
 		$listeCategories = array();
 		foreach($listeCategorieEvent as $categorie) {
 			$listeCategories[] = $categorie->idcategorie;

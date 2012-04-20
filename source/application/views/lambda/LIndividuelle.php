@@ -47,6 +47,7 @@
 		<div>
 		<label><?php echo lang('categorie'); ?></label>
 		<select  id="categorie" name="categorie[]" class="select dyn-selector">
+			<option value="-1"><?php echo lang('neSaisPas'); ?></option>
 			<?php foreach($listeCategorie as $cate): ?>
 			<option value="<?php echo $cate['db']->idcategorie; ?>" >
 				<?php for($i=0; $i<$cate['depth']; $i++) echo '&#160;&#160;'; ?>
