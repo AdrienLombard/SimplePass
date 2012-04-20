@@ -162,12 +162,12 @@ class Accreditation extends Cafe {
 		$data['pays'] = $this->modelpays->getPays();
 		
 		// Liste des catégories avec les zones associées.
-		$cats = $this->modelcategorie->getCategorieDansEvenement($this->session->userdata('idEvenementEnCours'));
+		$cats = $this->listeCategorieToDisplay($this->session->userdata('idEvenementEnCours'));
 		foreach($cats as $cat) {
 			$push = array();
 			$push['cat'] = $cat;
 			$push['zones'] = '';
-			$catZones = $this->modelzone->getZoneParCategorieEtEvenement($cat->idcategorie, $this->session->userdata('idEvenementEnCours'));
+			$catZones = $this->modelzone->getZoneParCategorieEtEvenement($cat['db']->idcategorie, $this->session->userdata('idEvenementEnCours'));
 			foreach($catZones as $cz) $push['zones'] .= $cz->idzone.'-';
 			$data['categories'][] = $push;
 		}
@@ -176,7 +176,7 @@ class Accreditation extends Cafe {
 		if(!empty($re)) {
 			$data['re'] = $re;
 		}
-		
+
 		$this->layout->view('utilisateur/accreditation/UAAjout', $data);
 		
 	}
@@ -334,9 +334,17 @@ class Accreditation extends Cafe {
 		
 		// liste des pays.
 		$data['pays'] = $this->modelpays->getPays();
-		
-		// liste des catégorie de l'évènement.
-		$data['categories'] = $this->listeCategorieToDisplay($this->session->userdata('idEvenementEnCours'));
+
+		// Liste des catégories avec les zones associées.
+		$cats = $this->listeCategorieToDisplay($this->session->userdata('idEvenementEnCours'));
+		foreach($cats as $cat) {
+			$push = array();
+			$push['cat'] = $cat;
+			$push['zones'] = '';
+			$catZones = $this->modelzone->getZoneParCategorieEtEvenement($cat['db']->idcategorie, $this->session->userdata('idEvenementEnCours'));
+			foreach($catZones as $cz) $push['zones'] .= $cz->idzone.'-';
+			$data['categories'][] = $push;
+		}
 		
 		// Info de reremplissage.
 		$data['re'] = $re;
@@ -462,10 +470,10 @@ class Accreditation extends Cafe {
 			redirect('accreditation/voirEquipe/'.$info['groupe']);
 		}
 		else {
-			
-			$data->info 		= $info;
+			$data = '';
+			$data->info 	= $info;
 			$data->ref 		= $ref;
-			$data->personne 	= $personnes;
+			$data->personne = $personnes;
 			
 			$this->ajouterGroupe($data);
 		}
@@ -560,7 +568,6 @@ class Accreditation extends Cafe {
 		$idEvent = $this->session->userdata('idEvenementEnCours');
 		$membres = $this->modelaccreditation->getAccreditationGroupeParEvenement( $nomGroupe, $idEvent);
 		$zonesEvent = $this->modelzone->getZoneParEvenement($idEvent);
-		$categorieEvent = $this->modelcategorie->getCategorieDansEvenement( $idEvent );
 		$pays = $this->modelpays->getPays();
 		
 		foreach($membres as $m){
@@ -581,7 +588,18 @@ class Accreditation extends Cafe {
 		$data['ref'] = $ref;
 		$data['personnes'] = $pers;
 		$data['pays'] = $this->modelpays->getPaysParId($ref->pays);
-		$data['categories'] = $categorieEvent;
+
+		// Liste des catégories avec les zones associées.
+		$cats = $this->listeCategorieToDisplay($this->session->userdata('idEvenementEnCours'));
+		foreach($cats as $cat) {
+			$push = array();
+			$push['cat'] = $cat;
+			$push['zones'] = '';
+			$catZones = $this->modelzone->getZoneParCategorieEtEvenement($cat['db']->idcategorie, $this->session->userdata('idEvenementEnCours'));
+			foreach($catZones as $cz) $push['zones'] .= $cz->idzone.'-';
+			$data['categories'][] = $push;
+		}
+
 		$data['pays'] = $pays;
 		
 		$this->layout->view('utilisateur/accreditation/UAModifierGroupe', $data);
@@ -668,7 +686,7 @@ class Accreditation extends Cafe {
 		// Suppression de notre accreditation.
 		$this->modelaccreditation->supprimer( $idaccred );
 		
-		$nomGroupe=str_replace('%20', ' ', $nomGroupe);
+		$nomGroupe=str_replace('%20', ' ', $nomgroupe);
 		redirect('accreditation/modifierGroupe/' . $nomgroupe);
 	}
 	
@@ -692,7 +710,17 @@ class Accreditation extends Cafe {
 		$data['info']->nompays = $this->modelpays->getPaysParId($membres[0]->pays);
 		$data['pays'] = $this->modelpays->getPays();
 		$data['zonesEvent'] = $this->modelzone->getZoneParEvenement($idEvent);
-		$data['categories'] = $this->listeCategorieToDisplay($this->session->userdata('idEvenementEnCours'));
+
+		// Liste des catégories avec les zones associées.
+		$cats = $this->listeCategorieToDisplay($this->session->userdata('idEvenementEnCours'));
+		foreach($cats as $cat) {
+			$push = array();
+			$push['cat'] = $cat;
+			$push['zones'] = '';
+			$catZones = $this->modelzone->getZoneParCategorieEtEvenement($cat['db']->idcategorie, $this->session->userdata('idEvenementEnCours'));
+			foreach($catZones as $cz) $push['zones'] .= $cz->idzone.'-';
+			$data['categories'][] = $push;
+		}
 		
 		$this->layout->view('utilisateur/accreditation/UAModifierAjoutMembre', $data);
 	}

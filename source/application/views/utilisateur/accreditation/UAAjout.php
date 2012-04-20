@@ -114,14 +114,16 @@
 
 							<div>
 								<label>Catégorie : </label>
-								<select name="categorie">
+								<select id="categorieGroupe" name="categorie">
 									<option value="" <?php if(empty($re->accred['categorie'])) echo 'selected'; ?> >---</option>
-									<?php foreach($categories as $categorie): ?>
-									<option value="<?php echo $categorie['cat']->idcategorie; ?>" 
-										zone="<?php echo $categorie['zones']; ?>" 
+									<?php foreach($categories as $cate): ?>
+									<option
+										value="<?php echo $cate['cat']['db']->idcategorie; ?>"
+										zone="<?php echo $cate['zones']; ?>"
 										<?php if(isset($re->accred['idcategorie']) && $re->accred['idcategorie'] == $categorie['cat']->idcategorie) echo 'selected'; ?>
 									>
-										<?php echo $categorie['cat']->libellecategorie; ?>
+										<?php for($i=0; $i<$cate['cat']['depth']; $i++) echo '&#160;&#160;'; ?>
+										<?php echo $cate['cat']['db']->libellecategorie; ?>
 									</option>
 									<?php endforeach; ?>
 								</select>
@@ -132,10 +134,10 @@
 								<div>
 									<?php foreach($zones as $zone): ?>
 									<div class="checkzone <?php if(isset($re->zones[$zone->idzone])) echo 'on'; ?>" id="<?php echo $zone->idzone; ?>">
-										<?php echo $zone->idzone; ?>
+										<?php echo $zone->codezone; ?>
 										<input type="checkbox" 
 											name="zone[<?php echo $zone->idzone; ?>]"
-											value="<?php echo $zone->idzone; ?>" 
+											value="<?php echo $zone->idzone; ?>"
 											<?php if(isset($re->zones[$zone->idzone])) echo 'checked'; ?>
 										/>
 									</div>

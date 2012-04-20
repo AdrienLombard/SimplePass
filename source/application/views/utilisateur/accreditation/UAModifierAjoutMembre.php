@@ -31,16 +31,18 @@
 					</div>
 					<div class="ligne">
 						<label>Catégorie : </label><select name="categorie" class="champ" style="width:202px">
-														<?php foreach($categories as $cate): ?>
-														<option 
-															value="<?php echo $cate['db']->idcategorie; ?>" 
-															<?php if(isset($re->info['categorie']) and $cate['db']->idcategorie == $re->info['categorie']) echo 'selected'?>
-														>
-															<?php for($i=0; $i<$cate['depth']; $i++) echo '&#160;&#160;'; ?>
-															<?php echo $cate['db']->libellecategorie; ?>
-														</option>
-														<?php endforeach; ?>
-													</select>
+						<option value="" <?php if(empty($re->accred['categorie'])) echo 'selected'; ?> >---</option>
+						<?php foreach($categories as $cate): ?>
+							<option
+								value="<?php echo $cate['cat']['db']->idcategorie; ?>"
+								zone="<?php echo $cate['zones']; ?>"
+								<?php if(isset($re->accred['idcategorie']) && $re->accred['idcategorie'] == $categorie['cat']->idcategorie) echo 'selected'; ?>
+								>
+								<?php for($i=0; $i<$cate['cat']['depth']; $i++) echo '&#160;&#160;'; ?>
+								<?php echo $cate['cat']['db']->libellecategorie; ?>
+							</option>
+						<?php endforeach; ?>
+						</select>
 						<label>Fonction : </label><input type="text" id="fonction" class="champ2" style="width:180px;" name="fonction" value=""/>
 					</div>
 					<div>
