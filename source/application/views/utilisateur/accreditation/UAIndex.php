@@ -12,6 +12,10 @@
 
         <aside>  
 			<a href="<?php echo site_url('export/accreds/'.$this->session->userdata('idEvenementEnCours')); ?>">Exporter</a>
+			<input type="checkbox" id="simple" checked />Simple </br>
+			<input type="checkbox" id="groupe" checked />Groupe </br>
+			<input type="checkbox" id="valide" checked />Validé </br>
+			<input type="checkbox" id="demande" checked />Demande </br>
         </aside>
 		
 		<div id="main">
@@ -33,7 +37,10 @@
                 <tbody>
 					
                     <?php foreach ($accreds as $accred): ?>
-					<tr>
+					<tr class="<?php 
+						if($accred->groupe == null) echo "simple "; else echo "groupe ";
+						if($accred->etataccreditation == ACCREDITATION_VALIDE) echo " valide"; else echo " demande"; 
+						?>" >
 						<td><?php echo $accred->nom . ' ' . $accred->prenom ?></td>
 						<td><?php if (isset($accred->groupe) && !empty($accred->groupe) && $accred->groupe != "") echo $accred->groupe; else echo " - "; ?></td>
 						<td><?php echo $accred->pays ?></td>

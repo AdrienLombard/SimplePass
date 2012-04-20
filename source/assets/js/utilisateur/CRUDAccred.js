@@ -183,4 +183,64 @@ $(document).ready(function(){
 		return bool;
 	});
 	
+	//==============================
+	/* filtre des accreditation. */
+	var simple = true;
+	var groupe = true;
+	var valide = true;
+	var demande = true;
+	
+	$("#simple").change(function() {
+		if($(this).attr('checked')) {
+			if($("#valide").attr('checked'))
+				$("tr.simple.valide").show();
+			if($("#demande").attr('checked'))
+				$("tr.simple.demande").show();
+		}
+		else {
+			$("tr.simple").hide();
+		}
+	});
+	
+	$("#groupe").change(function() {
+		if($(this).attr('checked')) {
+			if($("#valide").attr('checked'))
+				$("tr.groupe.valide").show();
+			if($("#demande").attr('checked'))
+				$("tr.groupe.demande").show();
+		}
+		else {
+			$("tr.groupe").hide();
+		}
+	});
+	
+	$("#valide").change(function() {
+		if($(this).attr('checked')) {
+			if($("#simple").attr('checked'))
+				$("tr.valide.simple").show();
+			if($("#groupe").attr('checked'))
+				$("tr.valide.groupe").show();
+		}
+		else {
+			$("tr.valide").hide();
+		}
+	});
+	
+	$("#demande").change(function() {
+		if($(this).attr('checked')) {
+			if($("#simple").attr('checked'))
+				$("tr.demande.simple").show();
+			if($("#groupe").attr('checked'))
+				$("tr.demande.groupe").show();
+		}
+		else {
+			$("tr.demande").hide();
+		}
+	});
+	
+	
+	
+	
+	
+	
 });

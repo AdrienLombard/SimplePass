@@ -4,11 +4,16 @@
 
     <div class="tabs">
         <a href="<?php echo site_url('zone/liste'); ?>" class="current">Liste</a>
-        <a href="<?php echo site_url('zone/ajouter'); ?>">Ajouter</a>
     </div>
 
     <div class="box-full">
-
+		
+		<!-- menu de gauche -->
+		<aside>
+			<a href="#" class="afficheNouvelleZone">Nouvelle Zone</a>
+        </aside>
+		
+		<!-- Liste centrale -->
         <div id="main" class="nomargin">
         	
 			<table class="liste">
