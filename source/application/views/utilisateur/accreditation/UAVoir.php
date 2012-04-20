@@ -4,7 +4,7 @@
 
     <div class="tabs">
 		<a href="<?php echo site_url('accreditation/index'); ?>" >Liste</a>
-		<a href="<?php echo site_url('accreditation/rechercher'); ?>" >Ajouter personne</a>
+		<a href="<?php echo site_url('accreditation/rechercher'); ?>" >Ajouter individuel</a>
 		<a href="<?php echo site_url('accreditation/ajouterGroupe'); ?>" >Ajouter groupe</a>
 		<a href="#" class="current">Personne</a>
     </div>
@@ -70,11 +70,15 @@
 					<br>
 
 					<div>
-						<label class="short">Pays : </label>
+						<label class="short">Pays : 
+							<?php foreach($pays as $p): ?>
+								<span id="<?php echo $p->idpays; ?>" class="drapeau" ><?php echo img('drapeaux/' . $p->idpays . '.gif'); ?></span>
+							<?php endforeach; ?>
+						</label>
 						<select class="pays" name="pays" init="<?php echo $client->pays; ?>" style="padding-left: 0px;" disabled="disabled">
-
+						
 						<?php foreach($pays as $p): ?>
-							<option value="<?php echo $p->idpays; ?>" style="background: url(<?php echo img_url('drapeaux/'.strtolower($p->idpays).'.gif'); ?>)no-repeat left;" <?php echo ($p->idpays == $client->pays)? 'selected' : '' ?>><?php echo $p->nompays; ?></option>
+							<option value="<?php echo $p->idpays; ?>" <?php echo ($p->idpays == $client->pays)? 'selected' : '' ?>><?php echo $p->nompays; ?></option>
 						<?php endforeach; ?>
 
 						</select>
@@ -91,7 +95,7 @@
 					</div>
 					
 					<div>
-						<label class="short">Organisme :</label>
+						<label class="shortOrganisme">Organisme :</label>
 						<input type="text" name="organisme" class="societe" init="<?php echo $client->organisme; ?>" value="<?php echo $client->organisme; ?>" readonly>
 					</div>
 					<input type="submit" class="valideInfos" value="Enregistrer les modifications" />

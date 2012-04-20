@@ -31,6 +31,7 @@ class Export extends The {
 			'nom'		=> array('title' => 'Nom', 'type' => ExcelExport::STRING),
 			'prenom'	=> array('title' => 'Prenom', 'type' => ExcelExport::STRING),
 			'pays'		=> array('title' => 'Pays', 'type' => ExcelExport::STRING),
+			'groupe'	=> array('title' => 'Groupe', 'type' => ExcelExport::STRING),
 			'cat'		=> array('title' => 'Catégorie', 'type' => ExcelExport::STRING),
 			'zones'		=> array('title' => 'Zones', 'type' => ExcelExport::STRING),
 			'organisme' => array('title' => 'Organisme', 'type' => ExcelExport::STRING),
@@ -47,12 +48,27 @@ class Export extends The {
 			$zones = $this->modelzone->getZoneParAccreditation($accred->idaccreditation);
 			$strZones = '';
 			foreach($zones as $zone)
-				$strZones .= $zone->idzone . ' -';
+				$strZones .= $zone->codezone . ' -';
+			
+			$groupe = '';
+			
+			if(isset($accred->groupe) && !empty($accred->groupe) && $accred->groupe != '') {
+				$groupe = $accred->groupe;
+			}
+			
+			$nom = $accred->nom;
+			
+			if($groupe != '' && $accred->referent != null)
+				$nom = '	- ' . $nom;
+			
+			if($groupe != '' && $accred->referent == null)
+				$groupe .= ' (Référent)';
 			
 			$content[] = array(
-				'nom'		=> $accred->nom,
+				'nom'		=> $nom,
 				'prenom'	=> $accred->prenom,
 				'pays'		=> $accred->pays,
+				'groupe'	=> $groupe,
 				'cat'		=> $accred->libellecategorie,
 				'zones'		=> $strZones,
 				'organisme' => $accred->organisme,

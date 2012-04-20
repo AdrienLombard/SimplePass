@@ -4,9 +4,9 @@
 
     <div class="tabs">
 		<a href="<?php echo site_url('accreditation/index'); ?>" >Liste</a>
-		<a href="<?php echo site_url('accreditation/rechercher'); ?>" >Ajouter personne</a>
-		<a href="<?php echo site_url('accreditation/ajouterGroupe'); ?>" class="current" >Ajouter groupe</a>
-		<a href="#" class="current">Nouvelle</a>
+		<a href="<?php echo site_url('accreditation/rechercher'); ?>" >Ajouter individuel</a>
+		<a href="<?php echo site_url('accreditation/ajouterGroupe'); ?>" >Ajouter groupe</a>
+		<a href="#" class="current">Nouvelle accréditation</a>
     </div>
 
     <div class="box-full">
@@ -49,11 +49,15 @@
 						</div>
 
 						<div>
-							<label>Pays : </label>
+							<label>Pays : 
+							<?php foreach($pays as $p): ?>
+								<span id="<?php echo $p->idpays; ?>" class="drapeau" ><?php echo img('drapeaux/' . $p->idpays . '.gif'); ?></span>
+							<?php endforeach; ?>
+							</label>
 							<select class="pays" name="pays" style="padding-left: 0px;">
 
 							<?php foreach($pays as $p): ?>
-								<option value="<?php echo $p->idpays; ?>" <?php echo ($p->idpays == $client->pays)? 'selected' : '' ;?> style="background: url(<?php echo img_url('drapeaux/'.strtolower($p->idpays).'.gif'); ?>) no-repeat left;"><?php echo $p->nompays; ?></option>
+								<option value="<?php echo $p->idpays; ?>" <?php echo ($p->idpays == $client->pays)? 'selected' : '' ;?> ><?php echo $p->nompays; ?></option>
 							<?php endforeach; ?>
 
 							</select>

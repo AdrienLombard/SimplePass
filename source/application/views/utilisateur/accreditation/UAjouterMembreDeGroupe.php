@@ -54,7 +54,7 @@
 
     <div class="tabs">
 		<a href="<?php echo site_url('accreditation/index'); ?>" >Liste</a>
-		<a href="<?php echo site_url('accreditation/rechercher'); ?>" >Ajouter personne</a>
+		<a href="<?php echo site_url('accreditation/rechercher'); ?>" >Ajouter individuel</a>
 		<a href="<?php echo site_url('accreditation/ajouterGroupe'); ?>" class="current" >Ajouter groupe</a>
     </div>
 
@@ -103,7 +103,11 @@
 						
 						<div>
 							
-							<label>Pays : </label>
+							<label>Pays : 
+								<?php foreach($pays as $p): ?>
+								<span id="<?php echo $p->idpays; ?>" class="drapeau" ><?php echo img('drapeaux/' . $p->idpays . '.gif'); ?></span>
+							<?php endforeach; ?>
+							</label>
 							<select class="pays" name="info[pays]" style="padding-left: 0px;">
 
 							<?php foreach($pays as $p): ?>
@@ -118,7 +122,6 @@
 										if('FRA' == $p->idpays) echo 'selected';
 									}
 									?> 
-									style="background: url(<?php echo img_url('drapeaux/'.strtolower($p->idpays).'.gif'); ?>)no-repeat left;"
 								>
 									<?php echo $p->nompays; ?>
 								</option>

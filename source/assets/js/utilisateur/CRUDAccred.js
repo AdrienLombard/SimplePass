@@ -64,11 +64,6 @@ $(document).ready(function(){
 		$("form.infos input[type=submit]").show();
 		$('.optionPhoto').show();
 	});
-
-	$("select.pays").change(function(){
-		$(this).attr('style', 'background: url(http://localhost/courchevel_src/assets/images/drapeaux/' + $(this).val().toLowerCase() + '.gif) no-repeat left;');
-	});
-	
 	
 	/*
 	 * Ergonomie des checkzones.
@@ -250,7 +245,24 @@ $(document).ready(function(){
 		}
 	});
 	
+	/*
+	 *	Gestion de l'affichage des drapeaux
+	 */
+	 
+	$('.drapeau').hide();
+	 
+	var pays = $('select.pays').val();
 	
+	$('#'+pays).toggle();
+	
+	$('select.pays').change(function() {
+		$('.drapeau').hide();
+	 
+		var pays = $('select.pays').val();
+	
+		$('#'+pays).toggle();
+		
+	});
 	
 	
 	

@@ -122,6 +122,7 @@ class Accreditation extends Cafe {
 		$data['ref'] = $ref;
 		$data['personnes'] = $pers;
 		$data['pays'] = $this->modelpays->getPaysParId($ref->pays);
+		$data['listePays'] = $this->modelpays->getPays();
 		
 		$this->layout->view('utilisateur/accreditation/UAVoirEquipe',$data);
 		

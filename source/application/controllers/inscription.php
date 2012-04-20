@@ -410,7 +410,7 @@ class Inscription extends Chocolat {
 	 */
 	public function groupe($evenement, $info=false) {
 		// Chargement du js.
-		$this->layout->ajouter_js('lambda/script');
+		$this->layout->ajouter_js('lambda/scriptGroupe');
 		$this->layout->ajouter_js('jquery.Jcrop.min');
 		$this->layout->ajouter_js('webcam/jquery.webcam');
 		
