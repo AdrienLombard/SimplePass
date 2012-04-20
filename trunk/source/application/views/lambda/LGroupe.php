@@ -103,14 +103,20 @@
 			<label><?php echo lang('demandeAjoutFonction'); ?></label>
 			<input type="text" value="<?php echo set_value('fonction'); ?>" id="fonction" name="fonction" />
 			
+			<input type="hidden" name="photo_webcam" id="photo_webcam" />
+			<input type="file" name="photo_file" id="photo_file" />
+			
 			<div class="photo">
+				
 				<canvas id="canvas" width="160" height="204" style="display:none;"></canvas>
+				
 				<div class="webcamWrapper">
 					<a href="#" class="closeCam">x</a>
 					<span style="color:black"><?php echo lang('centreWebcam').' :'; ?></span>
 					<div class="webcam"></div>
 					<a href="#" class="captureCam"><?php echo lang('prendrePhoto'); ?></a>
 				</div>
+				
 				<fieldset class="encadrePhoto">
 					<legend><?php echo lang('photo'); ?></legend>
 					<div class="optionPhoto">
@@ -120,8 +126,8 @@
 						<span class="startWebcam"><?php echo lang('camera'); ?></span>
 					</div>
 				</fieldset>
+				
 			</div>
-			<input type="file" name="photo_file" id="photo_file" />
 			
 			<div class="clear"></div>
 			<input type="submit" value="<?php echo lang('valider'); ?>"/>
