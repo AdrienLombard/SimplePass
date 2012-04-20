@@ -61,7 +61,7 @@
 			<tbody>
 
 				<tr class="ligneCodeZone">
-					<td class="titreCodeDeLaZone">code de la zone :</td>
+					<td class="titreCodeDeLaZone">Code de la zone :</td>
 					<?php foreach($listeZones as $zone): ?>
 					<td>
 						<input type="text" 

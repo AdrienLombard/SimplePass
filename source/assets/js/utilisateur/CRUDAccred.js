@@ -15,7 +15,7 @@ $(document).ready(function(){
 		// if($('#facultatif').find('input').attr('value').length > 0) {
 			// $(this).attr('href', $(this).attr('href')+'/'+$('#facultatif').find('input').attr('value'));
 		// }
-		var facultatif = prompt("Votre texte pour le champs facultatif : ", "");
+		var facultatif = prompt("Votre texte pour le champ facultatif : ", "");
 		if (facultatif != null) {
 			$(this).attr('href', $(this).attr('href')+'/'+facultatif);
 		}
@@ -26,7 +26,7 @@ $(document).ready(function(){
 		// if($('#facultatif').find('input').attr('value').length > 0) {
 			// $(this).attr('href', $(this).attr('href')+'/'+$('#facultatif').find('input').attr('value'));
 		// }
-		var facultatif = prompt("Votre texte pour le champs facultatif : ", "");
+		var facultatif = prompt("Votre texte pour le champ facultatif : ", "");
 		if (facultatif != null) {
 			$(this).attr('href', $(this).attr('href')+'/'+facultatif);
 		}

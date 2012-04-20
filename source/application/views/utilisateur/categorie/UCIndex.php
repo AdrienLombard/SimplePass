@@ -131,7 +131,7 @@
 						<td class="icon">
 <a href="<?php echo site_url('categorie/exeSupprimer/'.$categorie['db']->idcategorie ); ?>" class="icons delete"
 confirm='Êtes-vous sûr de vouloir supprimer cette catégorie ?
-Cela entrainera la suppression de toutes ses sous-catégories.'></a>
+Cela entraînera la suppression de toutes ses sous-catégories.'></a>
 						</td>
 				   
 				  </tr>

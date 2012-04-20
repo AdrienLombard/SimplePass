@@ -191,7 +191,7 @@ class Accreditation extends Cafe {
 			),
 			array(
 				'field'   => 'prenom',
-				'label'   => 'Prenom', 
+				'label'   => 'Prénom', 
 				'rules'   => 'required'
 			),
 			array(
@@ -206,7 +206,7 @@ class Accreditation extends Cafe {
 			),
 			array(
 				'field'   => 'mail',
-				'label'   => 'e-Mail', 
+				'label'   => 'Mail', 
 				'rules'   => 'valid_email'
 			),
 			array(
@@ -317,10 +317,10 @@ class Accreditation extends Cafe {
 			if(empty($re->client['nom']))
 				$re->erreurNom = 'Veuillez spécifier un nom.';
 			if(empty($re->client['prenom']))
-				$re->erreurPrenom = 'Veuillez spécifier un prenom.';
+				$re->erreurPrenom = 'Veuillez spécifier un prénom.';
 			
 			if($mailOk == 0)
-				$re->erreurMail = 'Veuillez spécifier un e-mail valide.';
+				$re->erreurMail = 'Veuillez spécifier un mail valide.';
 		
 			// On recharge le formulaire.
 			$this->ajouter($re);
@@ -337,7 +337,7 @@ class Accreditation extends Cafe {
 		// liste des pays.
 		$data['pays'] = $this->modelpays->getPays();
 		
-		// liste des catégorie de l'événement.
+		// liste des catégorie de l'évènement.
 		$data['categories'] = $this->listeCategorieToDisplay($this->session->userdata('idEvenementEnCours'));
 		
 		// Info de reremplissage.

@@ -138,7 +138,7 @@ class Export extends The {
 		// export
 		$excel = new ExcelExport($columns, 'fr', true);
 		$excel->addContent($content);
-		$excel->download('Syntèse - ' . $evenement[0]->libelleevenement . '.xls');
+		$excel->download('Synthèse - ' . $evenement[0]->libelleevenement . '.xls');
 		
 	}
 	

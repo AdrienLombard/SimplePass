@@ -12,7 +12,7 @@
 			
 			<div id="about">
 
-				<p>SimplePass Accreditation est une application des gestion des accrédiations et de génération de pass se voulant
+				<p>SimplePass Accreditation est une application de gestion des accrédiations et de génération de pass se voulant
 				simple, intuitive, rapide et efficace d'une part pour les orgnisateurs et d'autre part pour les collaborateurs.</p>
 
 				<p>Cette application web a été développée intialement pour le <em>Club des sports de Courchevel</em> par 5 étudiants de l'<em>Université de Savoie</em>

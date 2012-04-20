@@ -16,7 +16,7 @@
 
 					Avec <strong>SimplePass Accréditation</strong>, vous pouvez <strong>gagner
 					du temps</strong> : en <strong>quelques clics</strong>, vous pouvez
-					<strong>préparer</strong> vos événements, <strong>gérer</strong> vos accréditations et <strong>générer</strong> vos
+					<strong>préparer</strong> vos évènements, <strong>gérer</strong> vos accréditations et <strong>générer</strong> vos
 					pass.
 					<br/><br>
 					Le tout, en une seule interface.
@@ -39,15 +39,15 @@
 
 						<br>
 						<div class="actions">
-						<a href="<?php echo site_url('evenement/modifier/' . $this->session->userdata('idEvenementEnCours')); ?>" class="button">Modifier cet événement</a> ou <a href="<?php echo site_url('accreditation'); ?>" class="button">Gérer les accréditations</a>
+						<a href="<?php echo site_url('evenement/modifier/' . $this->session->userdata('idEvenementEnCours')); ?>" class="button">Modifier cet évènement</a> ou <a href="<?php echo site_url('accreditation'); ?>" class="button">Gérer les accréditations</a>
 						</div>
 
 					<?php elseif($evenement == null && $nb > 0): ?>
 
-						Vous n'avez pas d'événement en cours... Voulez-vous en <strong>créer un nouveau</strong> afin de démarrer une nouvelle activité ?<br/>
+						Vous n'avez pas d'évènement en cours... Voulez-vous en <strong>créer un nouveau</strong> afin de démarrer une nouvelle activité ?<br/>
 
 						<div class="actions">
-							<a href="<?php echo site_url('evenement/ajouter'); ?>" class="button">Créer un nouvel événement</a>
+							<a href="<?php echo site_url('evenement/ajouter'); ?>" class="button">Créer un nouvel évènement</a>
 						</div>
 
 						Vous pouvez également personnaliser votre jeu de <strong>zones</strong> et de <strong>catégories</strong> via le menu de gestion en haut à droite.
@@ -55,10 +55,10 @@
 					<?php else: ?>
 
 						Afin de vous aider à <strong>commencer</strong> votre activité, <strong>SimplePass</strong>
-						vous propose de <strong>créer</strong> et de <strong>personnaliser</strong>, suivant vos besoins, un nouvel événement :
+						vous propose de <strong>créer</strong> et de <strong>personnaliser</strong>, suivant vos besoins, un nouvel évènement :
 
 						<div class="actions">
-							<a href="<?php echo site_url('evenement/ajouter'); ?>" class="button">Créer un nouvel événement</a>
+							<a href="<?php echo site_url('evenement/ajouter'); ?>" class="button">Créer un nouvel évènement</a>
 						</div>
 
 						Vous pouvez également personnaliser votre jeu de <strong>zones</strong> et de <strong>catégories</strong> via le menu de gestion en haut à droite.

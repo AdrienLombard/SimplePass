@@ -174,7 +174,7 @@ class Evenement extends Cafe {
 			
 			if(!empty ($datedebut) && !empty ($datefin)) {
 				if($datedebutTstmp >= $datefinTstmp)
-					$values->erreurDate = "La date de début doit être antèrieur à la date de fin.";
+					$values->erreurDate = "La date de début doit être antérieure à la date de fin.";
 			}
 			else {
 				$values->erreurDate = "Veuillez spécifier une date de début et une date de fin.";
@@ -261,7 +261,7 @@ class Evenement extends Cafe {
 		}
 		// Appel de la vue.
 			$data['titre']		= 'Ajout';
-			$data['message']	= 'Votre événement a bien été ajouté.';
+			$data['message']	= 'Votre évènement a bien été ajouté.';
 			$data['redirect'] = 'evenement/liste';
 			$this->layout->view('utilisateur/UMessage', $data);	
 		
@@ -403,7 +403,7 @@ class Evenement extends Cafe {
 			$resultat = $this->modelevenement->modifierAvecTextMail($nom, $datedebutTstmp, $datefinTstmp, $id, $textmail);
 			
 			$data['titre']		= 'Modification';
-			$data['message']	= 'Votre évènement à  bien été modifié.';
+			$data['message']	= 'Votre évènement a bien été modifié.';
 			$data['redirect'] 	= 'evenement/liste';
 			$this->layout->view('utilisateur/UMessage', $data);
 			
@@ -432,7 +432,7 @@ class Evenement extends Cafe {
 			$values = '';
 			if(!empty ($datedebut) && !empty ($datefin)) {
 				if($datedebutTstmp >= $datefinTstmp)
-					$values->erreurDate = "La date de début doit être antèrieur à la date de fin.";
+					$values->erreurDate = "La date de début doit être antérieure à la date de fin.";
 			}
 			else {
 				$values->erreurDate = "Veuillez spécifier une date de début et une date de fin.";

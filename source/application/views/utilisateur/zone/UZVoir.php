@@ -24,7 +24,7 @@
 					<h2><?php echo $resultat->libellezone; ?></h2>
 				<?php endforeach; ?>
 			<?php else: ?>
-				Cette zone n'éxiste pas.
+				Cette zone n'existe pas.
 			<?php endif; ?>
         </div>
 

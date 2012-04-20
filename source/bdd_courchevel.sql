@@ -176,11 +176,11 @@ insert into courchevel_zone (libellezone) values ('VIP');
 insert into courchevel_zone (libellezone) values ('O.C. Areas');
 
 insert into courchevel_evenement (libelleevenement,datedebut,datefin) values ('Coupe du monde feminine de ski alpin hiver 2011','1324076400','1324162800');
-insert into courchevel_evenement (libelleevenement,datedebut,datefin) values ('Coupe du monde d été de saut a ski 2011','1313013600','1313100000');
+insert into courchevel_evenement (libelleevenement,datedebut,datefin) values ('Coupe du monde d''été de saut a ski 2011','1313013600','1313100000');
 insert into courchevel_evenement (libelleevenement,datedebut,datefin) values ('Coupe du monde feminine de ski alpin hiver 2012','1355612400','1355698800');
 
 insert into courchevel_categorie (libellecategorie, couleur) values ('Presse', 'FF0000');
-insert into courchevel_categorie (surcategorie,libellecategorie, couleur) values (1,'Presse oral', 'FF0000');
+insert into courchevel_categorie (surcategorie,libellecategorie, couleur) values (1,'Presse orale', 'FF0000');
 insert into courchevel_categorie (surcategorie,libellecategorie, couleur) values (1,'Presse écrite', 'FF0000');
 insert into courchevel_categorie (surcategorie,libellecategorie, couleur) values (2,'Presse TV', 'FF0000');
 insert into courchevel_categorie (surcategorie,libellecategorie, couleur) values (2,'Presse radio', 'FF0000');

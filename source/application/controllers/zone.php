@@ -149,7 +149,7 @@ class Zone extends Cafe {
 			$resultat = $this->modelzone->modifier( $id, $libelle );
 			
 			$data['titre']		= 'Modification';
-			$data['message']	= 'Votre zone à bien été modifiée.';
+			$data['message']	= 'Votre zone a bien été modifiée.';
 			$data['redirect'] 	= 'zone';
 			$this->layout->view('utilisateur/UMessage', $data);
 			
