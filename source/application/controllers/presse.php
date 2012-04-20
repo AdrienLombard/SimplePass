@@ -219,7 +219,7 @@ class Presse extends Chocolat{
 				$evenement = $this->modelevenement->getEvenementParId($event);
 				
 				// Préparation et envoi du mail de confirmation
-				$this->email->from(MAIL_EXPEDITEUR, 'Courchevel Accreditations'); // L'adresse qui enverra le mail
+				$this->email->from(MAIL_EXPEDITEUR, NOM_EXPEDITEUR); // L'adresse qui enverra le mail
 				$this->email->to($values['mail']); // Le destinataire du mail
 				$this->email->bcc(MAIL_COPIE); // Placer ici l'adresse de Courchevel qui recevra une copie du mail
 				
@@ -633,7 +633,7 @@ class Presse extends Chocolat{
 		}
 		
 		// Préparation et envoi du mail de confirmation
-		$this->email->from(MAIL_EXPEDITEUR, 'Courchevel Accreditations'); // L'adresse qui enverra le mail
+		$this->email->from(MAIL_EXPEDITEUR, NOM_EXPEDITEUR); // L'adresse qui enverra le mail
 		$this->email->to($ref['mail']); // Le destinataire du mail
 		$this->email->bcc(MAIL_COPIE); // L'adresse de Courchevel qui recevra une copie du mail
 		
