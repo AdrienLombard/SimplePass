@@ -39,7 +39,7 @@ create table courchevel_accreditation
 (
    idaccreditation      bigint not null auto_increment,
    idclient             bigint not null,
-   idcategorie          bigint not null default -1,
+   idcategorie          bigint default -1,
    idevenement          bigint not null,
    referent		        bigint default null,
    etataccreditation    tinyint not null,
@@ -239,7 +239,6 @@ insert into courchevel_accreditation_zones (idaccreditation, idzone) values (4, 
 insert into courchevel_accreditation_zones (idaccreditation, idzone) values (4, 3);
 insert into courchevel_accreditation_zones (idaccreditation, idzone) values (4, 4);
 insert into courchevel_accreditation_zones (idaccreditation, idzone) values (4, 5);
-insert into courchevel_accreditation_zones (idaccreditation, idzone) values (5, 1);
 insert into courchevel_accreditation_zones (idaccreditation, idzone) values (5, 2);
 insert into courchevel_accreditation_zones (idaccreditation, idzone) values (5, 3);
 insert into courchevel_accreditation_zones (idaccreditation, idzone) values (5, 4);
