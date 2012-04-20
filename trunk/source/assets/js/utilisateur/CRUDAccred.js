@@ -124,6 +124,22 @@ $(document).ready(function(){
 			$('.contientZones[data='+id+'] .checkzone[id='+v+']').toggleClass('on').find('input').attr('checked', 'checked');
 		});
 	});
+
+    /*
+     * Auto check des zone au changement de catégorie pour l'accréditation des groupes
+     */
+    $('select.categorieSelect').change(function(){
+        var zones = $(this).find('option:selected').attr('zone').split('-');
+        var id = $(this).attr('data');
+        $('.contientZones[data='+id+'] .checkzone').removeClass('on').find('input').removeAttr('checked');
+        $.each(zones, function(k, v){
+            $('.contientZones[data='+id+'] .checkzone[id='+v+']').toggleClass('on').find('input').attr('checked', 'checked');
+        });
+    });
+
+
+
+
 	
 	/*
 	 * Modifier le formulaire d'accred en place
@@ -185,10 +201,6 @@ $(document).ready(function(){
 	
 	//==============================
 	/* filtre des accreditation. */
-	var simple = true;
-	var groupe = true;
-	var valide = true;
-	var demande = true;
 	
 	$("#simple").change(function() {
 		if($(this).attr('checked')) {

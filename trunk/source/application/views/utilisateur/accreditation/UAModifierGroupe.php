@@ -70,20 +70,26 @@
 							<label>Prénom : </label><input type="text" id="prenom" class="champ2" style="width:130px;" name="pers[0][prenom]" value="<?php echo $ref->prenom; ?>"/>
 						</div>
 						<div>
-							<label>Catégorie : </label><select name="pers[0][categorie]" class="champ" style="width:152px">
-															<?php foreach($categories as $categorie): ?>
-															<option value="<?php echo $categorie->idcategorie; ?>" <?php echo ($categorie->idcategorie == $ref->idcategorie)? 'selected' : '' ;?>>
-																<?php echo $categorie->libellecategorie; ?>
-															</option>
-															<?php endforeach; ?>
-														</select>
+							<label>Catégorie : </label>
+							<select data="0" name="pers[0][categorie]" class="champ categorieSelect" style="width:152px">
+								<?php foreach($categories as $cate): ?>
+									<option
+										value="<?php echo $cate['cat']['db']->idcategorie; ?>"
+										zone="<?php echo $cate['zones']; ?>"
+										<?php if(isset($re->accred['idcategorie']) && $ref->idcategorie == $categorie['cat']->idcategorie) echo 'selected'; ?>
+										>
+										<?php for($i=0; $i<$cate['cat']['depth']; $i++) echo '&#160;&#160;'; ?>
+										<?php echo $cate['cat']['db']->libellecategorie; ?>
+									</option>
+								<?php endforeach; ?>
+							</select>
 							<label>Fonction : </label><input type="text" id="fonction" class="champ2" style="width:130px;" name="pers[0][fonction]" value="<?php echo $ref->fonction; ?>"/>
 						</div>
 						<div>
 							<label>Image : </label>
 							<input type="file" name="pers[0][photo_file]"  />
 						</div>
-						<div class="contientZones">
+						<div  data="0" class="contientZones" >
 							<label>Zones : </label>
 							<div>
 								<?php foreach($zonesEvent as $zone): ?>
@@ -108,25 +114,31 @@
 							<?php endif; ?>
 						</div>
 						<div>
-							<label>Nom : </label><input type="text" id="nom" class="champ" style="text-transform: uppercase; width:130px;" name="pers[<?php echo $nb; ?>][nom]" value="<?php echo $p->nom; ?>"/>
-							<label>Prénom : </label><input type="text" id="prenom" class="champ2" style="width:130px;" name="pers[<?php echo $nb; ?>][prenom]" value="<?php echo $p->prenom; ?>"/>
+							<label>Nom : </label><input type="text"  class="champ" style="text-transform: uppercase; width:130px;" name="pers[<?php echo $nb; ?>][nom]" value="<?php echo $p->nom; ?>"/>
+							<label>Prénom : </label><input type="text"  class="champ2" style="width:130px;" name="pers[<?php echo $nb; ?>][prenom]" value="<?php echo $p->prenom; ?>"/>
 							<a href="<?php echo site_url('accreditation/supprimerMembreGroupe/'.$p->idaccreditation.'/'.$ref->groupe); ?>" class="icons delete deleteNouvelleCatMere" confirm="Êtes-vous sûr de vouloir supprimer ce membre du groupe ?"></a>
 						</div>
 						<div class="ligne">
-							<label>Catégorie : </label><select name="pers[<?php echo $nb; ?>][categorie]" class="champ" style="width:152px">
-															<?php foreach($categories as $categorie): ?>
-															<option value="<?php echo $categorie->idcategorie; ?>" <?php echo ($categorie->idcategorie == $p->idcategorie)? 'selected' : '' ;?>>
-																<?php echo $categorie->libellecategorie; ?>
-															</option>
-															<?php endforeach; ?>
-														</select>
-							<label>Fonction : </label><input type="text" id="fonction" class="champ2" style="width:130px;" name="pers[<?php echo $nb; ?>][fonction]" value="<?php echo $p->fonction; ?>"/>
+							<label>Catégorie : </label>
+							<select data="<?php echo $nb; ?>" name="pers[<?php echo $nb; ?>][categorie]" class="champ categorieSelect" style="width:152px">
+								<?php foreach($categories as $cate): ?>
+								<option
+									value="<?php echo $cate['cat']['db']->idcategorie; ?>"
+									zone="<?php echo $cate['zones']; ?>"
+									<?php if(isset($re->accred['idcategorie']) && $ref->idcategorie == $categorie['cat']->idcategorie) echo 'selected'; ?>
+									>
+									<?php for($i=0; $i<$cate['cat']['depth']; $i++) echo '&#160;&#160;'; ?>
+									<?php echo $cate['cat']['db']->libellecategorie; ?>
+								</option>
+								<?php endforeach; ?>
+							</select>
+							<label>Fonction : </label><input type="text"  class="champ2" style="width:130px;" name="pers[<?php echo $nb; ?>][fonction]" value="<?php echo $p->fonction; ?>"/>
 						</div>
 						<div>
 							<label>Image : </label>
 							<input type="file" name="pers[<?php echo $nb; ?>][photo_file]"  />
 						</div>
-						<div class="contientZones">
+						<div class="contientZones" data="<?php echo $nb; ?>">
 							<label>Zones : </label>
 							<div>
 								<?php foreach($zonesEvent as $zone): ?>
