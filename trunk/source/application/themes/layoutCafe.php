@@ -29,7 +29,7 @@
                 
                 <div id="logo">
 					<span>SIMPLE</span><b>PASS</b>
-					<span class="subtitle">accreditation</span>
+					<span class="subtitle">accreditations</span>
 				</div>
 
 				<?php if($CI_login): ?>

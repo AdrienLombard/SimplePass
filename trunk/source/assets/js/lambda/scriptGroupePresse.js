@@ -241,7 +241,7 @@ $(document).ready(function(){
 				if(lang == 'fra' || lang == '')
 					$('.photoMessage').show().text('Photo prise, enregistrez pour valider ->');
 				else
-					$('.photoMessage').show().text('Photo taken, save to validate ->');
+					$('.photoMessage').show().text('Picture taken, save to validate ->');
 			}
 			
 		});
