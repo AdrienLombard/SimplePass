@@ -9,6 +9,7 @@ class utilisateur extends Cafe {
 	{
 		parent::__construct();
 		$this->load->model('modelutilisateur');
+		$this->load->model('modelaccreditation');
 		
 		$this->lang->load('fr');
 		
@@ -21,6 +22,8 @@ class utilisateur extends Cafe {
 			
 			$data['evenement'] = end($this->modelevenement->getEvenementEnCours());
 			$data['nb'] = count($this->modelevenement->getEvenements());
+			$data['nbAccreds'] = $this->modelaccreditation->getNbAccreditationsParEvenement($this->session->userdata('idEvenementEnCours'));
+			$data['nbDemandes'] = $this->modelaccreditation->getNbAccreditationsEnAttenteParEvenement($this->session->userdata('idEvenementEnCours'));
 			$this->layout->view('utilisateur/UWelcome', $data);
 			
 		}
