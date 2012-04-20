@@ -611,7 +611,8 @@ class Inscription extends Chocolat {
 			}
 			$accred['idcategorie'] = $temp;
 
-			$idNewAccred = $this->modelaccreditation->ajouter($accred);
+			if($accred['idcategorie'] != -1)
+				$idNewAccred = $this->modelaccreditation->ajouter($accred);
 
 			$cat = null;
 			
