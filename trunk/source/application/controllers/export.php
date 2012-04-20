@@ -73,6 +73,9 @@ class Export extends The {
 	
 	public function evenement($idEvenement) {
 		
+		// evenement
+		$evenement = $this->modelevenement->getEvenementParId($idEvenement);
+		
 		// Récupération de la liste des zones.
 		$zones = $this->modelzone->getZonesAvecCode($idEvenement);
 		
@@ -97,6 +100,18 @@ class Export extends The {
 		
 		// content
 		$content = array();
+		
+		$input = array();
+		
+		$input['cat'] = '';
+		
+		
+		foreach($zones as $zone) {
+			$input[$zone->idzone] = $zone->codezone;
+		}
+		
+		$content[] = $input;
+		
 		foreach($categories as $cat) {
 			
 			$input = array();

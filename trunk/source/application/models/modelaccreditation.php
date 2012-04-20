@@ -15,7 +15,24 @@ class modelAccreditation extends MY_Model {
 						->get()
 						->result();
 	}
-
+	
+	public function getNbAccreditationsParEvenement($idEvenement) {
+		return $this->db->select('COUNT(idaccreditation) as count')
+						->from(DB_ACCREDITATION . ' a')
+						->where('a.idevenement', $idEvenement)
+						->where('a.referent', NULL)
+						->get()
+						->result();
+	}
+	
+	public function getNbAccreditationsEnAttenteParEvenement($idEvenement) {
+		return $this->db->select('COUNT(idaccreditation) as count')
+						->from(DB_ACCREDITATION . ' a')
+						->where('a.idevenement', $idEvenement)
+						->where('a.etataccreditation', ACCREDITATION_A_VALIDE)
+						->get()
+						->result();
+	}
 	
 	public function getAccreditationParId($id) {
 		$result = $this->db->select('*')
