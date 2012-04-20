@@ -27,10 +27,14 @@
 		<input type="text" value="<?php echo set_value('prenom'); ?>" id="prenom" name="prenom" />
 		<?php echo form_error('prenom'); ?>
 		
-		<label><?php echo lang('pays'); ?>*</label>
+		<label><?php echo lang('pays'); ?>*
+			<?php foreach($listePays as $p): ?>
+				<span id="<?php echo $p->idpays; ?>" class="drapeau" ><?php echo img('drapeaux/' . $p->idpays . '.gif'); ?></span>
+			<?php endforeach; ?>
+		</label>
 		<select  id="pays" name="pays" class="select">
 			<?php foreach($listePays as $pays): ?>
-            <option value="<?php echo $pays->idpays; ?>" <?php echo ($pays->idpays == 'FRA')? 'selected' : '' ;?> style="background: url(<?php echo img_url('drapeaux/'.strtolower($pays->idpays).'.gif'); ?>)no-repeat left;"><?php echo $pays->nompays; ?></option><?php endforeach; ?> 
+            <option value="<?php echo $pays->idpays; ?>" <?php echo ($pays->idpays == 'FRA')? 'selected' : '' ;?> ><?php echo $pays->nompays; ?></option><?php endforeach; ?> 
 		</select>
 		
 		<label><?php echo lang('tel'); ?></label>

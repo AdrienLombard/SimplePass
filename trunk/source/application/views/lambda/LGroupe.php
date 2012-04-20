@@ -61,10 +61,14 @@
 			<input type="text" value="<?php if($values) echo $values->groupe; ?>" name="groupe" />
 			<?php echo form_error('groupe'); ?>
 			
-			<label><?php echo lang('pays'); ?>*</label>
+			<label><?php echo lang('pays'); ?>*
+				<?php foreach($listePays as $p): ?>
+					<span id="<?php echo $p->idpays; ?>" class="drapeau" ><?php echo img('drapeaux/' . $p->idpays . '.gif'); ?></span>
+				<?php endforeach; ?>
+			</label>
 			<select  id="pays" name="pays" class="select">
 				<?php foreach($listePays as $pays): ?>
-	            <option value="<?php echo $pays->idpays; ?>" <?php echo ($pays->idpays == 'FRA')? 'selected' : '' ;?> style="background: url(<?php echo img_url('drapeaux/'.strtolower($pays->idpays).'.gif'); ?>) no-repeat left;"><?php echo $pays->nompays; ?></option><?php endforeach; ?> 
+	            <option value="<?php echo $pays->idpays; ?>" <?php echo ($pays->idpays == 'FRA')? 'selected' : '' ;?> ><?php echo $pays->nompays; ?></option><?php endforeach; ?> 
 			</select>
 			
 			<br><br>

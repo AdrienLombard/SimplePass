@@ -42,7 +42,10 @@
 	color: #888;
 }
 .accred .client .infos label.short {
-	width: 60px;
+	width: 70px;
+}
+.accred .client .infos label.shortOrganisme {
+	width: 90px;
 }
 .accred .client .infos input[type=text], .accred .client .infos select {
 	border: 1px solid #AAA;
@@ -55,6 +58,9 @@
 }
 .accred .client .infos input[type=text][readonly], .accred .client .infos select[readonly], .accred .client .infos select:disabled {
 	border: 1px solid #FFF;
+}
+.accred .client .infos input.societe {
+	width: 380px;
 }
 .accred .client .infos input.nom, .accred .client .infos input.prenom {
 	font-size: 26px;

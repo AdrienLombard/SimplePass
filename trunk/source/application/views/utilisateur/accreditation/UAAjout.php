@@ -4,7 +4,7 @@
 
     <div class="tabs">
 		<a href="<?php echo site_url('accreditation/index'); ?>" >Liste</a>
-		<a href="<?php echo site_url('accreditation/rechercher'); ?>" class="current" >Ajouter personne</a>
+		<a href="<?php echo site_url('accreditation/rechercher'); ?>" class="current" >Ajouter individuel</a>
 		<a href="<?php echo site_url('accreditation/ajouterGroupe'); ?>">Ajouter groupe</a>
     </div>
 
@@ -78,11 +78,15 @@
 							</div>
 
 							<div>
-								<label>Pays : </label>
+								<label>Pays : 
+									<?php foreach($pays as $p): ?>
+										<span id="<?php echo $p->idpays; ?>" class="drapeau" ><?php echo img('drapeaux/' . $p->idpays . '.gif'); ?></span>
+									<?php endforeach; ?>
+								</label>
 								<select class="pays" name="pays" style="padding-left: 0px;">
 
 								<?php foreach($pays as $p): ?>
-									<option value="<?php echo $p->idpays; ?>"  <?php if(isset($re->client['pays']) && $re->client['pays'] == $p->idpays) echo 'selected'; ?> style="background: url(<?php echo img_url('drapeaux/'.strtolower($p->idpays).'.gif'); ?>) no-repeat left;"><?php echo $p->nompays; ?></option>
+									<option value="<?php echo $p->idpays; ?>"  <?php if(isset($re->client['pays']) && $re->client['pays'] == $p->idpays) echo 'selected'; ?> ><?php echo $p->nompays; ?></option>
 								<?php endforeach; ?>
 
 								</select>

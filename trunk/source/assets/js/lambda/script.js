@@ -37,6 +37,24 @@ $(document).ready(function(){
 	});
 	
 	/*
+	 *	Gestion de l'affichage des drapeaux
+	 */
+	 
+	$('.drapeau').hide();
+	 
+	var pays = $('#pays').val();
+	
+	$('#'+pays).toggle();
+	
+	$('#pays').change(function() {
+		$('.drapeau').hide();
+		var pays = $('#pays').val();
+	
+		$('#'+pays).toggle();
+		
+	});
+	
+	/*
 	 * upload fichier
 	 */
 	$('#photo_file').css('opacity', 0).css('position', 'absolute');

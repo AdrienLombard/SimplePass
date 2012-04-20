@@ -4,8 +4,25 @@ $(document).ready(function(){
 	$('div.ligne h3').live('click', function(){
 		$(this).next('div.form').slideDown('fast');
 		$(this).parent().attr('etat', false);
-	})
+	});
 	
+	/**
+	 *	Gestion de l'affichage des drapeaux
+	 */
+	$('.drapeau').hide();
+	 
+	var pays = $('#pays').val();
+	
+	$('#'+pays).toggle();
+	
+	$('#pays').change(function() {
+		$('.drapeau').hide();
+		
+		var pays = $('#pays').val();
+	
+		$('#'+pays).toggle();
+		
+	});
 	
 	// valider la ligne du groupe
 	$('#validerLigne').live('click', function(){

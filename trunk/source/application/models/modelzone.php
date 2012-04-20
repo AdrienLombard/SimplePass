@@ -100,8 +100,10 @@ class modelZone extends MY_Model {
 	
 	public function getZoneParAccreditation ( $idAccred ) {
 		return $this->db->select('*')
-						->from(DB_ACCREDITATION_ZONES)
+						->from(DB_ACCREDITATION_ZONES . ' az')
+						->join(DB_PARAMETRES_EVENEMENTS . ' z', 'z.idzone = az.idzone', 'left')
 						->where('idaccreditation', $idAccred)
+						->group_by('az.idzone')
 						->get()
 						->result();
 	}
