@@ -6,7 +6,8 @@ class Chocolat extends CI_Controller {
         
         parent::__construct();
 		
-		$this->output->enable_profiler(true);
+		// debug
+		//$this->output->enable_profiler(true);
 		
 		$this->layout->set_theme('layoutChocolat');
         

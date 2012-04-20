@@ -10,6 +10,10 @@
 
     <div class="box-full">
 		
+		<aside>
+		<a href="<?php echo site_url('accreditation/ajoutMembreGroupe/'.$ref->groupe); ?>" >Ajouter membre</a>
+		</aside>
+		
 		<div id="main" class="accred">
         	
 			<div class="client nouveau">
@@ -136,7 +140,7 @@
 					<?php $nb++; ?>
 					<div class="clear"><h2></h2></div>
 					<?php endforeach; ?>
-
+					
 					<input type="submit" class="button" value="Valider" />
 				</form>
 

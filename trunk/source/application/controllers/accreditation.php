@@ -292,7 +292,7 @@ class Accreditation extends Cafe {
 			
 			// Mise en place de ses zones.
 			if($this->input->post('zone')) {
-				$valuess = array();
+				$values = array();
 				if($this->input->post('zone')) {
 					foreach( $this->input->post('zone') as $key => $value ) {
 						$values[] = array('idaccreditation' => $idAccred, 'idzone' => $key);
@@ -348,11 +348,7 @@ class Accreditation extends Cafe {
 	
 	public function exeAjoutGroupe() {
 		/* liste des champs obligatoire.
-		verif info['groupe']
-		
-		
-		
-		
+		verif info['groupe']	
 		*/
 		
 		
@@ -674,6 +670,84 @@ class Accreditation extends Cafe {
 		
 		$nomGroupe=str_replace('%20', ' ', $nomGroupe);
 		redirect('accreditation/modifierGroupe/' . $nomgroupe);
+	}
+	
+	public function ajoutMembreGroupe($nomgroupe){
+		
+		$nomGroupe=str_replace('%20', ' ', $nomgroupe);;
+		$idEvent = $this->session->userdata('idEvenementEnCours');
+		$membres = $this->modelaccreditation->getAccreditationGroupeParEvenement( $nomGroupe, $idEvent);
+		
+		foreach($membres as $m){
+			$zonesAccred = $this->modelzone->getZoneParAccreditation($m->idaccreditation);
+			foreach($zonesAccred as $z){
+				$m->zonesAccred[] = $z->idzone;
+			}
+			if ($m->referent != null){
+				$membresgrp[] = $m;
+			}
+		}
+		
+		$data['info'] = $membresgrp[0];
+		$data['info']->nompays = $this->modelpays->getPaysParId($membres[0]->pays);
+		$data['pays'] = $this->modelpays->getPays();
+		$data['zonesEvent'] = $this->modelzone->getZoneParEvenement($idEvent);
+		$data['categories'] = $this->listeCategorieToDisplay($this->session->userdata('idEvenementEnCours'));
+		
+		$this->layout->view('utilisateur/accreditation/UAModifierAjoutMembre', $data);
+	}
+	
+	public function exeAjoutMembreGroupe(){
+		
+		// Création du client.
+		$client = array();
+
+		$client['nom'] 		 = strtoupper($this->input->post('nom'));
+		$client['prenom'] 	 = $this->input->post('prenom');
+		$client['pays'] 	 = $this->input->post('pays');
+		$client['tel'] 		 = $this->input->post('tel');
+		$client['mail'] 	 = $this->input->post('mail');
+		$client['organisme'] = $this->input->post('organisme');
+
+		// Création de son accréditation.
+		$accred = array();
+		$accred['idevenement'] 	= $this->input->post('evenement');
+		$accred['fonction'] 	= $this->input->post('fonction');
+		$accred['idcategorie'] 	= $this->input->post('categorie');
+		$accred['referent']		= $this->input->post('referent');
+		$accred['groupe']		= $this->input->post('groupe');
+		$accred['allaccess'] 	= ($this->input->post('allAccess'))? ALL_ACCESS : NON_ALL_ACCESS;
+		
+		// Construction du tableau de ses zones.
+		$accredZone = array();
+		if($this->input->post('zone')) {
+			foreach( $this->input->post('zone') as $key => $value ) {
+				$accredZone[$key] = $key;
+			}
+		}
+		
+		// On ajoute le client.
+		$this->modelclient->ajouter($client);
+		$idClient = $this->modelclient->lastId();
+			
+		// On ajoute son accréditation.
+		$accred['idclient'] = $idClient;
+		$accred['etataccreditation'] = ACCREDITATION_VALIDE;
+		$accred['dateaccreditation'] = time();
+		$this->modelaccreditation->ajouter($accred);
+		$idAccred = $this->modelaccreditation->lastId();
+
+		// Mise en place de ses zones.
+		if($this->input->post('zone')) {
+			$values = array();
+			if($this->input->post('zone')) {
+				foreach( $this->input->post('zone') as $key => $value ) {
+					$values[] = array('idaccreditation' => $idAccred, 'idzone' => $key);
+				}
+			}
+			$this->modelzone->ajouterZonesAccreditation($values);
+		}
+		redirect('accreditation/voirEquipe/'.$this->input->post('groupe'));
 	}
 	
 	public function supprimerClient ( $idClient ) {
