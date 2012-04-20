@@ -105,8 +105,8 @@
 					</div>
 				</fieldset>
 			</div>
-			<div class="webcam"></div>
-			<input type="file" name="photo_file" id="photo_file" />
+			<input type="file" name="groupe[nbLigne][photo_file]" id="photo_file" />
+			<input type="hidden" name="groupe[nbLigne][photo_webcam]" id="photo_webcam" />
 			<div class="split">
 				<label for=""><?php echo lang('nom'); ?>*</label>
 				<input type="text" id="ligneNom" name="groupe[nbLigne][nom]" />

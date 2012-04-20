@@ -122,7 +122,7 @@ $(document).ready(function(){
 				else
 					$('.photoMessage').show().text('Picture taken, save to validate ->');
 			}
-			
+			// plop
 		});
 		
 	});

@@ -66,13 +66,16 @@
 		<input type="hidden" name="photo_webcam" id="photo_webcam" />
 		
 		<div class="photo">
+			
 			<canvas id="canvas" width="160" height="204" style="display:none;"></canvas>
+			
 			<div class="webcamWrapper">
-					<a href="#" class="closeCam">x</a>
-					<span style="color:black"><?php echo lang('centreWebcam').' :'; ?></span>
-					<div class="webcam"></div>
-					<a href="#" class="captureCam"><?php echo lang('prendrePhoto'); ?></a>
-				</div>
+				<a href="#" class="closeCam">x</a>
+				<span style="color:black"><?php echo lang('centreWebcam').' :'; ?></span>
+				<div class="webcam"></div>
+				<a href="#" class="captureCam"><?php echo lang('prendrePhoto'); ?></a>
+			</div>
+			
 			<fieldset class="encadrePhoto">
 				<legend><?php echo lang('photo'); ?></legend>
 				<div class="optionPhoto">
@@ -87,7 +90,7 @@
 
 		<div class="clear"></div>
 		<input type="submit" name="valider" id="valider" value="<?php echo lang('valider'); ?>"/>
-<div class="clear"></div>
+		<div class="clear"></div>
 		</div>	
 		
 		<div class="clear"></div>

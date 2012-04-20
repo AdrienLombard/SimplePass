@@ -411,6 +411,8 @@ class Inscription extends Chocolat {
 	public function groupe($evenement, $info=false) {
 		// Chargement du js.
 		$this->layout->ajouter_js('lambda/script');
+		$this->layout->ajouter_js('jquery.Jcrop.min');
+		$this->layout->ajouter_js('webcam/jquery.webcam');
 		
 		$data['idEvenement']	= $evenement;
 		$data['infoEvenement'] 	= $this->modelevenement->getEvenementParId($evenement);
@@ -523,6 +525,9 @@ class Inscription extends Chocolat {
 		$data['lang'] = $this->session->userdata('lang');
 	
 		$this->layout->ajouter_js('lambda/scriptGroupe');
+		$this->layout->ajouter_js('jquery.Jcrop.min');
+		$this->layout->ajouter_js('webcam/jquery.webcam');
+		
 		$this->layout->view('lambda/LGroupeDetails', $data);
 	}
 	
