@@ -98,7 +98,7 @@
 						
 						<div>
 							<label>Image : </label>
-							<input class="required" type="file" name="photo_file"  />
+							<input type="file" name="photo_file"  />
 						</div>
 						
 						<div>
@@ -133,7 +133,7 @@
 						
 						<div>
 							<label>Catégorie : </label>
-							<select name="categorie">
+							<select id="categorieSimple" name="info[categorie]">
 								<option value="" <?php if(empty($re->accred['categorie'])) echo 'selected'; ?> >---</option>
 								<?php foreach($categories as $cate): ?>
 								<option

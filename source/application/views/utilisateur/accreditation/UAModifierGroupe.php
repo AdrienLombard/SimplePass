@@ -80,7 +80,7 @@
 									<option
 										value="<?php echo $cate['cat']['db']->idcategorie; ?>"
 										zone="<?php echo $cate['zones']; ?>"
-										<?php if(isset($re->accred['idcategorie']) && $ref->idcategorie == $categorie['cat']->idcategorie) echo 'selected'; ?>
+										<?php if(isset($ref->idcategorie) && $ref->idcategorie == $cate['cat']['db']->idcategorie) echo 'selected'; ?>
 										>
 										<?php for($i=0; $i<$cate['cat']['depth']; $i++) echo '&#160;&#160;'; ?>
 										<?php echo $cate['cat']['db']->libellecategorie; ?>
@@ -103,6 +103,11 @@
 								</div>
 								<?php endforeach; ?>
 							</div>
+						</div>
+
+						<div>
+							<label> Mode All-Accees : </label>
+							<input data="0" type="checkbox" class="allGroupe" name="allAccess" value="1" <?php if(isset($re->accred['allaccess']) && $re->accred['allaccess'] == 1) echo 'checked'; ?> />
 						</div>
 					
 					<br><br>
@@ -152,6 +157,11 @@
 								</div>
 								<?php endforeach; ?>
 							</div>
+						</div>
+
+						<div>
+							<label> Mode All-Accees : </label>
+							<input data="<?php echo $nb; ?>" type="checkbox" class="allGroupe" name="allAccess" value="1" <?php if(isset($re->accred['allaccess']) && $re->accred['allaccess'] == 1) echo 'checked'; ?> />
 						</div>
 					<?php $nb++; ?>
 					<div class="clear"><h2></h2></div>
