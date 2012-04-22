@@ -609,6 +609,8 @@ class Inscription extends Chocolat {
 			while($temp == -1) {
 				$temp = array_pop($tab);
 			}
+			if(!$temp)
+				$temp = -1;
 			$accred['idcategorie'] = $temp;
 
 			if($accred['idcategorie'] != -1)

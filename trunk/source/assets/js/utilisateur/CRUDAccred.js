@@ -83,7 +83,7 @@ $(document).ready(function(){
 	/*
 	 * Auto check des zone au changement de catégorie
 	 */
-	$('select[name=categorie]').change(function(){
+	$('select[id=categorieSimple]').change(function(){
 		var zones = $(this).find('option:selected').attr('zone').split('-');
 		$('.checkzone').removeClass('on').find('input').removeAttr('checked');
 		$.each(zones, function(k, v){
@@ -107,6 +107,23 @@ $(document).ready(function(){
 			});
 		}
 	});
+
+    /*
+     * Auto check des zones a la coche de la catégorie all accees pour les groupes.
+     */
+    $('.allGroupe').change( function() {
+        var id = $(this).attr('data');
+        $('.contientZones[data='+id+'] .checkzone').removeClass('on').find('input').removeAttr('checked');
+        if($(this).attr('checked') == 'checked') {
+            $('.contientZones[data='+id+'] .checkzone').toggleClass('on').find('input').attr('checked', 'checked');
+        }
+        else {
+            var zones = $('select[data='+id+']').find('option:selected').attr('zone').split('-');
+            $.each(zones, function(k, v){
+                $('.contientZones[data='+id+'] .checkzone[id='+v+']').toggleClass('on').find('input').attr('checked', 'checked');
+            });
+        }
+    });
 	
 	/*
 	 * Auto check des zone au changement de catégorie pour l'accréditation des groupes
