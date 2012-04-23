@@ -142,10 +142,6 @@ class Impression extends The {
 			$indice = $indice + 6;
 		}
 		$pdf->Text(58, 40 + $indice, utf8_decode($client->organisme));
-		//$zonetxt = '- ';
-		//foreach($zones as $z){
-		//	$zonetxt = $zonetxt.$z->codezone.' - ';
-		//}
 		$pdf->SetFont('helvetica', 'B', 12);
 		$nb = count($zonesEvent);
 		$nbligne = ($nb % 10 == 0)?$nb / 10 : floor($nb / 10)+1;
@@ -154,7 +150,6 @@ class Impression extends The {
 		for($i=0;$i<$nbligne;$i++){
 			$py = 0;
 			for($j=0;$j<10 && ($j+$i*10)<$nb;$j++){
-				$pyi = 0;
 				if($this->zone_exist($zones, $zonesEvent[$j+$i*10]->codezone)){
 					$pdf->SetFillColor(0,0,0);
 					$pdf->Rect(30 + $py, 55 + $px*$i, 6, 6, 'DF');
@@ -163,7 +158,7 @@ class Impression extends The {
 				else{
 					$pdf->SetTextColor(200,200,200);
 				}
-				if(strlen($zonesEvent[$j+$i*6]->codezone )== 1){
+				if(strlen($zonesEvent[$j+$i*10]->codezone )== 1){
 						$pyi = 1.2;
 				}
 				$pdf->Text(30.5 + $py + $pyi, 59.5 + $px*$i, $zonesEvent[$j+$i*10]->codezone);
@@ -294,7 +289,7 @@ class Impression extends The {
 					else{
 						$pdf->SetTextColor(200,200,200);
 					}
-					if(strlen($zonesEvent[$j+$i*6]->codezone )== 1){
+					if(strlen($zonesEvent[$j+$i*10]->codezone )== 1){
 						$pyi = 1.2;
 					}
 					$pdf->Text(30.5 + $py + $pyi, 59.5 + $px*$i, $zonesEvent[$j+$i*10]->codezone);
