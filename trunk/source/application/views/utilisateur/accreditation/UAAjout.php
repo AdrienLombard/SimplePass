@@ -118,7 +118,7 @@
 
 							<div>
 								<label>Catégorie : </label>
-								<select id="categorieGroupe" name="categorie">
+								<select id="categorieSimple" name="categorie">
 									<option value="" <?php if(empty($re->accred['categorie'])) echo 'selected'; ?> >---</option>
 									<?php foreach($categories as $cate): ?>
 									<option
