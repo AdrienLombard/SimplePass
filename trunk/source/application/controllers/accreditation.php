@@ -117,7 +117,6 @@ class Accreditation extends Cafe {
 				
 			}
 		}
-		
 		$data['zonesEvent'] = $zonesEvent;
 		$data['ref'] = $ref;
 		$data['personnes'] = $pers;
@@ -358,9 +357,7 @@ class Accreditation extends Cafe {
 	public function exeAjoutGroupe() {
 		/* liste des champs obligatoire.
 		verif info['groupe']	
-		*/
-		
-		
+		*/				
 		$info 		= $this->input->post('info');
 		$ref 		= $this->input->post('ref');
 		$personnes 	= $this->input->post('personne');
@@ -382,7 +379,6 @@ class Accreditation extends Cafe {
 			}
 		}
 		
-		
 		if($verif) {
 		
 			// ajout du référent
@@ -394,7 +390,7 @@ class Accreditation extends Cafe {
 			unset($ref['fonction']);
 			$this->modelclient->ajouter($ref);
 			$id = $this->modelclient->lastId();
-			
+
 			// upload photo pour referent
 			if($_FILES['photo_file']['size'] != 0) {
 				
@@ -423,14 +419,14 @@ class Accreditation extends Cafe {
 			$aref['dateaccreditation'] = time();
 			$this->modelaccreditation->ajouter($aref);
 			$idAccredRef = $this->modelaccreditation->lastId();
-
+			
 			// ajout des zones
 			$this->modelzone->supprimerZoneParAccreditation($idAccredRef);
 			$values = array();
 			foreach($zones as $key => $value )
 				$values[] = array('idaccreditation' => $idAccredRef, 'idzone' => $key);
 			$this->modelzone->ajouterZonesAccreditation($values);
-
+			
 			// boucle personnes
 			foreach($personnes as $p) {
 				
