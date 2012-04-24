@@ -57,6 +57,8 @@
 				<input type="hidden" name="ref[mail]" value="<?php echo $mail; ?>" />
 				<input type="hidden" name="ref[groupe]" value="<?php echo $groupe; ?>" />
 				<input type="hidden" name="ref[pays]" value="<?php echo $pays; ?>" />
+				<input type="hidden" name="photo_file_ref" value="<?php echo $pays; ?>" />
+				<input type="hidden" name="ref[photo_webcam]" value="<?php echo $pays; ?>" />
 				
 				<input type="hidden" name="evenement" value="<?php echo $evenement; ?>" />
 				
@@ -87,25 +89,26 @@
 	<div class="ligne" data="nbLigne" etat="false">
 		<h3><?php echo lang('nouveauMembre'); ?> <span class="modifier"><?php echo lang('modifier'); ?></span></h3>
 		<div class="form">
+			<input type="hidden" name="ref[index]" value="nbLigne" />
 			<div class="photo">
-				<canvas id="canvas" width="160" height="204" style="display:none;"></canvas>
-				<div class="webcamWrapper">
-					<a href="#" class="closeCam">x</a>
+				<canvas id="canvas_nbLigne" width="160" height="204" style="display:none;"></canvas>
+				<div class="webcamWrapper" data="nbLigne">
+					<a href="#" class="closeCam" data="nbLigne">x</a>
 					<span style="color:black"><?php echo lang('centreWebcam').' :'; ?></span>
-					<div class="webcam"></div>
-					<a href="#" class="captureCam"><?php echo lang('prendrePhoto'); ?></a>
+					<div class="webcam" data="nbLigne"></div>
+					<a href="#" class="captureCam" data="nbLigne"><?php echo lang('prendrePhoto'); ?></a>
 				</div>
 				<fieldset class="encadrePhoto">
 					<legend><?php echo lang('photo'); ?></legend>
 					<div class="optionPhoto">
-						<span class="uploadFichier"><?php echo lang('fichier'); ?></span>
+						<span class="uploadFichier" data="nbLigne"><?php echo lang('fichier'); ?></span>
 					</div>
 					<div class="optionPhoto">
-						<span class="startWebcam"><?php echo lang('camera'); ?></span>
+						<span class="startWebcam" data="nbLigne"><?php echo lang('camera'); ?></span>
 					</div>
 				</fieldset>
 			</div>
-			<input type="file" name="groupe[nbLigne][photo_file]" id="photo_file" />
+			<input type="file" name="photo_file_nbLigne" id="photo_file" />
 			<input type="hidden" name="groupe[nbLigne][photo_webcam]" id="photo_webcam" />
 			<div class="split">
 				<label for=""><?php echo lang('nom'); ?>*</label>
