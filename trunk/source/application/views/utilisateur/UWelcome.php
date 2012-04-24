@@ -27,14 +27,14 @@
 					<?php if($evenement != null): ?>
 
 						Evénement en cours :<br/>
-						<strong><?php echo $this->session->userdata('libelleEvenementEnCours'); ?></strong>.
+						<strong><?php echo $this->session->userdata('libelleEvenementEnCours'); ?></strong>
 						<br><br>					
 						Actuellement : 
 						<li><?php echo $nbAccreds[0]->count; ?> accréditation(s)</li>
-						<li><?php echo $nbDemandes[0]->count; ?> demande(s) en attente.<br/></li>
+						<li><?php echo $nbDemandes[0]->count; ?> demande(s) en attente<br/></li>
 						
-						<?php if($evenement->datefin - time() <= 60*60*24*20): ?>
-						<span class="alert">Attention !<br/>Il ne vous reste que <?php echo floor(($evenement->datefin - time()) / 60 / 60 / 24); ?> jours pour valider vos demandes !</span>
+						<?php if($evenement[0]->datefin - time() <= 60*60*24*20): ?>
+						<span class="alert">Attention !<br/>Il ne vous reste que <?php echo floor(($evenement[0]->datefin - time()) / 60 / 60 / 24); ?> jours pour valider vos demandes !</span>
 						<?php endif; ?>
 
 						<br>
