@@ -1,6 +1,49 @@
-<script>
+<script type="text/javascript" >
+	function urlExport() {
+		var params = '';
+		
+		// simple.
+		if($("#simple").attr('checked'))
+			params += '1';
+		else
+			params += '0';
+		
+		// groupe.
+		if($("#groupe").attr('checked'))
+			params += '1';
+		else
+			params += '0';
+		
+		// valide
+		if($("#valide").attr('checked'))
+			params += '1';
+		else
+			params += '0';
+		
+		// demande
+		if($("#demande").attr('checked'))
+			params += '1';
+		else
+			params += '0';
+			
+		alert(':'+params+':');	
+	}
 	
-
+	$(document).ready(function(){
+		$("#simple").change(function() {
+			urlExport();
+		}
+		$("#groupe").change(function() {
+			urlExport();
+		}
+		$("#valide").change(function() {
+			urlExport();
+		}
+		$("#demande").change(function() {
+			urlExport();
+		}
+	
+	}
 </script>
 
 <h1>Accréditations</h1>
@@ -16,7 +59,7 @@
     <div class="box-full">
 
         <aside>  
-			<a href="<?php echo site_url('export/accreds/'.$this->session->userdata('idEvenementEnCours')); ?>">Exporter</a>
+			<a href="<?php echo site_url('export/accreds/'.$this->session->userdata('idEvenementEnCours').'/1111'); ?>">Exporter</a>
 			<input type="checkbox" id="simple" checked />Simple </br>
 			<input type="checkbox" id="groupe" checked />Groupe </br>
 			<input type="checkbox" id="valide" checked />Validé </br>
