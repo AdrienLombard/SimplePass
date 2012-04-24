@@ -12,6 +12,9 @@ class Zone extends Cafe {
 		$this->load->library('form_validation');
 		
 		$this->layout->ajouter_js('utilisateur/scriptDate');
+		$this->layout->ajouter_js('utilisateur/CRUDZone');
+		
+		$this->layout->ajouter_css('utilisateur/zone');
 		
 		// Mise en place de la sécurisation.
 		$this->securiseAll();
@@ -84,24 +87,11 @@ class Zone extends Cafe {
 		$libelle = $this->input->post('libelle');
 		
 		if ($this->form_validation->run() == true) {
-			// Ajout dans la base.
-			$this->modelzone->ajouter( $libelle );
-			
-			// Appel de la vue.
-			$data['titre']		= 'Ajout';
-			$data['message']	= 'Votre zone a bien été ajoutée.';
-			$data['redirect'] = 'zone/liste';
-			$this->layout->view('utilisateur/UMessage', $data);	 
+			$this->modelzone->ajouter( $libelle );		 
 		}
-		else {
-			
-			$values->libelle = $libelle;
-			
-			if(empty($libelle))
-				$values->erreurNom = "Veuillez spécifier un nom.";
-			
-			$this->ajouter($values);
-		}
+		
+		redirect('zone/liste');
+		
 	}
 
 	
@@ -130,9 +120,7 @@ class Zone extends Cafe {
 	/**
 	 * Méthode traitement de l'Update du CRUD.
 	 */
-	public function exeModifier($id) {
-		$data['id'] = $id;
-		
+	public function exeModifier( $id ) {
 		$config = array(
 			array(
 				'field'   => 'libelle',
@@ -145,25 +133,10 @@ class Zone extends Cafe {
 		$libelle = $this->input->post('libelle');
 		
 		if ($this->form_validation->run() == true) {
-			
 			$resultat = $this->modelzone->modifier( $id, $libelle );
-			
-			$data['titre']		= 'Modification';
-			$data['message']	= 'Votre zone a bien été modifiée.';
-			$data['redirect'] 	= 'zone';
-			$this->layout->view('utilisateur/UMessage', $data);
-			
 		}
-		else {
-			$donnees['libelle'] 	= $libelle;
-			
-			$values = '';
-			if(empty($libelle))
-				$values->erreurNom = "Veuillez spécifier un nom.";
-			$donnees['info'] = $values;
-			
-			$this->modifier($id, $donnees);
-		}
+		
+		redirect('zone/liste');
 	}
 	
 	
@@ -171,22 +144,18 @@ class Zone extends Cafe {
 	 * Methode Delete du CRUD.
 	 * @param $id : Id de la données a supprimer.
 	 */
-	public function supprimer($id) {
+	public function exeSupprimer( $id ) {
 		
-		// On supprime les paramètres dévènement qui utilisent cette zone.
+		// On supprime les paramètres d'évènement qui utilisent cette zone.
 		$this->modelevenement->supprimerParametreParZone( $id );
 		
 		// on supprime les liens entre les accréditations et cette zone.
-		$this->modelzone->supprimerZoneParZone ( $id );
+		$this->modelzone->supprimerZoneParZone( $id );
 		
 		// On supprime la zone.
 		$this->modelzone->supprimer( $id );
 		
-		$data['titre']		= 'Suppression';
-		$data['message']	= 'Votre zone a bien été supprimée.';
-		$data['redirect'] 	= 'zone';
-		$this->layout->view('utilisateur/UMessage', $data);
-
+		redirect('zone/liste');
 	}
 	
 

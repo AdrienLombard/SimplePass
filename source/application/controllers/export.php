@@ -19,11 +19,12 @@ class Export extends The {
 	}
 	
 	
-	public function accreds($idEvenement) {
+	public function accreds($idEvenement, $params ) {
 		
 		//error_reporting(0);
 
-		// evenement
+		// Requete pour les évènement.
+		// TODO : modifier la requete.
 		$evenement = $this->modelevenement->getEvenementParId($idEvenement);
 
 		// en-tête
