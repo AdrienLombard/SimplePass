@@ -20,7 +20,7 @@ class utilisateur extends Cafe {
 	{
 		if($this->session->userdata('login')) {
 			
-			$data['evenement'] = end($this->modelevenement->getEvenementEnCours());
+			$data['evenement'] = $this->modelevenement->getEvenementParId($this->session->userdata('idEvenementEnCours'));
 			$data['nb'] = count($this->modelevenement->getEvenements());
 			$data['nbAccreds'] = $this->modelaccreditation->getNbAccreditationsParEvenement($this->session->userdata('idEvenementEnCours'));
 			$data['nbDemandes'] = $this->modelaccreditation->getNbAccreditationsEnAttenteParEvenement($this->session->userdata('idEvenementEnCours'));

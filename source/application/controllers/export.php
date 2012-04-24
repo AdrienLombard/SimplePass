@@ -21,7 +21,7 @@ class Export extends The {
 	
 	public function accreds($idEvenement) {
 		
-		error_reporting(0);
+		//error_reporting(0);
 
 		// evenement
 		$evenement = $this->modelevenement->getEvenementParId($idEvenement);
@@ -37,45 +37,88 @@ class Export extends The {
 			'organisme' => array('title' => 'Organisme', 'type' => ExcelExport::STRING),
 			'fonction'	=> array('title' => 'Fonction', 'type' => ExcelExport::STRING),
 			'tel'		=> array('title' => 'Tel', 'type' => ExcelExport::STRING),
-			'mail'		=> array('title' => 'Mail', 'type' => ExcelExport::STRING)
+			'mail'		=> array('title' => 'Mail', 'type' => ExcelExport::STRING),
+			'numero presse' => array('title' => 'Numero de carte presse', 'type' => ExcelExport::STRING),
+			'adresse'	=> array('title' => 'Adresse', 'type' => ExcelExport::STRING)
 		);
 
 		// lignes : accreditations
 		$content = array();
 		$accreds = $this->modelaccreditation->getAccreditationsParEvenement($idEvenement);
 		foreach($accreds as $accred) {
-			
-			$zones = $this->modelzone->getZoneParAccreditation($accred->idaccreditation);
-			$strZones = '';
-			foreach($zones as $zone)
-				$strZones .= $zone->codezone . ' -';
-			
-			$groupe = '';
-			
-			if(isset($accred->groupe) && !empty($accred->groupe) && $accred->groupe != '') {
-				$groupe = $accred->groupe;
+			if(isset($accred->numeropresse) && !empty($accred->numeropresse) && $accred->numeropresse != '') {
+				
+				$zones = $this->modelzone->getZoneParAccreditation($accred->idaccreditation);
+				$strZones = '';
+				foreach($zones as $zone)
+					$strZones .= $zone->codezone . ' -';
+				
+				$groupe = '';
+				
+				if(isset($accred->groupe) && !empty($accred->groupe) && $accred->groupe != '') {
+					$groupe = $accred->groupe;
+				}
+				
+				$nom = $accred->nom;
+				
+				if($groupe != '' && $accred->referent != null)
+					$nom = '	- ' . $nom;
+				
+				if($groupe != '' && $accred->referent == null)
+					$groupe .= ' (Référent)';
+				
+				$content[] = array(
+					'nom'		=> $nom,
+					'prenom'	=> $accred->prenom,
+					'pays'		=> $accred->pays,
+					'groupe'	=> $groupe,
+					'cat'		=> $accred->libellecategorie,
+					'zones'		=> $strZones,
+					'organisme' => $accred->organisme,
+					'fonction'	=> $accred->fonction,
+					'numero presse' => $accred->numeropresse,
+					'tel'		=> $accred->tel,
+					'adresse'	=> $accred->adresse,
+					'mail'		=> $accred->mail
+				);
 			}
+			else {
 			
-			$nom = $accred->nom;
-			
-			if($groupe != '' && $accred->referent != null)
-				$nom = '	- ' . $nom;
-			
-			if($groupe != '' && $accred->referent == null)
-				$groupe .= ' (Référent)';
-			
-			$content[] = array(
-				'nom'		=> $nom,
-				'prenom'	=> $accred->prenom,
-				'pays'		=> $accred->pays,
-				'groupe'	=> $groupe,
-				'cat'		=> $accred->libellecategorie,
-				'zones'		=> $strZones,
-				'organisme' => $accred->organisme,
-				'fonction'	=> $accred->fonction,
-				'tel'		=> $accred->tel,
-				'mail'		=> $accred->mail
-			);
+				$zones = $this->modelzone->getZoneParAccreditation($accred->idaccreditation);
+				$strZones = '';
+				foreach($zones as $zone)
+					$strZones .= $zone->codezone . ' -';
+				
+				$groupe = '';
+				
+				if(isset($accred->groupe) && !empty($accred->groupe) && $accred->groupe != '') {
+					$groupe = $accred->groupe;
+				}
+				
+				$nom = $accred->nom;
+				
+				if($groupe != '' && $accred->referent != null)
+					$nom = '	- ' . $nom;
+				
+				if($groupe != '' && $accred->referent == null)
+					$groupe .= ' (Référent)';
+				
+				$content[] = array(
+					'nom'		=> $nom,
+					'prenom'	=> $accred->prenom,
+					'pays'		=> $accred->pays,
+					'groupe'	=> $groupe,
+					'cat'		=> $accred->libellecategorie,
+					'zones'		=> $strZones,
+					'organisme' => $accred->organisme,
+					'fonction'	=> $accred->fonction,
+					'numero presse' => ' - ',
+					'tel'		=> $accred->tel,
+					'adresse'	=> ' - ',
+					'mail'		=> $accred->mail
+				);
+				
+			}
 			
 		}
 		

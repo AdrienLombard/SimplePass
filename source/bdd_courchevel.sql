@@ -154,7 +154,7 @@ create table courchevel_zone
 insert into courchevel_utilisateur (login,mdp) values ('root', 'root');
 
 insert into courchevel_client (pays,nom,prenom,organisme,tel,mail) values ('CHE','ASSIER','Aymeric','World Company','0123456789','aymeric.assier@gmail.com');
-insert into courchevel_client (pays,nom,prenom,organisme,tel,mail) values ('FRA','LOMBARD','Adrien','World Company','0234567891','adrien.lombard@gmail.com');
+insert into courchevel_client (pays,nom,prenom,organisme,tel,mail,adresse) values ('FRA','LOMBARD','Adrien','World Company','0234567891','adrien.lombard@gmail.com','8 Rue Isaline 73100 Aix Les Bains');
 insert into courchevel_client (pays,nom,prenom,tel,mail) values ('BEL','ARNOULD','Mickaël','0345678912','mickael.arnould@gmail.com');
 insert into courchevel_client (pays,nom,prenom,tel,mail) values ('FRA','FRANCHON','Sebastien','0456789123','seb.franchon@gmail.com');
 insert into courchevel_client (pays,nom,prenom,tel,mail) values ('TUN','CHRIGUI','Hajer','0567891234','hajer.chrigui@gmail.com');
@@ -230,7 +230,7 @@ insert into courchevel_accreditation (idclient, idcategorie, idevenement, etatac
 insert into courchevel_accreditation (idclient, idcategorie, idevenement, etataccreditation, dateaccreditation) values (1, 13, 3, '1', '1330297200');
 insert into courchevel_accreditation (idclient, idcategorie, idevenement, etataccreditation, dateaccreditation) values (3, 12, 1, '0', '1324076400');
 insert into courchevel_accreditation (idclient, idcategorie, idevenement, etataccreditation, dateaccreditation) values (3, 12, 3, '0', '1330038000');
-insert into courchevel_accreditation (idclient, idcategorie, idevenement, etataccreditation, dateaccreditation) values (2, 4, 3, '1', '1330038000');
+insert into courchevel_accreditation (idclient, idcategorie, idevenement, etataccreditation, dateaccreditation, numeropresse) values (2, 4, 3, '1', '1330038000', '2592825830');
 
 insert into courchevel_accreditation_zones (idaccreditation, idzone) values (1, 14);
 insert into courchevel_accreditation_zones (idaccreditation, idzone) values (2, 14);
