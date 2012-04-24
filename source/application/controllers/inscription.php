@@ -527,6 +527,7 @@ class Inscription extends Chocolat {
 		$this->layout->ajouter_js('lambda/scriptGroupe');
 		$this->layout->ajouter_js('jquery.Jcrop.min');
 		$this->layout->ajouter_js('webcam/jquery.webcam');
+		$this->layout->ajouter_js('webcam/webcamGroupe');
 		
 		$this->layout->view('lambda/LGroupeDetails', $data);
 	}
