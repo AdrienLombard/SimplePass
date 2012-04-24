@@ -91,7 +91,7 @@
 						</div>
 						<div>
 							<label>Image : </label>
-							<input type="file" name="pers[0][photo_file]"  />
+							<input type="file" name="photo_file0"  />
 						</div>
 						<div  data="0" class="contientZones" >
 							<label>Zones : </label>
@@ -118,8 +118,8 @@
 						<input type="hidden"  name="pers[<?php echo $nb; ?>][idclient]"  value="<?php echo $p->idclient; ?>">
 						<input type="hidden"  name="pers[<?php echo $nb; ?>][idaccreditation]"  value="<?php echo $p->idaccreditation; ?>">
 						<div class="photo">
-							<?php if(img_url('photos/'.$ref->idclient.'.jpg') != NULL): ?>
-								<img src="<?php echo site_url('image/generate/' . $ref->idclient); ?>" />
+							<?php if(img_url('photos/'.$p->idclient.'.jpg') != NULL): ?>
+								<img src="<?php echo site_url('image/generate/' . $p->idclient); ?>" />
 							<?php endif; ?>
 						</div>
 						<div>
@@ -145,7 +145,7 @@
 						</div>
 						<div>
 							<label>Image : </label>
-							<input type="file" name="pers[<?php echo $nb; ?>][photo_file]"  />
+							<input type="file" name="photo_file<?php echo $nb; ?>"  />
 						</div>
 						<div class="contientZones" data="<?php echo $nb; ?>">
 							<label>Zones : </label>
