@@ -1,3 +1,8 @@
+<script>
+	
+
+</script>
+
 <h1>Accréditations</h1>
 
 <div class="wrap">
