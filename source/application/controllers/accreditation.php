@@ -605,58 +605,60 @@ class Accreditation extends Cafe {
 	public function exeModifierGroupe() {
 	
 		$info				= $this->input->post('info');
-		$personnes				= $this->input->post('pers');
-		if($_FILES['photo_file']['size'] != 0) {
-			
-			$config['upload_path'] = UPLOAD_DIR;
-			$config['allowed_types'] = 'jpg';
-			$config['file_name'] = $personnes['0']['idclient'].".jpg";
-			$config['overwrite'] = true;
-
-			$this->load->library('upload', $config);
-			$this->upload->do_upload('photo_file');
-			$data = $this->upload->data();
-
-			$this->load->helper('image');
-			if($data['image_width'] > 160)
-				resizeWidthRatio($data['full_path'], 160);
-			
-		}
+		$personnes			= $this->input->post('pers');
 		
+		$id = 0;
 		foreach($personnes as $pers){
-		
-		//modification du client	
-		$idClient = $pers['idclient'];
-		$client = array();
-		$client['nom'] = $pers['nom'];
-		$client['prenom'] = $pers['prenom'];
-		$client['pays'] = $info['pays'];
-		$client['tel'] = $info['tel'];
-		$client['mail'] = $info['mail'];
 			
-		$this->modelclient->modifier($idClient, $client);
+			//modification du client	
+			$idClient = $pers['idclient'];
+			$client = array();
+			$client['nom'] = $pers['nom'];
+			$client['prenom'] = $pers['prenom'];
+			$client['pays'] = $info['pays'];
+			$client['tel'] = $info['tel'];
+			$client['mail'] = $info['mail'];
 
-		//modification de l'accreditation
-		$idAccred = $pers['idaccreditation'];
-		$accred = array();
-		$accred['idclient'] = $idClient;
-		$accred['idcategorie'] = $pers['categorie'];
-		$accred['fonction'] = $pers['fonction'];
-		//$accred['allaccess'] = ($this->input->post('allAccess'))? ALL_ACCESS : NON_ALL_ACCESS;
+			$this->modelclient->modifier($idClient, $client);
 
-		$this->modelaccreditation->modifier($idAccred, $accred);
-		
-		// modification des zones (suppression puis ajout).
-		$this->modelzone->supprimerZoneParAccreditation($idAccred);
+			//modification de l'accreditation
+			$idAccred = $pers['idaccreditation'];
+			$accred = array();
+			$accred['idclient'] = $idClient;
+			$accred['idcategorie'] = $pers['categorie'];
+			$accred['fonction'] = $pers['fonction'];
+			//$accred['allaccess'] = ($this->input->post('allAccess'))? ALL_ACCESS : NON_ALL_ACCESS;
 
-		if($_FILES['photo_file']['size'] != 0)
-				copy($data['full_path'], UPLOAD_DIR . '/' . $pid . '.jpg');
-		
-		$values = array();
-		foreach( $pers['zone'] as $key => $value )
-			$values[] = array('idaccreditation' => $idAccred, 'idzone' => $key);
+			$this->modelaccreditation->modifier($idAccred, $accred);
 
-			$this->modelzone->ajouterZonesAccreditation($values);
+			// modification des zones (suppression puis ajout).
+			$this->modelzone->supprimerZoneParAccreditation($idAccred);
+			
+			$photo = 'photo_file'.$id;			
+			if($_FILES[$photo]['size'] != 0) {
+				
+				$config['upload_path'] = UPLOAD_DIR;
+				$config['allowed_types'] = 'jpg';
+				$config['file_name'] = $pers['idclient'].".jpg";
+				$config['overwrite'] = true;
+
+				$this->load->library('upload', $config);
+				$this->upload->do_upload($photo);
+				$data = $this->upload->data();
+
+				$this->load->helper('image');
+				if($data['image_width'] > 160)
+					resizeWidthRatio($data['full_path'], 160);
+
+			}
+
+			$values = array();
+			foreach( $pers['zone'] as $key => $value )
+				$values[] = array('idaccreditation' => $idAccred, 'idzone' => $key);
+
+				$this->modelzone->ajouterZonesAccreditation($values);
+				
+			$id++;
 		}
 		
 		redirect('accreditation/voirEquipe/'.$info['groupe']);
