@@ -495,12 +495,12 @@ class Accreditation extends Cafe {
 		/*
 		 * Liste des catégories avec les zones associées
 		 */
-		$cats = $this->modelcategorie->getCategorieDansEvenement($this->session->userdata('idEvenementEnCours'));
+		$cats = $this->listeCategorieToDisplay($this->session->userdata('idEvenementEnCours'));
 		foreach($cats as $cat) {
 			$push = array();
 			$push['cat'] = $cat;
 			$push['zones'] = '';
-			$catZones = $this->modelzone->getZoneParCategorieEtEvenement($cat->idcategorie, $this->session->userdata('idEvenementEnCours'));
+			$catZones = $this->modelzone->getZoneParCategorieEtEvenement($cat['db']->idcategorie, $this->session->userdata('idEvenementEnCours'));
 			foreach($catZones as $cz) $push['zones'] .= $cz->idzone.'-';
 			$data['categories'][] = $push;
 		}
@@ -797,51 +797,7 @@ class Accreditation extends Cafe {
 
 	
 	public function exeModifier() {
-		// mise en place de la vérification de CI.
-		// $config = array(
-			// array(
-				// 'field'   => 'nom',
-				// 'label'   => 'Nom', 
-				// 'rules'   => 'required'
-			// ),
-			// array(
-				// 'field'   => 'prenom',
-				// 'label'   => 'Prenom', 
-				// 'rules'   => 'required'
-			// ),
-			// array(
-				// 'field'   => 'pays',
-				// 'label'   => 'Pays',
-				// 'rules'   => ''
-			// ),
-			// array(
-				// 'field'   => 'tel',
-				// 'label'   => 'Téléphone',
-				// 'rules'   => ''
-			// ),
-			// array(
-				// 'field'   => 'mail',
-				// 'label'   => 'e-Mail',
-				// 'rules'   => ''
-			// ),
-			// array(
-				// 'field'   => 'evenement',
-				// 'label'   => 'Evènement', 
-				// 'rules'   => 'required'
-			// ),
-			// array(
-				// 'field'   => 'fonction',
-				// 'label'   => 'Fonction / Role', 
-				// 'rules'   => ''
-			// ),
-			// array(
-				// 'field'   => 'categorie',
-				// 'label'   => 'Catégorie', 
-				// 'rules'   => ''
-			// )
-		// );
-		// $this->form_validation->set_rules($config);
-		
+
 		$idClient = $this->input->post('idClient');
 		$client = array();
 		$client['nom'] = strtoupper($this->input->post('nom'));
@@ -849,6 +805,7 @@ class Accreditation extends Cafe {
 		$client['pays'] = $this->input->post('pays');
 		$client['tel'] = $this->input->post('tel');
 		$client['mail'] = $this->input->post('mail');
+		$client['organisme'] = $this->input->post('organisme');
 		
 		$webcam = $this->input->post('photo_webcam');
 		if($webcam != null) {
@@ -868,7 +825,7 @@ class Accreditation extends Cafe {
 		$accred['allaccess'] = ($this->input->post('allAccess'))? ALL_ACCESS : NON_ALL_ACCESS;
 		
 		$this->modelaccreditation->modifier($idAccred, $accred);
-		
+
 		// modification des zone.
 		$this->modelzone->supprimerZoneParAccreditation($idAccred);
 		
