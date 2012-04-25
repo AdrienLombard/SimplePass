@@ -17,9 +17,11 @@ class modelCategorie extends MY_Model {
 						->result();
 	}
 	
-	public function getCategoriesSaufPresse() {
+	public function getCategoriesSaufPresse( $event ) {
 		return $this->db->select('*')
-						->from(DB_CATEGORIE )
+						->from(DB_CATEGORIE.' c')
+						->join (DB_PARAMETRES_EVENEMENTS.' p', 'p.idcategorie = c.idcategorie')
+						->where('idevenement', $event)
 						->not_like('libellecategorie','Presse')
 						->get()
 						->result();
