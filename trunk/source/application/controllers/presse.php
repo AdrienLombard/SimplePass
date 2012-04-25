@@ -696,7 +696,7 @@ class Presse extends Chocolat{
 			$this->layout->view('lambda/LMessage', $data);
 		} elseif($data['image_width'] > IMG_WIDTH && $data['image_height'] > IMG_HEIGHT) {
 			if($data['image_width'] > 940)
-				resizeWidthRatio($data['full_path'], 940);
+				resizeWidthRatio($data['full_path'], 940, ($data['image_height'] * 940) / $data['image_width']);
 			redirect('inscription/crop/' . $id);
 		} else
 			die('Image trop petite.');
