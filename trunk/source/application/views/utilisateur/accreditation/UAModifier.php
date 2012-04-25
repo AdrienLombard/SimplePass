@@ -92,6 +92,11 @@
 						</div>
 
 						<div>
+							<label>Organisme : </label>
+							<input readonly type="text" name="organisme" class="organisme" value="<?php echo $accred->organisme; ?>" >
+						</div>
+
+						<div>
 							<label>Tel : </label>
 							<input readonly type="text" name="tel" class="tel" value="<?php echo $accred->tel; ?>">
 						</div>
@@ -114,11 +119,16 @@
 
 						<div>
 							<label>Catégorie : </label>
-							<select disabled name="categorie">
-								<option value="">---</option>
-								<?php foreach($categories as $categorie): ?>
-								<option value="<?php echo $categorie['cat']->idcategorie; ?>" zone="<?php echo $categorie['zones']; ?>" <?php echo ($categorie['cat']->idcategorie == $accred->idcategorie)? 'selected' : '' ; ?>>
-									<?php echo $categorie['cat']->libellecategorie; ?>
+							<select disabled name="categorie" id="categorieSimple" >
+								<option value="" <?php if(empty($accred->idcategorie)) echo 'selected'; ?> >---</option>
+								<?php foreach($categories as $cate): ?>
+								<option
+									value="<?php echo $cate['cat']['db']->idcategorie; ?>"
+									zone="<?php echo $cate['zones']; ?>"
+									<?php if(isset($accred->idcategorie) && $accred->idcategorie == $cate['cat']['db']->idcategorie) echo 'selected'; ?>
+									>
+									<?php for($i=0; $i<$cate['cat']['depth']; $i++) echo '&#160;&#160;'; ?>
+									<?php echo $cate['cat']['db']->libellecategorie; ?>
 								</option>
 								<?php endforeach; ?>
 							</select>
