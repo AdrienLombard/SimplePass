@@ -3,10 +3,9 @@
 if ( ! function_exists('resizeWidthRatio'))
 {
 	// redim une image suivant une largeur en conservant le ratio
-	function resizeWidthRatio($url, $w) {
+	function resizeWidthRatio($url, $w, $h) {
 		
 		$src = imagecreatefromjpeg($url);
-		$h = imagesy($src) / (imagesx($src) / $w);
 		$img = imagecreatetruecolor($w, $h);
 		imagecopyresampled($img, $src, 0, 0, 0, 0, $w, $h, imagesx($src), imagesy($src));
 		unlink($url);

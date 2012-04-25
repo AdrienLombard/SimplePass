@@ -405,7 +405,7 @@ class Accreditation extends Cafe {
 
 				$this->load->helper('image');
 				if($data['image_width'] > 160)
-					resizeWidthRatio($data['full_path'], 160);
+					resizeWidthRatio($data['full_path'], 160, ($data['image_height'] * 160) / $data['image_width']);
 				
 			}
 			
@@ -621,6 +621,9 @@ class Accreditation extends Cafe {
 
 			$this->modelclient->modifier($idClient, $client);
 
+			$this->load->helper('image');
+			if($data['image_width'] > 160)
+				resizeWidthRatio($data['full_path'], 160, ($data['image_height'] * 160) / $data['image_width']);
 			//modification de l'accreditation
 			$idAccred = $pers['idaccreditation'];
 			$accred = array();
@@ -976,7 +979,7 @@ class Accreditation extends Cafe {
 			redirect('accreditation/voir/' . $id, 0.2);
 		} elseif($data['image_width'] > IMG_WIDTH && $data['image_height'] > IMG_HEIGHT) {
 			if($data['image_width'] > 940)
-				resizeWidthRatio($data['full_path'], 940);
+				resizeWidthRatio($data['full_path'], 940, ($data['image_height'] * 940) / $data['image_width']);
 			redirect('accreditation/crop/' . $id);
 		} else
 			die('Image trop petite.');
