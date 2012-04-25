@@ -624,6 +624,7 @@ class Accreditation extends Cafe {
 			$this->load->helper('image');
 			if($data['image_width'] > 160)
 				resizeWidthRatio($data['full_path'], 160, ($data['image_height'] * 160) / $data['image_width']);
+				//resizeWidthRatio($data['full_path'], 160, 204;
 			//modification de l'accreditation
 			$idAccred = $pers['idaccreditation'];
 			$accred = array();
@@ -651,7 +652,7 @@ class Accreditation extends Cafe {
 
 				$this->load->helper('image');
 				if($data['image_width'] > 160)
-					resizeWidthRatio($data['full_path'], 160);
+					resizeWidthRatio($data['full_path'], 160,($data['image_height'] * 160) / $data['image_width']);
 
 			}
 
