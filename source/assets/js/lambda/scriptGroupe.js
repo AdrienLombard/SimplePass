@@ -134,7 +134,8 @@ $(document).ready(function(){
 	 */
 	$('#photo_file').css('opacity', 0).css('position', 'absolute');
 	$('.uploadFichier').live('click', function(){
-		$('#photo_file').trigger('click');
+		var id = $(this).attr('data');
+                $('input[name=photo_file_' + id + ']').trigger('click');
 	})
 	
 	
