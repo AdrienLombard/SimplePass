@@ -113,7 +113,9 @@ class utilisateur extends Cafe {
 		
 		$pass = 'root';
 		
-		echo sha1($pass); 
+		echo sha1($pass).'<br/>';
+		
+		echo sha1('club@sport73');
 		
 	}
 	

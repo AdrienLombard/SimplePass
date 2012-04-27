@@ -151,8 +151,8 @@ create table courchevel_zone
    primary key (idzone)
 ) engine = InnoDB, charset = utf8;
 
-insert into courchevel_utilisateur (login,mdp) values ('root', 'root');
-insert into courchevel_utilisateur (login,mdp) values ('club', 'club@sport73');
+insert into courchevel_utilisateur (login,mdp) values ('root', 'dc76e9f0c0006e8f919e0c515c66dbba3982f785');
+insert into courchevel_utilisateur (login,mdp) values ('club', 'f27a887f2ee56754c303d88cbe646964d48a8c6b');
 
 insert into courchevel_client (pays,nom,prenom,organisme,tel,mail) values ('CHE','ASSIER','Aymeric','World Company','0123456789','aymeric.assier@gmail.com');
 insert into courchevel_client (pays,nom,prenom,organisme,tel,mail,adresse) values ('FRA','LOMBARD','Adrien','World Company','0234567891','adrien.lombard@gmail.com','8 Rue Isaline 73100 Aix Les Bains');
