@@ -101,5 +101,36 @@ define('SIGNATURE_MAIL',	'<p>Sincères salutations, <br />' .
 							'<p>www.courchevel.com/skiworldcup</p>');
 
 
+/*
+ * Informations pour les accreditations papier
+ * Les dimensions sont en mm
+ */ 
+
+/* 
+ *		format quart de A4
+ */ 
+// haut gauche de la photo
+ define('Ximage',24);
+ define('Yimage',19);
+// haut gauche de la zone d'information
+ define('Xinfo',25);
+ define('Yinfo',71);
+// haut gauche de la zone de zones
+ define('Xzones',25);
+ define('Yzones',97);
+ 
+ /*
+  *		format carte
+  */
+// haut gauche de la photo 
+ define('Ximagec',30);
+ define('Yimagec',22);
+ // haut gauche de la zone d'information
+ define('Xinfoc',58);
+ define('Yinfoc',28);
+ // haut gauche de la zone de zones
+ define('Xzonesc',30);
+ define('Yzonesc',55);
+ 
 /* End of file constants.php */
 /* Location: ./application/config/constants.php */
