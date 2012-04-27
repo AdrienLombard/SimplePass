@@ -83,7 +83,7 @@
 						<div>
 							<label>Pays : 
 								<?php foreach($pays as $p): ?>
-									<span id="<?php echo $p->idpays; ?>" class="drapeau" ><?php echo img('drapeaux/' . strtolower($p->idpays) . '.gif'); ?></span>
+									<span id="<?php echo $p->idpays; ?>" class="drapeau" style="display:none;" ><?php echo img('drapeaux/' . strtolower($p->idpays) . '.gif'); ?></span>
 								<?php endforeach; ?>
 							</label>
 							<select disabled class="pays" name="pays" style="padding-left: 0px;">
