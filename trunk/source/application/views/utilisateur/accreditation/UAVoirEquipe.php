@@ -48,7 +48,7 @@
 						<div>
 							<label>Pays : 
 								<?php foreach($listePays as $p): ?>
-									<span id="<?php echo $p->idpays; ?>" class="drapeau" ><?php echo img('drapeaux/' . strtolower($p->idpays) . '.gif'); ?></span>
+									<span id="<?php echo $p->idpays; ?>" class="drapeau" style="display:none;" ><?php echo img('drapeaux/' . strtolower($p->idpays) . '.gif'); ?></span>
 								<?php endforeach; ?>
 							</label>
 							<select class="pays" name="info[pays]" disabled>

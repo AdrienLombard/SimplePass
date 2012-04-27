@@ -78,7 +78,7 @@
         </div>
 		
 		<footer>
-			SimplePass Accreditation <?php echo date('Y'); ?> - <a href="<?php echo site_url('welcome/about'); ?>">À propos</a>
+			SimplePass Accreditations <?php echo date('Y'); ?> - <a href="<?php echo site_url('welcome/about'); ?>">À propos</a>
 		</footer>
         
     </body>
