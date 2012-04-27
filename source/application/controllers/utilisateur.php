@@ -42,12 +42,16 @@ class utilisateur extends Cafe {
 		$login 	= $this->input->post('login');
 		$mdp 	= $this->input->post('mdp');
 		
+		
 		if($login && $mdp) {
+			// On crypte le password.
+			$pass = sha1($mdp);
+			
 			// On regarde dans la base si l'utilisateur existe.
 			$donnesUtilisateur = $this->modelutilisateur->getMDP($login);
 
 			if(!empty($donnesUtilisateur)){
-				if($donnesUtilisateur[0]->mdp == $mdp) {
+				if($donnesUtilisateur[0]->mdp == $pass) {
 					$this->session->set_userdata('login', $donnesUtilisateur[0]->login);
 					
 					$this->load->model('modelevenement');			
@@ -106,13 +110,11 @@ class utilisateur extends Cafe {
 	}
 
 	public function test() {
-		$this->load->model('modelcategorie');
-
-		$data['categories'] = $this->modelcategorie->getCategorieDansEvenementToutBien();
-
-		//var_dump($data['categories']);
-
-		$this->layout->view('test.php', $data);
+		
+		$pass = 'root';
+		
+		echo sha1($pass); 
+		
 	}
 	
 	
