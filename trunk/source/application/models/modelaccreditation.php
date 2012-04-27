@@ -88,6 +88,7 @@ class modelAccreditation extends MY_Model {
 						->join(DB_CATEGORIE . ' ca', 'a.idcategorie = ca.idcategorie', 'left')
 						->where('a.idevenement', $idEvenement)
 						->where('a.referent', null)
+						->Group_by('a.idclient')
 						->Order_by('a.etataccreditation')
 						->get()
 						->result();
