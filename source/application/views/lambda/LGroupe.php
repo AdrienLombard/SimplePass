@@ -63,7 +63,7 @@
 			
 			<label><?php echo lang('pays'); ?>*
 				<?php foreach($listePays as $p): ?>
-					<span id="<?php echo $p->idpays; ?>" class="drapeau" ><?php echo img('drapeaux/' . $p->idpays . '.gif'); ?></span>
+					<span id="<?php echo $p->idpays; ?>" class="drapeau" ><?php echo img('drapeaux/' . strtolower($p->idpays) . '.gif'); ?></span>
 				<?php endforeach; ?>
 			</label>
 			<select  id="pays" name="pays" class="select">

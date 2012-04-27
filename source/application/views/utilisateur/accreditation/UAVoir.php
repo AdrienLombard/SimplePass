@@ -72,7 +72,7 @@
 					<div>
 						<label class="short">Pays : 
 							<?php foreach($pays as $p): ?>
-								<span id="<?php echo $p->idpays; ?>" class="drapeau" ><?php echo img('drapeaux/' . $p->idpays . '.gif'); ?></span>
+								<span id="<?php echo $p->idpays; ?>" class="drapeau" ><?php echo img('drapeaux/' . strtolower($p->idpays) . '.gif'); ?></span>
 							<?php endforeach; ?>
 						</label>
 						<select class="pays" name="pays" init="<?php echo $client->pays; ?>" style="padding-left: 0px;" disabled="disabled">
