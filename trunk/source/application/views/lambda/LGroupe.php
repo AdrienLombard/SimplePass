@@ -91,7 +91,7 @@
 			
 			<div>
 			<label><?php echo lang('categorie'); ?></label>
-			<select  id="categorie" name="categorie[]" class="select dyn-selector">
+			<select  id="categorie" name="categorie" class="select dyn-selector">
 				<option value="-1"><?php echo lang('neSaisPas'); ?></option>
 				<?php foreach($categorie as $cate): ?>
 				<option value="<?php echo $cate['db']->idcategorie; ?>" >

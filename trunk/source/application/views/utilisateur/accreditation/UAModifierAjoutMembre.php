@@ -38,7 +38,7 @@
 										<a href="#" class="captureCam">Prendre une photo</a>
 									</div>
 
-									<canvas id="canvas" width="160" height="204"></canvas> 
+									<canvas id="canvas" width="160" height="204"></canvas>
 
 									<div class="photoMessage"></div>
 

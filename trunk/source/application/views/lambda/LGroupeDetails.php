@@ -89,7 +89,7 @@
 	<div class="ligne" data="nbLigne" etat="false">
 		<h3><?php echo lang('nouveauMembre'); ?> <span class="modifier"><?php echo lang('modifier'); ?></span></h3>
 		<div class="form">
-			<input type="hidden" name="groupe[index]" value="nbLigne" />
+			<input type="hidden" name="groupe[nbLigne][index]" value="nbLigne" />
 			<div class="photo">
 				<canvas id="canvas_nbLigne" width="160" height="204" style="display:none;"></canvas>
 				<div class="webcamWrapper" data="nbLigne">
@@ -121,7 +121,7 @@
 			
 			<div class="split">
 				<label for=""><?php echo lang('categorie'); ?></label>
-				<select  id="categorie" name="groupe[nbLigne][categorie][]" class="select dyn-selector">
+				<select  id="categorie" name="groupe[nbLigne][categorie]" class="select dyn-selector">
 					<option value="-1" libelle=" " ><?php echo lang('neSaisPas'); ?></option>
 					<?php foreach($listeCategorie as $cate): ?>
 					<option value="<?php echo $cate['db']->idcategorie; ?>" >
