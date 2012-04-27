@@ -47,7 +47,7 @@
 	
 		<div class="box-small">
 			
-			<form id="inscriptionGroupe" method="post" action="<?php echo site_url('inscription/exeAjouterGroupe'); ?>">
+			<form id="inscriptionGroupe" method="post" action="<?php echo site_url('inscription/exeAjouterGroupe'); ?>" enctype="multipart/form-data">
 				
 				<input type="hidden" name="ref[nom]" value="<?php echo $nom; ?>" />
 				<input type="hidden" name="ref[prenom]" value="<?php echo $prenom; ?>" />
@@ -57,8 +57,8 @@
 				<input type="hidden" name="ref[mail]" value="<?php echo $mail; ?>" />
 				<input type="hidden" name="ref[groupe]" value="<?php echo $groupe; ?>" />
 				<input type="hidden" name="ref[pays]" value="<?php echo $pays; ?>" />
-				<input type="hidden" name="photo_file_ref" value="<?php echo $pays; ?>" />
-				<input type="hidden" name="ref[photo_webcam]" value="<?php echo $pays; ?>" />
+				<input type="hidden" name="ref[photo_webcam]" value="<?php echo $webcam_ref; ?>" />
+                                <input type="hidden" name="ref[photo_file]" value="<?php echo $unik; ?>" />
 				
 				<input type="hidden" name="evenement" value="<?php echo $evenement; ?>" />
 				
@@ -89,7 +89,7 @@
 	<div class="ligne" data="nbLigne" etat="false">
 		<h3><?php echo lang('nouveauMembre'); ?> <span class="modifier"><?php echo lang('modifier'); ?></span></h3>
 		<div class="form">
-			<input type="hidden" name="ref[index]" value="nbLigne" />
+			<input type="hidden" name="groupe[index]" value="nbLigne" />
 			<div class="photo">
 				<canvas id="canvas_nbLigne" width="160" height="204" style="display:none;"></canvas>
 				<div class="webcamWrapper" data="nbLigne">

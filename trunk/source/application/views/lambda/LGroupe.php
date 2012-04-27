@@ -51,7 +51,7 @@
 	
 		<br><br>
 		<span class="info">* <?php echo lang('mentionChampObligatoire'); ?></span><br>
-		<form method="post" action="<?php echo site_url('inscription/exeGroupe/' . $idEvenement); ?>">
+		<form method="post" action="<?php echo site_url('inscription/exeGroupe/' . $idEvenement); ?>" enctype="multipart/form-data">
 			
 			<input type="hidden" name="evenement" value="<?php echo $infoEvenement[0]->idevenement; ?>" />
 			

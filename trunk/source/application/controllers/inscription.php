@@ -410,7 +410,7 @@ class Inscription extends Chocolat {
 	 */
 	public function groupe($evenement, $info=false) {
 		// Chargement du js.
-		$this->layout->ajouter_js('lambda/scriptGroupe');
+		$this->layout->ajouter_js('lambda/script');
 		$this->layout->ajouter_js('jquery.Jcrop.min');
 		$this->layout->ajouter_js('webcam/jquery.webcam');
 		
@@ -493,25 +493,38 @@ class Inscription extends Chocolat {
 		}
 		else {
 			
-			$data['groupe'] 			= $this->input->post('groupe');
-			$data['pays'] 				= $this->input->post('pays');	
-			$data['nom'] 				= $this->input->post('nom');
-			$data['prenom'] 			= $this->input->post('prenom');
-			$data['fonction'] 			= $this->input->post('fonction');
-			$data['tel'] 				= $this->input->post('tel');
-			$data['mail'] 				= $this->input->post('mail');
-			$data['evenement'] 			= $this->input->post('evenement');
-			$data['listeCategorie'] 	= $this->listeCategorieToDisplay( $idEvenement );
-			
-			// Gestion pour les catégorie.
-			$tab = $this->input->post('categorie');
-			$temp = -1;
-			while($temp == -1) {
-				$temp = array_pop($tab);
-			}
-			$data['categorie'] = $temp;
-			
-			$this->ajouterGroupe($data);
+                    $data = array();
+                    $data['groupe'] 			= $this->input->post('groupe');
+                    $data['pays'] 				= $this->input->post('pays');	
+                    $data['nom'] 				= $this->input->post('nom');
+                    $data['prenom'] 			= $this->input->post('prenom');
+                    $data['fonction'] 			= $this->input->post('fonction');
+                    $data['tel'] 				= $this->input->post('tel');
+                    $data['mail'] 				= $this->input->post('mail');
+                    $data['evenement'] 			= $this->input->post('evenement');
+                    $data['listeCategorie']                 = $this->listeCategorieToDisplay( $idEvenement );
+                    $data['webcam_ref']                     = $this->input->post('photo_webcam');
+
+                    // Gestion pour les catégorie.
+                    $tab = $this->input->post('categorie');
+                    $temp = -1;
+                    while($temp == -1) {
+                        $temp = array_pop($tab);
+                    }
+                    $data['categorie'] = $temp;
+
+                    // upload tmp du fichier
+                    $data['unik'] = null;
+
+                    if(isset($_FILES['photo_file']) && $_FILES['photo_file']['name'] != '') {
+                        $file = $_FILES['photo_file'];
+                        $unik = time();
+                        if(!move_uploaded_file($file['tmp_name'], UPLOAD_DIR . 'tmp/' . $unik . '.jpg'))
+                                die('Echec de l\'upload temporaire (inscription.php:exeGroupe) : ' . $_FILES['photo_file']['error']);
+                        $data['unik'] = $unik;
+                    }
+                    
+                    $this->ajouterGroupe($data);
 		}
 		
 	}
@@ -542,7 +555,36 @@ class Inscription extends Chocolat {
 		unset($ref['categorie']);
 		unset($ref['fonction']);
 		unset($ref['groupe']);
+                unset($ref['index']);
+                
+                // webcam
+                $webcam = $ref['photo_webcam'];
+                unset($ref['photo_webcam']);
+                
+                // file
+                $file = $ref['photo_file'];
+                unset($ref['photo_file']);
+                
+                // ajout ref
 		$id = $this->modelclient->ajouter($ref);
+                
+                // ajout photo webcam
+                if($webcam != null) {
+                    $png = imagecreatefrompng($webcam);
+                    $jpg = imagecreatetruecolor(IMG_WIDTH, IMG_HEIGHT);
+                    imagecopyresampled($jpg, $png, 0, 0, 0, 0, IMG_WIDTH, IMG_HEIGHT, IMG_WIDTH, IMG_HEIGHT);
+                    imagejpeg($jpg, UPLOAD_DIR . $id.".jpg", 100);
+                }
+                
+                // upload fichier
+                if($file != null) {
+                    rename(UPLOAD_DIR . 'tmp/' . $file . '.jpg', UPLOAD_DIR . $id . '.jpg');
+                    $this->load->helper('image');
+                    resizeWidthRatio(UPLOAD_DIR . $id.".jpg", 160, 240);
+                }
+                
+                
+                
 		
 		// Création de l'accreditation pour le referent.
 		$accred = null;
@@ -593,7 +635,29 @@ class Inscription extends Chocolat {
 			$membre['nom'] = $ligne['nom'];
 			$membre['prenom'] = $ligne['prenom'];
 			$membre['pays'] = $data['pays'];
+                        $index = $ligne['index'];
 			$idNewClient = $this->modelclient->ajouter($membre);
+                        
+                        // image
+                        if($_FILES['photo_file_'.$index]['name'] != '') {
+				
+				$config['upload_path'] = UPLOAD_DIR;
+				$config['allowed_types'] = 'jpg';
+				$config['file_name'] = $idNewClient.".jpg";
+				$config['overwrite'] = true;
+
+				$this->load->library('upload', $config);
+				$this->upload->do_upload('photo_file');
+				$dataimg = $this->upload->data();
+
+				$this->load->helper('image');
+				if($dataimg['image_width'] > IMG_WIDTH){
+					if((($dataimg['image_height'] * IMG_WIDTH) / $dataimg['image_width']) <= IMG_HEIGHT)
+						resizeWidthRatio($data['full_path'], IMG_WIDTH);
+					else
+						resizeHeightRatio($data['full_path'], IMG_HEIGHT);
+				}
+			}
 
 			// création de l'accreditation
 			$accred = null;
@@ -604,18 +668,9 @@ class Inscription extends Chocolat {
 			$accred['referent'] = $id;
 			$accred['etataccreditation'] = ACCREDITATION_A_VALIDE;
 			$accred['dateaccreditation'] = time();
-			
-			$tab = $ligne['categorie'];
-			$temp = -1;
-			while($temp == -1) {
-				$temp = array_pop($tab);
-			}
-			if(!$temp)
-				$temp = -1;
-			$accred['idcategorie'] = $temp;
+			$accred['idcategorie'] = $ligne['categorie'];
 
-			if($accred['idcategorie'] != -1)
-				$idNewAccred = $this->modelaccreditation->ajouter($accred);
+                        $idNewAccred = $this->modelaccreditation->ajouter($accred);
 
 			$cat = null;
 			
