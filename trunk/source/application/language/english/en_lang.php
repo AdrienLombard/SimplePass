@@ -72,7 +72,7 @@ $lang['ajoutNouveauMembre'] = 'Add a new member';
 $lang['toutEnvoyer'] = 'Send all';
 $lang['nouveauMembre'] = 'New member';
 $lang['modifier'] = 'Modify';
-$lang['valider'] = 'Validate';
+$lang['valider'] = 'Submit';
 $lang['supprimer'] = 'Delete';
 $lang['oui'] = 'Yes';
 $lang['non'] = 'No';
@@ -80,5 +80,8 @@ $lang['erreurValid'] = 'Please validate every member before submitting the reque
 
 // Page de confirmation
 $lang['continuer'] = 'Continue';
+
+// Bouton du crop
+$lang['validDimensions'] = 'Submit the new size';
 
 ?>

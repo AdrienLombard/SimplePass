@@ -82,4 +82,7 @@ $lang['erreurValid'] = 'Merci de valider chaque membre avant de soumettre votre 
 // Page de confirmation
 $lang['continuer'] = 'Continuer';
 
+// Bouton du crop
+$lang['validDimensions'] = 'Valider les nouvelles dimensions';
+
 ?>
