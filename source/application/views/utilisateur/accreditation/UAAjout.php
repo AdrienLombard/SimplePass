@@ -86,7 +86,9 @@
 								<select class="pays" name="pays" style="padding-left: 0px;">
 
 								<?php foreach($pays as $p): ?>
-									<option value="<?php echo $p->idpays; ?>" <?php echo ($pays->idpays == 'FRA')? 'selected' : '' ;?> ><?php echo $pays->nompays; ?></option>
+									<option value="<?php echo $p->idpays; ?>" <?php echo ($p->idpays == 'FRA')? 'selected' : '' ;?> >
+										<?php echo $p->nompays; ?>
+									</option>
 								<?php endforeach; ?>
 
 								</select>

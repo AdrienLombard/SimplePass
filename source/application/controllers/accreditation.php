@@ -289,7 +289,7 @@ class Accreditation extends Cafe {
 			$accred['dateaccreditation'] = time();
 			$this->modelaccreditation->ajouter($accred);
 			$idAccred = $this->modelaccreditation->lastId();
-			
+
 			// Mise en place de ses zones.
 			if($this->input->post('zone')) {
 				$values = array();
