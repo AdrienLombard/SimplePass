@@ -893,6 +893,7 @@ class Accreditation extends Cafe {
 		$client['pays'] = $this->input->post('pays');
 		$client['tel'] = $this->input->post('tel');
 		$client['mail'] = $this->input->post('mail');
+		$client['organisme'] = $this->input->post('organisme');
 		
 		$this->modelclient->modifier($idClient, $client);
 		
