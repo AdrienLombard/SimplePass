@@ -134,7 +134,7 @@
 								<option
 									value="<?php echo $cate['cat']['db']->idcategorie; ?>"
 									zone="<?php echo $cate['zones']; ?>"
-									<?php if(isset($re->accred['idcategorie']) && $ref->idcategorie == $categorie['cat']->idcategorie) echo 'selected'; ?>
+									<?php if(isset($p->idcategorie) && $p->idcategorie == $cate['cat']['db']->idcategorie) echo 'selected'; ?>
 									>
 									<?php for($i=0; $i<$cate['cat']['depth']; $i++) echo '&#160;&#160;'; ?>
 									<?php echo $cate['cat']['db']->libellecategorie; ?>
