@@ -626,13 +626,6 @@ class Accreditation extends Cafe {
 
 			$this->load->helper('image');
 			
-			if($data['image_width'] > IMG_WIDTH){
-				if((($data['image_height'] * IMG_WIDTH) / $data['image_width']) <= IMG_HEIGHT)
-					resizeWidthRatio($data['full_path'], IMG_WIDTH);
-				else
-					resizeHeightRatio($data['full_path'], IMG_HEIGHT);
-			}
-			
 			//modification de l'accreditation
 			$idAccred = $pers['idaccreditation'];
 			$accred = array();
@@ -707,7 +700,9 @@ class Accreditation extends Cafe {
 	}
 	
 	public function ajoutMembreGroupe($nomgroupe){
-		
+		$this->layout->ajouter_js('webcam/jquery.webcam');
+		$this->layout->ajouter_js('webcam/webcam');
+
 		$nomGroupe=str_replace('%20', ' ', $nomgroupe);;
 		$idEvent = $this->session->userdata('idEvenementEnCours');
 		$membres = $this->modelaccreditation->getAccreditationGroupeParEvenement( $nomGroupe, $idEvent);
@@ -717,7 +712,7 @@ class Accreditation extends Cafe {
 			foreach($zonesAccred as $z){
 				$m->zonesAccred[] = $z->idzone;
 			}
-			if ($m->referent != null){
+			if ($m->referent == null){
 				$membresgrp[] = $m;
 			}
 		}

@@ -502,16 +502,12 @@ class Inscription extends Chocolat {
                     $data['tel'] 				= $this->input->post('tel');
                     $data['mail'] 				= $this->input->post('mail');
                     $data['evenement'] 			= $this->input->post('evenement');
-                    $data['listeCategorie']                 = $this->listeCategorieToDisplay( $idEvenement );
-                    $data['webcam_ref']                     = $this->input->post('photo_webcam');
+                    $data['listeCategorie']     = $this->listeCategorieToDisplay( $idEvenement );
+                    $data['webcam_ref']         = $this->input->post('photo_webcam');
 
                     // Gestion pour les catégorie.
                     $tab = $this->input->post('categorie');
-                    $temp = -1;
-                    while($temp == -1) {
-                        $temp = array_pop($tab);
-                    }
-                    $data['categorie'] = $temp;
+                    $data['categorie'] = $tab;
 
                     // upload tmp du fichier
                     $data['unik'] = null;
@@ -552,40 +548,38 @@ class Inscription extends Chocolat {
 	public function exeAjouterGroupe() {		
 		// Ajout du référent.
 		$ref = $data = $this->input->post('ref');
+
 		unset($ref['categorie']);
 		unset($ref['fonction']);
 		unset($ref['groupe']);
-                unset($ref['index']);
-                
-                // webcam
-                $webcam = $ref['photo_webcam'];
-                unset($ref['photo_webcam']);
-                
-                // file
-                $file = $ref['photo_file'];
-                unset($ref['photo_file']);
-                
-                // ajout ref
+		unset($ref['index']);
+
+		// webcam
+		$webcam = $ref['photo_webcam'];
+		unset($ref['photo_webcam']);
+
+		// file
+		$file = $ref['photo_file'];
+		unset($ref['photo_file']);
+
+        // ajout ref
 		$id = $this->modelclient->ajouter($ref);
                 
-                // ajout photo webcam
-                if($webcam != null) {
-                    $png = imagecreatefrompng($webcam);
-                    $jpg = imagecreatetruecolor(IMG_WIDTH, IMG_HEIGHT);
-                    imagecopyresampled($jpg, $png, 0, 0, 0, 0, IMG_WIDTH, IMG_HEIGHT, IMG_WIDTH, IMG_HEIGHT);
-                    imagejpeg($jpg, UPLOAD_DIR . $id.".jpg", 100);
-                }
+		// ajout photo webcam
+		if($webcam != null) {
+			$png = imagecreatefrompng($webcam);
+			$jpg = imagecreatetruecolor(IMG_WIDTH, IMG_HEIGHT);
+			imagecopyresampled($jpg, $png, 0, 0, 0, 0, IMG_WIDTH, IMG_HEIGHT, IMG_WIDTH, IMG_HEIGHT);
+			imagejpeg($jpg, UPLOAD_DIR . $id.".jpg", 100);
+		}
+
+		// upload fichier
+		if($file != null) {
+			rename(UPLOAD_DIR . 'tmp/' . $file . '.jpg', UPLOAD_DIR . $id . '.jpg');
+			$this->load->helper('image');
+			resizeWidthRatio(UPLOAD_DIR . $id.".jpg", 160, 240);
+		}
                 
-                // upload fichier
-                if($file != null) {
-                    rename(UPLOAD_DIR . 'tmp/' . $file . '.jpg', UPLOAD_DIR . $id . '.jpg');
-                    $this->load->helper('image');
-                    resizeWidthRatio(UPLOAD_DIR . $id.".jpg", 160, 240);
-                }
-                
-                
-                
-		
 		// Création de l'accreditation pour le referent.
 		$accred = null;
 		$accred['idcategorie'] = $data['categorie'];
@@ -598,7 +592,8 @@ class Inscription extends Chocolat {
 		$idNewAccred = $this->modelaccreditation->ajouter($accred);
 
 		// Création des zones accéssible pour cette accrédiation.
-		$this->AssociationZoneAccred($idNewAccred, $data['categorie'], $this->input->post('evenement') );
+		if(!$data['categorie'] == -1)
+			$this->AssociationZoneAccred($idNewAccred, $data['categorie'], $this->input->post('evenement') );
 
 		$evenement = $this->modelevenement->getEvenementParId($accred['idevenement']);
 		
@@ -627,77 +622,93 @@ class Inscription extends Chocolat {
 		else {
 			$contenuMail .= ' (Pas de fonction définie / No function defined) - <strong>Référent(e) du groupe / Group referent</strong></li>';
 		}
-		
+
+
 		// Ajout des membres
-		foreach($this->input->post('groupe') as $ligne) {
-			// création du client
-			$membre = null;
-			$membre['nom'] = $ligne['nom'];
-			$membre['prenom'] = $ligne['prenom'];
-			$membre['pays'] = $data['pays'];
-                        $index = $ligne['index'];
-			$idNewClient = $this->modelclient->ajouter($membre);
-                        
-                        // image
-                        if($_FILES['photo_file_'.$index]['name'] != '') {
-				
-				$config['upload_path'] = UPLOAD_DIR;
-				$config['allowed_types'] = 'jpg';
-				$config['file_name'] = $idNewClient.".jpg";
-				$config['overwrite'] = true;
 
-				$this->load->library('upload', $config);
-				$this->upload->do_upload('photo_file');
-				$dataimg = $this->upload->data();
+		$gr = $this->input->post('groupe');
 
-				$this->load->helper('image');
-				if($dataimg['image_width'] > IMG_WIDTH){
-					if((($dataimg['image_height'] * IMG_WIDTH) / $dataimg['image_width']) <= IMG_HEIGHT)
-						resizeWidthRatio($data['full_path'], IMG_WIDTH);
-					else
-						resizeHeightRatio($data['full_path'], IMG_HEIGHT);
+		//*
+		if($gr) {
+			foreach($this->input->post('groupe') as $ligne) {
+				// création du client
+				$membre = null;
+				$membre['nom'] = $ligne['nom'];
+				$membre['prenom'] = $ligne['prenom'];
+				$membre['pays'] = $data['pays'];
+				$membre['tel'] = $data['tel'];
+				$membre['mail'] = $data['mail'];
+				$idNewClient = $this->modelclient->ajouter($membre);
+
+				$index = $ligne['index'];
+				// image
+				if($_FILES['photo_file_'.$index]['name'] != '') {
+
+					$config['upload_path'] = UPLOAD_DIR;
+					$config['allowed_types'] = 'jpg';
+					$config['file_name'] = $idNewClient.".jpg";
+					$config['overwrite'] = true;
+
+					$this->load->library('upload', $config);
+					$this->upload->do_upload('photo_file');
+					$dataimg = $this->upload->data();
+
+					$this->load->helper('image');
+					if($dataimg['image_width'] > IMG_WIDTH){
+						if((($dataimg['image_height'] * IMG_WIDTH) / $dataimg['image_width']) <= IMG_HEIGHT)
+							resizeWidthRatio($data['full_path'], IMG_WIDTH);
+						else
+							resizeHeightRatio($data['full_path'], IMG_HEIGHT);
+					}
 				}
-			}
 
-			// création de l'accreditation
-			$accred = null;
-			$accred['groupe'] = $data['groupe'];
-			$accred['idevenement'] = $this->input->post('evenement');
-			$accred['idclient'] = $idNewClient;
-			$accred['fonction'] = $ligne['fonction'];
-			$accred['referent'] = $id;
-			$accred['etataccreditation'] = ACCREDITATION_A_VALIDE;
-			$accred['dateaccreditation'] = time();
-			$accred['idcategorie'] = $ligne['categorie'];
+				// création de l'accreditation
+				$accred = null;
+				$accred['groupe'] = $data['groupe'];
+				$accred['idevenement'] = $this->input->post('evenement');
+				$accred['idclient'] = $idNewClient;
+				$accred['fonction'] = $ligne['fonction'];
+				$accred['referent'] = $id;
+				$accred['etataccreditation'] = ACCREDITATION_A_VALIDE;
+				$accred['dateaccreditation'] = time();
 
-                        $idNewAccred = $this->modelaccreditation->ajouter($accred);
 
-			$cat = null;
-			
-			$cat = $this->modelcategorie->getCategorieMereid($accred['idcategorie']);
+				$tab = $ligne['categorie'];
 
-			// Création des zones accéssible pour cette accrédiation.
-			$this->AssociationZoneAccred($idNewAccred, $accred['idcategorie'],$this->input->post('evenement') );
+				$accred['idcategorie'] = $tab;
 
-			// Gestion du mail.
-			$contenuMail .= '<li>' . $membre['prenom'] . ' ' . $membre['nom'];
-			
-			
-			if(isset($cat) && !empty($cat) && $cat[0]->libellecategorie != '') {
-				$contenuMail .= ' - ' . $cat[0]->libellecategorie;
-			}
-			else {
-				$contenuMail .= ' - Pas de catégorie définie / No category defined';
-			}
-			
-			if(isset($accred['fonction']) && !empty($accred['fonction']) && $accred['fonction'] != '') {
-				$contenuMail .= ' (' . $accred['fonction'] . ')</li>';
-			}
-			else {
-				$contenuMail .= ' (Pas de fonction définie / No function defined)</li>';
+				$idNewAccred = $this->modelaccreditation->ajouter($accred);
+
+				$cat = null;
+
+				//$cat = $this->modelcategorie->getCategorieMereid($accred['idcategorie']);
+
+				// Création des zones accéssible pour cette accrédiation.
+				if(!$accred['idcategorie'] == -1)
+					$this->AssociationZoneAccred($idNewAccred, $accred['idcategorie'],$this->input->post('evenement') );
+
+				// Gestion du mail.
+				$contenuMail .= '<li>' . $membre['prenom'] . ' ' . $membre['nom'];
+
+
+				if(isset($cat) && !empty($cat) && $cat[0]->libellecategorie != '') {
+					$contenuMail .= ' - ' . $cat[0]->libellecategorie;
+				}
+				else {
+					$contenuMail .= ' - Pas de catégorie définie / No category defined';
+				}
+
+				if(isset($accred['fonction']) && !empty($accred['fonction']) && $accred['fonction'] != '') {
+					$contenuMail .= ' (' . $accred['fonction'] . ')</li>';
+				}
+				else {
+					$contenuMail .= ' (Pas de fonction définie / No function defined)</li>';
+				}
+
 			}
 
 		}
+		/* */
 				
 		// Préparation et envoi du mail de confirmation
 		$this->email->from(MAIL_EXPEDITEUR, NOM_EXPEDITEUR); // L'adresse qui enverra le mail
@@ -723,7 +734,7 @@ class Inscription extends Chocolat {
 		
 		// Envoi du mail
 		//$this->email->send();
-		
+
 		$msg['titre']	= $this->lang->line('titreConfirmeDemandeGroupe');
 		$msg['message']	= $this->lang->line('confirmeDemandeGroupe');
 		$this->layout->view('lambda/LMessage', $msg);
