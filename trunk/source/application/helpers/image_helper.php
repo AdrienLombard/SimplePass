@@ -3,9 +3,25 @@
 if ( ! function_exists('resizeWidthRatio'))
 {
 	// redim une image suivant une largeur en conservant le ratio
-	function resizeWidthRatio($url, $w, $h) {
+	function resizeWidthRatio($url, $w) {
 		
 		$src = imagecreatefromjpeg($url);
+		$h = $w * imagesy($src) / imagesx($src);
+		$img = imagecreatetruecolor($w, $h);
+		imagecopyresampled($img, $src, 0, 0, 0, 0, $w, $h, imagesx($src), imagesy($src));
+		unlink($url);
+		imagejpeg($img, $url, 100);
+		
+	}
+}
+
+if ( ! function_exists('resizeHeightRatio'))
+{
+	// redim une image suivant une largeur en conservant le ratio
+	function resizeHeightRatio($url, $h) {
+		
+		$src = imagecreatefromjpeg($url);
+		$w = $h * imagesx($src) / imagesy($src);
 		$img = imagecreatetruecolor($w, $h);
 		imagecopyresampled($img, $src, 0, 0, 0, 0, $w, $h, imagesx($src), imagesy($src));
 		unlink($url);
