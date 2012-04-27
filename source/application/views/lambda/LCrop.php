@@ -43,7 +43,7 @@
 			<input type="hidden" name="w" value="160" />
 			<input type="hidden" name="h" value="204" />
 
-			<input type="submit" value="Valider les nouvelles dimensions" />
+			<input type="submit" value="<?php echo lang('validDimensions'); ?>" />
 			
 			<div class="clear"></div>
 
