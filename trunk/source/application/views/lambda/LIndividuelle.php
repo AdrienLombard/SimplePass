@@ -31,7 +31,6 @@
 			<?php foreach($listePays as $p): ?>
 				<span id="<?php echo $p->idpays; ?>" class="drapeau" ><?php echo img('drapeaux/' . $p->idpays . '.gif'); ?></span>
 			<?php endforeach; ?>
-			<?php echo '::'.img('drapeaux/' . $listePays[0]->idpays . '.gif').'::'; ?>
 		</label>
 		<select  id="pays" name="pays" class="select">
 			<?php foreach($listePays as $pays): ?>
