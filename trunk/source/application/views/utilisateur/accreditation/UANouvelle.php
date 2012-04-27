@@ -23,7 +23,11 @@
 
 					<div class="photo">
 
-						<div class="simulPhoto"></div>
+						<div class="simulPhoto">
+							<?php if(img_url('photos/'.$client->idclient.'.jpg') != NULL): ?>
+								<img src="<?php echo site_url('image/generate/' . $client->idclient); ?>" />
+							<?php endif; ?>							
+						</div>
 
 						<div class="optionPhoto">
 							<a href="#">FICHIER</a>
@@ -71,6 +75,11 @@
 						<div>
 							<label>Mail : </label>
 							<input type="text" name="mail" class="email" value="<?php echo $client->mail; ?>">
+						</div>
+						
+						<div>
+							<label>Organisme : </label>
+							<input type="text" name="organisme" class="societe" init="<?php echo $client->organisme; ?>" value="<?php echo $client->organisme; ?>">
 						</div>
 						
 						<br><br>

@@ -96,11 +96,6 @@
 						</div>
 
 						<div>
-							<label>Organisme : </label>
-							<input readonly type="text" name="organisme" class="organisme" value="<?php echo $accred->organisme; ?>" >
-						</div>
-
-						<div>
 							<label>Tel : </label>
 							<input readonly type="text" name="tel" class="tel" value="<?php echo $accred->tel; ?>">
 						</div>
@@ -108,6 +103,11 @@
 						<div>
 							<label>Mail : </label>
 							<input readonly type="text" name="mail" class="email" value="<?php echo $accred->mail; ?>">
+						</div>
+						
+						<div>
+							<label>Organisme : </label>
+							<input readonly type="text" name="organisme" class="organisme" value="<?php echo $accred->organisme; ?>" >
 						</div>
 						
 						<br><br>
