@@ -461,6 +461,11 @@ class Inscription extends Chocolat {
 				'field'   => 'mail',
 				'label'   => $this->lang->line('mail'), 
 				'rules'   => 'required|valid_email'
+			),
+			array(
+				'field'	  => 'organisme',
+				'label'   => $this->lang->line('organisme'),
+				'rules'   => 'required'
 			)
 		);
 		
@@ -478,6 +483,7 @@ class Inscription extends Chocolat {
 			$values->fonction 	= $this->input->post('fonction');
 			$values->mail 		= $this->input->post('mail');
 			$values->tel 		= $this->input->post('tel');
+			$values->organisme	= $this->input->post('organisme');
 			$values->categorie 	= $this->input->post('categorie');
 			
 			$this->groupe($idEvenement, $values);
@@ -493,6 +499,7 @@ class Inscription extends Chocolat {
                     $data['fonction'] 			= $this->input->post('fonction');
                     $data['tel'] 				= $this->input->post('tel');
                     $data['mail'] 				= $this->input->post('mail');
+					$data['organisme']			= $this->input->post('organisme');
                     $data['evenement'] 			= $this->input->post('evenement');
                     $data['listeCategorie']     = $this->listeCategorieToDisplay( $idEvenement );
                     $data['webcam_ref']         = $this->input->post('photo_webcam');

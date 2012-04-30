@@ -46,14 +46,8 @@ $(document).ready(function(){
 		var adresse = parent.find('#ligneAdresse');
 		
 		// Gestion de la catégorie
-		var listeCategorie = parent.find('.dyn-selector').find('option:selected');
-		var len = listeCategorie.length -1;
-		var categorieId = listeCategorie[len].value;
-		var categorie = listeCategorie[len].getAttribute('libelle');
-		if(categorieId == -1 && listeCategorie.length != 1) {
-			categorieId = listeCategorie[len-1].value;
-			categorie = listeCategorie[len-1].getAttribute('libelle');
-		}
+		var listeCategorie = parent.find('#categorie').find('option:selected');
+		var categorie = listeCategorie.text();
 		
 		// Gestion du mail.
 		var mail = parent.find('#ligneMail');

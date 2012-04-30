@@ -148,7 +148,7 @@
 			<!-- Boutons de validation du formulaire. -->
 			<div class="clear"></div>
 			<div class="split splitRight">
-				<a href="#" class="button" id="validerLigne"><?php echo lang('valider'); ?></a>
+				<a href="#" class="button" id="validerLigne" data="nbLigne"><?php echo lang('valider'); ?></a>
 			</div>
 			<div class="split splitRight">
 				<a href="#" class="button" id="supprimerLigne"><?php echo lang('supprimer'); ?></a>

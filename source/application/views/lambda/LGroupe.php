@@ -89,6 +89,10 @@
 			<input type="text" value="<?php if($values) echo $values->mail; ?>" name="mail" />
 			<?php echo form_error('mail'); ?>
 			
+			<label><?php echo lang('societe'); ?>*</label>
+			<input type="text" value="<?php if($values) echo $values->organisme; ?>" name="organisme" />
+			<?php echo form_error('societe'); ?>
+			
 			<div>
 			<label><?php echo lang('categorie'); ?></label>
 			<select  id="categorie" name="categorie" class="select dyn-selector">

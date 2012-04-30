@@ -55,6 +55,7 @@
 				<input type="hidden" name="ref[fonction]" value="<?php echo $fonction; ?>" />
 				<input type="hidden" name="ref[tel]" value="<?php echo $tel; ?>" />
 				<input type="hidden" name="ref[mail]" value="<?php echo $mail; ?>" />
+				<input type="hidden" name="ref[organisme]" value="<?php echo $organisme; ?>" />	
 				<input type="hidden" name="ref[groupe]" value="<?php echo $groupe; ?>" />
 				<input type="hidden" name="ref[pays]" value="<?php echo $pays; ?>" />
 				<input type="hidden" name="ref[photo_webcam]" value="<?php echo $webcam_ref; ?>" />
