@@ -94,7 +94,7 @@
 							
 							<label>Fonction : </label>
 							<?php if(isset($ref->numeropresse) && !empty($ref->numeropresse)): ?>
-							<select name="ref[fonction]" id="fonctionref" style="width:180px;" disabled>
+							<select class="pays" name="ref[fonction]" id="fonctionref" style="width:180px;" disabled>
 								<option name="redacChef" 	value="Rédacteur en chef"	<?php if(isset($ref->fonction) && $ref->fonction == 'Rédacteur en chef') echo 'selected'; ?> >Rédacteur en chef</option>
 								<option name="journaliste" 	value="journaliste" <?php if(isset($ref->fonction) && $ref->fonction == 'Journaliste') echo 'selected'; ?> >Journaliste</option>
 								<option name="cameraman" 	value="Caméraman" <?php if(isset($ref->fonction) && $ref->fonction == 'Caméraman') echo 'selected'; ?> >Caméraman</option>
@@ -147,7 +147,7 @@
 							<label>Catégorie : </label><input type="text" id="categorie" class="champ" style="width:130px;" name="ref[categorie]" value="<?php echo $p->libellecategorie; ?>" readonly/>
 							
 							<?php if(isset($p->numeropresse) && !empty($p->numeropresse)): ?>
-							<select name="ref[fonction]" id="fonctionref" style="width:180px;" disabled>
+							<select class="pays" name="ref[fonction]" id="fonctionref" style="width:180px;" disabled>
 								<option name="redacChef" 	value="redacChef"	<?php if(isset($p->fonction) && $p->fonction == 'Rédacteur en chef') echo 'selected'; ?> >Rédacteur en chef</option>
 								<option name="journaliste" 	value="journaliste" <?php if(isset($p->fonction) && $p->fonction == 'Journaliste') echo 'selected'; ?> >Journaliste</option>
 								<option name="cameraman" 	value="cameraman" <?php if(isset($p->fonction) && $p->fonction == 'Caméraman') echo 'selected'; ?> >Caméraman</option>

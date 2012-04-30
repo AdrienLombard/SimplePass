@@ -142,7 +142,7 @@
 
 						<div>
 							<label>Catégorie : </label>
-							<select disabled name="categorie" id="categorieSimple" >
+							<select disabled class="pays" name="categorie" id="categorieSimple" >
 								<option value="" <?php if(empty($accred->idcategorie)) echo 'selected'; ?> >---</option>
 								<?php foreach($categories as $cate): ?>
 								<option
