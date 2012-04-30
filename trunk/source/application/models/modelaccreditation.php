@@ -191,6 +191,23 @@ class modelAccreditation extends MY_Model {
 	}
 	
 	
+	/**
+	 * Méthode pour vérifier si un groupe existe déja.
+	 */
+	public function getGroupeExist( $nomGroupe ) {
+		$result = $this->db->select('*')
+						->from(DB_ACCREDITATION)
+						->where('groupe', $nomGroupe)
+						->get()
+						->result();
+						
+		if($result)
+			return true;
+		else
+			return false;
+	
+	}
+	
 	
 	/*
 	 * CREATE
