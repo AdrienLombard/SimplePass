@@ -89,7 +89,7 @@
 							<select disabled class="pays" name="pays" style="padding-left: 0px;">
 
 							<?php foreach($pays as $p): ?>
-								<option value="<?php echo $p->idpays; ?>" <?php echo ($p->idpays == $accred->pays)? 'selected' : '' ;?> style="background: url(<?php echo img_url('drapeaux/'.strtolower($p->idpays).'.gif'); ?>) no-repeat left;"><?php echo $p->nompays; ?></option>
+								<option value="<?php echo $p->idpays; ?>" <?php echo ($p->idpays == $accred->pays)? 'selected' : '' ;?> style="background: url(<?php echo img_url('drapeaux/'.strtolower($p->idpays).'.gif'); ?>)no-repeat left;"><?php echo $p->nompays; ?></option>
 							<?php endforeach; ?>
 
 							</select>
