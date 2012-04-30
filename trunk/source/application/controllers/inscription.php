@@ -635,10 +635,11 @@ class Inscription extends Chocolat {
 		// Ajout des membres
 
 		$gr = $this->input->post('groupe');
+		$this->load->library('upload');
 
 		//*
 		if($gr) {
-			foreach($this->input->post('groupe') as $ligne) {
+			foreach($gr as $ligne) {
 				// création du client
 				$membre = null;
 				$membre['nom'] = $ligne['nom'];
@@ -653,12 +654,13 @@ class Inscription extends Chocolat {
 				// image
 				if($_FILES['photo_file_'.$index]['name'] != '') {
 
+					$config = array();
 					$config['upload_path'] = UPLOAD_DIR;
 					$config['allowed_types'] = 'jpg, jpeg, png';
 					$config['file_name'] = $idNewClient.".jpg";
 					$config['overwrite'] = true;
 
-					$this->load->library('upload', $config);
+					$this->upload->initialize($config);
 					$this->upload->do_upload('photo_file_' . $index);
 					$dataimg = $this->upload->data();
 					
