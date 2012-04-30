@@ -238,6 +238,11 @@ form.rechercheClient div.listeTempsReel div.itemFlowSearch:hover {
 	background: #DDD;
 	cursor: pointer;
 }
+form.rechercheClient div.listeTempsReel div.itemFlowSearch span.email {
+	margin-left: 2px;
+	font-size: 10px;
+	color: #666;
+}
 form.rechercheClient div.listeTempsReel div.itemFlowSearch span.pays {
 	float: right;
 }
