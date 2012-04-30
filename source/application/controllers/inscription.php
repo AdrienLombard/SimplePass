@@ -559,7 +559,7 @@ class Inscription extends Chocolat {
 		unset($ref['fonction']);
 		unset($ref['groupe']);
 		unset($ref['index']);
-
+		
 		// webcam
 		$webcam = $ref['photo_webcam'];
 		unset($ref['photo_webcam']);
@@ -568,7 +568,7 @@ class Inscription extends Chocolat {
 		$file = $ref['photo_file'];
 		unset($ref['photo_file']);
 
-                // ajout ref
+        // ajout ref
 		$id = $this->modelclient->ajouter($ref);
                 
 		// ajout photo webcam
@@ -578,7 +578,9 @@ class Inscription extends Chocolat {
 			imagecopyresampled($jpg, $png, 0, 0, 0, 0, IMG_WIDTH, IMG_HEIGHT, IMG_WIDTH, IMG_HEIGHT);
 			imagejpeg($jpg, UPLOAD_DIR . $id.".jpg", 100);
 		}
-
+		
+		
+		
 		// upload fichier
 		if($file != null) {
 			rename(UPLOAD_DIR . 'tmp/' . $file . '.jpg', UPLOAD_DIR . $id . '.jpg');
@@ -652,7 +654,7 @@ class Inscription extends Chocolat {
 				if($_FILES['photo_file_'.$index]['name'] != '') {
 
 					$config['upload_path'] = UPLOAD_DIR;
-					$config['allowed_types'] = 'jpg';
+					$config['allowed_types'] = 'jpg, jpeg, png';
 					$config['file_name'] = $idNewClient.".jpg";
 					$config['overwrite'] = true;
 
@@ -669,6 +671,7 @@ class Inscription extends Chocolat {
 						else
 							resizeHeightRatio($dataimg['full_path'], IMG_HEIGHT);
 					}
+					
 				}
 
 				// création de l'accreditation

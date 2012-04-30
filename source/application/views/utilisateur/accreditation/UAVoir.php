@@ -12,7 +12,8 @@
     <div class="box-full">
 
         <aside>
-           
+			<a href="<?php echo site_url('accreditation/index/'); ?>">Retour</a>
+			<br>
             <a href="#" class="editClient">Modifier la personne</a>
 			<a href="<?php echo site_url('accreditation/nouvelle/'.$client->idclient); ?>">Nouvelle accréditation</a>
 
@@ -100,14 +101,15 @@
 					</div>
 					
 					<!-- champ pour l'adresse du client -->
-						<?php if(isset($client->adresse) && !empty($client->adresse)): ?>
-						<div>
-							<label>Adresse : </label>
-							<textarea readonly name="adresse" cols="45" rows="3"><?php if(isset($client->adresse)) echo $client->adresse; ?></textarea>
-						</div>
-						<?php endif; ?>
+					<?php if(isset($client->adresse) && !empty($client->adresse)): ?>
+					<br/>
+					<div>
+						<label class="shortAdresse">Adresse : </label>
+						<textarea readonly name="adresse" cols="45" rows="3"><?php if(isset($client->adresse)) echo $client->adresse; ?></textarea>
+					</div>
+					<?php endif; ?>
 				
-						<input type="submit" class="valideInfos" value="Enregistrer les modifications" />
+					<input type="submit" class="valideInfos" value="Enregistrer les modifications" />
 				</form>
 				
 				<div class="clear"></div>
