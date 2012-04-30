@@ -469,7 +469,7 @@ class Inscription extends Chocolat {
 		// On vérifie si le nom de groupe existe déja.
 		$groupe = $this->modelaccreditation->getGroupeExist( $this->input->post('groupe') );
 		
-		if ($this->form_validation->run() == false or !$groupe) {
+		if ($this->form_validation->run() == false or $groupe) {
 			$values             = '';
 			$values->groupe 	= $this->input->post('groupe');
 			$values->pays 		= $this->input->post('pays');
