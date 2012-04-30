@@ -459,20 +459,15 @@ form#editAccredRealTime input[type=text][readonly], form#editAccredRealTime sele
     color: #999;
     font-size: 9px;
     text-align: center;
-    border: 1px solid #EEE;
+    border: 1px solid #CCC;
     margin-right: -6px;
 }
 .supra-checkbox.right {
     border-radius: 0 4px 4px 0;
     margin-right: 6px;
 }
-.supra-checkbox:hover {
-    border: 1px solid #CCC;
-    color: #444;
-}
 .supra-checkbox.checked {
     background: #EEE;
-    border: 1px solid #CCC;
     color: #444;
 }
 .supra-checkbox input {
