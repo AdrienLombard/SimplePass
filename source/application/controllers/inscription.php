@@ -466,7 +466,10 @@ class Inscription extends Chocolat {
 		
 		$this->form_validation->set_rules($config);
 		
-		if ($this->form_validation->run() == false) {
+		// On vérifie si le nom de groupe existe déja.
+		$groupe = $this->modelaccreditation->getGroupeExist( $this->input->post('groupe') );
+		
+		if ($this->form_validation->run() == false or !$groupe) {
 			$values             = '';
 			$values->groupe 	= $this->input->post('groupe');
 			$values->pays 		= $this->input->post('pays');
@@ -526,6 +529,7 @@ class Inscription extends Chocolat {
 		$this->layout->ajouter_js('jquery.Jcrop.min');
 		$this->layout->ajouter_js('webcam/jquery.webcam');
 		$this->layout->ajouter_js('webcam/webcamGroupe');
+		
 		
 		$this->layout->view('lambda/LGroupeDetails', $data);
 	}

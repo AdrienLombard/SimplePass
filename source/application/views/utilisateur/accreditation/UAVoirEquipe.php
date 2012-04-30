@@ -80,9 +80,9 @@
 							<label>Zones : </label>
 							<div>
 								<?php foreach($zonesEvent as $zone): ?>
-								<div class="checkzone <?php echo in_array($zone->idzone, $ref->zonesAccred)? 'on' : '' ; ?>" id="<?php echo $zone->idzone; ?>">
+								<div class="checkzone <?php echo (isset( $ref->zonesAccred) && in_array($zone->idzone, $ref->zonesAccred))? 'on' : '' ; ?>" id="<?php echo $zone->idzone; ?>">
 									<?php echo $zone->codezone; ?>
-									<input type="checkbox" name="zone[<?php echo $zone->idzone; ?>]" <?php echo in_array($zone->idzone, $ref->zonesAccred)? 'checked' : '' ; ?> />
+									<input type="checkbox" name="zone[<?php echo $zone->idzone; ?>]" <?php echo (isset($ref->zonesAccred) && in_array($zone->idzone, $ref->zonesAccred))? 'checked' : '' ; ?> />
 								</div>
 								<?php endforeach; ?>
 							</div>
