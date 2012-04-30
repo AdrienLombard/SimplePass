@@ -98,8 +98,16 @@
 						<label class="shortOrganisme">Organisme :</label>
 						<input type="text" name="organisme" class="societe" init="<?php echo $client->organisme; ?>" value="<?php echo $client->organisme; ?>" readonly>
 					</div>
-					<input type="submit" class="valideInfos" value="Enregistrer les modifications" />
 					
+					<!-- champ pour l'adresse du client -->
+						<?php if(isset($client->adresse) && !empty($client->adresse)): ?>
+						<div>
+							<label>Adresse : </label>
+							<textarea readonly name="adresse" cols="45" rows="3"><?php if(isset($client->adresse)) echo $client->adresse; ?></textarea>
+						</div>
+						<?php endif; ?>
+				
+						<input type="submit" class="valideInfos" value="Enregistrer les modifications" />
 				</form>
 				
 				<div class="clear"></div>
