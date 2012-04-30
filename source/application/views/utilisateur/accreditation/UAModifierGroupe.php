@@ -60,6 +60,15 @@
 								
 							</select>
 						</div>
+						
+						<!-- champ pour l'adresse du client -->
+						<?php if(isset($ref->numeropresse) && !empty($ref->numeropresse)): ?>
+						<div>
+							<label>Adresse : </label>
+							<textarea name="info[adresse]" cols="65" rows="7"><?php if(isset($ref->adresse)) echo $ref->adresse; ?></textarea>
+						</div>
+						<?php endif; ?>
+						
 						<div class="clear"></div>
 						
 					</div>
@@ -91,12 +100,33 @@
 									</option>
 								<?php endforeach; ?>
 							</select>
-							<label>Fonction : </label><input type="text" id="fonction" class="champ2" style="width:130px;" name="pers[0][fonction]" value="<?php echo $ref->fonction; ?>"/>
+							
+							<label>Fonction : </label>
+							<?php if(isset($ref->numeropresse) && !empty($ref->numeropresse)): ?>
+							<select name="pers[0][fonction]" id="fonctionref" style="width:180px;" >
+								<option name="redacChef" 	value="Rédacteur en chef"	<?php if(isset($ref->fonction) && $ref->fonction == 'Rédacteur en chef') echo 'selected'; ?> >Rédacteur en chef</option>
+								<option name="journaliste" 	value="Journaliste" <?php if(isset($ref->fonction) && $ref->fonction == 'Journaliste') echo 'selected'; ?> >Journaliste</option>
+								<option name="cameraman" 	value="Caméraman" <?php if(isset($ref->fonction) && $ref->fonction == 'Caméraman') echo 'selected'; ?> >Caméraman</option>
+								<option name="preneurSon" 	value="Preneur de son" <?php if(isset($ref->fonction) && $ref->fonction == 'Preneur de son') echo 'selected'; ?> >Preneur de son</option>
+								<option name="photographe" 	value="Photographe" <?php if(isset($ref->fonction) && $ref->fonction == 'Photographe') echo 'selected'; ?> >Photographe</option>
+								<option name="technicien" 	value="Technicien" <?php if(isset($ref->fonction) && $ref->fonction == 'Technicien') echo 'selected'; ?>>Technicien</option>
+							</select>
+							<?php else: ?>
+							<input type="text" id="fonction" class="champ2" style="width:130px;" name="pers[0][fonction]" value="<?php echo $ref->fonction; ?>"/>
+							<?php endif; ?>
 						</div>
 						<div>
 							<label>Image : </label>
 							<input type="file" name="photo_file0"  />
 						</div>
+						
+						<?php if(isset($ref->numeropresse) && !empty($ref->numeropresse)): ?>
+							<div>
+								<label>Num presse : </label>
+								<input type="text" id="numeroref" class="champ" style="" name="pers[0][numeropresse]" value="<?php if(isset($ref->numeropresse)) echo $ref->numeropresse; ?>" />
+							</div>
+						<?php endif; ?>
+						
 						<div  data="0" class="contientZones" >
 							<label>Zones : </label>
 							<div>
@@ -145,12 +175,33 @@
 								</option>
 								<?php endforeach; ?>
 							</select>
-							<label>Fonction : </label><input type="text"  class="champ2" style="width:130px;" name="pers[<?php echo $nb; ?>][fonction]" value="<?php echo $p->fonction; ?>"/>
+							
+							<label>Fonction : </label>
+							<?php if(isset($p->numeropresse) && !empty($p->numeropresse)): ?>
+							<select name="pers[<?php echo $nb; ?>][fonction]" id="fonctionref" style="width:180px;" >
+								<option name="redacChef" 	value="Rédacteur en chef"	<?php if(isset($p->fonction) && $p->fonction == 'Rédacteur en chef') echo 'selected'; ?> >Rédacteur en chef</option>
+								<option name="journaliste" 	value="Journaliste" <?php if(isset($p->fonction) && $p->fonction == 'Journaliste') echo 'selected'; ?> >Journaliste</option>
+								<option name="cameraman" 	value="Caméraman" <?php if(isset($p->fonction) && $p->fonction == 'Caméraman') echo 'selected'; ?> >Caméraman</option>
+								<option name="preneurSon" 	value="Preneur de son" <?php if(isset($p->fonction) && $p->fonction == 'Preneur de son') echo 'selected'; ?> >Preneur de son</option>
+								<option name="photographe" 	value="Photographe" <?php if(isset($p->fonction) && $p->fonction == 'Photographe') echo 'selected'; ?> >Photographe</option>
+								<option name="technicien" 	value="Technicien" <?php if(isset($p->fonction) && $p->fonction == 'Technicien') echo 'selected'; ?>>Technicien</option>
+							</select>
+							<?php else: ?>
+							<input type="text"  class="champ2" style="width:130px;" name="pers[<?php echo $nb; ?>][fonction]" value="<?php echo $p->fonction; ?>"/>
+							<?php endif; ?>
 						</div>
 						<div>
 							<label>Image : </label>
 							<input type="file" name="photo_file<?php echo $nb; ?>"  />
 						</div>
+						
+						<?php if(isset($p->numeropresse) && !empty($p->numeropresse)): ?>
+							<div>
+								<label>Num presse : </label>
+								<input type="text" id="numeroref" class="champ" style="" name="pers[<?php echo $nb; ?>][numeropresse]" value="<?php if(isset($p->numeropresse)) echo $p->numeropresse; ?>" />
+							</div>
+						<?php endif; ?>
+						
 						<div class="contientZones" data="<?php echo $nb; ?>">
 							<label>Zones : </label>
 							<div>

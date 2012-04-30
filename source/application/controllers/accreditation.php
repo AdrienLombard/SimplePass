@@ -133,6 +133,11 @@ class Accreditation extends Cafe {
 		
 		$this->layout->view('utilisateur/accreditation/UAVoirEquipe',$data);
 	}
+	
+	
+	/**
+	 *
+	 */
 	public function rechercher() {
 		
 		$this->load->model('modelclient');
@@ -141,7 +146,11 @@ class Accreditation extends Cafe {
 		$this->layout->view('utilisateur/accreditation/UARecherche', $data);
 		
 	}
-		
+	
+	
+	/**
+	 *
+	 */
 	public function ajouter( $re = '' ) {
 		
 		$this->layout->ajouter_js('webcam/jquery.webcam');
@@ -186,7 +195,11 @@ class Accreditation extends Cafe {
 		$this->layout->view('utilisateur/accreditation/UAAjout', $data);
 		
 	}
-
+	
+	
+	/**
+	 *
+	 */
 	public function exeAjouter() {
 		// mise en place de la vérification de CI.
 		$config = array(
@@ -332,7 +345,11 @@ class Accreditation extends Cafe {
 		}
 
 	}
-
+	
+	
+	/**
+	 *
+	 */
 	public function ajouterGroupe( $re='' ) {
 		
 		// liste des zones pour l'evenement en cours.
@@ -360,6 +377,9 @@ class Accreditation extends Cafe {
 	}
 	
 	
+	/**
+	 *
+	 */
 	public function exeAjoutGroupe() {
 		/* liste des champs obligatoire.
 		verif info['groupe']	
@@ -488,7 +508,9 @@ class Accreditation extends Cafe {
 	}
 	
 
-
+	/**
+	 *
+	 */
 	public function modifier($idAccred) {
 
 		$this->layout->ajouter_js('webcam/jquery.webcam');
@@ -615,6 +637,7 @@ class Accreditation extends Cafe {
 	
 		$info				= $this->input->post('info');
 		$personnes			= $this->input->post('pers');
+		var_dump($personnes);
 		
 		$id = 0;
 		foreach($personnes as $pers){
@@ -627,6 +650,11 @@ class Accreditation extends Cafe {
 			$client['pays'] = $info['pays'];
 			$client['tel'] = $info['tel'];
 			$client['mail'] = $info['mail'];
+			
+			// traitement en plus si presse.
+			if(!empty($pers['numeropresse'])) {
+				$client['adresse'] = $info['adresse'];
+			}
 
 			$this->modelclient->modifier($idClient, $client);
 
@@ -635,11 +663,16 @@ class Accreditation extends Cafe {
 			//modification de l'accreditation
 			$idAccred = $pers['idaccreditation'];
 			$accred = array();
-			$accred['idclient'] = $idClient;
-			$accred['idcategorie'] = $pers['categorie'];
-			$accred['fonction'] = $pers['fonction'];
+			$accred['idclient'] 	= $idClient;
+			$accred['idcategorie'] 	= $pers['categorie'];
+			$accred['fonction'] 	= $pers['fonction'];
 			//$accred['allaccess'] = ($this->input->post('allAccess'))? ALL_ACCESS : NON_ALL_ACCESS;
-
+			
+			// traitement en plus si presse.
+			if(!empty($pers['numeropresse'])) {
+				$accred['numeropresse'] = $pers['numeropresse'];
+			}
+			
 			$this->modelaccreditation->modifier($idAccred, $accred);
 
 			// modification des zones (suppression puis ajout).
@@ -676,7 +709,7 @@ class Accreditation extends Cafe {
 				
 			$id++;
 		}
-		
+		// TODO
 		redirect('accreditation/voirEquipe/'.$info['groupe']);
 	
 	}
