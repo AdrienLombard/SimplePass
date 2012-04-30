@@ -37,17 +37,14 @@ $(document).ready(function(){
 		var prenom = parent.find('#lignePrenom');
 		
 		// Gestion de la catégorie
-		var listeCategorie = parent.find('.dyn-selector').find('option:selected');
-		var len = listeCategorie.length -1;
-		var categorieId = listeCategorie[len].value;
-		var categorie = listeCategorie[len].getAttribute('libelle');
-		if(categorieId == -1 && listeCategorie.length != 1) {
-			categorieId = listeCategorie[len-1].value;
-			categorie = listeCategorie[len-1].getAttribute('libelle');
-		}
+		var listeCategorie = parent.find('#categorie').find('option:selected');
+		var categorie = listeCategorie.text();
+		
 		
 		// Gestion du rôle
 		var fonction = parent.find('#ligneFonction');
+		var nomFonction = fonction.val();
+		if(nomFonction != '') nomFonction = ' (' + nomFonction + ')';
 		
 		var erreur = false;
 		if(nom.val() == '') {
@@ -76,10 +73,10 @@ $(document).ready(function(){
 
 			// met à jours le h3 avec les infos des inputs
 			if(lang == 'fra' || lang == '') {
-				parent.parent().find('h3').html(nom.val() + ' ' + prenom.val() + ' - ' + categorie + ' (' + fonction.val() + ')' + '<span class="modifier">Modifier</span>');
+				parent.parent().find('h3').html(nom.val() + ' ' + prenom.val() + ' - ' + categorie + nomFonction + '<span class="modifier">Modifier</span>');
 			}
 			else {
-				parent.parent().find('h3').html(nom.val() + ' ' + prenom.val() + ' - ' + categorie + ' (' + fonction.val() + ')' + '<span class="modifier">Modify</span>');
+				parent.parent().find('h3').html(nom.val() + ' ' + prenom.val() + ' - ' + categorie + nomFonction + '<span class="modifier">Modify</span>');
 			}
 		} else {
 			// refuser l'etat de la ligne
