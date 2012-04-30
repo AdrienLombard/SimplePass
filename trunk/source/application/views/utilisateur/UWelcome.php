@@ -3,7 +3,7 @@
 <div class="wrap">
 	
 	<div class="tabs">
-        <a href="#" class="current">Bienvenue</a>
+        <a href="#" class="current">Bienvenue <?php echo $this->session->userdata('login'); ?></a>
     </div>
 
     <div class="box-full">
