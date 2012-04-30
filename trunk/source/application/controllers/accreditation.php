@@ -923,7 +923,18 @@ class Accreditation extends Cafe {
 		
 	}	
 	
+	public function validergroupe ($nomgroupe) {
+		
+		$nomGroupe=str_replace('%20', ' ', $nomgroupe);;
+		$idEvent = $this->session->userdata('idEvenementEnCours');
+		$membres = $this->modelaccreditation->getAccreditationGroupeParEvenement( $nomGroupe, $idEvent);
 
+		foreach($membres as $m) {
+			$this->modelaccreditation->valideraccreditation ($m->idaccreditation);
+		}
+		
+		redirect('accreditation/voirEquipe/' . $nomGroupe);
+	}
 	
 	/*
 	 * Upload
