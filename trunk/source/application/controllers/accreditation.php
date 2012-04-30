@@ -104,10 +104,14 @@ class Accreditation extends Cafe {
 		$ref = Array();
 		$pers = Array();
 		
-		$nomGroupe=str_replace('%20', ' ', $nomGroupe);;
+		// On corrige l'encodage des espace dans le passage par URL.
+		$nomGroupe = str_replace('%20', ' ', $nomGroupe);
+		
+		// On prend l'id de l'évènement en cours.
 		$idEvent = $this->session->userdata('idEvenementEnCours');
-		$membres = $this->modelaccreditation->getAccreditationGroupeParEvenement( $nomGroupe, $idEvent);
-		$zonesEvent = $this->modelzone->getZoneParEvenement($idEvent);
+		
+		$membres = $this->modelaccreditation->getAccreditationGroupeParEvenement( $nomGroupe, $idEvent );
+		
 		foreach($membres as $m){
 			$zonesAccred = $this->modelzone->getZoneParAccreditation($m->idaccreditation);
 			foreach($zonesAccred as $z){
@@ -121,15 +125,13 @@ class Accreditation extends Cafe {
 				
 			}
 		}
-		$data['zonesEvent'] = $zonesEvent;
+		$data['zonesEvent'] = $this->modelzone->getZoneParEvenement($idEvent);;
 		$data['ref'] = $ref;
 		$data['personnes'] = $pers;
 		$data['pays'] = $this->modelpays->getPaysParId($ref->pays);
 		$data['listePays'] = $this->modelpays->getPays();
 		
 		$this->layout->view('utilisateur/accreditation/UAVoirEquipe',$data);
-		
-		
 	}
 	public function rechercher() {
 		
