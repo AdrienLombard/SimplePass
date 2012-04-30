@@ -1,49 +1,19 @@
 <script type="text/javascript" >
-	function urlExport() {
-		var params = '';
-		
-		// simple.
-		if($("#simple").attr('checked'))
-			params += '1';
-		else
-			params += '0';
-		
-		// groupe.
-		if($("#groupe").attr('checked'))
-			params += '1';
-		else
-			params += '0';
-		
-		// valide
-		if($("#valide").attr('checked'))
-			params += '1';
-		else
-			params += '0';
-		
-		// demande
-		if($("#demande").attr('checked'))
-			params += '1';
-		else
-			params += '0';
-			
-		alert(':'+params+':');	
-	}
+    
+    function urlExport() {
+
+	    var url = "<?php echo site_url('export/accreds/'.$this->session->userdata('idEvenementEnCours')); ?>";
+	    var params = '/';
+
+	    params += ($("#simple").attr('checked'))? '1' : '0';
+	    params += ($("#groupe").attr('checked'))? '1' : '0';
+	    params += ($("#valide").attr('checked'))? '1' : '0';
+	    params += ($("#demande").attr('checked'))? '1' : '0';
+
+	    $('.toExport').attr('href',  url + params);
+
+    }
 	
-	$(document).ready(function(){
-		$("#simple").change(function() {
-			urlExport();
-		}
-		$("#groupe").change(function() {
-			urlExport();
-		}
-		$("#valide").change(function() {
-			urlExport();
-		}
-		$("#demande").change(function() {
-			urlExport();
-		}
-	
-	}
 </script>
 
 <h1>Accréditations</h1>
@@ -59,14 +29,32 @@
     <div class="box-full">
 
         <aside>  
-			<a href="<?php echo site_url('export/accreds/'.$this->session->userdata('idEvenementEnCours').'/1111'); ?>">Exporter</a>
-			<input type="checkbox" id="simple" checked />Simple </br>
-			<input type="checkbox" id="groupe" checked />Groupe </br>
-			<input type="checkbox" id="valide" checked />Validé </br>
-			<input type="checkbox" id="demande" checked />Demande </br>
+	    <a href="<?php echo site_url('export/accreds/'.$this->session->userdata('idEvenementEnCours').'/1111'); ?>"class="toExport">Exporter</a>
         </aside>
 		
 		<div id="main">
+		    
+		    <div>
+			
+			<div class="titre-supra-checkbox">Filtres :</div>
+			
+			<div class="supra-checkbox checked" data="simple">Simple
+			    <input type="checkbox" id="simple" checked />
+			</div>
+			
+			<div class="supra-checkbox right checked" data="groupe">Groupe
+			    <input type="checkbox" id="groupe" checked />
+			</div>
+			
+			<div class="supra-checkbox checked" data="valide">Validée
+			    <input type="checkbox" id="valide" checked />
+			</div>
+			
+			<div class="supra-checkbox right checked" data="demande">Demande
+			    <input type="checkbox" id="demande" checked />
+			</div>
+			
+		    </div>
         	
 			<table class="liste">
                 <thead>
@@ -85,10 +73,7 @@
                 <tbody>
 					
                     <?php foreach ($accreds as $accred): ?>
-					<tr class="<?php 
-						if($accred->groupe == null) echo "simple "; else echo "groupe ";
-						if($accred->etataccreditation == ACCREDITATION_VALIDE) echo " valide"; else echo " demande"; 
-						?>" >
+					<tr data="<?php echo ($accred->groupe == null)? "simple" : "groupe"; ?>:<?php echo ($accred->etataccreditation == ACCREDITATION_VALIDE)? "valide" : "demande"; ?>" >
 						<td><?php echo $accred->nom . ' ' . $accred->prenom ?></td>
 						<td><?php if (isset($accred->groupe) && !empty($accred->groupe) && $accred->groupe != "") echo $accred->groupe; else echo " - "; ?></td>
 						<td><?php echo $accred->pays ?></td>

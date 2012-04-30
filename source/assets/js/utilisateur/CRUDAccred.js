@@ -213,57 +213,7 @@ $(document).ready(function(){
 		
 		return bool;
 	});
-	
-	//==============================
-	/* filtre des accreditation. */
-	
-	$("#simple").change(function() {
-		if($(this).attr('checked')) {
-			if($("#valide").attr('checked'))
-				$("tr.simple.valide").show();
-			if($("#demande").attr('checked'))
-				$("tr.simple.demande").show();
-		}
-		else {
-			$("tr.simple").hide();
-		}
-	});
-	
-	$("#groupe").change(function() {
-		if($(this).attr('checked')) {
-			if($("#valide").attr('checked'))
-				$("tr.groupe.valide").show();
-			if($("#demande").attr('checked'))
-				$("tr.groupe.demande").show();
-		}
-		else {
-			$("tr.groupe").hide();
-		}
-	});
-	
-	$("#valide").change(function() {
-		if($(this).attr('checked')) {
-			if($("#simple").attr('checked'))
-				$("tr.valide.simple").show();
-			if($("#groupe").attr('checked'))
-				$("tr.valide.groupe").show();
-		}
-		else {
-			$("tr.valide").hide();
-		}
-	});
-	
-	$("#demande").change(function() {
-		if($(this).attr('checked')) {
-			if($("#simple").attr('checked'))
-				$("tr.demande.simple").show();
-			if($("#groupe").attr('checked'))
-				$("tr.demande.groupe").show();
-		}
-		else {
-			$("tr.demande").hide();
-		}
-	});
+
 	
 	/*
 	 *	Gestion de l'affichage des drapeaux
@@ -282,6 +232,44 @@ $(document).ready(function(){
 	
 		$('#'+pays).toggle();
 		
+	});
+	
+	
+	
+	
+	
+	/*
+	 * filtres listes
+	 */
+	$('.supra-checkbox').live('click', function(){
+	    
+	    // toggle sur la checkbox
+	    $(this).find('input').attr('checked', !$(this).find('input').is(':checked'));
+	    
+	    // changement de class
+	    $(this).toggleClass('checked');
+	    
+	    // affichage des lignes
+	    $('table.liste tbody tr').hide().each(function(){
+		
+		var data = $(this).attr('data').split(':');
+		var access = true;
+		
+		$.each(data, function(k, v){
+		    if(!$('.supra-checkbox[data=' + v + ']').hasClass('checked'))
+			access = false;
+		});
+
+		if(access)
+		    $(this).show();
+		else
+		    $(this).hide();
+		
+	    });
+	    
+	    // actualisation de l'url d'export
+	    urlExport();
+	    
 	});
 	
 	

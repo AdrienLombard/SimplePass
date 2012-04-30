@@ -441,12 +441,87 @@ form#editAccredRealTime input[type=text][readonly], form#editAccredRealTime sele
 	background-image: url(../../images/icons/delete_hover.png);
 }
 
-/******************************************/
 
-textarea[readonly] {
-	border: none;
+
+.titre-supra-checkbox {
+    display: inline-block;
+    font-size: 9px;
+    margin-right: 5px;
+}
+.supra-checkbox {
+    cursor: pointer;
+    border-radius: 4px 0 0 4px;
+    display: inline-block;
+    width: 65px;
+    margin-bottom: 8px;
+    font-size: 10px;
+    padding: 3px 0 4px 0;
+    color: #999;
+    font-size: 9px;
+    text-align: center;
+    border: 1px solid #EEE;
+    margin-right: -6px;
+}
+.supra-checkbox.right {
+    border-radius: 0 4px 4px 0;
+    margin-right: 6px;
+}
+.supra-checkbox:hover {
+    border: 1px solid #CCC;
+    color: #444;
+}
+.supra-checkbox.checked {
+    background: #EEE;
+    border: 1px solid #CCC;
+    color: #444;
+}
+.supra-checkbox input {
+    display: none;
 }
 
 
 
 
+.contientZones {
+	margin-top: 15px;
+}
+ .contientZones label {
+	float: left;
+	margin-right: 5px;height: 50px;
+}
+
+.contientZones input[type=checkbox]{
+	margin-top: 23px;
+}
+
+.contientZones .checkzone {
+	display: inline-block;
+	margin-bottom: 5px;
+	background: #CCC;
+	color: #666;
+	font-size: 11px;
+	border-radius: 4px;
+	width: 40px;
+	text-align: center;
+	padding: 5px 2px 5px 2px;
+}
+.contientZones .checkzone:hover {
+	background: #AAA;
+	cursor: pointer;
+}
+.contientZones.readonly .checkzone:hover {
+	background: #CCC;
+	cursor: auto;
+}
+.contientZones.readonly .checkzone.on:hover {
+	background: #2e6f92;
+	cursor: auto;
+}
+.contientZones .checkzone input {
+	display: none;
+}
+.contientZones .checkzone.on {
+	background: #2e6f92;
+	color: #FFF;
+	box-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+}
