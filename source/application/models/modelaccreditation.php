@@ -262,7 +262,7 @@ class modelAccreditation extends MY_Model {
 		return $this->db->select('*')
 						->from(DB_ACCREDITATION . ' a')
 						->join(DB_CLIENT . ' c', 'c.idclient = a.idclient')
-						->join(DB_CATEGORIE . ' ct', 'ct.idcategorie = a.idcategorie')
+						->join(DB_CATEGORIE . ' ct', 'ct.idcategorie = a.idcategorie', 'left')
 						->where('a.groupe', $nomGroupe)
 						->where('a.idevenement', $idEvent)
 						->get()
