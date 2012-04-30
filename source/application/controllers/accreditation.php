@@ -96,10 +96,14 @@ class Accreditation extends Cafe {
 		
 	}
 	
+	/**
+	 * Vue pour voir tous les membre d'une équipe.
+	 */
 	public function voirEquipe($nomGroupe){
 		$data = Array();
 		$ref = Array();
 		$pers = Array();
+		
 		$nomGroupe=str_replace('%20', ' ', $nomGroupe);;
 		$idEvent = $this->session->userdata('idEvenementEnCours');
 		$membres = $this->modelaccreditation->getAccreditationGroupeParEvenement( $nomGroupe, $idEvent);

@@ -84,18 +84,7 @@ class Inscription extends Chocolat {
 			$this->lang->load('fr');
 		}
 	}
-
-
-	/*
-	public function lambda() {
-		$this->layout->ajouter_js('lambda/script');
-		
-		$data['events'] = $this->modelevenement->getEvenementEnCours();
-		$data['lang'] = $this->session->userdata('lang');
-		
-		$this->layout->view('lambda/LAccueil', $data);
-	}*/
-
+	
 
 	/**
 	 * Méthode pour afficher le formulaire pour l'ajout individuelle.
@@ -592,7 +581,7 @@ class Inscription extends Chocolat {
 		$idNewAccred = $this->modelaccreditation->ajouter($accred);
 
 		// Création des zones accéssible pour cette accrédiation.
-		if(!$data['categorie'] == -1)
+		if($data['categorie'] != -1)
 			$this->AssociationZoneAccred($idNewAccred, $data['categorie'], $this->input->post('evenement') );
 
 		$evenement = $this->modelevenement->getEvenementParId($accred['idevenement']);
@@ -684,7 +673,7 @@ class Inscription extends Chocolat {
 				//$cat = $this->modelcategorie->getCategorieMereid($accred['idcategorie']);
 
 				// Création des zones accéssible pour cette accrédiation.
-				if(!$accred['idcategorie'] == -1)
+				if($accred['idcategorie'] != -1)
 					$this->AssociationZoneAccred($idNewAccred, $accred['idcategorie'],$this->input->post('evenement') );
 
 				// Gestion du mail.
