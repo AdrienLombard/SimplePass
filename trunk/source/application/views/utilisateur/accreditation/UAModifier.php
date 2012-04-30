@@ -110,6 +110,14 @@
 							<input readonly type="text" name="organisme" class="organisme" value="<?php echo $accred->organisme; ?>" >
 						</div>
 						
+						<?php if(isset($accred->adresse) && !empty($accred->adresse)): ?>
+						<br/>
+						<div>
+							<label>Adresse : </label>
+							<textarea readonly name="adresse" cols="40" rows="3"><?php if(isset($accred->adresse)) echo $accred->adresse; ?></textarea>
+						</div>
+						<?php endif; ?>
+						
 						<br><br>
 						
 						<h2>Accréditation</h2>
@@ -118,7 +126,18 @@
 
 						<div>
 							<label>Fonction : </label>
+							<?php if(isset($accred->fonction) && !empty($accred->numeropresse)): ?>
+							<select name="fonction" id="fonctionref" disabled>
+								<option name="redacChef" 	value="Rédacteur en chef"	<?php if(isset($accred->fonction) && $accred->fonction == 'Rédacteur en chef') echo 'selected'; ?> >Rédacteur en chef</option>
+								<option name="journaliste" 	value="journaliste" <?php if(isset($accred->fonction) && $accred->fonction == 'Journaliste') echo 'selected'; ?> >Journaliste</option>
+								<option name="cameraman" 	value="Caméraman" <?php if(isset($accred->fonction) && $accred->fonction == 'Caméraman') echo 'selected'; ?> >Caméraman</option>
+								<option name="preneurSon" 	value="Preneur de son" <?php if(isset($accred->fonction) && $accred->fonction == 'Preneur de son') echo 'selected'; ?> >Preneur de son</option>
+								<option name="photographe" 	value="Photographe" <?php if(isset($accred->fonction) && $accred->fonction == 'Photographe') echo 'selected'; ?> >Photographe</option>
+								<option name="technicien" 	value="Technicien" <?php if(isset($accred->fonction) && $accred->fonction == 'Technicien') echo 'selected'; ?>>Technicien</option>
+							</select>
+							<?php else: ?>
 							<input readonly type="text" name="fonction" value="<?php echo $accred->fonction; ?>" />
+							<?php endif; ?>
 						</div>
 
 						<div>
@@ -137,6 +156,13 @@
 								<?php endforeach; ?>
 							</select>
 						</div>
+						
+						<?php if(isset($accred->numeropresse) && !empty($accred->numeropresse)): ?>
+							<div>
+								<label>Num presse : </label>
+								<input type="text" id="numeroref" class="champ" name="numeropresse" value="<?php if(isset($accred->numeropresse)) echo $accred->numeropresse; ?>" readonly/>
+							</div>
+						<?php endif; ?>
 
 						<div class="contientZones readonly">
 							<label>Zones : </label>

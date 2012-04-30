@@ -63,7 +63,7 @@ $(document).ready(function(){
 	$('.optionPhoto').hide();
 	
 	$('a.editClient').live('click', function(){
-		$('form.infos input, form.infos select').removeAttr('readonly').removeAttr('disabled');
+		$('form.infos input, form.infos select, form.infos textarea').removeAttr('readonly').removeAttr('disabled');
 		$("form.infos input[type=submit]").show();
 		$('.optionPhoto').show();
 	});
@@ -164,6 +164,7 @@ $(document).ready(function(){
 		$('.contientZones').removeClass('readonly');
 		$('#editAccredRealTime input[type=text]').removeAttr('readonly');
 		$('#editAccredRealTime select').removeAttr('disabled');
+		$('#editAccredRealTime textarea').removeAttr('readonly');
 		$('#editAccredRealTime #saveAccred').show();
 		$('#editAccredRealTime input[type=checkbox]').removeAttr('disabled');
 		$('.optionPhoto').show();

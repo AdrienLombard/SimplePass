@@ -267,6 +267,7 @@ class Accreditation extends Cafe {
 		$client['tel'] 		 = $this->input->post('tel');
 		$client['mail'] 	 = $this->input->post('mail');
 		$client['organisme'] = $this->input->post('organisme');
+		
 
 		// Création de son accréditation.
 		$accred = array();
@@ -275,6 +276,8 @@ class Accreditation extends Cafe {
 		$accred['idcategorie'] 	= $this->input->post('categorie');
 		$accred['allaccess'] 	= ($this->input->post('allAccess'))? ALL_ACCESS : NON_ALL_ACCESS;
 		
+		
+		var_dump($accred);
 		// Construction du tableau de ses zones.
 		$accredZone = array();
 		if($this->input->post('zone')) {
@@ -321,6 +324,7 @@ class Accreditation extends Cafe {
 			}
 			
 			// redirection vers la fiche ainsi créer.
+			
 			redirect('accreditation/voir/' . $idClient);
 			
 		}
@@ -568,6 +572,9 @@ class Accreditation extends Cafe {
 		$data['tel']	= $this->input->post('tel');
 		$data['mail']	= $this->input->post('mail');
 		$data['organisme'] = $this->input->post('organisme');
+		$temp = $this->input->post('adresse');
+		if(!empty($temp))
+			$data['adresse'] = $temp;
 		
 		$webcam = $this->input->post('photo_webcam');
 		if($webcam != null) {
@@ -868,6 +875,9 @@ class Accreditation extends Cafe {
 		$client['tel'] = $this->input->post('tel');
 		$client['mail'] = $this->input->post('mail');
 		$client['organisme'] = $this->input->post('organisme');
+		$temp = $this->input->post('adresse');
+		if(!empty($temp))
+			$client['adresse'] = $temp;
 		
 		$webcam = $this->input->post('photo_webcam');
 		if($webcam != null) {
@@ -885,6 +895,9 @@ class Accreditation extends Cafe {
 		$accred['idcategorie'] = $this->input->post('categorie');
 		$accred['fonction'] = $this->input->post('fonction');
 		$accred['allaccess'] = ($this->input->post('allAccess'))? ALL_ACCESS : NON_ALL_ACCESS;
+		$temp = $this->input->post('numeropresse');
+		if(!empty($temp))
+			$accred['numeropresse'] = $temp;
 		
 		$this->modelaccreditation->modifier($idAccred, $accred);
 
