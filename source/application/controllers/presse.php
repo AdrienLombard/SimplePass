@@ -465,7 +465,9 @@ class Presse extends Chocolat{
 		
 		$this->form_validation->set_rules($config);
 		
-		if ($this->form_validation->run() == false) {
+		$groupe = $this->modelaccreditation->getGroupeExist( $this->input->post('groupe') );
+		
+		if ($this->form_validation->run() == false or $groupe) {
 			$values = "";
 			$values->groupe 	= $this->input->post('groupe');
 			$values->pays 		= $this->input->post('pays');
@@ -478,6 +480,10 @@ class Presse extends Chocolat{
 			$values->numr_carte = $this->input->post('numr_carte');
 			$values->categorie 	= $this->input->post('categorie');
 			
+			 if($groupe)
+			
+			$values->error_groupe='Le groupe existe déjà';
+			 
 			$this->groupe($idEvenement, $cate, $values);
 			
 		}

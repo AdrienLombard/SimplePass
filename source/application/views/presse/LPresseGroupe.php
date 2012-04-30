@@ -24,6 +24,7 @@
 			
 			<label><?php echo lang('nomGroupe'); ?>*</label>
 			<input type="text" value="<?php if($values) echo $values->groupe; ?>" name="groupe" />
+			<?php if(isset($info->error_groupe)) echo $info->error_groupe;?>
 			<?php echo form_error('groupe'); ?>
 			
 			<label><?php echo lang('pays'); ?>*
