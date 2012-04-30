@@ -404,6 +404,7 @@ class Presse extends Chocolat{
 		$idEvenement = $this->input->post('evenement');
 		
 		// On regle les paramètres du formulaire.
+		
 		$this->form_validation->set_message('required', 'Le champ %s est obligatoire.');
 		$this->form_validation->set_message('valid_email', 'Veuillez rentrer un mail valide.');
 		$this->form_validation->set_error_delimiters('<p class="error_message" > *', '</p>');

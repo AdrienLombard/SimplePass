@@ -104,6 +104,7 @@ class Inscription extends Chocolat {
 		$data['lang'] = $this->session->userdata('lang');
 		
 		// On regle les paramètres du formulaire.
+		
 		$this->form_validation->set_message('required', $this->lang->line('champRequis'));
 		$this->form_validation->set_message('valid_email', $this->lang->line('emailValide'));
 		$this->form_validation->set_error_delimiters('<p class="error_message" > *', '</p>');
@@ -406,13 +407,11 @@ class Inscription extends Chocolat {
 		$data['idEvenement']	= $evenement;
 		$data['infoEvenement'] 	= $this->modelevenement->getEvenementParId($evenement);
 		$data['listePays'] 		= $this->modellambda->listePays();
-		
 		$data['categorie'] = $this->listeCategorieToDisplay( $evenement );
-		
 		$data['values'] = $info;
-		
 		$data['lang'] = $this->session->userdata('lang');
 		
+			
 		$this->layout->view('lambda/LGroupe', $data);
 			
 	}
@@ -426,9 +425,12 @@ class Inscription extends Chocolat {
 		$idEvenement = $this->input->post('evenement');
 		
 		// On regle les paramètres du formulaire.
+		//$this->form_validation->set_message('required','Le groupe existe déjà.');
 		$this->form_validation->set_message('required', 'Le champ %s est obligatoire.');
 		$this->form_validation->set_message('valid_email', 'Veuillez rentrer un mail valide.');
 		$this->form_validation->set_error_delimiters('<p class="error_message" > *', '</p>');
+		
+	
 		
 		// On définie les règles de validation du formulaire.
 		$config = array(
@@ -473,8 +475,10 @@ class Inscription extends Chocolat {
 		
 		// On vérifie si le nom de groupe existe déja.
 		$groupe = $this->modelaccreditation->getGroupeExist( $this->input->post('groupe') );
-		
+
+			
 		if ($this->form_validation->run() == false or $groupe) {
+
 			$values             = '';
 			$values->groupe 	= $this->input->post('groupe');
 			$values->pays 		= $this->input->post('pays');
@@ -485,7 +489,11 @@ class Inscription extends Chocolat {
 			$values->tel 		= $this->input->post('tel');
 			$values->organisme	= $this->input->post('organisme');
 			$values->categorie 	= $this->input->post('categorie');
+		
+			if($groupe)
 			
+			$values->error_groupe='Le groupe existe déjà';
+			 	
 			$this->groupe($idEvenement, $values);
 			
 		}
@@ -683,7 +691,7 @@ class Inscription extends Chocolat {
 				$cat = null;
 
 				//$cat = $this->modelcategorie->getCategorieMereid($accred['idcategorie']);
-
+                
 				// Création des zones accéssible pour cette accrédiation.
 				if($accred['idcategorie'] != -1)
 					$this->AssociationZoneAccred($idNewAccred, $accred['idcategorie'],$this->input->post('evenement') );
