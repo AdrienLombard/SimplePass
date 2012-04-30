@@ -41,11 +41,14 @@ $(document).ready(function(){
 		var val = $(this).val().toLowerCase();
 		
 		if(val.length >= 2) {
-			var tab = val.split(' ');
 			$('.itemFlowSearch').hide();
+			var tab = val.split(' ');
+			var request = "";
 			for(var i=0; i<tab.length; i++)
-				$('.itemFlowSearch[username*='+tab[i]+']').show();
-		}
+			    request += '[username*=' + tab[i] + ']';
+			$('.itemFlowSearch' + request).show();
+		} else
+		    $('.itemFlowSearch').hide();
 
 	});
 	

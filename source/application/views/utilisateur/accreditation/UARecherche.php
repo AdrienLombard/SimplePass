@@ -25,6 +25,7 @@
 					<a href="<?php echo site_url('accreditation/voir/'.$client->idclient); ?>">
 						<div username="<?php echo strtolower($client->nom. ' ' .$client->prenom); ?>" class="itemFlowSearch">
 							<span class="username"><?php echo $client->nom. ' ' .$client->prenom; ?></span>
+							<span class="email">- <?php echo $client->mail; ?></span>
 							<span class="pays"><?php echo $client->pays; ?></span>
 						</div>
 					</a>
