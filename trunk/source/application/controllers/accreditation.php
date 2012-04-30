@@ -705,6 +705,21 @@ class Accreditation extends Cafe {
 		redirect('accreditation/modifierGroupe/' . $nomGroupe);
 	}
 	
+	public function supprimerGroupe ($nomgroupe){
+		
+		$nomGroupe=str_replace('%20', ' ', $nomgroupe);;
+		$idEvent = $this->session->userdata('idEvenementEnCours');
+		$membres = $this->modelaccreditation->getAccreditationGroupeParEvenement( $nomGroupe, $idEvent);
+		
+		foreach($membres as $m){
+			$this->modelzone->supprimerZoneParAccreditation($m->idaccreditation);
+			$this->modelaccreditation->supprimer( $m->idaccreditation );
+		}
+		
+		
+		redirect('accreditation/index');
+	}
+	
 	public function ajoutMembreGroupe($nomgroupe){
 		$this->layout->ajouter_js('webcam/jquery.webcam');
 		$this->layout->ajouter_js('webcam/webcam');
