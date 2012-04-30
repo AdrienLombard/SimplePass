@@ -87,7 +87,7 @@
 								<?php endforeach; ?>
 							</div>
 							<div>
-								<label> Mode All-Accees : </label>
+								<label> All-Access : </label>
 								<input type="checkbox" disabled  name="allAccess" value="1" <?php if(isset($re->accred['allaccess']) && $re->accred['allaccess'] == 1) echo 'checked'; ?> />
 							</div>
 						</div>
@@ -120,7 +120,7 @@
 								<?php endforeach; ?>
 							</div>
 							<div>
-								<label> Mode All-Accees : </label>
+								<label> All-Access : </label>
 								<input type="checkbox" disabled name="allAccess" value="1" <?php if(isset($re->accred['allaccess']) && $re->accred['allaccess'] == 1) echo 'checked'; ?> readonly/>
 							</div>
 						</div>
@@ -136,4 +136,6 @@
 
     </div>
 		
+</div>
+		    
 </div>

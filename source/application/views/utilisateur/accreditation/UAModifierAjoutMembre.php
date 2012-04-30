@@ -83,7 +83,7 @@
 						</div>
 					</div>
 					<div>
-						<label> Mode All-Accees : </label>
+						<label>All-Access : </label>
 						<input type="checkbox" id="all" name="allAccess" value="1" <?php if(isset($re->accred['allaccess']) && $re->accred['allaccess'] == 1) echo 'checked'; ?>/>
 					</div>
 					<input type="submit" class="button" value="Valider" />
