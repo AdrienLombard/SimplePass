@@ -11,7 +11,11 @@
     <div class="box-full">
 		
 		<aside>
-		<a href="<?php echo site_url('accreditation/ajoutMembreGroupe/'.$ref->groupe); ?>" >Ajouter membre</a>
+			<a href="<?php echo site_url('accreditation/index'); ?>">Retour</a>
+			<br/>	
+			<a href="<?php echo site_url('accreditation/ajoutMembreGroupe/'.$ref->groupe); ?>" >Ajouter membre</a>
+			<br>
+			<a href="<?php echo site_url('accreditation/supprimerGroupe/'.$ref->groupe); ?>" confirm="Êtes-vous sûr de vouloir supprimer ce groupe ?">Supprimer groupe</a>
 		</aside>
 		
 		<div id="main" class="accred">

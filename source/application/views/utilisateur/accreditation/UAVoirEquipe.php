@@ -11,14 +11,17 @@
     <div class="box-full">
 
         <aside>
+			<a href="<?php echo site_url('accreditation/index'); ?>">Retour</a>
+			<br/>
 			<a href="<?php echo site_url('accreditation/modifierGroupe/'.$ref->groupe); ?>">Modifier</a>
 			<?php if($ref->etataccreditation == ACCREDITATION_A_VALIDE): ?>
 				<a href="<?php echo site_url('accreditation/validergroupe/'.$ref->groupe); ?>">Valider la demande</a>
 			<?php else: ?>
-				<a id="imprimer" target="_blank" href="<?php echo site_url('impression/impgroupe/'.$ref->groupe); ?>">Imprimer</a>
-				<a id="imprimerCarte" target="_blank" href="<?php echo site_url('impression/impcartegroupe/'.$ref->groupe); ?>">Imprimer carte</a>
+				<a target="_blank" href="<?php echo site_url('impression/impgroupe/'.$ref->groupe); ?>">Imprimer</a>
+				<a target="_blank" href="<?php echo site_url('impression/impcartegroupe/'.$ref->groupe); ?>">Imprimer carte</a>
 			<?php endif; ?>
-			<a href="<?php echo site_url('accreditation/index'); ?>">Retour</a>
+			<br/>
+			<a href="<?php echo site_url('accreditation/supprimerGroupe/'.$ref->groupe); ?>" confirm="Êtes-vous sûr de vouloir supprimer ce groupe ?">Supprimer groupe</a>
         </aside>
 		
 		<div id="main" class="accred">
