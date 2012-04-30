@@ -387,6 +387,7 @@ class Presse extends Chocolat{
 		$data['values'] 			= $info;
 		$data['cate'] 				= $categorie;
 		
+		//var_dump($data['listeCategorie']);
 		$this->layout->view('presse/LPresseGroupe', $data);
 	}
 

@@ -62,6 +62,14 @@
 								<option value="<?php echo $ref->pays; ?>"><?php echo $pays->nompays; ?></option>
 							</select>
 						</div>
+						
+						<!-- champ pour l'adresse du client -->
+						<?php if(isset($ref->numeropresse) && !empty($ref->numeropresse)): ?>
+						<div>
+							<label>Adresse : </label>
+							<textarea readonly name="adresse" cols="65" rows="3"><?php if(isset($ref->adresse)) echo $ref->adresse; ?></textarea>
+						</div>
+						<?php endif; ?>
 					
 						<div class="clear"></div>
 						
@@ -79,10 +87,33 @@
 							<label>Nom : </label><input type="text" id="nomref" class="champ" style="text-transform: uppercase; width:130px;" name="ref[nom]" value="<?php echo $ref->nom; ?>" readonly/>
 							<label>Prénom : </label><input type="text" id="prenomref" class="champ2" style="width:130px;" name="ref[prenom]" value="<?php echo $ref->prenom; ?>" readonly/>
 						</div>
+						
 						<div>
-							<label>Catégorie : </label><input type="text" id="categorieref" class="champ" style="width:130px;" name="ref[categorie]" value="<?php echo $ref->libellecategorie; ?>" readonly/>
-							<label>Fonction : </label><input type="text" id="fonctionref" class="champ2" style="width:130px;" name="ref[fonction]" value="<?php echo $ref->fonction; ?>" readonly/>
+							<label>Catégorie : </label>
+							<input type="text" id="categorieref" class="champ" style="width:130px;" name="ref[categorie]" value="<?php echo $ref->libellecategorie; ?>" readonly/>
+							
+							<label>Fonction : </label>
+							<?php if(isset($ref->numeropresse) && !empty($ref->numeropresse)): ?>
+							<select name="ref[fonction]" id="fonctionref" style="width:180px;" disabled>
+								<option name="redacChef" 	value="Rédacteur en chef"	<?php if(isset($ref->fonction) && $ref->fonction == 'Rédacteur en chef') echo 'selected'; ?> >Rédacteur en chef</option>
+								<option name="journaliste" 	value="journaliste" <?php if(isset($ref->fonction) && $ref->fonction == 'Journaliste') echo 'selected'; ?> >Journaliste</option>
+								<option name="cameraman" 	value="Caméraman" <?php if(isset($ref->fonction) && $ref->fonction == 'Caméraman') echo 'selected'; ?> >Caméraman</option>
+								<option name="preneurSon" 	value="Preneur de son" <?php if(isset($ref->fonction) && $ref->fonction == 'Preneur de son') echo 'selected'; ?> >Preneur de son</option>
+								<option name="photographe" 	value="Photographe" <?php if(isset($ref->fonction) && $ref->fonction == 'Photographe') echo 'selected'; ?> >Photographe</option>
+								<option name="technicien" 	value="Technicien" <?php if(isset($ref->fonction) && $ref->fonction == 'Technicien') echo 'selected'; ?>>Technicien</option>
+							</select>
+							<?php else: ?>
+							<input type="text" id="fonctionref" class="champ2" style="width:130px;" name="ref[fonction]" value="<?php echo $ref->fonction; ?>" readonly/>
+							<?php endif; ?>
 						</div>
+						
+						<?php if(isset($ref->numeropresse) && !empty($ref->numeropresse)): ?>
+							<div>
+								<label>Num presse : </label>
+								<input type="text" id="numeroref" class="champ" style="" name="ref[numeropresse]" value="<?php if(isset($ref->numeropresse)) echo $ref->numeropresse; ?>" readonly/>
+							</div>
+						<?php endif; ?>
+						
 						<div class="contientZones readonly">
 							<label>Zones : </label>
 							<div>
@@ -114,8 +145,29 @@
 						</div>
 						<div class="ligne">
 							<label>Catégorie : </label><input type="text" id="categorie" class="champ" style="width:130px;" name="ref[categorie]" value="<?php echo $p->libellecategorie; ?>" readonly/>
+							
+							<?php if(isset($p->numeropresse) && !empty($p->numeropresse)): ?>
+							<select name="ref[fonction]" id="fonctionref" style="width:180px;" disabled>
+								<option name="redacChef" 	value="redacChef"	<?php if(isset($p->fonction) && $p->fonction == 'Rédacteur en chef') echo 'selected'; ?> >Rédacteur en chef</option>
+								<option name="journaliste" 	value="journaliste" <?php if(isset($p->fonction) && $p->fonction == 'Journaliste') echo 'selected'; ?> >Journaliste</option>
+								<option name="cameraman" 	value="cameraman" <?php if(isset($p->fonction) && $p->fonction == 'Caméraman') echo 'selected'; ?> >Caméraman</option>
+								<option name="preneurSon" 	value="preneurSon" <?php if(isset($p->fonction) && $p->fonction == 'Preneur de son') echo 'selected'; ?> >Preneur de son</option>
+								<option name="photographe" 	value="photographe" <?php if(isset($p->fonction) && $p->fonction == 'Photographe') echo 'selected'; ?> >Photographe</option>
+								<option name="technicien" 	value="technicien" <?php if(isset($p->fonction) && $p->fonction == 'Technicien') echo 'selected'; ?>>Technicien</option>
+							</select>
+							<?php else: ?>
 							<label>Fonction : </label><input type="text" id="fonction" class="champ2" style="width:130px;" name="ref[fonction]" value="<?php echo $p->fonction; ?>" readonly/>
+							<?php endif; ?>
 						</div>
+						
+						<?php if(isset($p->numeropresse) && !empty($p->numeropresse)): ?>
+							<div>
+								<label>Num presse : </label>
+								<input type="text" id="numeroref" class="champ" style="" name="ref[numeropresse]" value="<?php if(isset($p->numeropresse)) echo $p->numeropresse; ?>" readonly/>
+							</div>
+						<?php endif; ?>
+						
+						
 						<div class="contientZones readonly">
 							<label>Zones : </label>
 							<div>

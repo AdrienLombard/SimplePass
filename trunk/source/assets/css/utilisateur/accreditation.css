@@ -440,3 +440,13 @@ form#editAccredRealTime input[type=text][readonly], form#editAccredRealTime sele
 .icons.delete:hover {
 	background-image: url(../../images/icons/delete_hover.png);
 }
+
+/******************************************/
+
+textarea[readonly] {
+	border: none;
+}
+
+
+
+
