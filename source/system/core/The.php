@@ -13,7 +13,7 @@ class The extends CI_Controller {
         $this->layout->ajouter_css('app/app');
         $this->layout->ajouter_css('app/forms');
         
-        $this->layout->set_titre('Courchevel');
+        $this->layout->set_titre('SimplePass Accreditations - Courchevel');
         
 		$this->layout->ajouter_js('jquery-1.7.1.min');
         
