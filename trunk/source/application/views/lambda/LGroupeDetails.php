@@ -90,26 +90,12 @@
 		<h3><?php echo lang('nouveauMembre'); ?> <span class="modifier"><?php echo lang('modifier'); ?></span></h3>
 		<div class="form">
 			<input type="hidden" name="groupe[nbLigne][index]" value="nbLigne" />
-			<div class="photo">
-				<canvas id="canvas_nbLigne" width="160" height="204" style="display:none;"></canvas>
-				<div class="webcamWrapper" data="nbLigne">
-					<a href="#" class="closeCam" data="nbLigne">x</a>
-					<span style="color:black"><?php echo lang('centreWebcam').' :'; ?></span>
-					<div class="webcam" data="nbLigne"></div>
-					<a href="#" class="captureCam" data="nbLigne"><?php echo lang('prendrePhoto'); ?></a>
-				</div>
-				<fieldset class="encadrePhoto">
-					<legend><?php echo lang('photo'); ?></legend>
-					<div class="optionPhoto">
-						<span class="uploadFichier" data="nbLigne"><?php echo lang('fichier'); ?></span>
-					</div>
-					<div class="optionPhoto">
-						<span class="startWebcam" data="nbLigne"><?php echo lang('camera'); ?></span>
-					</div>
-				</fieldset>
+			<div class="photo" style="float: left; margin: 25px 30px 50px 0">
+			    <div class="optionPhoto">
+				<span class="uploadFichier" data="nbLigne"><?php echo lang('photo'); ?></span>
+			    </div>
 			</div>
 			<input type="file" name="photo_file_nbLigne" id="photo_file" />
-			<input type="hidden" name="groupe[nbLigne][photo_webcam]" id="photo_webcam" />
 			<div class="split">
 				<label for=""><?php echo lang('nom'); ?>*</label>
 				<input type="text" id="ligneNom" name="groupe[nbLigne][nom]" />

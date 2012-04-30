@@ -527,8 +527,6 @@ class Inscription extends Chocolat {
 	
 		$this->layout->ajouter_js('lambda/scriptGroupe');
 		$this->layout->ajouter_js('jquery.Jcrop.min');
-		$this->layout->ajouter_js('webcam/jquery.webcam');
-		$this->layout->ajouter_js('webcam/webcamGroupe');
 		
 		
 		$this->layout->view('lambda/LGroupeDetails', $data);
@@ -555,7 +553,7 @@ class Inscription extends Chocolat {
 		$file = $ref['photo_file'];
 		unset($ref['photo_file']);
 
-        // ajout ref
+                // ajout ref
 		$id = $this->modelclient->ajouter($ref);
                 
 		// ajout photo webcam
@@ -634,6 +632,7 @@ class Inscription extends Chocolat {
 				$idNewClient = $this->modelclient->ajouter($membre);
 
 				$index = $ligne['index'];
+				
 				// image
 				if($_FILES['photo_file_'.$index]['name'] != '') {
 
@@ -643,15 +642,17 @@ class Inscription extends Chocolat {
 					$config['overwrite'] = true;
 
 					$this->load->library('upload', $config);
-					$this->upload->do_upload('photo_file');
+					$this->upload->do_upload('photo_file_' . $index);
 					$dataimg = $this->upload->data();
+					
+					echo $this->upload->display_errors();
 
 					$this->load->helper('image');
 					if($dataimg['image_width'] > IMG_WIDTH){
 						if((($dataimg['image_height'] * IMG_WIDTH) / $dataimg['image_width']) <= IMG_HEIGHT)
-							resizeWidthRatio($data['full_path'], IMG_WIDTH);
+							resizeWidthRatio($dataimg['full_path'], IMG_WIDTH);
 						else
-							resizeHeightRatio($data['full_path'], IMG_HEIGHT);
+							resizeHeightRatio($dataimg['full_path'], IMG_HEIGHT);
 					}
 				}
 
