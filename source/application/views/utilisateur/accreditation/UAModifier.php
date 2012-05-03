@@ -176,7 +176,7 @@
 							</div>
 						</div>
 						
-						<div>
+						<div class="allaccess">
 							<label>All-Access : </label>
 							<input type="checkbox" id="all" name="allAccess" disabled <?php if($accred->allaccess == 1) echo 'checked'; ?>/>
 						</div>

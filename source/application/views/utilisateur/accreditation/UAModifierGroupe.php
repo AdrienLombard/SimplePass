@@ -139,7 +139,7 @@
 							</div>
 						</div>
 
-						<div>
+						<div class="allaccess">
 							<label>All-Access : </label>
 							<input data="0" type="checkbox" class="allGroupe" name="allAccess" value="1" <?php if(isset($re->accred['allaccess']) && $re->accred['allaccess'] == 1) echo 'checked'; ?> />
 						</div>
@@ -214,7 +214,7 @@
 							</div>
 						</div>
 
-						<div>
+						<div class="allaccess">
 							<label>All-Access : </label>
 							<input data="<?php echo $nb; ?>" type="checkbox" class="allGroupe" name="allAccess" value="1" <?php if(isset($re->accred['allaccess']) && $re->accred['allaccess'] == 1) echo 'checked'; ?> />
 						</div>
