@@ -38,19 +38,19 @@
 			
 			<div class="titre-supra-checkbox">Filtres :</div>
 			
-			<div class="supra-checkbox checked" data="simple">Simple
+			<div class="supra-checkbox checked" data="simple">Individuelles
 			    <input type="checkbox" id="simple" checked />
 			</div>
 			
-			<div class="supra-checkbox right checked" data="groupe">Groupe
+			<div class="supra-checkbox right checked" data="groupe">Groupes
 			    <input type="checkbox" id="groupe" checked />
 			</div>
 			
-			<div class="supra-checkbox checked" data="valide">Validée
+			<div class="supra-checkbox checked" data="valide">Validées
 			    <input type="checkbox" id="valide" checked />
 			</div>
 			
-			<div class="supra-checkbox right checked" data="demande">Demande
+			<div class="supra-checkbox right checked" data="demande">Demandes
 			    <input type="checkbox" id="demande" checked />
 			</div>
 			
