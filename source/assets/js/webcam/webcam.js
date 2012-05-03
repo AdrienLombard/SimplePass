@@ -28,7 +28,7 @@ $(document).ready(function(){
 			height: 204,
 			width: 272,
 			mode: "callback",
-			swffile: "http://localhost/courchevel_src/assets/flash/jscam_canvas_only.swf",
+			swffile: "http://localhost/courchevel_src/assets/flash/jscam.swf",
 			
 			onCapture: function() {
 				
