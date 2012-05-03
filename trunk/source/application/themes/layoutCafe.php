@@ -55,9 +55,11 @@
 						Gestion
 						<div class="toggleMenu">
 							<a href="<?php echo site_url('evenement/index'); ?>">Evènements</a>
+							<?php if($this->session->userdata('idEvenementEnCours')): ?>
 							<a href="<?php echo site_url('accreditation/index'); ?>">Accréditations</a>
 							<a href="<?php echo site_url('categorie/liste'); ?>">Catégories</a>
 							<a href="<?php echo site_url('zone/index'); ?>">Zones</a>
+							<?php endif; ?>
 						</div>
 					</span>
 					<a href="<?php echo site_url('utilisateur/deconnexion'); ?>">Déconnexion</a>

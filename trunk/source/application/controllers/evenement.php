@@ -163,6 +163,11 @@ class Evenement extends Cafe {
 			
 			$id = $this->modelevenement->lastId();
 			
+			if(!$this->session->userdata('idEvenementEnCours')) { 
+				$this->session->set_userdata('idEvenementEnCours', $id);
+				$this->session->set_userdata('libelleEvenementEnCours', $nom);
+			}
+			
 			$this->donnees( $id, $idEvenement );
 		}
 		else {
