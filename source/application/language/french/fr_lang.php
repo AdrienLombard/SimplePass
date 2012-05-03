@@ -66,7 +66,7 @@ $lang['technicien'] = 'Technicien';
 
 
 // Formulaire d'inscription groupée
-$lang['responsable'] = 'Responsable';
+$lang['responsable'] = 'Référent du groupe';
 $lang['demandeAjoutFonction'] = 'Quelle est votre fonction ?';
 $lang['titreListeMembres'] = 'Liste des membres de l\'équipe';
 $lang['ajoutNouveauMembre'] = 'Ajouter un nouveau membre';

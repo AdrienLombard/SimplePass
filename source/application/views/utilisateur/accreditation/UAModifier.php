@@ -160,7 +160,7 @@
 						<?php if(isset($accred->numeropresse) && !empty($accred->numeropresse)): ?>
 							<div>
 								<label>Num presse : </label>
-								<input type="text" id="numeroref" class="champ" name="numeropresse" value="<?php if(isset($accred->numeropresse)) echo $accred->numeropresse; ?>" readonly/>
+								<input type="text" id="numeroref" name="numeropresse" value="<?php if(isset($accred->numeropresse)) echo $accred->numeropresse; ?>" readonly/>
 							</div>
 						<?php endif; ?>
 

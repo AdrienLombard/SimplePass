@@ -48,7 +48,8 @@
 				<input  type="radio" value="<?php echo DIRECT ?>" 		id="tel_direct" 	name="tel_type" /><?php echo lang('ligneDirecte'); ?>
 
 				<input  type="text" value="<?php echo set_value('tel'); ?>" id="tel" name="tel" />
-			 </div>
+				<?php echo form_error('tel'); ?>
+			</div>
 
 			<label><?php echo lang('cartePresse'); ?>* : </label>
 			<input type="text" name="numr_carte" value="<?php echo set_value('numr_carte');?>"/>
@@ -119,11 +120,10 @@
 			</div> <!-- fin du bloc de photo -->
 			<div class="clear"></div>
 
+			<input type="submit" name="valider" id="valider" value="<?php echo lang('valider'); ?>"/>
+			
+			<div class="clear"></div>
 		</div> <!-- fin du bloc small-box -->
-		<div class="clear"></div>
-
-		
-		<input type="submit" name="valider" id="valider" value="<?php echo lang('valider'); ?>"/>
 		
 		<div class="clear"></div>
 	</form>

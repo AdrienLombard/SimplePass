@@ -5,7 +5,11 @@ class modelEvenement extends MY_Model {
 	
 	public function getEvenements(){
 		
-		return $this->db->get(DB_EVENEMENT)->result();
+		return $this->db->select('*')
+						->from(DB_EVENEMENT)
+						->order_by('datedebut', 'asc')
+						->get()
+						->result();
 	
 	}
 	

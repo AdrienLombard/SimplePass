@@ -276,8 +276,6 @@ class Accreditation extends Cafe {
 		$accred['idcategorie'] 	= $this->input->post('categorie');
 		$accred['allaccess'] 	= ($this->input->post('allAccess'))? ALL_ACCESS : NON_ALL_ACCESS;
 		
-		
-		var_dump($accred);
 		// Construction du tableau de ses zones.
 		$accredZone = array();
 		if($this->input->post('zone')) {
@@ -644,7 +642,6 @@ class Accreditation extends Cafe {
 	
 		$info				= $this->input->post('info');
 		$personnes			= $this->input->post('pers');
-		var_dump($personnes);
 		
 		$id = 0;
 		foreach($personnes as $pers){
@@ -908,7 +905,6 @@ class Accreditation extends Cafe {
 		
 		foreach( $this->input->post('zone') as $key => $value )
 			$values[] = array('idaccreditation' => $idAccred, 'idzone' => $key);
-		var_dump($values);
 		$this->modelzone->ajouterZonesAccreditation($values);
 
 		if($_FILES['photo_file']['size'] != 0)

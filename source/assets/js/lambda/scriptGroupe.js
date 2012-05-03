@@ -46,14 +46,7 @@ $(document).ready(function(){
 		var nomFonction = fonction.val();
 		if(nomFonction != '') nomFonction = ' (' + nomFonction + ')';
 		
-		var regEspaceSebALaCon = 
-		
-		nomFonction.replace(/&nbsp;/g, '');
-		
-		/*while(nomFonction.substring(0, 1) == ' ') {
-			alert('Pouet');
-			nomFonction = nomFonction.substring(1, nomFonction.length);
-		}*/
+		nomFonction = $.trim(nomFonction);
 		
 		var erreur = false;
 		if(nom.val() == '') {
@@ -82,10 +75,10 @@ $(document).ready(function(){
 
 			// met à jours le h3 avec les infos des inputs
 			if(lang == 'fra' || lang == '') {
-				parent.parent().find('h3').html(nom.val() + ' ' + prenom.val() + ' - ' + categorie + $.trim(nomFonction) + '<span class="modifier">Modifier</span>');
+				parent.parent().find('h3').html(nom.val() + ' ' + prenom.val() + ' - ' + categorie + ' ' + $.trim(nomFonction) + '<span class="modifier">Modifier</span>');
 			}
 			else {
-				parent.parent().find('h3').html(nom.val() + ' ' + prenom.val() + ' - ' + categorie + $.trim(nomFonction) + '<span class="modifier">Modify</span>');
+				parent.parent().find('h3').html(nom.val() + ' ' + prenom.val() + ' - ' + categorie + ' ' + $.trim(nomFonction) + '<span class="modifier">Modify</span>');
 			}
 		} else {
 			// refuser l'etat de la ligne

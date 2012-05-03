@@ -45,8 +45,9 @@
 		<input type="text" value="<?php echo set_value('mail'); ?>" id="mail" name="mail" />
 		<?php echo form_error('mail'); ?>
 		
-		<label><?php echo lang('societe'); ?></label>
+		<label><?php echo lang('societe'); ?>*</label>
 		<input type="text" value="<?php echo set_value('titre'); ?>" id="titre" name="titre" />
+		<?php echo form_error('titre'); ?>
 		
 		<div>
 		<label><?php echo lang('categorie'); ?></label>

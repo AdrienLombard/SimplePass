@@ -105,7 +105,7 @@
 					<br/>
 					<div>
 						<label class="shortAdresse">Adresse : </label>
-						<textarea readonly name="adresse" cols="45" rows="3"><?php if(isset($client->adresse)) echo $client->adresse; ?></textarea>
+						<textarea readonly name="adresse" cols="45" rows="3" class="adresse" ><?php if(isset($client->adresse)) echo $client->adresse; ?></textarea>
 					</div>
 					<?php endif; ?>
 				
