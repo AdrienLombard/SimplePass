@@ -158,6 +158,10 @@
 								</div>
 								<?php endforeach; ?>
 							</div>
+							<div class="allaccess">
+								<label>All-Access : </label>
+								<input type="checkbox" style="margin-top:14px;" id="all" name="allAccess"/>
+							</div>
 						</div>
 						
 						<div class="clear"></div>
