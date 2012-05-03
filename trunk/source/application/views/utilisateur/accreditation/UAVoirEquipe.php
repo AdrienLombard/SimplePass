@@ -81,6 +81,8 @@
 						<div class="photo">
 							<?php if(img_url('photos/'.$ref->idclient.'.jpg') != NULL): ?>
 								<img src="<?php echo site_url('image/generate/' . $ref->idclient); ?>" />
+							<?php else: ?>
+								<?php echo img('photos/0.jpg'); ?>
 							<?php endif; ?>
 						</div>
 						<div>
@@ -137,6 +139,8 @@
 						<div class="photo">
 							<?php if(img_url('photos/'.$p->idclient.'.jpg') != NULL): ?>
 								<img src="<?php echo site_url('image/generate/' . $p->idclient); ?>" />
+							<?php else: ?>
+								<?php echo img('photos/0.jpg'); ?>
 							<?php endif; ?>
 						</div>
 						<div>
