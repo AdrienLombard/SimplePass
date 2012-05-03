@@ -431,11 +431,6 @@ class Presse extends Chocolat{
 				'label'   => 'Adresse',
 				'rules'   => 'required',
 			),
-			array(
-				'field'   => 'tel',
-				'label'   => $this->lang->line('tel'),
-				'rules'   => 'required'
-			),
 		    array(
 				'field'   => 'numr_carte',
 				'label'   => 'Numero carte de presse',
@@ -443,7 +438,7 @@ class Presse extends Chocolat{
 			),
 			array(
 				'field'   => 'titre',
-				'label'   => $this->lang->line('titre'), 
+				'label'   => $this->lang->line('societe'), 
 				'rules'   => 'required'
 			),
 			array(
@@ -454,7 +449,7 @@ class Presse extends Chocolat{
 			array(
 				'field'   => 'tel',
 				'label'   => $this->lang->line('tel'), 
-				'rules'   => ''
+				'rules'   => 'required'
 			),
 			array(
 				'field'   => 'mail',
@@ -586,58 +581,62 @@ class Presse extends Chocolat{
 		}
 		
 		// Ajout des membres
+		
+		$gr = $this->input->post('groupe');
+		
+		if($gr) {
+			foreach($gr as $ligne) {
+				// création du client
+				$membre = null;
+				$membre['nom']     		= $ligne['nom'];
+				$membre['prenom']  		= $ligne['prenom'];
+				$membre['adresse'] 		= $ligne['adresse_membre'];
+				$membre['tel']     		= $ligne['tel_membre'];
+				$membre['mail']			= $ligne['mail_membre'];
+				$membre['organisme']	= $data['organisme'];
+				$membre['pays'] 		= $data['pays'];
+				$idNewClient = $this->modelclient->ajouter($membre);
 
-		foreach($this->input->post('groupe') as $ligne) {
-			// création du client
-			$membre = null;
-			$membre['nom']     		= $ligne['nom'];
-			$membre['prenom']  		= $ligne['prenom'];
-			$membre['adresse'] 		= $ligne['adresse_membre'];
-			$membre['tel']     		= $ligne['tel_membre'];
-			$membre['mail']			= $ligne['mail_membre'];
-			$membre['organisme']	= $data['organisme'];
-			$membre['pays'] 		= $data['pays'];
-			$idNewClient = $this->modelclient->ajouter($membre);
 
+				// création de l'accreditation de son accreditation.
+				$accred = null;
+				$accred['groupe'] 			 = $data['groupe'];
+				$accred['idevenement']		 = $this->input->post('evenement');
+				$accred['idclient'] 		 = $idNewClient;
+				$accred['fonction'] 		 = $ligne['fonction'];
+				$accred['numeropresse']		 = $ligne['numr_carte_membre'];
+				$accred['referent'] 		 = $id;
+				$accred['etataccreditation'] = ACCREDITATION_A_VALIDE ;
+				$accred['dateaccreditation'] = time();
+				
+				// Gestion du mail.
+				$contenuMail .= '<li>' . $membre['prenom'] . ' ' . $membre['nom'];
+				
+				$accred['idcategorie'] = array_pop($ligne['categorie']);
 
-			// création de l'accreditation de son accreditation.
-			$accred = null;
-			$accred['groupe'] 			 = $data['groupe'];
-			$accred['idevenement']		 = $this->input->post('evenement');
-			$accred['idclient'] 		 = $idNewClient;
-			$accred['fonction'] 		 = $ligne['fonction'];
-			$accred['numeropresse']		 = $ligne['numr_carte_membre'];
-			$accred['referent'] 		 = $id;
-			$accred['etataccreditation'] = ACCREDITATION_A_VALIDE ;
-			$accred['dateaccreditation'] = time();
-			
-			// Gestion du mail.
-			$contenuMail .= '<li>' . $membre['prenom'] . ' ' . $membre['nom'];
-			
-			$accred['idcategorie'] = array_pop($ligne['categorie']);
-
-			$cat = null;
-			
-			$cat = $this->modelcategorie->getCategorieMereid($accred['idcategorie']);
-			
-			if(isset($cat) && !empty($cat) && $cat[0]->libellecategorie != '') {
-				$contenuMail .= ' - ' . $cat[0]->libellecategorie;
+				$cat = null;
+				
+				$cat = $this->modelcategorie->getCategorieMereid($accred['idcategorie']);
+				
+				if(isset($cat) && !empty($cat) && $cat[0]->libellecategorie != '') {
+					$contenuMail .= ' - ' . $cat[0]->libellecategorie;
+				}
+				else {
+					$contenuMail .= ' - Pas de catégorie définie / No category defined';
+				}
+				
+				if(isset($accred['fonction']) && !empty($accred['fonction']) && $accred['fonction'] != '') {
+					$contenuMail .= ' (' . $accred['fonction'] . ')</li>';
+				}
+				else {
+					$contenuMail .= ' (Pas de fonction définie / No function defined)</li>';
+				}
+				
+				$idNewAccred = $this->modelaccreditation->ajouter($accred);
+				
+				
+				$this->AssociationZoneAccred($idNewAccred, $accred['idcategorie'], $this->input->post('evenement'));
 			}
-			else {
-				$contenuMail .= ' - Pas de catégorie définie / No category defined';
-			}
-			
-			if(isset($accred['fonction']) && !empty($accred['fonction']) && $accred['fonction'] != '') {
-				$contenuMail .= ' (' . $accred['fonction'] . ')</li>';
-			}
-			else {
-				$contenuMail .= ' (Pas de fonction définie / No function defined)</li>';
-			}
-			
-			$idNewAccred = $this->modelaccreditation->ajouter($accred);
-			
-			
-			$this->AssociationZoneAccred($idNewAccred, $accred['idcategorie'], $this->input->post('evenement'));
 		}
 		
 		// Préparation et envoi du mail de confirmation

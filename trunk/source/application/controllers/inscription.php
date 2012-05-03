@@ -132,11 +132,6 @@ class Inscription extends Chocolat {
 				'rules'   => ''
 			),
 			array(
-				'field'   => 'titre',
-				'label'   => $this->lang->line('titre'), 
-				'rules'   => ''
-			),
-			array(
 				'field'   => 'fonction',
 				'label'   => $this->lang->line('fonction'), 
 				'rules'   => ''
@@ -150,6 +145,11 @@ class Inscription extends Chocolat {
 				'field'   => 'categorie',
 				'label'   => $this->lang->line('categorie'), 
 				'rules'   => ''
+			),
+			array(
+				'field'   => 'titre',
+				'label'   => $this->lang->line('societe'), 
+				'rules'   => 'required'
 			),
 			array(
 				'field'   => 'mail',
@@ -207,11 +207,13 @@ class Inscription extends Chocolat {
 				foreach($categories as $cat) {
 					if($cat != "-1")
 						$categorie = $cat;
+					else
+						$categorie = -1;
 				}
 
 				// On vérifie si le client existe dans la base.
 				$idClient = $this->modelclient->verifierClient($values['nom'], $values['prenom'], $values['mail']);
-
+				
 				if(!$idClient) {
 					//Insertion dans la base.
 					$this->modelclient->ajouter($values);
@@ -225,7 +227,7 @@ class Inscription extends Chocolat {
 					'etataccreditation'	=> ACCREDITATION_A_VALIDE,
 					'dateaccreditation' => time()
 				);
-
+				
 				$fonction = $this->input->post('fonction');
 				if(isset($fonction) && !empty($fonction)) {
 					$accredData['fonction'] = $fonction;
@@ -234,8 +236,11 @@ class Inscription extends Chocolat {
 				// On ajoute une nouvelle accréditation dans la base et on récupère son ID.
 				$idNewAccred = $this->modelaccreditation->ajouter($accredData);
 
-				// On crée l'association entre cette accréditation et les zones.
-				$this->AssociationZoneAccred( $idNewAccred, $categorie, $event );
+				// Si une catégorie a été sélectionnée
+				if($categorie != -1) {
+					// On crée l'association entre cette accréditation et les zones.
+					$this->AssociationZoneAccred( $idNewAccred, $categorie, $event );
+				}
 				
 				
 				//upload ou webcam
@@ -502,7 +507,7 @@ class Inscription extends Chocolat {
                     $data = array();
                     $data['groupe'] 			= $this->input->post('groupe');
                     $data['pays'] 				= $this->input->post('pays');	
-                    $data['nom'] 				= $this->input->post('nom');
+                    $data['nom'] 				= strtoupper($this->input->post('nom'));
                     $data['prenom'] 			= $this->input->post('prenom');
                     $data['fonction'] 			= $this->input->post('fonction');
                     $data['tel'] 				= $this->input->post('tel');
