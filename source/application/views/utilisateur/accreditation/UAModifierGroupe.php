@@ -4,8 +4,8 @@
 
     <div class="tabs">
 		<a href="<?php echo site_url('accreditation/index'); ?>" >Liste</a>
-		<a href="<?php echo site_url('accreditation/rechercher'); ?>" >Ajouter individuel</a>
-		<a href="<?php echo site_url('accreditation/ajouterGroupe'); ?>" class="current" >Ajouter groupe</a>
+		<a href="<?php echo site_url('accreditation/rechercher'); ?>" >Individuelles</a>
+		<a href="<?php echo site_url('accreditation/ajouterGroupe'); ?>" class="current" >Groupes</a>
     </div>
 
     <div class="box-full">
