@@ -407,6 +407,18 @@ class Evenement extends Cafe {
 			// Si la verification est ok.
 			$resultat = $this->modelevenement->modifierAvecTextMail($nom, $datedebutTstmp, $datefinTstmp, $id, $textmail);
 			
+			if($this->session->userdata('idEvenementEnCours') == $id) {
+				$evenementsEnCours = $this->modelevenement->getEvenementEnCours();
+				if(!empty($evenementsEnCours)) {
+					$this->session->set_userdata('idEvenementEnCours', $evenementsEnCours[0]->idevenement);
+					$this->session->set_userdata('libelleEvenementEnCours', $evenementsEnCours[0]->libelleevenement);
+				}
+				else {
+					$this->session->unset_userdata('idEvenementEnCours');
+					$this->session->unset_userdata('libelleEvenementEnCours');
+				}
+			}
+			
 			$data['titre']		= 'Modification';
 			$data['message']	= 'Votre évènement a bien été modifié.';
 			$data['redirect'] 	= 'evenement/liste';
