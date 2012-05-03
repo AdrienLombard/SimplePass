@@ -27,11 +27,10 @@ $(document).ready(function(){
 			
 			height: 204,
 			width: 272,
-			mode: "callback",
-			swffile: "http://localhost/courchevel_src/assets/flash/jscam.swf",
+			mode: "save",
+			swffile: "http://localhost/courchevel_src/assets/flash/jscam_canvas_only.swf",
 			
 			onCapture: function() {
-				
 				$('.webcamWrapper').hide('fast');
 				image = ctx.getImageData(0, 0, 160, 204);
 				pos = 0;
@@ -39,6 +38,8 @@ $(document).ready(function(){
 			},
 			
 			onSave: function(data) {
+				
+				alert('plop');
 				
 				var col = data.split(";");
 				var img = image;
