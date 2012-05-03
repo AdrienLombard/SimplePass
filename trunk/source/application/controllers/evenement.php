@@ -461,6 +461,18 @@ class Evenement extends Cafe {
 	   
 		$this->modelevenement->supprimer($id);
 		
+		if($this->session->userdata('idEvenementEnCours') == $id) {
+			$evenementsEnCours = $this->modelevenement->getEvenementEnCours();
+			if(!empty($evenementsEnCours)) {
+				$this->session->set_userdata('idEvenementEnCours', $evenementsEnCours[0]->idevenement);
+				$this->session->set_userdata('libelleEvenementEnCours', $evenementsEnCours[0]->libelleevenement);
+			}
+			else {
+				$this->session->unset_userdata('idEvenementEnCours');
+				$this->session->unset_userdata('libelleEvenementEnCours');
+			}
+		}
+		
 		$data['titre']		= 'Suppression';
 		$data['message']	= 'Votre évènement a bien été supprimé.';
 		$data['redirect'] 	= 'evenement/liste';
