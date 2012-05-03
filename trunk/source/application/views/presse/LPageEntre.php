@@ -16,6 +16,8 @@
 
 		<input id="baseURL" type="hidden" value="<?php echo $baseUrl; ?>" />
 		
+		<?php if(!empty($events)): ?>
+		
 		<label><?php echo lang('evenement'); ?></label>
 		<select id="evenement" name="evenement" class="select">
 			<?php foreach($events as $event): ?>
@@ -38,6 +40,9 @@
 			   href="<?php echo site_url('inscription/groupe/' . $events[0]->idevenement); ?>"
 			   class="button"><?php echo lang('demandeGroupe'); ?></a>
 		</div>
+		<?php else: ?>
+		<p>Il n'y a actuellement aucun évènement en cours pour lequel vous pouvez vous inscrire</p>
+		<?php endif; ?>
 
 	</div>
 		
