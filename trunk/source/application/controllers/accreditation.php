@@ -519,11 +519,17 @@ class Accreditation extends Cafe {
 		$data['zones'] = $this->modelzone->getZoneParEvenement($this->session->userdata('idEvenementEnCours'));
 		$data['pays'] = $this->modelpays->getPays();
 
-
-		/*
-		 * Liste des catégories avec les zones associées
-		 */
-		$cats = $this->listeCategorieToDisplay($this->session->userdata('idEvenementEnCours'));
+		// Accred et client
+		$data['accred'] = $this->modelaccreditation->getAccreditationParId($idAccred);
+		
+		// Liste des catégories avec les zones associées
+		if(empty($data['accred']->numeropresse)) {
+			$cats = $this->listeCategorieToDisplay($this->session->userdata('idEvenementEnCours'));
+		}
+		else {
+			$cats = $this->listeCategoriePresse($this->session->userdata('idEvenementEnCours'));
+		}
+		
 		foreach($cats as $cat) {
 			$push = array();
 			$push['cat'] = $cat;
@@ -532,16 +538,8 @@ class Accreditation extends Cafe {
 			foreach($catZones as $cz) $push['zones'] .= $cz->idzone.'-';
 			$data['categories'][] = $push;
 		}
-
-		/*
-		 * Accred et client
-		 */
-		$data['accred'] = $this->modelaccreditation->getAccreditationParId($idAccred);
-
-
-		/*
-		 * Liste des zones de l'accred
-		 */
+		
+		//Liste des zones de l'accred
 		$sortie = array();
 		$zonesAccred = $this->modelzone->getZoneParAccreditation($idAccred);
 		foreach($zonesAccred as $za)
@@ -611,7 +609,13 @@ class Accreditation extends Cafe {
 		$data['pays'] = $this->modelpays->getPaysParId($ref->pays);
 
 		// Liste des catégories avec les zones associées.
-		$cats = $this->listeCategorieToDisplay($this->session->userdata('idEvenementEnCours'));
+		if(empty($ref->numeropresse)) {
+			$cats = $this->listeCategorieToDisplay($this->session->userdata('idEvenementEnCours'));
+		}
+		else {
+			$cats = $this->listeCategoriePresse($this->session->userdata('idEvenementEnCours'));
+		}
+		
 		foreach($cats as $cat) {
 			$push = array();
 			$push['cat'] = $cat;
@@ -1072,6 +1076,55 @@ class Accreditation extends Cafe {
 		$listeCategories = array();
 		foreach($listeCategorieEvent as $categorie) {
 			$listeCategories[] = $categorie->idcategorie;
+		}
+		$categories = array();
+		foreach($listeAllCategorie as $cate) {
+			if(in_array($cate['db']->idcategorie, $listeCategories)) {
+				$categories[] = $cate;
+			}
+		}
+		
+		return $categories;
+	}
+	/**
+	 * fonction qui retourne une liste hiérachisée des catégorie de la presse pour un évènement.
+	 */
+	private function listeCategoriePresse( $event ) {
+		$newCate = $this->modelcategorie->getCategorieDansEvenementToutBien();
+		
+		$presse = array();
+		$presse[] = $this->modelcategorie->getIdPresse();
+		
+		$infoCategorie = array();
+		
+		foreach($newCate as $cate) {
+			if($cate['db']->idcategorie == $presse[0]) {
+				$infoCategorie[] = $cate;
+			}
+		}
+		
+		Do {
+			$find = false;
+			$categorie = $newCate;
+			$newCate = array();
+			foreach($categorie as $cate) {
+				if(in_array($cate['db']->surcategorie, $presse)) {
+					$presse[] = $cate['db']->idcategorie;
+					$infoCategorie[] = $cate;
+					$find = true;
+				}
+				else {
+					$newCate[] = $cate;
+				}
+			}
+		}
+		while($find);
+		
+		$listeAllCategorie = $infoCategorie;
+		$listeCategorieEvent = $this->modelcategorie->getCategorieDansEvenement($event);
+		$listeCategories = array();
+		foreach($listeCategorieEvent as $cate) {
+			$listeCategories[] = $cate->idcategorie;
 		}
 		$categories = array();
 		foreach($listeAllCategorie as $cate) {
