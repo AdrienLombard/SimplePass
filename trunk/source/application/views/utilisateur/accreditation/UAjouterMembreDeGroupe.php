@@ -160,7 +160,7 @@
 							</div>
 							<div class="allaccess">
 								<label>All-Access : </label>
-								<input type="checkbox" style="margin-top:14px;" id="all" name="allAccess"/>
+								<input type="checkbox" name="info[allaccess]" value="1" style="margin-top:14px;" id="all" />
 							</div>
 						</div>
 						

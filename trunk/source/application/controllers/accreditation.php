@@ -404,7 +404,12 @@ class Accreditation extends Cafe {
 		}
 		
 		if($verif) {
-		
+			
+			var_dump($info);
+			var_dump($ref);
+			var_dump($personne);
+			var_dump($zones);
+			
 			// ajout du référent
 			$ref['pays'] 		= $info['pays'];
 			$ref['tel'] 		= $info['tel'];
@@ -444,6 +449,12 @@ class Accreditation extends Cafe {
 			$aref['fonction'] 		= $fonction;
 			$aref['groupe'] 		= $info['groupe'];
 			$aref['dateaccreditation'] = time();
+			if(isset($info['allaccess'])) {
+				$aref['allaccess'] = ($info['allaccess'])? ALL_ACCESS : NON_ALL_ACCESS;
+			}
+			else {
+				$aref['allaccess'] = NON_ALL_ACCESS;
+			}
 			$this->modelaccreditation->ajouter($aref);
 			$idAccredRef = $this->modelaccreditation->lastId();
 			
@@ -480,6 +491,12 @@ class Accreditation extends Cafe {
 				$ap['groupe'] = $info['groupe'];
 				$ap['referent'] = $id;
 				$ap['dateaccreditation'] = time();
+				if(isset($info['allaccess'])) {
+					$ap['allaccess'] = ($info['allaccess'])? ALL_ACCESS : NON_ALL_ACCESS;
+				}
+				else {
+					$ap['allaccess'] = NON_ALL_ACCESS;
+				}
 				$this->modelaccreditation->ajouter($ap);
 				$idap = $this->modelaccreditation->lastId();
 				
@@ -491,7 +508,7 @@ class Accreditation extends Cafe {
 				$this->modelzone->ajouterZonesAccreditation($values);
 			}
 			
-			redirect('accreditation/voirEquipe/'.$info['groupe']);
+			//redirect('accreditation/voirEquipe/'.$info['groupe']);
 		}
 		else {
 			$data = '';
