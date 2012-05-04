@@ -949,7 +949,6 @@ class Accreditation extends Cafe {
 			$data['categories'][] = $push;
 		}
 		
-		
 		$this->layout->view('utilisateur/accreditation/UANouvelle', $data);
 		
 	}
@@ -983,6 +982,25 @@ class Accreditation extends Cafe {
 		$this->modelaccreditation->ajouter($accred);
 		
 		$idAccred = $this->modelaccreditation->lastId();
+		
+		// Construction du tableau de ses zones.
+		$accredZone = array();
+		if($this->input->post('zone')) {
+			foreach( $this->input->post('zone') as $key => $value ) {
+				$accredZone[$key] = $key;
+			}
+		}
+		
+		// Mise en place de ses zones.
+		if($this->input->post('zone')) {
+			$values = array();
+			if($this->input->post('zone')) {
+				foreach( $this->input->post('zone') as $key => $value ) {
+					$values[] = array('idaccreditation' => $idAccred, 'idzone' => $key);
+				}
+			}
+			$this->modelzone->ajouterZonesAccreditation($values);
+		}
 		
 		redirect('accreditation/modifier/' . $idAccred);
 		
