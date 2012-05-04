@@ -147,13 +147,18 @@
 
 						<div>
 							<label>Catégorie : </label>
-							<select name="categorie">
-								<option value="">---</option>
-								<?php foreach($categories as $categorie): ?>
-								<option value="<?php echo $categorie['cat']->idcategorie; ?>" zone="<?php echo $categorie['zones']; ?>">
-									<?php echo $categorie['cat']->libellecategorie; ?>
-								</option>
-								<?php endforeach; ?>
+							<select name="categorie" id="categorieSimple" >
+								<option value="-1">---</option>
+								<?php foreach($categories as $cate): ?>
+							<option
+								value="<?php echo $cate['cat']['db']->idcategorie; ?>"
+								zone="<?php echo $cate['zones']; ?>"
+								<?php if(isset($re->accred['idcategorie']) && $re->accred['idcategorie'] == $cate['cat']['db']['cat']->idcategorie) echo 'selected'; ?>
+								>
+								<?php for($i=0; $i<$cate['cat']['depth']; $i++) echo '&#160;&#160;'; ?>
+								<?php echo $cate['cat']['db']->libellecategorie; ?>
+							</option>
+						<?php endforeach; ?>
 							</select>
 						</div>
 
