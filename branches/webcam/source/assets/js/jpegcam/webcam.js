@@ -18,24 +18,30 @@
 
 // Everything is under a 'webcam' Namespace
 window.webcam = {
+    
 	version: '1.0.9',
 	
 	// globals
 	ie: !!navigator.userAgent.match(/MSIE/),
 	protocol: location.protocol.match(/https/i) ? 'https' : 'http',
 	callback: null, // user callback for completed uploads
+	key: null,
 	swf_url: 'webcam.swf', // URI to webcam.swf movie (defaults to cwd)
 	shutter_url: 'shutter.mp3', // URI to shutter.mp3 sound
-	api_url: '', // URL to upload script
+	api_url: '',
 	loaded: false, // true when webcam movie finishes loading
 	quality: 100, // JPEG quality (1 - 100)
-	shutter_sound: true, // shutter sound effect on/off
+	shutter_sound: false, // shutter sound effect on/off
 	stealth: false, // stealth mode (do not freeze image upon capture)
 	hooks: {
 		onLoad: null,
 		onComplete: null,
 		onError: null
 	}, // callback hook functions
+	
+	set_key: function(id) {
+	    this.key = id;
+	},
 	
 	set_hook: function(name, callback) {
 		// set callback hook
@@ -125,6 +131,11 @@ window.webcam = {
 
 		this.get_movie()._snap( this.api_url, this.quality, this.shutter_sound ? 1 : 0, this.stealth ? 1 : 0 );
 		alert('L\'envoi de votre photo s\'est déroulé correctement.');
+		
+		// exception : webkit, need to fire manually
+		if($.browser.webkit) {
+		    my_completion_handler('photos/tmp/' + this.key + '.jpg');
+		}
 	},
 	
 	freeze: function() {

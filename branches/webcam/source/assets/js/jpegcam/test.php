@@ -4,8 +4,13 @@
 /* Receives JPEG webcam submission and saves to local file. */
 /* Make sure your directory has permission to write files as your web server user! */
 
+if(!isset($_GET['key']))
+    die('Aucune clé pour l\'upload.');
+
 $filename = date('YmdHis') . '.jpg';
+$filename = $_GET['key'] . '.jpg';
 $real = '../../images/photos/tmp/' . $filename;
+$full = 'photos/tmp/' . $filename;
 $result = file_put_contents($real, file_get_contents('php://input') );
 
 $w = 160;
@@ -17,11 +22,10 @@ unlink($real);
 imagejpeg($img, $real, 100);
 
 if (!$result) {
-	print "ERROR: Failed to write data to $filename, check permissions\n";
-	exit();
+    print "ERROR: Failed to write data to $filename, check permissions\n";
+    exit();
 }
 
-$url = 'http://' . $_SERVER['HTTP_HOST'] . dirname($_SERVER['REQUEST_URI']) . '/' . $real;
-print "$url";
+print $full;
 
 ?>

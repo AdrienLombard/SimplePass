@@ -576,10 +576,8 @@ class Accreditation extends Cafe {
 			$data['adresse'] = $temp;
 		
 		$webcam = $this->input->post('photo_webcam');
-		if($webcam != null) {
-		    $split = explode('../..', $webcam);
-		    rename('./assets' . $split[1], UPLOAD_DIR . $id . '.jpg');
-		}
+		if($webcam != null)
+		    rename('./assets/images/' . $webcam, UPLOAD_DIR . $id . '.jpg');
 
 		$this->modelclient->modifier($id, $data);
 
