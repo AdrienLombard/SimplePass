@@ -164,7 +164,12 @@
 							<label>Fonction : </label><input type="text" id="fonction" class="champ2" style="width:130px;" name="ref[fonction]" value="<?php echo $p->fonction; ?>" readonly/>
 							<?php endif; ?>
 						</div>
-						
+					
+						<div style="left-top:20px" >
+							<label>Adresse : </label>
+							<textarea readonly name="adresse" cols="65" rows="3"><?php if(isset($ref->adresse)) echo $ref->adresse; ?></textarea>
+						</div>
+					
 						<?php if(isset($p->numeropresse) && !empty($p->numeropresse)): ?>
 							<div>
 								<label>Num presse : </label>
@@ -189,9 +194,7 @@
 							<input type="checkbox"  disabled name="allAccess" value="1" <?php if(isset($p->allaccess) && $p->allaccess == "1") echo 'checked'; ?> readonly/>
 						</div>
 					<div class="clear"><h2></h2></div>
-					<?php endforeach; ?>
-
-				
+					<?php endforeach; ?>		
 				</form>
 
 			</div>
