@@ -184,6 +184,7 @@ $(document).ready(function(){
 	/*
 	 * Crop d'image
 	 */
+	/*
 	$('.cropper img').Jcrop({
 		onChange:		changeCoords,
 		aspectRatio:	160 / 240,
@@ -196,7 +197,7 @@ $(document).ready(function(){
 		$('input[name=w]').val(c.w);
 		$('input[name=h]').val(c.h);
 	}
-	
+	*/
 	$('.visible').show();
 	
 	//=============================
