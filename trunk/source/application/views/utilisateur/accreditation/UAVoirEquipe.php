@@ -177,6 +177,19 @@
 							</div>
 						<?php endif; ?>
 						
+					    <?php if(isset($p->numeropresse) && !empty($p->numeropresse)): ?>
+							<div>
+								<label>Tel : </label>
+								<input type="text" id="numeroref" class="champ" style="" name="ref[numeropresse]" value="<?php if(isset($p->tel)) echo $p->tel; ?>" readonly/>
+							</div>
+						<?php endif; ?>
+					
+					   <?php if(isset($p->numeropresse) && !empty($p->numeropresse)): ?>
+							<div>
+								<label>Mail : </label>
+								<input type="text" name="ref[numeropresse]" class="mail" value="<?php if(isset($p->mail)) echo $p->mail; ?>"  readonly/>
+							</div>
+						<?php endif; ?>
 						
 						<div class="contientZones readonly">
 							<label>Zones : </label>
