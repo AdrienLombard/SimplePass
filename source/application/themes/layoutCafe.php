@@ -26,11 +26,12 @@
         <header>
             
             <div class="wrap-h">
-                
-                <div id="logo">
-					<span>SIMPLE</span><b>PASS</b>
-					<span class="subtitle">accreditations</span>
-				</div>
+				<a href="<?php echo site_url('utilisateur/index'); ?>" >
+					<div id="logo">
+						<span>SIMPLE</span><b>PASS</b>
+						<span class="subtitle">accreditations</span>
+					</div>
+				</a>
 
 				<?php if($CI_login): ?>
 				<span class="switchMenu" id="topMenuEvenements">
