@@ -23,7 +23,7 @@
 					
                 </thead>
                 <tbody>
-					
+					<?php if(!empty($resultats)): ?>
                     <?php foreach ($resultats as $evenement): ?>
 					<tr>
 			
@@ -35,8 +35,13 @@
 
 						<td><a href="<?php echo site_url('evenement/voir/'.$evenement->idevenement ); ?>">Voir</a></td>
 				   
-				  </tr>
+					</tr>
                     <?php endforeach; ?>
+					<?php else: ?>
+					<tr>
+						<td colspan="4" class="bddVide" >Pas d'évènements dans la base de données</td>
+					</tr>
+					<?php endif; ?>
                 </tbody>
             </table>
         </div>

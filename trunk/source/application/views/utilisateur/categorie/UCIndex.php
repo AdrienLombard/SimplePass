@@ -70,6 +70,7 @@
 						
 					</tr>
 					
+					<?php if(!empty($resultats)): ?>
                     <?php foreach ($resultats as $categorie): ?>
 					
 					<?php if($categorie['depth'] == 0): ?>
@@ -159,6 +160,11 @@ Cela entraînera la suppression de toutes ses sous-catégories.'></a>
 				  </tr>
 				  
                   <?php endforeach; ?>
+				  <?php else: ?>
+					<tr>
+						<td colspan="4" class="bddVide" >Pas de catégories dans la base de données</td>
+					</tr>
+				  <?php endif; ?>
                 </tbody>
             </table>
         </div>

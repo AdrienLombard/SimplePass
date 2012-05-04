@@ -71,7 +71,7 @@
 					
                 </thead>
                 <tbody>
-					
+					<?php if(!empty($accreds)): ?>
                     <?php foreach ($accreds as $accred): ?>
 					<tr data="<?php echo ($accred->groupe == null)? "simple" : "groupe"; ?>:<?php echo ($accred->etataccreditation == ACCREDITATION_VALIDE)? "valide" : "demande"; ?>" >
 						<td><?php echo $accred->nom . ' ' . $accred->prenom ?></td>
@@ -87,7 +87,11 @@
 							<?php endif; ?>
 					</tr>
                     <?php endforeach; ?>
-					
+					<?php else: ?>
+					<tr>
+						<td colspan="7" class="bddVide" >Pas d'accréditations pour cet évènement</td>
+					</tr>
+					<?php endif; ?>
                 </tbody>
             </table>
         </div>

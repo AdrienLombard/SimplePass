@@ -41,6 +41,7 @@
 						</td>
 					</tr>
 					
+					<?php if(!empty($resultats)): ?>
                     <?php foreach ($resultats as $zone): ?>
 					<tr>
 					
@@ -63,9 +64,14 @@
 						></a>
 						</td>
 						
-				  </tr>
-                    <?php endforeach; ?>
-                </tbody>
+					</tr>
+					<?php endforeach; ?>
+					<?php else: ?>
+					<tr>
+						<td colspan="3" class="bddVide" >Pas de zones dans la base de données</td>
+					</tr>
+					<?php endif; ?>
+				</tbody>
             </table>
         </div>
 
