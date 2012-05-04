@@ -73,9 +73,9 @@
 						
 								<div class="webcamWrapper">
 									<a href="#" class="closeCam">x</a>
-									<br>
+									<br/>
 									<div class="webcam"></div>
-									<br>
+									<br/>
 									<a href="#" class="captureCam">Prendre une photo</a>
 								</div>
 
@@ -91,7 +91,7 @@
 							</div>
 
 						</div>
-						
+					</div>
 
 						<div class="inputs">
 
