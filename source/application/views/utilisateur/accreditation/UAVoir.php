@@ -1,28 +1,20 @@
 <script language="JavaScript">
     
-	webcam.set_api_url( '<?php echo base_url(); ?>/assets/js/jpegcam/test.php' );
+	<?php $key = uniqid(); ?>
+	webcam.set_api_url( '<?php echo base_url(); ?>/assets/js/jpegcam/test.php?key=<?php echo $key; ?>');
+	webcam.set_key('<?php echo $key; ?>');
 	webcam.set_swf_url( '<?php echo base_url(); ?>/assets/js/jpegcam/webcam.swf' );
-	webcam.set_shutter_sound( false ); // no shutter click sound
 	webcam.set_stealth( true ); // enable stealth mode
 	
 	webcam.set_hook( 'onComplete', 'my_completion_handler' );
 
 	function take_snapshot() {
-		// take snapshot and upload to server
-		// document.getElementById('upload_results').innerHTML = '<h1>Uploading...</h1>';
-		webcam.snap();
+	    webcam.snap();
 	}
 
 	function my_completion_handler(msg) {
-		// extract URL out of PHP output
-		if (msg.match(/(http\:\/\/\S+)/)) {
-		    
-		    var image_url = RegExp.$1;
-		    $('.input_image_upload').attr('src', image_url);
-		    $('#photo_webcam').val(image_url);
-		    
-		}
-		else alert("PHP Error: " + msg);
+	    $('.input_image_upload').attr('src', '<?php echo base_url(); ?>assets/images/' + msg);
+	    $('#photo_webcam').val(msg);
 	}
 	
 	$(document).ready(function(){
