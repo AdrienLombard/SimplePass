@@ -111,6 +111,8 @@ class Accreditation extends Cafe {
 		
 		$membres = $this->modelaccreditation->getAccreditationGroupeParEvenement( $nomGroupe, $idEvent );
 		
+		//var_dump($membres);
+		
 		foreach($membres as $m){
 			$zonesAccred = $this->modelzone->getZoneParAccreditation($m->idaccreditation);
 			foreach($zonesAccred as $z){
@@ -635,6 +637,8 @@ class Accreditation extends Cafe {
 		$info				= $this->input->post('info');
 		$personnes			= $this->input->post('pers');
 		
+		var_dump($personnes);
+		
 		$id = 0;
 		foreach($personnes as $pers){
 			
@@ -662,7 +666,12 @@ class Accreditation extends Cafe {
 			$accred['idclient'] 	= $idClient;
 			$accred['idcategorie'] 	= $pers['categorie'];
 			$accred['fonction'] 	= $pers['fonction'];
-			//$accred['allaccess'] = ($this->input->post('allAccess'))? ALL_ACCESS : NON_ALL_ACCESS;
+			if(isset($pers['allaccess'])) {
+				$accred['allaccess'] = ($pers['allaccess'])? ALL_ACCESS : NON_ALL_ACCESS;
+			}
+			else {
+				$accred['allaccess'] = NON_ALL_ACCESS;
+			}
 			
 			// traitement en plus si presse.
 			if(!empty($pers['numeropresse'])) {
@@ -698,11 +707,14 @@ class Accreditation extends Cafe {
 			}
 
 			$values = array();
-			foreach( $pers['zone'] as $key => $value )
-				$values[] = array('idaccreditation' => $idAccred, 'idzone' => $key);
 
-				$this->modelzone->ajouterZonesAccreditation($values);
-				
+			if(isset($pers['zone'])) {
+				foreach( $pers['zone'] as $key => $value )
+					$values[] = array('idaccreditation' => $idAccred, 'idzone' => $key);
+
+				$this->modelzone->ajouterZonesAccreditation($values);	
+			}
+			
 			$id++;
 		}
 		// TODO

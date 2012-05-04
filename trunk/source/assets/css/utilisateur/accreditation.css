@@ -66,9 +66,6 @@
 .accred .client .infos input[type=text][readonly], .accred .client .infos select[readonly], .accred .client .infos select:disabled {
 	border: 1px solid #FFF;
 }
-.accred .client .infos input.societe {
-	width: 380px;
-}
 .accred .client .infos input.nom, .accred .client .infos input.prenom {
 	font-size: 26px;
 	padding: 0px;

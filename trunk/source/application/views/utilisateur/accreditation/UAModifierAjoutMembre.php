@@ -9,6 +9,10 @@
     </div>
 
     <div class="box-full">
+	
+		<aside>
+			<a href="<?php echo site_url('accreditation/modifierGroupe/' . $info->groupe); ?>">Retour</a>
+        </aside>
 		
 		<div id="main" class="accred">
         	

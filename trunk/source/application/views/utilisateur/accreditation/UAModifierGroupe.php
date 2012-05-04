@@ -141,7 +141,7 @@
 
 						<div class="allaccess">
 							<label>All-Access : </label>
-							<input data="0" type="checkbox" class="allGroupe" name="allAccess" value="1" <?php if(isset($re->accred['allaccess']) && $re->accred['allaccess'] == 1) echo 'checked'; ?> />
+							<input data="0" type="checkbox" class="allGroupe" name="pers[0][allaccess]" value="1" <?php if(isset($ref->allaccess) && $ref->allaccess == 1) echo 'checked'; ?> />
 						</div>
 					
 					<br><br>
@@ -216,7 +216,7 @@
 
 						<div class="allaccess">
 							<label>All-Access : </label>
-							<input data="<?php echo $nb; ?>" type="checkbox" class="allGroupe" name="allAccess" value="1" <?php if(isset($re->accred['allaccess']) && $re->accred['allaccess'] == 1) echo 'checked'; ?> />
+							<input data="<?php echo $nb; ?>" type="checkbox" class="allGroupe" name="pers[<?php echo $nb; ?>][allaccess]" value="1" <?php if(isset($p->allaccess) && $p->allaccess == 1) echo 'checked'; ?> />
 						</div>
 					<?php $nb++; ?>
 					<div class="clear"><h2></h2></div>
