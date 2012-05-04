@@ -927,12 +927,13 @@ class Accreditation extends Cafe {
 		/*
 		 * Liste des catégories avec les zones associées
 		 */
-		$cats = $this->modelcategorie->getCategorieDansEvenement($this->session->userdata('idEvenementEnCours'));
+		// Liste des catégories avec les zones associées.
+		$cats = $this->listeCategorieToDisplay($this->session->userdata('idEvenementEnCours'));
 		foreach($cats as $cat) {
 			$push = array();
 			$push['cat'] = $cat;
 			$push['zones'] = '';
-			$catZones = $this->modelzone->getZoneParCategorieEtEvenement($cat->idcategorie, $this->session->userdata('idEvenementEnCours'));
+			$catZones = $this->modelzone->getZoneParCategorieEtEvenement($cat['db']->idcategorie, $this->session->userdata('idEvenementEnCours'));
 			foreach($catZones as $cz) $push['zones'] .= $cz->idzone.'-';
 			$data['categories'][] = $push;
 		}

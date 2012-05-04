@@ -101,7 +101,7 @@
 						<label>Prénom : </label><input type="text" id="prenom" class="champ2" style="width:130px;" name="prenom" value=""/>
 					</div>
 					<div class="ligne">
-						<label>Catégorie : </label><select name="categorie" class="champ" style="width:152px">
+						<label>Catégorie : </label><select id="categorieSimple" name="categorie" class="champ" style="width:152px">
 						<option value="" <?php if(empty($re->accred['categorie'])) echo 'selected'; ?> >---</option>
 						<?php foreach($categories as $cate): ?>
 							<option
