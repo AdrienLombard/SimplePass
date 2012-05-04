@@ -19,8 +19,8 @@ class Accreditation extends Cafe {
 		$this->layout->ajouter_css('utilisateur/accreditation');
 		$this->layout->ajouter_js('utilisateur/CRUDAccred');
 		
-		$this->layout->ajouter_css('jquery.Jcrop');
-		$this->layout->ajouter_js('jquery.Jcrop.min');
+		//$this->layout->ajouter_css('jquery.Jcrop');
+		//$this->layout->ajouter_js('jquery.Jcrop.min');
 		
 		// Chargement des librairie.
 		$this->load->library('form_validation');
@@ -57,8 +57,7 @@ class Accreditation extends Cafe {
 	 */
 	public function voir($idClient) {
 		
-		$this->layout->ajouter_js('webcam/jquery.webcam');
-		$this->layout->ajouter_js('webcam/webcam');
+		$this->layout->ajouter_js('jpegcam/webcam');
 		
 		$id = $this->session->userdata('idEvenementEnCours');
 		
@@ -575,22 +574,15 @@ class Accreditation extends Cafe {
 			$data['adresse'] = $temp;
 		
 		$webcam = $this->input->post('photo_webcam');
-		if($webcam != null) {
-			$png = imagecreatefrompng($webcam);
-			$jpg = imagecreatetruecolor(160, 204);
-			imagecopyresampled($jpg, $png, 0, 0, 0, 0, 160, 204, 160, 204);
-			imagejpeg($jpg, UPLOAD_DIR . $id.".jpg", 100);
-		}
+		if($webcam != null)
+		    rename('./assets/images/' . $webcam, UPLOAD_DIR . $id . '.jpg');
 
 		$this->modelclient->modifier($id, $data);
 
 		if($_FILES['photo_file']['size'] != 0)
 			$this->upload($id);
-		else {
-			redirect('accreditation/voir/' . $id);
-		}
-			
 		
+		redirect('accreditation/voir/' . $id);
 	}
 	
 	public function modifierGroupe($nomGroupe){		
