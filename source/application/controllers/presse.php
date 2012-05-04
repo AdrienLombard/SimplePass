@@ -475,10 +475,9 @@ class Presse extends Chocolat{
 			$values->numr_carte = $this->input->post('numr_carte');
 			$values->categorie 	= $this->input->post('categorie');
 			
-			 if($groupe)
+			if($groupe)
 			
 			$values->error_groupe='Le groupe existe déjà';
-			 
 			$this->groupe($idEvenement, $cate, $values);
 			
 		}
