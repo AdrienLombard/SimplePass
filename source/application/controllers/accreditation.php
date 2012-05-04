@@ -154,8 +154,7 @@ class Accreditation extends Cafe {
 	 */
 	public function ajouter( $re = '' ) {
 		
-		$this->layout->ajouter_js('webcam/jquery.webcam');
-		$this->layout->ajouter_js('webcam/webcam');
+		$this->layout->ajouter_js('jpegcam/webcam');
 	
 		/*
 		 * Traitement du nom et du prénom : répercusion depuis la recherche
@@ -294,12 +293,8 @@ class Accreditation extends Cafe {
 			
 			//upload ou webcam
 			$webcam = $this->input->post('photo_webcam');
-			if($webcam != null) {
-				$png = imagecreatefrompng($webcam);
-				$jpg = imagecreatetruecolor(IMG_WIDTH, IMG_HEIGHT);
-				imagecopyresampled($jpg, $png, 0, 0, 0, 0, IMG_WIDTH, IMG_HEIGHT, IMG_WIDTH, IMG_HEIGHT);
-				imagejpeg($jpg, UPLOAD_DIR . $idClient.".jpg", 100);
-			}
+			if($webcam != null)
+			    rename('./assets/images/' . $webcam, UPLOAD_DIR . $idClient . '.jpg');
 
 			if($_FILES['photo_file']['size'] != 0)
 				$this->upload($idClient);
@@ -516,8 +511,7 @@ class Accreditation extends Cafe {
 	 */
 	public function modifier($idAccred) {
 
-		$this->layout->ajouter_js('webcam/jquery.webcam');
-		$this->layout->ajouter_js('webcam/webcam');
+		$this->layout->ajouter_js('jpegcam/webcam');
 
 		/*
 		 * Liste de zone et pays
@@ -762,8 +756,8 @@ class Accreditation extends Cafe {
 	}
 	
 	public function ajoutMembreGroupe($nomgroupe){
-		$this->layout->ajouter_js('webcam/jquery.webcam');
-		$this->layout->ajouter_js('webcam/webcam');
+
+		$this->layout->ajouter_js('jpegcam/webcam');
 
 		$nomGroupe=str_replace('%20', ' ', $nomgroupe);;
 		$idEvent = $this->session->userdata('idEvenementEnCours');
@@ -830,6 +824,11 @@ class Accreditation extends Cafe {
 		// On ajoute le client.
 		$this->modelclient->ajouter($client);
 		$idClient = $this->modelclient->lastId();
+		
+		// webcam
+		$webcam = $this->input->post('photo_webcam');
+		if($webcam != null)
+		    rename('./assets/images/' . $webcam, UPLOAD_DIR . $idClient . '.jpg');
 			
 		// On ajoute son accréditation.
 		$accred['idclient'] = $idClient;
@@ -881,12 +880,8 @@ class Accreditation extends Cafe {
 			$client['adresse'] = $temp;
 		
 		$webcam = $this->input->post('photo_webcam');
-		if($webcam != null) {
-			$png = imagecreatefrompng($webcam);
-			$jpg = imagecreatetruecolor(160, 204);
-			imagecopyresampled($jpg, $png, 0, 0, 0, 0, 160, 204, 160, 204);
-			imagejpeg($jpg, UPLOAD_DIR . $idClient.".jpg", 100);
-		}
+		if($webcam != null)
+		    rename('./assets/images/' . $webcam, UPLOAD_DIR . $idClient . '.jpg');
 
 		$this->modelclient->modifier($idClient, $client);
 		
@@ -920,7 +915,9 @@ class Accreditation extends Cafe {
 	
 	
 	public function nouvelle($idClient) {
-		
+	    
+		$this->layout->ajouter_js('jpegcam/webcam');
+	    
 		/*
 		 * Client et liste de zone et pays
 		 */
@@ -958,6 +955,10 @@ class Accreditation extends Cafe {
 		$client['organisme'] = $this->input->post('organisme');
 		
 		$this->modelclient->modifier($idClient, $client);
+		
+		$webcam = $this->input->post('photo_webcam');
+		if($webcam != null)
+		    rename('./assets/images/' . $webcam, UPLOAD_DIR . $idClient . '.jpg');
 		
 		$accred = array();
 		$accred['idclient'] = $idClient;

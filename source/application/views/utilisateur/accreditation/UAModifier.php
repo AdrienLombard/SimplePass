@@ -1,3 +1,43 @@
+<script language="JavaScript">
+    
+	<?php $key = uniqid() . '-' . rand() * 10; ?>
+	webcam.set_api_url( '<?php echo base_url(); ?>/assets/js/jpegcam/test.php?key=<?php echo $key; ?>');
+	webcam.set_key('<?php echo $key; ?>');
+	webcam.set_swf_url( '<?php echo base_url(); ?>/assets/js/jpegcam/webcam.swf' );
+	webcam.set_stealth( true ); // enable stealth mode
+	
+	webcam.set_hook( 'onComplete', 'my_completion_handler' );
+
+	function take_snapshot() {
+	    webcam.snap();
+	}
+
+	function my_completion_handler(msg) {
+	    $('.input_image_upload').attr('src', '<?php echo base_url(); ?>assets/images/' + msg);
+	    $('#photo_webcam').val(msg);
+	}
+	
+	$(document).ready(function(){
+	
+	    $('.webcam').html(webcam.get_html(272, 362));
+	
+	    $('.startWebcam').click(function(){
+		$('.webcamWrapper').show();
+	    });
+	    
+	    $('.captureCam').click(function(){
+		take_snapshot();
+		$('.webcamWrapper').hide();
+	    });
+	    
+	    $('.closeCam').click(function(){
+		$('.webcamWrapper').hide();
+	    });
+	    
+	});
+
+</script>
+
 <h1>Accréditations</h1>
 
 <div class="wrap">
@@ -36,24 +76,22 @@
 
 					<div class="photo">
 
-						<div class="simulPhoto">
+						<div class="simulPhoto" id="simulPhoto">
+						
+						    <div class="webcamWrapper">
+							    <a href="#" class="closeCam">x</a>
+							    <br>
+							    <div class="webcam"></div>
+							    <br>
+							    <a href="#" class="captureCam">Prendre une photo</a>
+						    </div>
 
-							<div class="webcamWrapper">
-								<a href="#" class="closeCam">x</a>
-								<span>Placer votre visage au centre de l'image :</span>
-								<div class="webcam"></div>
-								<a href="#" class="captureCam">Prendre une photo</a>
-							</div>
+						    <div class="photoMessage"></div>
 
-							<canvas id="canvas" width="160" height="204"></canvas> 
+						    <?php $url = (img_url('photos/'.$accred->idclient.'.jpg') != NULL)? site_url('image/generate/' . $accred->idclient) : ''; ?>
+						    <img class="input_image_upload" src="<?php echo $url; ?>" />
 
-							<div class="photoMessage"></div>
-
-							<?php if(img_url('photos/'.$accred->idclient.'.jpg') != NULL): ?>
-							<img src="<?php echo site_url('image/generate/' . $accred->idclient); ?>" />
-							<?php endif; ?>
-
-						</div>
+					    </div>
 
 						<div class="clear"></div>
 

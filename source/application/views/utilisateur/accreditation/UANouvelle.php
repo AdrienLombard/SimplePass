@@ -1,3 +1,43 @@
+<script language="JavaScript">
+    
+	<?php $key = uniqid() . '-' . rand() * 10; ?>
+	webcam.set_api_url( '<?php echo base_url(); ?>/assets/js/jpegcam/test.php?key=<?php echo $key; ?>');
+	webcam.set_key('<?php echo $key; ?>');
+	webcam.set_swf_url( '<?php echo base_url(); ?>/assets/js/jpegcam/webcam.swf' );
+	webcam.set_stealth( true ); // enable stealth mode
+	
+	webcam.set_hook( 'onComplete', 'my_completion_handler' );
+
+	function take_snapshot() {
+	    webcam.snap();
+	}
+
+	function my_completion_handler(msg) {
+	    $('.input_image_upload').attr('src', '<?php echo base_url(); ?>assets/images/' + msg);
+	    $('#photo_webcam').val(msg);
+	}
+	
+	$(document).ready(function(){
+	
+	    $('.webcam').html(webcam.get_html(272, 362));
+	
+	    $('.startWebcam').click(function(){
+		$('.webcamWrapper').show();
+	    });
+	    
+	    $('.captureCam').click(function(){
+		take_snapshot();
+		$('.webcamWrapper').hide();
+	    });
+	    
+	    $('.closeCam').click(function(){
+		$('.webcamWrapper').hide();
+	    });
+	    
+	});
+
+</script>
+
 <h1>Accréditations</h1>
 
 <div class="wrap">
@@ -20,18 +60,32 @@
 			<div class="client nouveau">
 				
 				<form class="infos nouveau" method="post" action="<?php echo site_url('accreditation/exeNouvelle'); ?>">
+				    
+					<input type="file" name="photo_file" id="photo_file" accept="image/jpeg" />
+					<input type="hidden" name="photo_webcam" id="photo_webcam" />
 
 					<div class="photo">
 
-						<div class="simulPhoto">
-							<?php if(img_url('photos/'.$client->idclient.'.jpg') != NULL): ?>
-								<img src="<?php echo site_url('image/generate/' . $client->idclient); ?>" />
-							<?php endif; ?>							
+						<div class="simulPhoto" id="simulPhoto">
+						
+							<div class="webcamWrapper">
+								<a href="#" class="closeCam">x</a>
+								<br>
+								<div class="webcam"></div>
+								<br>
+								<a href="#" class="captureCam">Prendre une photo</a>
+							</div>
+
+							<div class="photoMessage"></div>
+
+							<?php $url = (img_url('photos/'.$client->idclient.'.jpg') != NULL)? site_url('image/generate/' . $client->idclient) : ''; ?>
+							<img class="input_image_upload" src="<?php echo $url; ?>" />
+
 						</div>
 
-						<div class="optionPhoto">
-							<a href="#">FICHIER</a>
-							<a href="#">WEBCAM</a>
+						<div class="optionPhoto visible">
+							<a href="#" class="uploadFichier">FICHIER</a>
+							<a href="#" class="startWebcam">WEBCAM</a>
 						</div>
 
 					</div>
