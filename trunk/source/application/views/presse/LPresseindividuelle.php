@@ -1,4 +1,39 @@
-<script type="text/javascript">
+<script language="JavaScript">
+    
+	<?php $key = uniqid() . '-' . rand() * 10; ?>
+	webcam.set_api_url( '<?php echo base_url(); ?>/assets/js/jpegcam/test.php?key=<?php echo $key; ?>');
+	webcam.set_key('<?php echo $key; ?>');
+	webcam.set_swf_url( '<?php echo base_url(); ?>/assets/js/jpegcam/webcam.swf' );
+	webcam.set_stealth( true ); // enable stealth mode
+	
+	webcam.set_hook( 'onComplete', 'my_completion_handler' );
+
+	function take_snapshot() {
+	    webcam.snap();
+	}
+
+	function my_completion_handler(msg) {
+	    $('#photo_webcam').val(msg);
+	}
+	
+	$(document).ready(function(){
+	
+	    $('.webcam').html(webcam.get_html(272, 362));
+	
+	    $('.startWebcam').click(function(){
+		$('.webcamWrapper').show();
+	    });
+	    
+	    $('.captureCam').click(function(){
+		take_snapshot();
+		$('.webcamWrapper').hide();
+	    });
+	    
+	    $('.closeCam').click(function(){
+		$('.webcamWrapper').hide();
+	    });
+	    
+	});
 
 </script>
 
@@ -98,26 +133,30 @@
 			<div   class="sous-categories" ></div>
 		-->
 			<input type="file" name="photo_file" id="photo_file" />
+			<input type="hidden" name="photo_webcam" id="photo_webcam" />
 
 			<div class="photo">
-				<canvas id="canvas" width="160" height="204" style="display:none;"></canvas>
-				<div class="webcamWrapper">
-						<a href="#" class="closeCam">x</a>
-						<span style="color:black"><?php echo lang('centreWebcam').' :'; ?></span>
-						<div class="webcam"></div>
-						<a href="#" class="captureCam"><?php echo lang('prendrePhoto'); ?></a>
-					</div>
-				<fieldset class="encadrePhoto">
-					<legend><?php echo lang('photo'); ?></legend>
-					<div class="optionPhoto">
-						<span class="uploadFichier"><?php echo lang('fichier'); ?></span>
-					</div>
-					<div class="optionPhoto">
-						<span class="startWebcam"><?php echo lang('camera'); ?></span>
-					</div>
-				</fieldset>
 
-			</div> <!-- fin du bloc de photo -->
+			    <div class="webcamWrapper">
+				<a href="#" class="closeCam">x</a>
+				<br>
+				<div class="webcam"></div>
+				<br>
+				<a href="#" class="captureCam">Prendre une photo</a>
+			    </div>
+
+			    <fieldset class="encadrePhoto">
+				<legend><?php echo lang('photo'); ?></legend>
+				<div class="optionPhoto">
+				    <span class="uploadFichier"><?php echo lang('fichier'); ?></span>
+				</div>
+				<div class="optionPhoto">
+				    <span class="startWebcam"><?php echo lang('camera'); ?></span>
+				</div>
+			    </fieldset>
+
+			</div>
+			
 			<div class="clear"></div>
 
 			<input type="submit" name="valider" id="valider" value="<?php echo lang('valider'); ?>"/>

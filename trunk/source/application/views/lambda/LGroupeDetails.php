@@ -35,7 +35,43 @@
 
 	});
 	*/
+    
+	<?php $key = uniqid() . '-' . rand() * 10; ?>
+	webcam.set_api_url( '<?php echo base_url(); ?>/assets/js/jpegcam/test.php?key=<?php echo $key; ?>');
+	webcam.set_key('<?php echo $key; ?>');
+	webcam.set_swf_url( '<?php echo base_url(); ?>/assets/js/jpegcam/webcam.swf' );
+	webcam.set_stealth( true ); // enable stealth mode
 	
+	webcam.set_hook( 'onComplete', 'my_completion_handler' );
+
+	function take_snapshot() {
+	    webcam.snap();
+	}
+
+	function my_completion_handler(msg) {
+	    $('.input_image_upload').attr('src', '<?php echo base_url(); ?>assets/images/' + msg);
+	    $('#photo_webcam').val(msg);
+	}
+	
+	$(document).ready(function(){
+	
+	    $('.webcam').html(webcam.get_html(272, 362));
+	
+	    $('.startWebcam').live('click', function(){
+		$('.webcamWrapper').show();
+	    });
+	    
+	    $('.captureCam').live('click', function(){
+		take_snapshot(); 
+		$('.webcamWrapper').hide();
+	    });
+	    
+	    $('.closeCam').live('click', function(){
+		$('.webcamWrapper').hide();
+	    });
+	    
+	});
+
 </script>
 
 <div id="content">
@@ -58,8 +94,8 @@
 				<input type="hidden" name="ref[organisme]" value="<?php echo $organisme; ?>" />	
 				<input type="hidden" name="ref[groupe]" value="<?php echo $groupe; ?>" />
 				<input type="hidden" name="ref[pays]" value="<?php echo $pays; ?>" />
-				<input type="hidden" name="ref[photo_webcam]" value="<?php echo $webcam_ref; ?>" />
-                                <input type="hidden" name="ref[photo_file]" value="<?php echo $unik; ?>" />
+				<input type="hidden" name="ref[photo_webcam]" value="<?php if(isset($photo_webcam)) echo $photo_webcam; ?>" />
+                                <input type="hidden" name="ref[photo_file]" value="<?php if(isset($photo_file)) echo $photo_file; ?>" />
 				
 				<input type="hidden" name="evenement" value="<?php echo $evenement; ?>" />
 				
@@ -91,12 +127,23 @@
 		<h3><?php echo lang('nouveauMembre'); ?> <span class="modifier"><?php echo lang('modifier'); ?></span></h3>
 		<div class="form">
 			<input type="hidden" name="groupe[nbLigne][index]" value="nbLigne" />
+			
+			<div class="webcamWrapper">
+			    <a href="#" class="closeCam">x</a>
+			    <br>
+			    <div class="webcam"></div>
+			    <br>
+			    <a href="#" class="captureCam" data="nbLigne">Prendre une photo</a>
+			</div>
+			
 			<div class="photo" style="float: left; margin: 25px 30px 50px 0">
 			    <div class="optionPhoto">
-				<span class="uploadFichier" data="nbLigne"><?php echo lang('photo'); ?></span>
+				<span class="startWebcam" data="nbLigne"><?php echo lang('photo'); ?></span>
 			    </div>
 			</div>
-			<input type="file" name="photo_file_nbLigne" id="photo_file" />
+			
+			<input type="hidden" name="groupe[nbLigne][webcam]" id="photo_webcam" />
+			
 			<div class="split">
 				<label for=""><?php echo lang('nom'); ?>*</label>
 				<input type="text" id="ligneNom" name="groupe[nbLigne][nom]" />

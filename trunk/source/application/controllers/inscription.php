@@ -36,6 +36,7 @@ class Inscription extends Chocolat {
 
 	public function entry() {
 		$this->layout->ajouter_js('lambda/script');
+		
 		$data['events'] 	= $this->modelevenement->getEvenementEnCours();
 		$data['idcategorie'] = $this->modelcategorie->getIdPresse();
 		$data['listeSurCategorie'] 	= $this->modelcategorie->getCategoriesMeresSaufpresse();
@@ -43,7 +44,6 @@ class Inscription extends Chocolat {
 		$data['baseUrl'] = base_url();
 
 		$this->layout->view('presse/LPageEntre',$data);
-
 	}
 
 
@@ -95,12 +95,10 @@ class Inscription extends Chocolat {
 	
 		// Chargement du js.
 		$this->layout->ajouter_js('lambda/script');
-		$this->layout->ajouter_js('webcam/jquery.webcam');
-		$this->layout->ajouter_js('jquery.Jcrop.min');
+		$this->layout->ajouter_js('jpegcam/webcam');
 		
 		// variable pour transmettre des données à la vue.
 		$data = Array();
-		
 		$data['lang'] = $this->session->userdata('lang');
 		
 		// On regle les paramètres du formulaire.
@@ -245,12 +243,8 @@ class Inscription extends Chocolat {
 				
 				//upload ou webcam
 				$webcam = $this->input->post('photo_webcam');
-				if($webcam != null) {
-					$png = imagecreatefrompng($webcam);
-					$jpg = imagecreatetruecolor(IMG_WIDTH, IMG_HEIGHT);
-					imagecopyresampled($jpg, $png, 0, 0, 0, 0, IMG_WIDTH, IMG_HEIGHT, IMG_WIDTH, IMG_HEIGHT);
-					imagejpeg($jpg, UPLOAD_DIR . $idClient.".jpg", 100);
-				}
+				if($webcam != null)
+					rename('./assets/images/' . $webcam, UPLOAD_DIR . $idClient . '.jpg');
 
 
 				if($_FILES['photo_file']['size'] != 0)
@@ -406,8 +400,7 @@ class Inscription extends Chocolat {
 	public function groupe($evenement, $info=false) {
 		// Chargement du js.
 		$this->layout->ajouter_js('lambda/script');
-		$this->layout->ajouter_js('jquery.Jcrop.min');
-		$this->layout->ajouter_js('webcam/jquery.webcam');
+		$this->layout->ajouter_js('jpegcam/webcam');
 		
 		$data['idEvenement']	= $evenement;
 		$data['infoEvenement'] 	= $this->modelevenement->getEvenementParId($evenement);
@@ -529,8 +522,12 @@ class Inscription extends Chocolat {
                         $unik = time();
                         if(!move_uploaded_file($file['tmp_name'], UPLOAD_DIR . 'tmp/' . $unik . '.jpg'))
                                 die('Echec de l\'upload temporaire (inscription.php:exeGroupe) : ' . $_FILES['photo_file']['error']);
-                        $data['unik'] = $unik;
+                        $data['photo_file'] = UPLOAD_DIR . 'tmp/' . $unik . '.jpg';
                     }
+		    
+		    $webcam = $this->input->post('photo_webcam');
+		    if($webcam != null)
+			    $data['photo_webcam'] = './assets/images/' . $webcam;
                     
                     $this->ajouterGroupe($data);
 		}
@@ -546,7 +543,7 @@ class Inscription extends Chocolat {
 		$data['lang'] = $this->session->userdata('lang');
 	
 		$this->layout->ajouter_js('lambda/scriptGroupe');
-		$this->layout->ajouter_js('jquery.Jcrop.min');
+		$this->layout->ajouter_js('jpegcam/webcam');
 		
 		
 		$this->layout->view('lambda/LGroupeDetails', $data);
@@ -573,19 +570,13 @@ class Inscription extends Chocolat {
 		$file = $ref['photo_file'];
 		unset($ref['photo_file']);
 
-        // ajout ref
+		// ajout ref
 		$id = $this->modelclient->ajouter($ref);
                 
 		// ajout photo webcam
-		if($webcam != null) {
-			$png = imagecreatefrompng($webcam);
-			$jpg = imagecreatetruecolor(IMG_WIDTH, IMG_HEIGHT);
-			imagecopyresampled($jpg, $png, 0, 0, 0, 0, IMG_WIDTH, IMG_HEIGHT, IMG_WIDTH, IMG_HEIGHT);
-			imagejpeg($jpg, UPLOAD_DIR . $id.".jpg", 100);
-		}
-		
-		
-		
+		if($webcam != null)
+			rename($webcam, UPLOAD_DIR . $id . '.jpg');
+
 		// upload fichier
 		if($file != null) {
 			rename(UPLOAD_DIR . 'tmp/' . $file . '.jpg', UPLOAD_DIR . $id . '.jpg');
