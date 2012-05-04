@@ -38,14 +38,20 @@ class Export extends The {
 			'organisme' => array('title' => 'Organisme', 'type' => ExcelExport::STRING),
 			'fonction'	=> array('title' => 'Fonction', 'type' => ExcelExport::STRING),
 			'tel'		=> array('title' => 'Tel', 'type' => ExcelExport::STRING),
-			'mail'		=> array('title' => 'Mail', 'type' => ExcelExport::STRING),
+
+			'mail'		=> array('title' => 'Mail', 'type' => ExcelExport::STRING),		    
+			'numeropresse'=>array('title'=>'Numero de presse','type' => ExcelExport::STRING),
+             'mail'		=> array('title' => 'Mail', 'type' => ExcelExport::STRING),
 			'numero presse' => array('title' => 'Numero de carte presse', 'type' => ExcelExport::STRING),
 			'adresse'	=> array('title' => 'Adresse', 'type' => ExcelExport::STRING)
+
 		);
+		
 
 		// lignes : accreditations
 		$content = array();
-		$accreds = $this->modelaccreditation->getAccreditationsParEvenement($idEvenement);
+		$accreds = $this->modelaccreditation->getAccreditationsParEvenement($idEvenement);	
+		 
 		foreach($accreds as $accred) {
 			if(isset($accred->numeropresse) && !empty($accred->numeropresse) && $accred->numeropresse != '') {
 				
@@ -121,6 +127,29 @@ class Export extends The {
 				
 			}
 			
+
+			$nom = $accred->nom;
+			
+			if($groupe != '' && $accred->referent != null)
+				$nom = '	- ' . $nom;
+			
+			if($groupe != '' && $accred->referent == null)
+				$groupe .= ' (Référent)';
+			
+			$content[] = array(
+				'nom'		=> $nom,
+				'prenom'	=> $accred->prenom,
+				'pays'		=> $accred->pays,
+				'groupe'	=> $groupe,
+				'cat'		=> $accred->libellecategorie,
+				'zones'		=> $strZones,
+				'organisme' => $accred->organisme,
+				'fonction'	=> $accred->fonction,
+				'tel'		=> $accred->tel,
+				'mail'		=> $accred->mail,
+				'numeropresse'=>$accred->numeropresse
+			);
+
 		}
 		
 		// export
@@ -130,6 +159,53 @@ class Export extends The {
 		
 	}
 	
+		public function accreds_valide($idEvenement) {
+		
+		error_reporting(0);
+
+		// evenement
+		$evenement = $this->modelevenement->getEvenementParId($idEvenement);
+
+		// en-tête
+		$colums = array(
+			'nom'		=> array('title' => 'Nom', 'type' => ExcelExport::STRING),
+			'prenom'	=> array('title' => 'Prenom', 'type' => ExcelExport::STRING),
+			'pays'		=> array('title' => 'Pays', 'type' => ExcelExport::STRING),
+			'cat'		=> array('title' => 'Catégorie', 'type' => ExcelExport::STRING),
+			'zones'		=> array('title' => 'Zones', 'type' => ExcelExport::STRING),
+			'organisme' => array('title' => 'Organisme', 'type' => ExcelExport::STRING),
+			'fonction'	=> array('title' => 'Fonction', 'type' => ExcelExport::STRING),
+			'tel'		=> array('title' => 'Tel', 'type' => ExcelExport::STRING),
+			'mail'		=> array('title' => 'Mail', 'type' => ExcelExport::STRING),
+		    'numeropresse'=>array('title'=>'Numero de presse','type' => ExcelExport::STRING)
+		);
+
+		// lignes : accreditations
+		$content = array();
+		$accreds = $this->modelaccreditation->getAccreditationsParEvenement($idEvenement);
+		foreach($accreds as $accred) {
+			
+			$zones = $this->modelzone->getZoneParAccreditation($accred->idaccreditation);
+			$strZones = '';
+			foreach($zones as $zone)
+				$strZones .= $zone->idzone . ' -';
+			
+			$content[] = array(
+				'nom'		=> $accred->nom,
+				'prenom'	=> $accred->prenom,
+				'pays'		=> $accred->pays,
+				'cat'		=> $accred->libellecategorie,
+				'zones'		=> $strZones,
+				'organisme' => $accred->organisme,
+				'fonction'	=> $accred->fonction,
+				'tel'		=> $accred->tel,
+				'mail'		=> $accred->mail,
+				'numeropresse'=>$accred->numeropresse
+			);
+			
+		}
+		
+	}
 	
 	public function evenement($idEvenement) {
 		
