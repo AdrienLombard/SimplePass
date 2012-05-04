@@ -1,6 +1,6 @@
 <script language="JavaScript">
     
-	<?php $key = uniqid(); ?>
+	<?php $key = uniqid() . '-' . rand() * 10; ?>
 	webcam.set_api_url( '<?php echo base_url(); ?>/assets/js/jpegcam/test.php?key=<?php echo $key; ?>');
 	webcam.set_key('<?php echo $key; ?>');
 	webcam.set_swf_url( '<?php echo base_url(); ?>/assets/js/jpegcam/webcam.swf' );
