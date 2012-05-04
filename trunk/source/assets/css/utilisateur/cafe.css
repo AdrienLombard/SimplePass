@@ -21,6 +21,7 @@ header .wrap-h #logo {
     border-radius: 0 0 10px 10px;
     box-shadow: 0 0 2px rgba(0, 0, 0, 0.6);
 	text-align: center;
+	cursor: default;
 }
 header .wrap-h #logo * {
 	font-size: 18px;
