@@ -181,23 +181,6 @@ $(document).ready(function(){
 	})
 	
 	
-	/*
-	 * Crop d'image
-	 */
-	/*
-	$('.cropper img').Jcrop({
-		onChange:		changeCoords,
-		aspectRatio:	160 / 240,
-		minSize:		[160, 204],
-		setSelect:		[10, 10, 160, 204]
-	});
-	function changeCoords(c) {
-		$('input[name=x]').val(c.x);
-		$('input[name=y]').val(c.y);
-		$('input[name=w]').val(c.w);
-		$('input[name=h]').val(c.h);
-	}
-	*/
 	$('.visible').show();
 	
 	//=============================

@@ -1023,6 +1023,8 @@ class Accreditation extends Cafe {
 	 */
 	public function crop($id) {
 		
+		$this->layout->ajouter_js('jquery.Jcrop.min');
+		$this->layout->ajouter_css('jquery.Jcrop');
 		$data['client'] = $this->modelclient->getClientParId($id);
 		$this->layout->view('utilisateur/accreditation/UACrop', $data);
 		
