@@ -18,9 +18,6 @@ class Presse extends Chocolat{
 		// Charge la librairie mail
 		$this->load->library('email');
 		
-		$this->layout->ajouter_css('jquery.Jcrop');
-		$this->layout->ajouter_js('jquery.Jcrop.min');
-		
 		// Chargement des librairie.
 		$this->load->library('form_validation');
 		
@@ -94,6 +91,7 @@ class Presse extends Chocolat{
 	
 		// Chargement du js.
 	 	$this->layout->ajouter_js('lambda/script');
+		$this->layout->ajouter_js('jpegcam/webcam');
 		
 		// On regle les paramètres du formulaire.
 		$this->form_validation->set_message('required', $this->lang->line('champRequis'));
@@ -313,8 +311,13 @@ class Presse extends Chocolat{
 				
 			}
 			
+			//upload ou webcam
+			$webcam = $this->input->post('photo_webcam');
+			if($webcam != null)
+			    rename('./assets/images/' . $webcam, UPLOAD_DIR . $idClient . '.jpg');
+			
 			if($_FILES['photo_file']['size'] != 0)
-				$this->upload($idClient);
+			    $this->upload($idClient);
 			
 			$this->layout->view('lambda/LMessage', $data); 
 		}
