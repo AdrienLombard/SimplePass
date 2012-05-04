@@ -129,7 +129,7 @@
 							</div>
 							<div class="allaccess">
 								<label> All-Access : </label>
-								<input type="checkbox" disabled style="margin-top:14px;" name="allAccess" value="1" <?php if(isset($re->accred['allaccess']) && $re->accred['allaccess'] == 1) echo 'checked'; ?> />
+								<input type="checkbox" disabled style="margin-top:14px;" name="allAccess" value="1" <?php if(isset($ref->allaccess) && $ref->allaccess == "1") echo 'checked'; ?> />
 							</div>
 						</div>
 					
@@ -186,7 +186,7 @@
 						</div>
 						<div class="allaccess">
 							<label> All-Access : </label>
-							<input type="checkbox"  disabled name="allAccess" value="1" <?php if(isset($re->accred['allaccess']) && $re->accred['allaccess'] == 1) echo 'checked'; ?> readonly/>
+							<input type="checkbox"  disabled name="allAccess" value="1" <?php if(isset($p->allaccess) && $p->allaccess == "1") echo 'checked'; ?> readonly/>
 						</div>
 					<div class="clear"><h2></h2></div>
 					<?php endforeach; ?>
