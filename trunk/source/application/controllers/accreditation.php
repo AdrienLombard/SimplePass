@@ -523,12 +523,7 @@ class Accreditation extends Cafe {
 		$data['accred'] = $this->modelaccreditation->getAccreditationParId($idAccred);
 		
 		// Liste des catégories avec les zones associées
-		if(empty($data['accred']->numeropresse)) {
-			$cats = $this->listeCategorieToDisplay($this->session->userdata('idEvenementEnCours'));
-		}
-		else {
-			$cats = $this->listeCategoriePresse($this->session->userdata('idEvenementEnCours'));
-		}
+		$cats = $this->listeCategoriePresse($this->session->userdata('idEvenementEnCours'));
 		
 		foreach($cats as $cat) {
 			$push = array();
@@ -609,12 +604,7 @@ class Accreditation extends Cafe {
 		$data['pays'] = $this->modelpays->getPaysParId($ref->pays);
 
 		// Liste des catégories avec les zones associées.
-		if(empty($ref->numeropresse)) {
-			$cats = $this->listeCategorieToDisplay($this->session->userdata('idEvenementEnCours'));
-		}
-		else {
-			$cats = $this->listeCategoriePresse($this->session->userdata('idEvenementEnCours'));
-		}
+		$cats = $this->listeCategoriePresse($this->session->userdata('idEvenementEnCours'));
 		
 		foreach($cats as $cat) {
 			$push = array();
