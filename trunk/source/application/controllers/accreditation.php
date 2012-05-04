@@ -954,6 +954,7 @@ class Accreditation extends Cafe {
 		$accred['idcategorie'] = $this->input->post('categorie');
 		$accred['etataccreditation'] = ACCREDITATION_VALIDE;
 		$accred['dateaccreditation'] = time();
+		$accred['allaccess'] = ($this->input->post('allAccess'))? ALL_ACCESS : NON_ALL_ACCESS;
 		$this->modelaccreditation->ajouter($accred);
 		
 		$idAccred = $this->modelaccreditation->lastId();
