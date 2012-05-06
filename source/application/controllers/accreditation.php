@@ -517,12 +517,8 @@ class Accreditation extends Cafe {
 			$data->personne = $personnes;
 			
 			$this->ajouterGroupe($data);
-		}
-		
-		
+		}		
 	}
-	
-
 	/**
 	 *
 	 */
@@ -653,12 +649,13 @@ class Accreditation extends Cafe {
 			$client['nom'] = $pers['nom'];
 			$client['prenom'] = $pers['prenom'];
 			$client['pays'] = $info['pays'];
-			$client['tel'] = $info['tel'];
-			$client['mail'] = $info['mail'];
+			$client['tel'] = $pers['tel'];
+			$client['mail'] = $pers['mail'];
+		    
 			
 			// traitement en plus si presse.
 			if(!empty($pers['numeropresse'])) {
-				$client['adresse'] = $info['adresse'];
+				$client['adresse'] = $pers['adresse'];
 			}
 
 			$this->modelclient->modifier($idClient, $client);
