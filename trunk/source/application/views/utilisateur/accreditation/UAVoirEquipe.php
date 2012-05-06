@@ -44,16 +44,6 @@
 						</div>
 
 						<div>
-							<label>Tel : </label>
-							<input type="text" name="info[tel]" class="tel" value="<?php echo $ref->tel; ?>" readonly/>
-						</div>
-						
-						<div>
-							<label>Mail : </label>
-							<input type="text" name="info[mail]" class="mail" value="<?php echo $ref->mail; ?>"  readonly/>
-						</div>
-				
-						<div>
 							<label>Pays : 
 								<?php foreach($listePays as $p): ?>
 									<span id="<?php echo $p->idpays; ?>" class="drapeau" style="display:none;" ><?php echo img('drapeaux/' . strtolower($p->idpays) . '.gif'); ?></span>
@@ -63,14 +53,7 @@
 								<option value="<?php echo $ref->pays; ?>"><?php echo $pays->nompays; ?></option>
 							</select>
 						</div>
-						
-						<!-- champ pour l'adresse du client -->
-						<?php if(isset($ref->numeropresse) && !empty($ref->numeropresse)): ?>
-						<div>
-							<label>Adresse : </label>
-							<textarea readonly name="adresse" cols="65" rows="3"><?php if(isset($ref->adresse)) echo $ref->adresse; ?></textarea>
-						</div>
-						<?php endif; ?>
+				
 					
 						<div class="clear"></div>
 						
@@ -91,6 +74,16 @@
 							<label>Prénom : </label><input type="text" id="prenomref" class="champ2" style="width:130px;" name="ref[prenom]" value="<?php echo $ref->prenom; ?>" readonly/>
 						</div>
 						
+						<div>
+							<label>Tel : </label>
+							<input type="text" name="info[tel]" class="tel" value="<?php echo $ref->tel; ?>" readonly/>
+						</div>
+						
+						<div>
+							<label>Mail : </label>
+							<input type="text" name="info[mail]" class="mail" value="<?php echo $ref->mail; ?>"  readonly/>
+						</div>
+				
 						<div>
 							<label>Catégorie : </label>
 							<input type="text" id="categorieref" class="champ" style="width:130px;" name="ref[categorie]" value="<?php echo $ref->libellecategorie; ?>" readonly/>
@@ -115,6 +108,14 @@
 								<label>Num presse : </label>
 								<input type="text" id="numeroref" class="champ" style="" name="ref[numeropresse]" value="<?php if(isset($ref->numeropresse)) echo $ref->numeropresse; ?>" readonly/>
 							</div>
+						<?php endif; ?>
+								
+						<!-- champ pour l'adresse du client -->
+						<?php if(isset($ref->numeropresse) && !empty($ref->numeropresse)): ?>
+						<div>
+							<label>Adresse : </label>
+							<textarea readonly name="adresse" cols="65" rows="3"><?php if(isset($ref->adresse)) echo $ref->adresse; ?></textarea>
+						</div>
 						<?php endif; ?>
 						
 						<div class="contientZones readonly">
@@ -165,11 +166,6 @@
 							<?php endif; ?>
 						</div>
 					
-						<div style="left-top:20px" >
-							<label>Adresse : </label>
-							<textarea readonly name="adresse" cols="65" rows="3"><?php if(isset($ref->adresse)) echo $ref->adresse; ?></textarea>
-						</div>
-					
 						<?php if(isset($p->numeropresse) && !empty($p->numeropresse)): ?>
 							<div>
 								<label>Num presse : </label>
@@ -201,6 +197,11 @@
 								</div>
 								<?php endforeach; ?>
 							</div>
+						</div>
+					     
+						<div style="left-top:20px" >
+							<label>Adresse : </label>
+							<textarea readonly name="adresse" cols="65" rows="3"><?php if(isset($ref->adresse)) echo $ref->adresse; ?></textarea>
 						</div>
 						<div class="allaccess">
 							<label> All-Access : </label>

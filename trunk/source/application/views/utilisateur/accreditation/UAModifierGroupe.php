@@ -36,16 +36,6 @@
 							<input type="text" name="info[societe]" value="<?php echo $ref->organisme; ?>" class="nom"/>
 						</div>
 
-						<div>
-							<label>Tel : </label>
-							<input type="text" name="info[tel]" class="tel" value="<?php echo $ref->tel; ?>"/>
-						</div>
-						
-						<div>
-							<label>Mail : </label>
-							<input type="text" name="info[mail]" class="mail" value="<?php echo $ref->mail; ?>"/>
-						</div>
-						
 						
 						<div>
 							<label>Pays : 
@@ -62,12 +52,6 @@
 						</div>
 						
 						<!-- champ pour l'adresse du client -->
-						<?php if(isset($ref->numeropresse) && !empty($ref->numeropresse)): ?>
-						<div>
-							<label>Adresse : </label>
-							<textarea name="info[adresse]" cols="65" rows="7"><?php if(isset($ref->adresse)) echo $ref->adresse; ?></textarea>
-						</div>
-						<?php endif; ?>
 						
 						<div class="clear"></div>
 						
@@ -122,9 +106,25 @@
 						
 						<?php if(isset($ref->numeropresse) && !empty($ref->numeropresse)): ?>
 							<div>
-								<label>Num presse : </label>
+								<label> Num presse : </label>
 								<input type="text" id="numeroref" class="champ" style="" name="pers[0][numeropresse]" value="<?php if(isset($ref->numeropresse)) echo $ref->numeropresse; ?>" />
 							</div>
+						<?php endif; ?>
+						
+						<div>
+							<label>Tel : </label>
+							<input type="text" name="pers[0][tel]" class="tel" value="<?php echo $ref->tel; ?>"/>
+						</div>
+						
+						<div>
+							<label>Mail : </label>
+							<input type="text" name="pers[0][mail]" class="mail" value="<?php echo $ref->mail; ?>"/>
+						</div>
+						<?php if(isset($ref->numeropresse) && !empty($ref->numeropresse)): ?>
+						<div>
+							<label>Adresse : </label>
+							<textarea name="pers[0][adresse]" cols="65" rows="7"><?php if(isset($ref->adresse)) echo $ref->adresse; ?></textarea>
+						</div>
 						<?php endif; ?>
 						
 						<div  data="0" class="contientZones" >
@@ -202,6 +202,20 @@
 							</div>
 						<?php endif; ?>
 						
+						<div>
+							<label>Mail : </label>
+							<input type="text" name="pers[<?php echo $nb; ?>][mail]" class="mail" value="<?php echo $p->mail; ?>"/>
+						</div>
+						<div>
+							<label>Tel : </label>
+							<input type="text" name="pers[<?php echo $nb; ?>][tel]" class="mail" value="<?php echo $p->tel; ?>"/>
+						</div>
+						<?php if(isset($p->numeropresse) && !empty($p->numeropresse)): ?>
+						<div>
+							<label>Adresse : </label>
+							<textarea name="pers[<?php echo $nb; ?>][adresse]" cols="65" rows="7"><?php if(isset($p->adresse)) echo $p->adresse; ?></textarea>
+						</div>
+						<?php endif; ?>
 						<div class="contientZones" data="<?php echo $nb; ?>">
 							<label>Zones : </label>
 							<div>
@@ -213,11 +227,13 @@
 								<?php endforeach; ?>
 							</div>
 						</div>
-
+                        
+						
 						<div class="allaccess">
 							<label>All-Access : </label>
 							<input data="<?php echo $nb; ?>" type="checkbox" class="allGroupe" name="pers[<?php echo $nb; ?>][allaccess]" value="1" <?php if(isset($p->allaccess) && $p->allaccess == 1) echo 'checked'; ?> />
 						</div>
+						
 					<?php $nb++; ?>
 					<div class="clear"><h2></h2></div>
 					<?php endforeach; ?>
