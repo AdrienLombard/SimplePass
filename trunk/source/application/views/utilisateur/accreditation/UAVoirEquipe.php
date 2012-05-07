@@ -201,7 +201,7 @@
 					     
 						<div style="left-top:20px" >
 							<label>Adresse : </label>
-							<textarea readonly name="adresse" cols="65" rows="3"><?php if(isset($ref->adresse)) echo $ref->adresse; ?></textarea>
+							<textarea readonly name="adresse" cols="65" rows="3"><?php if(isset($p->adresse)) echo $p->adresse; ?></textarea>
 						</div>
 						<div class="allaccess">
 							<label> All-Access : </label>
