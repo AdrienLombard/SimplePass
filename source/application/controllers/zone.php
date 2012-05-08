@@ -11,7 +11,6 @@ class Zone extends Cafe {
 		
 		$this->load->library('form_validation');
 		
-		$this->layout->ajouter_js('utilisateur/scriptDate');
 		$this->layout->ajouter_js('utilisateur/CRUDZone');
 		
 		$this->layout->ajouter_css('utilisateur/zone');
