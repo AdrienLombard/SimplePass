@@ -33,7 +33,7 @@
 					
 				</div>
 				
-				<input type="submit" value="Personne ne correspond ? Créer un nouveau personne " />
+				<input type="submit" value="Personne ne correspond ? Créer une nouvelle personne " />
 				
 			</form>
 			
