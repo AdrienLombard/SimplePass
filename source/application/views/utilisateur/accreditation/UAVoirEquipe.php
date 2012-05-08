@@ -111,13 +111,10 @@
 						<?php endif; ?>
 								
 						<!-- champ pour l'adresse du client -->
-						<?php if(isset($ref->numeropresse) && !empty($ref->numeropresse)): ?>
 						<div>
 							<label>Adresse : </label>
 							<textarea readonly name="adresse" cols="65" rows="3"><?php if(isset($ref->adresse)) echo $ref->adresse; ?></textarea>
 						</div>
-						<?php endif; ?>
-						
 						<div class="contientZones readonly">
 							<label>Zones : </label>
 							<div>
@@ -149,6 +146,20 @@
 							<label>Nom : </label><input type="text" id="nom" class="champ" style="text-transform: uppercase; width:130px;" name="ref[nom]" value="<?php echo $p->nom; ?>" readonly/>
 							<label>Prénom : </label><input type="text" id="prenom" class="champ2" style="width:130px;" name="ref[prenom]" value="<?php echo $p->prenom; ?>" readonly/>
 						</div>
+					<?php if(isset($p->numeropresse) && !empty($p->numeropresse)): ?>
+							<div>
+								<label>Tel : </label>
+								<input type="text" id="numeroref" class="champ" style="" name="ref[numeropresse]" value="<?php if(isset($p->tel)) echo $p->tel; ?>" readonly/>
+							</div>
+						<?php endif; ?>
+					
+					   <?php if(isset($p->numeropresse) && !empty($p->numeropresse)): ?>
+							<div>
+								<label>Mail : </label>
+								<input type="text" name="ref[numeropresse]" class="mail" value="<?php if(isset($p->mail)) echo $p->mail; ?>"  readonly/>
+							</div>
+						<?php endif; ?>
+						
 						<div class="ligne">
 							<label>Catégorie : </label><input type="text" id="categorie" class="champ" style="width:130px;" name="ref[categorie]" value="<?php echo $p->libellecategorie; ?>" readonly/>
 							
@@ -172,21 +183,10 @@
 								<input type="text" id="numeroref" class="champ" style="" name="ref[numeropresse]" value="<?php if(isset($p->numeropresse)) echo $p->numeropresse; ?>" readonly/>
 							</div>
 						<?php endif; ?>
-						
-					    <?php if(isset($p->numeropresse) && !empty($p->numeropresse)): ?>
-							<div>
-								<label>Tel : </label>
-								<input type="text" id="numeroref" class="champ" style="" name="ref[numeropresse]" value="<?php if(isset($p->tel)) echo $p->tel; ?>" readonly/>
-							</div>
-						<?php endif; ?>
-					
-					   <?php if(isset($p->numeropresse) && !empty($p->numeropresse)): ?>
-							<div>
-								<label>Mail : </label>
-								<input type="text" name="ref[numeropresse]" class="mail" value="<?php if(isset($p->mail)) echo $p->mail; ?>"  readonly/>
-							</div>
-						<?php endif; ?>
-						
+					    <div>
+							<label>Adresse : </label>
+							<textarea readonly name="adresse" cols="65" rows="3"><?php if(isset($p->adresse)) echo $p->adresse; ?></textarea>
+						</div>
 						<div class="contientZones readonly">
 							<label>Zones : </label>
 							<div>
@@ -197,11 +197,6 @@
 								</div>
 								<?php endforeach; ?>
 							</div>
-						</div>
-					     
-						<div style="left-top:20px" >
-							<label>Adresse : </label>
-							<textarea readonly name="adresse" cols="65" rows="3"><?php if(isset($p->adresse)) echo $p->adresse; ?></textarea>
 						</div>
 						<div class="allaccess">
 							<label> All-Access : </label>
