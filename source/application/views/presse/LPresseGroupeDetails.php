@@ -1,6 +1,53 @@
 <script type="text/javascript">
+    
+	webcam.set_api_url( '<?php echo base_url(); ?>/assets/js/jpegcam/test.php');
+	webcam.set_swf_url( '<?php echo base_url(); ?>/assets/js/jpegcam/webcam.swf' );
+	webcam.set_stealth( true ); // enable stealth mode
+	
+	webcam.set_hook( 'onComplete', 'my_completion_handler' );
+	
+	var index_handler = null;
+
+	function take_snapshot() {
+	    webcam.snap();
+	}
+
+	function my_completion_handler(msg) {
+	    $('#photo_webcam_' + index_handler).val(msg);
+	}
+	
+	$(document).ready(function(){
+	
+	    $('.webcam').html(webcam.get_html(272, 362));
+	    
+	    $('.startWebcam').live('click', function(){
+		index_handler = $(this).attr('data');
+		$('#webcam-overlay').show();
+	    });
+	    
+	    $('.captureCam').live('click', function(){
+		take_snapshot(); 
+		$('#webcam-overlay').hide();
+	    });
+	    
+	    $('.closeCam').live('click', function(){
+		$('#webcam-overlay').hide();
+	    });
+	    
+	    if($.browser.webit)
+		$('.startWebcam').hide();
+	    
+	});
 
 </script>
+
+<div id="webcam-overlay">
+    <div id="webcam-box">
+	<a href="#" class="closeCam">x</a>
+	<div class="webcam"></div>
+	<a href="#" class="captureCam">Prendre une photo</a>
+    </div>
+</div>
 
 <div id="content">
 	<div class="wrap2">
@@ -24,6 +71,8 @@
 				<input type="hidden" name="ref[numeropresse]" value="<?php echo $numr_carte; ?>" />
 				<input type="hidden" name="ref[adresse]" value="<?php echo $adresse; ?>" />
 				<input type="hidden" name="ref[organisme]" value="<?php echo $organisme; ?>" />
+				<input type="hidden" name="ref[photo_webcam]" value="<?php if(isset($photo_webcam)) echo $photo_webcam; ?>" />
+                                <input type="hidden" name="ref[photo_file]" value="<?php if(isset($photo_file)) echo $photo_file; ?>" />
 				
 				<input type="hidden" name="evenement" value="<?php echo $evenement; ?>" />
 				
@@ -54,26 +103,15 @@
 	<div class="ligne" data="nbLigne" etat="false">
 		<h3><?php echo lang('nouveauMembre'); ?> <span class="modifier"><?php echo lang('modifier'); ?></span></h3>
 		<div class="form">
-			<div class="photo">
-				<canvas id="canvas" width="160" height="204" style="display:none;"></canvas>
-				<div class="webcamWrapper">
-					<a href="#" class="closeCam">x</a>
-					<span style="color:black"><?php echo lang('centreWebcam').' :'; ?></span>
-					<div class="webcam"></div>
-					<a href="#" class="captureCam"><?php echo lang('prendrePhoto'); ?></a>
-				</div>
-				<fieldset class="encadrePhoto">
-					<legend><?php echo lang('photo'); ?></legend>
-					<div class="optionPhoto">
-						<span class="uploadFichier"><?php echo lang('fichier'); ?></span>
-					</div>
-					<div class="optionPhoto">
-						<span class="startWebcam"><?php echo lang('camera'); ?></span>
-					</div>
-				</fieldset>
+		    
+			<input type="hidden" name="groupe[nbLigne][index]" value="nbLigne" />
+			<input type="hidden" name="groupe[nbLigne][webcam]" id="photo_webcam_nbLigne" />
+			
+			<div class="photo" style="float: left; margin: 25px 30px 50px 0">
+			    <div class="optionPhoto">
+				<span class="startWebcam" data="nbLigne"><?php echo lang('photo'); ?></span>
+			    </div>
 			</div>
-			<div class="webcam"></div>
-			<input type="file" name="photo_file" id="photo_file" />
 			
 			<!-- gestion du nom -->
 			<div class="split">

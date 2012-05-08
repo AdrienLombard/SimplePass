@@ -498,15 +498,15 @@ class Inscription extends Chocolat {
 		else {
 			
                     $data = array();
-                    $data['groupe'] 			= $this->input->post('groupe');
-                    $data['pays'] 				= $this->input->post('pays');	
-                    $data['nom'] 				= strtoupper($this->input->post('nom'));
-                    $data['prenom'] 			= $this->input->post('prenom');
-                    $data['fonction'] 			= $this->input->post('fonction');
-                    $data['tel'] 				= $this->input->post('tel');
-                    $data['mail'] 				= $this->input->post('mail');
-					$data['organisme']			= $this->input->post('organisme');
-                    $data['evenement'] 			= $this->input->post('evenement');
+                    $data['groupe'] 		= $this->input->post('groupe');
+                    $data['pays'] 		= $this->input->post('pays');	
+                    $data['nom'] 		= strtoupper($this->input->post('nom'));
+                    $data['prenom'] 		= $this->input->post('prenom');
+                    $data['fonction'] 		= $this->input->post('fonction');
+                    $data['tel'] 		= $this->input->post('tel');
+                    $data['mail'] 		= $this->input->post('mail');
+		    $data['organisme']		= $this->input->post('organisme');
+                    $data['evenement'] 		= $this->input->post('evenement');
                     $data['listeCategorie']     = $this->listeCategorieToDisplay( $idEvenement );
                     $data['webcam_ref']         = $this->input->post('photo_webcam');
 
@@ -515,8 +515,6 @@ class Inscription extends Chocolat {
                     $data['categorie'] = $tab;
 
                     // upload tmp du fichier
-                    $data['unik'] = null;
-
                     if(isset($_FILES['photo_file']) && $_FILES['photo_file']['name'] != '') {
                         $file = $_FILES['photo_file'];
                         $unik = time();
@@ -544,6 +542,8 @@ class Inscription extends Chocolat {
 	
 		$this->layout->ajouter_js('lambda/scriptGroupe');
 		$this->layout->ajouter_js('jpegcam/webcam');
+		
+		$this->layout->ajouter_css('lambda/webcam-overlay');
 		
 		
 		$this->layout->view('lambda/LGroupeDetails', $data);
@@ -644,33 +644,12 @@ class Inscription extends Chocolat {
 				$membre['tel'] = $data['tel'];
 				$membre['mail'] = $data['mail'];
 				$idNewClient = $this->modelclient->ajouter($membre);
+				
+				// ajout photo webcam
+				if($ligne['webcam'] != null)
+					rename('./assets/images/' . $ligne['webcam'], UPLOAD_DIR . $idNewClient . '.jpg');
 
 				$index = $ligne['index'];
-				
-				// image
-				if($_FILES['photo_file_'.$index]['name'] != '') {
-
-					$config = array();
-					$config['upload_path'] = UPLOAD_DIR;
-					$config['allowed_types'] = 'jpg, jpeg, png';
-					$config['file_name'] = $idNewClient.".jpg";
-					$config['overwrite'] = true;
-
-					$this->upload->initialize($config);
-					$this->upload->do_upload('photo_file_' . $index);
-					$dataimg = $this->upload->data();
-					
-					echo $this->upload->display_errors();
-
-					$this->load->helper('image');
-					if($dataimg['image_width'] > IMG_WIDTH){
-						if((($dataimg['image_height'] * IMG_WIDTH) / $dataimg['image_width']) <= IMG_HEIGHT)
-							resizeWidthRatio($dataimg['full_path'], IMG_WIDTH);
-						else
-							resizeHeightRatio($dataimg['full_path'], IMG_HEIGHT);
-					}
-					
-				}
 
 				// création de l'accreditation
 				$accred = null;

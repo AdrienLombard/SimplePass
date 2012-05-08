@@ -4,11 +4,9 @@
 /* Receives JPEG webcam submission and saves to local file. */
 /* Make sure your directory has permission to write files as your web server user! */
 
-if(!isset($_GET['key']))
-    die('Aucune clé pour l\'upload.');
+$key = (isset($_GET['key']))? $_GET['key'] : uniqid() . '-' . rand() * 10;
 
-$filename = date('YmdHis') . '.jpg';
-$filename = $_GET['key'] . '.jpg';
+$filename = $key . '.jpg';
 $real = '../../images/photos/tmp/' . $filename;
 $full = 'photos/tmp/' . $filename;
 $result = file_put_contents($real, file_get_contents('php://input') );
