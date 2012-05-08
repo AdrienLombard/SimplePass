@@ -134,7 +134,10 @@ window.webcam = {
 		
 		// exception : webkit, need to fire manually
 		if($.browser.webkit) {
-		    my_completion_handler('photos/tmp/' + this.key + '.jpg');
+		    if(this.key != null)
+			my_completion_handler('photos/tmp/' + this.key + '.jpg');
+		    else
+			alert('Error : Chrome browser does not support multi-webcam. Please use IE or Firefox.')
 		}
 	},
 	

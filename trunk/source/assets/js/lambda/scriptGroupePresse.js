@@ -27,7 +27,7 @@ $(document).ready(function(){
 	// valider la ligne du groupe
 	$('#validerLigne').live('click', function(){
 		
-		// récupère le parent : div.form
+		// rï¿½cupï¿½re le parent : div.form
 		var parent = $(this).parent().parent();
 		
 		// Gstion du nom
@@ -36,7 +36,7 @@ $(document).ready(function(){
 		// Gestion du prenom
 		var prenom = parent.find('#lignePrenom');
 		
-		// Gestion du téléphone.
+		// Gestion du tï¿½lï¿½phone.
 		var tel = parent.find('#ligneTel');
 		
 		// Gestion du numero de carte de presse.
@@ -45,7 +45,7 @@ $(document).ready(function(){
 		// Gestion de l'dresse postale.
 		var adresse = parent.find('#ligneAdresse');
 		
-		// Gestion de la catégorie
+		// Gestion de la catï¿½gorie
 		var listeCategorie = parent.find('#categorie').find('option:selected');
 		var categorie = listeCategorie.text();
 		
@@ -93,7 +93,7 @@ $(document).ready(function(){
 			mail.addClass('erreur');
 		}
 		
-		// Récuperation de la langue courante
+		// Rï¿½cuperation de la langue courante
 		var lang = $('#lang').val();
 		
 		// traitement en cas d'erreur sur le formulaire.
@@ -112,7 +112,7 @@ $(document).ready(function(){
 			// valider l'etat de la ligne
 			parent.parent().attr('etat', true);
 
-			// met à jours le h3 avec les infos des inputs
+			// met ï¿½ jours le h3 avec les infos des inputs
 			if(lang == 'fra' || lang == '')
 				parent.parent().find('h3').html(nom.val() + ' ' + prenom.val() + ' - ' + categorie + ' (' + fonction + ')' + '<span class="modifier">Modifier</span>');
 			else
@@ -126,7 +126,7 @@ $(document).ready(function(){
 	
 	// supprimer la ligne
 	$('#supprimerLigne').live('click', function(){
-		// récupère le parent : div.form
+		// rï¿½cupï¿½re le parent : div.form
 		var parent = $(this).parent().parent().parent().remove();
 	});
 	
@@ -149,7 +149,7 @@ $(document).ready(function(){
 				bool = false;
 		});
 		
-		// Récuperation de la langue courante
+		// Rï¿½cuperation de la langue courante
 		var lang = $('#lang').val();
 		
 		if(bool == false) {
@@ -173,98 +173,6 @@ $(document).ready(function(){
 	$('#photo_file').css('opacity', 0).css('position', 'absolute');
 	$('.uploadFichier').live('click', function(){
 		$('#photo_file').trigger('click');
-	});
-	
-	
-	/*
-	 * Crop d'image
-	 */
-	$('.cropper img').Jcrop({
-		onChange:		changeCoords,
-		aspectRatio:	160 / 240,
-		minSize:		[160, 204],
-		setSelect:		[10, 10, 160, 204]
-	});
-	function changeCoords(c) {
-		$('input[name=x]').val(c.x);
-		$('input[name=y]').val(c.y);
-		$('input[name=w]').val(c.w);
-		$('input[name=h]').val(c.h);
-	}
-	
-	/*
-	 * Init webcam
-	 */
-	var pos = 0;
-	var ctx = null;
-	var image = null;
-	var canvas = document.getElementById("canvas");
-	if (canvas.getContext) {
-		ctx = document.getElementById("canvas").getContext("2d");
-		ctx.clearRect(0, 0, 160, 204);
-
-		var img = new Image();
-		image = ctx.getImageData(0, 0, 160, 204);
-	}
-	
-	/*
-	 * Affiche la webcam
-	 */
-	$('.startWebcam').live('click', function(){
-		$('.webcamWrapper').show('fast');
-		$('.webcam').html('').webcam({
-			
-			height: 204,
-			width: 272,
-			mode: "callback",
-			swffile: "http://localhost/courchevel_src/assets/flash/jscam_canvas_only.swf",
-			
-			onCapture: function() {
-				
-				$('.webcamWrapper').hide('fast');			
-				webcam.save();
-			},
-			
-			onSave: function(data) {
-				
-				var col = data.split(";");
-				var img = image;
-
-				for(var i = 80; i < 240; i++) {
-					var tmp = parseInt(col[i]);
-					img.data[pos + 0] = (tmp >> 16) & 0xff;
-					img.data[pos + 1] = (tmp >> 8) & 0xff;
-					img.data[pos + 2] = tmp & 0xff;
-					img.data[pos + 3] = 0xff;
-					pos+= 4;
-				}
-
-				if (pos >= 4 * 160 * 204) {
-					ctx.putImageData(img, 0, 0);
-					pos = 0;
-				}
-				
-				// Récuperation de la langue courante
-				var lang = $('#lang').val();
-				
-				$('input[name=photo_webcam]').val(canvas.toDataURL("image/png"));
-				
-				if(lang == 'fra' || lang == '')
-					$('.photoMessage').show().text('Photo prise, enregistrez pour valider ->');
-				else
-					$('.photoMessage').show().text('Picture taken, save to validate ->');
-			}
-			
-		});
-		
-	});
-	
-	$('.captureCam').live('click', function(){
-		webcam.capture();
-	});
-	
-	$('.closeCam').live('click', function(){
-		$('.webcamWrapper').hide('fast');
 	});
 	
 });

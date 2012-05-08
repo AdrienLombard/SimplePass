@@ -380,6 +380,7 @@ class Presse extends Chocolat{
 	public function groupe($evenement, $categorie, $info=false) {
 		// Chargement du js.
 		$this->layout->ajouter_js('lambda/script');
+		$this->layout->ajouter_js('jpegcam/webcam');
 
 		$data['lang'] = $this->session->userdata('lang');
 		
@@ -498,7 +499,8 @@ class Presse extends Chocolat{
 			$data['evenement'] 			= $this->input->post('evenement');
 			$data['organisme']          = $this->input->post('titre');
 			$data['listeCategorie'] 	= $this->listeCategoriePresse($idEvenement);
-			
+			$data['webcam_ref']         = $this->input->post('photo_webcam');
+
 			// Gestion pour les catégorie.
 			$tab = $this->input->post('categorie');
 			$temp = -1;
@@ -506,6 +508,20 @@ class Presse extends Chocolat{
 				$temp = array_pop($tab);
 			}
 			$data['categorie'] = $temp;
+			
+			// upload tmp du fichier
+			if(isset($_FILES['photo_file']) && $_FILES['photo_file']['name'] != '') {
+			    $file = $_FILES['photo_file'];
+			    $unik = time();
+			    if(!move_uploaded_file($file['tmp_name'], UPLOAD_DIR . 'tmp/' . $unik . '.jpg'))
+				    die('Echec de l\'upload temporaire (inscription.php:exeGroupe) : ' . $_FILES['photo_file']['error']);
+			    $data['photo_file'] = UPLOAD_DIR . 'tmp/' . $unik . '.jpg';
+			}
+
+			$webcam = $this->input->post('photo_webcam');
+			if($webcam != null)
+				$data['photo_webcam'] = './assets/images/' . $webcam;
+
 
 			$this->ajouterGroupe($data, $cate);
 		}
@@ -521,6 +537,9 @@ class Presse extends Chocolat{
 		$data['lang'] = $this->session->userdata('lang');
 	
 		$this->layout->ajouter_js('lambda/scriptGroupePresse');
+		$this->layout->ajouter_js('jpegcam/webcam');
+		
+		$this->layout->ajouter_css('lambda/webcam-overlay');
 
 		$this->layout->view('presse/LPresseGroupeDetails', $data);
 	}
@@ -534,7 +553,27 @@ class Presse extends Chocolat{
 		unset($ref['fonction']);
 		unset($ref['numeropresse']);
 		unset($ref['groupe']);
+		
+		// webcam
+		$webcam = $ref['photo_webcam'];
+		unset($ref['photo_webcam']);
+
+		// file
+		$file = $ref['photo_file'];
+		unset($ref['photo_file']);
+		
 		$id = $this->modelclient->ajouter($ref);
+		
+		// ajout photo webcam
+		if($webcam != null)
+			rename($webcam, UPLOAD_DIR . $id . '.jpg');
+
+		// upload fichier
+		if($file != null) {
+			rename(UPLOAD_DIR . 'tmp/' . $file . '.jpg', UPLOAD_DIR . $id . '.jpg');
+			$this->load->helper('image');
+			resizeWidthRatio(UPLOAD_DIR . $id.".jpg", 160, 240);
+		}
 		
 		$msg['lang'] = $this->session->userdata('lang');
 		
@@ -545,7 +584,7 @@ class Presse extends Chocolat{
 		$accred['idclient'] = $id;
 		$accred['etataccreditation'] = ACCREDITATION_A_VALIDE;
 		$accred['fonction'] = $data['fonction'];
-	    $accred['numeropresse'] = $data['numeropresse'];
+		$accred['numeropresse'] = $data['numeropresse'];
 		$accred['groupe'] = $data['groupe'];
 		$accred['dateaccreditation'] = time();
 		$newAccred = $this->modelaccreditation->ajouter($accred);
@@ -599,6 +638,9 @@ class Presse extends Chocolat{
 				$membre['pays'] 		= $data['pays'];
 				$idNewClient = $this->modelclient->ajouter($membre);
 
+				// ajout photo webcam
+				if($ligne['webcam'] != null)
+					rename('./assets/images/' . $ligne['webcam'], UPLOAD_DIR . $idNewClient . '.jpg');
 
 				// création de l'accreditation de son accreditation.
 				$accred = null;
