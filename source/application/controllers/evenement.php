@@ -15,6 +15,7 @@ class Evenement extends Cafe {
 		$this->load->model('modelcategorie');
 		
 		// Chargement des fichier javascript.
+		$this->layout->ajouter_js('jquery-ui-1.8.17.min');
 		$this->layout->ajouter_js('utilisateur/scriptDate');
 		$this->layout->ajouter_js('utilisateur/CRUDEvenement');
 		

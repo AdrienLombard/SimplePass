@@ -536,7 +536,7 @@ class Accreditation extends Cafe {
 		$data['accred'] = $this->modelaccreditation->getAccreditationParId($idAccred);
 		
 		// Liste des catégories avec les zones associées
-		$cats = $this->listeCategoriePresse($this->session->userdata('idEvenementEnCours'));
+		$cats = $this->listeCategorieToDisplay($this->session->userdata('idEvenementEnCours'));
 		
 		foreach($cats as $cat) {
 			$push = array();
