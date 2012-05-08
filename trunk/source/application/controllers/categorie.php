@@ -13,8 +13,6 @@ class Categorie extends Cafe {
 		
 		$this->load->library('form_validation');
 		
-		$this->layout->ajouter_js('utilisateur/scriptDate');
-		
 		// Mise en place de la sécurisation.
 		$this->securiseAll();
 	}

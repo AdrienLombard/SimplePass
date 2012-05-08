@@ -3,6 +3,7 @@ $("document").ready( function() {
 	var newCat = true;
 	var updateCat = true;
 	
+	
 	$('.modifCat').live('click', function(){
 		if(updateCat == true) {
 			var id = $(this).attr('data');
@@ -12,49 +13,39 @@ $("document").ready( function() {
 	});
 
 /*
-$('.categorieAllInOne form').live("blur", function(){
-	var init = $(this).attr("init");
-	if(init == $(this).val())
-		$(this).attr('readonly', 'readonly').removeClass('error').parent().addClass('disabled');
-	else
-		$(this).addClass('error');
-});
-*/
-
-/*
  * Aymeric
  */
 
 
-$('.afficheNouvelleCatMere').live('click', function(){
-	if(newCat == true){
-		$('.nouvelleCatMere').show().find('input[type=text]').focus();
-		newCat = false;
-	}
-});
+	$('.afficheNouvelleCatMere').live('click', function(){
+		if(newCat == true){
+			$('.nouvelleCatMere').show().find('input[type=text]').focus();
+			newCat = false;
+		}
+	});
 
-$('.deleteNouvelleCatMere').live('click', function(){
-	$('.nouvelleCatMere').hide();
-	newCat = true;
-});
+	$('.deleteNouvelleCatMere').live('click', function(){
+		$('.nouvelleCatMere').hide();
+		newCat = true;
+	});
 
 
-$('.addCat').live('click', function(){
-	if(newCat == true){
+	$('.addCat').live('click', function(){
+		if(newCat == true){
+			var id = $(this).attr('data');
+			$('.nouvelleSousCat[data='+id+']').show();
+			newCat = false;
+		}
+	});
+
+	$('.removeCat').live('click', function(){
 		var id = $(this).attr('data');
-		$('.nouvelleSousCat[data='+id+']').show();
-		newCat = false;
-	}
-});
-
-$('.removeCat').live('click', function(){
-	var id = $(this).attr('data');
-	$('.nouvelleSousCat[data='+id+']').hide();
-	newCat = true;
-});
+		$('.nouvelleSousCat[data='+id+']').hide();
+		newCat = true;
+	});
 
 
-$("form").bind("submit", function(){
+	$("form").bind("submit", function(){
 		
 		var bool = true;
 		
