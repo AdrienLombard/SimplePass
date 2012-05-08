@@ -1,40 +1,4 @@
 <script type="text/javascript">
-	/*
-	$(document).ready(function(){
-		
-		var tabCat = new Array();
-		
-		<?php $i = 0; ?>
-		<?php foreach($listeCategorie as $cat): ?>
-			tabCat[<?php echo $i; ?>] = [<?php echo $cat->idcategorie ?>, <?php echo $cat->surcategorie ?>, "<?php echo $cat->libellecategorie ?>"];
-			<?php $i++; ?>
-		<?php endforeach; ?>
-
-		$("select.dyn-selector").live("change",function(){
-			
-			var id = $(this).find("option:selected").val();
-			var nbLigne = $(this).parent().parent().parent().attr('data');
-			var count = 0;
-			
-			var newSelect = "<select name='groupe["+ nbLigne +"][categorie][]' class='select dyn-selector'>";
-			newSelect += "<option value='-1' libelle=' '><?php echo lang('neSaisPas'); ?></option>";
-			for(var i=0; i<tabCat.length; i++) {
-				if(tabCat[i][1] == id) {
-					newSelect += "<option value='" + tabCat[i][0] + "' libelle='" + tabCat[i][2] + "' >" + tabCat[i][2] + "</option>";
-					count++;
-				}
-			}
-			newSelect += "</select>";
-			
-			$(this).nextAll().remove();
-			
-			if(count != 0)
-				$(newSelect).insertAfter(this);
-			
-		});
-
-	});
-	*/
     
 	<?php $key = uniqid() . '-' . rand() * 10; ?>
 	webcam.set_api_url( '<?php echo base_url(); ?>/assets/js/jpegcam/test.php?key=<?php echo $key; ?>');
@@ -146,7 +110,7 @@
 			
 			<div class="split">
 				<label for=""><?php echo lang('nom'); ?>*</label>
-				<input type="text" id="ligneNom" name="groupe[nbLigne][nom]" />
+				<input type="text" id="ligneNom" name="groupe[nbLigne][nom]" style="text-transform: uppercase"/>
 			</div>
 			<div class="split">
 				<label for=""><?php echo lang('prenom'); ?>*</label>
