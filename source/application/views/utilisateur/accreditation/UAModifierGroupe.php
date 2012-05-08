@@ -51,7 +51,17 @@
 							</select>
 						</div>
 						
-						<!-- champ pour l'adresse du client -->
+						<?php if(!(isset($ref->numeropresse)) or empty($ref->numeropresse)): ?>
+						<div>
+							<label>Tel : </label>
+							<input type="text" name="pers[0][tel]" class="tel" value="<?php echo $ref->tel; ?>"/>
+						</div>
+						
+						<div>
+							<label>Mail : </label>
+							<input type="text" name="pers[0][mail]" class="mail" value="<?php echo $ref->mail; ?>"/>
+						</div>
+						<?php endif; ?>
 						
 						<div class="clear"></div>
 						
@@ -111,6 +121,7 @@
 							</div>
 						<?php endif; ?>
 						
+						<?php if(isset($ref->numeropresse) && !empty($ref->numeropresse)): ?>
 						<div>
 							<label>Tel : </label>
 							<input type="text" name="pers[0][tel]" class="tel" value="<?php echo $ref->tel; ?>"/>
@@ -120,7 +131,7 @@
 							<label>Mail : </label>
 							<input type="text" name="pers[0][mail]" class="mail" value="<?php echo $ref->mail; ?>"/>
 						</div>
-						<?php if(isset($ref->numeropresse) && !empty($ref->numeropresse)): ?>
+						
 						<div>
 							<label>Adresse : </label>
 							<textarea name="pers[0][adresse]" cols="65" rows="7"><?php if(isset($ref->adresse)) echo $ref->adresse; ?></textarea>
@@ -196,21 +207,23 @@
 						</div>
 						
 						<?php if(isset($p->numeropresse) && !empty($p->numeropresse)): ?>
-							<div>
+						<div>
 								<label>Num presse : </label>
 								<input type="text" id="numeroref" class="champ" style="" name="pers[<?php echo $nb; ?>][numeropresse]" value="<?php if(isset($p->numeropresse)) echo $p->numeropresse; ?>" />
-							</div>
-						<?php endif; ?>
+						</div>
 						
 						<div>
 							<label>Mail : </label>
 							<input type="text" name="pers[<?php echo $nb; ?>][mail]" class="mail" value="<?php echo $p->mail; ?>"/>
 						</div>
+						
 						<div>
 							<label>Tel : </label>
 							<input type="text" name="pers[<?php echo $nb; ?>][tel]" class="mail" value="<?php echo $p->tel; ?>"/>
 						</div>
-						<?php if(isset($p->numeropresse) && !empty($p->numeropresse)): ?>
+						
+						
+						
 						<div>
 							<label>Adresse : </label>
 							<textarea name="pers[<?php echo $nb; ?>][adresse]" cols="65" rows="7"><?php if(isset($p->adresse)) echo $p->adresse; ?></textarea>
