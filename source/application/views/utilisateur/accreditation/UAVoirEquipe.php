@@ -122,13 +122,15 @@
 								<label>Num presse : </label>
 								<input type="text" id="numeroref" class="champ" style="" name="ref[numeropresse]" value="<?php if(isset($ref->numeropresse)) echo $ref->numeropresse; ?>" readonly/>
 							</div>
+							
+							<div>
+								<label>Adresse : </label>
+								<textarea readonly name="adresse" cols="65" rows="3"><?php if(isset($ref->adresse)) echo $ref->adresse; ?></textarea>
+							</div>
 						<?php endif; ?>
 								
-						<!-- champ pour l'adresse du client -->
-						<div>
-							<label>Adresse : </label>
-							<textarea readonly name="adresse" cols="65" rows="3"><?php if(isset($ref->adresse)) echo $ref->adresse; ?></textarea>
-						</div>
+						
+						
 						<div class="contientZones readonly">
 							<label>Zones : </label>
 							<div>

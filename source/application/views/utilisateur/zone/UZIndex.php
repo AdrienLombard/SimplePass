@@ -28,7 +28,7 @@
                 <tbody>
 					<!-- système caché pour ajouter une nouvelle zone -->
 					<tr class="nouvelleZone hide" >
-						<td>
+						<td colspan="3" >
 						<form action="<?php echo site_url('zone/exeAjouter'); ?>" method="POST" class="gestionZone" >
 							Nom de la zone : 
 							<input type="text" name="libelle" /> 
@@ -37,8 +37,7 @@
 						</form>
 						</td>
 						
-						<td>
-						</td>
+						
 					</tr>
 					
 					<?php if(!empty($resultats)): ?>
