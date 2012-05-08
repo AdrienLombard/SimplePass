@@ -53,6 +53,18 @@
 								<option value="<?php echo $ref->pays; ?>"><?php echo $pays->nompays; ?></option>
 							</select>
 						</div>
+						
+						<?php if(!(isset($ref->numeropresse)) or empty($ref->numeropresse)): ?>
+							<div>
+								<label>Tel : </label>
+								<input type="text" name="info[tel]" class="tel" value="<?php echo $ref->tel; ?>" readonly/>
+							</div>
+							
+							<div>
+								<label>Mail : </label>
+								<input type="text" name="info[mail]" class="mail" value="<?php echo $ref->mail; ?>"  readonly/>
+							</div>
+						<?php endif; ?>
 				
 					
 						<div class="clear"></div>
@@ -75,16 +87,6 @@
 						</div>
 						
 						<div>
-							<label>Tel : </label>
-							<input type="text" name="info[tel]" class="tel" value="<?php echo $ref->tel; ?>" readonly/>
-						</div>
-						
-						<div>
-							<label>Mail : </label>
-							<input type="text" name="info[mail]" class="mail" value="<?php echo $ref->mail; ?>"  readonly/>
-						</div>
-				
-						<div>
 							<label>Catégorie : </label>
 							<input type="text" id="categorieref" class="champ" style="width:130px;" name="ref[categorie]" value="<?php echo $ref->libellecategorie; ?>" readonly/>
 							
@@ -102,6 +104,18 @@
 							<input type="text" id="fonctionref" class="champ2" style="width:130px;" name="ref[fonction]" value="<?php echo $ref->fonction; ?>" readonly/>
 							<?php endif; ?>
 						</div>
+						
+						<?php if(isset($ref->numeropresse) && !empty($ref->numeropresse)): ?>
+							<div>
+								<label>Tel : </label>
+								<input type="text" name="info[tel]" class="tel" value="<?php echo $ref->tel; ?>" readonly/>
+							</div>
+							
+							<div>
+								<label>Mail : </label>
+								<input type="text" name="info[mail]" class="mail" value="<?php echo $ref->mail; ?>"  readonly/>
+							</div>
+						<?php endif; ?>
 						
 						<?php if(isset($ref->numeropresse) && !empty($ref->numeropresse)): ?>
 							<div>
@@ -163,6 +177,7 @@
 						<div class="ligne">
 							<label>Catégorie : </label><input type="text" id="categorie" class="champ" style="width:130px;" name="ref[categorie]" value="<?php echo $p->libellecategorie; ?>" readonly/>
 							
+							<label>Fonction : </label>
 							<?php if(isset($p->numeropresse) && !empty($p->numeropresse)): ?>
 							<select class="pays" name="ref[fonction]" id="fonctionref" style="width:180px;" disabled>
 								<option name="redacChef" 	value="redacChef"	<?php if(isset($p->fonction) && $p->fonction == 'Rédacteur en chef') echo 'selected'; ?> >Rédacteur en chef</option>
@@ -173,20 +188,40 @@
 								<option name="technicien" 	value="technicien" <?php if(isset($p->fonction) && $p->fonction == 'Technicien') echo 'selected'; ?>>Technicien</option>
 							</select>
 							<?php else: ?>
-							<label>Fonction : </label><input type="text" id="fonction" class="champ2" style="width:130px;" name="ref[fonction]" value="<?php echo $p->fonction; ?>" readonly/>
+							<input type="text" id="fonction" class="champ2" style="width:130px;" name="ref[fonction]" value="<?php echo $p->fonction; ?>" readonly/>
 							<?php endif; ?>
 						</div>
 					
+						
+						
+					    <?php if(isset($p->numeropresse) && !empty($p->numeropresse)): ?>
+							<div>
+								<label>Tel : </label>
+								<input type="text" id="numeroref" class="champ" style="" name="ref[numeropresse]" value="<?php if(isset($p->tel)) echo $p->tel; ?>" readonly/>
+							</div>
+						<?php endif; ?>
+					
+					   <?php if(isset($p->numeropresse) && !empty($p->numeropresse)): ?>
+							<div>
+								<label>Mail : </label>
+								<input type="text" name="ref[numeropresse]" class="mail" value="<?php if(isset($p->mail)) echo $p->mail; ?>"  readonly/>
+							</div>
+						<?php endif; ?>
+						
 						<?php if(isset($p->numeropresse) && !empty($p->numeropresse)): ?>
 							<div>
 								<label>Num presse : </label>
 								<input type="text" id="numeroref" class="champ" style="" name="ref[numeropresse]" value="<?php if(isset($p->numeropresse)) echo $p->numeropresse; ?>" readonly/>
 							</div>
 						<?php endif; ?>
-					    <div>
-							<label>Adresse : </label>
-							<textarea readonly name="adresse" cols="65" rows="3"><?php if(isset($p->adresse)) echo $p->adresse; ?></textarea>
-						</div>
+						
+						<?php if(isset($p->numeropresse) && !empty($p->numeropresse)): ?>
+							<div style="left-top:20px" >
+								<label>Adresse : </label>
+								<textarea readonly name="adresse" cols="65" rows="3"><?php if(isset($p->adresse)) echo $p->adresse; ?></textarea>
+							</div>
+						<?php endif; ?>
+						
 						<div class="contientZones readonly">
 							<label>Zones : </label>
 							<div>
