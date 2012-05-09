@@ -150,7 +150,7 @@ class Evenement extends Cafe {
 		 
 		 
 		
-		if ($this->form_validation->run() == true && !empty ($datedebut) && !empty ($datedebut) && $datedebutTstmp < $datefinTstmp) {
+		if ($this->form_validation->run() == true && !empty ($datedebut) && !empty ($datedebut) && $datedebutTstmp <= $datefinTstmp) {
 			
 			if($this->input->post('choix') == "oui") {
 				$idEvenement = $this->input->post('evenements');
