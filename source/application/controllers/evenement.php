@@ -21,6 +21,7 @@ class Evenement extends Cafe {
 		
 		// Chargement d'un css particulier.
 		$this->layout->ajouter_css('utilisateur/evenement');
+		$this->layout->ajouter_css('jquery-ui-1.8.17.custom');
 		
 		// Mise en place de la sécurisation.
 		$this->securiseAll();
