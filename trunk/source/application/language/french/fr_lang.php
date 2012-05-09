@@ -34,7 +34,7 @@ $lang['demandeNon'] = 'Vous avez déjà une demande d\'accréditation enregistr�
 // Page d'accueil de l'inscription
 $lang['demandeAccred'] = 'Demande d\'accréditation';
 $lang['evenement'] = 'Evènement :';
-$lang['bienvenue'] = 'Bienvenue sur le site de demandes d\'accréditation';
+$lang['bienvenue'] = 'Bienvenue sur le site de demande d\'accréditation';
 $lang['demandeIndiv'] = 'Demande individuelle';
 $lang['ou'] = 'ou';
 $lang['demandeGroupe'] = 'Demande groupée';
