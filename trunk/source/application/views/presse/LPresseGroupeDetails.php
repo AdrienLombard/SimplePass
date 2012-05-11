@@ -116,7 +116,7 @@
 			<!-- gestion du nom -->
 			<div class="split">
 				<label ><?php echo lang('nom'); ?>*</label>
-				<input type="text" id="ligneNom" name="groupe[nbLigne][nom]" />
+				<input type="text" id="ligneNom" name="groupe[nbLigne][nom]" style="text-transform: uppercase"/>
 			</div>
 			
 			<!-- gestion du prenom -->
