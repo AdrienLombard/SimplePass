@@ -549,6 +549,7 @@ class Presse extends Chocolat{
 	public function exeAjouterGroupe() {		
 		// ajout du référent
 		$ref = $data = $this->input->post('ref');
+		$ref['nom'] = strtoupper($ref['nom']);
 		unset($ref['categorie']);
 		unset($ref['fonction']);
 		unset($ref['numeropresse']);
@@ -629,7 +630,7 @@ class Presse extends Chocolat{
 			foreach($gr as $ligne) {
 				// création du client
 				$membre = null;
-				$membre['nom']     		= $ligne['nom'];
+				$membre['nom']     		= strtoupper($ligne['nom']);
 				$membre['prenom']  		= $ligne['prenom'];
 				$membre['adresse'] 		= $ligne['adresse_membre'];
 				$membre['tel']     		= $ligne['tel_membre'];
