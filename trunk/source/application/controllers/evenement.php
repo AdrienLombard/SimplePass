@@ -247,17 +247,19 @@ class Evenement extends Cafe {
 		
 		$newentry = false;
 		$newDonneesEvenement = Array();
-		foreach( $categories as $categorie) {
-			foreach($zones as $zone) {
-				if($this->input->post($categorie . '_' . $zone->idzone) == 'on') {
-					$entry = Array(
-						'idzone'		=> $zone->idzone,
-						'idcategorie'	=> $categorie,
-						'idevenement'	=> $id,
-						'codezone'		=> $this->input->post('code_' . $zone->idzone)
-					);
-					$newDonneesEvenement[] = $entry;
-					$newentry = true;
+		if(isset($categories) && !empty($categories)) {
+			foreach( $categories as $categorie) {
+				foreach($zones as $zone) {
+					if($this->input->post($categorie . '_' . $zone->idzone) == 'on') {
+						$entry = Array(
+							'idzone'		=> $zone->idzone,
+							'idcategorie'	=> $categorie,
+							'idevenement'	=> $id,
+							'codezone'		=> $this->input->post('code_' . $zone->idzone)
+						);
+						$newDonneesEvenement[] = $entry;
+						$newentry = true;
+					}
 				}
 			}
 		}
