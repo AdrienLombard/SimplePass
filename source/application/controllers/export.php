@@ -79,7 +79,7 @@ class Export extends The {
 					'zones'		=> $strZones,
 					'organisme' => $accred->organisme,
 					'fonction'	=> $accred->fonction,
-					'numero presse' => $accred->numeropresse,
+					'numeropresse' => $accred->numeropresse,
 					'tel'		=> $accred->tel,
 					'adresse'	=> $accred->adresse,
 					'mail'		=> $accred->mail
@@ -115,7 +115,7 @@ class Export extends The {
 					'zones'		=> $strZones,
 					'organisme' => $accred->organisme,
 					'fonction'	=> $accred->fonction,
-					'numero presse' => ' - ',
+					'numeropresse' => ' - ',
 					'tel'		=> $accred->tel,
 					'adresse'	=> ' - ',
 					'mail'		=> $accred->mail
