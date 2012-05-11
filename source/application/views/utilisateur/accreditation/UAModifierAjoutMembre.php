@@ -96,6 +96,7 @@
 
 						</div>
 					</div>
+					<br/><br/>
 					<div>
 						<label>Nom : </label><input type="text" id="nom" class="champ" style="text-transform: uppercase; width:130px;" name="nom" value=""/>
 						<label>Prénom : </label><input type="text" id="prenom" class="champ2" style="width:130px;" name="prenom" value=""/>
@@ -134,9 +135,14 @@
 					<input type="submit" class="button" value="Valider" />
 				</form>
 			</div>
+			
+			
 		</div>
-        <div class="clear"></div>
-
+		
+		<div class="clear"></div>
+		
     </div>
+	
+	 
 		
 </div>

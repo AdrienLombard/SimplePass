@@ -404,12 +404,6 @@ class Accreditation extends Cafe {
 		}
 		
 		if($verif) {
-			
-			var_dump($info);
-			var_dump($ref);
-			var_dump($personne);
-			var_dump($zones);
-			
 			// ajout du référent
 			$ref['pays'] 		= $info['pays'];
 			$ref['tel'] 		= $info['tel'];
@@ -508,7 +502,7 @@ class Accreditation extends Cafe {
 				$this->modelzone->ajouterZonesAccreditation($values);
 			}
 			
-			//redirect('accreditation/voirEquipe/'.$info['groupe']);
+			redirect('accreditation/voirEquipe/'.$info['groupe']);
 		}
 		else {
 			$data = '';

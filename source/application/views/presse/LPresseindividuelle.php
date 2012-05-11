@@ -55,7 +55,7 @@
 			<input type="hidden" id="evenement" name="evenement" value="<?php echo $event_id; ?>" />
 
 			<label><?php echo lang('nom'); ?>*</label>
-			<input type="text" value="<?php echo set_value('nom'); ?>" id="nom" name="nom" />
+			<input type="text" value="<?php echo set_value('nom'); ?>" id="nom" name="nom" style="text-transform: uppercase"/>
 			<?php echo form_error('nom'); ?>
 
 			<label><?php echo lang('prenom'); ?>*</label>
