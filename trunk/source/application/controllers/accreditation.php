@@ -409,6 +409,7 @@ class Accreditation extends Cafe {
 			$ref['tel'] 		= $info['tel'];
 			$ref['organisme'] 	= $info['societe'];
 			$ref['mail'] 		= $info['mail'];
+			$ref['nom']			= strtoupper($ref['nom']);
 			$fonction 			= $ref['fonction'];
 			unset($ref['fonction']);
 			$this->modelclient->ajouter($ref);
@@ -467,6 +468,7 @@ class Accreditation extends Cafe {
 				$p['organisme'] = $info['societe'];
 				$p['tel']=$ref['tel'];
 				$p['mail']=$ref['mail'];
+				$p['nom'] = strtoupper($p['nom']);
 				$fonction = $p['fonction'];
 				unset($p['fonction']);
 				$this->modelclient->ajouter($p);

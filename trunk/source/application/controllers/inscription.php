@@ -556,7 +556,7 @@ class Inscription extends Chocolat {
 	public function exeAjouterGroupe() {		
 		// Ajout du référent.
 		$ref = $data = $this->input->post('ref');
-
+		$ref['nom'] = strtoupper($ref['nom']);
 		unset($ref['categorie']);
 		unset($ref['fonction']);
 		unset($ref['groupe']);
@@ -638,7 +638,7 @@ class Inscription extends Chocolat {
 			foreach($gr as $ligne) {
 				// création du client
 				$membre = null;
-				$membre['nom'] = $ligne['nom'];
+				$membre['nom'] = strtoupper($ligne['nom']);
 				$membre['prenom'] = $ligne['prenom'];
 				$membre['pays'] = $data['pays'];
 				$membre['tel'] = $data['tel'];
