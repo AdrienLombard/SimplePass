@@ -104,7 +104,7 @@ class Accreditation extends Cafe {
 		$pers = Array();
 		
 		// On corrige l'encodage des espace dans le passage par URL.
-		$nomGroupe = str_replace('%20', ' ', $nomGroupe);
+		$nomGroupe = str_replace('%20', ' ', rawurldecode($nomGroupe));
 		
 		// On prend l'id de l'évènement en cours.
 		$idEvent = $this->session->userdata('idEvenementEnCours');
@@ -587,7 +587,7 @@ class Accreditation extends Cafe {
 		$data = Array();
 		$ref = Array();
 		$pers = Array();
-		$nomGroupe=str_replace('%20', ' ', $nomGroupe);;
+		$nomGroupe=str_replace('%20', ' ', rawurldecode($nomGroupe));;
 		$idEvent = $this->session->userdata('idEvenementEnCours');
 		$membres = $this->modelaccreditation->getAccreditationGroupeParEvenement( $nomGroupe, $idEvent);
 		$zonesEvent = $this->modelzone->getZoneParEvenement($idEvent);
@@ -740,13 +740,13 @@ class Accreditation extends Cafe {
 		// Suppression de notre accreditation.
 		$this->modelaccreditation->supprimer( $idaccred );
 		
-		$nomGroupe = str_replace('%20', ' ', $nomGroupe);
+		$nomGroupe = str_replace('%20', ' ', rawurldecode($nomGroupe));
 		redirect('accreditation/modifierGroupe/' . $nomGroupe);
 	}
 	
 	public function supprimerGroupe ($nomgroupe){
 		
-		$nomGroupe=str_replace('%20', ' ', $nomgroupe);;
+		$nomGroupe=str_replace('%20', ' ', rawurldecode($nomgroupe));
 		$idEvent = $this->session->userdata('idEvenementEnCours');
 		$membres = $this->modelaccreditation->getAccreditationGroupeParEvenement( $nomGroupe, $idEvent);
 		
@@ -763,7 +763,7 @@ class Accreditation extends Cafe {
 
 		$this->layout->ajouter_js('jpegcam/webcam');
 
-		$nomGroupe=str_replace('%20', ' ', $nomgroupe);;
+		$nomGroupe=str_replace('%20', ' ', rawurldecode($nomgroupe));
 		$idEvent = $this->session->userdata('idEvenementEnCours');
 		$membres = $this->modelaccreditation->getAccreditationGroupeParEvenement( $nomGroupe, $idEvent);
 		
@@ -1011,7 +1011,7 @@ class Accreditation extends Cafe {
 	
 	public function validergroupe ($nomgroupe) {
 		
-		$nomGroupe=str_replace('%20', ' ', $nomgroupe);;
+		$nomGroupe=str_replace('%20', ' ', rawurldecode($nomgroupe));
 		$idEvent = $this->session->userdata('idEvenementEnCours');
 		$membres = $this->modelaccreditation->getAccreditationGroupeParEvenement( $nomGroupe, $idEvent);
 

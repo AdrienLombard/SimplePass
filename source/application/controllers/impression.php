@@ -175,7 +175,7 @@ class Impression extends The {
 		
 		include("phpToPDF.php");
 		
-		$nomGroupe=str_replace('%20', ' ', $nomGroupe);
+		$nomGroupe=str_replace('%20', ' ', rawurldecode($nomGroupe));
 		$idEvent = $this->session->userdata('idEvenementEnCours');
 		$membres = $this->modelaccreditation->getAccreditationGroupeParEvenement( $nomGroupe, $idEvent);
 		$zonesEvent = $this->modelzone->getZoneParEvenement($idEvent);				
@@ -241,7 +241,7 @@ class Impression extends The {
 		include("phpToPDF.php");
 		
 		
-		$nomGroupe=str_replace('%20', ' ', $nomGroupe);;
+		$nomGroupe=str_replace('%20', ' ', rawurldecode($nomGroupe));
 		$idEvent = $this->session->userdata('idEvenementEnCours');
 		$membres = $this->modelaccreditation->getAccreditationGroupeParEvenement( $nomGroupe, $idEvent);
 		$zonesEvent = $this->modelzone->getZoneParEvenement($idEvent);				
