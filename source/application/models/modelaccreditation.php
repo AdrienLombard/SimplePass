@@ -81,6 +81,33 @@ class modelAccreditation extends MY_Model {
 						->result();
 	}
 	
+	public function getAccreditationsExport($idEvenement, $indiv, $groupe, $valide, $demande) {
+		$requete = $this->db->select('*')
+						->from(DB_ACCREDITATION . ' a')
+						->join(DB_CLIENT . ' cl', 'a.idclient = cl.idclient', 'left')
+						->join(DB_CATEGORIE . ' ca', 'a.idcategorie = ca.idcategorie', 'left')
+						->where('a.idevenement', $idEvenement);
+		
+		if($indiv && !$groupe)
+			$requete = $this->db->where('a.groupe IS NULL');
+		elseif(!$indiv && $groupe)
+			$requete = $this->db->where('a.groupe IS NOT NULL');
+		elseif(!$indiv && !$groupe)
+			return null;
+			
+		if($valide && !$demande)
+			$requete = $this->db->where('a.etataccreditation = ' . ACCREDITATION_VALIDE);
+		elseif(!$valide && $demande)
+			$requete = $this->db->where('a.etataccreditation = ' . ACCREDITATION_A_VALIDE);
+		elseif(!$valide && !$demande)
+			return null;
+			
+						
+		return $this->db->Order_by('a.etataccreditation')
+							->get()
+							->result();
+	}
+	
 	public function getAccreditationsParEvenementSansMembre($idEvenement) {
 		return $this->db->select('*')
 						->from(DB_ACCREDITATION . ' a')

@@ -19,12 +19,10 @@ class Export extends The {
 	}
 	
 	
-	public function accreds($idEvenement, $params ) {
+	public function accreds($idEvenement, $indiv, $groupe, $valide, $demande) {
 		
 		//error_reporting(0);
 
-		// Requete pour les évènement.
-		// TODO : modifier la requete.
 		$evenement = $this->modelevenement->getEvenementParId($idEvenement);
 
 		// en-tête
@@ -41,8 +39,6 @@ class Export extends The {
 
 			'mail'		=> array('title' => 'Mail', 'type' => ExcelExport::STRING),		    
 			'numeropresse'=>array('title'=>'Numero de presse','type' => ExcelExport::STRING),
-             'mail'		=> array('title' => 'Mail', 'type' => ExcelExport::STRING),
-			'numero presse' => array('title' => 'Numero de carte presse', 'type' => ExcelExport::STRING),
 			'adresse'	=> array('title' => 'Adresse', 'type' => ExcelExport::STRING)
 
 		);
@@ -126,29 +122,6 @@ class Export extends The {
 				);
 				
 			}
-			
-
-			$nom = $accred->nom;
-			
-			if($groupe != '' && $accred->referent != null)
-				$nom = '	- ' . $nom;
-			
-			if($groupe != '' && $accred->referent == null)
-				$groupe .= ' (Référent)';
-			
-			$content[] = array(
-				'nom'		=> $nom,
-				'prenom'	=> $accred->prenom,
-				'pays'		=> $accred->pays,
-				'groupe'	=> $groupe,
-				'cat'		=> $accred->libellecategorie,
-				'zones'		=> $strZones,
-				'organisme' => $accred->organisme,
-				'fonction'	=> $accred->fonction,
-				'tel'		=> $accred->tel,
-				'mail'		=> $accred->mail,
-				'numeropresse'=>$accred->numeropresse
-			);
 
 		}
 		

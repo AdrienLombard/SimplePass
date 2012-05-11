@@ -3,12 +3,11 @@
     function urlExport() {
 
 	    var url = "<?php echo site_url('export/accreds/'.$this->session->userdata('idEvenementEnCours')); ?>";
-	    var params = '/';
 
-	    params += ($("#simple").attr('checked'))? '1' : '0';
-	    params += ($("#groupe").attr('checked'))? '1' : '0';
-	    params += ($("#valide").attr('checked'))? '1' : '0';
-	    params += ($("#demande").attr('checked'))? '1' : '0';
+	    params = '/' + ($("#simple").attr('checked'))? '1' : '0';
+	    params += '/' + ($("#groupe").attr('checked'))? '1' : '0';
+	    params += '/' + ($("#valide").attr('checked'))? '1' : '0';
+	    params += '/' + ($("#demande").attr('checked'))? '1' : '0';
 
 	    $('.toExport').attr('href',  url + params);
 
@@ -29,7 +28,7 @@
     <div class="box-full">
 
         <aside>  
-	    <a href="<?php echo site_url('export/accreds/'.$this->session->userdata('idEvenementEnCours').'/1111'); ?>"class="toExport">Exporter</a>
+	    <a href="<?php echo site_url('export/accreds/'.$this->session->userdata('idEvenementEnCours').'/1/1/1/1'); ?>"class="toExport">Exporter</a>
         </aside>
 		
 		<div id="main">
