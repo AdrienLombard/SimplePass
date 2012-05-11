@@ -647,6 +647,7 @@ class Accreditation extends Cafe {
 			$client['pays'] = $info['pays'];
 			$client['tel'] = $pers['tel'];
 			$client['mail'] = $pers['mail'];
+			$client['organisme'] = $info['societe'];
 		    
 			
 			// traitement en plus si presse.
