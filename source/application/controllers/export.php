@@ -46,7 +46,7 @@ class Export extends The {
 
 		// lignes : accreditations
 		$content = array();
-		$accreds = $this->modelaccreditation->getAccreditationsParEvenement($idEvenement);	
+		$accreds = $this->modelaccreditation->getAccreditationsExport($idEvenement, $indiv, $groupe, $valide, $demande);	
 		 
 		foreach($accreds as $accred) {
 			if(isset($accred->numeropresse) && !empty($accred->numeropresse) && $accred->numeropresse != '') {
