@@ -74,9 +74,9 @@ define('IMG_HEIGHT', 204);
 /*
  * INFORMATIONS DU MAIL
  */
-define('MAIL_EXPEDITEUR', 'accreditation-skiworldcup@sportcourchevel.com');
+define('MAIL_EXPEDITEUR', 'accreditation@sportcourchevel.com');
 define('NOM_EXPEDITEUR', 'Courchevel Accreditations');
-define('MAIL_COPIE', 'adrilomb@gmail.com');
+define('MAIL_COPIE', 'accreditation@sportcourchevel.com');
 define('OBJET_MAIL', 'Accreditations FIS Alpine Ski World Cup Courchevel');
 define('CHER', 'Cher(e) ');
 define('DEAR', 'Dear ');
