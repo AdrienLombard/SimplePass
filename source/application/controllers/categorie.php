@@ -94,15 +94,20 @@ class Categorie extends Cafe {
 	
 	public function exeSupprimer($id) {
 		
+		$non = true;
+		
 		// on supprime les accréditations liées à cette catégorie qui sont déjà passé.
-		$this->modelaccreditation->supprimerParcategorie( $id );
+		$non = $this->modelaccreditation->supprimerParcategorie( $id );
 		
-		// On supprime les entrées dans la tables des paramètres des évènement.
-		$this->modelevenement->supprimerparametreParCategorie( $id );
+		if($non) {
 		
-		// on supprimes les catégorie et ses sous-catégorie.
-		$this->modelcategorie->supprimerSousCategories($id);
+			// On supprime les entrées dans la tables des paramètres des évènement.
+			$this->modelevenement->supprimerparametreParCategorie( $id );
+			
+			// on supprimes les catégorie et ses sous-catégorie.
+			$this->modelcategorie->supprimerSousCategories($id);
 		
+		}
 		$this->load->helper('url');
 		redirect('categorie/liste');
 		

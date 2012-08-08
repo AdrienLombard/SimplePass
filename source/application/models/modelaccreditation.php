@@ -285,21 +285,29 @@ class modelAccreditation extends MY_Model {
 						->result();
 		
 		$where = '';
-		$k = true;
-		foreach($res as $id) {
-			if($k) {
-				$where .= '( idevenement = ' . $id->idevenement;
-				$k = false;
-			}
-			else {
-				$where .= ' OR idevenement = ' . $id->idevenement;
-			}
-		}
-		$where .= ' )';
 		
-		$this->db->where($where)
-				 ->where('idcategorie', $idCategorie)
-				 ->delete(DB_ACCREDITATION);
+		if(!empty($res)) {
+			$k = true;
+			foreach($res as $id) {
+				if($k) {
+					$where .= '( idevenement = ' . $id->idevenement;
+					$k = false;
+				}
+				else {
+					$where .= ' OR idevenement = ' . $id->idevenement;
+				}
+			}
+			$where .= ' )';
+		
+			$this->db->where($where)
+					 ->where('idcategorie', $idCategorie)
+					 ->delete(DB_ACCREDITATION);
+		
+		}
+		else {
+			return false;
+		}
+		
 	}
 	
 	public function getAccreditationGroupeParEvenement( $nomGroupe, $idEvent) {
