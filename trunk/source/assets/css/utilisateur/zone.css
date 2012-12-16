@@ -1,0 +1,73 @@
+
+/**
+ * Mise en forme des formulaire pour le CRUD des zones.
+ */
+
+td.icon {
+	width: 80px;
+	margin: 0;
+}
+
+.icons {
+	margin: 0;
+}
+ 
+.gestionZone {
+	padding: 0;
+	display: inline-block;
+}
+
+.gestionZone input[type=submit] {
+	display: inline-block;
+	float: none;
+	margin: 0;
+}
+
+.gestionZone input[type=text] {
+	display: inline-block;
+	border: none;
+	padding: 8px 3px 8px 3px;
+	border-radius: 0px;
+	width: 200px;
+	text-align: left;
+	
+}
+
+.gestionZone input[type=text].modif {
+	border: 1px solid gray;
+}
+
+
+.icons {
+	display: inline-block;
+	height: 25px;
+	width: 25px;
+	margin-top: 4px;
+	background: no-repeat 5px 5px;
+}
+.icons:hover {
+	box-shadow: 0 0 3px rgba(0,0,0,0.4);
+	border-radius: 4px;
+	cursor: pointer;
+}
+
+.icons.update {
+	background-image: url(../../images/icons/update.png);
+}
+.icons.update:hover {
+	background-image: url(../../images/icons/update_hover.png);
+}
+
+.icons.delete {
+	background-image: url(../../images/icons/delete.png);
+}
+.icons.delete:hover {
+	background-image: url(../../images/icons/delete_hover.png);
+}
+
+.icons.add {
+	background-image: url(../../images/icons/add.png);
+}
+.icons.add:hover {
+	background-image: url(../../images/icons/add_hover.png);
+}
